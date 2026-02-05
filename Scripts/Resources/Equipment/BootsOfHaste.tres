@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EquipmentBase" load_steps=3 format=3 uid="uid://b2qxupuqnkemp"]
+
+[ext_resource type="Script" uid="uid://8r1j7qka5m4e" path="res://Scripts/Resources/EquipmentBase.gd" id="1_783ol"]
+[ext_resource type="Texture2D" uid="uid://ddc0a00pw1xkv" path="res://Sprites/boots_of_haste_icon.png" id="1_l6d78"]
+
+[resource]
+script = ExtResource("1_783ol")
+name = "Boots Of Haste"
+base_stats = {
+"health": 0,
+"luck": 0,
+"power": 0,
+"speed": 20
+}
+icon = ExtResource("1_l6d78")
+metadata/_custom_type_script = "uid://8r1j7qka5m4e"

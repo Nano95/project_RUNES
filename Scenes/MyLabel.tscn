@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bogmh56si167x"]
+
+[ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="1_wbk6d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kn3qh"]
+resource_local_to_scene = true
+shader = ExtResource("1_wbk6d")
+shader_parameter/time = 4.7500000022182576e-07
+shader_parameter/activate = false
+
+[node name="Label" type="Label"]
+material = SubResource("ShaderMaterial_kn3qh")
+offset_right = 600.0
+offset_bottom = 130.0
+scale = Vector2(0.3, 0.3)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -25
+theme_override_constants/paragraph_spacing = -36
+theme_override_constants/outline_size = 40
+theme_override_font_sizes/font_size = 100
+text = "This is a text"
+autowrap_mode = 2

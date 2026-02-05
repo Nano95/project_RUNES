@@ -1,0 +1,53 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Idle Rune Master"
+run/main_scene="uid://d3uurpsjr56i5"
+config/features=PackedStringArray("4.5", "Mobile")
+run/max_fps=90
+config/icon="res://icon.svg"
+
+[autoload]
+
+Utils="*res://Scripts/Utils.gd"
+MonsterDatabase="*res://Scripts/MonsterDatabase.gd"
+
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=1280
+window/size/initial_position_type=0
+window/size/window_width_override=540
+window/size/window_height_override=960
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[file_customization]
+
+folder_colors={
+"res://Resources/": "red",
+"res://Scenes/": "yellow",
+"res://Scripts/": "green",
+"res://Shaders/": "blue",
+"res://Sprites/": "purple"
+}
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_clear_color=Color(0.18262479, 0.25521815, 0.6260201, 1)

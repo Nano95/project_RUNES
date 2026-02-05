@@ -1,0 +1,473 @@
+[gd_scene load_steps=13 format=3 uid="uid://blmp3gywbfee1"]
+
+[ext_resource type="Script" uid="uid://mqmfo2nmeldy" path="res://Scripts/MainMenu.gd" id="1_8saeu"]
+[ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="2_ghw46"]
+[ext_resource type="Curve" uid="uid://bdkmegreb07jj" path="res://Resources/xpCurve.tres" id="2_koqhg"]
+[ext_resource type="ButtonGroup" uid="uid://br2b15cqpspy" path="res://Resources/StatsButtonQty.tres" id="3_df05h"]
+[ext_resource type="ButtonGroup" uid="uid://dwmdxhjybfguq" path="res://Resources/EquipmentSlot.tres" id="3_koqhg"]
+[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="4_df05h"]
+[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="5_8um5k"]
+[ext_resource type="PackedScene" uid="uid://bclknj3c05tf" path="res://Scenes/InventoryButton.tscn" id="6_8um5k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_koqhg"]
+resource_local_to_scene = true
+shader = ExtResource("5_8um5k")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cmrfp"]
+resource_local_to_scene = true
+shader = ExtResource("5_8um5k")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_if7li"]
+resource_local_to_scene = true
+shader = ExtResource("5_8um5k")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xim88"]
+resource_local_to_scene = true
+shader = ExtResource("5_8um5k")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("start_btn", "lvl_label", "ap_label", "btn1", "btn10", "btn100", "clear_stats_btn", "debugton", "eq_slot_1_btn", "eq_slot_2_btn", "health_increase_btn", "speed_increase_btn", "power_increase_btn", "luck_increase_btn", "health_decrease_btn", "speed_decrease_btn", "power_decrease_btn", "luck_decrease_btn", "inventory_grid", "generate_btn")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_8saeu")
+xp_curve = ExtResource("2_koqhg")
+start_btn = NodePath("StartButton")
+button_group = ExtResource("3_df05h")
+equipment_slot_group = ExtResource("3_koqhg")
+lvl_label = NodePath("StatsContainer/Labels/LvLabel")
+ap_label = NodePath("StatsContainer/Labels/ApLabel")
+btn1 = NodePath("StatsContainer/statsBtn1")
+btn10 = NodePath("StatsContainer/statsBtn2")
+btn100 = NodePath("StatsContainer/statsBtn3")
+clear_stats_btn = NodePath("StatsContainer/ClearButton")
+debugton = NodePath("Debugton")
+eq_slot_1_btn = NodePath("Equipment/Panel/Equipment/slot1")
+eq_slot_2_btn = NodePath("Equipment/Panel/Equipment/slot2")
+health_increase_btn = NodePath("StatsContainer/Labels/PlusHealth")
+speed_increase_btn = NodePath("StatsContainer/Labels/PlusSpeed")
+power_increase_btn = NodePath("StatsContainer/Labels/PlusPower")
+luck_increase_btn = NodePath("StatsContainer/Labels/PlusLuck")
+health_decrease_btn = NodePath("StatsContainer/Labels/MinusHealth")
+speed_decrease_btn = NodePath("StatsContainer/Labels/MinusSpeed")
+power_decrease_btn = NodePath("StatsContainer/Labels/MinusPower")
+luck_decrease_btn = NodePath("StatsContainer/Labels/MinusLuck")
+inventory_grid = NodePath("Equipment/Panel/Inventory/ScrollContainer/MarginContainer/GridContainer")
+generate_btn = NodePath("Equipment/Panel/Inventory/Button")
+
+[node name="StatsContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 122.0
+offset_bottom = 122.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="statsBtn1" type="Button" parent="StatsContainer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -212.0
+offset_top = 65.0
+offset_right = 88.0
+offset_bottom = 225.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("2_ghw46")
+theme_override_font_sizes/font_size = 100
+toggle_mode = true
+button_group = ExtResource("3_df05h")
+text = "1x"
+
+[node name="statsBtn2" type="Button" parent="StatsContainer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -54.0
+offset_top = 65.0
+offset_right = 246.0
+offset_bottom = 225.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("2_ghw46")
+theme_override_font_sizes/font_size = 100
+toggle_mode = true
+button_group = ExtResource("3_df05h")
+text = "10x"
+
+[node name="statsBtn3" type="Button" parent="StatsContainer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 104.0
+offset_top = 65.0
+offset_right = 404.0
+offset_bottom = 225.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("2_ghw46")
+theme_override_font_sizes/font_size = 100
+toggle_mode = true
+button_group = ExtResource("3_df05h")
+text = "100x"
+
+[node name="ClearButton" type="Button" parent="StatsContainer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 228.0
+offset_top = 454.99997
+offset_right = 528.0
+offset_bottom = 593.0
+grow_horizontal = 2
+scale = Vector2(0.4, 0.4)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("2_ghw46")
+theme_override_font_sizes/font_size = 100
+text = "Clear"
+
+[node name="Labels" type="Control" parent="StatsContainer"]
+anchors_preset = 0
+offset_top = 183.0
+offset_right = 40.0
+offset_bottom = 223.0
+
+[node name="LvLabel" parent="StatsContainer/Labels" instance=ExtResource("4_df05h")]
+material = SubResource("ShaderMaterial_koqhg")
+layout_mode = 0
+offset_left = 5.0
+offset_top = -31.0
+offset_right = 605.0
+offset_bottom = 106.0
+scale = Vector2(0.4, 0.4)
+text = "Lv: 1"
+horizontal_alignment = 2
+
+[node name="ApLabel" parent="StatsContainer/Labels" instance=ExtResource("4_df05h")]
+material = SubResource("ShaderMaterial_cmrfp")
+layout_mode = 0
+offset_left = 258.0
+offset_top = -31.0
+offset_right = 858.0
+offset_bottom = 106.0
+scale = Vector2(0.4, 0.4)
+text = "| AP: 100"
+
+[node name="HealthRich" type="RichTextLabel" parent="StatsContainer/Labels"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 244.0
+offset_top = 31.0
+offset_right = 1269.0
+offset_bottom = 162.81824
+scale = Vector2(0.44, 0.44)
+mouse_filter = 2
+theme_override_constants/outline_size = 42
+theme_override_fonts/normal_font = ExtResource("2_ghw46")
+theme_override_fonts/bold_font = ExtResource("2_ghw46")
+theme_override_fonts/bold_italics_font = ExtResource("2_ghw46")
+theme_override_fonts/italics_font = ExtResource("2_ghw46")
+theme_override_fonts/mono_font = ExtResource("2_ghw46")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = " Health: "
+
+[node name="SpeedRich" type="RichTextLabel" parent="StatsContainer/Labels"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 244.0
+offset_top = 101.0
+offset_right = 1269.0
+offset_bottom = 232.81824
+scale = Vector2(0.44, 0.44)
+mouse_filter = 2
+theme_override_constants/outline_size = 42
+theme_override_fonts/normal_font = ExtResource("2_ghw46")
+theme_override_fonts/bold_font = ExtResource("2_ghw46")
+theme_override_fonts/bold_italics_font = ExtResource("2_ghw46")
+theme_override_fonts/italics_font = ExtResource("2_ghw46")
+theme_override_fonts/mono_font = ExtResource("2_ghw46")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = " Speed: "
+
+[node name="PowerRich" type="RichTextLabel" parent="StatsContainer/Labels"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 244.0
+offset_top = 171.0
+offset_right = 1269.0
+offset_bottom = 302.81824
+scale = Vector2(0.44, 0.44)
+mouse_filter = 2
+theme_override_constants/outline_size = 42
+theme_override_fonts/normal_font = ExtResource("2_ghw46")
+theme_override_fonts/bold_font = ExtResource("2_ghw46")
+theme_override_fonts/bold_italics_font = ExtResource("2_ghw46")
+theme_override_fonts/italics_font = ExtResource("2_ghw46")
+theme_override_fonts/mono_font = ExtResource("2_ghw46")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = " Power: "
+
+[node name="LuckRich" type="RichTextLabel" parent="StatsContainer/Labels"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 244.0
+offset_top = 241.0
+offset_right = 1269.0
+offset_bottom = 372.81824
+scale = Vector2(0.44, 0.44)
+mouse_filter = 2
+theme_override_constants/outline_size = 42
+theme_override_fonts/normal_font = ExtResource("2_ghw46")
+theme_override_fonts/bold_font = ExtResource("2_ghw46")
+theme_override_fonts/bold_italics_font = ExtResource("2_ghw46")
+theme_override_fonts/italics_font = ExtResource("2_ghw46")
+theme_override_fonts/mono_font = ExtResource("2_ghw46")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = " Luck: "
+
+[node name="PlusHealth" type="Button" parent="StatsContainer/Labels"]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 27.999996
+offset_right = 358.0
+offset_bottom = 208.0
+scale = Vector2(0.35, 0.35)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("2_ghw46")
+theme_override_font_sizes/font_size = 100
+text = "+"
+
+[node name="MinusHealth" type="Button" parent="StatsContainer/Labels"]
+layout_mode = 0
+offset_left = 105.00001
+offset_top = 27.999996
+offset_right = 285.0
+offset_bottom = 208.0
+scale = Vector2(0.35, 0.35)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("2_ghw46")
+theme_override_font_sizes/font_size = 100
+text = "-"
+
+[node name="PlusSpeed" type="Button" parent="StatsContainer/Labels"]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 98.0
+offset_right = 358.0
+offset_bottom = 278.0
+scale = Vector2(0.35, 0.35)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("2_ghw46")
+theme_override_font_sizes/font_size = 100
+text = "+"
+
+[node name="MinusSpeed" type="Button" parent="StatsContainer/Labels"]
+layout_mode = 0
+offset_left = 105.00001
+offset_top = 98.0
+offset_right = 285.0
+offset_bottom = 278.0
+scale = Vector2(0.35, 0.35)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("2_ghw46")
+theme_override_font_sizes/font_size = 100
+text = "-"
+
+[node name="PlusPower" type="Button" parent="StatsContainer/Labels"]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 168.0
+offset_right = 358.0
+offset_bottom = 348.0
+scale = Vector2(0.35, 0.35)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("2_ghw46")
+theme_override_font_sizes/font_size = 100
+text = "+"
+
+[node name="MinusPower" type="Button" parent="StatsContainer/Labels"]
+layout_mode = 0
+offset_left = 105.00001
+offset_top = 168.0
+offset_right = 285.0
+offset_bottom = 348.0
+scale = Vector2(0.35, 0.35)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("2_ghw46")
+theme_override_font_sizes/font_size = 100
+text = "-"
+
+[node name="PlusLuck" type="Button" parent="StatsContainer/Labels"]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 238.0
+offset_right = 358.0
+offset_bottom = 418.0
+scale = Vector2(0.35, 0.35)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("2_ghw46")
+theme_override_font_sizes/font_size = 100
+text = "+"
+
+[node name="MinusLuck" type="Button" parent="StatsContainer/Labels"]
+layout_mode = 0
+offset_left = 105.00001
+offset_top = 238.0
+offset_right = 285.0
+offset_bottom = 418.0
+scale = Vector2(0.35, 0.35)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("2_ghw46")
+theme_override_font_sizes/font_size = 100
+text = "-"
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 201.99998
+offset_top = 56.000008
+offset_right = 602.0
+offset_bottom = 256.0
+scale = Vector2(0.8, 0.8)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("2_ghw46")
+theme_override_font_sizes/font_size = 100
+text = "Climb!"
+
+[node name="Equipment" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -400.0
+offset_bottom = -400.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Equipment"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = -11.0
+offset_right = 683.0
+offset_bottom = 571.0
+
+[node name="Inventory" type="Control" parent="Equipment/Panel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" parent="Equipment/Panel/Inventory" instance=ExtResource("4_df05h")]
+material = SubResource("ShaderMaterial_if7li")
+layout_mode = 0
+offset_left = 236.0
+offset_top = 1.0
+offset_right = 836.0
+offset_bottom = 138.0
+text = "Inventory"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Equipment/Panel/Inventory"]
+layout_mode = 0
+offset_left = 455.0
+offset_right = 915.0
+offset_bottom = 158.0
+scale = Vector2(0.3, 0.3)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("2_ghw46")
+theme_override_font_sizes/font_size = 100
+text = "Generate"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Equipment/Panel/Inventory"]
+layout_mode = 0
+offset_top = 59.0
+offset_right = 642.0
+offset_bottom = 413.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Equipment/Panel/Inventory/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 1
+
+[node name="GridContainer" type="GridContainer" parent="Equipment/Panel/Inventory/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/v_separation = 9
+
+[node name="InventoryButton" parent="Equipment/Panel/Inventory/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("6_8um5k")]
+layout_mode = 2
+
+[node name="Equipment" type="Control" parent="Equipment/Panel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="equipmentTitle" parent="Equipment/Panel/Equipment" instance=ExtResource("4_df05h")]
+material = SubResource("ShaderMaterial_xim88")
+layout_mode = 0
+offset_left = 236.0
+offset_top = 421.0
+offset_right = 836.0
+offset_bottom = 558.0
+text = "Equipment"
+horizontal_alignment = 1
+
+[node name="slot1" type="Button" parent="Equipment/Panel/Equipment"]
+layout_mode = 0
+offset_left = 202.0
+offset_top = 470.0
+offset_right = 299.0
+offset_bottom = 567.0
+toggle_mode = true
+button_group = ExtResource("3_koqhg")
+
+[node name="icon" type="TextureRect" parent="Equipment/Panel/Equipment/slot1"]
+layout_mode = 0
+offset_right = 97.0
+offset_bottom = 97.0
+
+[node name="slot2" type="Button" parent="Equipment/Panel/Equipment"]
+layout_mode = 0
+offset_left = 343.0
+offset_top = 470.0
+offset_right = 440.0
+offset_bottom = 567.0
+toggle_mode = true
+button_group = ExtResource("3_koqhg")
+
+[node name="icon" type="TextureRect" parent="Equipment/Panel/Equipment/slot2"]
+layout_mode = 0
+offset_right = 97.0
+offset_bottom = 97.0
+
+[node name="Debugton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 1139.0
+offset_right = 94.0
+offset_bottom = 1274.0

@@ -1,0 +1,92 @@
+[gd_scene load_steps=6 format=3 uid="uid://bclknj3c05tf"]
+
+[ext_resource type="Script" uid="uid://dipfvj3n3bxhu" path="res://Scripts/InventoryButton.gd" id="1_afw8q"]
+[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="1_m7xb7"]
+[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="2_afw8q"]
+[ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="3_o6ibj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rdm5d"]
+resource_local_to_scene = true
+shader = ExtResource("2_afw8q")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="InventoryButton" type="Panel"]
+custom_minimum_size = Vector2(584, 97)
+offset_right = 584.0
+offset_bottom = 97.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_afw8q")
+
+[node name="Icon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(97, 97)
+layout_mode = 0
+offset_right = 97.0
+offset_bottom = 97.0
+
+[node name="Name" parent="." instance=ExtResource("1_m7xb7")]
+material = SubResource("ShaderMaterial_rdm5d")
+layout_mode = 0
+offset_left = 98.0
+offset_right = 1802.0
+offset_bottom = 137.0
+scale = Vector2(0.25, 0.25)
+text = "Champion's War Hammer"
+
+[node name="Rarity" parent="." instance=ExtResource("1_m7xb7")]
+material = SubResource("ShaderMaterial_rdm5d")
+layout_mode = 0
+offset_left = 179.0
+offset_top = 4.9999995
+offset_right = 1883.0
+offset_bottom = 142.0
+scale = Vector2(0.2, 0.2)
+text = "Legendary"
+horizontal_alignment = 2
+
+[node name="Level" parent="." instance=ExtResource("1_m7xb7")]
+material = SubResource("ShaderMaterial_rdm5d")
+layout_mode = 0
+offset_left = 98.0
+offset_top = 33.0
+offset_right = 2944.6667
+offset_bottom = 170.0
+scale = Vector2(0.15, 0.15)
+text = "Level: 1"
+
+[node name="Description" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 53.0
+offset_right = 2944.6667
+offset_bottom = 339.6667
+scale = Vector2(0.15, 0.15)
+mouse_filter = 1
+theme_override_constants/shadow_outline_size = 30
+theme_override_constants/outline_size = 40
+theme_override_fonts/normal_font = ExtResource("3_o6ibj")
+theme_override_fonts/bold_font = ExtResource("3_o6ibj")
+theme_override_fonts/bold_italics_font = ExtResource("3_o6ibj")
+theme_override_fonts/italics_font = ExtResource("3_o6ibj")
+theme_override_fonts/mono_font = ExtResource("3_o6ibj")
+theme_override_font_sizes/normal_font_size = 100
+theme_override_font_sizes/bold_font_size = 100
+theme_override_font_sizes/bold_italics_font_size = 100
+theme_override_font_sizes/italics_font_size = 100
+theme_override_font_sizes/mono_font_size = 100
+bbcode_enabled = true
+text = "Health: +100, Speed: 300"
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 524.0
+offset_top = 1.0
+offset_right = 724.0
+offset_bottom = 320.99997
+scale = Vector2(0.3, 0.3)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("3_o6ibj")
+theme_override_font_sizes/font_size = 100
+text = "N"

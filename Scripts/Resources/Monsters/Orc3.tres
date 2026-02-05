@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://rgsbmauh3u3l"]
+
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_gm006"]
+
+[resource]
+script = ExtResource("1_gm006")
+name = "Orc Soldier"
+max_hp = 30
+power = 10
+exp_reward = 10
+gold_reward = 11
+essence_type = "physical"
+min_essence_amount = 2
+max_essence_amount = 3
+attack_speed = 4
+anim_offset_y = -14
+anim_name = "orc3"
+metadata/_custom_type_script = "uid://dljne2akmlj0u"

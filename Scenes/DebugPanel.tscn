@@ -1,0 +1,176 @@
+[gd_scene load_steps=6 format=3 uid="uid://dq67y5pmx8adc"]
+
+[ext_resource type="Script" uid="uid://dwwd78td8c38m" path="res://Scripts/DebugPanel.gd" id="1_28dv6"]
+[ext_resource type="ButtonGroup" uid="uid://br2b15cqpspy" path="res://Resources/StatsButtonQty.tres" id="2_n44sy"]
+[ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="3_imyrc"]
+[ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="4_o7tuo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kbq37"]
+shader = ExtResource("3_imyrc")
+shader_parameter/lod = 2.000000095
+
+[node name="DebugPanel" type="Control" node_paths=PackedStringArray("btn1000", "btn20000", "btn500000", "btn90000000", "exp_btn", "gold_btn")]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+script = ExtResource("1_28dv6")
+button_group = ExtResource("2_n44sy")
+btn1000 = NodePath("ColorRect/Panel/Control/qtyBtn1")
+btn20000 = NodePath("ColorRect/Panel/Control/qtyBtn2")
+btn500000 = NodePath("ColorRect/Panel/Control/qtyBtn3")
+btn90000000 = NodePath("ColorRect/Panel/Control/qtyBtn4")
+exp_btn = NodePath("ColorRect/Panel/Control/expBtn")
+gold_btn = NodePath("ColorRect/Panel/Control/goldBtn")
+
+[node name="backdropButton" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = 1281.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_kbq37")
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = 186.0
+offset_right = -20.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="ColorRect/Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="qtyBtn1" type="Button" parent="ColorRect/Panel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -311.0
+offset_top = 37.0
+offset_right = -11.0
+offset_bottom = 197.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("4_o7tuo")
+theme_override_font_sizes/font_size = 70
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("2_n44sy")
+text = "1000x"
+
+[node name="qtyBtn2" type="Button" parent="ColorRect/Panel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -154.0
+offset_top = 37.0
+offset_right = 146.0
+offset_bottom = 197.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("4_o7tuo")
+theme_override_font_sizes/font_size = 70
+toggle_mode = true
+button_group = ExtResource("2_n44sy")
+text = "20000x"
+
+[node name="qtyBtn3" type="Button" parent="ColorRect/Panel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 3.5
+offset_top = 37.0
+offset_right = 304.5
+offset_bottom = 197.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("4_o7tuo")
+theme_override_font_sizes/font_size = 70
+toggle_mode = true
+button_group = ExtResource("2_n44sy")
+text = "500000x"
+
+[node name="qtyBtn4" type="Button" parent="ColorRect/Panel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 161.0
+offset_top = 37.0
+offset_right = 461.0
+offset_bottom = 197.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("4_o7tuo")
+theme_override_font_sizes/font_size = 50
+toggle_mode = true
+button_group = ExtResource("2_n44sy")
+text = "90000000x"
+
+[node name="expBtn" type="Button" parent="ColorRect/Panel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -154.0
+offset_top = 134.0
+offset_right = 146.0
+offset_bottom = 294.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("4_o7tuo")
+theme_override_font_sizes/font_size = 70
+toggle_mode = true
+button_group = ExtResource("2_n44sy")
+text = "Exp"
+
+[node name="goldBtn" type="Button" parent="ColorRect/Panel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 3.5
+offset_top = 134.0
+offset_right = 304.5
+offset_bottom = 294.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("4_o7tuo")
+theme_override_font_sizes/font_size = 70
+toggle_mode = true
+button_group = ExtResource("2_n44sy")
+text = "Gold"

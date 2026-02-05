@@ -1,0 +1,180 @@
+[gd_scene load_steps=13 format=3 uid="uid://b7xgkus4u2361"]
+
+[ext_resource type="Script" uid="uid://dygepuv8uhpel" path="res://Scripts/GameUI.gd" id="1_po7eo"]
+[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_frnsy"]
+[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="3_co6lq"]
+[ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="4_frnsy"]
+[ext_resource type="Texture2D" uid="uid://2mjbs0mmr2ya" path="res://Sprites/mid_progress_bar_top.png" id="5_co6lq"]
+[ext_resource type="Texture2D" uid="uid://b8vfc4t74gkpt" path="res://Sprites/FULL_ATK.png" id="5_d8tla"]
+[ext_resource type="Texture2D" uid="uid://bc5ptbig8ogjf" path="res://Sprites/Damaged_icon.png" id="6_j41el"]
+[ext_resource type="Texture2D" uid="uid://opa2rothhy7x" path="res://Sprites/mid_progress_bar_progress.png" id="7_tii1l"]
+[ext_resource type="Script" uid="uid://dt4un2465kwr1" path="res://Scripts/XpBarController.gd" id="8_tii1l"]
+[ext_resource type="Curve" uid="uid://bdkmegreb07jj" path="res://Resources/xpCurve.tres" id="9_8dgta"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wjrrg"]
+resource_local_to_scene = true
+shader = ExtResource("3_co6lq")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_co6lq"]
+resource_local_to_scene = true
+shader = ExtResource("3_co6lq")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="GameUI" type="Control" node_paths=PackedStringArray("hp_bar", "xp_bar", "hp_label", "xp_label", "monster_turns", "monster_damage")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_po7eo")
+hp_bar = NodePath("TopSection/HpBar")
+xp_bar = NodePath("TopSection/XpBar")
+hp_label = NodePath("TopSection/HpBar/HpLabel")
+xp_label = NodePath("TopSection/XpBar/XpLabel")
+monster_turns = NodePath("TopSection/DamagedIcon/turnsLabel")
+monster_damage = NodePath("TopSection/AttackIcon/totalAtkLabel")
+
+[node name="TopSection" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 69.0
+offset_bottom = 69.0
+grow_horizontal = 2
+
+[node name="Location" parent="TopSection" instance=ExtResource("2_frnsy")]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_wjrrg")
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 2397.6667
+offset_bottom = 174.0
+text = "Location name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackBtn" type="Button" parent="TopSection"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = -39.0
+offset_right = 235.0
+offset_bottom = 117.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("4_frnsy")
+theme_override_font_sizes/font_size = 100
+text = "<-"
+
+[node name="QuickRespawn" type="Button" parent="TopSection"]
+layout_mode = 0
+offset_left = 588.0
+offset_top = -39.0
+offset_right = 798.0
+offset_bottom = 117.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("4_frnsy")
+theme_override_font_sizes/font_size = 100
+text = "->"
+
+[node name="HpBar" type="TextureProgressBar" parent="TopSection"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 86.0
+offset_right = 103.0
+offset_bottom = 96.0
+scale = Vector2(4, 4)
+value = 50.0
+texture_over = ExtResource("5_co6lq")
+texture_progress = ExtResource("7_tii1l")
+tint_progress = Color(0.51250005, 1, 0.35000002, 1)
+
+[node name="HpLabel" parent="TopSection/HpBar" instance=ExtResource("2_frnsy")]
+material = SubResource("ShaderMaterial_wjrrg")
+layout_mode = 0
+offset_top = 0.2500011
+offset_right = 1337.5
+offset_bottom = 158.58331
+scale = Vector2(0.06, 0.06)
+text = "2000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XpBar" type="TextureProgressBar" parent="TopSection"]
+layout_mode = 0
+offset_left = 378.0
+offset_top = 86.0
+offset_right = 458.0
+offset_bottom = 96.0
+scale = Vector2(4, 4)
+value = 50.0
+texture_over = ExtResource("5_co6lq")
+texture_progress = ExtResource("7_tii1l")
+tint_progress = Color(0.9095733, 0.92, 0.2944, 1)
+script = ExtResource("8_tii1l")
+xp_curve = ExtResource("9_8dgta")
+
+[node name="XpLabel" parent="TopSection/XpBar" instance=ExtResource("2_frnsy")]
+material = SubResource("ShaderMaterial_wjrrg")
+layout_mode = 0
+offset_top = 0.2500011
+offset_right = 1337.5
+offset_bottom = 158.58331
+scale = Vector2(0.06, 0.06)
+text = "2000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DamagedIcon" type="TextureRect" parent="TopSection"]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 138.0
+offset_right = 182.0
+offset_bottom = 178.0
+scale = Vector2(2, 2)
+texture = ExtResource("6_j41el")
+
+[node name="turnsLabel" parent="TopSection/DamagedIcon" instance=ExtResource("2_frnsy")]
+material = SubResource("ShaderMaterial_co6lq")
+layout_mode = 0
+offset_left = 151.5
+offset_top = -49.500008
+offset_right = 371.5
+offset_bottom = 87.49999
+pivot_offset = Vector2(60, 68)
+text = "30"
+vertical_alignment = 1
+
+[node name="AttackIcon" type="TextureRect" parent="TopSection"]
+layout_mode = 0
+offset_left = 433.0
+offset_top = 138.0
+offset_right = 473.0
+offset_bottom = 178.0
+scale = Vector2(2, 2)
+texture = ExtResource("5_d8tla")
+
+[node name="totalAtkLabel" parent="TopSection/AttackIcon" instance=ExtResource("2_frnsy")]
+material = SubResource("ShaderMaterial_co6lq")
+layout_mode = 0
+offset_left = -140.5
+offset_top = -49.5
+offset_right = 49.5
+offset_bottom = 87.5
+pivot_offset = Vector2(60, 68.5)
+text = "50"
+vertical_alignment = 1
+
+[node name="BottomSection" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 69.0
+offset_bottom = 69.0
+grow_horizontal = 2

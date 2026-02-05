@@ -1,0 +1,110 @@
+[gd_scene load_steps=10 format=3 uid="uid://bi1c8jgwhnhki"]
+
+[ext_resource type="Script" uid="uid://dr4nxsos6lrwq" path="res://Scripts/SummaryPanel.gd" id="1_10axu"]
+[ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="2_w37fs"]
+[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_sws4i"]
+[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="4_0kgc7"]
+[ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="8_sws4i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_55pba"]
+shader = ExtResource("2_w37fs")
+shader_parameter/lod = 1.674000079515
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8k8yn"]
+resource_local_to_scene = true
+shader = ExtResource("4_0kgc7")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_duup7"]
+resource_local_to_scene = true
+shader = ExtResource("4_0kgc7")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sws4i"]
+resource_local_to_scene = true
+shader = ExtResource("4_0kgc7")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="SummaryPanel" type="Control" node_paths=PackedStringArray("back_btn", "retry_btn")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(360, 640)
+script = ExtResource("1_10axu")
+back_btn = NodePath("ColorRect/Panel/Menu")
+retry_btn = NodePath("ColorRect/Panel/QuickRestart")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_55pba")
+layout_mode = 0
+offset_left = 2.0
+offset_top = 29.0
+offset_right = 722.0
+offset_bottom = 1176.0
+
+[node name="Panel" type="Panel" parent="ColorRect"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 21.0
+offset_right = 698.0
+offset_bottom = 1120.0
+
+[node name="Title" parent="ColorRect/Panel" instance=ExtResource("3_sws4i")]
+material = SubResource("ShaderMaterial_8k8yn")
+layout_mode = 0
+offset_left = 176.0
+offset_top = 70.0
+offset_right = 815.99994
+offset_bottom = 207.0
+scale = Vector2(0.54, 0.54)
+text = "Victory"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemiesDead" parent="ColorRect/Panel" instance=ExtResource("3_sws4i")]
+material = SubResource("ShaderMaterial_duup7")
+layout_mode = 0
+offset_left = 86.0
+offset_top = 270.0
+offset_right = 2049.3335
+offset_bottom = 407.0
+text = "Enemies pulverized: "
+
+[node name="RunesUsed" parent="ColorRect/Panel" instance=ExtResource("3_sws4i")]
+material = SubResource("ShaderMaterial_sws4i")
+layout_mode = 0
+offset_left = 86.0
+offset_top = 319.0
+offset_right = 2049.3335
+offset_bottom = 456.0
+text = "Walls Destroyed: "
+
+[node name="Menu" type="Button" parent="ColorRect/Panel"]
+layout_mode = 0
+offset_left = 34.000015
+offset_top = 980.99994
+offset_right = 234.00002
+offset_bottom = 1119.0
+scale = Vector2(0.7, 0.7)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("8_sws4i")
+theme_override_font_sizes/font_size = 100
+text = "<-"
+
+[node name="QuickRestart" type="Button" parent="ColorRect/Panel"]
+layout_mode = 0
+offset_left = 506.0
+offset_top = 980.99994
+offset_right = 706.0
+offset_bottom = 1119.0
+scale = Vector2(0.7, 0.7)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("8_sws4i")
+theme_override_font_sizes/font_size = 100
+text = "->"

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://0n5ocif8cg6b"]
+
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_m3ned"]
+
+[resource]
+script = ExtResource("1_m3ned")
+name = "Orc Warrior"
+max_hp = 40
+power = 16
+exp_reward = 15
+gold_reward = 16
+essence_type = "physical"
+min_essence_amount = 3
+max_essence_amount = 4
+attack_speed = 4
+anim_offset_y = -14
+anim_name = "orc4"
+metadata/_custom_type_script = "uid://dljne2akmlj0u"

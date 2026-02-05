@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://c1ofndiffxia0"]
+
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_xb32t"]
+
+[resource]
+script = ExtResource("1_xb32t")
+name = "Orc Brawler"
+max_hp = 23
+power = 4
+exp_reward = 7
+gold_reward = 7
+essence_type = "physical"
+min_essence_amount = 1
+max_essence_amount = 2
+attack_speed = 4
+anim_offset_y = -11
+anim_name = "orc2"
+metadata/_custom_type_script = "uid://dljne2akmlj0u"

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EquipmentBase" load_steps=3 format=3 uid="uid://ccsbphke2xv6b"]
+
+[ext_resource type="Script" uid="uid://8r1j7qka5m4e" path="res://Scripts/Resources/EquipmentBase.gd" id="1_2duav"]
+[ext_resource type="Texture2D" uid="uid://t3ffb8unegpu" path="res://Sprites/AccessorySquare.png" id="1_dvm34"]
+
+[resource]
+script = ExtResource("1_2duav")
+name = "Ring Of Might"
+base_stats = {
+"health": 50,
+"luck": 0,
+"power": 150,
+"speed": 0
+}
+allowed_mods = ["health", "power"]
+icon = ExtResource("1_dvm34")
+metadata/_custom_type_script = "uid://8r1j7qka5m4e"

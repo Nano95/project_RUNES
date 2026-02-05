@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3uurpsjr56i5"]
+
+[ext_resource type="Script" uid="uid://csxtg5a3i0t5m" path="res://Scripts/Main.gd" id="1_r150o"]
+[ext_resource type="Shader" path="res://Shaders/BackgroundStripes.gdshader" id="2_kln2b"]
+[ext_resource type="Texture2D" uid="uid://t3ffb8unegpu" path="res://Sprites/AccessorySquare.png" id="3_rgh2o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbw6q"]
+shader = ExtResource("2_kln2b")
+shader_parameter/color_one = Vector3(0.5, 0.8, 1)
+shader_parameter/color_two = Vector3(0.3, 0.6, 0.8)
+shader_parameter/angle = 20.0
+shader_parameter/line_count = 17.0
+shader_parameter/speed = 0.7
+shader_parameter/blur = 0.0
+
+[node name="Main" type="Control" node_paths=PackedStringArray("top_layer", "mid_layer", "back_layer", "shader_bg")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_r150o")
+top_layer = NodePath("FRONT")
+mid_layer = NodePath("MID")
+back_layer = NodePath("BACK")
+shader_bg = NodePath("BACK/BG")
+
+[node name="FRONT" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="MID" type="Node2D" parent="."]
+
+[node name="BACK" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="BG" type="TextureRect" parent="BACK"]
+material = SubResource("ShaderMaterial_pbw6q")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_rgh2o")

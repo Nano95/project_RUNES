@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsw781t07yq02"]
+
+[ext_resource type="Script" uid="uid://c7olgoekccypb" path="res://Scripts/FloatingLabel.gd" id="1_vmeda"]
+[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_h3u3j"]
+[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="3_jop8i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6qenv"]
+resource_local_to_scene = true
+shader = ExtResource("3_jop8i")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="FloatingLabel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -720.0
+offset_bottom = -1280.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vmeda")
+
+[node name="Label" parent="." instance=ExtResource("2_h3u3j")]
+material = SubResource("ShaderMaterial_6qenv")
+layout_mode = 0
+offset_left = -300.0
+offset_top = -69.0
+offset_right = 300.0
+offset_bottom = 68.0
+scale = Vector2(0.45, 0.45)
+pivot_offset = Vector2(300, 68)
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1

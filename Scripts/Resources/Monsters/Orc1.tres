@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://qhoj2kh4oyun"]
+
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_gw14g"]
+
+[resource]
+script = ExtResource("1_gw14g")
+name = "Orc Brute"
+max_hp = 15
+power = 2
+exp_reward = 4
+gold_reward = 5
+essence_type = "physical"
+max_essence_amount = 2
+attack_speed = 4
+anim_offset_y = -11
+anim_name = "orc1"
+metadata/_custom_type_script = "uid://dljne2akmlj0u"

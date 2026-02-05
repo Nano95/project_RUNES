@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlpj0y82cin1o"]
+
+[ext_resource type="Script" uid="uid://c532ov8my54xm" path="res://Scripts/DamageLabel.gd" id="1_qp2qc"]
+[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_ep01d"]
+[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="3_2nhr0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6qenv"]
+resource_local_to_scene = true
+shader = ExtResource("3_2nhr0")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="DamageLabel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -720.0
+offset_bottom = -1280.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qp2qc")
+
+[node name="Label" parent="." instance=ExtResource("2_ep01d")]
+self_modulate = Color(1, 0.41000003, 0.41000003, 1)
+material = SubResource("ShaderMaterial_6qenv")
+layout_mode = 0
+scale = Vector2(0.45, 0.45)
+text = "100"
