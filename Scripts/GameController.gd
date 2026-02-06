@@ -13,11 +13,13 @@ var my_grid:MyGrid
 var game_ui:GameUI
 
 var game_is_active: bool = true
-var group_turns_left:int = 5
+var GENERAL_STARTING_TURNS_LEFT:int = 4
+var group_turns_left:int = GENERAL_STARTING_TURNS_LEFT
 var monsters := []  # list of MonsterInstance nodes, only used for things like if all monsters are dead. NOT positional reasons
 
 var selected_monster_family:String="orcs"
 var selected_monster_index:int=1
+
 var PADDING:Vector2 = Vector2(38, 290)
 
 ### Stats
@@ -45,12 +47,14 @@ func _ready() -> void:
 func start_game(restart:bool=false) -> void:
 	game_is_active = true
 	if (restart):
+		print(" NEW ROUND ==========")
 		clear_all_monsters()
-		group_turns_left = max(2, 5) # it will be base - some ascension number
-		
+		group_turns_left = max(2, GENERAL_STARTING_TURNS_LEFT) # it will be base - some ascension number
+	
 	spawn_stage(selected_monster_index, 5)
-	print("Turns to go on start: ", group_turns_left)
-	game_ui.update_monster_data(group_turns_left, calculate_group_power())
+	var next_attack = calculate_next_incoming_attack()
+	print("Turns to go on start: ", next_attack.turns)
+	game_ui.update_monster_data(next_attack.turns, next_attack.damage)
 
 func setup(main_ref:MainNode, g_ui:GameUI) -> void:
 	main = main_ref
@@ -91,6 +95,8 @@ func spawn_stage(stage: int, count: int):
 		my_grid.spawn_monster_into_cell(cell.x, cell.y, base)
 
 func take_damage(dmg:int=0) -> void:
+	if (dmg <= 0): return
+	%Camera2D.add_shake(30.0)
 	game_ui.update_hp_bar(current_hp, max_hp, dmg)
 	current_hp -= dmg
 	if (current_hp <= 0):
@@ -105,7 +111,7 @@ func spawn_summary_panel(message:String="mmm!") -> void:
 
 func register_monster(monster:MonsterInstance): 
 	monsters.append(monster)
-	monster.died.connect(monster_died)
+	#monster.died.connect(monster_died)
 
 func monster_died(monster):
 	# Remove from flat list
@@ -114,9 +120,10 @@ func monster_died(monster):
 
 	# Remove from grid
 	my_grid.clear_monster(monster)
-	game_ui.update_monster_damage(calculate_group_power())
+	#game_ui.update_monster_damage(calculate_group_power()) # I dont think we want to update this as game ends
 	
-	check_if_all_monsters_dead()
+	var game_over = check_if_all_monsters_dead()
+	if (game_over): return
 
 	# Update UI if needed
 	#game_ui.refresh_monster_data()
@@ -124,38 +131,61 @@ func monster_died(monster):
 func prune_dead_monsters(): 
 	monsters = monsters.filter(is_instance_valid)
 
-func check_if_all_monsters_dead() -> void:
+func check_if_all_monsters_dead() -> bool:
 	if monsters.is_empty():
 		# Spawn a victory animation that lasts less than a second, and when that 
 		# finishes, then spawn this.
 		spawn_summary_panel("Victory!")
+		return true
+	return false
 
 func advance_turn():
-	if (!game_is_active): return
-	prune_dead_monsters() # Safety check for potential bug with a freed instance remaining in array
-	check_if_all_monsters_dead()
+	if !game_is_active: return
+	prune_dead_monsters()
+	if check_if_all_monsters_dead(): return
 	runes_used += 1
+	# 1. Decrement group timer
 	group_turns_left -= 1
-	print("Advance a turn: ", group_turns_left)
-	var incoming_group_power = calculate_group_power()
-	if (group_turns_left <= 0):
-		apply_group_attack(incoming_group_power)
-		group_turns_left = 3
-	
-	game_ui.update_monster_turns(group_turns_left)
-	game_ui.update_monster_damage(incoming_group_power)
-	# Handle elites/bosses
+	# 2. Decrement elite timers FIRST
 	for monster in monsters:
-		if (monster.is_elite_or_boss()):
+		if monster.is_elite_or_boss():
 			monster.individual_turns_left -= 1
-			if (monster.individual_turns_left <= 0):
+	
+	# 3. Now calculate the next attack using UPDATED timers
+	var next_attack = calculate_next_incoming_attack()
+	
+	# 4. Execute attacks that fire this turn
+	if next_attack.turns <= 0:
+		match next_attack.source:
+			"group":
+				apply_group_attack(next_attack.damage)
+				group_turns_left = GENERAL_STARTING_TURNS_LEFT
+	
+			"elite":
+				# elite damage will be applied below
+				pass
+	
+			"both":
+				apply_group_attack(next_attack.group_damage)
+				group_turns_left = GENERAL_STARTING_TURNS_LEFT
+
+	# 5. Apply elite attacks that fire this turn
+	for monster in monsters:
+		if monster.is_elite_or_boss():
+			if monster.individual_turns_left <= 0:
 				take_damage(monster.base.power)
-				#show_elite_attack_feedback(monster)
 				monster.individual_turns_left = monster.base.attack_speed
+				
 		monster.update_individual_atk_label()
+		
+	# 6. Recalculate preview AFTER attacks resolve (optional but clean)
+	next_attack = calculate_next_incoming_attack()
+	# 7. Update UI
+	game_ui.update_monster_turns(next_attack.turns)
+	game_ui.update_monster_damage(next_attack.damage)
+
 func apply_group_attack(dmg:int= 0) -> void:
 	if (dmg > 0):
-		%Camera2D.add_shake(30.0)
 		take_damage(dmg)
 		show_group_attack_feedback(dmg)
 
@@ -170,6 +200,48 @@ func calculate_group_power() -> int:
 		total_power += monster.base.power
 	
 	return total_power
+
+func calculate_next_elite_attack() -> Dictionary:
+	var best_turns = 1000
+	var best_damage = 0
+
+	for monster in monsters:
+		if is_instance_valid(monster) and monster.is_elite_or_boss():
+			print("Found elite")
+			if monster.individual_turns_left < best_turns:
+				best_turns = monster.individual_turns_left
+				best_damage = monster.base.power
+
+	return {
+		"turns": best_turns,
+		"damage": best_damage,
+		"source": "elite"
+	}
+
+# This is purely for UI
+func calculate_next_incoming_attack() -> Dictionary:
+	var elite_turn = calculate_next_elite_attack()
+	var monster_group_turns = group_turns_left
+	var monster_group_damage = calculate_group_power()
+	
+	# Compare which attack is sooner
+	if (elite_turn.turns < monster_group_turns):
+		return elite_turn
+	elif (monster_group_turns < elite_turn.turns):
+		return {
+			"turns": monster_group_turns,
+			"damage": monster_group_damage,
+			"source": "group"
+		}
+	else:
+		# They attack on the same turn → sum damage
+		return {
+			"turns": monster_group_turns,
+			"damage": monster_group_damage + elite_turn.damage,
+			"group_damage": monster_group_damage,
+			"source": "both"
+		}
+
 
 # Only if an elite is present.
 func calculate_elite_power() -> int:
@@ -205,7 +277,7 @@ func get_monster_for_stage(stage: int) -> MonsterBase:
 ######################
 func on_cell_tapped(row, col) -> void:
 	if (!game_is_active): return
-	damage_plus(row, col)
+	damage_3x3(row, col)
 	advance_turn()
 	#var rune = player.get_selected_rune()
 #
@@ -227,6 +299,7 @@ func damage_cell(r: int, c: int) -> int:
 		var died = monster.take_damage(current_power)
 		if (died):
 			xp_gained += monster.base.exp_reward
+			monster_died(monster)
 	
 	return xp_gained
 

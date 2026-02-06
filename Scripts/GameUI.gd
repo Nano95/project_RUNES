@@ -65,12 +65,10 @@ func update_monster_data(turns:int, power:int) -> void:
 func update_monster_turns(turns:int) -> void:
 	var prev_turns:int = monster_turns.text.to_int()
 	monster_turns.text = str(turns)
-	print("prev turns: ", prev_turns)
-	print("new turns: ", turns)
 	# Animate
 	if (prev_turns == turns): return
 	# Scale based on urgency (closer to 1 = bigger)
-	var danger_scale = 0.3 + (.5 / max(turns, 1)) * 0.3
+	var danger_scale = 0.3 + (.7 / max(turns, 1)) * 0.5
 	# Start slightly smaller so the tween pops it up
 	monster_turns.scale = Vector2(danger_scale, danger_scale)
 	#monster_turns.scale = Vector2(.4, .4) / (turns * 2)

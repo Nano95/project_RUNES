@@ -18,8 +18,6 @@ func setup(main_node:MainNode, gc:GameController) -> void:
 	animate_xp_gain(0)
 
 func award_run_xp(xp_gained:int=1) -> void:
-	print("Adding xp_gained: ", xp_gained)
-	
 	animate_xp_gain(xp_gained) # NOTE WE DO NOT ADD XP HERE
 
 func add_xp(amount: float) -> void:

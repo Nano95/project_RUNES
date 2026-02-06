@@ -15,6 +15,8 @@ var my_grid:MyGrid
 signal died
 func _ready() -> void:
 	hp_label.text = str(current_hp)
+	if (is_elite or is_boss):
+		update_individual_atk_label()
 
 func setup(monster_base: MonsterBase, grid:MyGrid):
 	base = monster_base
@@ -33,7 +35,7 @@ func become_elite():
 	$atk.visible = true
 	current_hp = int(current_hp * 1.5)
 	base.power = int(base.power * 1.5)
-	individual_turns_left = 4  # elites attack faster
+	individual_turns_left = base.attack_speed - 1 # elites attack faster
 
 func update_individual_atk_label() -> void:
 	$atk.text = str(individual_turns_left)
@@ -43,7 +45,7 @@ func take_damage(dmg:int=1) -> bool:
 	current_hp -= dmg
 	hp_label.text = str(current_hp)
 	animate_hit()
-	if (current_hp < 0):
+	if (current_hp <= 0):
 		emit_signal("died", self)
 		spawn_xp_label()
 		queue_free() # will be enhanced later
@@ -60,7 +62,7 @@ func spawn_xp_label() -> void:
 
 func spawn_damage_label(amount: float) -> void:
 	var label = damage_label.instantiate()
-	add_child(label)
+	my_grid.spawn_to_fx_container(label)
 
 	# Position relative to the wall sprite
 	label.global_position = %AnimatedSprite2D.global_position + Vector2(20, 5)

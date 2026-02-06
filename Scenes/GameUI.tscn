@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b7xgkus4u2361"]
+[gd_scene load_steps=16 format=3 uid="uid://b7xgkus4u2361"]
 
 [ext_resource type="Script" uid="uid://dygepuv8uhpel" path="res://Scripts/GameUI.gd" id="1_po7eo"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_frnsy"]
@@ -12,6 +12,24 @@
 [ext_resource type="Curve" uid="uid://bdkmegreb07jj" path="res://Resources/xpCurve.tres" id="9_8dgta"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wjrrg"]
+resource_local_to_scene = true
+shader = ExtResource("3_co6lq")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j41el"]
+resource_local_to_scene = true
+shader = ExtResource("3_co6lq")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8oijl"]
+resource_local_to_scene = true
+shader = ExtResource("3_co6lq")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ed32"]
 resource_local_to_scene = true
 shader = ExtResource("3_co6lq")
 shader_parameter/time = 4.750000002218258e-07
@@ -36,8 +54,8 @@ hp_bar = NodePath("TopSection/HpBar")
 xp_bar = NodePath("TopSection/XpBar")
 hp_label = NodePath("TopSection/HpBar/HpLabel")
 xp_label = NodePath("TopSection/XpBar/XpLabel")
-monster_turns = NodePath("TopSection/DamagedIcon/turnsLabel")
-monster_damage = NodePath("TopSection/AttackIcon/totalAtkLabel")
+monster_turns = NodePath("TopSection/AttackIcon/turnsLabel")
+monster_damage = NodePath("TopSection/DamagedIcon/totalAtkLabel")
 
 [node name="TopSection" type="Control" parent="."]
 layout_mode = 1
@@ -96,7 +114,7 @@ texture_progress = ExtResource("7_tii1l")
 tint_progress = Color(0.51250005, 1, 0.35000002, 1)
 
 [node name="HpLabel" parent="TopSection/HpBar" instance=ExtResource("2_frnsy")]
-material = SubResource("ShaderMaterial_wjrrg")
+material = SubResource("ShaderMaterial_j41el")
 layout_mode = 0
 offset_top = 0.2500011
 offset_right = 1337.5
@@ -121,7 +139,7 @@ script = ExtResource("8_tii1l")
 xp_curve = ExtResource("9_8dgta")
 
 [node name="XpLabel" parent="TopSection/XpBar" instance=ExtResource("2_frnsy")]
-material = SubResource("ShaderMaterial_wjrrg")
+material = SubResource("ShaderMaterial_8oijl")
 layout_mode = 0
 offset_top = 0.2500011
 offset_right = 1337.5
@@ -132,6 +150,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DamagedIcon" type="TextureRect" parent="TopSection"]
+z_index = -1
 layout_mode = 0
 offset_left = 142.0
 offset_top = 138.0
@@ -140,18 +159,19 @@ offset_bottom = 178.0
 scale = Vector2(2, 2)
 texture = ExtResource("6_j41el")
 
-[node name="turnsLabel" parent="TopSection/DamagedIcon" instance=ExtResource("2_frnsy")]
-material = SubResource("ShaderMaterial_co6lq")
+[node name="totalAtkLabel" parent="TopSection/DamagedIcon" instance=ExtResource("2_frnsy")]
+material = SubResource("ShaderMaterial_4ed32")
 layout_mode = 0
-offset_left = 151.5
-offset_top = -49.500008
-offset_right = 371.5
-offset_bottom = 87.49999
-pivot_offset = Vector2(60, 68)
-text = "30"
+offset_left = 5.0
+offset_top = -49.5
+offset_right = 195.0
+offset_bottom = 87.5
+pivot_offset = Vector2(60, 68.5)
+text = "50"
 vertical_alignment = 1
 
 [node name="AttackIcon" type="TextureRect" parent="TopSection"]
+z_index = -1
 layout_mode = 0
 offset_left = 433.0
 offset_top = 138.0
@@ -160,15 +180,15 @@ offset_bottom = 178.0
 scale = Vector2(2, 2)
 texture = ExtResource("5_d8tla")
 
-[node name="totalAtkLabel" parent="TopSection/AttackIcon" instance=ExtResource("2_frnsy")]
+[node name="turnsLabel" parent="TopSection/AttackIcon" instance=ExtResource("2_frnsy")]
 material = SubResource("ShaderMaterial_co6lq")
 layout_mode = 0
-offset_left = -140.5
-offset_top = -49.5
-offset_right = 49.5
-offset_bottom = 87.5
-pivot_offset = Vector2(60, 68.5)
-text = "50"
+offset_left = 6.0
+offset_top = -49.500008
+offset_right = 226.0
+offset_bottom = 87.49999
+pivot_offset = Vector2(60, 68)
+text = "30"
 vertical_alignment = 1
 
 [node name="BottomSection" type="Control" parent="."]

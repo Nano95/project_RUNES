@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://xxup1p8e76di"]
+[gd_scene load_steps=41 format=3 uid="uid://xxup1p8e76di"]
 
 [ext_resource type="Script" uid="uid://cpm362jinw3ou" path="res://Scripts/Resources/MonsterInstance.gd" id="1_ld5e8"]
 [ext_resource type="Texture2D" uid="uid://g6ycv2s2cnuv" path="res://Sprites/monsters/orc1.png" id="2_1o6kg"]
@@ -215,6 +215,12 @@ shader = ExtResource("9_0suyq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qfc3e"]
+resource_local_to_scene = true
+shader = ExtResource("9_0suyq")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
 [node name="MonsterInstance" type="Node2D"]
 script = ExtResource("1_ld5e8")
 damage_label = ExtResource("2_q5h8j")
@@ -244,7 +250,7 @@ texture = ExtResource("10_qfc3e")
 
 [node name="atk" parent="." instance=ExtResource("8_rovrv")]
 visible = false
-material = SubResource("ShaderMaterial_5ha12")
+material = SubResource("ShaderMaterial_qfc3e")
 offset_left = -3.0
 offset_top = -103.0
 offset_right = 170.33333
