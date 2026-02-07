@@ -44,7 +44,7 @@ func spawn_monster_into_cell(row: int, col: int, base: MonsterBase):
 	monster.setup(base, self)
 
 	# mutation
-	if (randf() < 0.25):
+	if (randf() < 0.05):
 		monster.become_elite()
 
 	# convert grid coords → world coords

@@ -1,16 +1,24 @@
-# Godot 4+ specific ignores
-.godot/
-.nomedia
-
+  
 # Godot-specific ignores
+.godot/
 .import/
 export.cfg
-export_credentials.cfg
-
-# Imported translations (automatically generated from CSV files)
-*.translation
+export_presets.cfg
 
 # Mono-specific ignores
 .mono/
-data_*/
 mono_crash.*.json
+
+# System/tool-specific ignores
+.directory
+*~
+.android/build/
+android/build/
+.android/build/*
+android/build/*
+android/build/.gradle/5.1.1/executionHistory/executionHistory.lock
+android/build/.gradle/5.1.1/fileHashes/fileHashes.bin
+android/build/.gradle/5.1.1/fileHashes/fileHashes.lock
+android/build/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+android/build/build/reports/lint-results.html
+*.import
