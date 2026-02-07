@@ -29,6 +29,13 @@ func setup_game_controller(gc:GameController) -> void:
 	$TopSection/BackBtn.pressed.connect(game_controller.spawn_summary_panel.bind("Escaped safely!"))
 	setup_hp(game_controller.current_hp, game_controller.max_hp)
 	xp_bar.setup(main, game_controller)
+	setup_rune_buttons()
+
+func setup_rune_buttons() -> void:
+	if !(is_instance_valid(game_controller)): return
+	$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton1.pressed.connect(game_controller.change_selected_rune.bind("single"))
+	$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton2.pressed.connect(game_controller.change_selected_rune.bind("plus"))
+	$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton3.pressed.connect(game_controller.change_selected_rune.bind("aoe3"))
 
 func setup_hp(player_hp:float, player_max_hp:float) -> void:
 	hp_bar.max_value = BAR_CONST

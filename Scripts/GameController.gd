@@ -20,7 +20,8 @@ var monsters := []  # list of MonsterInstance nodes, only used for things like i
 var selected_monster_family:String="orcs"
 var selected_monster_index:int=1
 
-var PADDING:Vector2 = Vector2(38, 290)
+var PADDING:Vector2 = Vector2(38, 260)
+var selected_rune_name:String="single"
 
 ### Stats
 var max_hp:int
@@ -258,19 +259,20 @@ func get_monster_for_stage(stage: int) -> MonsterBase:
 ######################
 ########### RUNE STUFF
 ######################
+func change_selected_rune(selected:String) -> void:
+	selected_rune_name = selected
+
 func on_cell_tapped(row, col) -> void:
 	if (!game_is_active): return
-	damage_3x3(row, col)
 	advance_turn()
-	#var rune = player.get_selected_rune()
 #
-	#match rune.area_type:
-		#"single":
-			#damage_single(row, col)
-		#"plus":
-			#damage_plus(row, col)
-		#"aoe3":
-			#damage_3x3(row, col)
+	match selected_rune_name:
+		"single":
+			damage_single(row, col)
+		"plus":
+			damage_plus(row, col)
+		"aoe3":
+			damage_3x3(row, col)
 
 func damage_cell(r: int, c: int) -> int:
 	var xp_gained := 0
