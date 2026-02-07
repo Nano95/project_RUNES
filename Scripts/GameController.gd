@@ -47,13 +47,11 @@ func _ready() -> void:
 func start_game(restart:bool=false) -> void:
 	game_is_active = true
 	if (restart):
-		print(" NEW ROUND ==========")
 		clear_all_monsters()
 		group_turns_left = max(2, GENERAL_STARTING_TURNS_LEFT) # it will be base - some ascension number
 	
 	spawn_stage(selected_monster_index, 5)
 	var next_attack = calculate_next_incoming_attack()
-	print("Turns to go on start: ", next_attack.turns)
 	game_ui.update_monster_data(next_attack.turns, next_attack.damage)
 
 func setup(main_ref:MainNode, g_ui:GameUI) -> void:
@@ -100,7 +98,6 @@ func take_damage(dmg:int=0) -> void:
 	game_ui.update_hp_bar(current_hp, max_hp, dmg)
 	current_hp -= dmg
 	if (current_hp <= 0):
-		print("DEAD")
 		spawn_summary_panel("you died :(")
 
 func spawn_summary_panel(message:String="mmm!") -> void:
@@ -173,7 +170,7 @@ func advance_turn():
 	for monster in monsters:
 		if monster.is_elite_or_boss():
 			if monster.individual_turns_left <= 0:
-				take_damage(monster.base.power)
+				take_damage(monster.current_power)
 				monster.individual_turns_left = monster.base.attack_speed
 				
 		monster.update_individual_atk_label()
@@ -197,26 +194,30 @@ func calculate_group_power() -> int:
 			continue
 		if monster.is_elite_or_boss():
 			continue
-		total_power += monster.base.power
+		total_power += monster.current_power
 	
 	return total_power
 
 func calculate_next_elite_attack() -> Dictionary:
-	var best_turns = 1000
-	var best_damage = 0
+	var best_turns = INF
+	var total_damage = 0
 
+	# First pass: find the soonest elite attack
 	for monster in monsters:
-		if is_instance_valid(monster) and monster.is_elite_or_boss():
-			print("Found elite")
-			if monster.individual_turns_left < best_turns:
-				best_turns = monster.individual_turns_left
-				best_damage = monster.base.power
+		if monster.is_elite_or_boss():
+			best_turns = min(best_turns, monster.individual_turns_left)
+
+	# Second pass: sum all elites that attack on that turn
+	for monster in monsters:
+		if monster.is_elite_or_boss() and monster.individual_turns_left == best_turns:
+			total_damage += monster.current_power
 
 	return {
 		"turns": best_turns,
-		"damage": best_damage,
+		"damage": total_damage,
 		"source": "elite"
 	}
+
 
 # This is purely for UI
 func calculate_next_incoming_attack() -> Dictionary:
@@ -249,7 +250,7 @@ func calculate_elite_power() -> int:
 	for monster in monsters:
 		if is_instance_valid(monster) and monster.is_elite_or_boss():
 			if monster.individual_turns_left == 1:
-				total += monster.base.power
+				total += monster.current_power
 	return total
 
 func show_group_attack_feedback(_amt: int) -> void:

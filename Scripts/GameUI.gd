@@ -13,6 +13,8 @@ var game_controller:GameController
 var BAR_CONST:float = 1000.0
 var hp_tween:Tween
 var xp_tween:Tween
+var dmg_tween:Tween
+var turns_tween:Tween
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -63,28 +65,27 @@ func update_monster_data(turns:int, power:int) -> void:
 	monster_damage.text = str(power)
 
 func update_monster_turns(turns:int) -> void:
-	var prev_turns:int = monster_turns.text.to_int()
+	#var prev_turns:int = monster_turns.text.to_int()
+	## Animate
+	#if (prev_turns == turns): return
 	monster_turns.text = str(turns)
-	# Animate
-	if (prev_turns == turns): return
 	# Scale based on urgency (closer to 1 = bigger)
 	var danger_scale = 0.3 + (.7 / max(turns, 1)) * 0.5
 	# Start slightly smaller so the tween pops it up
 	monster_turns.scale = Vector2(danger_scale, danger_scale)
-	#monster_turns.scale = Vector2(.4, .4) / (turns * 2)
-	var dmg_tween = create_tween()
-	dmg_tween.tween_property(monster_turns, "scale", Vector2(.3, .3), 0.4)\
+	if (turns_tween and turns_tween.is_running()): turns_tween.kill()
+	turns_tween = create_tween()
+	turns_tween.tween_property(monster_turns, "scale", Vector2(.3, .3), 0.4)\
 		.set_trans(Tween.TRANS_CUBIC)
 
 func update_monster_damage(power:int) -> void:
 	var prev_dmg:int = monster_damage.text.to_int()
-	#print("prev: ", prev_dmg)
-	#print("incoming: ", power)
-	monster_damage.text = str(power)
 	if (prev_dmg == power): return
+	monster_damage.text = str(power)
 	# Animate
+	if (dmg_tween and dmg_tween.is_running()): dmg_tween.kill()
 	monster_damage.scale = Vector2(.4, .4)
-	var dmg_tween = create_tween()
+	dmg_tween = create_tween()
 	dmg_tween.tween_property(monster_damage, "scale", Vector2(.3, .3), 0.4)\
 		.set_trans(Tween.TRANS_CUBIC)
 

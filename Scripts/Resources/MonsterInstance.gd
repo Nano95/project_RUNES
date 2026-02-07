@@ -8,6 +8,7 @@ class_name MonsterInstance
 var base: MonsterBase
 var current_hp: int
 var individual_turns_left:int = 5 # only used by elites/bosses
+var current_power:int=1
 var is_elite:bool = false
 var is_boss:bool = false
 var my_grid:MyGrid
@@ -21,6 +22,7 @@ func _ready() -> void:
 func setup(monster_base: MonsterBase, grid:MyGrid):
 	base = monster_base
 	current_hp = base.max_hp
+	current_power = base.power
 	individual_turns_left = base.attack_speed
 	$AnimatedSprite2D.play(base.anim_name)
 	$AnimatedSprite2D.offset.y = base.anim_offset_y
@@ -34,7 +36,7 @@ func become_elite():
 	$AtkIcon.visible = true
 	$atk.visible = true
 	current_hp = int(current_hp * 1.5)
-	base.power = int(base.power * 1.5)
+	current_power = int(base.power * 1.5)
 	individual_turns_left = base.attack_speed - 1 # elites attack faster
 
 func update_individual_atk_label() -> void:
