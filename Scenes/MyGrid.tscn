@@ -8,7 +8,8 @@
 script = ExtResource("1_3h6cw")
 cell_sprite = ExtResource("2_o6ano")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="HelpfulMarker" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, -2.3841858e-07)
 scale = Vector2(0.29999998, 0.4)
 texture = ExtResource("3_1qoqy")

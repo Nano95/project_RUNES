@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://cxne8jbhwp14t"]
+
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_5lx6q"]
+
+[resource]
+script = ExtResource("1_5lx6q")
+name = "Builder Dwarf"
+max_hp = 50
+power = 18
+exp_reward = 19
+gold_reward = 29
+essence_type = "physical"
+min_essence_amount = 3
+max_essence_amount = 4
+attack_speed = 4
+anim_offset_y = -13
+anim_name = "dwarf2"
+metadata/_custom_type_script = "uid://dljne2akmlj0u"

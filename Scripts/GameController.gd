@@ -17,10 +17,9 @@ var GENERAL_STARTING_TURNS_LEFT:int = 4
 var group_turns_left:int = GENERAL_STARTING_TURNS_LEFT
 var monsters := []  # list of MonsterInstance nodes, only used for things like if all monsters are dead. NOT positional reasons
 
-var selected_monster_family:String="orcs"
 var selected_monster_index:int=1
 
-var PADDING:Vector2 = Vector2(38, 260)
+var PADDING:Vector2 = Vector2(38, 240)
 var selected_rune_name:String="single"
 
 ### Stats
@@ -51,7 +50,7 @@ func start_game(restart:bool=false) -> void:
 		clear_all_monsters()
 		group_turns_left = max(2, GENERAL_STARTING_TURNS_LEFT) # it will be base - some ascension number
 	
-	spawn_stage(selected_monster_index, 5)
+	spawn_stage(main.battle_data["index"], 10)
 	var next_attack = calculate_next_incoming_attack()
 	game_ui.update_monster_data(next_attack.turns, next_attack.damage)
 
@@ -132,10 +131,16 @@ func check_if_all_monsters_dead() -> bool:
 func take_damage(dmg:int=0) -> void:
 	if (dmg <= 0): return
 	%Camera2D.add_shake(30.0)
-	game_ui.update_hp_bar(current_hp, max_hp, dmg)
+	game_ui.update_hp_bar(current_hp, max_hp, -dmg)
 	current_hp -= dmg
 	if (current_hp <= 0):
 		spawn_summary_panel("you died :(")
+
+func heal(amt:int=100) -> void:
+	game_ui.update_hp_bar(current_hp, max_hp, amt)
+	current_hp += amt
+	if (current_hp > max_hp):
+		current_hp = max_hp
 
 func apply_group_attack(dmg:int= 0) -> void:
 	if (dmg > 0):
@@ -148,6 +153,7 @@ func advance_turn():
 	runes_used += 1
 	# 1. Decrement group timer
 	group_turns_left -= 1
+	print("advanced hello")
 	# 2. Decrement elite timers FIRST
 	for monster in monsters:
 		if monster.is_elite_or_boss():
@@ -244,11 +250,12 @@ func calculate_next_incoming_attack() -> Dictionary:
 
 func get_monster_for_stage(stage: int) -> MonsterBase:
 	var base_index = stage - 1  # stage 1 = index 0
+	var selected_monster_family = main.battle_data["family"]
 	var base = MonsterDatabase[selected_monster_family][base_index]
 
 	# Boss logic for stage 4
-	if (stage == 4 and randf() < 0.05):
-		return MonsterDatabase.boss_orc  # or whatever your boss is
+	#if (stage == 4 and randf() < 0.05):
+		#return MonsterDatabase.boss_orc
 
 	# Mutation logic
 	if (randf() < 0.10 and base_index + 1 < MonsterDatabase[selected_monster_family].size()):
@@ -264,8 +271,7 @@ func change_selected_rune(selected:String) -> void:
 
 func on_cell_tapped(row, col) -> void:
 	if (!game_is_active): return
-	advance_turn()
-#
+	
 	match selected_rune_name:
 		"single":
 			damage_single(row, col)
@@ -273,6 +279,23 @@ func on_cell_tapped(row, col) -> void:
 			damage_plus(row, col)
 		"aoe3":
 			damage_3x3(row, col)
+	
+	advance_turn()
+
+func activate_instant_rune():
+	_apply_instant_rune("heal")
+	print("yah")
+	advance_turn()
+
+#func _apply_instant_rune(rune: RuneData):
+func _apply_instant_rune(type: String):
+	match type:
+		"heal":
+			heal(100)
+		#"skip_turn":
+			#skip_monster_turns(1)
+		#"reduce_timers":
+			#reduce_all_monster_timers(1)
 
 func damage_cell(r: int, c: int) -> int:
 	var xp_gained := 0

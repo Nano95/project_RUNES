@@ -1,0 +1,164 @@
+[gd_scene load_steps=8 format=3 uid="uid://2dvdykbjounr"]
+
+[ext_resource type="Script" uid="uid://crgoc5n1t752c" path="res://Scripts/FightMenu.gd" id="1_ipivn"]
+[ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="2_p854w"]
+[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_x5u2f"]
+[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="4_ov7x6"]
+[ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="5_utror"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_55pba"]
+shader = ExtResource("2_p854w")
+shader_parameter/lod = 3.0000001425
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8k8yn"]
+resource_local_to_scene = true
+shader = ExtResource("4_ov7x6")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="FightPanel" type="Control" node_paths=PackedStringArray("monster_grid_container", "location_grid_container", "rune_grid_container", "start_button", "exit_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(360, 640)
+script = ExtResource("1_ipivn")
+monster_grid_container = NodePath("ColorRect/Panel/Family/MarginContainer/GridContainer")
+location_grid_container = NodePath("ColorRect/Panel/Location/MarginContainer/GridContainer")
+rune_grid_container = NodePath("ColorRect/Panel/ChooseRunes/ScrollContainer2/MarginContainer/GridContainer")
+start_button = NodePath("ColorRect/Panel/Fight")
+exit_button = NodePath("ColorRect/Panel/Close")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_55pba")
+layout_mode = 0
+offset_left = 2.0
+offset_top = 29.0
+offset_right = 722.0
+offset_bottom = 1176.0
+
+[node name="Panel" type="Panel" parent="ColorRect"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 21.0
+offset_right = 698.0
+offset_bottom = 1120.0
+
+[node name="ChooseMonster" parent="ColorRect/Panel" instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_8k8yn")
+layout_mode = 0
+offset_left = 327.0
+offset_top = 20.0
+offset_right = 880.7037
+offset_bottom = 157.0
+scale = Vector2(0.54, 0.54)
+text = "Monster"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChooseMonster2" parent="ColorRect/Panel" instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_8k8yn")
+layout_mode = 0
+offset_left = 1.9999847
+offset_top = 22.0
+offset_right = 648.29626
+offset_bottom = 159.0
+scale = Vector2(0.54, 0.54)
+text = "Area"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Family" type="ScrollContainer" parent="ColorRect/Panel"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 93.0
+offset_right = 335.0
+offset_bottom = 560.0
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/Panel/Family"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect/Panel/Family/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 10
+
+[node name="Location" type="ScrollContainer" parent="ColorRect/Panel"]
+layout_mode = 0
+offset_left = 343.0
+offset_top = 93.0
+offset_right = 664.0
+offset_bottom = 560.0
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/Panel/Location"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect/Panel/Location/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 10
+
+[node name="ChooseRunes" parent="ColorRect/Panel" instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_8k8yn")
+layout_mode = 0
+offset_left = 1.9999847
+offset_top = 573.0
+offset_right = 1252.0
+offset_bottom = 710.0
+scale = Vector2(0.54, 0.54)
+text = "Choose Runes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="ColorRect/Panel/ChooseRunes"]
+layout_mode = 0
+offset_left = 7.4074364
+offset_top = 146.29626
+offset_right = 1246.2964
+offset_bottom = 731.48145
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/Panel/ChooseRunes/ScrollContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect/Panel/ChooseRunes/ScrollContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 10
+
+[node name="Fight" type="Button" parent="ColorRect/Panel"]
+layout_mode = 0
+offset_left = 34.000015
+offset_top = 980.99994
+offset_right = 681.14276
+offset_bottom = 1119.0
+scale = Vector2(0.7, 0.7)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("5_utror")
+theme_override_font_sizes/font_size = 100
+text = "Let's go!"
+
+[node name="Close" type="Button" parent="ColorRect/Panel"]
+layout_mode = 0
+offset_left = 506.0
+offset_top = 980.99994
+offset_right = 706.0
+offset_bottom = 1119.0
+scale = Vector2(0.7, 0.7)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("5_utror")
+theme_override_font_sizes/font_size = 100
+text = "x"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RuneData" load_steps=3 format=3 uid="uid://xrhk72gffnp5"]
+
+[ext_resource type="Texture2D" uid="uid://llqj70wrm8i3" path="res://Sprites/Runes/RUNE_1_PHYS.png" id="1_hyjcs"]
+[ext_resource type="Script" uid="uid://wqovi0smk0qq" path="res://Scripts/RuneData.gd" id="2_447j1"]
+
+[resource]
+script = ExtResource("2_447j1")
+name = "Single Physical Rune"
+icon = ExtResource("1_hyjcs")
+pattern = "single"
+metadata/_custom_type_script = "uid://wqovi0smk0qq"

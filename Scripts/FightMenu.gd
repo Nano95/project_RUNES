@@ -1,0 +1,73 @@
+extends Control
+class_name FightMenu
+
+@export var monster_grid_container:GridContainer
+@export var location_grid_container:GridContainer
+@export var rune_grid_container:GridContainer
+@export var start_button:Button
+@export var exit_button:Button
+var areas:Array = ["orcs", "sandlings", "dwarves"]
+
+var selected_family: String = ""
+var selected_monster_index: int = -1
+var selected_runes: Array = []
+var starting_turns: int = 4
+
+var game_controller: GameController
+var main: MainNode
+
+func _ready() -> void:
+	Utils.animate_summary_in_happy(self)
+	setup_monster_grid()
+	#setup_rune_grid()
+	start_button.pressed.connect(main.spawn_game)
+	exit_button.pressed.connect(close)
+
+func setup(main_node:MainNode) -> void:
+	main = main_node
+
+func setup_monster_grid() -> void:
+	for family in areas:
+		var btn := Button.new()
+		btn.text = family.capitalize()
+		btn.size += Vector2(20, 15)
+		btn.pressed.connect(_on_family_selected.bind(family))
+		monster_grid_container.add_child(btn)
+		
+	_on_family_selected(areas[0])
+
+func setup_rune_grid() -> void:
+	rune_grid_container.clear()
+
+	for rune in Utils.all_runes:
+		var btn := Button.new()
+		btn.text = rune.name
+		btn.pressed.connect(_on_rune_pressed.bind(rune))
+		rune_grid_container.add_child(btn)
+
+func _on_rune_pressed(rune):
+	if selected_runes.has(rune):
+		selected_runes.erase(rune)
+	else:
+		if selected_runes.size() < 5:
+			selected_runes.append(rune)
+
+func _on_family_selected(family: String) -> void:
+	#if (main.battle_data["family"] == family): return
+	main.battle_data["family"] = family
+	for btn in location_grid_container.get_children():
+		btn.queue_free()
+	
+	var monsters = MonsterDatabase[family]
+	for i in monsters.size():
+		var btn := Button.new()
+		btn.text = monsters[i].name  # or "Orc %d" % (i+1)
+		btn.scale = Vector2(1.6, 1.6)
+		btn.pressed.connect(_on_monster_selected.bind(i + 1))
+		location_grid_container.add_child(btn)
+
+func _on_monster_selected(index: int) -> void: 
+	main.battle_data["index"] = index
+
+func close() -> void:
+	Utils.animate_summary_out_and_free(self)

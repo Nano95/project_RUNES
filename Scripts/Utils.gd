@@ -19,6 +19,8 @@ const PASTEL_GREEN = Color(0.6, 1.0, 0.6)
 const PASTEL_RED   = Color(1.0, 0.6, 0.6)
 const RED   = Color(0.966, 0.0, 0.252, 1.0)
 
+const all_runes:Array = ["single", "plus", "aoe3"] # temporary until we figure out how runes become available
+
 func setup(main:MainNode) -> void:
 	main_node = main
 
@@ -163,3 +165,47 @@ func get_time_gone() -> Dictionary:
 	#}
 	#
 	#return time_format
+
+
+func animate_summary_in_happy(panel):
+	# Start invisible and slightly small
+	panel.modulate.a = 0.0
+	panel.scale = Vector2(0.85, 0.85)
+
+	var tween := create_tween()
+
+	# --- FADE IN ---
+	tween.tween_property(panel, "modulate:a", 1.0, 0.25)\
+		.set_trans(Tween.TRANS_SINE)\
+		.set_ease(Tween.EASE_OUT)
+
+	# --- SCALE UP WITH BOUNCE ---
+	tween.parallel().tween_property(panel, "scale", Vector2(1.05, 1.05), 0.18)\
+		.set_trans(Tween.TRANS_CUBIC)\
+		.set_ease(Tween.EASE_OUT)
+
+	# --- SETTLE BACK TO NORMAL SIZE ---
+	tween.tween_property(panel, "scale", Vector2(1.0, 1.0), 0.12)\
+		.set_trans(Tween.TRANS_CIRC)\
+		.set_ease(Tween.EASE_OUT)
+
+func animate_summary_out_and_free(panel):
+	var tween := create_tween()
+
+	# --- FADE OUT ---
+	tween.tween_property(panel, "modulate:a", 0.0, 0.22)\
+		.set_trans(Tween.TRANS_SINE)\
+		.set_ease(Tween.EASE_IN)
+
+	# --- SCALE DOWN SLIGHTLY ---
+	tween.parallel().tween_property(panel, "scale", Vector2(0.9, 0.9), 0.22)\
+		.set_trans(Tween.TRANS_CUBIC)\
+		.set_ease(Tween.EASE_IN)
+
+	# --- SLIDE DOWN (or up if you prefer) ---
+	tween.parallel().tween_property(panel, "position:y", panel.position.y + 40, 0.28)\
+		.set_trans(Tween.TRANS_SINE)\
+		.set_ease(Tween.EASE_IN)
+
+	# --- CLEANUP ---
+	tween.tween_callback(panel.queue_free)

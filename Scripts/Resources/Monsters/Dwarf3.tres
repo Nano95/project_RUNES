@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://c8bydn0fvrjys"]
+
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_ft5ym"]
+
+[resource]
+script = ExtResource("1_ft5ym")
+name = "Big Red"
+max_hp = 58
+power = 25
+exp_reward = 30
+gold_reward = 20
+essence_type = "physical"
+min_essence_amount = 3
+max_essence_amount = 4
+attack_speed = 4
+anim_offset_y = -13
+anim_name = "dwarf3"
+metadata/_custom_type_script = "uid://dljne2akmlj0u"

@@ -36,6 +36,7 @@ func setup_rune_buttons() -> void:
 	$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton1.pressed.connect(game_controller.change_selected_rune.bind("single"))
 	$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton2.pressed.connect(game_controller.change_selected_rune.bind("plus"))
 	$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton3.pressed.connect(game_controller.change_selected_rune.bind("aoe3"))
+	$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton4.pressed.connect(game_controller.activate_instant_rune)
 
 func setup_hp(player_hp:float, player_max_hp:float) -> void:
 	hp_bar.max_value = BAR_CONST
@@ -44,19 +45,42 @@ func setup_hp(player_hp:float, player_max_hp:float) -> void:
 	hp_bar.tint_progress = get_health_color(player_hp / player_max_hp)
 	update_hp_bar(player_hp, player_max_hp, 0)
 
-func update_hp_bar(hp:float, max_hp:float, damage:int=0) -> void:
-	@warning_ignore("integer_division")
-	var ratio = float(hp) / float(max_hp)
-	var from_percent: float = ratio * BAR_CONST
-	@warning_ignore("integer_division")
-	var to_percent: float = ((float(hp) - float(damage)) / float(max_hp)) * BAR_CONST
-	
-	var color: Color = get_health_color(ratio)
-	if (damage > 0):
+#func update_hp_bar(hp:float, max_hp:float, amt:int=0) -> void:
+	#@warning_ignore("integer_division")
+	#var ratio = float(hp) / float(max_hp)
+	#var from_percent: float = ratio * BAR_CONST
+	#@warning_ignore("integer_division")
+	#var to_percent: float = ((float(hp) + float(amt)) / float(max_hp)) * BAR_CONST
+	#
+	#var color: Color = get_health_color(ratio)
+	#if (amt > 0):
+		#hp_bar.tint_progress = Color.WHITE
+		#tween_hp_bar(from_percent, to_percent, color)
+	#
+	#hp = clamp(hp + amt, 0, max_hp)
+	#hp_label.text = str(hp)
+
+func update_hp_bar(current_hp: float, max_hp: float, delta: float) -> void:
+	# delta > 0 = heal, delta < 0 = damage
+
+	var old_hp := current_hp
+	var new_hp:float = clamp(current_hp + delta, 0, max_hp)
+
+	# Percentages for tween
+	var from_ratio:float = old_hp / max_hp
+	var to_ratio:float = new_hp / max_hp
+
+	var from_percent:float = from_ratio * BAR_CONST
+	var to_percent:float = to_ratio * BAR_CONST
+
+	# Color based on NEW ratio (optional: use old if you prefer)
+	var color: Color = get_health_color(to_ratio)
+
+	if delta != 0:
 		hp_bar.tint_progress = Color.WHITE
 		tween_hp_bar(from_percent, to_percent, color)
-	
-	hp_label.text = str(hp - damage)
+
+	hp_label.text = str(new_hp)
 
 func restart() -> void:
 	game_controller.spawn_stage(game_controller.selected_monster_index, 5)

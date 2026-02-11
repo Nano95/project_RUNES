@@ -6,7 +6,7 @@
 script = ExtResource("1_gm006")
 name = "Orc Soldier"
 max_hp = 30
-power = 10
+power = 4
 exp_reward = 10
 gold_reward = 11
 essence_type = "physical"

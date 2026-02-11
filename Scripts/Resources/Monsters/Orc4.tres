@@ -6,9 +6,9 @@
 script = ExtResource("1_m3ned")
 name = "Orc Warrior"
 max_hp = 40
-power = 16
+power = 6
 exp_reward = 15
-gold_reward = 16
+gold_reward = 13
 essence_type = "physical"
 min_essence_amount = 3
 max_essence_amount = 4

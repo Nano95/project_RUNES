@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RuneData" load_steps=3 format=3 uid="uid://co62s0shndjmw"]
+
+[ext_resource type="Texture2D" uid="uid://ds14befai3yep" path="res://Sprites/Runes/RUNE_3x3_PPHYS.png" id="1_tryx4"]
+[ext_resource type="Script" uid="uid://wqovi0smk0qq" path="res://Scripts/RuneData.gd" id="2_ny8nm"]
+
+[resource]
+script = ExtResource("2_ny8nm")
+name = "Aoe3 Physical Rune"
+icon = ExtResource("1_tryx4")
+pattern = "aoe3"
+metadata/_custom_type_script = "uid://wqovi0smk0qq"

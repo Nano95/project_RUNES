@@ -3,6 +3,7 @@ class_name MainMenu
 
 @onready var inv_button:PackedScene = preload("res://Scenes/InventoryButton.tscn")
 @onready var debug_panel:PackedScene = preload("res://Scenes/DebugPanel.tscn")
+@onready var fight_menu:PackedScene = preload("res://Scenes/FightMenu.tscn")
 
 @export var xp_curve:Curve
 @export var start_btn:Button
@@ -81,8 +82,13 @@ func eq_slot_button_pressed(toggled) -> void:
 		_:
 			current_equipment_slot_selected = "slot1"
 
+func spawn_fight_menu() -> void:
+	var fight = fight_menu.instantiate()
+	fight.setup(main)
+	main.spawn_to_top_ui_layer(fight)
+
 func connect_buttons() -> void:
-	start_btn.pressed.connect(main.spawn_game)
+	start_btn.pressed.connect(spawn_fight_menu)
 	debugton.pressed.connect(spawn_debug_things)
 	btn1.toggled.connect(qty_button_pressed)
 	btn10.toggled.connect(qty_button_pressed)

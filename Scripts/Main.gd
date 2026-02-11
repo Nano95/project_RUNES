@@ -24,6 +24,11 @@ var game_current_level:int = 0
 var player_stats:StatsData
 var bonus_stats:Dictionary
 
+var battle_data:Dictionary = {
+	"family": "",
+	"index": 1
+}
+
 func _ready() -> void:
 	game_data = SaveData.new()
 	backup_game_data = SaveData.new()
@@ -44,6 +49,9 @@ func spawn_main_menu() -> void:
 	spawn_to_top_ui_layer(active_menu_ref)
 
 func spawn_game() -> void:
+	print(battle_data)
+	delete_all_top_ui_children()
+	
 	if (is_instance_valid(game_ui_ref)):
 		game_ui_ref.queue_free()
 	game_ui_ref = game_ui.instantiate() as GameUI
@@ -57,8 +65,6 @@ func spawn_game() -> void:
 	spawn_to_mid_ui_layer(active_menu_ref)
 	
 	game_ui_ref.setup_game_controller(active_menu_ref)
-	
-
 
 func spawn_to_top_ui_layer(node) -> void:
 	top_layer.add_child(node)

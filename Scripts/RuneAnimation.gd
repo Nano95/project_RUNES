@@ -1,7 +1,7 @@
 extends Node2D
 class_name RuneAnimation
 
-var anim_name:String = "physical"
+var anim_name:String = "magical3"
 
 func _ready() -> void:
 	$AnimatedSprite2D.play(anim_name)

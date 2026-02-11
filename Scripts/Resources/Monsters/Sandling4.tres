@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://cyj8u6ajt8lth"]
+
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_givtv"]
+
+[resource]
+script = ExtResource("1_givtv")
+name = "Death Horn"
+max_hp = 52
+power = 23
+exp_reward = 20
+gold_reward = 15
+essence_type = "physical"
+min_essence_amount = 3
+max_essence_amount = 4
+attack_speed = 4
+anim_offset_y = -13
+anim_name = "sandling4"
+metadata/_custom_type_script = "uid://dljne2akmlj0u"

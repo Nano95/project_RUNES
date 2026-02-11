@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RuneData" load_steps=3 format=3 uid="uid://c0ei4m12yu2h1"]
+
+[ext_resource type="Script" uid="uid://wqovi0smk0qq" path="res://Scripts/RuneData.gd" id="1_gawcj"]
+[ext_resource type="Texture2D" uid="uid://cxn4ecalsk13s" path="res://Sprites/Runes/healing_rune.png" id="1_wg6ge"]
+
+[resource]
+script = ExtResource("1_gawcj")
+name = "Great Healing rune"
+icon = ExtResource("1_wg6ge")
+pattern = "great_heal"
+activation = "instant"
+power = 100
+metadata/_custom_type_script = "uid://wqovi0smk0qq"
