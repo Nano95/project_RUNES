@@ -1,11 +1,13 @@
 [gd_resource type="Resource" script_class="RuneData" load_steps=3 format=3 uid="uid://6qf80asia3aa"]
 
-[ext_resource type="Texture2D" uid="uid://0a223jgjtsti" path="res://Sprites/Runes/RUNE_PLUS_PHYS.png" id="1_gus5b"]
-[ext_resource type="Script" uid="uid://wqovi0smk0qq" path="res://Scripts/RuneData.gd" id="2_46rwp"]
+[ext_resource type="Texture2D" uid="uid://0a223jgjtsti" path="res://Sprites/Runes/RUNE_PLUS_PHYS.png" id="1_bva57"]
+[ext_resource type="Script" uid="uid://wqovi0smk0qq" path="res://Scripts/RuneData.gd" id="2_d7l4b"]
 
 [resource]
-script = ExtResource("2_46rwp")
+script = ExtResource("2_d7l4b")
 name = "Plus Physical Rune"
-icon = ExtResource("1_gus5b")
+mini_name = "PR"
+icon = ExtResource("1_bva57")
 pattern = "plus"
+focus_cost = 4
 metadata/_custom_type_script = "uid://wqovi0smk0qq"

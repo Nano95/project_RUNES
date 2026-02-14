@@ -88,8 +88,10 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 10
+columns = 2
 
 [node name="Location" type="ScrollContainer" parent="ColorRect/Panel"]
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 0
 offset_left = 343.0
 offset_top = 93.0
@@ -107,6 +109,7 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 10
+columns = 2
 
 [node name="ChooseRunes" parent="ColorRect/Panel" instance=ExtResource("3_x5u2f")]
 material = SubResource("ShaderMaterial_8k8yn")
@@ -135,9 +138,11 @@ theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
 [node name="GridContainer" type="GridContainer" parent="ColorRect/Panel/ChooseRunes/ScrollContainer2/MarginContainer"]
+custom_minimum_size = Vector2(1200, 550)
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 10
+columns = 4
 
 [node name="Fight" type="Button" parent="ColorRect/Panel"]
 layout_mode = 0

@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://cby5cdsq4bcyo"]
+
+[ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="1_4rjwq"]
+[ext_resource type="Texture2D" uid="uid://llqj70wrm8i3" path="res://Sprites/Runes/RUNE_1_PHYS.png" id="2_00aqc"]
+[ext_resource type="Script" uid="uid://jj0fcb5mx0c5" path="res://Scripts/FightMenuRuneButton.gd" id="3_00aqc"]
+[ext_resource type="Texture2D" uid="uid://b18ao2eimbmku" path="res://Sprites/MANA_ICON.png" id="4_cuo2q"]
+[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="5_lhn1g"]
+[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="6_at73j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_curfs"]
+resource_local_to_scene = true
+shader = ExtResource("6_at73j")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="Button" type="Button"]
+offset_right = 800.0
+offset_bottom = 300.0
+scale = Vector2(0.25, 0.25)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("1_4rjwq")
+theme_override_font_sizes/font_size = 80
+text = "Great Healing"
+icon = ExtResource("2_00aqc")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+script = ExtResource("3_00aqc")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 48.0
+offset_right = 132.0
+offset_bottom = 84.0
+texture = ExtResource("4_cuo2q")
+
+[node name="FocusLabel" parent="TextureRect" instance=ExtResource("5_lhn1g")]
+material = SubResource("ShaderMaterial_curfs")
+layout_mode = 0
+offset_left = -108.0
+offset_top = 68.0
+offset_right = 492.0
+offset_bottom = 205.0
+scale = Vector2(0.5, 0.5)
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1

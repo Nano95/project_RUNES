@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b7xgkus4u2361"]
+[gd_scene load_steps=18 format=3 uid="uid://b7xgkus4u2361"]
 
 [ext_resource type="Script" uid="uid://dygepuv8uhpel" path="res://Scripts/GameUI.gd" id="1_po7eo"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_frnsy"]
@@ -10,10 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://opa2rothhy7x" path="res://Sprites/mid_progress_bar_progress.png" id="7_tii1l"]
 [ext_resource type="Script" uid="uid://dt4un2465kwr1" path="res://Scripts/XpBarController.gd" id="8_tii1l"]
 [ext_resource type="Curve" uid="uid://bdkmegreb07jj" path="res://Resources/xpCurve.tres" id="9_8dgta"]
-[ext_resource type="Texture2D" uid="uid://llqj70wrm8i3" path="res://Sprites/Runes/RUNE_1_PHYS.png" id="11_8oijl"]
-[ext_resource type="Texture2D" uid="uid://ds14befai3yep" path="res://Sprites/Runes/RUNE_3x3_PPHYS.png" id="12_4ed32"]
-[ext_resource type="Texture2D" uid="uid://0a223jgjtsti" path="res://Sprites/Runes/RUNE_PLUS_PHYS.png" id="12_us4cf"]
-[ext_resource type="Texture2D" uid="uid://cxn4ecalsk13s" path="res://Sprites/Runes/healing_rune.png" id="14_qecx7"]
+[ext_resource type="Texture2D" uid="uid://b18ao2eimbmku" path="res://Sprites/MANA_ICON.png" id="11_0hwcy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wjrrg"]
 resource_local_to_scene = true
@@ -45,7 +42,13 @@ shader = ExtResource("3_co6lq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="GameUI" type="Control" node_paths=PackedStringArray("hp_bar", "xp_bar", "hp_label", "xp_label", "monster_turns", "monster_damage")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0hwcy"]
+resource_local_to_scene = true
+shader = ExtResource("3_co6lq")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="GameUI" type="Control" node_paths=PackedStringArray("hp_bar", "xp_bar", "hp_label", "xp_label", "monster_turns", "monster_damage", "rune_btns_container", "mana_icon", "focus_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -60,6 +63,9 @@ hp_label = NodePath("TopSection/HpBar/HpLabel")
 xp_label = NodePath("TopSection/XpBar/XpLabel")
 monster_turns = NodePath("TopSection/AttackIcon/turnsLabel")
 monster_damage = NodePath("TopSection/DamagedIcon/totalAtkLabel")
+rune_btns_container = NodePath("BottomSection/MarginContainer/ScrollContainer/HBoxContainer")
+mana_icon = NodePath("TopSection/FocusIcon")
+focus_label = NodePath("TopSection/FocusIcon/focusLabel")
 
 [node name="TopSection" type="Control" parent="."]
 layout_mode = 1
@@ -156,9 +162,9 @@ vertical_alignment = 1
 [node name="DamagedIcon" type="TextureRect" parent="TopSection"]
 z_index = -1
 layout_mode = 0
-offset_left = 142.0
+offset_left = 59.0
 offset_top = 112.0
-offset_right = 182.0
+offset_right = 99.0
 offset_bottom = 152.0
 scale = Vector2(2, 2)
 texture = ExtResource("6_j41el")
@@ -168,7 +174,7 @@ material = SubResource("ShaderMaterial_4ed32")
 layout_mode = 0
 offset_left = 5.0
 offset_top = -49.5
-offset_right = 195.0
+offset_right = 283.33334
 offset_bottom = 87.5
 pivot_offset = Vector2(60, 68.5)
 text = "50"
@@ -177,15 +183,36 @@ vertical_alignment = 1
 [node name="AttackIcon" type="TextureRect" parent="TopSection"]
 z_index = -1
 layout_mode = 0
-offset_left = 433.0
+offset_left = 280.0
 offset_top = 112.0
-offset_right = 473.0
+offset_right = 320.0
 offset_bottom = 152.0
 scale = Vector2(2, 2)
 texture = ExtResource("5_d8tla")
 
 [node name="turnsLabel" parent="TopSection/AttackIcon" instance=ExtResource("2_frnsy")]
 material = SubResource("ShaderMaterial_co6lq")
+layout_mode = 0
+offset_left = 6.0
+offset_top = -49.500008
+offset_right = 226.0
+offset_bottom = 87.49999
+pivot_offset = Vector2(60, 68)
+text = "30"
+vertical_alignment = 1
+
+[node name="FocusIcon" type="TextureRect" parent="TopSection"]
+z_index = -1
+layout_mode = 0
+offset_left = 488.0
+offset_top = 112.0
+offset_right = 528.0
+offset_bottom = 152.0
+scale = Vector2(2, 2)
+texture = ExtResource("11_0hwcy")
+
+[node name="focusLabel" parent="TopSection/FocusIcon" instance=ExtResource("2_frnsy")]
+material = SubResource("ShaderMaterial_0hwcy")
 layout_mode = 0
 offset_left = 6.0
 offset_top = -49.500008
@@ -222,35 +249,3 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="BottomSection/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
-
-[node name="RuneButton1" type="Button" parent="BottomSection/MarginContainer/ScrollContainer/HBoxContainer"]
-custom_minimum_size = Vector2(155, 125)
-layout_mode = 2
-size_flags_horizontal = 3
-icon = ExtResource("11_8oijl")
-icon_alignment = 1
-expand_icon = true
-
-[node name="RuneButton2" type="Button" parent="BottomSection/MarginContainer/ScrollContainer/HBoxContainer"]
-custom_minimum_size = Vector2(155, 125)
-layout_mode = 2
-size_flags_horizontal = 3
-icon = ExtResource("12_us4cf")
-icon_alignment = 1
-expand_icon = true
-
-[node name="RuneButton3" type="Button" parent="BottomSection/MarginContainer/ScrollContainer/HBoxContainer"]
-custom_minimum_size = Vector2(155, 125)
-layout_mode = 2
-size_flags_horizontal = 3
-icon = ExtResource("12_4ed32")
-icon_alignment = 1
-expand_icon = true
-
-[node name="RuneButton4" type="Button" parent="BottomSection/MarginContainer/ScrollContainer/HBoxContainer"]
-custom_minimum_size = Vector2(155, 125)
-layout_mode = 2
-size_flags_horizontal = 3
-icon = ExtResource("14_qecx7")
-icon_alignment = 1
-expand_icon = true

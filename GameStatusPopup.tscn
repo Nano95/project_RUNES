@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://cko7e16hwbxg6"]
+
+[ext_resource type="Script" uid="uid://dnb63q2vqprkt" path="res://Scripts/GameStatusPopup.gd" id="1_e7gtc"]
+[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_hbryo"]
+[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="3_4uhm1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ctjxm"]
+resource_local_to_scene = true
+shader = ExtResource("3_4uhm1")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="GameStatusPopup" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e7gtc")
+
+[node name="Label" parent="." instance=ExtResource("2_hbryo")]
+material = SubResource("ShaderMaterial_ctjxm")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -718.5
+offset_top = -140.5
+offset_right = 718.5
+offset_bottom = 140.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(721, 140)
+theme_override_font_sizes/font_size = 140
+text = "test"
+horizontal_alignment = 1
+vertical_alignment = 1

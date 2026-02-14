@@ -1,6 +1,8 @@
 extends Control
 class_name GameUI
 
+@onready var rune_button: PackedScene = preload("res://Scenes/BattleRuneButton.tscn")
+
 var main:MainNode
 var game_controller:GameController
 
@@ -10,10 +12,14 @@ var game_controller:GameController
 @export var xp_label:Label
 @export var monster_turns:Label
 @export var monster_damage:Label
+@export var rune_btns_container:HBoxContainer
+@export var mana_icon:TextureRect
+@export var focus_label:Label
 var BAR_CONST:float = 1000.0
 var hp_tween:Tween
 var xp_tween:Tween
 var dmg_tween:Tween
+var focus_tween:Tween
 var turns_tween:Tween
 
 func _ready() -> void:
@@ -33,10 +39,20 @@ func setup_game_controller(gc:GameController) -> void:
 
 func setup_rune_buttons() -> void:
 	if !(is_instance_valid(game_controller)): return
-	$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton1.pressed.connect(game_controller.change_selected_rune.bind("single"))
-	$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton2.pressed.connect(game_controller.change_selected_rune.bind("plus"))
-	$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton3.pressed.connect(game_controller.change_selected_rune.bind("aoe3"))
-	$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton4.pressed.connect(game_controller.activate_instant_rune)
+	for rune in main.battle_data["selected_runes"]:
+		var btn = rune_button.instantiate()
+		btn.setup(rune)
+		if (rune.activation == "grid"):
+			btn.pressed.connect(game_controller.change_selected_rune.bind(rune))
+		else:
+			btn.pressed.connect(game_controller.activate_instant_rune.bind(rune))
+			
+		rune_btns_container.add_child(btn)
+		
+	#$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton1.pressed.connect(game_controller.change_selected_rune.bind("single"))
+	#$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton2.pressed.connect(game_controller.change_selected_rune.bind("plus"))
+	#$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton3.pressed.connect(game_controller.change_selected_rune.bind("aoe3"))
+	#$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton4.pressed.connect(game_controller.activate_instant_rune)
 
 func setup_hp(player_hp:float, player_max_hp:float) -> void:
 	hp_bar.max_value = BAR_CONST
@@ -118,6 +134,20 @@ func update_monster_damage(power:int) -> void:
 	monster_damage.scale = Vector2(.4, .4)
 	dmg_tween = create_tween()
 	dmg_tween.tween_property(monster_damage, "scale", Vector2(.3, .3), 0.4)\
+		.set_trans(Tween.TRANS_CUBIC)
+
+func shake_mana_icon() -> void:
+	Utils.warn_shake_node(mana_icon)
+
+func update_focus(focus:int) -> void:
+	var prev_focus:int = focus_label.text.to_int()
+	if (prev_focus == focus): return
+	focus_label.text = str(focus)
+	# Animate
+	if (focus_tween and focus_tween.is_running()): focus_tween.kill()
+	focus_label.scale = Vector2(.4, .4)
+	focus_tween = create_tween()
+	focus_tween.tween_property(focus_label, "scale", Vector2(.3, .3), 0.4)\
 		.set_trans(Tween.TRANS_CUBIC)
 
 func tween_hp_bar(from: float, to: float, clr:Color) -> void:

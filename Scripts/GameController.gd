@@ -1,6 +1,7 @@
 extends Node2D
 class_name GameController
 
+@export var status_message:PackedScene
 @export var monster_instance:Resource
 @export var summary_panel_ref: Resource
 @export var my_grid_ref:Resource
@@ -20,16 +21,18 @@ var monsters := []  # list of MonsterInstance nodes, only used for things like i
 var selected_monster_index:int=1
 
 var PADDING:Vector2 = Vector2(38, 240)
-var selected_rune_name:String="single"
+var selected_rune:RuneData
 
 ### Stats
 var max_hp:int
-var base_max_hp:int
 var current_hp:int
 var base_luck:int
 var current_luck:int
 var current_power:int
 var base_power:int
+var max_focus:int
+var current_focus:int
+
 var enemies_killed:int
 var runes_used:int
 var total_exp:int
@@ -43,16 +46,19 @@ func _ready() -> void:
 	setup_stats()
 	spawn_grid()
 	start_game()
+	selected_rune = main.battle_data["selected_runes"][0]
 
 func start_game(restart:bool=false) -> void:
 	game_is_active = true
 	if (restart):
 		clear_all_monsters()
 		group_turns_left = max(2, GENERAL_STARTING_TURNS_LEFT) # it will be base - some ascension number
-	
+		current_hp = max_hp
+		current_focus = max_focus
 	spawn_stage(main.battle_data["index"], 10)
 	var next_attack = calculate_next_incoming_attack()
 	game_ui.update_monster_data(next_attack.turns, next_attack.damage)
+	game_ui.update_focus(current_focus)
 
 func setup(main_ref:MainNode, g_ui:GameUI) -> void:
 	main = main_ref
@@ -61,6 +67,8 @@ func setup(main_ref:MainNode, g_ui:GameUI) -> void:
 func setup_stats() -> void:
 	max_hp = Utils.get_stat_for_ui("health") + main.bonus_stats.health
 	current_hp = max_hp
+	max_focus = Utils.get_stat_for_ui("focus") + main.bonus_stats.focus
+	current_focus = max_focus
 	current_luck = Utils.get_stat_for_ui("luck") + main.bonus_stats.luck
 	base_luck = current_luck
 	current_power = Utils.get_stat_for_ui("power") + main.bonus_stats.power
@@ -92,7 +100,20 @@ func spawn_stage(stage: int, count: int):
 		var cell = my_grid.pick_empty_cell()
 		my_grid.spawn_monster_into_cell(cell.x, cell.y, base)
 
+func spawn_status_message(died:bool=false, no_focus:bool=false) -> void:
+	var msg = Utils.STATUS_MESSAGE_VICTORY
+	if (died):
+		msg = "You Ded :("
+	elif (no_focus):
+		msg = "No more focus :("
+	
+	var lbl = status_message.instantiate() as GameStatusPopup
+	lbl.setup(msg)
+	lbl.animation_complete.connect(spawn_summary_panel.bind(msg))
+	main.spawn_to_top_ui_layer(lbl)
+
 func spawn_summary_panel(message:String="mmm!") -> void:
+	print("== Summary spawned")
 	game_is_active = false
 	var panel = summary_panel_ref.instantiate()
 	panel.setup(self, main, message)
@@ -111,7 +132,8 @@ func monster_died(monster):
 	my_grid.clear_monster(monster)
 	#game_ui.update_monster_damage(calculate_group_power()) # I dont think we want to update this as game ends
 	
-	var game_over = check_if_all_monsters_dead()
+	print("Monster cjecl")
+	var game_over = check_if_all_monsters_dead(false)
 	if (game_over): return
 
 	# Update UI if needed
@@ -120,11 +142,11 @@ func monster_died(monster):
 func prune_dead_monsters(): 
 	monsters = monsters.filter(is_instance_valid)
 
-func check_if_all_monsters_dead() -> bool:
+func check_if_all_monsters_dead(spawn_msg:bool=false) -> bool:
 	if monsters.is_empty():
 		# Spawn a victory animation that lasts less than a second, and when that 
 		# finishes, then spawn this.
-		spawn_summary_panel("Victory!")
+		if (spawn_msg): spawn_status_message()
 		return true
 	return false
 
@@ -134,7 +156,7 @@ func take_damage(dmg:int=0) -> void:
 	game_ui.update_hp_bar(current_hp, max_hp, -dmg)
 	current_hp -= dmg
 	if (current_hp <= 0):
-		spawn_summary_panel("you died :(")
+		spawn_status_message(true)
 
 func heal(amt:int=100) -> void:
 	game_ui.update_hp_bar(current_hp, max_hp, amt)
@@ -149,11 +171,10 @@ func apply_group_attack(dmg:int= 0) -> void:
 func advance_turn():
 	if !game_is_active: return
 	prune_dead_monsters()
-	if check_if_all_monsters_dead(): return
+	if check_if_all_monsters_dead(true): return
 	runes_used += 1
 	# 1. Decrement group timer
 	group_turns_left -= 1
-	print("advanced hello")
 	# 2. Decrement elite timers FIRST
 	for monster in monsters:
 		if monster.is_elite_or_boss():
@@ -191,6 +212,9 @@ func advance_turn():
 	# 7. Update UI
 	game_ui.update_monster_turns(next_attack.turns)
 	game_ui.update_monster_damage(next_attack.damage)
+	
+	if (current_focus <= 0 and current_hp > 0):
+		spawn_status_message(false, true)
 
 func calculate_group_power() -> int:
 	var total_power: int = 0
@@ -266,13 +290,15 @@ func get_monster_for_stage(stage: int) -> MonsterBase:
 ######################
 ########### RUNE STUFF
 ######################
-func change_selected_rune(selected:String) -> void:
-	selected_rune_name = selected
+func change_selected_rune(rune:RuneData) -> void:
+	selected_rune = rune
 
 func on_cell_tapped(row, col) -> void:
 	if (!game_is_active): return
+	if (!focus_check(selected_rune)): return
 	
-	match selected_rune_name:
+	# Here is now where we have to subtract and make checks for focus used
+	match selected_rune.pattern:
 		"single":
 			damage_single(row, col)
 		"plus":
@@ -282,10 +308,22 @@ func on_cell_tapped(row, col) -> void:
 	
 	advance_turn()
 
-func activate_instant_rune():
+
+func activate_instant_rune(pressed_rune:RuneData):
+	if (!game_is_active): return
+	if (!focus_check(pressed_rune)): return
+	
 	_apply_instant_rune("heal")
-	print("yah")
 	advance_turn()
+
+func focus_check(pressed_rune:RuneData) -> bool:
+	if (current_focus < pressed_rune.focus_cost):
+		game_ui.shake_mana_icon()
+		return false
+	
+	current_focus -= pressed_rune.focus_cost
+	if (pressed_rune.focus_cost > 0): game_ui.update_focus(current_focus)
+	return true
 
 #func _apply_instant_rune(rune: RuneData):
 func _apply_instant_rune(type: String):

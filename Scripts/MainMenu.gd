@@ -19,11 +19,11 @@ class_name MainMenu
 @export var eq_slot_1_btn:Button
 @export var eq_slot_2_btn:Button
 @export var health_increase_btn:Button
-@export var speed_increase_btn:Button
+@export var focus_increase_btn:Button
 @export var power_increase_btn:Button
 @export var luck_increase_btn:Button
 @export var health_decrease_btn:Button
-@export var speed_decrease_btn:Button
+@export var focus_decrease_btn:Button
 @export var power_decrease_btn:Button
 @export var luck_decrease_btn:Button
 
@@ -35,7 +35,7 @@ var buttons_items_dictionary = {
 
 enum STAT_NAMES {
 	HEALTH,
-	SPEED,
+	FOCUS,
 	POWER,
 	LUCK
 }
@@ -97,11 +97,11 @@ func connect_buttons() -> void:
 	eq_slot_1_btn.toggled.connect(eq_slot_button_pressed)
 	eq_slot_2_btn.toggled.connect(eq_slot_button_pressed)
 	health_increase_btn.pressed.connect(add_subtract_stats.bind(true, STAT_NAMES.HEALTH))
-	speed_increase_btn.pressed.connect(add_subtract_stats.bind(true, STAT_NAMES.SPEED))
+	focus_increase_btn.pressed.connect(add_subtract_stats.bind(true, STAT_NAMES.FOCUS))
 	power_increase_btn.pressed.connect(add_subtract_stats.bind(true, STAT_NAMES.POWER))
 	luck_increase_btn.pressed.connect(add_subtract_stats.bind(true, STAT_NAMES.LUCK))
 	health_decrease_btn.pressed.connect(add_subtract_stats.bind(false, STAT_NAMES.HEALTH))
-	speed_decrease_btn.pressed.connect(add_subtract_stats.bind(false, STAT_NAMES.SPEED))
+	focus_decrease_btn.pressed.connect(add_subtract_stats.bind(false, STAT_NAMES.FOCUS))
 	power_decrease_btn.pressed.connect(add_subtract_stats.bind(false, STAT_NAMES.POWER))
 	luck_decrease_btn.pressed.connect(add_subtract_stats.bind(false, STAT_NAMES.LUCK))
 	# Equipment
@@ -169,7 +169,7 @@ func add_subtract_stats(should_add:bool=false, type:int=STAT_NAMES.HEALTH) -> vo
 	var stat_name:String = "health"
 	match type:
 		STAT_NAMES.HEALTH: stat_name = "health"
-		STAT_NAMES.SPEED: stat_name = "speed"
+		STAT_NAMES.FOCUS: stat_name = "focus"
 		STAT_NAMES.POWER: stat_name = "power"
 		STAT_NAMES.LUCK: stat_name = "luck"
 		_: stat_name = "health"
@@ -182,10 +182,10 @@ func add_subtract_stats(should_add:bool=false, type:int=STAT_NAMES.HEALTH) -> vo
 			#main.player_stats.health += number
 			#main.player_stats.health = clamp(main.player_stats.health, 0, 1999)
 			set_health_label()
-		STAT_NAMES.SPEED:
-			#main.player_stats.speed += number
-			#main.player_stats.speed = clamp(main.player_stats.speed, 0, 1999)
-			set_speed_label()
+		STAT_NAMES.FOCUS:
+			#main.player_stats.focus += number
+			#main.player_stats.focus = clamp(main.player_stats.focus, 0, 1999)
+			set_focus_label()
 		STAT_NAMES.POWER:
 			#main.player_stats.power += number
 			#main.player_stats.power = clamp(main.player_stats.power, 0, 1999)
@@ -196,7 +196,7 @@ func add_subtract_stats(should_add:bool=false, type:int=STAT_NAMES.HEALTH) -> vo
 			set_luck_label()
 
 func recalc_player_stats():
-	var stats = {"health": 0, "speed": 0, "power": 0, "luck": 0}
+	var stats = {"health": 0, "focus": 0, "power": 0, "luck": 0}
 
 	for slot in main.game_data.equipped.keys():
 		var item = main.game_data.equipped[slot]
@@ -222,7 +222,7 @@ func update_ap_label() -> void:
 
 func set_all_labels() -> void:
 	set_health_label()
-	set_speed_label()
+	set_focus_label()
 	set_power_label()
 	set_luck_label()
 	update_lvl_label()
@@ -230,8 +230,8 @@ func set_all_labels() -> void:
 
 func set_health_label() -> void:
 	%HealthRich.text = format_stat_with_bonus("Health", main.game_data.base_stats["health"] + main.game_data.allocated_stats["health"], main.bonus_stats['health'])
-func set_speed_label() -> void:
-	%SpeedRich.text = format_stat_with_bonus("Speed", main.game_data.base_stats["speed"] + main.game_data.allocated_stats["speed"], main.bonus_stats['speed'])
+func set_focus_label() -> void:
+	%FocusRich.text = format_stat_with_bonus("Focus", main.game_data.base_stats["focus"] + main.game_data.allocated_stats["focus"], main.bonus_stats['focus'])
 func set_power_label() -> void:
 	%PowerRich.text = format_stat_with_bonus("Power", main.game_data.base_stats["power"] + main.game_data.allocated_stats["power"], main.bonus_stats['power'])
 func set_luck_label() -> void:

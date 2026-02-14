@@ -18,6 +18,7 @@ const HP_YELLOW = Color(0.985, 0.924, 0.31, 1.0)
 const PASTEL_GREEN = Color(0.6, 1.0, 0.6)
 const PASTEL_RED   = Color(1.0, 0.6, 0.6)
 const RED   = Color(0.966, 0.0, 0.252, 1.0)
+const STATUS_MESSAGE_VICTORY:String = "Victory!"
 
 const all_runes:Array = ["single", "plus", "aoe3"] # temporary until we figure out how runes become available
 
@@ -74,7 +75,7 @@ func roll_mod_amount(stat: String, level: int, rarity: String) -> float:
 	var stat_mult:float = 1.0
 	match stat:
 		"health": stat_mult = 1.0
-		"speed": stat_mult = 1.0
+		"focus": stat_mult = 1.0
 		"power": stat_mult = 2.0
 		"luck": stat_mult = 3.0
 		_ : stat_mult = 1.0
@@ -209,3 +210,22 @@ func animate_summary_out_and_free(panel):
 
 	# --- CLEANUP ---
 	tween.tween_callback(panel.queue_free)
+
+func warn_shake_node(node) -> void:
+	if !(is_instance_valid(node)):
+		return
+	if not node.has_meta("original_position"):
+		node.set_meta("original_position", node.position)
+	var original_position = node.get_meta("original_position")  # Capture it *now*, so it's consistent for this whole tween
+	# Always reset to original first in case of overlap
+	node.position = original_position
+	
+	var shake_amount: float = 4.0
+	var shake_time: float = 0.05
+	
+	var tween = node.create_tween()
+	tween.tween_property(node, "position", original_position + Vector2(-shake_amount, 0), shake_time).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(node, "position", original_position + Vector2(shake_amount, 0), shake_time).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(node, "position", original_position + Vector2(-shake_amount / 2.0, 0), shake_time).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(node, "position", original_position + Vector2(shake_amount / 2.0, 0), shake_time).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(node, "position", original_position, shake_time).set_trans(Tween.TRANS_SINE)

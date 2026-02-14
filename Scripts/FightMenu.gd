@@ -6,6 +6,7 @@ class_name FightMenu
 @export var rune_grid_container:GridContainer
 @export var start_button:Button
 @export var exit_button:Button
+@onready var rune_button:PackedScene = preload("res://Scenes/FightMenuRuneButton.tscn")
 var areas:Array = ["orcs", "sandlings", "dwarves"]
 
 var selected_family: String = ""
@@ -19,7 +20,7 @@ var main: MainNode
 func _ready() -> void:
 	Utils.animate_summary_in_happy(self)
 	setup_monster_grid()
-	#setup_rune_grid()
+	setup_rune_grid()
 	start_button.pressed.connect(main.spawn_game)
 	exit_button.pressed.connect(close)
 
@@ -37,20 +38,23 @@ func setup_monster_grid() -> void:
 	_on_family_selected(areas[0])
 
 func setup_rune_grid() -> void:
-	rune_grid_container.clear()
-
-	for rune in Utils.all_runes:
-		var btn := Button.new()
-		btn.text = rune.name
+	for btn in rune_grid_container.get_children():
+		btn.queue_free()
+	#for rune in Utils.all_runes:
+	var runes = RuneDatabase.runes
+	for rune in runes.keys():
+		var btn := rune_button.instantiate()
+		btn.setup(runes[rune])
 		btn.pressed.connect(_on_rune_pressed.bind(rune))
 		rune_grid_container.add_child(btn)
+		main.battle_data["selected_runes"].append(runes[rune])
 
 func _on_rune_pressed(rune):
-	if selected_runes.has(rune):
-		selected_runes.erase(rune)
+	if main.battle_data["selected_runes"].has(rune):
+		main.battle_data["selected_runes"].erase(rune)
 	else:
-		if selected_runes.size() < 5:
-			selected_runes.append(rune)
+		if main.battle_data["selected_runes"].size() < 5:
+			main.battle_data["selected_runes"].append(rune)
 
 func _on_family_selected(family: String) -> void:
 	#if (main.battle_data["family"] == family): return

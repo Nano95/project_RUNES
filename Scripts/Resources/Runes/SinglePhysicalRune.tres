@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_447j1")
 name = "Single Physical Rune"
+mini_name = "SR"
 icon = ExtResource("1_hyjcs")
 pattern = "single"
 metadata/_custom_type_script = "uid://wqovi0smk0qq"

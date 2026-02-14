@@ -28,5 +28,4 @@ func get_monster(family:String, index) -> MonsterBase:
 	return monsters[family][index]
 
 func get_monsters_for_family(family:String) -> Array:
-	print("utils monsters: ", monsters)
 	return monsters[family]

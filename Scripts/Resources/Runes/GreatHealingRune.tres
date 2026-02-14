@@ -6,8 +6,10 @@
 [resource]
 script = ExtResource("1_gawcj")
 name = "Great Healing rune"
+mini_name = "GH"
 icon = ExtResource("1_wg6ge")
 pattern = "great_heal"
 activation = "instant"
 power = 100
+focus_cost = 3
 metadata/_custom_type_script = "uid://wqovi0smk0qq"

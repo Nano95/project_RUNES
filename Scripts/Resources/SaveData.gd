@@ -15,8 +15,8 @@ class_name SaveData
 	"slot2": null
 }
 @export var available_ap:int = 0
-@export var base_stats:Dictionary = { "health": 10, "speed": 10, "power": 10, "luck": 10 }
-@export var allocated_stats:Dictionary = { "health": 0, "speed": 0, "power": 0, "luck": 0 }
+@export var base_stats:Dictionary = { "health": 10, "focus": 10, "power": 10, "luck": 10 }
+@export var allocated_stats:Dictionary = { "health": 0, "focus": 0, "power": 0, "luck": 0 }
 
 @export_category("Stats")
 @export var runes_used:int = 0

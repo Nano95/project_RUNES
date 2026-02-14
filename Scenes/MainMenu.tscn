@@ -33,7 +33,7 @@ shader = ExtResource("5_8um5k")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("start_btn", "lvl_label", "ap_label", "btn1", "btn10", "btn100", "clear_stats_btn", "debugton", "eq_slot_1_btn", "eq_slot_2_btn", "health_increase_btn", "speed_increase_btn", "power_increase_btn", "luck_increase_btn", "health_decrease_btn", "speed_decrease_btn", "power_decrease_btn", "luck_decrease_btn", "inventory_grid", "generate_btn")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("start_btn", "lvl_label", "ap_label", "btn1", "btn10", "btn100", "clear_stats_btn", "debugton", "eq_slot_1_btn", "eq_slot_2_btn", "health_increase_btn", "focus_increase_btn", "power_increase_btn", "luck_increase_btn", "health_decrease_btn", "focus_decrease_btn", "power_decrease_btn", "luck_decrease_btn", "inventory_grid", "generate_btn")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -56,11 +56,11 @@ debugton = NodePath("Debugton")
 eq_slot_1_btn = NodePath("Equipment/Panel/Equipment/slot1")
 eq_slot_2_btn = NodePath("Equipment/Panel/Equipment/slot2")
 health_increase_btn = NodePath("StatsContainer/Labels/PlusHealth")
-speed_increase_btn = NodePath("StatsContainer/Labels/PlusSpeed")
+focus_increase_btn = NodePath("StatsContainer/Labels/PlusFocus")
 power_increase_btn = NodePath("StatsContainer/Labels/PlusPower")
 luck_increase_btn = NodePath("StatsContainer/Labels/PlusLuck")
 health_decrease_btn = NodePath("StatsContainer/Labels/MinusHealth")
-speed_decrease_btn = NodePath("StatsContainer/Labels/MinusSpeed")
+focus_decrease_btn = NodePath("StatsContainer/Labels/MinusFocus")
 power_decrease_btn = NodePath("StatsContainer/Labels/MinusPower")
 luck_decrease_btn = NodePath("StatsContainer/Labels/MinusLuck")
 inventory_grid = NodePath("Equipment/Panel/Inventory/ScrollContainer/MarginContainer/GridContainer")
@@ -193,7 +193,7 @@ theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
 text = " Health: "
 
-[node name="SpeedRich" type="RichTextLabel" parent="StatsContainer/Labels"]
+[node name="FocusRich" type="RichTextLabel" parent="StatsContainer/Labels"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 244.0
@@ -274,7 +274,7 @@ theme_override_fonts/font = ExtResource("2_ghw46")
 theme_override_font_sizes/font_size = 100
 text = "-"
 
-[node name="PlusSpeed" type="Button" parent="StatsContainer/Labels"]
+[node name="PlusFocus" type="Button" parent="StatsContainer/Labels"]
 layout_mode = 0
 offset_left = 178.0
 offset_top = 98.0
@@ -286,7 +286,7 @@ theme_override_fonts/font = ExtResource("2_ghw46")
 theme_override_font_sizes/font_size = 100
 text = "+"
 
-[node name="MinusSpeed" type="Button" parent="StatsContainer/Labels"]
+[node name="MinusFocus" type="Button" parent="StatsContainer/Labels"]
 layout_mode = 0
 offset_left = 105.00001
 offset_top = 98.0

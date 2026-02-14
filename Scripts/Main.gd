@@ -21,18 +21,17 @@ var game_data:SaveData
 var active_menu_ref
 var game_ui_ref: GameUI
 var game_current_level:int = 0
-var player_stats:StatsData
 var bonus_stats:Dictionary
 
 var battle_data:Dictionary = {
 	"family": "",
-	"index": 1
+	"index": 1,
+	"selected_runes": [] # Eventually be coming from save file.
 }
 
 func _ready() -> void:
 	game_data = SaveData.new()
 	backup_game_data = SaveData.new()
-	player_stats = StatsData.new()
 	verify_save_directory(save_data_path)
 	verify_save_directory(backup_data_path) #and for backup
 	load_game()

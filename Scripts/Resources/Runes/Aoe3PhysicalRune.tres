@@ -6,6 +6,8 @@
 [resource]
 script = ExtResource("2_ny8nm")
 name = "Aoe3 Physical Rune"
+mini_name = "AOE3"
 icon = ExtResource("1_tryx4")
 pattern = "aoe3"
+focus_cost = 8
 metadata/_custom_type_script = "uid://wqovi0smk0qq"
