@@ -113,7 +113,6 @@ func spawn_status_message(died:bool=false, no_focus:bool=false) -> void:
 	main.spawn_to_top_ui_layer(lbl)
 
 func spawn_summary_panel(message:String="mmm!") -> void:
-	print("== Summary spawned")
 	game_is_active = false
 	var panel = summary_panel_ref.instantiate()
 	panel.setup(self, main, message)
@@ -132,7 +131,6 @@ func monster_died(monster):
 	my_grid.clear_monster(monster)
 	#game_ui.update_monster_damage(calculate_group_power()) # I dont think we want to update this as game ends
 	
-	print("Monster cjecl")
 	var game_over = check_if_all_monsters_dead(false)
 	if (game_over): return
 
