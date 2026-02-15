@@ -48,7 +48,7 @@ shader = ExtResource("3_co6lq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="GameUI" type="Control" node_paths=PackedStringArray("hp_bar", "xp_bar", "hp_label", "xp_label", "monster_turns", "monster_damage", "rune_btns_container", "mana_icon", "focus_label")]
+[node name="GameUI" type="Control" node_paths=PackedStringArray("back_btn", "hp_bar", "xp_bar", "hp_label", "xp_label", "monster_turns", "monster_damage", "rune_btns_container", "mana_icon", "focus_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,6 +57,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_po7eo")
+back_btn = NodePath("TopSection/BackBtn")
 hp_bar = NodePath("TopSection/HpBar")
 xp_bar = NodePath("TopSection/XpBar")
 hp_label = NodePath("TopSection/HpBar/HpLabel")

@@ -5,7 +5,7 @@ class_name GameUI
 
 var main:MainNode
 var game_controller:GameController
-
+@export var back_btn:Button
 @export var hp_bar:TextureProgressBar
 @export var xp_bar:TextureProgressBar
 @export var hp_label:Label
@@ -31,8 +31,6 @@ func setup(main_node:MainNode) -> void:
 func setup_game_controller(gc:GameController) -> void:
 	game_controller = gc
 	$TopSection/QuickRespawn.pressed.connect(restart)
-	# Escaping should simulate 3 turns. potential for you to get hit and die
-	$TopSection/BackBtn.pressed.connect(game_controller.spawn_summary_panel.bind("Escaped safely!"))
 	setup_hp(game_controller.current_hp, game_controller.max_hp)
 	xp_bar.setup(main, game_controller)
 	setup_rune_buttons()
@@ -164,3 +162,6 @@ func get_health_color(ratio: float) -> Color:
 		return Utils.HP_YELLOW
 	else:
 		return Utils.RED
+
+func disable_back_button(is_disabled:bool=false) -> void:
+	back_btn.disabled = is_disabled

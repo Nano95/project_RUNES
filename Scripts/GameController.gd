@@ -6,6 +6,7 @@ class_name GameController
 @export var summary_panel_ref: Resource
 @export var my_grid_ref:Resource
 @export var rune_animation:Resource
+@export var escape_timer:Timer
 var base_width = ProjectSettings.get_setting("display/window/size/viewport_width")
 var base_height = ProjectSettings.get_setting("display/window/size/viewport_height")
 
@@ -41,6 +42,8 @@ var loot:Array
 
 signal gained_exp
 
+var escape_timer_counter:int = 0
+
 func _ready() -> void:
 	%Camera2D.setup(null) # temporary null until i know what i need to do
 	setup_stats()
@@ -50,6 +53,7 @@ func _ready() -> void:
 
 func start_game(restart:bool=false) -> void:
 	game_is_active = true
+	escape_timer_counter = 0
 	if (restart):
 		clear_all_monsters()
 		group_turns_left = max(2, GENERAL_STARTING_TURNS_LEFT) # it will be base - some ascension number
@@ -63,6 +67,21 @@ func start_game(restart:bool=false) -> void:
 func setup(main_ref:MainNode, g_ui:GameUI) -> void:
 	main = main_ref
 	game_ui = g_ui
+	game_ui.back_btn.pressed.connect(escape_pressed_behavior)
+	escape_timer.timeout.connect(escape_timer_timeout)
+
+func escape_pressed_behavior() -> void:
+	game_ui.disable_back_button(true)
+	advance_turn()
+	escape_timer_counter += 1
+	escape_timer.start(.3)
+
+func escape_timer_timeout() -> void:
+	if (escape_timer_counter >= 3):
+		escape_timer.stop()
+		spawn_summary_panel("Escaped successfully!")
+	advance_turn()
+	escape_timer_counter += 1
 
 func setup_stats() -> void:
 	max_hp = Utils.get_stat_for_ui("health") + main.bonus_stats.health
@@ -113,6 +132,7 @@ func spawn_status_message(died:bool=false, no_focus:bool=false) -> void:
 	main.spawn_to_top_ui_layer(lbl)
 
 func spawn_summary_panel(message:String="mmm!") -> void:
+	game_ui.disable_back_button(false) # Just in case in any scenario
 	game_is_active = false
 	var panel = summary_panel_ref.instantiate()
 	panel.setup(self, main, message)
@@ -155,6 +175,8 @@ func take_damage(dmg:int=0) -> void:
 	current_hp -= dmg
 	if (current_hp <= 0):
 		spawn_status_message(true)
+		# In case we die while trying to escape
+		if (!escape_timer.is_stopped()): escape_timer.stop()
 
 func heal(amt:int=100) -> void:
 	game_ui.update_hp_bar(current_hp, max_hp, amt)

@@ -8,13 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://vqwmc6txdxui" path="res://Scenes/MyGrid.tscn" id="4_06oto"]
 [ext_resource type="PackedScene" uid="uid://d2g2e823fkk04" path="res://Scenes/RuneAnimation.tscn" id="5_n0sx1"]
 
-[node name="GameController" type="Node2D"]
+[node name="GameController" type="Node2D" node_paths=PackedStringArray("escape_timer")]
 script = ExtResource("1_fyej0")
 status_message = ExtResource("2_7fjnr")
 monster_instance = ExtResource("2_gbhfg")
 summary_panel_ref = ExtResource("3_06oto")
 my_grid_ref = ExtResource("4_06oto")
 rune_animation = ExtResource("5_n0sx1")
+escape_timer = NodePath("escapeTimer")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
@@ -24,3 +25,5 @@ script = ExtResource("2_occvc")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.6
+
+[node name="escapeTimer" type="Timer" parent="."]
