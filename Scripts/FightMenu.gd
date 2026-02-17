@@ -7,6 +7,7 @@ class_name FightMenu
 @export var start_button:Button
 @export var exit_button:Button
 @onready var rune_button:PackedScene = preload("res://Scenes/FightMenuRuneButton.tscn")
+@onready var my_button:PackedScene = preload("res://Scenes/MyButton.tscn")
 var areas:Array = ["orcs", "sandlings", "dwarves"]
 
 var selected_family: String = ""
@@ -29,10 +30,8 @@ func setup(main_node:MainNode) -> void:
 
 func setup_monster_grid() -> void:
 	for family in areas:
-		var btn := Button.new()
-		btn.text = family.capitalize()
-		btn.size += Vector2(20, 15)
-		btn.pressed.connect(_on_family_selected.bind(family))
+		var btn := my_button.instantiate()
+		btn.setup(family.capitalize(), _on_family_selected.bind(family), Vector2(.4, .4))
 		monster_grid_container.add_child(btn)
 		
 	_on_family_selected(areas[0])
@@ -64,10 +63,8 @@ func _on_family_selected(family: String) -> void:
 	
 	var monsters = MonsterDatabase[family]
 	for i in monsters.size():
-		var btn := Button.new()
-		btn.text = monsters[i].name  # or "Orc %d" % (i+1)
-		btn.scale = Vector2(1.6, 1.6)
-		btn.pressed.connect(_on_monster_selected.bind(i + 1))
+		var btn := my_button.instantiate()
+		btn.setup(monsters[i].name.capitalize(),_on_monster_selected.bind(i + 1), Vector2(.4, .4))
 		location_grid_container.add_child(btn)
 
 func _on_monster_selected(index: int) -> void: 

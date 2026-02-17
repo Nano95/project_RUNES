@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://b37x20v0etu6t"]
+
+[ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="1_a8uc2"]
+[ext_resource type="Script" uid="uid://b0u33hmqstq1d" path="res://Scripts/MyButton.gd" id="1_xd1w4"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_xd1w4")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(600, 182)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 560.0
+offset_bottom = 142.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("1_a8uc2")
+theme_override_font_sizes/font_size = 100
+text = "Orc Brute"

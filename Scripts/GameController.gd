@@ -150,6 +150,8 @@ func monster_died(monster):
 	# Remove from grid
 	my_grid.clear_monster(monster)
 	#game_ui.update_monster_damage(calculate_group_power()) # I dont think we want to update this as game ends
+	print("")
+	roll_loot(monster.base)
 	
 	var game_over = check_if_all_monsters_dead(false)
 	if (game_over): return
@@ -306,6 +308,30 @@ func get_monster_for_stage(stage: int) -> MonsterBase:
 		return MonsterDatabase[selected_monster_family][base_index + 1]
 
 	return base
+
+func roll_loot(monster: MonsterBase) -> void:
+	# --- ESSENCE (always drops) ---
+	var essence_amount := randi_range(monster.min_essence_amount, monster.max_essence_amount)
+	main.game_data.current_essences[monster.essence_type] += essence_amount
+	main.game_data.total_essences[monster.essence_type] += essence_amount
+	#loot_panel.add_loot_entry("+" + str(essence_amount) + " " + monster.essence_type + " Essence", essence_color, true)
+	print("Essences: ", essence_amount)
+	# --- GOLD (chance-based) ---
+	var final_gold_chance = monster.gold_chance + (current_luck * 0.01)
+	if (randf() <= (final_gold_chance)):
+		var gold_amount := randi_range(monster.min_gold_reward, monster.max_gold_reward)
+		main.game_data.current_gold += gold_amount
+		main.game_data.total_gold += gold_amount
+		#loot_panel.add_loot_entry("+" + str(gold_amount) + " Gold", gold_color, true)
+	
+		print("final_gold_chance: ", gold_amount)
+	# --- EQUIPMENT (rare) ---
+	#if randf() <= monster.equipment_chance and monster.equipment_pool.size() > 0:
+		#var item_id := monster.equipment_pool.pick_random()
+		#var item := ItemDatabase.generate_item(item_id)
+		#main.game_data.add_item_to_inventory(item)
+		#loot_panel.add_loot_entry("Found: " + item.name, item_color, true)
+
 
 ######################
 ########### RUNE STUFF

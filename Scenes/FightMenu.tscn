@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://2dvdykbjounr"]
+[gd_scene load_steps=10 format=3 uid="uid://2dvdykbjounr"]
 
 [ext_resource type="Script" uid="uid://crgoc5n1t752c" path="res://Scripts/FightMenu.gd" id="1_ipivn"]
 [ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="2_p854w"]
@@ -11,6 +11,18 @@ shader = ExtResource("2_p854w")
 shader_parameter/lod = 3.0000001425
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8k8yn"]
+resource_local_to_scene = true
+shader = ExtResource("4_ov7x6")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ipivn"]
+resource_local_to_scene = true
+shader = ExtResource("4_ov7x6")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p854w"]
 resource_local_to_scene = true
 shader = ExtResource("4_ov7x6")
 shader_parameter/time = 4.750000002218258e-07
@@ -59,7 +71,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ChooseMonster2" parent="ColorRect/Panel" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_8k8yn")
+material = SubResource("ShaderMaterial_ipivn")
 layout_mode = 0
 offset_left = 1.9999847
 offset_top = 22.0
@@ -87,8 +99,7 @@ theme_override_constants/margin_bottom = 10
 [node name="GridContainer" type="GridContainer" parent="ColorRect/Panel/Family/MarginContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 10
-columns = 2
+theme_override_constants/v_separation = 80
 
 [node name="Location" type="ScrollContainer" parent="ColorRect/Panel"]
 custom_minimum_size = Vector2(150, 150)
@@ -107,17 +118,15 @@ theme_override_constants/margin_bottom = 10
 
 [node name="GridContainer" type="GridContainer" parent="ColorRect/Panel/Location/MarginContainer"]
 layout_mode = 2
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 10
-columns = 2
+theme_override_constants/v_separation = 80
 
 [node name="ChooseRunes" parent="ColorRect/Panel" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_8k8yn")
+material = SubResource("ShaderMaterial_p854w")
 layout_mode = 0
 offset_left = 1.9999847
-offset_top = 573.0
+offset_top = 612.0
 offset_right = 1252.0
-offset_bottom = 710.0
+offset_bottom = 749.0
 scale = Vector2(0.54, 0.54)
 text = "Choose Runes"
 horizontal_alignment = 1
@@ -126,9 +135,9 @@ vertical_alignment = 1
 [node name="ScrollContainer2" type="ScrollContainer" parent="ColorRect/Panel/ChooseRunes"]
 layout_mode = 0
 offset_left = 7.4074364
-offset_top = 146.29626
+offset_top = 127.77779
 offset_right = 1246.2964
-offset_bottom = 731.48145
+offset_bottom = 625.92584
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect/Panel/ChooseRunes/ScrollContainer2"]
 layout_mode = 2
@@ -142,7 +151,18 @@ custom_minimum_size = Vector2(1200, 550)
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 10
-columns = 4
+columns = 3
+
+[node name="ToggleMonsterInfo" type="Button" parent="ColorRect/Panel"]
+layout_mode = 0
+offset_left = 564.00006
+offset_top = 632.0
+offset_right = 635.4286
+offset_bottom = 699.1428
+scale = Vector2(0.7, 0.7)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("5_utror")
+theme_override_font_sizes/font_size = 100
 
 [node name="Fight" type="Button" parent="ColorRect/Panel"]
 layout_mode = 0

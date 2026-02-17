@@ -10,9 +10,29 @@ class_name SaveData
 @export var current_exp:float = 0 # Drives UI -- progress Bar -- and resets to 0 on level up
 @export var total_gold:float = 0
 @export var current_gold:float = 0
+@export var total_essences:Dictionary = {
+	"physical": 0,
+	"fire": 0,
+	"ice": 0,
+	"earth": 0,
+	"lightning": 0
+}
+@export var current_essences:Dictionary = {
+	"physical": 0,
+	"fire": 0,
+	"ice": 0,
+	"earth": 0,
+	"lightning": 0
+}
 @export var equipped = {
 	"slot1": null,
 	"slot2": null
+}
+@export var monsters_unlocked = {
+	"slimes": false,
+	"orcs": false,
+	"sandlings": false,
+	"dwarves": false,
 }
 @export var available_ap:int = 0
 @export var base_stats:Dictionary = { "health": 10, "focus": 10, "power": 10, "luck": 10 }
