@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://d0atfxrsqnbfu"]
 
 [ext_resource type="Script" uid="uid://duaqtbkpkw5q8" path="res://Scripts/GameController.gd" id="1_fyej0"]
-[ext_resource type="PackedScene" uid="uid://cko7e16hwbxg6" path="res://GameStatusPopup.tscn" id="2_7fjnr"]
+[ext_resource type="PackedScene" uid="uid://cko7e16hwbxg6" path="res://Scenes/GameStatusPopup.tscn" id="2_7fjnr"]
 [ext_resource type="PackedScene" uid="uid://xxup1p8e76di" path="res://Scenes/MonsterInstance.tscn" id="2_gbhfg"]
 [ext_resource type="Script" uid="uid://cy02ldenav82t" path="res://Scripts/CameraController.gd" id="2_occvc"]
 [ext_resource type="PackedScene" uid="uid://bi1c8jgwhnhki" path="res://Scenes/SummaryPanel.tscn" id="3_06oto"]

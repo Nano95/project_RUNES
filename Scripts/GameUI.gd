@@ -15,6 +15,7 @@ var game_controller:GameController
 @export var rune_btns_container:HBoxContainer
 @export var mana_icon:TextureRect
 @export var focus_label:Label
+@export var loot_manager:LootManager
 var BAR_CONST:float = 1000.0
 var hp_tween:Tween
 var xp_tween:Tween

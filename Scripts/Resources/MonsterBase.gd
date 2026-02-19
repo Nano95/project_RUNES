@@ -10,6 +10,7 @@ class_name MonsterBase
 @export var min_gold_reward: int
 @export var max_gold_reward: int
 
+'''physical > lightning > fire > ice > poison > physical'''
 @export var essence_type: String  # "fire", "earth", etc.
 @export var min_essence_amount: int
 @export var max_essence_amount: int

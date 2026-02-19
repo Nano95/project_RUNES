@@ -4,6 +4,7 @@ var main:MainNode
 var game_controller: GameController
 @export var back_btn: Button
 @export var retry_btn: Button
+@export var loot_labels: PackedScene
 
 func _ready() -> void:
 	setup_labels()
@@ -25,3 +26,15 @@ func setup(game: GameController, main_node: MainNode, message:String="Victory!")
 func setup_labels() -> void:
 	$ColorRect/Panel/EnemiesDead.text = "Enemies pulverized: " + str(game_controller.enemies_killed)
 	$ColorRect/Panel/RunesUsed.text = "Runes used: " + str(game_controller.runes_used)
+	setup_loot()
+
+func setup_loot() -> void:
+	var all_loot = game_controller.loot_summary
+	print("all LOot: ", all_loot)
+	for loot in all_loot.keys():
+		print("printing loot: ", loot)
+		var data = ItemsDatabase.loot_data[loot]
+		var lbl = loot_labels.instantiate()
+		lbl.scale *= 2
+		lbl.setup(data.name, data.icon, all_loot[loot])
+		$ColorRect/Panel/LootContainer.add_child(lbl)

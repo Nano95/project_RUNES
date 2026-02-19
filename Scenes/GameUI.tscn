@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b7xgkus4u2361"]
+[gd_scene load_steps=20 format=3 uid="uid://b7xgkus4u2361"]
 
 [ext_resource type="Script" uid="uid://dygepuv8uhpel" path="res://Scripts/GameUI.gd" id="1_po7eo"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_frnsy"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://dt4un2465kwr1" path="res://Scripts/XpBarController.gd" id="8_tii1l"]
 [ext_resource type="Curve" uid="uid://bdkmegreb07jj" path="res://Resources/xpCurve.tres" id="9_8dgta"]
 [ext_resource type="Texture2D" uid="uid://b18ao2eimbmku" path="res://Sprites/MANA_ICON.png" id="11_0hwcy"]
+[ext_resource type="Script" uid="uid://csqoa81ypjofv" path="res://Scripts/LootManager.gd" id="12_us4cf"]
+[ext_resource type="PackedScene" uid="uid://dakbi23goa01y" path="res://Scenes/LootEntry.tscn" id="13_qecx7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wjrrg"]
 resource_local_to_scene = true
@@ -48,7 +50,7 @@ shader = ExtResource("3_co6lq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="GameUI" type="Control" node_paths=PackedStringArray("back_btn", "hp_bar", "xp_bar", "hp_label", "xp_label", "monster_turns", "monster_damage", "rune_btns_container", "mana_icon", "focus_label")]
+[node name="GameUI" type="Control" node_paths=PackedStringArray("back_btn", "hp_bar", "xp_bar", "hp_label", "xp_label", "monster_turns", "monster_damage", "rune_btns_container", "mana_icon", "focus_label", "loot_manager")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,6 +69,7 @@ monster_damage = NodePath("TopSection/DamagedIcon/totalAtkLabel")
 rune_btns_container = NodePath("BottomSection/MarginContainer/ScrollContainer/HBoxContainer")
 mana_icon = NodePath("TopSection/FocusIcon")
 focus_label = NodePath("TopSection/FocusIcon/focusLabel")
+loot_manager = NodePath("LootManager")
 
 [node name="TopSection" type="Control" parent="."]
 layout_mode = 1
@@ -250,3 +253,12 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="BottomSection/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
+
+[node name="LootManager" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 261.0
+offset_right = 40.0
+offset_bottom = 301.0
+theme_override_constants/separation = 69
+script = ExtResource("12_us4cf")
+loot_entry_scene = ExtResource("13_qecx7")

@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://dakbi23goa01y"]
+
+[ext_resource type="Script" uid="uid://cwvvg36knmdqe" path="res://Scripts/LootEntry.gd" id="1_xks6d"]
+[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_hpiku"]
+[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="3_28aoy"]
+[ext_resource type="Texture2D" path="res://Sprites/IRIDESCENT_TAPNITE_ICON.png" id="4_ar3bs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qvx5n"]
+resource_local_to_scene = true
+shader = ExtResource("3_28aoy")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="LootEntry" type="Control"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 232.0
+offset_bottom = 61.0
+pivot_offset = Vector2(0, 30)
+script = ExtResource("1_xks6d")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 231.0
+offset_bottom = 60.0
+mouse_filter = 2
+
+[node name="Label" parent="Panel" instance=ExtResource("2_hpiku")]
+material = SubResource("ShaderMaterial_qvx5n")
+layout_mode = 0
+offset_left = 59.0
+offset_top = -6.9999995
+offset_right = 928.9999
+offset_bottom = 354.0
+scale = Vector2(0.2, 0.2)
+text = "Gold Essence 20xx"
+vertical_alignment = 1
+
+[node name="icon" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 56.0
+offset_bottom = 58.0
+texture = ExtResource("4_ar3bs")

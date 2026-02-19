@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bi1c8jgwhnhki"]
+[gd_scene load_steps=11 format=3 uid="uid://bi1c8jgwhnhki"]
 
 [ext_resource type="Script" uid="uid://dr4nxsos6lrwq" path="res://Scripts/SummaryPanel.gd" id="1_10axu"]
+[ext_resource type="PackedScene" uid="uid://bgmuooukrioal" path="res://Scenes/LootLabelContainer.tscn" id="2_10axu"]
 [ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="2_w37fs"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_sws4i"]
 [ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="4_0kgc7"]
@@ -39,6 +40,7 @@ pivot_offset = Vector2(360, 640)
 script = ExtResource("1_10axu")
 back_btn = NodePath("ColorRect/Panel/Menu")
 retry_btn = NodePath("ColorRect/Panel/QuickRestart")
+loot_labels = ExtResource("2_10axu")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_55pba")
@@ -80,10 +82,29 @@ text = "Enemies pulverized: "
 material = SubResource("ShaderMaterial_sws4i")
 layout_mode = 0
 offset_left = 86.0
-offset_top = 319.0
+offset_top = 311.0
 offset_right = 2049.3335
-offset_bottom = 456.0
-text = "Walls Destroyed: "
+offset_bottom = 448.0
+text = "Runes used: "
+
+[node name="LootTitle" parent="ColorRect/Panel" instance=ExtResource("3_sws4i")]
+material = SubResource("ShaderMaterial_sws4i")
+layout_mode = 0
+offset_left = 86.0
+offset_top = 619.0
+offset_right = 1460.9999
+offset_bottom = 756.0
+scale = Vector2(0.4, 0.4)
+text = "Loot"
+
+[node name="LootContainer" type="VBoxContainer" parent="ColorRect/Panel"]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 675.0
+offset_right = 677.00006
+offset_bottom = 1000.5556
+scale = Vector2(0.9, 0.9)
+theme_override_constants/separation = 0
 
 [node name="Menu" type="Button" parent="ColorRect/Panel"]
 layout_mode = 0

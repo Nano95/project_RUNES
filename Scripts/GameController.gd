@@ -38,7 +38,7 @@ var enemies_killed:int
 var runes_used:int
 var total_exp:int
 var total_gold:int
-var loot:Array
+var loot_summary:Dictionary
 
 signal gained_exp
 
@@ -314,18 +314,27 @@ func roll_loot(monster: MonsterBase) -> void:
 	var essence_amount := randi_range(monster.min_essence_amount, monster.max_essence_amount)
 	main.game_data.current_essences[monster.essence_type] += essence_amount
 	main.game_data.total_essences[monster.essence_type] += essence_amount
-	#loot_panel.add_loot_entry("+" + str(essence_amount) + " " + monster.essence_type + " Essence", essence_color, true)
+	
+	# Now add loot to notifications and summary loot.
+	var essence_key:String = str(monster.essence_type + " essence")
+	game_ui.loot_manager.add_loot_from_key(essence_key, essence_amount)
+	if !(loot_summary.has(essence_key)):
+		loot_summary[essence_key] = 0
+	loot_summary[essence_key] += essence_amount
 	print("Essences: ", essence_amount)
-	# --- GOLD (chance-based) ---
+	### --- GOLD (chance-based) ---
 	var final_gold_chance = monster.gold_chance + (current_luck * 0.01)
 	if (randf() <= (final_gold_chance)):
 		var gold_amount := randi_range(monster.min_gold_reward, monster.max_gold_reward)
 		main.game_data.current_gold += gold_amount
 		main.game_data.total_gold += gold_amount
-		#loot_panel.add_loot_entry("+" + str(gold_amount) + " Gold", gold_color, true)
-	
+		
+		game_ui.loot_manager.add_loot_from_key("gold", gold_amount)
+		if !(loot_summary.has("gold")):
+			loot_summary["gold"] = 0
+		loot_summary["gold"] += gold_amount
 		print("final_gold_chance: ", gold_amount)
-	# --- EQUIPMENT (rare) ---
+	### --- EQUIPMENT (rare) ---
 	#if randf() <= monster.equipment_chance and monster.equipment_pool.size() > 0:
 		#var item_id := monster.equipment_pool.pick_random()
 		#var item := ItemDatabase.generate_item(item_id)
