@@ -50,6 +50,7 @@ func _ready() -> void:
 	connect_buttons()
 	populate_inventory()
 	recalc_player_stats()
+	update_gold_info_panel()
 
 func setup(main_ref:MainNode) -> void:
 	main = main_ref
@@ -290,3 +291,35 @@ func on_level_up():
 
 func xp_required_for_level(level: int) -> float:
 	return xp_curve.sample(level)
+
+func update_gold_info_panel() -> void:
+	var total_gold = main.game_data.current_gold
+	var total_essence = main.game_data.current_essences
+	$BottomInfoPanel/Panel/RichTextLabel.text = build_loot_summary_bbcode(total_gold, total_essence)
+
+func build_loot_summary_bbcode(total_gold: int, total_essences: Dictionary) -> String:
+	var gold_icon := "res://Sprites/GOLD_ICON.png"
+	var essence_icon := "res://Sprites/ESSENCE_ICON.png"
+
+	var bb := ""
+
+	# GOLD
+	bb += "[img=40]" + gold_icon + "[/img] "
+	bb += str(Utils.numberize(total_gold))
+
+	bb += "  |  "
+
+	# ESSENCES
+	bb += "[img=40]" + essence_icon + "[/img] "
+
+	# Build essence list like: Fire: 3  Ice: 1  Poison: 2
+	var essence_parts := []
+	for essence_type in total_essences.keys():
+		var amount = total_essences[essence_type]
+		if amount > 0:
+			essence_parts.append(essence_type.capitalize() + ": " + str(Utils.numberize(amount)))
+
+	bb += "  ".join(essence_parts)
+	print("bb: ", bb)
+
+	return bb

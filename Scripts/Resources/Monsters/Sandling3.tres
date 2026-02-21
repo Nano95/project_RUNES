@@ -4,15 +4,15 @@
 
 [resource]
 script = ExtResource("1_j3jey")
-name = "Flesh Eater"
-max_hp = 47
-power = 19
-exp_reward = 20
+name = "Death Horn"
+max_hp = 58
+power = 25
+exp_reward = 30
 min_gold_reward = 5
-max_gold_reward = 14
+max_gold_reward = 20
 essence_type = "physical"
 min_essence_amount = 4
-max_essence_amount = 6
+max_essence_amount = 5
 attack_speed = 4
 anim_offset_y = -12
 anim_name = "sandling3"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://cqnrrhjhkao2t"]
+
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_j8dds"]
+
+[resource]
+script = ExtResource("1_j8dds")
+name = "Slime Youngling"
+max_hp = 23
+power = 2
+exp_reward = 7
+min_gold_reward = 1
+max_gold_reward = 5
+essence_type = "physical"
+min_essence_amount = 1
+max_essence_amount = 2
+attack_speed = 4
+anim_offset_y = -9
+anim_name = "slime2"
+metadata/_custom_type_script = "uid://dljne2akmlj0u"

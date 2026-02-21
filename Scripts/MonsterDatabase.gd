@@ -1,10 +1,17 @@
 extends Node
 
 var monsters = {
+	"slimes": slimes,
 	"orcs": orcs,
 	"sandlings": sandlings,
 	"dwarves": dwarves
 }
+var slimes := [
+	preload("res://Scripts/Resources/Monsters/Slime1.tres"),
+	preload("res://Scripts/Resources/Monsters/Slime2.tres"),
+	preload("res://Scripts/Resources/Monsters/Slime3.tres"),
+	preload("res://Scripts/Resources/Monsters/Slime4.tres")	
+]
 var orcs := [
 	preload("res://Scripts/Resources/Monsters/Orc1.tres"),
 	preload("res://Scripts/Resources/Monsters/Orc2.tres"),

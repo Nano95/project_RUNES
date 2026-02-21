@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://xxup1p8e76di"]
+[gd_scene load_steps=109 format=3 uid="uid://xxup1p8e76di"]
 
 [ext_resource type="Script" uid="uid://cpm362jinw3ou" path="res://Scripts/Resources/MonsterInstance.gd" id="1_ld5e8"]
 [ext_resource type="Texture2D" uid="uid://g6ycv2s2cnuv" path="res://Sprites/monsters/orc1.png" id="2_1o6kg"]
@@ -20,6 +20,10 @@
 [ext_resource type="Texture2D" uid="uid://psl2oktmuf35" path="res://Sprites/monsters/Sandling_2.png" id="14_e8v2i"]
 [ext_resource type="Texture2D" uid="uid://bvbpsxuhho2ak" path="res://Sprites/monsters/Sandling_3.png" id="15_erbvs"]
 [ext_resource type="Texture2D" uid="uid://b7n5h7lvb4axf" path="res://Sprites/monsters/Sandling_4.png" id="16_jn61m"]
+[ext_resource type="Texture2D" uid="uid://dyh5eogo5tel2" path="res://Sprites/monsters/Slime1.png" id="17_xgj37"]
+[ext_resource type="Texture2D" uid="uid://lq5d3grtipb5" path="res://Sprites/monsters/Slime2.png" id="18_20cav"]
+[ext_resource type="Texture2D" uid="uid://dkjy1j20688xn" path="res://Sprites/monsters/Slime3.png" id="19_ox7g6"]
+[ext_resource type="Texture2D" uid="uid://dtrrjxgfysnjj" path="res://Sprites/monsters/Slime4.png" id="20_e8v2i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q5h8j"]
 resource_local_to_scene = true
@@ -258,6 +262,94 @@ region = Rect2(54, 0, 27, 27)
 atlas = ExtResource("16_jn61m")
 region = Rect2(81, 0, 27, 27)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jax02"]
+atlas = ExtResource("17_xgj37")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wscqf"]
+atlas = ExtResource("17_xgj37")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxmc3"]
+atlas = ExtResource("17_xgj37")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrtvc"]
+atlas = ExtResource("17_xgj37")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jp3tn"]
+atlas = ExtResource("18_20cav")
+region = Rect2(0, 0, 23, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0w73"]
+atlas = ExtResource("18_20cav")
+region = Rect2(23, 0, 23, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxmxb"]
+atlas = ExtResource("18_20cav")
+region = Rect2(46, 0, 23, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxp4o"]
+atlas = ExtResource("18_20cav")
+region = Rect2(69, 0, 23, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7cut"]
+atlas = ExtResource("18_20cav")
+region = Rect2(92, 0, 23, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qr24j"]
+atlas = ExtResource("18_20cav")
+region = Rect2(115, 0, 23, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3w0a"]
+atlas = ExtResource("19_ox7g6")
+region = Rect2(0, 0, 28, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfqhq"]
+atlas = ExtResource("19_ox7g6")
+region = Rect2(28, 0, 28, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxi8r"]
+atlas = ExtResource("19_ox7g6")
+region = Rect2(56, 0, 28, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tslrh"]
+atlas = ExtResource("19_ox7g6")
+region = Rect2(84, 0, 28, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oalfn"]
+atlas = ExtResource("19_ox7g6")
+region = Rect2(112, 0, 28, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0oc4d"]
+atlas = ExtResource("19_ox7g6")
+region = Rect2(140, 0, 28, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipkwh"]
+atlas = ExtResource("20_e8v2i")
+region = Rect2(0, 0, 28, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m03u8"]
+atlas = ExtResource("20_e8v2i")
+region = Rect2(28, 0, 28, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ee4a"]
+atlas = ExtResource("20_e8v2i")
+region = Rect2(56, 0, 28, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggc4r"]
+atlas = ExtResource("20_e8v2i")
+region = Rect2(84, 0, 28, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2m8tn"]
+atlas = ExtResource("20_e8v2i")
+region = Rect2(112, 0, 28, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5spfp"]
+atlas = ExtResource("20_e8v2i")
+region = Rect2(140, 0, 28, 20)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_krk12"]
 animations = [{
 "frames": [{
@@ -493,6 +585,92 @@ animations = [{
 "loop": true,
 "name": &"sandling4",
 "speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jax02")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wscqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxmc3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lrtvc")
+}],
+"loop": true,
+"name": &"slime1",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jp3tn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0w73")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pxmxb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxp4o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7cut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qr24j")
+}],
+"loop": true,
+"name": &"slime2",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3w0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfqhq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxi8r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tslrh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oalfn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0oc4d")
+}],
+"loop": true,
+"name": &"slime3",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipkwh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m03u8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ee4a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ggc4r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2m8tn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5spfp")
+}],
+"loop": true,
+"name": &"slime4",
+"speed": 10.0
 }]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5ha12"]
@@ -517,9 +695,8 @@ unique_name_in_owner = true
 material = SubResource("ShaderMaterial_q5h8j")
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_krk12")
-animation = &"sandling4"
-frame_progress = 0.07126307
-offset = Vector2(0, -13)
+animation = &"dwarf4"
+offset = Vector2(0, -12)
 
 [node name="Hp" parent="." instance=ExtResource("8_rovrv")]
 material = SubResource("ShaderMaterial_5ha12")

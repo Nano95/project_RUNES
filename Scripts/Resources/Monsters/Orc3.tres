@@ -4,16 +4,16 @@
 
 [resource]
 script = ExtResource("1_gm006")
-name = "Orc Soldier"
-max_hp = 30
-power = 4
-exp_reward = 10
-min_gold_reward = 3
-max_gold_reward = 6
+name = "Orc Warrior"
+max_hp = 47
+power = 19
+exp_reward = 20
+min_gold_reward = 5
+max_gold_reward = 14
 essence_type = "physical"
-min_essence_amount = 1
-max_essence_amount = 3
+min_essence_amount = 4
+max_essence_amount = 6
 attack_speed = 4
-anim_offset_y = -14
+anim_offset_y = -13
 anim_name = "orc3"
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://din5hfmmwq4bo"]
+
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_ctjo7"]
+
+[resource]
+script = ExtResource("1_ctjo7")
+name = "Agony Slime"
+max_hp = 30
+power = 4
+exp_reward = 10
+min_gold_reward = 3
+max_gold_reward = 6
+essence_type = "physical"
+min_essence_amount = 1
+max_essence_amount = 3
+attack_speed = 4
+anim_offset_y = -10
+anim_name = "slime3"
+metadata/_custom_type_script = "uid://dljne2akmlj0u"

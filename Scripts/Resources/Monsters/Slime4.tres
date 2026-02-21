@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://clqw62ytmprfg"]
+
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_1jr2k"]
+
+[resource]
+script = ExtResource("1_1jr2k")
+name = "Elite Slime"
+max_hp = 40
+power = 6
+exp_reward = 15
+min_gold_reward = 4
+max_gold_reward = 12
+essence_type = "earth"
+min_essence_amount = 2
+max_essence_amount = 3
+attack_speed = 4
+anim_offset_y = -10
+anim_name = "slime4"
+metadata/_custom_type_script = "uid://dljne2akmlj0u"

@@ -11,17 +11,17 @@ offset_bottom = 40.0
 script = ExtResource("1_xd1w4")
 
 [node name="Button" type="Button" parent="."]
-custom_minimum_size = Vector2(600, 182)
+custom_minimum_size = Vector2(670, 182)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 560.0
+offset_right = 630.0
 offset_bottom = 142.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.4, 0.4)
 theme_override_constants/outline_size = 25
 theme_override_fonts/font = ExtResource("1_a8uc2")
-theme_override_font_sizes/font_size = 100
-text = "Orc Brute"
+theme_override_font_sizes/font_size = 80
+text = "Slime Youngling"

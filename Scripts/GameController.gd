@@ -321,7 +321,6 @@ func roll_loot(monster: MonsterBase) -> void:
 	if !(loot_summary.has(essence_key)):
 		loot_summary[essence_key] = 0
 	loot_summary[essence_key] += essence_amount
-	print("Essences: ", essence_amount)
 	### --- GOLD (chance-based) ---
 	var final_gold_chance = monster.gold_chance + (current_luck * 0.01)
 	if (randf() <= (final_gold_chance)):
@@ -333,7 +332,7 @@ func roll_loot(monster: MonsterBase) -> void:
 		if !(loot_summary.has("gold")):
 			loot_summary["gold"] = 0
 		loot_summary["gold"] += gold_amount
-		print("final_gold_chance: ", gold_amount)
+		
 	### --- EQUIPMENT (rare) ---
 	#if randf() <= monster.equipment_chance and monster.equipment_pool.size() > 0:
 		#var item_id := monster.equipment_pool.pick_random()

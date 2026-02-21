@@ -1,10 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://2dvdykbjounr"]
+[gd_scene load_steps=16 format=3 uid="uid://2dvdykbjounr"]
 
 [ext_resource type="Script" uid="uid://crgoc5n1t752c" path="res://Scripts/FightMenu.gd" id="1_ipivn"]
 [ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="2_p854w"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_x5u2f"]
 [ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="4_ov7x6"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="5_utror"]
+[ext_resource type="Script" uid="uid://der06tyl3xyu3" path="res://Scripts/MonsterInfoPanel.gd" id="6_ou8aj"]
+[ext_resource type="Texture2D" uid="uid://ddh2mb0rv2wj8" path="res://Sprites/health_icon.png" id="6_utror"]
+[ext_resource type="Texture2D" uid="uid://dnnqjb0eguu63" path="res://Sprites/SWORD_LARGE_ICON.png" id="7_ou8aj"]
+[ext_resource type="Texture2D" uid="uid://trfwff23tnyo" path="res://Sprites/EXP_ICON.png" id="8_0c1bx"]
+[ext_resource type="Texture2D" uid="uid://by8eyn77jli18" path="res://Sprites/GOLD_ICON.png" id="8_ryii3"]
+[ext_resource type="Texture2D" uid="uid://bsyplht1cw35v" path="res://Sprites/ESSENCE_ICON.png" id="9_0c1bx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_55pba"]
 shader = ExtResource("2_p854w")
@@ -124,9 +130,9 @@ theme_override_constants/v_separation = 80
 material = SubResource("ShaderMaterial_p854w")
 layout_mode = 0
 offset_left = 1.9999847
-offset_top = 612.0
+offset_top = 596.00006
 offset_right = 1252.0
-offset_bottom = 749.0
+offset_bottom = 733.00006
 scale = Vector2(0.54, 0.54)
 text = "Choose Runes"
 horizontal_alignment = 1
@@ -156,9 +162,9 @@ columns = 3
 [node name="ToggleMonsterInfo" type="Button" parent="ColorRect/Panel"]
 layout_mode = 0
 offset_left = 564.00006
-offset_top = 632.0
+offset_top = 617.00006
 offset_right = 635.4286
-offset_bottom = 699.1428
+offset_bottom = 684.1429
 scale = Vector2(0.7, 0.7)
 theme_override_constants/outline_size = 30
 theme_override_fonts/font = ExtResource("5_utror")
@@ -166,9 +172,9 @@ theme_override_font_sizes/font_size = 100
 
 [node name="Fight" type="Button" parent="ColorRect/Panel"]
 layout_mode = 0
-offset_left = 34.000015
+offset_left = 13.000006
 offset_top = 980.99994
-offset_right = 681.14276
+offset_right = 660.14276
 offset_bottom = 1119.0
 scale = Vector2(0.7, 0.7)
 theme_override_constants/outline_size = 30
@@ -178,12 +184,165 @@ text = "Let's go!"
 
 [node name="Close" type="Button" parent="ColorRect/Panel"]
 layout_mode = 0
-offset_left = 506.0
+offset_left = 524.0
 offset_top = 980.99994
-offset_right = 706.0
+offset_right = 724.0
 offset_bottom = 1119.0
 scale = Vector2(0.7, 0.7)
 theme_override_constants/outline_size = 30
 theme_override_fonts/font = ExtResource("5_utror")
 theme_override_font_sizes/font_size = 100
 text = "x"
+
+[node name="MonsterInfo" type="Panel" parent="ColorRect/Panel" node_paths=PackedStringArray("hp_lbl", "xp_lbl", "atk_lbl", "gold_lbl", "essence_lbl", "name_lbl", "desc_lbl", "loot_lbl")]
+visible = false
+layout_mode = 0
+offset_left = 14.0
+offset_top = 679.0
+offset_right = 664.0
+offset_bottom = 971.0
+script = ExtResource("6_ou8aj")
+hp_lbl = NodePath("Panel/HP/lbl")
+xp_lbl = NodePath("Panel/XP/lbl")
+atk_lbl = NodePath("Panel/ATK/lbl")
+gold_lbl = NodePath("Panel/GOLD/lbl")
+essence_lbl = NodePath("Panel/ESSENCE/lbl")
+name_lbl = NodePath("Name")
+desc_lbl = NodePath("Lore")
+loot_lbl = NodePath("Loot")
+
+[node name="Panel" type="Panel" parent="ColorRect/Panel/MonsterInfo"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 9.0
+offset_right = 180.0
+offset_bottom = 285.0
+
+[node name="HP" type="TextureRect" parent="ColorRect/Panel/MonsterInfo/Panel"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 10.0
+offset_right = 51.0
+offset_bottom = 58.0
+texture = ExtResource("6_utror")
+
+[node name="lbl" parent="ColorRect/Panel/MonsterInfo/Panel/HP" instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_8k8yn")
+layout_mode = 0
+offset_left = 52.0
+offset_top = 2.999999
+offset_right = 605.7037
+offset_bottom = 140.0
+scale = Vector2(0.27, 0.27)
+text = "999"
+vertical_alignment = 1
+
+[node name="XP" type="TextureRect" parent="ColorRect/Panel/MonsterInfo/Panel"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 62.0
+offset_right = 51.0
+offset_bottom = 110.0
+texture = ExtResource("8_0c1bx")
+
+[node name="lbl" parent="ColorRect/Panel/MonsterInfo/Panel/XP" instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_8k8yn")
+layout_mode = 0
+offset_left = 52.0
+offset_top = 2.999999
+offset_right = 605.7037
+offset_bottom = 140.0
+scale = Vector2(0.27, 0.27)
+text = "999"
+vertical_alignment = 1
+
+[node name="ATK" type="TextureRect" parent="ColorRect/Panel/MonsterInfo/Panel"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 114.0
+offset_right = 51.0
+offset_bottom = 162.0
+texture = ExtResource("7_ou8aj")
+
+[node name="lbl" parent="ColorRect/Panel/MonsterInfo/Panel/ATK" instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_8k8yn")
+layout_mode = 0
+offset_left = 52.0
+offset_top = 2.999999
+offset_right = 605.7037
+offset_bottom = 140.0
+scale = Vector2(0.27, 0.27)
+text = "999"
+vertical_alignment = 1
+
+[node name="GOLD" type="TextureRect" parent="ColorRect/Panel/MonsterInfo/Panel"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 166.0
+offset_right = 51.0
+offset_bottom = 214.0
+texture = ExtResource("8_ryii3")
+
+[node name="lbl" parent="ColorRect/Panel/MonsterInfo/Panel/GOLD" instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_8k8yn")
+layout_mode = 0
+offset_left = 52.0
+offset_top = 2.999999
+offset_right = 605.7037
+offset_bottom = 140.0
+scale = Vector2(0.27, 0.27)
+text = "999-9.0k"
+vertical_alignment = 1
+
+[node name="ESSENCE" type="TextureRect" parent="ColorRect/Panel/MonsterInfo/Panel"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 218.0
+offset_right = 51.0
+offset_bottom = 266.0
+texture = ExtResource("9_0c1bx")
+
+[node name="lbl" parent="ColorRect/Panel/MonsterInfo/Panel/ESSENCE" instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_8k8yn")
+layout_mode = 0
+offset_left = 52.0
+offset_top = 2.999999
+offset_right = 605.7037
+offset_bottom = 140.0
+scale = Vector2(0.27, 0.27)
+text = "999-1.3k"
+vertical_alignment = 1
+
+[node name="Name" parent="ColorRect/Panel/MonsterInfo" instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_8k8yn")
+layout_mode = 0
+offset_left = 197.00002
+offset_top = 3.0
+offset_right = 1550.3333
+offset_bottom = 140.0
+theme_override_constants/line_spacing = 14
+text = "Orc Warrior"
+
+[node name="Lore" parent="ColorRect/Panel/MonsterInfo" instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_8k8yn")
+layout_mode = 0
+offset_left = 196.0
+offset_top = 41.0
+offset_right = 2008.0
+offset_bottom = 677.0
+scale = Vector2(0.25, 0.25)
+theme_override_constants/line_spacing = -19
+theme_override_constants/paragraph_spacing = -29
+text = "This is a lore description of the monster, there will be some details but maybe not too many. Enough to provoke feelings of some sort if anything dramatic pops up."
+
+[node name="Loot" parent="ColorRect/Panel/MonsterInfo" instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_8k8yn")
+layout_mode = 0
+offset_left = 196.0
+offset_top = 197.0
+offset_right = 1828.0
+offset_bottom = 449.0
+scale = Vector2(0.25, 0.25)
+theme_override_constants/line_spacing = 14
+text = "Notable Loot:
+None"

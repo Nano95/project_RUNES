@@ -4,15 +4,15 @@
 
 [resource]
 script = ExtResource("1_givtv")
-name = "Death Horn"
-max_hp = 52
-power = 23
-exp_reward = 20
-min_gold_reward = 6
-max_gold_reward = 15
-essence_type = "lightning"
-min_essence_amount = 3
-max_essence_amount = 5
+name = "Flesh Eater"
+max_hp = 70
+power = 22
+exp_reward = 35
+min_gold_reward = 10
+max_gold_reward = 20
+essence_type = "Lightning"
+min_essence_amount = 7
+max_essence_amount = 9
 attack_speed = 4
 anim_offset_y = -13
 anim_name = "sandling4"

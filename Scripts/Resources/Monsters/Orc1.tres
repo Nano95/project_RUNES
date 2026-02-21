@@ -5,14 +5,14 @@
 [resource]
 script = ExtResource("1_gw14g")
 name = "Orc Brute"
-max_hp = 15
-power = 1
-exp_reward = 4
-min_gold_reward = 1
-max_gold_reward = 3
+max_hp = 35
+power = 12
+exp_reward = 13
+min_gold_reward = 2
+max_gold_reward = 9
 essence_type = "physical"
-min_essence_amount = 1
-max_essence_amount = 2
+min_essence_amount = 3
+max_essence_amount = 5
 attack_speed = 4
 anim_offset_y = -11
 anim_name = "orc1"

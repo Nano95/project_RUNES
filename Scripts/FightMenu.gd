@@ -8,7 +8,8 @@ class_name FightMenu
 @export var exit_button:Button
 @onready var rune_button:PackedScene = preload("res://Scenes/FightMenuRuneButton.tscn")
 @onready var my_button:PackedScene = preload("res://Scenes/MyButton.tscn")
-var areas:Array = ["orcs", "sandlings", "dwarves"]
+@onready var monster_info:Control = $ColorRect/Panel/MonsterInfo
+var areas:Array = ["slimes", "orcs", "sandlings", "dwarves"]
 
 var selected_family: String = ""
 var selected_monster_index: int = -1
@@ -24,6 +25,7 @@ func _ready() -> void:
 	setup_rune_grid()
 	start_button.pressed.connect(main.spawn_game)
 	exit_button.pressed.connect(close)
+	$ColorRect/Panel/ToggleMonsterInfo.pressed.connect(toggle_monster_info)
 
 func setup(main_node:MainNode) -> void:
 	main = main_node
@@ -64,11 +66,16 @@ func _on_family_selected(family: String) -> void:
 	var monsters = MonsterDatabase[family]
 	for i in monsters.size():
 		var btn := my_button.instantiate()
-		btn.setup(monsters[i].name.capitalize(),_on_monster_selected.bind(i + 1), Vector2(.4, .4))
+		btn.setup(monsters[i].name.capitalize(),_on_monster_selected.bind(i + 1, monsters[i]), Vector2(.4, .4))
 		location_grid_container.add_child(btn)
 
-func _on_monster_selected(index: int) -> void: 
+func _on_monster_selected(index: int, monster:MonsterBase) -> void: 
 	main.battle_data["index"] = index
+	monster_info.update_panel(monster)
 
 func close() -> void:
 	Utils.animate_summary_out_and_free(self)
+
+func toggle_monster_info() -> void:
+	$ColorRect/Panel/ChooseRunes.visible = !$ColorRect/Panel/ChooseRunes.visible
+	monster_info.visible = !monster_info.visible

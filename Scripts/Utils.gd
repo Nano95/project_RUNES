@@ -31,6 +31,28 @@ func get_main() -> MainNode:
 func get_stat_for_ui(stat_name: String) -> int:
 	return main_node.game_data.base_stats[stat_name] + main_node.game_data.allocated_stats[stat_name]
 
+############
+# NUMERIZE #
+############
+func numberize(number: float):
+	if number == null:
+		return ""
+
+	if number >= 1_000_000_000_000_000.0:
+		return "%.2fQ" % (number / 1_000_000_000_000_000.0)
+	elif number >= 1_000_000_000_000.0:
+		return "%.2fT" % (number / 1_000_000_000_000.0)
+	elif number >= 1_000_000_000.0:
+		return "%.2fB" % (number / 1_000_000_000.0)
+	elif number >= 1_000_000.0:
+		return "%.2fM" % (number / 1_000_000.0)
+	elif number >= 1_000.0:
+		return "%.2fK" % (number / 1_000.0)
+	else:
+	# Below 1000 → no decimals
+		return str(int(number))
+
+
 func roll_rarity() -> String:
 	var roll := randf()
 

@@ -5,15 +5,15 @@
 [resource]
 script = ExtResource("1_5lx6q")
 name = "Builder Dwarf"
-max_hp = 50
-power = 18
-exp_reward = 19
+max_hp = 55
+power = 21
+exp_reward = 23
 min_gold_reward = 8
 max_gold_reward = 17
 essence_type = "physical"
 min_essence_amount = 6
 max_essence_amount = 7
 attack_speed = 4
-anim_offset_y = -13
+anim_offset_y = -10
 anim_name = "dwarf2"
 metadata/_custom_type_script = "uid://dljne2akmlj0u"
