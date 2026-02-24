@@ -6,8 +6,6 @@
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 script = ExtResource("1_xd1w4")
 
 [node name="Button" type="Button" parent="."]
@@ -16,8 +14,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 630.0
-offset_bottom = 142.0
+offset_right = 670.0
+offset_bottom = 182.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.4, 0.4)
@@ -25,3 +23,16 @@ theme_override_constants/outline_size = 25
 theme_override_fonts/font = ExtResource("1_a8uc2")
 theme_override_font_sizes/font_size = 80
 text = "Slime Youngling"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 0
+offset_top = 53.999996
+offset_right = 669.99994
+offset_bottom = 133.99998
+scale = Vector2(0.4, 0.4)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("1_a8uc2")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center][img=65]res://Sprites/GOLD_ICON.png[/img]100[/center]"

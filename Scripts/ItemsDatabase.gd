@@ -11,9 +11,24 @@ var loot_data = {
 		"short_name": "phys ess",
 		"icon": preload("res://Sprites/ESSENCE_ICON.png")
 	},
-	"fire essence": {
-		"name": "Fire Essence",
-		"short_name": "fire ess",
+	"scorching essence": {
+		"name": "Scorching Essence",
+		"short_name": "Scorching ess",
+		"icon": preload("res://Sprites/ESSENCE_ICON.png")
+	},
+	"earth essence": {
+		"name": "Earth Essence",
+		"short_name": "Earth ess",
+		"icon": preload("res://Sprites/ESSENCE_ICON.png")
+	},
+	"electric essence": {
+		"name": "Electric Essence",
+		"short_name": "Electric ess",
+		"icon": preload("res://Sprites/ESSENCE_ICON.png")
+	},
+	"frozen essence": {
+		"name": "Frozen Essence",
+		"short_name": "Frozen ess",
 		"icon": preload("res://Sprites/ESSENCE_ICON.png")
 	}
 }

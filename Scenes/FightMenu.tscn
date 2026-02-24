@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://2dvdykbjounr"]
+[gd_scene load_steps=25 format=3 uid="uid://2dvdykbjounr"]
 
 [ext_resource type="Script" uid="uid://crgoc5n1t752c" path="res://Scripts/FightMenu.gd" id="1_ipivn"]
+[ext_resource type="PackedScene" uid="uid://b37x20v0etu6t" path="res://Scenes/MyButton.tscn" id="2_0c1bx"]
 [ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="2_p854w"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_x5u2f"]
 [ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="4_ov7x6"]
@@ -34,6 +35,54 @@ shader = ExtResource("4_ov7x6")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f0u7t"]
+resource_local_to_scene = true
+shader = ExtResource("4_ov7x6")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v0ir0"]
+resource_local_to_scene = true
+shader = ExtResource("4_ov7x6")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6sloi"]
+resource_local_to_scene = true
+shader = ExtResource("4_ov7x6")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ke3j0"]
+resource_local_to_scene = true
+shader = ExtResource("4_ov7x6")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n6iuk"]
+resource_local_to_scene = true
+shader = ExtResource("4_ov7x6")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k44dd"]
+resource_local_to_scene = true
+shader = ExtResource("4_ov7x6")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c37k1"]
+resource_local_to_scene = true
+shader = ExtResource("4_ov7x6")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bfk1v"]
+resource_local_to_scene = true
+shader = ExtResource("4_ov7x6")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
 [node name="FightPanel" type="Control" node_paths=PackedStringArray("monster_grid_container", "location_grid_container", "rune_grid_container", "start_button", "exit_button")]
 layout_mode = 3
 anchors_preset = 15
@@ -48,6 +97,7 @@ location_grid_container = NodePath("ColorRect/Panel/Location/MarginContainer/Gri
 rune_grid_container = NodePath("ColorRect/Panel/ChooseRunes/ScrollContainer2/MarginContainer/GridContainer")
 start_button = NodePath("ColorRect/Panel/Fight")
 exit_button = NodePath("ColorRect/Panel/Close")
+my_button = ExtResource("2_0c1bx")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_55pba")
@@ -227,7 +277,7 @@ offset_bottom = 58.0
 texture = ExtResource("6_utror")
 
 [node name="lbl" parent="ColorRect/Panel/MonsterInfo/Panel/HP" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_8k8yn")
+material = SubResource("ShaderMaterial_f0u7t")
 layout_mode = 0
 offset_left = 52.0
 offset_top = 2.999999
@@ -246,7 +296,7 @@ offset_bottom = 110.0
 texture = ExtResource("8_0c1bx")
 
 [node name="lbl" parent="ColorRect/Panel/MonsterInfo/Panel/XP" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_8k8yn")
+material = SubResource("ShaderMaterial_v0ir0")
 layout_mode = 0
 offset_left = 52.0
 offset_top = 2.999999
@@ -265,7 +315,7 @@ offset_bottom = 162.0
 texture = ExtResource("7_ou8aj")
 
 [node name="lbl" parent="ColorRect/Panel/MonsterInfo/Panel/ATK" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_8k8yn")
+material = SubResource("ShaderMaterial_6sloi")
 layout_mode = 0
 offset_left = 52.0
 offset_top = 2.999999
@@ -284,7 +334,7 @@ offset_bottom = 214.0
 texture = ExtResource("8_ryii3")
 
 [node name="lbl" parent="ColorRect/Panel/MonsterInfo/Panel/GOLD" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_8k8yn")
+material = SubResource("ShaderMaterial_ke3j0")
 layout_mode = 0
 offset_left = 52.0
 offset_top = 2.999999
@@ -303,7 +353,7 @@ offset_bottom = 266.0
 texture = ExtResource("9_0c1bx")
 
 [node name="lbl" parent="ColorRect/Panel/MonsterInfo/Panel/ESSENCE" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_8k8yn")
+material = SubResource("ShaderMaterial_n6iuk")
 layout_mode = 0
 offset_left = 52.0
 offset_top = 2.999999
@@ -314,7 +364,7 @@ text = "999-1.3k"
 vertical_alignment = 1
 
 [node name="Name" parent="ColorRect/Panel/MonsterInfo" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_8k8yn")
+material = SubResource("ShaderMaterial_k44dd")
 layout_mode = 0
 offset_left = 197.00002
 offset_top = 3.0
@@ -324,7 +374,7 @@ theme_override_constants/line_spacing = 14
 text = "Orc Warrior"
 
 [node name="Lore" parent="ColorRect/Panel/MonsterInfo" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_8k8yn")
+material = SubResource("ShaderMaterial_c37k1")
 layout_mode = 0
 offset_left = 196.0
 offset_top = 41.0
@@ -336,7 +386,7 @@ theme_override_constants/paragraph_spacing = -29
 text = "This is a lore description of the monster, there will be some details but maybe not too many. Enough to provoke feelings of some sort if anything dramatic pops up."
 
 [node name="Loot" parent="ColorRect/Panel/MonsterInfo" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_8k8yn")
+material = SubResource("ShaderMaterial_bfk1v")
 layout_mode = 0
 offset_left = 196.0
 offset_top = 197.0

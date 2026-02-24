@@ -13,22 +13,22 @@ class_name SaveData
 @export var total_essences:Dictionary = {
 	"physical": 0,
 	"fire": 0,
-	"ice": 0,
+	"frozen": 0,
 	"earth": 0,
-	"lightning": 0
+	"electric": 0
 }
 @export var current_essences:Dictionary = {
 	"physical": 0,
 	"fire": 0,
-	"ice": 0,
+	"frozen": 0,
 	"earth": 0,
-	"lightning": 0
+	"electric": 0
 }
 @export var equipped = {
 	"slot1": null,
 	"slot2": null
 }
-@export var monsters_unlocked = {
+@export var unlocked_monster_families = {
 	"slimes": false,
 	"orcs": false,
 	"sandlings": false,

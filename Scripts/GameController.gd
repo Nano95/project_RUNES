@@ -59,6 +59,8 @@ func start_game(restart:bool=false) -> void:
 		group_turns_left = max(2, GENERAL_STARTING_TURNS_LEFT) # it will be base - some ascension number
 		current_hp = max_hp
 		current_focus = max_focus
+		heal(1000)
+		
 	spawn_stage(main.battle_data["index"], 10)
 	var next_attack = calculate_next_incoming_attack()
 	game_ui.update_monster_data(next_attack.turns, next_attack.damage)

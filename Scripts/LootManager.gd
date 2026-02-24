@@ -22,12 +22,15 @@ func add_loot(loot_name: String, icon:Texture, quantity: int) -> void:
 			active_entries.erase(loot_name))
 
 func get_loot_info(key: String) -> Dictionary:
-	if loot_data.has(key):
-		return loot_data[key]
+	if ItemsDatabase.loot_data.has(key):
+		return ItemsDatabase.loot_data[key]
 	else:
 		push_warning("Loot key not found: %s" % key)
-		return {}
-
+		return {
+			"name": "ERR",
+			"short_name": "err",
+			"icon": load("res://Sprites/tiny_heart.png")
+		}
 
 func add_loot_from_key(key: String, quantity: int) -> void:
 	var info := get_loot_info(key)
@@ -38,22 +41,3 @@ func add_loot_from_key(key: String, quantity: int) -> void:
 	var icon:Texture = info["icon"]
 
 	add_loot(loot_name, icon, quantity)
-
-
-var loot_data = {
-	"gold": {
-		"name": "Gold",
-		"short_name": "gold",
-		"icon": load("res://Sprites/GOLD_ICON.png")
-	},
-	"physical essence": {
-		"name": "Physical Essence",
-		"short_name": "phys ess",
-		"icon": load("res://Sprites/ESSENCE_ICON.png")
-	},
-	"fire essence": {
-		"name": "Fire Essence",
-		"short_name": "fire ess",
-		"icon": load("res://Sprites/ESSENCE_ICON.png")
-	}
-}

@@ -50,7 +50,7 @@ func _ready() -> void:
 	connect_buttons()
 	populate_inventory()
 	recalc_player_stats()
-	update_gold_info_panel()
+	update_info_panel()
 
 func setup(main_ref:MainNode) -> void:
 	main = main_ref
@@ -292,7 +292,7 @@ func on_level_up():
 func xp_required_for_level(level: int) -> float:
 	return xp_curve.sample(level)
 
-func update_gold_info_panel() -> void:
+func update_info_panel() -> void:
 	var total_gold = main.game_data.current_gold
 	var total_essence = main.game_data.current_essences
 	$BottomInfoPanel/Panel/RichTextLabel.text = build_loot_summary_bbcode(total_gold, total_essence)
@@ -320,6 +320,5 @@ func build_loot_summary_bbcode(total_gold: int, total_essences: Dictionary) -> S
 			essence_parts.append(essence_type.capitalize() + ": " + str(Utils.numberize(amount)))
 
 	bb += "  ".join(essence_parts)
-	print("bb: ", bb)
 
 	return bb

@@ -60,21 +60,6 @@ func setup_hp(player_hp:float, player_max_hp:float) -> void:
 	hp_bar.tint_progress = get_health_color(player_hp / player_max_hp)
 	update_hp_bar(player_hp, player_max_hp, 0)
 
-#func update_hp_bar(hp:float, max_hp:float, amt:int=0) -> void:
-	#@warning_ignore("integer_division")
-	#var ratio = float(hp) / float(max_hp)
-	#var from_percent: float = ratio * BAR_CONST
-	#@warning_ignore("integer_division")
-	#var to_percent: float = ((float(hp) + float(amt)) / float(max_hp)) * BAR_CONST
-	#
-	#var color: Color = get_health_color(ratio)
-	#if (amt > 0):
-		#hp_bar.tint_progress = Color.WHITE
-		#tween_hp_bar(from_percent, to_percent, color)
-	#
-	#hp = clamp(hp + amt, 0, max_hp)
-	#hp_label.text = str(hp)
-
 func update_hp_bar(current_hp: float, max_hp: float, delta: float) -> void:
 	# delta > 0 = heal, delta < 0 = damage
 

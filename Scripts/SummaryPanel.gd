@@ -30,9 +30,7 @@ func setup_labels() -> void:
 
 func setup_loot() -> void:
 	var all_loot = game_controller.loot_summary
-	print("all LOot: ", all_loot)
 	for loot in all_loot.keys():
-		print("printing loot: ", loot)
 		var data = ItemsDatabase.loot_data[loot]
 		var lbl = loot_labels.instantiate()
 		lbl.scale *= 2

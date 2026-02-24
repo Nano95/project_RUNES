@@ -24,7 +24,7 @@ var game_current_level:int = 0
 var bonus_stats:Dictionary
 
 var battle_data:Dictionary = {
-	"family": "",
+	"family": "slimes",
 	"index": 1,
 	"selected_runes": [] # Eventually be coming from save file.
 }
@@ -77,6 +77,10 @@ func spawn_to_bottom_layer(node) -> void:
 func delete_all_top_ui_children() -> void:
 	for child in $FRONT.get_children():
 		child.queue_free()
+
+func purchase_successful_update_ui() -> void:
+	if !(active_menu_ref is MainMenu): return
+	active_menu_ref.update_info_panel()
 
 func set_background_colors(col1:Vector3, col2:Vector3) -> void:
 	shader_bg.material.set("shader_parameter/color_one", col1)

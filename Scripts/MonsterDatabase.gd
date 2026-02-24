@@ -36,3 +36,10 @@ func get_monster(family:String, index) -> MonsterBase:
 
 func get_monsters_for_family(family:String) -> Array:
 	return monsters[family]
+
+var monster_stage_cost = {
+	"slimes": 0,
+	"orcs": 300,
+	"sandlings": 1800,
+	"dwarves": 10000
+}
