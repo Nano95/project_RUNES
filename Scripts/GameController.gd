@@ -123,6 +123,7 @@ func spawn_stage(stage: int, count: int):
 
 func spawn_status_message(died:bool=false, no_focus:bool=false) -> void:
 	var msg = Utils.STATUS_MESSAGE_VICTORY
+	game_is_active = false
 	if (died):
 		msg = "You Ded :("
 	elif (no_focus):
@@ -135,7 +136,6 @@ func spawn_status_message(died:bool=false, no_focus:bool=false) -> void:
 
 func spawn_summary_panel(message:String="mmm!") -> void:
 	game_ui.disable_back_button(false) # Just in case in any scenario
-	game_is_active = false
 	var panel = summary_panel_ref.instantiate()
 	panel.setup(self, main, message)
 	main.spawn_to_top_ui_layer(panel)
@@ -152,7 +152,6 @@ func monster_died(monster):
 	# Remove from grid
 	my_grid.clear_monster(monster)
 	#game_ui.update_monster_damage(calculate_group_power()) # I dont think we want to update this as game ends
-	print("")
 	roll_loot(monster.base)
 	
 	var game_over = check_if_all_monsters_dead(false)

@@ -30,7 +30,7 @@ func add_xp(amount: float) -> void:
 
 func animate_xp_gain(amount: float) -> void:
 	var xp_to_next = xp_required_for_level(main.game_data.current_level + 1) - main.game_data.current_exp
-
+	print("XP to next: ", xp_to_next)
 	var from_percent: float = xp_to_percent(main.game_data.current_exp, main.game_data.current_level)
 	var to_percent: float = xp_to_percent(main.game_data.current_exp + amount, main.game_data.current_level)
 	

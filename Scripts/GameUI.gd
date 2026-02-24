@@ -85,9 +85,6 @@ func update_hp_bar(current_hp: float, max_hp: float, delta: float) -> void:
 func restart() -> void:
 	game_controller.spawn_stage(game_controller.selected_monster_index, 5)
 
-func update_stair_level_label() -> void:
-	%Level.text = "Level: " + str(main.game_current_level)
-
 func update_timer_label(time_left:float=10.0) -> void:
 	$TopSection/Time.text = "Time: " + str(time_left)
 
