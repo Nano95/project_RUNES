@@ -13,14 +13,14 @@ class_name SaveData
 @export var total_essences:Dictionary = {
 	"physical": 0,
 	"fire": 0,
-	"frozen": 0,
+	"ice": 0,
 	"earth": 0,
 	"electric": 0
 }
 @export var current_essences:Dictionary = {
 	"physical": 0,
 	"fire": 0,
-	"frozen": 0,
+	"ice": 0,
 	"earth": 0,
 	"electric": 0
 }

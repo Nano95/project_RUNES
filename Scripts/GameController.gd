@@ -5,6 +5,7 @@ class_name GameController
 @export var monster_instance:Resource
 @export var summary_panel_ref: Resource
 @export var my_grid_ref:Resource
+@export var xp_label:Resource
 @export var rune_animation:Resource
 @export var escape_timer:Timer
 var base_width = ProjectSettings.get_setting("display/window/size/viewport_width")
@@ -73,17 +74,21 @@ func setup(main_ref:MainNode, g_ui:GameUI) -> void:
 	escape_timer.timeout.connect(escape_timer_timeout)
 
 func escape_pressed_behavior() -> void:
-	game_ui.disable_back_button(true)
 	advance_turn()
 	escape_timer_counter += 1
+	game_ui.disable_back_button(true)
 	escape_timer.start(.3)
 
 func escape_timer_timeout() -> void:
-	if (escape_timer_counter >= 3):
-		escape_timer.stop()
-		spawn_summary_panel("Escaped successfully!")
 	advance_turn()
 	escape_timer_counter += 1
+	print("escape_timer_counter: ", escape_timer_counter)
+	if (escape_timer_counter >= 3):
+		escape_timer.stop()
+		if (current_hp > 0):
+			spawn_status_message(false, false, true)
+			return
+	
 
 func setup_stats() -> void:
 	max_hp = Utils.get_stat_for_ui("health") + main.bonus_stats.health
@@ -121,24 +126,41 @@ func spawn_stage(stage: int, count: int):
 		var cell = my_grid.pick_empty_cell()
 		my_grid.spawn_monster_into_cell(cell.x, cell.y, base)
 
-func spawn_status_message(died:bool=false, no_focus:bool=false) -> void:
+func spawn_status_message(died:bool=false, no_focus:bool=false, escaped:bool=false) -> void:
+	if (!game_is_active): return
 	var msg = Utils.STATUS_MESSAGE_VICTORY
+	var xp_gain:int = current_focus
 	game_is_active = false
 	if (died):
 		msg = "You Ded :("
+		xp_gain = 0
 	elif (no_focus):
 		msg = "No more focus :("
+		xp_gain = 0
+	elif(escaped):
+		msg = "Escaped! :D"
+		@warning_ignore("integer_division")
+		xp_gain = int(current_focus/4)
 	
 	var lbl = status_message.instantiate() as GameStatusPopup
 	lbl.setup(msg)
 	lbl.animation_complete.connect(spawn_summary_panel.bind(msg))
 	main.spawn_to_top_ui_layer(lbl)
+	
+	if (xp_gain > 0):
+		print("xp gained from focus: ", xp_gain)
+		var xp_lbl = xp_label.instantiate()
+		my_grid.spawn_to_fx_container(xp_lbl)
+		xp_lbl.global_position = game_ui.mana_icon.global_position + Vector2(10, 100)
+		xp_lbl.show_label(xp_gain)
+		emit_signal("gained_exp", xp_gain)
 
 func spawn_summary_panel(message:String="mmm!") -> void:
 	game_ui.disable_back_button(false) # Just in case in any scenario
 	var panel = summary_panel_ref.instantiate()
 	panel.setup(self, main, message)
 	main.spawn_to_top_ui_layer(panel)
+	
 
 func register_monster(monster:MonsterInstance): 
 	monsters.append(monster)
@@ -349,6 +371,7 @@ func change_selected_rune(rune:RuneData) -> void:
 	selected_rune = rune
 
 func on_cell_tapped(row, col) -> void:
+	print("game is active: ", game_is_active)
 	if (!game_is_active): return
 	if (!focus_check(selected_rune)): return
 	

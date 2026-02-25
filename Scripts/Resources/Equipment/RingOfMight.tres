@@ -7,10 +7,8 @@
 script = ExtResource("1_2duav")
 name = "Ring Of Might"
 base_stats = {
-"health": 50,
-"luck": 0,
-"power": 150,
-"speed": 0
+"health": 5,
+"power": 5
 }
 allowed_mods = ["health", "power"]
 icon = ExtResource("1_dvm34")

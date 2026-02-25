@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bi1c8jgwhnhki"]
+[gd_scene load_steps=13 format=3 uid="uid://bi1c8jgwhnhki"]
 
 [ext_resource type="Script" uid="uid://dr4nxsos6lrwq" path="res://Scripts/SummaryPanel.gd" id="1_10axu"]
 [ext_resource type="PackedScene" uid="uid://bgmuooukrioal" path="res://Scenes/LootLabelContainer.tscn" id="2_10axu"]
 [ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="2_w37fs"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_sws4i"]
 [ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="4_0kgc7"]
+[ext_resource type="Texture2D" uid="uid://blol1i5pqn8oo" path="res://Sprites/RETRY_BUTTON.png" id="7_w37fs"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="8_sws4i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_55pba"]
@@ -24,6 +25,12 @@ shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sws4i"]
+resource_local_to_scene = true
+shader = ExtResource("4_0kgc7")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0kgc7"]
 resource_local_to_scene = true
 shader = ExtResource("4_0kgc7")
 shader_parameter/time = 4.750000002218258e-07
@@ -88,7 +95,7 @@ offset_bottom = 448.0
 text = "Runes used: "
 
 [node name="LootTitle" parent="ColorRect/Panel" instance=ExtResource("3_sws4i")]
-material = SubResource("ShaderMaterial_sws4i")
+material = SubResource("ShaderMaterial_0kgc7")
 layout_mode = 0
 offset_left = 86.0
 offset_top = 619.0
@@ -116,7 +123,7 @@ scale = Vector2(0.7, 0.7)
 theme_override_constants/outline_size = 30
 theme_override_fonts/font = ExtResource("8_sws4i")
 theme_override_font_sizes/font_size = 100
-text = "<-"
+text = "x"
 
 [node name="QuickRestart" type="Button" parent="ColorRect/Panel"]
 layout_mode = 0
@@ -128,4 +135,6 @@ scale = Vector2(0.7, 0.7)
 theme_override_constants/outline_size = 30
 theme_override_fonts/font = ExtResource("8_sws4i")
 theme_override_font_sizes/font_size = 100
-text = "->"
+icon = ExtResource("7_w37fs")
+icon_alignment = 1
+expand_icon = true

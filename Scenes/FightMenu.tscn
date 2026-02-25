@@ -222,9 +222,9 @@ theme_override_font_sizes/font_size = 100
 
 [node name="Fight" type="Button" parent="ColorRect/Panel"]
 layout_mode = 0
-offset_left = 13.000006
+offset_left = 207.99998
 offset_top = 980.99994
-offset_right = 660.14276
+offset_right = 855.14276
 offset_bottom = 1119.0
 scale = Vector2(0.7, 0.7)
 theme_override_constants/outline_size = 30
@@ -234,9 +234,9 @@ text = "Let's go!"
 
 [node name="Close" type="Button" parent="ColorRect/Panel"]
 layout_mode = 0
-offset_left = 524.0
+offset_left = 17.000092
 offset_top = 980.99994
-offset_right = 724.0
+offset_right = 217.00009
 offset_bottom = 1119.0
 scale = Vector2(0.7, 0.7)
 theme_override_constants/outline_size = 30

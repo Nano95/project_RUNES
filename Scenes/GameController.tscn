@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0atfxrsqnbfu"]
+[gd_scene load_steps=9 format=3 uid="uid://d0atfxrsqnbfu"]
 
 [ext_resource type="Script" uid="uid://duaqtbkpkw5q8" path="res://Scripts/GameController.gd" id="1_fyej0"]
 [ext_resource type="PackedScene" uid="uid://cko7e16hwbxg6" path="res://Scenes/GameStatusPopup.tscn" id="2_7fjnr"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bi1c8jgwhnhki" path="res://Scenes/SummaryPanel.tscn" id="3_06oto"]
 [ext_resource type="PackedScene" uid="uid://vqwmc6txdxui" path="res://Scenes/MyGrid.tscn" id="4_06oto"]
 [ext_resource type="PackedScene" uid="uid://d2g2e823fkk04" path="res://Scenes/RuneAnimation.tscn" id="5_n0sx1"]
+[ext_resource type="PackedScene" uid="uid://dsw781t07yq02" path="res://Scenes/FloatingLabel.tscn" id="6_ie14q"]
 
 [node name="GameController" type="Node2D" node_paths=PackedStringArray("escape_timer")]
 script = ExtResource("1_fyej0")
@@ -14,6 +15,7 @@ status_message = ExtResource("2_7fjnr")
 monster_instance = ExtResource("2_gbhfg")
 summary_panel_ref = ExtResource("3_06oto")
 my_grid_ref = ExtResource("4_06oto")
+xp_label = ExtResource("6_ie14q")
 rune_animation = ExtResource("5_n0sx1")
 escape_timer = NodePath("escapeTimer")
 

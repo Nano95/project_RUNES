@@ -13,24 +13,24 @@ func _ready() -> void:
 func setup(main_node:MainNode, gc:GameController) -> void:
 	game_controller = gc
 	main = main_node
-	game_controller.gained_exp.connect(award_run_xp)
-	$XpLabel.text = str(main.game_data.total_exp)
+	game_controller.gained_exp.connect(award_xp)
+	update_xp_label()
 	animate_xp_gain(0)
 
-func award_run_xp(xp_gained:int=1) -> void:
+func award_xp(xp_gained:int=1) -> void:
 	animate_xp_gain(xp_gained) # NOTE WE DO NOT ADD XP HERE
 
 func add_xp(amount: float) -> void:
 	main.game_data.current_exp += amount
 	main.game_data.total_exp += amount
-	
-	$XpLabel.text = str(main.game_data.total_exp)
 	while (main.game_data.current_exp >= xp_required_for_level(main.game_data.current_level + 1)):
 		on_level_up()
+	
+	update_xp_label()
 
 func animate_xp_gain(amount: float) -> void:
 	var xp_to_next = xp_required_for_level(main.game_data.current_level + 1) - main.game_data.current_exp
-	print("XP to next: ", xp_to_next)
+	
 	var from_percent: float = xp_to_percent(main.game_data.current_exp, main.game_data.current_level)
 	var to_percent: float = xp_to_percent(main.game_data.current_exp + amount, main.game_data.current_level)
 	
@@ -51,6 +51,11 @@ func animate_xp_gain(amount: float) -> void:
 
 	# Continue with leftover XP
 	animate_xp_gain(amount - xp_to_next)
+
+func update_xp_label():
+	var current = main.game_data.current_exp
+	var needed = xp_required_for_level(main.game_data.current_level + 1)
+	$XpLabel.text = str(int(current)) + " / " + str(int(needed))
 
 func tween_xp_bar(from: float, to: float) -> void:
 	value = from  # explicitly set the start
