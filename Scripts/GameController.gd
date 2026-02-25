@@ -82,7 +82,6 @@ func escape_pressed_behavior() -> void:
 func escape_timer_timeout() -> void:
 	advance_turn()
 	escape_timer_counter += 1
-	print("escape_timer_counter: ", escape_timer_counter)
 	if (escape_timer_counter >= 3):
 		escape_timer.stop()
 		if (current_hp > 0):
@@ -148,7 +147,6 @@ func spawn_status_message(died:bool=false, no_focus:bool=false, escaped:bool=fal
 	main.spawn_to_top_ui_layer(lbl)
 	
 	if (xp_gain > 0):
-		print("xp gained from focus: ", xp_gain)
 		var xp_lbl = xp_label.instantiate()
 		my_grid.spawn_to_fx_container(xp_lbl)
 		xp_lbl.global_position = game_ui.mana_icon.global_position + Vector2(10, 100)
@@ -371,7 +369,6 @@ func change_selected_rune(rune:RuneData) -> void:
 	selected_rune = rune
 
 func on_cell_tapped(row, col) -> void:
-	print("game is active: ", game_is_active)
 	if (!game_is_active): return
 	if (!focus_check(selected_rune)): return
 	
