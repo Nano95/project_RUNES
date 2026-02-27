@@ -68,17 +68,19 @@ generate_btn = NodePath("Equipment/Panel/Inventory/Button")
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = 14
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 151.99998
-offset_top = -539.0
-offset_right = -38.0
-offset_bottom = -401.0
+offset_left = -200.0
+offset_top = -560.0
+offset_right = 200.0
+offset_bottom = -409.99997
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(200, 75)
 theme_override_constants/outline_size = 30
 theme_override_fonts/font = ExtResource("2_ghw46")
 theme_override_font_sizes/font_size = 100
@@ -86,12 +88,11 @@ text = "Fight!"
 
 [node name="StatsContainer" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 14
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = -1.0
-offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -167,7 +168,9 @@ text = "Clear"
 
 [node name="Labels" type="Control" parent="StatsContainer"]
 anchors_preset = 0
+offset_left = -330.0
 offset_top = 236.0
+offset_right = -330.0
 offset_bottom = 236.0
 
 [node name="LvLabel" parent="StatsContainer/Labels" instance=ExtResource("4_df05h")]
@@ -365,19 +368,28 @@ text = "-"
 
 [node name="Equipment" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 14
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="Equipment"]
-layout_mode = 0
-offset_left = 40.0
-offset_top = -413.0
-offset_right = 683.0
-offset_bottom = 99.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -321.5
+offset_top = -407.0
+offset_right = 321.5
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(324, 256)
 
 [node name="Inventory" type="Control" parent="Equipment/Panel"]
 anchors_preset = 0
@@ -494,11 +506,15 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="BottomInfoPanel/Panel"]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 5.0
-offset_right = 723.0
-offset_bottom = 49.0
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -19.5
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/outline_size = 15
 theme_override_fonts/normal_font = ExtResource("2_ghw46")
 theme_override_font_sizes/normal_font_size = 30

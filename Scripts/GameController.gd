@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 class_name GameController
 
 @export var status_message:PackedScene

@@ -9,7 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://d2g2e823fkk04" path="res://Scenes/RuneAnimation.tscn" id="5_n0sx1"]
 [ext_resource type="PackedScene" uid="uid://dsw781t07yq02" path="res://Scenes/FloatingLabel.tscn" id="6_ie14q"]
 
-[node name="GameController" type="Node2D" node_paths=PackedStringArray("escape_timer")]
+[node name="GameController" type="Control" node_paths=PackedStringArray("escape_timer")]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_fyej0")
 status_message = ExtResource("2_7fjnr")
 monster_instance = ExtResource("2_gbhfg")
