@@ -1,13 +1,13 @@
 extends Control
 class_name MainNode
 
-@onready var game_controller = load("res://Scenes/GameController.tscn")
-@onready var game_ui = load("res://Scenes/GameUI.tscn")
-@onready var main_menu_ui = load("res://Scenes/MainMenu.tscn")
+@onready var game_controller:PackedScene = load("res://Scenes/GameController.tscn")
+@onready var game_ui:PackedScene = load("res://Scenes/GameUI.tscn")
+@onready var main_menu_ui:PackedScene = load("res://Scenes/MainMenu.tscn")
 
 @export_category("UI")
 @export var top_layer:CanvasLayer
-@export var mid_layer:Node2D
+@export var mid_layer:Control
 @export var back_layer:CanvasLayer
 @export var shader_bg:TextureRect
 

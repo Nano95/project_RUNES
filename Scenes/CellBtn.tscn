@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmn3pncj5s2h"]
+
+[ext_resource type="Texture2D" uid="uid://d3r72j0pfyt1" path="res://Sprites/GridCellBorder.png" id="1_qu7v2"]
+[ext_resource type="Script" uid="uid://c6pindoh6m5nk" path="res://Scripts/CellBtn.gd" id="2_xkwnv"]
+
+[node name="Button" type="Button"]
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 132.0
+offset_bottom = 132.0
+script = ExtResource("2_xkwnv")
+
+[node name="CellBtn" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 132.0
+offset_bottom = 132.0
+texture = ExtResource("1_qu7v2")

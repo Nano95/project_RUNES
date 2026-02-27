@@ -2,7 +2,7 @@ extends Control
 class_name GameController
 
 @export var status_message:PackedScene
-@export var monster_instance:Resource
+@export var monster_instance:Resource # Used in Grid
 @export var summary_panel_ref: Resource
 @export var my_grid_ref:Resource
 @export var xp_label:Resource
@@ -426,7 +426,7 @@ func damage_cell(r: int, c: int) -> int:
 
 func spawn_rune_explosion(row: int, col: int):
 	var rune = rune_animation.instantiate()
-	rune.position = my_grid.grid_to_world(row, col) + Vector2(64, 64)
+	rune.position = my_grid.grid_to_world(row, col)
 	my_grid.add_to_rune_container(rune)
 
 func damage_single(r, c) -> void:

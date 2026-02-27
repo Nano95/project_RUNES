@@ -30,7 +30,14 @@ shader_bg = NodePath("BACK/BG")
 [node name="FRONT" type="CanvasLayer" parent="."]
 layer = 10
 
-[node name="MID" type="Node2D" parent="."]
+[node name="MID" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="BACK" type="CanvasLayer" parent="."]
 layer = -10

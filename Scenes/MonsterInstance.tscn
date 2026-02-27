@@ -695,33 +695,33 @@ unique_name_in_owner = true
 material = SubResource("ShaderMaterial_q5h8j")
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_krk12")
-animation = &"dwarf4"
-offset = Vector2(0, -12)
+animation = &"slime1"
+offset = Vector2(0, 1)
 
 [node name="Hp" parent="." instance=ExtResource("8_rovrv")]
 material = SubResource("ShaderMaterial_5ha12")
-offset_left = -3.0
-offset_top = -13.0
-offset_right = 300.3333
-offset_bottom = 124.0
+offset_left = -37.0
+offset_top = 31.0
+offset_right = 266.3333
+offset_bottom = 168.0
 text = "300"
 
 [node name="HealthIcon" type="Sprite2D" parent="."]
-position = Vector2(-24, 9)
+position = Vector2(-53, 53)
 scale = Vector2(4, 4)
 texture = ExtResource("10_qfc3e")
 
 [node name="atk" parent="." instance=ExtResource("8_rovrv")]
 visible = false
 material = SubResource("ShaderMaterial_qfc3e")
-offset_left = -3.0
-offset_top = -103.0
-offset_right = 170.33333
-offset_bottom = 34.0
+offset_left = -26.0
+offset_top = -64.0
+offset_right = 147.33333
+offset_bottom = 73.0
 text = "1"
 
 [node name="AtkIcon" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(-27, -82)
+position = Vector2(-50, -43)
 scale = Vector2(4, 4)
 texture = ExtResource("12_qfc3e")

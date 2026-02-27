@@ -25,7 +25,7 @@ func setup(monster_base: MonsterBase, grid:MyGrid):
 	current_power = base.power
 	individual_turns_left = base.attack_speed
 	$AnimatedSprite2D.play(base.anim_name)
-	$AnimatedSprite2D.offset.y = base.anim_offset_y
+	#$AnimatedSprite2D.offset.y = base.anim_offset_y
 	my_grid = grid
 
 func is_elite_or_boss() -> bool:
@@ -67,15 +67,15 @@ func spawn_damage_label(amount: float) -> void:
 	my_grid.spawn_to_fx_container(label)
 
 	# Position relative to the wall sprite
-	label.global_position = %AnimatedSprite2D.global_position + Vector2(20, 55)
+	label.global_position = %AnimatedSprite2D.global_position + Vector2(-140, 80)
 
 	label.show_label(amount)
 
 func animate_hit() -> void:
 	# ANIMATE SIZE
 	var tween = create_tween()
-	tween.tween_property(%AnimatedSprite2D, "scale", Vector2(3.55, 4.9), 0.05)
-	tween.tween_property(%AnimatedSprite2D, "scale", Vector2(4.96,3.63), 0.05)
+	tween.tween_property(%AnimatedSprite2D, "scale", Vector2(4.25, 7.4), 0.07)
+	tween.tween_property(%AnimatedSprite2D, "scale", Vector2(7.2, 2.63), 0.05)
 	tween.tween_property(%AnimatedSprite2D, "scale", Vector2(4.0, 4.0), 0.05)
 	
 	# ANIMATE WHITE COLOR

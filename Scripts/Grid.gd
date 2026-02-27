@@ -1,12 +1,12 @@
-extends Node2D
+extends Control
 class_name MyGrid
 
-@export var cell_sprite:Resource
+@export var cell_btn:PackedScene
 @export var rows := 7
 @export var cols := 5
-@export var cell_size := Vector2(128, 128)
+var cell_size := Vector2(128, 128)
 var game_controller:GameController
-
+var grid_origin :Vector2= Vector2.ZERO
 var cells = [] # 2D array storing monster instances or null
 
 """
@@ -16,25 +16,32 @@ var cells = [] # 2D array storing monster instances or null
 """
 
 func _ready():
+	grid_origin = global_position
 	cells.resize(rows)
 	for r in rows:
 		cells[r] = []
 		for c in cols:
 			cells[r].append(null)
-			var sprite = Sprite2D.new()
-			sprite.texture = cell_sprite
-			sprite.position = grid_to_world(r,c) + cell_size * 0.5
-			sprite.scale = Vector2(3.5, 3.5)
-			$TileContainer.add_child(sprite)
+			var cell = cell_btn.instantiate() as Button
+			cell.set_coords(r, c)
+			cell.row = r
+			cell.col = c
+			cell.position = Vector2(
+				c * cell_size.x,
+				r * cell_size.y
+			)
+			cell.connect("cell_pressed", _on_cell_pressed)
+			$TileContainer.add_child(cell)
 
 func setup(gc:GameController) -> void:
 	game_controller = gc
 
-func _input(event):
-	if event is InputEventScreenTouch and event.pressed:
-		var cell = world_to_grid(event.position)
-		if not is_valid(cell.x, cell.y): return # ignore taps outside the grid
-		game_controller.on_cell_tapped(cell.x, cell.y)
+func _on_cell_pressed(row, col):
+	print("row col pressed: ()", row, ",", col, ")")
+	game_controller.on_cell_tapped(row, col)
+
+#func _process(delta: float) -> void:
+	#print("- global_position: ", global_position, position)
 
 func spawn_monster_into_cell(row: int, col: int, base: MonsterBase):
 	if (not is_valid(row, col)): return
@@ -48,7 +55,7 @@ func spawn_monster_into_cell(row: int, col: int, base: MonsterBase):
 		monster.become_elite()
 
 	# convert grid coords → world coords
-	monster.position = grid_to_world(row, col) + Vector2(64, 108)
+	monster.position = grid_to_world(row, col) + Vector2(6, 0) # Some adjustment to center
 	$MonstersContainer.add_child(monster)
 	cells[row][col] = monster
 	game_controller.register_monster(monster)
@@ -85,14 +92,11 @@ func highlight_cell(row, col, color):
 	var sprite = $CellContainer.get_child(index)
 	sprite.modulate = color
 
-func world_to_grid(world_pos: Vector2) -> Vector2i:
-	var local = to_local(world_pos)
-	var col = int(floor(local.x / cell_size.x))
-	var row = int(floor(local.y / cell_size.y))
-	return Vector2i(row, col)
-
 func grid_to_world(row: int, col: int) -> Vector2:
-	return Vector2(col * cell_size.x, row * cell_size.y)
+	return Vector2(
+		col * cell_size.x + cell_size.x * 0.5,
+		row * cell_size.y + cell_size.y * 0.5
+	)
 
 func is_valid(r: int, c: int) -> bool:
 	return r >= 0 and r < rows and c >= 0 and c < cols
