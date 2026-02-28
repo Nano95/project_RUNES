@@ -59,7 +59,7 @@ func spawn_xp_label() -> void:
 	var label = xp_label.instantiate()
 	
 	my_grid.spawn_to_fx_container(label)
-	label.global_position = %AnimatedSprite2D.global_position + Vector2(-5, -50)
+	label.global_position = %AnimatedSprite2D.global_position + Vector2(-5, 50)
 	label.show_label(base.exp_reward)
 
 func spawn_damage_label(amount: float) -> void:
@@ -67,7 +67,7 @@ func spawn_damage_label(amount: float) -> void:
 	my_grid.spawn_to_fx_container(label)
 
 	# Position relative to the wall sprite
-	label.global_position = %AnimatedSprite2D.global_position + Vector2(-140, 80)
+	label.global_position = %AnimatedSprite2D.global_position  + Vector2(-35, -50)
 
 	label.show_label(amount)
 

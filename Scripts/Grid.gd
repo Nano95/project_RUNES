@@ -14,7 +14,7 @@ var cells = [] # 2D array storing monster instances or null
 (1,0) (1,1) (1,2)
 (2,0) (2,1) (2,2)
 """
-
+var padding := -4.0
 func _ready():
 	grid_origin = global_position
 	cells.resize(rows)
@@ -27,8 +27,8 @@ func _ready():
 			cell.row = r
 			cell.col = c
 			cell.position = Vector2(
-				c * cell_size.x,
-				r * cell_size.y
+				c * (cell_size.x + padding),
+				r * (cell_size.y + padding)
 			)
 			cell.connect("cell_pressed", _on_cell_pressed)
 			$TileContainer.add_child(cell)
@@ -94,8 +94,8 @@ func highlight_cell(row, col, color):
 
 func grid_to_world(row: int, col: int) -> Vector2:
 	return Vector2(
-		col * cell_size.x + cell_size.x * 0.5,
-		row * cell_size.y + cell_size.y * 0.5
+		col * (cell_size.x + padding) + cell_size.x * 0.5,
+		row * (cell_size.y + padding) + cell_size.y * 0.5
 	)
 
 func is_valid(r: int, c: int) -> bool:

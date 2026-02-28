@@ -2,7 +2,6 @@ extends Control
 
 func show_label(amount: float) -> void:
 	z_index = 10
-	
 	$Label.text = "+" + str(amount) + " XP"
 
 	# Start small and slightly below the monster

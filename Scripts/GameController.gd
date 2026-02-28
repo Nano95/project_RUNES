@@ -22,7 +22,7 @@ var monsters := []  # list of MonsterInstance nodes, only used for things like i
 
 var selected_monster_index:int=1
 
-var PADDING:Vector2 = Vector2(38, 240)
+var PADDING:Vector2 = Vector2(44, 225)
 var selected_rune:RuneData
 
 ### Stats
