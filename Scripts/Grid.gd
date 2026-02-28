@@ -37,11 +37,7 @@ func setup(gc:GameController) -> void:
 	game_controller = gc
 
 func _on_cell_pressed(row, col):
-	print("row col pressed: ()", row, ",", col, ")")
 	game_controller.on_cell_tapped(row, col)
-
-#func _process(delta: float) -> void:
-	#print("- global_position: ", global_position, position)
 
 func spawn_monster_into_cell(row: int, col: int, base: MonsterBase):
 	if (not is_valid(row, col)): return
