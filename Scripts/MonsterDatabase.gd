@@ -43,3 +43,23 @@ var monster_stage_cost = {
 	"sandlings": 1800,
 	"dwarves": 10000
 }
+
+var monster_colors = {
+	"slimes": {
+		"col1": Vector3(.516, .691, .473),
+		"col2": Vector3(.633, .793, .543),
+	},
+	"orcs": {
+		"col1": Vector3(.445, .488, .449),
+		"col2": Vector3(.664, .723, .602),
+	},
+	"sandlings": {
+		"col1": Vector3(.875, .652, .367),
+		"col2": Vector3(.973, .836, .535
+		),
+	},
+	"dwarves": {
+		"col1": Vector3(.297, .211, .09),
+		"col2": Vector3(.355, .285, .133),
+	},
+}

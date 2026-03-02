@@ -242,7 +242,7 @@ func warn_shake_node(node) -> void:
 	# Always reset to original first in case of overlap
 	node.position = original_position
 	
-	var shake_amount: float = 4.0
+	var shake_amount: float = 8.0
 	var shake_time: float = 0.05
 	
 	var tween = node.create_tween()

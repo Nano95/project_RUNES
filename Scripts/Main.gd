@@ -64,6 +64,9 @@ func spawn_game() -> void:
 	spawn_to_mid_ui_layer(active_menu_ref)
 	
 	game_ui_ref.setup_game_controller(active_menu_ref)
+	print("battle_data[\"family\"]", battle_data["family"])
+	var colors = MonsterDatabase.monster_colors[battle_data["family"]]
+	set_background_colors(colors["col1"], colors["col2"])
 
 func spawn_to_top_ui_layer(node) -> void:
 	top_layer.add_child(node)

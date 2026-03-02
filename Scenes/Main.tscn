@@ -6,8 +6,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pbw6q"]
 shader = ExtResource("2_kln2b")
-shader_parameter/color_one = Vector3(0.906, 0.957, 0.738)
-shader_parameter/color_two = Vector3(0.77, 0.91, 0.738)
+shader_parameter/color_one = Vector3(0.41, 0.434, 0.777)
+shader_parameter/color_two = Vector3(0.652, 0.664, 0.879)
 shader_parameter/angle = 20.0
 shader_parameter/line_count = 17.0
 shader_parameter/speed = 0.7
