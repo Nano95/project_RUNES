@@ -70,7 +70,10 @@ func add_rune_to_inv(rune:RuneData, qty:int, notify:bool = false) -> void:
 	
 	rune_inv[rune.name] = qty
 
-func remove_rune_from_inv(rune:RuneData, qty:int) -> void:
+func remove_rune_from_inv(rune:RuneData, qty:int) -> int:
 	rune_inv[rune.name] -= qty
 	if (rune_inv[rune.name] <= 0):
 		rune_inv.erase(rune.name)
+		return 0
+	
+	return rune_inv[rune.name]

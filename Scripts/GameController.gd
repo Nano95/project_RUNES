@@ -396,17 +396,19 @@ func on_cell_tapped(row, col) -> void:
 		"expl":
 			damage_3x3(row, col)
 	
-	print("main.game_data.rune_inv: ", main.game_data.rune_inv[selected_rune.name])
-	main.game_data.remove_rune_from_inv(selected_rune, 1)
+	var new_qty = main.game_data.remove_rune_from_inv(selected_rune, 1)
+	game_ui.update_rune_qty(selected_rune.name, new_qty)
 	advance_turn()
 
 
 func activate_instant_rune(pressed_rune:RuneData):
 	if (!game_is_active): return
-	if (!main.game_data.rune_inv.get(selected_rune.name)): return
+	if (!main.game_data.rune_inv.get(pressed_rune.name)): return
 	if (!focus_check(pressed_rune)): return
 	
-	_apply_instant_rune("heal")
+	_apply_instant_rune("great_heal")
+	var new_qty = main.game_data.remove_rune_from_inv(pressed_rune, 1)
+	game_ui.update_rune_qty(pressed_rune.name, new_qty)
 	advance_turn()
 
 #func _apply_instant_rune(rune: RuneData):

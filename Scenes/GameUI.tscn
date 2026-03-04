@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b7xgkus4u2361"]
+[gd_scene load_steps=19 format=3 uid="uid://b7xgkus4u2361"]
 
 [ext_resource type="Script" uid="uid://dygepuv8uhpel" path="res://Scripts/GameUI.gd" id="1_po7eo"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_frnsy"]
@@ -13,12 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://b18ao2eimbmku" path="res://Sprites/MANA_ICON.png" id="11_0hwcy"]
 [ext_resource type="Script" uid="uid://csqoa81ypjofv" path="res://Scripts/LootManager.gd" id="12_us4cf"]
 [ext_resource type="PackedScene" uid="uid://dakbi23goa01y" path="res://Scenes/LootEntry.tscn" id="13_qecx7"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wjrrg"]
-resource_local_to_scene = true
-shader = ExtResource("3_co6lq")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j41el"]
 resource_local_to_scene = true
@@ -89,18 +83,6 @@ offset_left = 6.0
 offset_top = 11.0
 offset_right = 714.0
 offset_bottom = 152.0
-
-[node name="Location" parent="TopSection" instance=ExtResource("2_frnsy")]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_wjrrg")
-layout_mode = 0
-offset_left = 1.0
-offset_top = -26.0
-offset_right = 2397.6667
-offset_bottom = 111.0
-text = "Location name"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="BackBtn" type="Button" parent="TopSection"]
 layout_mode = 0

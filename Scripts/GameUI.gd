@@ -22,7 +22,7 @@ var xp_tween:Tween
 var dmg_tween:Tween
 var focus_tween:Tween
 var turns_tween:Tween
-
+var rune_buttons:Dictionary = {}  # NEW: store buttons by rune name
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 
@@ -38,20 +38,23 @@ func setup_game_controller(gc:GameController) -> void:
 
 func setup_rune_buttons() -> void:
 	if !(is_instance_valid(game_controller)): return
+	rune_buttons = {}
 	for rune in main.battle_data["selected_runes"]:
 		var btn = rune_button.instantiate()
-		btn.setup(rune)
+		btn.setup(rune, main.game_data.get_rune_count(rune.name))
 		if (rune.activation == "grid"):
+			# Attack runes
 			btn.pressed.connect(game_controller.change_selected_rune.bind(rune))
 		else:
+			# Healing runes
 			btn.pressed.connect(game_controller.activate_instant_rune.bind(rune))
-			
-		rune_btns_container.add_child(btn)
 		
-	#$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton1.pressed.connect(game_controller.change_selected_rune.bind("single"))
-	#$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton2.pressed.connect(game_controller.change_selected_rune.bind("plus"))
-	#$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton3.pressed.connect(game_controller.change_selected_rune.bind("aoe3"))
-	#$BottomSection/MarginContainer/ScrollContainer/HBoxContainer/RuneButton4.pressed.connect(game_controller.activate_instant_rune)
+		rune_buttons[rune.name] = btn
+		rune_btns_container.add_child(btn)
+
+func update_rune_qty(rune_name: String, new_qty: int) -> void:
+	if rune_name in rune_buttons:
+		rune_buttons[rune_name].set_rune_qty(new_qty)
 
 func setup_hp(player_hp:float, player_max_hp:float) -> void:
 	hp_bar.max_value = BAR_CONST
