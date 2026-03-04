@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RuneData" load_steps=3 format=3 uid="uid://xrhk72gffnp5"]
+
+[ext_resource type="Texture2D" uid="uid://llqj70wrm8i3" path="res://Sprites/Runes/ARCANE_STRIKE_RUNE.png" id="1_78jlq"]
+[ext_resource type="Script" uid="uid://wqovi0smk0qq" path="res://Scripts/RuneData.gd" id="2_dr7re"]
+
+[resource]
+script = ExtResource("2_dr7re")
+name = "Arcane Strike"
+mini_name = "Arc Str"
+icon = ExtResource("1_78jlq")
+pattern = "strike"
+buy_cost = 15
+metadata/_custom_type_script = "uid://wqovi0smk0qq"

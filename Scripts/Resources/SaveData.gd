@@ -3,6 +3,7 @@ class_name SaveData
 
 @export_category("General")
 @export var inventory: Array[EquipmentInstance] = []
+@export var rune_inv: Dictionary
 
 @export_category("Player")
 @export var current_level:int = 1
@@ -11,14 +12,14 @@ class_name SaveData
 @export var total_gold:float = 0
 @export var current_gold:float = 0
 @export var total_essences:Dictionary = {
-	"physical": 0,
+	"arcane": 0,
 	"fire": 0,
 	"ice": 0,
 	"earth": 0,
 	"electric": 0
 }
 @export var current_essences:Dictionary = {
-	"physical": 0,
+	"arcane": 0,
 	"fire": 0,
 	"ice": 0,
 	"earth": 0,
@@ -53,3 +54,23 @@ func equip(item: EquipmentInstance, slot):
 
 func unequip(slot):
 	equipped[slot] = null
+
+func get_rune_count(rune_name:String) -> int:
+	if (rune_inv.get(rune_name)):
+		return rune_inv[rune_name]
+	return 0
+
+func add_rune_to_inv(rune:RuneData, qty:int, notify:bool = false) -> void:
+	print("notify... ", notify)
+	#if (notify && is_instance_valid(Utils)):
+		#Utils.spawn_notification(item_name, quantity)
+	if rune.name in rune_inv:
+		rune_inv[rune.name] += qty
+		return
+	
+	rune_inv[rune.name] = qty
+
+func remove_rune_from_inv(rune:RuneData, qty:int) -> void:
+	rune_inv[rune.name] -= qty
+	if (rune_inv[rune.name] <= 0):
+		rune_inv.erase(rune.name)

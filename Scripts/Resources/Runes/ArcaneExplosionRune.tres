@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RuneData" load_steps=3 format=3 uid="uid://co62s0shndjmw"]
+
+[ext_resource type="Texture2D" uid="uid://ds14befai3yep" path="res://Sprites/Runes/ARCANE_EXPLOSION_RUNE.png" id="1_xs2cs"]
+[ext_resource type="Script" uid="uid://wqovi0smk0qq" path="res://Scripts/RuneData.gd" id="2_t0iws"]
+
+[resource]
+script = ExtResource("2_t0iws")
+name = "Arcane Explosion"
+mini_name = "Arc Exp"
+icon = ExtResource("1_xs2cs")
+pattern = "expl"
+focus_cost = 8
+buy_cost = 120
+metadata/_custom_type_script = "uid://wqovi0smk0qq"

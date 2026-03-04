@@ -8,3 +8,5 @@ class_name RuneData
 @export var activation: String = "grid"  # "grid", "instant"
 @export var power: int = 0
 @export var focus_cost: int = 1
+@export var rune_type: String = "arcane" # arcane, electric, fire, ice, earth, heal
+@export var buy_cost:int = 100

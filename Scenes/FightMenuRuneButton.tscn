@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cby5cdsq4bcyo"]
 
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="1_4rjwq"]
-[ext_resource type="Texture2D" uid="uid://llqj70wrm8i3" path="res://Sprites/Runes/RUNE_1_PHYS.png" id="2_00aqc"]
+[ext_resource type="Texture2D" uid="uid://llqj70wrm8i3" path="res://Sprites/Runes/ARCANE_STRIKE_RUNE.png" id="2_00aqc"]
 [ext_resource type="Script" uid="uid://jj0fcb5mx0c5" path="res://Scripts/FightMenuRuneButton.gd" id="3_00aqc"]
 [ext_resource type="Texture2D" uid="uid://b18ao2eimbmku" path="res://Sprites/MANA_ICON.png" id="4_cuo2q"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="5_lhn1g"]

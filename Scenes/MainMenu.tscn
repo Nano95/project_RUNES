@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://blmp3gywbfee1"]
+[gd_scene load_steps=15 format=3 uid="uid://blmp3gywbfee1"]
 
 [ext_resource type="Script" uid="uid://mqmfo2nmeldy" path="res://Scripts/MainMenu.gd" id="1_8saeu"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="2_ghw46"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="4_df05h"]
 [ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="5_8um5k"]
 [ext_resource type="PackedScene" uid="uid://bclknj3c05tf" path="res://Scenes/InventoryButton.tscn" id="6_8um5k"]
+[ext_resource type="PackedScene" uid="uid://b2rttg80j12x4" path="res://Scenes/RuneShop.tscn" id="9_cmrfp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_koqhg"]
 resource_local_to_scene = true
@@ -32,6 +33,8 @@ resource_local_to_scene = true
 shader = ExtResource("5_8um5k")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_cmrfp"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("start_btn", "lvl_label", "ap_label", "btn1", "btn10", "btn100", "clear_stats_btn", "debugton", "eq_slot_1_btn", "eq_slot_2_btn", "health_increase_btn", "focus_increase_btn", "power_increase_btn", "luck_increase_btn", "health_decrease_btn", "focus_decrease_btn", "power_decrease_btn", "luck_decrease_btn", "inventory_grid", "generate_btn")]
 layout_mode = 3
@@ -93,8 +96,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = -280.0
-offset_bottom = -280.0
+offset_top = -520.0
+offset_bottom = -520.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -491,9 +494,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -348.0
-offset_top = 404.0
+offset_top = -629.0
 offset_right = -260.0
-offset_bottom = 539.0
+offset_bottom = -494.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -532,3 +535,9 @@ theme_override_font_sizes/bold_font_size = 30
 bbcode_enabled = true
 text = "[img=40]res://Sprites/GOLD_ICON.png[/img] 3541557  |  [img=40]res://Sprites/ESSENCE_ICON.png[/img] Physical: 447
 "
+
+[node name="ShopPanel" parent="." instance=ExtResource("9_cmrfp")]
+layout_mode = 1
+offset_top = 380.0
+offset_bottom = 380.0
+button_group = SubResource("ButtonGroup_cmrfp")

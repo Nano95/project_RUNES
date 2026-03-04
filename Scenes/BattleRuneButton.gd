@@ -1,5 +1,15 @@
 extends Button
 
-func setup(rune:RuneData) -> void:
+var qty:int = 0
+var rune_data:RuneData
+func setup(rune:RuneData, _qty:int=1) -> void:
+	rune_data = rune
 	icon = rune.icon
 	$manaLbl.text = str(rune.focus_cost)
+	qty = _qty
+	%qty.text = str(Utils.numberize(qty))
+
+func set_rune_qty(_qty:int) -> void:
+	qty = _qty
+	%qty.text = str(Utils.numberize(qty))
+	

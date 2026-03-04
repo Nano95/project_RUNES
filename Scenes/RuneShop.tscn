@@ -1,0 +1,143 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2rttg80j12x4"]
+
+[ext_resource type="Script" uid="uid://11hg5ph8jse1" path="res://Scripts/RuneShop.gd" id="1_3w4oh"]
+[ext_resource type="PackedScene" uid="uid://g8h5rl7ffb3c" path="res://Scenes/RuneShopButton.tscn" id="3_f5wc8"]
+[ext_resource type="Texture2D" uid="uid://coagekegcnsw3" path="res://Sprites/Runes/ARCANE_ICON.png" id="5_3w4oh"]
+[ext_resource type="Texture2D" uid="uid://duwfmvpb1gi26" path="res://Sprites/Runes/HEALING_ICON.png" id="6_psxnm"]
+[ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="6_r014n"]
+[ext_resource type="ButtonGroup" uid="uid://b3bkme5g3nkds" path="res://Resources/shopBtnQty.tres" id="11_r014n"]
+
+[node name="ShopPanel" type="Control" node_paths=PackedStringArray("btn1", "btn10", "btn100")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3w4oh")
+button_group = ExtResource("11_r014n")
+btn1 = NodePath("Panel/Button1")
+btn10 = NodePath("Panel/Button10")
+btn100 = NodePath("Panel/Button100")
+rune_button = ExtResource("3_f5wc8")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -258.0
+offset_top = -236.0
+offset_right = 258.0
+offset_bottom = 224.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TypesContainer" type="Control" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -258.0
+offset_right = 258.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="arcane" type="Button" parent="Panel/TypesContainer"]
+layout_mode = 0
+offset_left = 26.0
+offset_right = 318.49997
+offset_bottom = 138.00002
+scale = Vector2(0.4, 0.4)
+theme_override_constants/outline_size = 35
+theme_override_fonts/font = ExtResource("6_r014n")
+theme_override_font_sizes/font_size = 100
+toggle_mode = true
+button_group = ExtResource("11_r014n")
+icon = ExtResource("5_3w4oh")
+icon_alignment = 1
+expand_icon = true
+
+[node name="healing" type="Button" parent="Panel/TypesContainer"]
+layout_mode = 0
+offset_left = 143.0
+offset_right = 435.49997
+offset_bottom = 138.00002
+scale = Vector2(0.4, 0.4)
+theme_override_constants/outline_size = 35
+theme_override_fonts/font = ExtResource("6_r014n")
+theme_override_font_sizes/font_size = 100
+toggle_mode = true
+button_group = ExtResource("11_r014n")
+icon = ExtResource("6_psxnm")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Button1" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 26.000002
+offset_top = 68.00001
+offset_right = 398.49994
+offset_bottom = 206.0
+scale = Vector2(0.4, 0.4)
+theme_override_constants/outline_size = 35
+theme_override_fonts/font = ExtResource("6_r014n")
+theme_override_font_sizes/font_size = 100
+toggle_mode = true
+button_group = ExtResource("11_r014n")
+text = "1x"
+
+[node name="Button10" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 182.99998
+offset_top = 68.00001
+offset_right = 555.49994
+offset_bottom = 206.0
+scale = Vector2(0.4, 0.4)
+theme_override_constants/outline_size = 35
+theme_override_fonts/font = ExtResource("6_r014n")
+theme_override_font_sizes/font_size = 100
+toggle_mode = true
+button_group = ExtResource("11_r014n")
+text = "10x
+"
+
+[node name="Button100" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 68.00001
+offset_right = 712.49994
+offset_bottom = 206.0
+scale = Vector2(0.4, 0.4)
+theme_override_constants/outline_size = 35
+theme_override_fonts/font = ExtResource("6_r014n")
+theme_override_font_sizes/font_size = 100
+toggle_mode = true
+button_group = ExtResource("11_r014n")
+text = "100x"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -210.75
+offset_top = -322.0
+offset_right = 210.75
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 75
+
+[node name="RuneShopButton" parent="Panel/VBoxContainer" instance=ExtResource("3_f5wc8")]
+layout_mode = 2
+
+[node name="RuneShopButton2" parent="Panel/VBoxContainer" instance=ExtResource("3_f5wc8")]
+layout_mode = 2

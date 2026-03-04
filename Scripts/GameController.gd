@@ -167,6 +167,7 @@ func register_monster(monster:MonsterInstance):
 func monster_died(monster):
 	# Remove from flat list
 	enemies_killed += 1
+	main.game_data.enemies_killed += 1
 	monsters.erase(monster)
 
 	# Remove from grid
@@ -216,6 +217,8 @@ func advance_turn():
 	prune_dead_monsters()
 	if check_if_all_monsters_dead(true): return
 	runes_used += 1
+		# Data
+	main.game_data.runes_used += 1
 	# 1. Decrement group timer
 	group_turns_left -= 1
 	# 2. Decrement elite timers FIRST
@@ -368,29 +371,7 @@ func roll_loot(monster: MonsterBase) -> void:
 func change_selected_rune(rune:RuneData) -> void:
 	selected_rune = rune
 
-func on_cell_tapped(row, col) -> void:
-	if (!game_is_active): return
-	if (!focus_check(selected_rune)): return
-	
-	# Here is now where we have to subtract and make checks for focus used
-	match selected_rune.pattern:
-		"single":
-			damage_single(row, col)
-		"plus":
-			damage_plus(row, col)
-		"aoe3":
-			damage_3x3(row, col)
-	
-	advance_turn()
-
-
-func activate_instant_rune(pressed_rune:RuneData):
-	if (!game_is_active): return
-	if (!focus_check(pressed_rune)): return
-	
-	_apply_instant_rune("heal")
-	advance_turn()
-
+## CURRENT OOPSIE< when we have this check we subtract focusso even when we dont have enough runes we are subtracting.
 func focus_check(pressed_rune:RuneData) -> bool:
 	if (current_focus < pressed_rune.focus_cost):
 		game_ui.shake_mana_icon()
@@ -400,10 +381,38 @@ func focus_check(pressed_rune:RuneData) -> bool:
 	if (pressed_rune.focus_cost > 0): game_ui.update_focus(current_focus)
 	return true
 
+
+func on_cell_tapped(row, col) -> void:
+	if (!game_is_active): return
+	if (!main.game_data.rune_inv.get(selected_rune.name)): return
+	if (!focus_check(selected_rune)): return # This check must go after checking for inventory! Otherwise focus is subtracted when we dont have enough
+	print("main.game_data.rune_inv.get(selected_rune.name) ", main.game_data.rune_inv.get(selected_rune.name))
+	# Here is now where we have to subtract and make checks for focus used
+	match selected_rune.pattern:
+		"strike":
+			damage_single(row, col)
+		"cross":
+			damage_plus(row, col)
+		"expl":
+			damage_3x3(row, col)
+	
+	print("main.game_data.rune_inv: ", main.game_data.rune_inv[selected_rune.name])
+	main.game_data.remove_rune_from_inv(selected_rune, 1)
+	advance_turn()
+
+
+func activate_instant_rune(pressed_rune:RuneData):
+	if (!game_is_active): return
+	if (!main.game_data.rune_inv.get(selected_rune.name)): return
+	if (!focus_check(pressed_rune)): return
+	
+	_apply_instant_rune("heal")
+	advance_turn()
+
 #func _apply_instant_rune(rune: RuneData):
 func _apply_instant_rune(type: String):
 	match type:
-		"heal":
+		"great_heal":
 			heal(100)
 		#"skip_turn":
 			#skip_monster_turns(1)
@@ -417,7 +426,9 @@ func damage_cell(r: int, c: int) -> int:
 	spawn_rune_explosion(r, c)
 	var monster = my_grid.cells[r][c]
 	if (is_instance_valid(monster)):
-		var died = monster.take_damage(current_power)
+		var mult:float = get_element_multiplier(selected_rune.rune_type, monster)
+		var dmg:int = int(current_power * mult)
+		var died = monster.take_damage(dmg)
 		if (died):
 			xp_gained += monster.base.exp_reward
 			monster_died(monster)
@@ -456,3 +467,12 @@ func damage_3x3(r, c) -> void:
 			gained += damage_cell(r+dr, c+dc)
 	
 	if (gained > 0): emit_signal("gained_exp", gained)
+
+func get_element_multiplier(rune_element: String, monster) -> float:
+	if rune_element in monster.base.immunities:
+		return 0.0
+	if rune_element in monster.base.weaknesses:
+		return 1.5
+	if rune_element in monster.base.resistances:
+		return 0.5
+	return 1.0

@@ -51,6 +51,7 @@ func _ready() -> void:
 	populate_inventory()
 	recalc_player_stats()
 	update_info_panel()
+	$ShopPanel.setup(main, self)
 
 func setup(main_ref:MainNode) -> void:
 	main = main_ref

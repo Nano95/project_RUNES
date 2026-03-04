@@ -6,9 +6,9 @@ var loot_data = {
 		"short_name": "gold",
 		"icon": preload("res://Sprites/GOLD_ICON.png")
 	},
-	"physical essence": {
-		"name": "Physical Essence",
-		"short_name": "phys ess",
+	"arcane essence": {
+		"name": "Arcane Essence",
+		"short_name": "arc ess",
 		"icon": preload("res://Sprites/ESSENCE_ICON.png")
 	},
 	"fire essence": {

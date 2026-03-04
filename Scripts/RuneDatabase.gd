@@ -7,11 +7,11 @@ func _ready():
 
 func _load_runes():
 	# Attack runes
-	runes["single"] = preload("res://Scripts/Resources/Runes/SinglePhysicalRune.tres")
+	runes["arcane_strike"] = preload("res://Scripts/Resources/Runes/ArcaneStrikeRune.tres")
 
-	runes["plus"] = preload("res://Scripts/Resources/Runes/PlusPhysicalRune.tres")
+	runes["arcane_cross"] = preload("res://Scripts/Resources/Runes/ArcaneCrossRune.tres")
 
-	runes["aoe3"] = preload("res://Scripts/Resources/Runes/Aoe3PhysicalRune.tres")
+	runes["arcane_explosion"] = preload("res://Scripts/Resources/Runes/ArcaneExplosionRune.tres")
 
 	# Healing rune
-	runes["heal"] = preload("res://Scripts/Resources/Runes/GreatHealingRune.tres")
+	runes["great_healing"] = preload("res://Scripts/Resources/Runes/GreatHealingRune.tres")

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RuneData" load_steps=3 format=3 uid="uid://6qf80asia3aa"]
+
+[ext_resource type="Texture2D" uid="uid://0a223jgjtsti" path="res://Sprites/Runes/ARCANE_CROSS_RUNE.png" id="1_vbc1f"]
+[ext_resource type="Script" uid="uid://wqovi0smk0qq" path="res://Scripts/RuneData.gd" id="2_e2h1f"]
+
+[resource]
+script = ExtResource("2_e2h1f")
+name = "Arcane Cross"
+mini_name = "Arc Cross"
+icon = ExtResource("1_vbc1f")
+pattern = "cross"
+focus_cost = 4
+buy_cost = 30
+metadata/_custom_type_script = "uid://wqovi0smk0qq"
