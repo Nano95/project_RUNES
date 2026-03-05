@@ -1,0 +1,162 @@
+[gd_scene load_steps=11 format=3 uid="uid://w1anjwd6ku5f"]
+
+[ext_resource type="Script" uid="uid://cjn4rwvwos7w6" path="res://Scripts/OfflineRunesPanel.gd" id="1_holjq"]
+[ext_resource type="PackedScene" uid="uid://c75p27x2gpgt3" path="res://Scenes/OfflineRuneSlot.tscn" id="2_holjq"]
+[ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="3_7nav1"]
+[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="4_qj4xs"]
+[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="5_rxgki"]
+[ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="6_qxrmt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_55pba"]
+shader = ExtResource("3_7nav1")
+shader_parameter/lod = 3.3600001596
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8k8yn"]
+resource_local_to_scene = true
+shader = ExtResource("5_rxgki")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_duup7"]
+resource_local_to_scene = true
+shader = ExtResource("5_rxgki")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s7eqj"]
+resource_local_to_scene = true
+shader = ExtResource("5_rxgki")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="OfflineRunesPanel" type="Control" node_paths=PackedStringArray("close_btn", "slots_container")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -602.0
+offset_right = -360.0
+offset_bottom = -602.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(360, 640)
+script = ExtResource("1_holjq")
+rune_slot_ref = ExtResource("2_holjq")
+close_btn = NodePath("ColorRect/Panel/Title/Exit")
+slots_container = NodePath("ColorRect/Panel/Slots/SlotsContainer")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_55pba")
+layout_mode = 0
+offset_left = 2.0
+offset_top = 29.0
+offset_right = 722.0
+offset_bottom = 1176.0
+
+[node name="Panel" type="Panel" parent="ColorRect"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 21.0
+offset_right = 698.0
+offset_bottom = 1120.0
+
+[node name="Title" type="Panel" parent="ColorRect/Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 82.0
+grow_horizontal = 2
+
+[node name="Title" parent="ColorRect/Panel/Title" instance=ExtResource("4_qj4xs")]
+material = SubResource("ShaderMaterial_8k8yn")
+layout_mode = 0
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 1032.4814
+offset_bottom = 141.0
+scale = Vector2(0.54, 0.54)
+text = "Idle Rune Making"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Exit" type="Button" parent="ColorRect/Panel/Title"]
+layout_mode = 0
+offset_left = 558.0
+offset_right = 758.0
+offset_bottom = 138.0
+scale = Vector2(0.6, 0.6)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("6_qxrmt")
+theme_override_font_sizes/font_size = 100
+text = "x"
+
+[node name="Slots" type="Panel" parent="ColorRect/Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -448.5
+offset_bottom = 192.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SlotsInfo" parent="ColorRect/Panel/Slots" instance=ExtResource("4_qj4xs")]
+material = SubResource("ShaderMaterial_duup7")
+layout_mode = 0
+offset_left = 47.0
+offset_top = 3.0000153
+offset_right = 1614.4999
+offset_bottom = 140.00002
+scale = Vector2(0.4, 0.4)
+text = "Pick your runes!"
+
+[node name="SlotsContainer" type="VBoxContainer" parent="ColorRect/Panel/Slots"]
+layout_mode = 0
+offset_left = 46.999996
+offset_top = 65.0
+offset_right = 687.00006
+offset_bottom = 752.1746
+scale = Vector2(0.9, 0.9)
+theme_override_constants/separation = 50
+
+[node name="OfflineRuneSlot" parent="ColorRect/Panel/Slots/SlotsContainer" instance=ExtResource("2_holjq")]
+custom_minimum_size = Vector2(590, 244)
+layout_mode = 2
+
+[node name="OfflineRuneSlot2" parent="ColorRect/Panel/Slots/SlotsContainer" instance=ExtResource("2_holjq")]
+custom_minimum_size = Vector2(0, 247)
+layout_mode = 2
+
+[node name="Summary" type="Panel" parent="ColorRect/Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 210.5
+offset_bottom = 550.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SummaryLbl" parent="ColorRect/Panel/Summary" instance=ExtResource("4_qj4xs")]
+material = SubResource("ShaderMaterial_s7eqj")
+layout_mode = 0
+offset_left = 47.0
+offset_top = 3.0000153
+offset_right = 1601.9999
+offset_bottom = 140.00002
+scale = Vector2(0.4, 0.4)
+text = "Summary"
+
+[node name="SummaryContainer" type="VBoxContainer" parent="ColorRect/Panel/Summary"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 65.0
+offset_right = 754.2223
+offset_bottom = 343.88885
+scale = Vector2(0.9, 0.9)
+theme_override_constants/separation = 0

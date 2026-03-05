@@ -3,7 +3,8 @@ class_name MainMenu
 
 @onready var inv_button:PackedScene = preload("res://Scenes/InventoryButton.tscn")
 @onready var debug_panel:PackedScene = preload("res://Scenes/DebugPanel.tscn")
-@onready var fight_menu:PackedScene = preload("res://Scenes/FightMenu.tscn")
+@export var fight_menu:PackedScene
+@export var offline_rune_panel:PackedScene
 
 @export var xp_curve:Curve
 @export var start_btn:Button
@@ -26,6 +27,7 @@ class_name MainMenu
 @export var focus_decrease_btn:Button
 @export var power_decrease_btn:Button
 @export var luck_decrease_btn:Button
+@export var open_offline_runes_btn:Button
 
 @export var inventory_grid:GridContainer
 @export var generate_btn:Button
@@ -48,7 +50,7 @@ var bonus_stats:Dictionary
 
 func _ready() -> void:
 	connect_buttons()
-	populate_inventory()
+	#populate_inventory()
 	recalc_player_stats()
 	update_info_panel()
 	$ShopPanel.setup(main, self)
@@ -108,6 +110,7 @@ func connect_buttons() -> void:
 	luck_decrease_btn.pressed.connect(add_subtract_stats.bind(false, STAT_NAMES.LUCK))
 	# Equipment
 	generate_btn.pressed.connect(generate_equipment)
+	open_offline_runes_btn.pressed.connect(open_offline_runes)
 
 func generate_equipment() -> void:
 	var item_path:String = Utils.items.pick_random()
@@ -293,6 +296,11 @@ func on_level_up():
 func xp_required_for_level(level: int) -> float:
 	return xp_curve.sample(level)
 
+func open_offline_runes() -> void:
+	var offline_panel = offline_rune_panel.instantiate()
+	offline_panel.setup(main)
+	main.spawn_to_top_ui_layer(offline_panel)
+
 func update_info_panel() -> void:
 	var total_gold = main.game_data.current_gold
 	var total_essence = main.game_data.current_essences
@@ -300,7 +308,7 @@ func update_info_panel() -> void:
 
 func build_loot_summary_bbcode(total_gold: int, total_essences: Dictionary) -> String:
 	var gold_icon := "res://Sprites/GOLD_ICON.png"
-	var essence_icon := "res://Sprites/ESSENCE_ICON.png"
+	var essence_icon := "res://Sprites/arcane_ESSENCE_ICON.png"
 
 	var bb := ""
 

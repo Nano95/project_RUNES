@@ -1,0 +1,303 @@
+[gd_scene load_steps=19 format=3 uid="uid://c75p27x2gpgt3"]
+
+[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="1_6awvn"]
+[ext_resource type="Script" uid="uid://d3yehmdd0fcnm" path="res://Scripts/OfflineRuneSlot.gd" id="1_qn8tj"]
+[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="2_qn8tj"]
+[ext_resource type="PackedScene" uid="uid://cp1msxhypma6i" path="res://Scenes/OfflineRuneSelectionPanel.tscn" id="2_v3syb"]
+[ext_resource type="Texture2D" uid="uid://llqj70wrm8i3" path="res://Sprites/Runes/ARCANE_STRIKE_RUNE.png" id="3_mth0g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ygd5c"]
+resource_local_to_scene = true
+shader = ExtResource("2_qn8tj")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6n8oe"]
+resource_local_to_scene = true
+shader = ExtResource("2_qn8tj")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v3syb"]
+resource_local_to_scene = true
+shader = ExtResource("2_qn8tj")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l7x2l"]
+resource_local_to_scene = true
+shader = ExtResource("2_qn8tj")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xsn2c"]
+resource_local_to_scene = true
+shader = ExtResource("2_qn8tj")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t71ac"]
+resource_local_to_scene = true
+shader = ExtResource("2_qn8tj")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d1ku2"]
+resource_local_to_scene = true
+shader = ExtResource("2_qn8tj")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h1jtd"]
+resource_local_to_scene = true
+shader = ExtResource("2_qn8tj")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qgr5s"]
+resource_local_to_scene = true
+shader = ExtResource("2_qn8tj")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x1vcg"]
+resource_local_to_scene = true
+shader = ExtResource("2_qn8tj")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_645wi"]
+resource_local_to_scene = true
+shader = ExtResource("2_qn8tj")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wnsi3"]
+resource_local_to_scene = true
+shader = ExtResource("2_qn8tj")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y406b"]
+resource_local_to_scene = true
+shader = ExtResource("2_qn8tj")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="OfflineRuneSlot" type="Control" node_paths=PackedStringArray("slot_lbl", "rune_name", "essence_lbl", "essence_hr_lbl", "runes_hr_lbl", "time_lbl", "output_lbl", "tap_lbl", "rune_icon", "info_panel", "icon_panel", "select_rune")]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 590.0
+offset_bottom = 244.0
+script = ExtResource("1_qn8tj")
+slot_lbl = NodePath("Panel/SlotLbl")
+rune_name = NodePath("Panel/NamePanel/NameValue")
+essence_lbl = NodePath("Panel/InfoPanel/Panel/essenceValue")
+essence_hr_lbl = NodePath("Panel/InfoPanel/Panel/essenceHrValue")
+runes_hr_lbl = NodePath("Panel/InfoPanel/Panel/runesHrValue")
+time_lbl = NodePath("Panel/InfoPanel/Panel/timeConsumedvalue")
+output_lbl = NodePath("Panel/InfoPanel/Panel/outputValue")
+tap_lbl = NodePath("Panel/TapLbl")
+rune_icon = NodePath("Panel/RuneTexture/rune")
+info_panel = NodePath("Panel/InfoPanel")
+icon_panel = NodePath("Panel/RuneTexture")
+select_rune = NodePath("Panel/PanelButton")
+rune_selection_panel = ExtResource("2_v3syb")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 590.0
+offset_bottom = 244.0
+
+[node name="SlotLbl" parent="Panel" instance=ExtResource("1_6awvn")]
+material = SubResource("ShaderMaterial_ygd5c")
+layout_mode = 0
+offset_left = 16.0
+offset_top = -2.0
+offset_right = 348.0
+offset_bottom = 135.0
+scale = Vector2(0.5, 0.5)
+text = "Slot 1"
+
+[node name="TapLbl" parent="Panel" instance=ExtResource("1_6awvn")]
+visible = false
+material = SubResource("ShaderMaterial_6n8oe")
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -153.0
+offset_right = 590.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+text = "Tap to select rune"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NamePanel" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 181.0
+offset_top = 11.0
+offset_right = 569.0
+offset_bottom = 58.0
+
+[node name="NameValue" parent="Panel/NamePanel" instance=ExtResource("1_6awvn")]
+material = SubResource("ShaderMaterial_v3syb")
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -20.5
+offset_right = 908.66675
+offset_bottom = 116.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Great Healing"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RuneTexture" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 69.0
+offset_right = 169.0
+offset_bottom = 226.0
+
+[node name="rune" type="TextureRect" parent="Panel/RuneTexture"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_mth0g")
+
+[node name="InfoPanel" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 69.0
+offset_right = 569.0
+offset_bottom = 226.0
+
+[node name="essenceLabel" parent="Panel/InfoPanel" instance=ExtResource("1_6awvn")]
+material = SubResource("ShaderMaterial_l7x2l")
+layout_mode = 0
+offset_left = 7.0
+offset_top = 3.0
+offset_right = 1031.0
+offset_bottom = 140.0
+scale = Vector2(0.25, 0.25)
+text = "Essence"
+
+[node name="essenceHour" parent="Panel/InfoPanel" instance=ExtResource("1_6awvn")]
+material = SubResource("ShaderMaterial_xsn2c")
+layout_mode = 0
+offset_left = 7.0
+offset_top = 32.0
+offset_right = 1031.0
+offset_bottom = 169.0
+scale = Vector2(0.25, 0.25)
+text = "Essence/hour"
+
+[node name="runesHour" parent="Panel/InfoPanel" instance=ExtResource("1_6awvn")]
+material = SubResource("ShaderMaterial_t71ac")
+layout_mode = 0
+offset_left = 7.0
+offset_top = 61.0
+offset_right = 1031.0
+offset_bottom = 198.0
+scale = Vector2(0.25, 0.25)
+text = "runes/hour"
+
+[node name="timeConsumed" parent="Panel/InfoPanel" instance=ExtResource("1_6awvn")]
+material = SubResource("ShaderMaterial_d1ku2")
+layout_mode = 0
+offset_left = 7.0
+offset_top = 90.0
+offset_right = 1031.0
+offset_bottom = 227.0
+scale = Vector2(0.25, 0.25)
+text = "All essences used in"
+
+[node name="output" parent="Panel/InfoPanel" instance=ExtResource("1_6awvn")]
+material = SubResource("ShaderMaterial_h1jtd")
+layout_mode = 0
+offset_left = 7.0
+offset_top = 119.0
+offset_right = 1031.0
+offset_bottom = 256.0
+scale = Vector2(0.25, 0.25)
+text = "Output"
+
+[node name="Panel" type="Panel" parent="Panel/InfoPanel"]
+layout_mode = 0
+offset_left = 257.0
+offset_right = 389.0
+offset_bottom = 157.0
+
+[node name="essenceValue" parent="Panel/InfoPanel/Panel" instance=ExtResource("1_6awvn")]
+material = SubResource("ShaderMaterial_qgr5s")
+layout_mode = 0
+offset_left = 8.0
+offset_top = 3.0
+offset_right = 524.0
+offset_bottom = 140.0
+scale = Vector2(0.25, 0.25)
+text = "Arcane"
+
+[node name="essenceHrValue" parent="Panel/InfoPanel/Panel" instance=ExtResource("1_6awvn")]
+material = SubResource("ShaderMaterial_x1vcg")
+layout_mode = 0
+offset_left = 8.0
+offset_top = 32.0
+offset_right = 524.0
+offset_bottom = 169.0
+scale = Vector2(0.25, 0.25)
+text = "1800"
+
+[node name="runesHrValue" parent="Panel/InfoPanel/Panel" instance=ExtResource("1_6awvn")]
+material = SubResource("ShaderMaterial_645wi")
+layout_mode = 0
+offset_left = 8.0
+offset_top = 61.0
+offset_right = 524.0
+offset_bottom = 198.0
+scale = Vector2(0.25, 0.25)
+text = "400"
+
+[node name="timeConsumedvalue" parent="Panel/InfoPanel/Panel" instance=ExtResource("1_6awvn")]
+material = SubResource("ShaderMaterial_wnsi3")
+layout_mode = 0
+offset_left = 8.0
+offset_top = 90.0
+offset_right = 524.0
+offset_bottom = 227.0
+scale = Vector2(0.25, 0.25)
+text = "24h:59s"
+
+[node name="outputValue" parent="Panel/InfoPanel/Panel" instance=ExtResource("1_6awvn")]
+material = SubResource("ShaderMaterial_y406b")
+layout_mode = 0
+offset_left = 8.0
+offset_top = 119.0
+offset_right = 524.0
+offset_bottom = 256.0
+scale = Vector2(0.25, 0.25)
+text = "~500"
+
+[node name="PanelButton" type="Button" parent="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Arcane"

@@ -3,7 +3,12 @@ class_name SaveData
 
 @export_category("General")
 @export var inventory: Array[EquipmentInstance] = []
-@export var rune_inv: Dictionary
+@export var rune_inv: Dictionary = { # Start pack
+	"Arcane Cross": 20,
+	"Arcane Explosion": 10,
+	"Arcane Strike": 100,
+	"Great Healing": 25
+}
 
 @export_category("Player")
 @export var current_level:int = 1
@@ -28,6 +33,15 @@ class_name SaveData
 @export var equipped = {
 	"slot1": null,
 	"slot2": null
+}
+# Null or rune names
+@export var offline_runes = {
+	"slot1": "Arcane Strike",
+	"slot2": null,
+	"slot3": null,
+	"slot4": null,
+	"slot5": null,
+	"slot6": null
 }
 @export var unlocked_monster_families = {
 	"slimes": false,
@@ -77,3 +91,13 @@ func remove_rune_from_inv(rune:RuneData, qty:int) -> int:
 		return 0
 	
 	return rune_inv[rune.name]
+
+# Data can be null or a string (rune name)
+func set_offline_rune_slot(id:int, data) -> void:
+	var slot_label:String = str("slot", id)
+	offline_runes[slot_label] = data
+
+# Returns null or string
+func get_offline_rune_slot(id):
+	var slot_label:String = str("slot", id)
+	return offline_runes[slot_label]

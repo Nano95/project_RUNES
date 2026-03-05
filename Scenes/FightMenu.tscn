@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dnnqjb0eguu63" path="res://Sprites/SWORD_LARGE_ICON.png" id="7_ou8aj"]
 [ext_resource type="Texture2D" uid="uid://trfwff23tnyo" path="res://Sprites/EXP_ICON.png" id="8_0c1bx"]
 [ext_resource type="Texture2D" uid="uid://by8eyn77jli18" path="res://Sprites/GOLD_ICON.png" id="8_ryii3"]
-[ext_resource type="Texture2D" uid="uid://bsyplht1cw35v" path="res://Sprites/ESSENCE_ICON.png" id="9_0c1bx"]
+[ext_resource type="Texture2D" uid="uid://bsyplht1cw35v" path="res://Sprites/arcane_ESSENCE_ICON.png" id="9_0c1bx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_55pba"]
 shader = ExtResource("2_p854w")
