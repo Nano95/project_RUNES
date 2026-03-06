@@ -14,4 +14,6 @@ power = 100
 focus_cost = 3
 rune_type = "life"
 buy_cost = 60
+craft_time = 8
+essence_cost = 4
 metadata/_custom_type_script = "uid://wqovi0smk0qq"

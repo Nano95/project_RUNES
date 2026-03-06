@@ -11,4 +11,6 @@ icon = ExtResource("1_vbc1f")
 pattern = "cross"
 focus_cost = 4
 buy_cost = 30
+craft_time = 9
+essence_cost = 6
 metadata/_custom_type_script = "uid://wqovi0smk0qq"

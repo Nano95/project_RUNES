@@ -162,12 +162,20 @@ func spawn_summary_panel(message:String="mmm!") -> void:
 
 func register_monster(monster:MonsterInstance): 
 	monsters.append(monster)
-	#monster.died.connect(monster_died)
 
 func monster_died(monster):
 	# Remove from flat list
 	enemies_killed += 1
 	main.game_data.enemies_killed += 1
+	if (monster.name in main.game_data.total_monster_kills):
+		main.game_data.total_monster_kills[monster.name] += 1
+	else:
+		main.game_data.total_monster_kills[monster.name] = 1
+	if (monster.name in main.game_data.total_run_monster_kills):
+		main.game_data.total_run_monster_kills[monster.name] += 1
+	else:
+		main.game_data.total_run_monster_kills[monster.name] = 1
+
 	monsters.erase(monster)
 
 	# Remove from grid

@@ -22,6 +22,7 @@ Utils="*res://Scripts/Utils.gd"
 MonsterDatabase="*res://Scripts/MonsterDatabase.gd"
 RuneDatabase="*res://Scripts/RuneDatabase.gd"
 ItemsDatabase="*res://Scripts/ItemsDatabase.gd"
+CraftingSystem="*res://Scripts/CraftingSystem.gd"
 
 [display]
 

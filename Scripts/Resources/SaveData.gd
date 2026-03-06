@@ -9,6 +9,7 @@ class_name SaveData
 	"Arcane Strike": 100,
 	"Great Healing": 25
 }
+@export var last_crafting_timestamp:int = 0
 
 @export_category("Player")
 @export var current_level:int = 1
@@ -36,12 +37,20 @@ class_name SaveData
 }
 # Null or rune names
 @export var offline_runes = {
-	"slot1": "Arcane Strike",
+	"slot1": null,
 	"slot2": null,
 	"slot3": null,
 	"slot4": null,
 	"slot5": null,
 	"slot6": null
+}
+@export var offline_rune_timestamps = { 
+	"slot1": 0, 
+	"slot2": 0,
+	"slot3": 0,
+	"slot4": 0,
+	"slot5": 0,
+	"slot6": 0
 }
 @export var unlocked_monster_families = {
 	"slimes": false,
@@ -56,6 +65,28 @@ class_name SaveData
 @export_category("Stats")
 @export var runes_used:int = 0
 @export var enemies_killed:int = 0
+@export var total_runes_obtained: Dictionary = {
+	#"Arcane Cross": 20,
+	#"Arcane Explosion": 10,
+	#"Arcane Strike": 100,
+	#"Great Healing": 25
+}
+# these reset every time that you prestige.
+@export var current_run_runes_obtained: Dictionary = {
+	#"Arcane Cross": 20,
+	#"Arcane Explosion": 10,
+	#"Arcane Strike": 100,
+	#"Great Healing": 25
+}
+
+@export var total_monster_kills: Dictionary = {
+	#"slime hatchling": 20,
+	#"elite slime": 10,
+}
+@export var total_run_monster_kills: Dictionary = {
+	#"slime hatchling": 20,
+	#"elite slime": 10,
+}
 
 func add_item_to_inventory(item: EquipmentInstance) -> void:
 	inventory.append(item)
@@ -101,3 +132,23 @@ func set_offline_rune_slot(id:int, data) -> void:
 func get_offline_rune_slot(id):
 	var slot_label:String = str("slot", id)
 	return offline_runes[slot_label]
+
+func add_crafted_runes_by_name(runes:Dictionary) -> void:
+	for rune_name in runes.keys():
+		var qty:int = runes[rune_name]
+		# FOR THE INVENTORY
+		if (rune_name in rune_inv):
+			rune_inv[rune_name] += qty
+		else:
+			rune_inv[rune_name] = qty
+		# FOR THE STATS
+		if (rune_name in current_run_runes_obtained):
+			current_run_runes_obtained[rune_name] += qty
+		else:
+			current_run_runes_obtained[rune_name] = qty
+		
+		if (rune_name in total_runes_obtained):
+			total_runes_obtained[rune_name] += qty
+		else:
+			total_runes_obtained[rune_name] = qty
+	

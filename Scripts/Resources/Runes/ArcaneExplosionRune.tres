@@ -11,4 +11,6 @@ icon = ExtResource("1_xs2cs")
 pattern = "expl"
 focus_cost = 8
 buy_cost = 120
+craft_time = 14
+essence_cost = 12
 metadata/_custom_type_script = "uid://wqovi0smk0qq"

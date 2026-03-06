@@ -10,4 +10,6 @@ mini_name = "Arc Str"
 icon = ExtResource("1_78jlq")
 pattern = "strike"
 buy_cost = 15
+craft_time = 6
+essence_cost = 3
 metadata/_custom_type_script = "uid://wqovi0smk0qq"

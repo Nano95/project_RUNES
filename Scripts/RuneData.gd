@@ -9,4 +9,7 @@ class_name RuneData
 @export var power: int = 0
 @export var focus_cost: int = 1
 @export var rune_type: String = "arcane" # arcane, electric, fire, ice, earth, heal
+@export var essence_type: String = "arcane" # arcane, electric, fire, ice, earth, heal
 @export var buy_cost:int = 100
+@export var craft_time:int = 10
+@export var essence_cost:int = 2

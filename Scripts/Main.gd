@@ -126,22 +126,26 @@ func _notification(what):
 
 func focus_in_notification() -> void:
 	# gets most recent time to calculate total time played
-	#latest_timestamp_player_focused_in = Time.get_unix_time_from_system()
-	#total_time_gone = get_time_gone() -> IN UTILS
-	print("-debug: FOCUS IN")
-	pass
+	@warning_ignore("narrowing_conversion")
+	var now:int = Time.get_unix_time_from_system()
+	var last:int = game_data.last_crafting_timestamp
+
+	if last > 0:
+		var elapsed:int = now - last
+		print("FOCUS IN — elapsed: ", elapsed)
+		var results = CraftingSystem.process_elapsed(elapsed, game_data)
+		game_data.add_crafted_runes_by_name(results)
+
+		if (active_menu_ref is MainMenu):
+			active_menu_ref.update_info_panel()
+	game_data.last_crafting_timestamp = now
 
 func focus_out_notification() -> void:
 	# calculates total time played - app on but out of focus
-	#latest_timestamp_player_focused_out = Time.get_unix_time_from_system()
-	#if (latest_timestamp_player_focused_in):
-		#if (latest_timestamp_player_focused_in <= latest_timestamp_player_focused_in):
-			#var time_calculation = latest_timestamp_player_focused_out - latest_timestamp_player_focused_in
-			#player_data.total_time_played += int(time_calculation)
-#
-	#player_data.last_seen = str(ceil(Time.get_unix_time_from_system()))
-	print("-debug: FOCUS OUT")
+	@warning_ignore("narrowing_conversion")
+	game_data.last_crafting_timestamp = Time.get_unix_time_from_system()
 	save_game()
+	print("-debug: FOCUS OUT")
 
 
 ########### SAVE THINGS ##############
