@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://2dvdykbjounr"]
+[gd_scene load_steps=26 format=3 uid="uid://2dvdykbjounr"]
 
 [ext_resource type="Script" uid="uid://crgoc5n1t752c" path="res://Scripts/FightMenu.gd" id="1_ipivn"]
 [ext_resource type="PackedScene" uid="uid://b37x20v0etu6t" path="res://Scenes/MyButton.tscn" id="2_0c1bx"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_x5u2f"]
 [ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="4_ov7x6"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="5_utror"]
+[ext_resource type="PackedScene" uid="uid://cby5cdsq4bcyo" path="res://Scenes/FightMenuRuneButton.tscn" id="6_f0u7t"]
 [ext_resource type="Script" uid="uid://der06tyl3xyu3" path="res://Scripts/MonsterInfoPanel.gd" id="6_ou8aj"]
 [ext_resource type="Texture2D" uid="uid://ddh2mb0rv2wj8" path="res://Sprites/health_icon.png" id="6_utror"]
 [ext_resource type="Texture2D" uid="uid://dnnqjb0eguu63" path="res://Sprites/SWORD_LARGE_ICON.png" id="7_ou8aj"]
@@ -214,6 +215,15 @@ layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 10
 columns = 3
+
+[node name="Button" parent="ColorRect/Panel/ChooseRunes/ScrollContainer2/MarginContainer/GridContainer" instance=ExtResource("6_f0u7t")]
+layout_mode = 2
+
+[node name="Button2" parent="ColorRect/Panel/ChooseRunes/ScrollContainer2/MarginContainer/GridContainer" instance=ExtResource("6_f0u7t")]
+layout_mode = 2
+
+[node name="Button3" parent="ColorRect/Panel/ChooseRunes/ScrollContainer2/MarginContainer/GridContainer" instance=ExtResource("6_f0u7t")]
+layout_mode = 2
 
 [node name="ToggleMonsterInfo" type="Button" parent="ColorRect/Panel"]
 layout_mode = 0

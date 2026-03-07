@@ -125,6 +125,7 @@ func remove_rune_from_inv(rune:RuneData, qty:int) -> int:
 
 # Data can be null or a string (rune name)
 func set_offline_rune_slot(id:int, data) -> void:
+	if (data == ""): data = null
 	var slot_label:String = str("slot", id)
 	offline_runes[slot_label] = data
 

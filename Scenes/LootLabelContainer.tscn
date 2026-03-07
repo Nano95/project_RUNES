@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bgmuooukrioal"]
 
 [ext_resource type="Script" uid="uid://dsljgeq3tfeuk" path="res://Scripts/LootLabel.gd" id="1_d1b7w"]
-[ext_resource type="Texture2D" uid="uid://bsyplht1cw35v" path="res://Sprites/arcane_ESSENCE_ICON.png" id="2_iwhnq"]
+[ext_resource type="Texture2D" uid="uid://dkfihb5ypu6kn" path="res://Sprites/tiny_heart.png" id="2_d1b7w"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_ifx40"]
 [ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="4_uws8e"]
 
@@ -23,7 +23,7 @@ script = ExtResource("1_d1b7w")
 layout_mode = 0
 offset_right = 49.0
 offset_bottom = 49.0
-texture = ExtResource("2_iwhnq")
+texture = ExtResource("2_d1b7w")
 
 [node name="Label" parent="." instance=ExtResource("3_ifx40")]
 material = SubResource("ShaderMaterial_8l2pk")

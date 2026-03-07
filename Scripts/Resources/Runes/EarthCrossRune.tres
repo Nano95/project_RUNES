@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="RuneData" load_steps=3 format=3 uid="uid://6bcidnyo8mch"]
+
+[ext_resource type="Texture2D" uid="uid://deamaiuw0pcuj" path="res://Sprites/Runes/EARTH_CROSS_RUNE.png" id="1_gsks3"]
+[ext_resource type="Script" uid="uid://wqovi0smk0qq" path="res://Scripts/RuneData.gd" id="2_0eeqk"]
+
+[resource]
+script = ExtResource("2_0eeqk")
+name = "Earth Cross"
+mini_name = "Eth Cross"
+icon = ExtResource("1_gsks3")
+pattern = "cross"
+focus_cost = 4
+rune_type = "earth"
+essence_type = "earth"
+buy_cost = 35
+essence_cost = 7
+metadata/_custom_type_script = "uid://wqovi0smk0qq"

@@ -14,6 +14,7 @@ shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
 [node name="Button" type="Button"]
+custom_minimum_size = Vector2(450, 225)
 offset_right = 800.0
 offset_bottom = 300.0
 scale = Vector2(0.25, 0.25)

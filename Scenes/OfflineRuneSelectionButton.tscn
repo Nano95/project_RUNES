@@ -53,7 +53,7 @@ offset_top = 149.0
 offset_right = 147.0
 offset_bottom = 195.0
 
-[node name="Label" parent="Panel/Panel2" instance=ExtResource("2_oa0bc")]
+[node name="essLabel" parent="Panel/Panel2" instance=ExtResource("2_oa0bc")]
 material = SubResource("ShaderMaterial_or8xw")
 layout_mode = 0
 offset_left = 49.0
@@ -72,7 +72,7 @@ offset_bottom = 43.000004
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("4_7n3pg")
 
-[node name="Label2" parent="Panel/Panel2" instance=ExtResource("2_oa0bc")]
+[node name="runeLabel" parent="Panel/Panel2" instance=ExtResource("2_oa0bc")]
 material = SubResource("ShaderMaterial_oa0bc")
 layout_mode = 0
 offset_left = 49.0

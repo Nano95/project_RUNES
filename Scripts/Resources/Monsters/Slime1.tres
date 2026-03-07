@@ -16,5 +16,6 @@ max_essence_amount = 2
 anim_offset_y = -8
 anim_name = "slime1"
 weaknesses = Array[String]([])
+resistances = Array[String](["earth"])
 immunities = Array[String]([])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

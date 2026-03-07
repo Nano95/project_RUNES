@@ -36,6 +36,8 @@ func setup_rune_grid() -> void:
 	#for rune in Utils.all_runes:
 	var runes = RuneDatabase.runes
 	for rune in runes.keys():
+		if !(rune in main.game_data.rune_inv):
+			continue
 		var btn := rune_button.instantiate()
 		btn.setup(runes[rune])
 		btn.pressed.connect(_on_rune_pressed.bind(rune))

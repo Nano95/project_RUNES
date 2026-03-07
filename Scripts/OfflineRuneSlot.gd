@@ -21,7 +21,6 @@ var main:MainNode
 var parent_panel:OfflineRunesPanel
 func setup(m:MainNode, r, parent:OfflineRunesPanel, id:int=1) -> void:
 	main = m
-	print("Slot: ", r, " - ", id)
 	if r == null: 
 		rune = null 
 	else: 
@@ -29,12 +28,10 @@ func setup(m:MainNode, r, parent:OfflineRunesPanel, id:int=1) -> void:
 	slot_id = id
 	slot_lbl.text = str("Slot ", slot_id)
 	parent_panel = parent
-	print("rune: ", rune)
 	select_rune.pressed.connect(spawn_rune_selector)
 	update_panel()
 
 func spawn_rune_selector() -> void:
-	print("spawning rune selector...")
 	var pnl = rune_selection_panel.instantiate()
 	pnl.setup(main, slot_id, parent_panel)
 	main.spawn_to_top_ui_layer(pnl)
@@ -58,6 +55,11 @@ func update_rune_data() -> void:
 	info_panel.visible = true
 	rune_name.text = rune.name
 	rune_icon.texture = rune.icon
-	
+	essence_lbl.text = rune.essence_type
+	var avail_essences = main.game_data.current_essences[rune.essence_type]
+	print("essences available: ", avail_essences)
 	# Calculations:
-	
+	var ess_per_hour:int = floor((float(rune.essence_cost) / float(rune.craft_time)) * 3600)
+	essence_hr_lbl.text = str(ess_per_hour)
+	var runes_per_hour:int = floor((1.0 / float(rune.craft_time)) * 3600.0)
+	runes_hr_lbl.text = str(runes_per_hour) 

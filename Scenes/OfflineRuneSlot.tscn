@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c75p27x2gpgt3"]
+[gd_scene load_steps=15 format=3 uid="uid://c75p27x2gpgt3"]
 
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="1_6awvn"]
 [ext_resource type="Script" uid="uid://d3yehmdd0fcnm" path="res://Scripts/OfflineRuneSlot.gd" id="1_qn8tj"]
@@ -42,18 +42,6 @@ shader = ExtResource("2_qn8tj")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d1ku2"]
-resource_local_to_scene = true
-shader = ExtResource("2_qn8tj")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_h1jtd"]
-resource_local_to_scene = true
-shader = ExtResource("2_qn8tj")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qgr5s"]
 resource_local_to_scene = true
 shader = ExtResource("2_qn8tj")
@@ -72,18 +60,6 @@ shader = ExtResource("2_qn8tj")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wnsi3"]
-resource_local_to_scene = true
-shader = ExtResource("2_qn8tj")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_y406b"]
-resource_local_to_scene = true
-shader = ExtResource("2_qn8tj")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
 [node name="OfflineRuneSlot" type="Control" node_paths=PackedStringArray("slot_lbl", "rune_name", "essence_lbl", "essence_hr_lbl", "runes_hr_lbl", "time_lbl", "output_lbl", "tap_lbl", "rune_icon", "info_panel", "icon_panel", "select_rune")]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 3
@@ -96,8 +72,8 @@ rune_name = NodePath("Panel/NamePanel/NameValue")
 essence_lbl = NodePath("Panel/InfoPanel/Panel/essenceValue")
 essence_hr_lbl = NodePath("Panel/InfoPanel/Panel/essenceHrValue")
 runes_hr_lbl = NodePath("Panel/InfoPanel/Panel/runesHrValue")
-time_lbl = NodePath("Panel/InfoPanel/Panel/timeConsumedvalue")
-output_lbl = NodePath("Panel/InfoPanel/Panel/outputValue")
+time_lbl = NodePath("")
+output_lbl = NodePath("")
 tap_lbl = NodePath("Panel/TapLbl")
 rune_icon = NodePath("Panel/RuneTexture/rune")
 info_panel = NodePath("Panel/InfoPanel")
@@ -188,9 +164,9 @@ offset_bottom = 226.0
 material = SubResource("ShaderMaterial_l7x2l")
 layout_mode = 0
 offset_left = 7.0
-offset_top = 3.0
+offset_top = 25.0
 offset_right = 1031.0
-offset_bottom = 140.0
+offset_bottom = 162.0
 scale = Vector2(0.25, 0.25)
 text = "Essence"
 
@@ -198,9 +174,9 @@ text = "Essence"
 material = SubResource("ShaderMaterial_xsn2c")
 layout_mode = 0
 offset_left = 7.0
-offset_top = 32.0
+offset_top = 60.0
 offset_right = 1031.0
-offset_bottom = 169.0
+offset_bottom = 197.0
 scale = Vector2(0.25, 0.25)
 text = "Essence/hour"
 
@@ -208,31 +184,11 @@ text = "Essence/hour"
 material = SubResource("ShaderMaterial_t71ac")
 layout_mode = 0
 offset_left = 7.0
-offset_top = 61.0
+offset_top = 95.0
 offset_right = 1031.0
-offset_bottom = 198.0
+offset_bottom = 232.0
 scale = Vector2(0.25, 0.25)
-text = "runes/hour"
-
-[node name="timeConsumed" parent="Panel/InfoPanel" instance=ExtResource("1_6awvn")]
-material = SubResource("ShaderMaterial_d1ku2")
-layout_mode = 0
-offset_left = 7.0
-offset_top = 90.0
-offset_right = 1031.0
-offset_bottom = 227.0
-scale = Vector2(0.25, 0.25)
-text = "All essences used in"
-
-[node name="output" parent="Panel/InfoPanel" instance=ExtResource("1_6awvn")]
-material = SubResource("ShaderMaterial_h1jtd")
-layout_mode = 0
-offset_left = 7.0
-offset_top = 119.0
-offset_right = 1031.0
-offset_bottom = 256.0
-scale = Vector2(0.25, 0.25)
-text = "Output"
+text = "Runes/hour"
 
 [node name="Panel" type="Panel" parent="Panel/InfoPanel"]
 layout_mode = 0
@@ -244,9 +200,9 @@ offset_bottom = 157.0
 material = SubResource("ShaderMaterial_qgr5s")
 layout_mode = 0
 offset_left = 8.0
-offset_top = 3.0
+offset_top = 23.0
 offset_right = 524.0
-offset_bottom = 140.0
+offset_bottom = 160.0
 scale = Vector2(0.25, 0.25)
 text = "Arcane"
 
@@ -254,9 +210,9 @@ text = "Arcane"
 material = SubResource("ShaderMaterial_x1vcg")
 layout_mode = 0
 offset_left = 8.0
-offset_top = 32.0
+offset_top = 60.0
 offset_right = 524.0
-offset_bottom = 169.0
+offset_bottom = 197.0
 scale = Vector2(0.25, 0.25)
 text = "1800"
 
@@ -264,31 +220,11 @@ text = "1800"
 material = SubResource("ShaderMaterial_645wi")
 layout_mode = 0
 offset_left = 8.0
-offset_top = 61.0
+offset_top = 95.0
 offset_right = 524.0
-offset_bottom = 198.0
+offset_bottom = 232.0
 scale = Vector2(0.25, 0.25)
 text = "400"
-
-[node name="timeConsumedvalue" parent="Panel/InfoPanel/Panel" instance=ExtResource("1_6awvn")]
-material = SubResource("ShaderMaterial_wnsi3")
-layout_mode = 0
-offset_left = 8.0
-offset_top = 90.0
-offset_right = 524.0
-offset_bottom = 227.0
-scale = Vector2(0.25, 0.25)
-text = "24h:59s"
-
-[node name="outputValue" parent="Panel/InfoPanel/Panel" instance=ExtResource("1_6awvn")]
-material = SubResource("ShaderMaterial_y406b")
-layout_mode = 0
-offset_left = 8.0
-offset_top = 119.0
-offset_right = 524.0
-offset_bottom = 256.0
-scale = Vector2(0.25, 0.25)
-text = "~500"
 
 [node name="PanelButton" type="Button" parent="Panel"]
 self_modulate = Color(1, 1, 1, 0)

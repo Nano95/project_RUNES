@@ -27,6 +27,7 @@ func setup_shop() -> void:
 	btn100.toggled.connect(qty_button_pressed)
 	$Panel/TypesContainer/arcane.pressed.connect(show_runes_for_element.bind("arcane"))
 	$Panel/TypesContainer/healing.pressed.connect(show_runes_for_element.bind("life"))
+	$Panel/TypesContainer/earth.pressed.connect(show_runes_for_element.bind("earth"))
 
 func show_runes_for_element(element: String):
 	# clear them first

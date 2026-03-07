@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="RuneData" load_steps=3 format=3 uid="uid://fo5txeb7kkwf"]
+
+[ext_resource type="Texture2D" uid="uid://db1cyxbggkhhy" path="res://Sprites/Runes/EARTH_STRIKE_RUNE.png" id="1_brjbw"]
+[ext_resource type="Script" uid="uid://wqovi0smk0qq" path="res://Scripts/RuneData.gd" id="2_jopka"]
+
+[resource]
+script = ExtResource("2_jopka")
+name = "Earth Strike"
+mini_name = "Eth Str"
+icon = ExtResource("1_brjbw")
+pattern = "strike"
+rune_type = "earth"
+essence_type = "earth"
+buy_cost = 20
+craft_time = 7
+essence_cost = 4
+metadata/_custom_type_script = "uid://wqovi0smk0qq"

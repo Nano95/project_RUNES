@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cp1msxhypma6i"]
+[gd_scene load_steps=13 format=3 uid="uid://cp1msxhypma6i"]
 
 [ext_resource type="Script" uid="uid://ctkw6kx3b8hew" path="res://Scripts/OfflineRunesSelectionPanel.gd" id="1_iow1g"]
 [ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="3_nbs4l"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://101a4tcc6v3" path="res://Scenes/OfflineRuneSelectionButton.tscn" id="5_iow1g"]
 [ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="5_lbyph"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="6_bjq66"]
+[ext_resource type="Texture2D" uid="uid://cbtr8w3ak64pc" path="res://Sprites/Runes/BLANK_CLEAR_ICON.png" id="7_i4p6k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_55pba"]
 shader = ExtResource("3_nbs4l")
@@ -23,7 +24,19 @@ shader = ExtResource("5_lbyph")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="OfflineRunesSelectionPanel" type="Control" node_paths=PackedStringArray("exit_btn", "grid_container")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_or8xw"]
+resource_local_to_scene = true
+shader = ExtResource("5_lbyph")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oa0bc"]
+resource_local_to_scene = true
+shader = ExtResource("5_lbyph")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="OfflineRunesSelectionPanel" type="Control" node_paths=PackedStringArray("exit_btn", "grid_container", "clear_rune_button")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -41,6 +54,7 @@ script = ExtResource("1_iow1g")
 rune_select_btn = ExtResource("5_iow1g")
 exit_btn = NodePath("ColorRect/Panel/Title/Exit")
 grid_container = NodePath("ColorRect/Panel/Slots/ScrollContainer/SlotsContainer")
+clear_rune_button = NodePath("ColorRect/Panel/Slots/ScrollContainer/SlotsContainer/OfflineRuneSelectionButton")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_55pba")
@@ -127,3 +141,25 @@ layout_mode = 2
 theme_override_constants/h_separation = 11
 theme_override_constants/v_separation = 101
 columns = 4
+
+[node name="OfflineRuneSelectionButton" parent="ColorRect/Panel/Slots/ScrollContainer/SlotsContainer" instance=ExtResource("5_iow1g")]
+layout_mode = 2
+
+[node name="TextureRect" parent="ColorRect/Panel/Slots/ScrollContainer/SlotsContainer/OfflineRuneSelectionButton/Panel/Panel" index="0"]
+texture = ExtResource("7_i4p6k")
+
+[node name="essLabel" parent="ColorRect/Panel/Slots/ScrollContainer/SlotsContainer/OfflineRuneSelectionButton/Panel/Panel2" index="0"]
+material = SubResource("ShaderMaterial_or8xw")
+text = "CLEAR"
+
+[node name="TextureRect" parent="ColorRect/Panel/Slots/ScrollContainer/SlotsContainer/OfflineRuneSelectionButton/Panel/Panel2" index="1"]
+visible = false
+
+[node name="runeLabel" parent="ColorRect/Panel/Slots/ScrollContainer/SlotsContainer/OfflineRuneSelectionButton/Panel/Panel2" index="2"]
+visible = false
+material = SubResource("ShaderMaterial_oa0bc")
+
+[node name="TextureRect2" parent="ColorRect/Panel/Slots/ScrollContainer/SlotsContainer/OfflineRuneSelectionButton/Panel/Panel2" index="3"]
+visible = false
+
+[editable path="ColorRect/Panel/Slots/ScrollContainer/SlotsContainer/OfflineRuneSelectionButton"]

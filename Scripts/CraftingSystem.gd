@@ -31,6 +31,7 @@ func process_elapsed(elapsed:int, game_data) -> Dictionary:
 
 	var essence_pools:Dictionary = game_data.current_essences
 	var slots := _load_slots(game_data)
+	var slot_elapsed:int = 0
 
 	for slot in slots:
 		var slot_key:String = slot.slot_key
@@ -42,28 +43,16 @@ func process_elapsed(elapsed:int, game_data) -> Dictionary:
 			continue
 
 		@warning_ignore("narrowing_conversion")
-		var slot_elapsed:int = Time.get_unix_time_from_system() - last_ts
-		print("\n--- SLOT DEBUG ---")
-		print("Slot:", slot_key)
-		print("Rune:", slot.rune_name)
-		print("Craft time:", slot.craft_time)
-		print("Essence cost:", slot.essence_cost)
-
-		print("Last timestamp:", last_ts)
-		print("Now:", Time.get_unix_time_from_system())
-		print("Computed slot_elapsed:", slot_elapsed)
-		print("Elapsed passed into function:", elapsed)
+		slot_elapsed = Time.get_unix_time_from_system() - last_ts
 
 		# How many full crafts completed?
 		var cycles:int = slot_elapsed / slot.craft_time
-		print("Full cycles possible:", cycles)
 		if cycles <= 0:
 			continue
 		# Check if essence pool has enough
 		var pool:int = essence_pools.get(slot.essence_type, 0)
 		var cycles_possible:int = min(cycles, pool / slot.essence_cost)
-		print("Essence pool:", pool)
-		print("Cycles affordable:", cycles_possible)
+
 		if cycles_possible > 0:
 			# Produce runes
 			produced[slot.rune_name] = produced.get(slot.rune_name, 0) + cycles_possible
@@ -74,11 +63,8 @@ func process_elapsed(elapsed:int, game_data) -> Dictionary:
 		# Update timestamp to reflect leftover partial progress
 		var leftover_time:int = slot_elapsed % slot.craft_time
 		game_data.offline_rune_timestamps[slot_key] = Time.get_unix_time_from_system() - leftover_time
-		print("Leftover time:", leftover_time)
-		print("New timestamp:", game_data.offline_rune_timestamps[slot_key])
-		print("--- END SLOT DEBUG ---\n")
 
-	print("== Produced while away: ", produced)
+	print("== Produced while away: ", " gone: ",slot_elapsed , "=== ", produced)
 	return produced
 
 

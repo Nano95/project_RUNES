@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RuneData" load_steps=3 format=3 uid="uid://5ku0ifkq1jbk"]
+
+[ext_resource type="Texture2D" uid="uid://h4jf6b25c0fl" path="res://Sprites/Runes/EARTH_EXPLOSION_RUNE.png" id="1_xq1ph"]
+[ext_resource type="Script" uid="uid://wqovi0smk0qq" path="res://Scripts/RuneData.gd" id="2_412cf"]
+
+[resource]
+script = ExtResource("2_412cf")
+name = "Earth Explosion"
+mini_name = "Eth Expl"
+icon = ExtResource("1_xq1ph")
+pattern = "expl"
+focus_cost = 8
+rune_type = "earth"
+essence_type = "earth"
+buy_cost = 125
+craft_time = 15
+essence_cost = 13
+metadata/_custom_type_script = "uid://wqovi0smk0qq"

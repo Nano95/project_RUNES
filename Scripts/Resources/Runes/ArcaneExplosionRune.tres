@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_t0iws")
 name = "Arcane Explosion"
-mini_name = "Arc Exp"
+mini_name = "Arc Expl"
 icon = ExtResource("1_xs2cs")
 pattern = "expl"
 focus_cost = 8
