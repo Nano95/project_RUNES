@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://w1anjwd6ku5f"]
+[gd_scene load_steps=12 format=3 uid="uid://w1anjwd6ku5f"]
 
 [ext_resource type="Script" uid="uid://cjn4rwvwos7w6" path="res://Scripts/OfflineRunesPanel.gd" id="1_holjq"]
 [ext_resource type="PackedScene" uid="uid://c75p27x2gpgt3" path="res://Scenes/OfflineRuneSlot.tscn" id="2_holjq"]
 [ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="3_7nav1"]
+[ext_resource type="PackedScene" uid="uid://cfuov8orkxl0o" path="res://Scenes/MyListLabel.tscn" id="3_s7eqj"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="4_qj4xs"]
 [ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="5_rxgki"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="6_qxrmt"]
@@ -29,7 +30,7 @@ shader = ExtResource("5_rxgki")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="OfflineRunesPanel" type="Control" node_paths=PackedStringArray("close_btn", "slots_container")]
+[node name="OfflineRunesPanel" type="Control" node_paths=PackedStringArray("close_btn", "slots_container", "essence_summary_container", "rune_summary_container")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -47,6 +48,9 @@ script = ExtResource("1_holjq")
 rune_slot_ref = ExtResource("2_holjq")
 close_btn = NodePath("ColorRect/Panel/Title/Exit")
 slots_container = NodePath("ColorRect/Panel/Slots/SlotsContainer")
+essence_summary_container = NodePath("ColorRect/Panel/Summary/Panel/EssenceTimes/ScrollContainer/MarginContainer/VBoxContainer")
+rune_summary_container = NodePath("ColorRect/Panel/Summary/Panel/RuneProduction/ScrollContainer/MarginContainer/VBoxContainer")
+my_lbl = ExtResource("3_s7eqj")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_55pba")
@@ -146,9 +150,9 @@ grow_vertical = 2
 material = SubResource("ShaderMaterial_s7eqj")
 layout_mode = 0
 offset_left = 47.0
-offset_top = 3.0000153
+offset_top = -1.9999843
 offset_right = 1601.9999
-offset_bottom = 140.00002
+offset_bottom = 135.00002
 scale = Vector2(0.4, 0.4)
 text = "Summary"
 
@@ -160,3 +164,70 @@ offset_right = 754.2223
 offset_bottom = 343.88885
 scale = Vector2(0.9, 0.9)
 theme_override_constants/separation = 0
+
+[node name="Panel" type="Panel" parent="ColorRect/Panel/Summary"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 58.0
+offset_right = 627.0
+offset_bottom = 325.0
+
+[node name="Depletion" parent="ColorRect/Panel/Summary/Panel" instance=ExtResource("4_qj4xs")]
+material = SubResource("ShaderMaterial_s7eqj")
+layout_mode = 0
+offset_left = 21.000004
+offset_top = 1.9999962
+offset_right = 1834.3333
+offset_bottom = 139.0
+text = "Essence depletion times"
+
+[node name="EssenceTimes" type="Panel" parent="ColorRect/Panel/Summary/Panel"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 44.0
+offset_right = 527.0
+offset_bottom = 124.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/Panel/Summary/Panel/EssenceTimes"]
+layout_mode = 0
+offset_right = 505.0
+offset_bottom = 67.0
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/Panel/Summary/Panel/EssenceTimes/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/Panel/Summary/Panel/EssenceTimes/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="RuneProduction2" parent="ColorRect/Panel/Summary/Panel" instance=ExtResource("4_qj4xs")]
+material = SubResource("ShaderMaterial_s7eqj")
+layout_mode = 0
+offset_left = 21.0
+offset_top = 127.0
+offset_right = 1834.3333
+offset_bottom = 264.0
+text = "Runes expected output"
+
+[node name="RuneProduction" type="Panel" parent="ColorRect/Panel/Summary/Panel"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 165.0
+offset_right = 527.0
+offset_bottom = 261.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/Panel/Summary/Panel/RuneProduction"]
+layout_mode = 0
+offset_right = 505.0
+offset_bottom = 93.0
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/Panel/Summary/Panel/RuneProduction/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/Panel/Summary/Panel/RuneProduction/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25

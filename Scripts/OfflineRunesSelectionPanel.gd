@@ -12,13 +12,14 @@ var parent:OfflineRunesPanel
 func _ready() -> void:
 	Utils.animate_summary_in_happy(self)
 	exit_btn.pressed.connect(exit)
+	$Button.pressed.connect(exit)
 	populate_container()
 
 func setup(m:MainNode, id:int, parent_panel:OfflineRunesPanel) -> void:
 	main = m
 	slot_id = id
 	parent = parent_panel
-	$ColorRect/Panel/Title/Title.text = str("Select slot ", slot_id, " rune!")
+	$Panel/Title/Title.text = str("Select slot ", slot_id, " rune!")
 
 func populate_container() -> void:
 	clear_rune_button.setup(null, select_rune)

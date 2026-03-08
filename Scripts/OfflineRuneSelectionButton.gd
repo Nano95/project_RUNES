@@ -14,8 +14,6 @@ func setup(r:RuneData, cta:Callable) -> void:
 func populate_rune_data() -> void:
 	if (rune is not RuneData): return
 	$Panel/Panel/TextureRect.texture = rune.icon
-	var ess_per_hour:int = floor((float(rune.essence_cost) / float(rune.craft_time)) * 3600)
-	$Panel/Panel2/essLabel.text = str("/hr: ", ess_per_hour)
-	var runes_per_hour:int = floor((1.0 / float(rune.craft_time)) * 3600.0)
-	$Panel/Panel2/runeLabel.text = str("/hr: ", runes_per_hour) 
+	$Panel/Panel2/essLabel.text = str("/craft: ", rune.essence_cost)
+	$Panel/Panel2/runeLabel.text = str("secs/craft: ", rune.craft_time) 
 	

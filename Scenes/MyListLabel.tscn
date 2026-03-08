@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfuov8orkxl0o"]
+
+[ext_resource type="Script" uid="uid://d2yijraoujesc" path="res://Scripts/MyListLabel.gd" id="1_quvmx"]
+[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_ib8dj"]
+[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="3_7ga4i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jwug5"]
+resource_local_to_scene = true
+shader = ExtResource("3_7ga4i")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="ListLabel" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_quvmx")
+
+[node name="Label" parent="." instance=ExtResource("2_ib8dj")]
+material = SubResource("ShaderMaterial_jwug5")
+layout_mode = 0
+offset_right = 1770.0
+offset_bottom = 137.0
+scale = Vector2(0.2, 0.2)

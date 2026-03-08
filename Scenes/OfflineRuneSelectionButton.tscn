@@ -57,10 +57,10 @@ offset_bottom = 195.0
 material = SubResource("ShaderMaterial_or8xw")
 layout_mode = 0
 offset_left = 49.0
-offset_right = 509.0
+offset_right = 702.3334
 offset_bottom = 137.0
 scale = Vector2(0.15, 0.15)
-text = "/hr: 500"
+text = "/craft: 500"
 vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="Panel/Panel2"]
@@ -75,22 +75,13 @@ texture = ExtResource("4_7n3pg")
 [node name="runeLabel" parent="Panel/Panel2" instance=ExtResource("2_oa0bc")]
 material = SubResource("ShaderMaterial_oa0bc")
 layout_mode = 0
-offset_left = 49.0
 offset_top = 24.0
-offset_right = 509.0
+offset_right = 980.0
 offset_bottom = 161.0
 scale = Vector2(0.15, 0.15)
-text = "/hr: 500"
+text = "secs/craft: 500"
+horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="TextureRect2" type="TextureRect" parent="Panel/Panel2"]
-layout_mode = 0
-offset_left = 30.999998
-offset_top = 27.0
-offset_right = 71.0
-offset_bottom = 67.0
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_rcutc")
 
 [node name="Button" type="Button" parent="Panel"]
 self_modulate = Color(1, 1, 1, 0)
