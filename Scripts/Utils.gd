@@ -46,12 +46,28 @@ func numberize(number: float):
 		return "%.2fB" % (number / 1_000_000_000.0)
 	elif number >= 1_000_000.0:
 		return "%.2fM" % (number / 1_000_000.0)
-	elif number >= 1_000.0:
+	elif number >= 9999.0:
 		return "%.2fK" % (number / 1_000.0)
 	else:
 	# Below 1000 → no decimals
 		return str(int(number))
 
+func format_time(seconds:float) -> String:
+	if seconds == INF:
+		return "—"
+
+	var s = int(seconds)
+	@warning_ignore("integer_division")
+	var m = s / 60
+	@warning_ignore("integer_division")
+	var h = m / 60
+
+	if h > 0:
+		return "%dh %dm" % [h, m % 60]
+	elif m > 0:
+		return "%dm" % m
+	else:
+		return "%ds" % s
 
 func roll_rarity() -> String:
 	var roll := randf()

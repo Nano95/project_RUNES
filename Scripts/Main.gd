@@ -130,7 +130,7 @@ func focus_in_notification() -> void:
 	var now:int = Time.get_unix_time_from_system()
 	var last:int = game_data.last_crafting_timestamp
 
-	if last > 0:
+	if (last > 0):
 		var elapsed:int = now - last
 		print("FOCUS IN — elapsed: ", elapsed)
 		var results = CraftingSystem.process_elapsed(elapsed, game_data)
@@ -144,6 +144,11 @@ func focus_out_notification() -> void:
 	# calculates total time played - app on but out of focus
 	@warning_ignore("narrowing_conversion")
 	game_data.last_crafting_timestamp = Time.get_unix_time_from_system()
+	# NEW: update per-slot timestamps so they don't drift 
+	for slot in game_data["offline_rune_timestamps"].keys():
+		if (game_data["offline_rune_timestamps"][slot] == 0): continue
+		game_data["offline_rune_timestamps"][slot] = Time.get_unix_time_from_system()
+		print("Slot: ", slot, )
 	save_game()
 	print("-debug: FOCUS OUT")
 

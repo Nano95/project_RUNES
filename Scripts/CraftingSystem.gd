@@ -64,7 +64,7 @@ func process_elapsed(elapsed:int, game_data) -> Dictionary:
 		var leftover_time:int = slot_elapsed % slot.craft_time
 		game_data.offline_rune_timestamps[slot_key] = Time.get_unix_time_from_system() - leftover_time
 
-	print("== Produced while away: ", " gone: ",slot_elapsed , "=== ", produced)
+	print("== time gone: ",slot_elapsed , " =produced= ", produced)
 	return produced
 
 
@@ -140,23 +140,6 @@ func compute_summary(game_data) -> Dictionary:
 		"essence_summaries": essence_summaries,
 		"rune_outputs": rune_outputs
 	}
-
-func format_time(seconds:float) -> String:
-	if seconds == INF:
-		return "—"
-
-	var s = int(seconds)
-	@warning_ignore("integer_division")
-	var m = s / 60
-	@warning_ignore("integer_division")
-	var h = m / 60
-
-	if h > 0:
-		return "%dh %dm" % [h, m % 60]
-	elif m > 0:
-		return "%dm" % m
-	else:
-		return "%ds" % s
 
 # ------------------------------------------------------------
 # Public helper for UI: compute progress bar fill
