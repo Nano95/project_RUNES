@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://llqj70wrm8i3" path="res://Sprites/Runes/ARCANE_STRIKE_RUNE.png" id="1_rcutc"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_oa0bc"]
 [ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="3_r71sb"]
-[ext_resource type="Texture2D" uid="uid://bsyplht1cw35v" path="res://Sprites/arcane_ESSENCE_ICON.png" id="4_7n3pg"]
+[ext_resource type="Texture2D" uid="uid://cis363l7mtswe" path="res://Sprites/arcane_ESSENCE_ICON.png" id="4_7n3pg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_or8xw"]
 resource_local_to_scene = true

@@ -308,7 +308,15 @@ func update_info_panel() -> void:
 
 func build_loot_summary_bbcode(total_gold: int, total_essences: Dictionary) -> String:
 	var gold_icon := "res://Sprites/GOLD_ICON.png"
-	var essence_icon := "res://Sprites/arcane_ESSENCE_ICON.png"
+
+	# Map essence types to their icons
+	var essence_icons := {
+		"arcane": "res://Sprites/arcane_ESSENCE_ICON.png",
+		"earth": "res://Sprites/earth_ESSENCE_ICON.png",
+		"electric": "res://Sprites/electric_ESSENCE_ICON.png",
+		"fire": "res://Sprites/fire_ESSENCE_ICON.png",
+		"ice": "res://Sprites/ice_ESSENCE_ICON.png"
+	}
 
 	var bb := ""
 
@@ -319,15 +327,15 @@ func build_loot_summary_bbcode(total_gold: int, total_essences: Dictionary) -> S
 	bb += "  |  "
 
 	# ESSENCES
-	bb += "[img=40]" + essence_icon + "[/img] "
-
-	# Build essence list like: Fire: 3  Ice: 1  Poison: 2
 	var essence_parts := []
+
 	for essence_type in total_essences.keys():
 		var amount = total_essences[essence_type]
 		if amount > 0:
-			essence_parts.append(essence_type.capitalize() + ": " + str(Utils.numberize(amount)))
+			var icon_path = essence_icons.get(essence_type, "")
+			if icon_path != "":
+				essence_parts.append("[img=40]" + icon_path + "[/img] " + str(Utils.numberize(amount)))
 
-	bb += "  ".join(essence_parts)
+	bb += "   ".join(essence_parts)
 
 	return bb

@@ -16,4 +16,6 @@ func populate_rune_data() -> void:
 	$Panel/Panel/TextureRect.texture = rune.icon
 	$Panel/Panel2/essLabel.text = str("/craft: ", rune.essence_cost)
 	$Panel/Panel2/runeLabel.text = str("secs/craft: ", rune.craft_time) 
+	var essence_type_texture:String = "res://Sprites/" + rune.essence_type + "_ESSENCE_ICON.png"
+	$Panel/Panel2/TextureRect.texture = load(essence_type_texture)
 	
