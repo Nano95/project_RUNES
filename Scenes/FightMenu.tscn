@@ -1,9 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://2dvdykbjounr"]
+[gd_scene load_steps=28 format=3 uid="uid://2dvdykbjounr"]
 
 [ext_resource type="Script" uid="uid://crgoc5n1t752c" path="res://Scripts/FightMenu.gd" id="1_ipivn"]
 [ext_resource type="PackedScene" uid="uid://b37x20v0etu6t" path="res://Scenes/MyButton.tscn" id="2_0c1bx"]
 [ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="2_p854w"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_x5u2f"]
+[ext_resource type="PackedScene" uid="uid://bu2xji8e1uu4y" path="res://Scenes/RuneSelectionPanel.tscn" id="4_6sloi"]
 [ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="4_ov7x6"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="5_utror"]
 [ext_resource type="PackedScene" uid="uid://cby5cdsq4bcyo" path="res://Scenes/FightMenuRuneButton.tscn" id="6_f0u7t"]
@@ -12,7 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://dnnqjb0eguu63" path="res://Sprites/SWORD_LARGE_ICON.png" id="7_ou8aj"]
 [ext_resource type="Texture2D" uid="uid://trfwff23tnyo" path="res://Sprites/EXP_ICON.png" id="8_0c1bx"]
 [ext_resource type="Texture2D" uid="uid://by8eyn77jli18" path="res://Sprites/GOLD_ICON.png" id="8_ryii3"]
-[ext_resource type="Texture2D" uid="uid://bsyplht1cw35v" path="res://Sprites/arcane_ESSENCE_ICON.png" id="9_0c1bx"]
+[ext_resource type="Texture2D" uid="uid://d2edg60502vj0" path="res://Sprites/MONSTER_ICON.png" id="8_v0ir0"]
+[ext_resource type="Texture2D" uid="uid://cis363l7mtswe" path="res://Sprites/arcane_ESSENCE_ICON.png" id="9_0c1bx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_55pba"]
 shader = ExtResource("2_p854w")
@@ -101,10 +103,12 @@ pivot_offset = Vector2(360, 640)
 script = ExtResource("1_ipivn")
 monster_grid_container = NodePath("ColorRect/Panel/Family/MarginContainer/GridContainer")
 location_grid_container = NodePath("ColorRect/Panel/Location/MarginContainer/GridContainer")
-rune_grid_container = NodePath("ColorRect/Panel/ChooseRunes/ScrollContainer2/MarginContainer/GridContainer")
+rune_grid_container = NodePath("ColorRect/Panel/ChooseRunes/MarginContainer/GridContainer")
 start_button = NodePath("ColorRect/Panel/Fight")
 exit_button = NodePath("ColorRect/Panel/Close")
 my_button = ExtResource("2_0c1bx")
+rune_button = ExtResource("6_f0u7t")
+select_runes_panel = ExtResource("4_6sloi")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_55pba")
@@ -187,54 +191,45 @@ theme_override_constants/v_separation = 80
 material = SubResource("ShaderMaterial_p854w")
 layout_mode = 0
 offset_left = 1.9999847
-offset_top = 596.00006
+offset_top = 684.0
 offset_right = 1252.0
-offset_bottom = 733.00006
+offset_bottom = 821.0
 scale = Vector2(0.54, 0.54)
 text = "Choose Runes"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollContainer2" type="ScrollContainer" parent="ColorRect/Panel/ChooseRunes"]
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/Panel/ChooseRunes"]
 layout_mode = 0
 offset_left = 7.4074364
-offset_top = 127.77779
-offset_right = 1246.2964
-offset_bottom = 625.92584
-
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/Panel/ChooseRunes/ScrollContainer2"]
-layout_mode = 2
+offset_top = 127.77771
+offset_right = 1237.4075
+offset_bottom = 697.7777
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="GridContainer" type="GridContainer" parent="ColorRect/Panel/ChooseRunes/ScrollContainer2/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="ColorRect/Panel/ChooseRunes/MarginContainer"]
 custom_minimum_size = Vector2(1200, 550)
 layout_mode = 2
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 10
-columns = 3
-
-[node name="Button" parent="ColorRect/Panel/ChooseRunes/ScrollContainer2/MarginContainer/GridContainer" instance=ExtResource("6_f0u7t")]
-layout_mode = 2
-
-[node name="Button2" parent="ColorRect/Panel/ChooseRunes/ScrollContainer2/MarginContainer/GridContainer" instance=ExtResource("6_f0u7t")]
-layout_mode = 2
-
-[node name="Button3" parent="ColorRect/Panel/ChooseRunes/ScrollContainer2/MarginContainer/GridContainer" instance=ExtResource("6_f0u7t")]
-layout_mode = 2
+theme_override_constants/h_separation = 35
+theme_override_constants/v_separation = 0
+columns = 4
 
 [node name="ToggleMonsterInfo" type="Button" parent="ColorRect/Panel"]
 layout_mode = 0
 offset_left = 564.00006
-offset_top = 617.00006
+offset_top = 705.0
 offset_right = 635.4286
-offset_bottom = 684.1429
+offset_bottom = 772.1428
 scale = Vector2(0.7, 0.7)
 theme_override_constants/outline_size = 30
 theme_override_fonts/font = ExtResource("5_utror")
 theme_override_font_sizes/font_size = 100
+icon = ExtResource("8_v0ir0")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Fight" type="Button" parent="ColorRect/Panel"]
 layout_mode = 0

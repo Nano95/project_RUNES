@@ -39,15 +39,15 @@ func numberize(number: float):
 		return ""
 
 	if number >= 1_000_000_000_000_000.0:
-		return "%.2fQ" % (number / 1_000_000_000_000_000.0)
+		return "%.2fq" % (number / 1_000_000_000_000_000.0)
 	elif number >= 1_000_000_000_000.0:
-		return "%.2fT" % (number / 1_000_000_000_000.0)
+		return "%.2ft" % (number / 1_000_000_000_000.0)
 	elif number >= 1_000_000_000.0:
-		return "%.2fB" % (number / 1_000_000_000.0)
+		return "%.2fb" % (number / 1_000_000_000.0)
 	elif number >= 1_000_000.0:
-		return "%.2fM" % (number / 1_000_000.0)
+		return "%.2fm" % (number / 1_000_000.0)
 	elif number >= 9999.0:
-		return "%.2fK" % (number / 1_000.0)
+		return "%.2fk" % (number / 1_000.0)
 	else:
 	# Below 1000 → no decimals
 		return str(int(number))

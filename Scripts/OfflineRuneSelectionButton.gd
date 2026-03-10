@@ -8,7 +8,7 @@ func _ready() -> void:
 
 func setup(r:RuneData, cta:Callable) -> void:
 	rune = r
-	var rune_name = "" if (rune == null) else r.name
+	var rune_name:String = "" if (rune == null) else r.name
 	$Panel/Button.pressed.connect(cta.bind(rune_name))
 
 func populate_rune_data() -> void:

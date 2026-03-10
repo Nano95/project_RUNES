@@ -38,18 +38,22 @@ func setup_game_controller(gc:GameController) -> void:
 
 func setup_rune_buttons() -> void:
 	if !(is_instance_valid(game_controller)): return
+	if (!main.game_data.selected_battle_runes): return
 	rune_buttons = {}
-	for rune in main.battle_data["selected_runes"]:
+	for rune_name in main.game_data.selected_battle_runes.values():
+		if (rune_name == null):
+			continue
+		var current_rune = RuneDatabase.runes[rune_name]
 		var btn = rune_button.instantiate()
-		btn.setup(rune, main.game_data.get_rune_count(rune.name))
-		if (rune.activation == "grid"):
+		btn.setup(current_rune, main.game_data.get_rune_count(rune_name))
+		if (current_rune.activation == "grid"):
 			# Attack runes
-			btn.pressed.connect(game_controller.change_selected_rune.bind(rune))
+			btn.pressed.connect(game_controller.change_selected_rune.bind(current_rune))
 		else:
 			# Healing runes
-			btn.pressed.connect(game_controller.activate_instant_rune.bind(rune))
+			btn.pressed.connect(game_controller.activate_instant_rune.bind(current_rune))
 		
-		rune_buttons[rune.name] = btn
+		rune_buttons[rune_name] = btn
 		rune_btns_container.add_child(btn)
 
 func update_rune_qty(rune_name: String, new_qty: int) -> void:

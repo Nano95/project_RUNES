@@ -1,47 +1,109 @@
-[gd_scene load_steps=8 format=3 uid="uid://cby5cdsq4bcyo"]
+[gd_scene load_steps=7 format=3 uid="uid://cby5cdsq4bcyo"]
 
-[ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="1_4rjwq"]
-[ext_resource type="Texture2D" uid="uid://llqj70wrm8i3" path="res://Sprites/Runes/ARCANE_STRIKE_RUNE.png" id="2_00aqc"]
+[ext_resource type="Texture2D" uid="uid://cbtr8w3ak64pc" path="res://Sprites/Runes/BLANK_CLEAR_ICON.png" id="2_3gfna"]
 [ext_resource type="Script" uid="uid://jj0fcb5mx0c5" path="res://Scripts/FightMenuRuneButton.gd" id="3_00aqc"]
-[ext_resource type="Texture2D" uid="uid://b18ao2eimbmku" path="res://Sprites/MANA_ICON.png" id="4_cuo2q"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="5_lhn1g"]
 [ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="6_at73j"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_curfs"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_or8xw"]
 resource_local_to_scene = true
 shader = ExtResource("6_at73j")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="Button" type="Button"]
-custom_minimum_size = Vector2(450, 225)
-offset_right = 800.0
-offset_bottom = 300.0
-scale = Vector2(0.25, 0.25)
-theme_override_constants/outline_size = 25
-theme_override_fonts/font = ExtResource("1_4rjwq")
-theme_override_font_sizes/font_size = 60
-text = "Great Healing"
-icon = ExtResource("2_00aqc")
-icon_alignment = 1
-vertical_icon_alignment = 0
-expand_icon = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oa0bc"]
+resource_local_to_scene = true
+shader = ExtResource("6_at73j")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="FightRuneSelectionButton" type="Control"]
+custom_minimum_size = Vector2(275, 374)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 275.0
+offset_bottom = 374.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("3_00aqc")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 48.0
-offset_right = 132.0
-offset_bottom = 84.0
-texture = ExtResource("4_cuo2q")
+offset_right = 220.0
+offset_bottom = 295.6561
+scale = Vector2(1.25, 1.25)
 
-[node name="FocusLabel" parent="TextureRect" instance=ExtResource("5_lhn1g")]
-material = SubResource("ShaderMaterial_curfs")
+[node name="Panel" type="Panel" parent="Panel"]
 layout_mode = 0
-offset_left = 72.0
-offset_top = 12.0
-offset_right = 328.0
-offset_bottom = 149.0
-scale = Vector2(0.5, 0.5)
-text = "10"
+offset_right = 220.0
+offset_bottom = 220.0
+
+[node name="runeIcon" type="TextureRect" parent="Panel/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_3gfna")
+
+[node name="Panel2" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_top = 227.0
+offset_right = 220.5
+offset_bottom = 296.0
+
+[node name="typeTexture" type="TextureRect" parent="Panel/Panel2"]
+visible = false
+layout_mode = 0
+offset_left = 181.0
+offset_top = -226.0
+offset_right = 275.99994
+offset_bottom = -131.00009
+scale = Vector2(0.4, 0.4)
+
+[node name="nameLabel" parent="Panel/Panel2" instance=ExtResource("5_lhn1g")]
+visible = false
+material = SubResource("ShaderMaterial_or8xw")
+layout_mode = 0
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 1095.9999
+offset_bottom = 141.0
+scale = Vector2(0.2, 0.2)
+text = "Arcane Strike"
+horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Qty" parent="Panel/Panel2" instance=ExtResource("5_lhn1g")]
+visible = false
+material = SubResource("ShaderMaterial_oa0bc")
+layout_mode = 0
+offset_top = 35.0
+offset_right = 1099.9999
+offset_bottom = 172.0
+scale = Vector2(0.2, 0.2)
+text = "Quantity: 50000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Select" parent="Panel/Panel2" instance=ExtResource("5_lhn1g")]
+material = SubResource("ShaderMaterial_oa0bc")
+layout_mode = 0
+offset_right = 1099.9999
+offset_bottom = 339.99988
+scale = Vector2(0.2, 0.2)
+text = "SELECT RUNE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

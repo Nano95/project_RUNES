@@ -35,6 +35,17 @@ class_name SaveData
 	"slot1": null,
 	"slot2": null
 }
+
+@export var selected_battle_runes = {
+	"slot1": null,
+	"slot2": null,
+	"slot3": null,
+	"slot4": null,
+	"slot5": null,
+	"slot6": null,
+	"slot7": null,
+	"slot8": null,
+}
 # Null or rune names
 @export var offline_runes = {
 	"slot1": null,
@@ -124,11 +135,19 @@ func remove_rune_from_inv(rune:RuneData, qty:int) -> int:
 	return rune_inv[rune.name]
 
 # Data can be null or a string (rune name)
+func set_battle_rune_slot(id:int, data) -> void:
+	if (data == ""): 
+		data = null
+	var slot_label:String = str("slot", id)
+	selected_battle_runes[slot_label] = data
+
+# Data can be null or a string (rune name)
 func set_offline_rune_slot(id:int, data) -> void:
 	if (data == ""): 
 		data = null
 	var slot_label:String = str("slot", id)
 	offline_runes[slot_label] = data
+	# Reset the timestamp
 	if (data == null):
 		offline_rune_timestamps[slot_label] = 0
 

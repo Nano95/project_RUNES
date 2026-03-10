@@ -7,20 +7,22 @@ class_name FightMenu
 @export var start_button:Button
 @export var exit_button:Button
 @export var my_button:PackedScene
-@onready var rune_button:PackedScene = preload("res://Scenes/FightMenuRuneButton.tscn")
+@export var rune_button:PackedScene
+@export var select_runes_panel:PackedScene
 @onready var monster_info:Control = $ColorRect/Panel/MonsterInfo
 var areas:Array = ["slimes", "orcs", "sandlings", "dwarves"]
 
 var selected_family: String = ""
 var selected_monster_index: int = -1
-var selected_runes: Array = []
 var starting_turns: int = 4
 
 var game_controller: GameController
 var main: MainNode
+var rune_data:Dictionary
 
 func _ready() -> void:
 	Utils.animate_summary_in_happy(self)
+	rune_data = RuneDatabase.runes
 	setup_monster_grid()
 	setup_rune_grid()
 	start_button.pressed.connect(main.spawn_game)
@@ -33,16 +35,18 @@ func setup(main_node:MainNode) -> void:
 func setup_rune_grid() -> void:
 	for btn in rune_grid_container.get_children():
 		btn.queue_free()
-	#for rune in Utils.all_runes:
-	var runes = RuneDatabase.runes
-	for rune in runes.keys():
-		if !(rune in main.game_data.rune_inv):
-			continue
-		var btn := rune_button.instantiate()
-		btn.setup(runes[rune])
-		btn.pressed.connect(_on_rune_pressed.bind(rune))
+	
+	for i in range(1,5):
+		print("building slot: ", i)
+		var selected_runes_data:Dictionary = main.game_data.selected_battle_runes
+		var slot:String = "slot" + str(i)
+		var btn := rune_button.instantiate() as FightMenuRuneButton
+		# Get the rune if it is saved
+		var slot_rune_data = null
+		if (selected_runes_data[slot] != null): 
+			slot_rune_data = rune_data[selected_runes_data[slot]]
+		btn.setup(i, slot_rune_data, main, open_rune_selection_panel, null)
 		rune_grid_container.add_child(btn)
-		main.battle_data["selected_runes"].append(runes[rune])
 
 func setup_monster_grid() -> void:
 	for btn in monster_grid_container.get_children():
@@ -116,3 +120,12 @@ func close() -> void:
 func toggle_monster_info() -> void:
 	$ColorRect/Panel/ChooseRunes.visible = !$ColorRect/Panel/ChooseRunes.visible
 	monster_info.visible = !monster_info.visible
+
+func open_rune_selection_panel(id:int) -> void:
+	var panl = select_runes_panel.instantiate()
+	panl.setup(main, id, select_rune_cta, false)
+	main.spawn_to_top_ui_layer(panl)
+
+func select_rune_cta(id:int, rune_name:String) -> void:
+	main.game_data.set_battle_rune_slot(id, rune_name)
+	setup_rune_grid()

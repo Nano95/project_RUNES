@@ -50,7 +50,9 @@ func _ready() -> void:
 	setup_stats()
 	spawn_grid()
 	start_game()
-	selected_rune = main.battle_data["selected_runes"][0]
+	# OnReady lets turn all of the names into data for the battle rune buttons to work
+	#THIS IS THE NEXT THING TO DO
+	select_available_rune()
 
 func start_game(restart:bool=false) -> void:
 	game_is_active = true
@@ -167,14 +169,14 @@ func monster_died(monster):
 	# Remove from flat list
 	enemies_killed += 1
 	main.game_data.enemies_killed += 1
-	if (monster.name in main.game_data.total_monster_kills):
-		main.game_data.total_monster_kills[monster.name] += 1
+	if (monster.base.name in main.game_data.total_monster_kills):
+		main.game_data.total_monster_kills[monster.base.name] += 1
 	else:
-		main.game_data.total_monster_kills[monster.name] = 1
-	if (monster.name in main.game_data.total_run_monster_kills):
-		main.game_data.total_run_monster_kills[monster.name] += 1
+		main.game_data.total_monster_kills[monster.base.name] = 1
+	if (monster.base.name in main.game_data.total_run_monster_kills):
+		main.game_data.total_run_monster_kills[monster.base.name] += 1
 	else:
-		main.game_data.total_run_monster_kills[monster.name] = 1
+		main.game_data.total_run_monster_kills[monster.base.name] = 1
 
 	monsters.erase(monster)
 
@@ -379,7 +381,17 @@ func roll_loot(monster: MonsterBase) -> void:
 func change_selected_rune(rune:RuneData) -> void:
 	selected_rune = rune
 
-## CURRENT OOPSIE< when we have this check we subtract focusso even when we dont have enough runes we are subtracting.
+# needed when we start the game
+func select_available_rune() -> void:
+	if (!main.game_data.selected_battle_runes):
+		return
+	for rune_name in main.game_data.selected_battle_runes.values():
+		if (rune_name == null):
+			continue
+		
+		selected_rune = RuneDatabase.runes[rune_name]
+		return
+
 func focus_check(pressed_rune:RuneData) -> bool:
 	if (current_focus < pressed_rune.focus_cost):
 		game_ui.shake_mana_icon()

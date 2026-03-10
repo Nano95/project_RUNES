@@ -60,7 +60,7 @@ shader = ExtResource("2_qn8tj")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="OfflineRuneSlot" type="Control" node_paths=PackedStringArray("slot_lbl", "rune_name", "essence_lbl", "essence_hr_lbl", "runes_hr_lbl", "time_lbl", "output_lbl", "tap_lbl", "rune_icon", "info_panel", "icon_panel", "select_rune")]
+[node name="OfflineRuneSlot" type="Control" node_paths=PackedStringArray("slot_lbl", "rune_name", "essence_lbl", "essence_hr_lbl", "runes_hr_lbl", "tap_lbl", "rune_icon", "info_panel", "icon_panel", "select_rune")]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 3
 anchors_preset = 0
@@ -72,8 +72,6 @@ rune_name = NodePath("Panel/NamePanel/NameValue")
 essence_lbl = NodePath("Panel/InfoPanel/Panel/essenceValue")
 essence_hr_lbl = NodePath("Panel/InfoPanel/Panel/essenceHrValue")
 runes_hr_lbl = NodePath("Panel/InfoPanel/Panel/runesHrValue")
-time_lbl = NodePath("")
-output_lbl = NodePath("")
 tap_lbl = NodePath("Panel/TapLbl")
 rune_icon = NodePath("Panel/RuneTexture/rune")
 info_panel = NodePath("Panel/InfoPanel")
