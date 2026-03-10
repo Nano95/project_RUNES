@@ -28,6 +28,7 @@ func _ready() -> void:
 	start_button.pressed.connect(main.spawn_game)
 	exit_button.pressed.connect(close)
 	$ColorRect/Panel/ToggleMonsterInfo.pressed.connect(toggle_monster_info)
+	$ColorRect/Panel/MonsterInfo/Button.pressed.connect(toggle_monster_info)
 
 func setup(main_node:MainNode) -> void:
 	main = main_node
@@ -69,6 +70,25 @@ func setup_monster_grid() -> void:
 	# Auto-select the first unlocked family
 	if (main.game_data.unlocked_monster_families[main.battle_data["family"]]):
 		_on_family_selected(main.battle_data["family"])
+		var first_monster = MonsterDatabase[main.battle_data["family"]][0]
+		_on_monster_selected(0, first_monster)
+	
+
+func _on_family_selected(family: String) -> void:
+	#if (main.battle_data["family"] == family): return
+	main.battle_data["family"] = family
+	for btn in location_grid_container.get_children():
+		btn.queue_free()
+	
+	var monsters = MonsterDatabase[family]
+	for i in monsters.size():
+		var btn := my_button.instantiate()
+		btn.setup(monsters[i].name.capitalize(),_on_monster_selected.bind(i + 1, monsters[i]), Vector2(.4, .4))
+		location_grid_container.add_child(btn)
+
+func _on_monster_selected(index: int, monster:MonsterBase) -> void: 
+	main.battle_data["index"] = index
+	monster_info.update_panel(monster)
 
 func try_unlock_family(family: String):
 	var cost = MonsterDatabase.monster_stage_cost[family]
@@ -97,22 +117,6 @@ func _on_rune_pressed(rune):
 	else:
 		if main.battle_data["selected_runes"].size() < 5:
 			main.battle_data["selected_runes"].append(rune)
-
-func _on_family_selected(family: String) -> void:
-	#if (main.battle_data["family"] == family): return
-	main.battle_data["family"] = family
-	for btn in location_grid_container.get_children():
-		btn.queue_free()
-	
-	var monsters = MonsterDatabase[family]
-	for i in monsters.size():
-		var btn := my_button.instantiate()
-		btn.setup(monsters[i].name.capitalize(),_on_monster_selected.bind(i + 1, monsters[i]), Vector2(.4, .4))
-		location_grid_container.add_child(btn)
-
-func _on_monster_selected(index: int, monster:MonsterBase) -> void: 
-	main.battle_data["index"] = index
-	monster_info.update_panel(monster)
 
 func close() -> void:
 	Utils.animate_summary_out_and_free(self)
