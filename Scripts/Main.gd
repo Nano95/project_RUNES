@@ -48,7 +48,6 @@ func spawn_main_menu() -> void:
 	spawn_to_top_ui_layer(active_menu_ref)
 
 func spawn_game() -> void:
-	print(battle_data)
 	delete_all_top_ui_children()
 	
 	if (is_instance_valid(game_ui_ref)):
@@ -64,7 +63,6 @@ func spawn_game() -> void:
 	spawn_to_mid_ui_layer(active_menu_ref)
 	
 	game_ui_ref.setup_game_controller(active_menu_ref)
-	print("battle_data[\"family\"]", battle_data["family"])
 	var colors = MonsterDatabase.monster_colors[battle_data["family"]]
 	set_background_colors(colors["col1"], colors["col2"])
 
@@ -148,7 +146,6 @@ func focus_out_notification() -> void:
 	for slot in game_data["offline_rune_timestamps"].keys():
 		if (game_data["offline_rune_timestamps"][slot] == 0): continue
 		game_data["offline_rune_timestamps"][slot] = Time.get_unix_time_from_system()
-		print("Slot: ", slot, )
 	save_game()
 	print("-debug: FOCUS OUT")
 

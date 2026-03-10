@@ -56,8 +56,8 @@ func update_rune_data() -> void:
 	rune_name.text = rune.name
 	rune_icon.texture = rune.icon
 	essence_lbl.text = rune.essence_type
-	var avail_essences = main.game_data.current_essences[rune.essence_type]
-	print("essences available: ", avail_essences)
+	#var avail_essences = main.game_data.current_essences[rune.essence_type]
+	
 	# Calculations:
 	var ess_per_hour:int = floor((float(rune.essence_cost) / float(rune.craft_time)) * 3600)
 	essence_hr_lbl.text = str(ess_per_hour)

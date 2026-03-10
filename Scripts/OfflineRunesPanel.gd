@@ -22,7 +22,6 @@ func populate_container() -> void:
 	# For now just two, no need to worry about unlockable slots
 	var unlocked_slots = 2 # later this becomes dynamic 
 	for slot_id in range(1, unlocked_slots + 1):
-		print(slot_id)
 		var slot = rune_slot_ref.instantiate() as OfflineRuneSlot
 		var rune_name = main.game_data.get_offline_rune_slot(slot_id) # Null or String
 		slot.setup(main, rune_name, self, slot_id)
@@ -38,8 +37,7 @@ func update_summary_section() -> void:
 	var summary = CraftingSystem.compute_summary(main.game_data)
 	var essence_summaries = summary["essence_summaries"]
 	var rune_outputs = summary["rune_outputs"]
-	print("- summary: ", summary)
-	print("- essence_summaries ", typeof(essence_summaries),  essence_summaries)
+	
 	if (essence_summaries.keys().size() <= 0): return
 	if (rune_outputs.keys().size() <= 0): return
 	### Setup Essence Labels 
