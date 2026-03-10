@@ -6,14 +6,13 @@
 script = ExtResource("1_xb32t")
 name = "Orc Brawler"
 max_hp = 42
-power = 17
+power = 9
 exp_reward = 17
 min_gold_reward = 4
 max_gold_reward = 12
 essence_type = "arcane"
 min_essence_amount = 4
 max_essence_amount = 5
-attack_speed = 4
 anim_offset_y = -11
 anim_name = "orc2"
 metadata/_custom_type_script = "uid://dljne2akmlj0u"
