@@ -43,7 +43,8 @@ func spawn_monster_into_cell(row: int, col: int, base: MonsterBase):
 	if (not is_valid(row, col)): return
 	if cells[row][col] != null: return # cell occupied
 
-	var monster = game_controller.monster_instance.instantiate()
+	var monster = game_controller.monster_instance.instantiate() as MonsterInstance
+	monster.died.connect(game_controller.monster_died.bind(monster))
 	monster.setup(base, self)
 
 	# mutation

@@ -1,6 +1,10 @@
 extends Control
 
-func show_label(amount: float) -> void:
+func show_label(amount: float, hex_color: String = "ff6969") -> void:
+	
+	# Convert hex → Color 
+	var color = Color("#" + hex_color) 
+	$Label.self_modulate = color
 	z_index = 10
 	$Label.text = str("-", int(amount))
 

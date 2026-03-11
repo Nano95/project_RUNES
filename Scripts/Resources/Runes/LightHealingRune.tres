@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="RuneData" load_steps=3 format=3 uid="uid://m77s405srrxg"]
+
+[ext_resource type="Texture2D" uid="uid://6hqhl60k7u67" path="res://Sprites/Runes/HEALING_LIGHT_RUNE.png" id="1_3rs76"]
+[ext_resource type="Script" uid="uid://wqovi0smk0qq" path="res://Scripts/RuneData.gd" id="2_j6u6r"]
+
+[resource]
+script = ExtResource("2_j6u6r")
+name = "Light Healing"
+mini_name = "Light Heal"
+icon = ExtResource("1_3rs76")
+pattern = "light_heal"
+activation = "instant"
+power = 25
+rune_type = "life"
+buy_cost = 30
+craft_time = 6
+metadata/_custom_type_script = "uid://wqovi0smk0qq"

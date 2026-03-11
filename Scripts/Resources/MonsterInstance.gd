@@ -12,6 +12,17 @@ var current_power:int=1
 var is_elite:bool = false
 var is_boss:bool = false
 var my_grid:MyGrid
+var status_effects = {
+	#"poison": {
+		#"damage_per_tick": 0,
+		#"turns_remaining": 0
+	#}
+}
+var POISON:String = "poison"
+var dmg_color:Dictionary = {
+	"arcane": "ff6969",
+	"poison": "bbff69"
+}
 
 signal died
 func _ready() -> void:
@@ -42,16 +53,17 @@ func become_elite():
 func update_individual_atk_label() -> void:
 	$atk.text = str(individual_turns_left)
 
-func take_damage(dmg:int=1) -> bool:
-	spawn_damage_label(dmg)
+func take_damage(dmg:int=1, dmg_color_type:String="arcane") -> bool:
+	spawn_damage_label(dmg, dmg_color_type)
 	current_hp -= dmg
 	hp_label.text = str(current_hp)
 	animate_hit()
 	if (current_hp <= 0):
-		emit_signal("died", self)
+		emit_signal("died")
 		spawn_xp_label()
 		queue_free() # will be enhanced later
 		return true
+		
 		
 	return false
 
@@ -62,14 +74,32 @@ func spawn_xp_label() -> void:
 	label.global_position = %AnimatedSprite2D.global_position + Vector2(-5, 50)
 	label.show_label(base.exp_reward)
 
-func spawn_damage_label(amount: float) -> void:
+func spawn_damage_label(amount: float, dmg_color_type:String="arcane") -> void:
 	var label = damage_label.instantiate()
 	my_grid.spawn_to_fx_container(label)
 
 	# Position relative to the wall sprite
 	label.global_position = %AnimatedSprite2D.global_position  + Vector2(-35, -50)
 
-	label.show_label(amount)
+	label.show_label(amount, dmg_color[dmg_color_type])
+
+func apply_poison(dmg:int, turns:int) -> void:
+	if (status_effects.has(POISON)):
+		status_effects[POISON]["damage_per_tick"] += dmg
+		status_effects[POISON]["turns_remaining"] += turns
+	else:
+		status_effects[POISON] = {"damage_per_tick": dmg, "turns_remaining": turns }
+
+	#add_status_icon(POISON) # optional # it should be a Vcontainer 
+
+func process_status_effect() -> void:
+	if (status_effects.has(POISON)):
+		if (status_effects[POISON]["turns_remaining"] > 0):
+			take_damage(status_effects[POISON]["damage_per_tick"], POISON)
+			status_effects[POISON]["turns_remaining"] -= 1
+			if (status_effects[POISON]["turns_remaining"] <= 0):
+				status_effects.erase(POISON)
+				#remove_status_icon(POISON)
 
 func animate_hit() -> void:
 	# ANIMATE SIZE

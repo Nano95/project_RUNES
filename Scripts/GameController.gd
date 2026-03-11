@@ -177,7 +177,7 @@ func monster_died(monster):
 		main.game_data.total_run_monster_kills[monster.base.name] += 1
 	else:
 		main.game_data.total_run_monster_kills[monster.base.name] = 1
-
+	emit_signal("gained_exp", monster.base.exp_reward)
 	monsters.erase(monster)
 
 	# Remove from grid
@@ -186,7 +186,8 @@ func monster_died(monster):
 	roll_loot(monster.base)
 	
 	var game_over = check_if_all_monsters_dead(false)
-	if (game_over): return
+	if (game_over): return # would adding the win game situation here cause it to happen too many times if multiple monsters die from poison at the same time?
+	
 
 	# Update UI if needed
 	#game_ui.refresh_monster_data()
@@ -225,7 +226,6 @@ func apply_group_attack(dmg:int= 0) -> void:
 func advance_turn():
 	if !game_is_active: return
 	prune_dead_monsters()
-	if check_if_all_monsters_dead(true): return
 	runes_used += 1
 		# Data
 	main.game_data.runes_used += 1
@@ -256,13 +256,21 @@ func advance_turn():
 
 	# 5. Apply elite attacks that fire this turn
 	for monster in monsters:
+		# 5A. Status effects tick here
+		monster.process_status_effect() 
+		# If poison killed the monster, skip its attack 
+		if (monster.current_hp <= 0): continue
 		if monster.is_elite_or_boss():
 			if monster.individual_turns_left <= 0:
 				take_damage(monster.current_power)
 				monster.individual_turns_left = monster.base.attack_speed
 				
 		monster.update_individual_atk_label()
-		
+	# Check victory after poison ticks from process_status_effect
+	prune_dead_monsters()
+	if check_if_all_monsters_dead(true):
+		return
+
 	# 6. Recalculate preview AFTER attacks resolve (optional but clean)
 	next_attack = calculate_next_incoming_attack()
 	# 7. Update UI
@@ -406,7 +414,6 @@ func on_cell_tapped(row, col) -> void:
 	if (!game_is_active): return
 	if (!main.game_data.rune_inv.get(selected_rune.name)): return
 	if (!focus_check(selected_rune)): return # This check must go after checking for inventory! Otherwise focus is subtracted when we dont have enough
-	print("main.game_data.rune_inv.get(selected_rune.name) ", main.game_data.rune_inv.get(selected_rune.name))
 	# Here is now where we have to subtract and make checks for focus used
 	match selected_rune.pattern:
 		"strike":
@@ -426,7 +433,7 @@ func activate_instant_rune(pressed_rune:RuneData):
 	if (!main.game_data.rune_inv.get(pressed_rune.name)): return
 	if (!focus_check(pressed_rune)): return
 	
-	_apply_instant_rune("great_heal")
+	_apply_instant_rune(pressed_rune.pattern)
 	var new_qty = main.game_data.remove_rune_from_inv(pressed_rune, 1)
 	game_ui.update_rune_qty(pressed_rune.name, new_qty)
 	advance_turn()
@@ -434,37 +441,42 @@ func activate_instant_rune(pressed_rune:RuneData):
 #func _apply_instant_rune(rune: RuneData):
 func _apply_instant_rune(type: String):
 	match type:
+		"light_heal":
+			heal(10)
 		"great_heal":
-			heal(100)
-		#"skip_turn":
-			#skip_monster_turns(1)
+			heal(25)
 		#"reduce_timers":
 			#reduce_all_monster_timers(1)
 
-func damage_cell(r: int, c: int) -> int:
-	var xp_gained := 0
-	if !(my_grid.is_valid(r, c)): return 0
+func damage_cell(r: int, c: int) -> void:
+	if !(my_grid.is_valid(r, c)): return
 	
 	spawn_rune_explosion(r, c)
 	var monster = my_grid.cells[r][c]
 	if (is_instance_valid(monster)):
 		var mult:float = get_element_multiplier(selected_rune.rune_type, monster)
+		# Earth runes deal slightly less direct damage 
+		if selected_rune.rune_type == "earth": 
+			mult *= 0.75
+		
 		var dmg:int = int(current_power * mult)
+		# Apply poison if rune is poison
+		if selected_rune.rune_type == "earth":
+			var poison_dmg = int(current_power * 0.15)
+			monster.apply_poison(poison_dmg, 4)
 		var died = monster.take_damage(dmg)
 		if (died):
-			xp_gained += monster.base.exp_reward
 			monster_died(monster)
 	
-	return xp_gained
 
 func spawn_rune_explosion(row: int, col: int):
 	var rune = rune_animation.instantiate()
+	rune.setup(selected_rune.rune_type)
 	rune.position = my_grid.grid_to_world(row, col)
 	my_grid.add_to_rune_container(rune)
 
 func damage_single(r, c) -> void:
-	var gained = damage_cell(r, c)
-	if (gained > 0): emit_signal("gained_exp", gained)
+	damage_cell(r, c)
 
 func damage_plus(row, col) -> void:
 	var plus_offsets = [
@@ -474,21 +486,15 @@ func damage_plus(row, col) -> void:
 		Vector2i(0, -1),  # left
 		Vector2i(0, 1)    # right
 	]
-	var gained = 0
 	for offset in plus_offsets:
 		var r = row + offset.x
 		var c = col + offset.y
-		gained += damage_cell(r, c)
-	
-	if (gained > 0): emit_signal("gained_exp", gained)
+		damage_cell(r, c)
 
 func damage_3x3(r, c) -> void:
-	var gained = 0
 	for dr in range(-1, 2):
 		for dc in range(-1, 2):
-			gained += damage_cell(r+dr, c+dc)
-	
-	if (gained > 0): emit_signal("gained_exp", gained)
+			damage_cell(r+dr, c+dc)
 
 func get_element_multiplier(rune_element: String, monster) -> float:
 	if rune_element in monster.base.immunities:

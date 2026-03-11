@@ -15,4 +15,5 @@ func _load_runes():
 	runes["Earth Explosion"] = preload("res://Scripts/Resources/Runes/EarthExplosionRune.tres")
 
 	# Healing rune
+	runes["Light Healing"] = preload("res://Scripts/Resources/Runes/LightHealingRune.tres")
 	runes["Great Healing"] = preload("res://Scripts/Resources/Runes/GreatHealingRune.tres")
