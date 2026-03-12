@@ -5,14 +5,14 @@
 [resource]
 script = ExtResource("1_j8dds")
 name = "Slime Youngling"
-max_hp = 23
+max_hp = 18
 power = 2
 exp_reward = 7
 min_gold_reward = 1
 max_gold_reward = 5
 essence_type = "arcane"
-min_essence_amount = 1
-max_essence_amount = 2
+min_essence_amount = 2
+max_essence_amount = 4
 anim_offset_y = -9
 anim_name = "slime2"
 resistances = Array[String](["earth"])

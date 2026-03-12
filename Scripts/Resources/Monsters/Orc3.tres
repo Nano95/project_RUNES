@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_gm006")
 name = "Orc Warrior"
-max_hp = 47
-power = 13
+max_hp = 36
+power = 11
 exp_reward = 20
 min_gold_reward = 5
 max_gold_reward = 14

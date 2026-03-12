@@ -5,14 +5,14 @@
 [resource]
 script = ExtResource("1_ctjo7")
 name = "Agony Slime"
-max_hp = 30
+max_hp = 24
 power = 4
 exp_reward = 10
 min_gold_reward = 3
 max_gold_reward = 6
 essence_type = "arcane"
-min_essence_amount = 1
-max_essence_amount = 3
+min_essence_amount = 2
+max_essence_amount = 5
 anim_offset_y = -10
 anim_name = "slime3"
 resistances = Array[String](["earth"])

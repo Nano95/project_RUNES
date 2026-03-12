@@ -5,15 +5,14 @@
 [resource]
 script = ExtResource("1_j3jey")
 name = "Death Horn"
-max_hp = 58
-power = 25
+max_hp = 47
+power = 20
 exp_reward = 30
 min_gold_reward = 5
 max_gold_reward = 20
 essence_type = "arcane"
 min_essence_amount = 4
 max_essence_amount = 5
-attack_speed = 4
 anim_offset_y = -12
 anim_name = "sandling3"
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

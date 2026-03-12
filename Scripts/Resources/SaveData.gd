@@ -4,10 +4,10 @@ class_name SaveData
 @export_category("General")
 @export var inventory: Array[EquipmentInstance] = []
 @export var rune_inv: Dictionary = { # Start pack
-	"Arcane Cross": 20,
-	"Arcane Explosion": 10,
-	"Arcane Strike": 100,
-	"Great Healing": 25
+	"Arcane Cross": 100,
+	"Arcane Explosion": 80,
+	"Arcane Strike": 250,
+	"Light Healing": 25
 }
 @export var last_crafting_timestamp:int = 0
 

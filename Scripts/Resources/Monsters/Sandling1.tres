@@ -5,15 +5,14 @@
 [resource]
 script = ExtResource("1_on335")
 name = "Stalker"
-max_hp = 40
-power = 18
+max_hp = 39
+power = 14
 exp_reward = 17
 min_gold_reward = 6
 max_gold_reward = 17
 essence_type = "arcane"
 min_essence_amount = 5
 max_essence_amount = 7
-attack_speed = 4
 anim_offset_y = -9
 anim_name = "sandling1"
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

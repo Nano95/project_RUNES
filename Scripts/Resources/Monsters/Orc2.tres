@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_xb32t")
 name = "Orc Brawler"
-max_hp = 42
+max_hp = 31
 power = 9
 exp_reward = 17
 min_gold_reward = 4

@@ -5,14 +5,14 @@
 [resource]
 script = ExtResource("1_irk3m")
 name = "Slime Hatchling"
-max_hp = 15
+max_hp = 12
 power = 1
 exp_reward = 4
 min_gold_reward = 1
 max_gold_reward = 3
 essence_type = "arcane"
-min_essence_amount = 1
-max_essence_amount = 2
+min_essence_amount = 2
+max_essence_amount = 3
 anim_offset_y = -8
 anim_name = "slime1"
 weaknesses = Array[String]([])

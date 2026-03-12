@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_xwwgs")
 name = "Howler"
-max_hp = 50
-power = 21
+max_hp = 43
+power = 16
 exp_reward = 19
 min_gold_reward = 8
 max_gold_reward = 17
