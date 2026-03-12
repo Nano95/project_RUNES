@@ -41,6 +41,10 @@ func _ready() -> void:
 	# Now game things
 	Utils.setup(self)
 	spawn_main_menu()
+	
+	# GIVE PLAYER REWARDS
+	if !(OS.get_name() == "Windows"):
+		check_offline_time_and_rewards()
 
 func spawn_main_menu() -> void:
 	if (is_instance_valid(active_menu_ref)):
@@ -127,12 +131,26 @@ func _notification(what):
 
 
 func focus_in_notification() -> void:
+	check_offline_time_and_rewards()
+
+func focus_out_notification() -> void:
+	# calculates total time played - app on but out of focus
+	@warning_ignore("narrowing_conversion")
+	game_data.last_crafting_timestamp = Time.get_unix_time_from_system()
+	# NEW: update per-slot timestamps so they don't drift 
+	for slot in game_data["offline_rune_timestamps"].keys():
+		if (game_data["offline_rune_timestamps"][slot] == 0): continue
+		game_data["offline_rune_timestamps"][slot] = Time.get_unix_time_from_system()
+	save_game()
+	print("-debug: FOCUS OUT")
+
+func check_offline_time_and_rewards() -> void:
 	# gets most recent time to calculate total time played
 	@warning_ignore("narrowing_conversion")
 	var now:int = Time.get_unix_time_from_system()
 	var last:int = game_data.last_crafting_timestamp
 
-	if (last > 0):
+	if (last > 3):
 		var elapsed:int = now - last
 		print("FOCUS IN — elapsed: ", Utils.format_time(elapsed))
 		var info = info_pop_up.instantiate() as InfoPopup
@@ -146,18 +164,6 @@ func focus_in_notification() -> void:
 		if (active_menu_ref is MainMenu):
 			active_menu_ref.update_info_panel()
 	game_data.last_crafting_timestamp = now
-
-func focus_out_notification() -> void:
-	# calculates total time played - app on but out of focus
-	@warning_ignore("narrowing_conversion")
-	game_data.last_crafting_timestamp = Time.get_unix_time_from_system()
-	# NEW: update per-slot timestamps so they don't drift 
-	for slot in game_data["offline_rune_timestamps"].keys():
-		if (game_data["offline_rune_timestamps"][slot] == 0): continue
-		game_data["offline_rune_timestamps"][slot] = Time.get_unix_time_from_system()
-	save_game()
-	print("-debug: FOCUS OUT")
-
 
 func show_reward_popups(results: Dictionary) -> void:
 	for rune_name in results.keys():
