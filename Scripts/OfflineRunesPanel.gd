@@ -44,7 +44,7 @@ func update_summary_section() -> void:
 	for ess_type in essence_summaries.keys():
 		var lbl = my_lbl.instantiate()
 		lbl.setup(
-			str(ess_type.capitalize(), " production ends in ", essence_summaries[ess_type]["time_to_empty"]),
+			str(ess_type.capitalize(), " production will end in ", Utils.format_time(essence_summaries[ess_type]["time_to_empty"])),
 			Vector2(.2, .2)
 		)
 		essence_summary_container.add_child(lbl)

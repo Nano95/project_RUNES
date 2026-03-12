@@ -52,22 +52,27 @@ func numberize(number: float):
 	# Below 1000 → no decimals
 		return str(int(number))
 
-func format_time(seconds:float) -> String:
-	if seconds == INF:
-		return "—"
+func format_time(value) -> String:
+	var total := int(value)
 
-	var s = int(seconds)
 	@warning_ignore("integer_division")
-	var m = s / 60
+	var hours := total / 3600
 	@warning_ignore("integer_division")
-	var h = m / 60
+	var minutes := (total % 3600) / 60
+	var seconds := total % 60
 
-	if h > 0:
-		return "%dh %dm" % [h, m % 60]
-	elif m > 0:
-		return "%dm" % m
-	else:
-		return "%ds" % s
+	var parts := []
+
+	if hours > 0:
+		parts.append("%02d" % hours)
+
+	if minutes > 0 or hours > 0:
+		parts.append("%02d" % minutes)
+
+	parts.append("%02d" % seconds)
+
+	return ":".join(parts)
+
 
 func roll_rarity() -> String:
 	var roll := randf()
@@ -176,34 +181,6 @@ func animate_modal_exit(node: CanvasItem, duration := 0.15, offset := 10.0, shou
 
 func get_rarity_color(rarity: String) -> Color:
 	return RARITY_COLORS.get(rarity, Color.WHITE) # Defaults to white if not found
-
-func get_time_gone() -> Dictionary:
-	print_debug("_TIME GONE IS NOTHING_")
-	return {}
-	#var time_format = {}
-	#if player_data.first_time_opened:
-		#time_format["days"] = 0
-		#time_format["hours"] = 0
-		#time_format["minutes"] = 0
-		#time_format["seconds"] = 0
-		#time_format["total_amount_seconds"] = 0
-		#return time_format
-	#
-	## error handle last seen being a negative number.
-	#if ("last_seen" in player_data):
-		#if (int(player_data.last_seen) < 0):
-			#player_data.last_seen = str(Time.get_unix_time_from_system())
-	#
-	#var time_gone = ceil(Time.get_unix_time_from_system()) - int(player_data.last_seen)
-	#time_format = {
-		#"days": floor(time_gone / 86400),
-		#"hours": floor((int(time_gone) % 86400) / 3600.0),
-		#"minutes": floor((int(time_gone) % 3600) / 60.0),
-		#"seconds": int(time_gone) % 60,
-		#"total_amount_seconds": int(time_gone)
-	#}
-	#
-	#return time_format
 
 
 func animate_summary_in_happy(panel):

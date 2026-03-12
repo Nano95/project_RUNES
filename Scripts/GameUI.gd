@@ -9,7 +9,6 @@ var game_controller:GameController
 @export var hp_bar:TextureProgressBar
 @export var xp_bar:TextureProgressBar
 @export var hp_label:Label
-@export var xp_label:Label
 @export var monster_turns:Label
 @export var monster_damage:Label
 @export var rune_btns_container:HBoxContainer

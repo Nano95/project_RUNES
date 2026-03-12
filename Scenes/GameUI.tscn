@@ -44,7 +44,7 @@ shader = ExtResource("3_co6lq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="GameUI" type="Control" node_paths=PackedStringArray("back_btn", "hp_bar", "xp_bar", "hp_label", "xp_label", "monster_turns", "monster_damage", "rune_btns_container", "mana_icon", "focus_label", "loot_manager")]
+[node name="GameUI" type="Control" node_paths=PackedStringArray("back_btn", "hp_bar", "xp_bar", "hp_label", "monster_turns", "monster_damage", "rune_btns_container", "mana_icon", "focus_label", "loot_manager")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,7 +57,6 @@ back_btn = NodePath("TopSection/BackBtn")
 hp_bar = NodePath("TopSection/HpBar")
 xp_bar = NodePath("TopSection/XpBar")
 hp_label = NodePath("TopSection/HpBar/HpLabel")
-xp_label = NodePath("TopSection/XpBar/XpLabel")
 monster_turns = NodePath("TopSection/AttackIcon/turnsLabel")
 monster_damage = NodePath("TopSection/DamagedIcon/totalAtkLabel")
 rune_btns_container = NodePath("BottomSection/MarginContainer/ScrollContainer/HBoxContainer")
@@ -97,6 +96,7 @@ theme_override_font_sizes/font_size = 100
 text = "<-"
 
 [node name="QuickRespawn" type="Button" parent="TopSection"]
+visible = false
 layout_mode = 0
 offset_left = 588.0
 offset_top = -68.0
@@ -131,7 +131,7 @@ text = "2000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="XpBar" type="TextureProgressBar" parent="TopSection"]
+[node name="XpBar" type="TextureProgressBar" parent="TopSection" node_paths=PackedStringArray("xp_lbl")]
 layout_mode = 0
 offset_left = 378.0
 offset_top = 23.0
@@ -144,6 +144,7 @@ texture_progress = ExtResource("7_tii1l")
 tint_progress = Color(0.9095733, 0.92, 0.2944, 1)
 script = ExtResource("8_tii1l")
 xp_curve = ExtResource("9_8dgta")
+xp_lbl = NodePath("XpLabel")
 
 [node name="XpLabel" parent="TopSection/XpBar" instance=ExtResource("2_frnsy")]
 material = SubResource("ShaderMaterial_8oijl")

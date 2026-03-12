@@ -4,6 +4,8 @@ class_name MainNode
 @onready var game_controller:PackedScene = load("res://Scenes/GameController.tscn")
 @onready var game_ui:PackedScene = load("res://Scenes/GameUI.tscn")
 @onready var main_menu_ui:PackedScene = load("res://Scenes/MainMenu.tscn")
+@export var reward_pop_up:PackedScene
+@export var info_pop_up:PackedScene
 
 @export_category("UI")
 @export var top_layer:CanvasLayer
@@ -94,10 +96,12 @@ func _notification(what):
 	if (what == NOTIFICATION_WM_WINDOW_FOCUS_IN):
 		# IOS and PC
 		if !(OS.get_name() == "Android"):
+			print("- OS.get_name(): ", OS.get_name())
 			focus_in_notification()
 	
 	if (what == NOTIFICATION_APPLICATION_RESUMED):
 		if (OS.get_name() == "Android"):
+			print("- OS.get_name()2 ", OS.get_name())
 			focus_in_notification()
 	
 	elif (what == NOTIFICATION_WM_WINDOW_FOCUS_OUT):
@@ -130,9 +134,14 @@ func focus_in_notification() -> void:
 
 	if (last > 0):
 		var elapsed:int = now - last
-		print("FOCUS IN — elapsed: ", elapsed)
+		print("FOCUS IN — elapsed: ", Utils.format_time(elapsed))
+		var info = info_pop_up.instantiate() as InfoPopup
+		spawn_to_top_ui_layer(info)
+		info.show_info(str("Gone: ", Utils.format_time(elapsed)))
 		var results = CraftingSystem.process_elapsed(elapsed, game_data)
 		game_data.add_crafted_runes_by_name(results)
+		if (results.keys().size() > 0):
+			show_reward_popups(results)
 
 		if (active_menu_ref is MainMenu):
 			active_menu_ref.update_info_panel()
@@ -148,6 +157,20 @@ func focus_out_notification() -> void:
 		game_data["offline_rune_timestamps"][slot] = Time.get_unix_time_from_system()
 	save_game()
 	print("-debug: FOCUS OUT")
+
+
+func show_reward_popups(results: Dictionary) -> void:
+	for rune_name in results.keys():
+		var rune = RuneDatabase.runes[rune_name]
+		var qty = results[rune_name]
+
+		var popup = reward_pop_up.instantiate() as RewardPopup
+		spawn_to_top_ui_layer(popup)
+
+		popup.show_reward(rune, qty)
+
+		# Delay before spawning the next popup
+		await get_tree().create_timer(1.0).timeout
 
 
 ########### SAVE THINGS ##############

@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3uurpsjr56i5"]
+[gd_scene load_steps=7 format=3 uid="uid://d3uurpsjr56i5"]
 
 [ext_resource type="Script" uid="uid://csxtg5a3i0t5m" path="res://Scripts/Main.gd" id="1_r150o"]
 [ext_resource type="Shader" path="res://Shaders/BackgroundStripes.gdshader" id="2_kln2b"]
+[ext_resource type="PackedScene" uid="uid://vmyv23nj752e" path="res://Scenes/RewardPopup.tscn" id="2_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://beklm42on2cjw" path="res://Scenes/InfoPopup.tscn" id="3_pbw6q"]
 [ext_resource type="Texture2D" uid="uid://t3ffb8unegpu" path="res://Sprites/AccessorySquare.png" id="3_rgh2o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pbw6q"]
@@ -22,6 +24,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_r150o")
+reward_pop_up = ExtResource("2_rgh2o")
+info_pop_up = ExtResource("3_pbw6q")
 top_layer = NodePath("FRONT")
 mid_layer = NodePath("MID")
 back_layer = NodePath("BACK")

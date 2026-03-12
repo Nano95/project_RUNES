@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://vmyv23nj752e"]
+
+[ext_resource type="Script" uid="uid://dkr486flmru4p" path="res://Scripts/RewardPopup.gd" id="1_7pqrl"]
+[ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="2_raruv"]
+
+[node name="InfoControl" type="Control" node_paths=PackedStringArray("ctrl", "lbl")]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_7pqrl")
+ctrl = NodePath("Control")
+lbl = NodePath("Control/RichTextLabel")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_right = 1082.0
+offset_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_constants/outline_size = 35
+theme_override_fonts/normal_font = ExtResource("2_raruv")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[center][img=128x128]res://Sprites/Runes/ARCANE_CROSS_RUNE.png[/img][color=99ff99ff]+26[/color]   [img=128x128]res://Sprites/arcane_ESSENCE_ICON.png[/img][color=ff9999ff]-156[/color][/center]
+"

@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://beklm42on2cjw"]
+
+[ext_resource type="Script" uid="uid://cpku2b02j7gh0" path="res://Scripts/infoPopup.gd" id="1_ieukj"]
+[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_1uhd2"]
+[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="3_hb1ye"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k0tfk"]
+resource_local_to_scene = true
+shader = ExtResource("3_hb1ye")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="RewardControl" type="Control" node_paths=PackedStringArray("ctrl", "lbl")]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_ieukj")
+ctrl = NodePath("Control")
+lbl = NodePath("Control/Label")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" parent="Control" instance=ExtResource("2_1uhd2")]
+material = SubResource("ShaderMaterial_k0tfk")
+layout_mode = 0
+offset_left = -361.00003
+offset_right = 2039.0
+offset_bottom = 137.0
+horizontal_alignment = 1

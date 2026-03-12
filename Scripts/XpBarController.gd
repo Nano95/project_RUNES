@@ -2,6 +2,7 @@ extends TextureProgressBar
 class_name XpBar
 
 @export var xp_curve:Resource
+@export var xp_lbl:Label
 var main:MainNode
 var game_controller:GameController
 var xp_tween:Tween
@@ -69,6 +70,8 @@ func on_level_up():
 
 	if (main.game_ui_ref.has_method('play_level_up_flash')):
 		main.game_ui_ref.play_level_up_flash()
+	
+	xp_lbl.self_modulate = Color(1.0, 0.988, 0.322, 1.0)
 	# apply stat bonuses, show UI, etc.
 
 func xp_required_for_level(level: int) -> float:
