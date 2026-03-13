@@ -51,7 +51,6 @@ func play_happy_message() -> void:
 	)
 
 func play_lose_message() -> void:
-	print("LOSE MSG")
 	my_label.scale = Vector2(0.2, 0.2)
 	my_label.modulate.a = 0.0
 

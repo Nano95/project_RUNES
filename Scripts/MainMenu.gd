@@ -284,7 +284,6 @@ func add_xp(amount: float) -> void:
 	if (lvled_up):
 		main.save_game()
 
-
 func on_level_up():
 	main.game_data.current_level += 1
 	main.game_data.available_ap += 5

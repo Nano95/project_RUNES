@@ -45,6 +45,7 @@ var round_gained_exp:int=0
 signal gained_exp
 
 var escape_timer_counter:int = 0
+var escape_in_progress:bool = false
 
 func _ready() -> void:
 	%Camera2D.setup(null) # temporary null until i know what i need to do
@@ -57,13 +58,14 @@ func _ready() -> void:
 
 func start_game(restart:bool=false) -> void:
 	game_is_active = true
+	escape_in_progress = false
 	escape_timer_counter = 0
+	round_gained_exp = 0
 	if (restart):
 		clear_all_monsters()
 		group_turns_left = max(2, GENERAL_STARTING_TURNS_LEFT) # it will be base - some ascension number
 		current_hp = max_hp
 		current_focus = max_focus
-		round_gained_exp = 0
 		heal(1000)
 		
 	spawn_stage(main.battle_data["index"], 10)
@@ -78,10 +80,15 @@ func setup(main_ref:MainNode, g_ui:GameUI) -> void:
 	escape_timer.timeout.connect(escape_timer_timeout)
 
 func escape_pressed_behavior() -> void:
+	if (escape_in_progress):
+		return
+	escape_in_progress = true
 	advance_turn()
 	escape_timer_counter += 1
 	game_ui.disable_back_button(true)
-	escape_timer.start(.3)
+	escape_timer.stop()
+	escape_timer.wait_time = 0.3
+	escape_timer.call_deferred("start")
 
 func escape_timer_timeout() -> void:
 	advance_turn()
@@ -133,13 +140,15 @@ func spawn_status_message(died:bool=false, no_focus:bool=false, escaped:bool=fal
 	if (!game_is_active): return
 	var msg = Utils.STATUS_MESSAGE_VICTORY
 	var xp_gain:int = current_focus
+	var focus_msg:String = "No more focus! Escaping..."
 	game_is_active = false
 	if (died):
 		msg = "You Ded :("
 		xp_gain = 0
 	elif (no_focus):
-		msg = "No more focus :("
-		xp_gain = 0
+		msg = focus_msg
+		
+		game_is_active = true # Have to do this so that escape behavior will work
 	elif(escaped):
 		msg = "Escaped! :D"
 		@warning_ignore("integer_division")
@@ -147,8 +156,9 @@ func spawn_status_message(died:bool=false, no_focus:bool=false, escaped:bool=fal
 	
 	var lbl = status_message.instantiate() as GameStatusPopup
 	lbl.setup(msg)
-	lbl.animation_complete.connect(spawn_summary_panel.bind(msg))
 	main.spawn_to_top_ui_layer(lbl)
+	if (msg != focus_msg):
+		lbl.animation_complete.connect(spawn_summary_panel.bind(msg))
 	
 	if (xp_gain > 0):
 		var xp_lbl = xp_label.instantiate()
@@ -156,6 +166,10 @@ func spawn_status_message(died:bool=false, no_focus:bool=false, escaped:bool=fal
 		xp_lbl.global_position = game_ui.mana_icon.global_position + Vector2(10, 100)
 		xp_lbl.show_label(xp_gain)
 		emit_signal("gained_exp", xp_gain)
+	
+	if (no_focus and !escape_in_progress):
+		await get_tree().create_timer(1.0).timeout
+		escape_pressed_behavior()
 
 func spawn_summary_panel(message:String="mmm!") -> void:
 	game_ui.disable_back_button(false) # Just in case in any scenario
@@ -279,7 +293,7 @@ func advance_turn():
 	game_ui.update_monster_turns(next_attack.turns)
 	game_ui.update_monster_damage(next_attack.damage)
 	
-	if (current_focus <= 0 and current_hp > 0):
+	if (current_focus <= 0 and current_hp > 0 and escape_timer.is_stopped() and !escape_in_progress):
 		spawn_status_message(false, true)
 
 func calculate_group_power() -> int:
