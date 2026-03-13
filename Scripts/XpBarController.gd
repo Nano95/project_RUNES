@@ -22,19 +22,26 @@ func award_xp(xp_gained:int=1) -> void:
 	animate_xp_gain(xp_gained) # NOTE WE DO NOT ADD XP HERE
 
 func add_xp(amount: float) -> void:
-	main.game_data.current_exp += amount
-	main.game_data.total_exp += amount
+	main.game_data.current_exp = max(0, main.game_data.current_exp + amount)
+	main.game_data.total_exp = max(0, main.game_data.total_exp + amount)
 	while (main.game_data.current_exp >= xp_required_for_level(main.game_data.current_level + 1)):
 		on_level_up()
 	
 	update_xp_label()
 
 func animate_xp_gain(amount: float) -> void:
-	var xp_to_next = xp_required_for_level(main.game_data.current_level + 1) - main.game_data.current_exp
-	
+	var current_xp = main.game_data.current_exp
+	var new_xp = max(0, current_xp + amount)
 	var from_percent: float = xp_to_percent(main.game_data.current_exp, main.game_data.current_level)
-	var to_percent: float = xp_to_percent(main.game_data.current_exp + amount, main.game_data.current_level)
-	
+	var to_percent: float = xp_to_percent(new_xp, main.game_data.current_level)
+	# If XP is decreasing, just tween backwards and apply immediately
+	if amount < 0:
+		tween_xp_bar(from_percent, to_percent)
+		await xp_tween.finished
+		add_xp(amount)  # amount is negative
+		return
+
+	var xp_to_next = xp_required_for_level(main.game_data.current_level + 1) - main.game_data.current_exp
 	# Case 1: Not enough XP to level up
 	if (amount < xp_to_next):
 

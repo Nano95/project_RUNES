@@ -37,8 +37,7 @@ func setup_rune_grid() -> void:
 	for btn in rune_grid_container.get_children():
 		btn.queue_free()
 	
-	for i in range(1,5):
-		print("building slot: ", i)
+	for i in range(1, 5):
 		var selected_runes_data:Dictionary = main.game_data.selected_battle_runes
 		var slot:String = "slot" + str(i)
 		var btn := rune_button.instantiate() as FightMenuRuneButton

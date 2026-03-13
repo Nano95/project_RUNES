@@ -40,6 +40,7 @@ var runes_used:int
 var total_exp:int
 var total_gold:int
 var loot_summary:Dictionary
+var round_gained_exp:int=0
 
 signal gained_exp
 
@@ -62,6 +63,7 @@ func start_game(restart:bool=false) -> void:
 		group_turns_left = max(2, GENERAL_STARTING_TURNS_LEFT) # it will be base - some ascension number
 		current_hp = max_hp
 		current_focus = max_focus
+		round_gained_exp = 0
 		heal(1000)
 		
 	spawn_stage(main.battle_data["index"], 10)
@@ -178,6 +180,7 @@ func monster_died(monster):
 	else:
 		main.game_data.total_run_monster_kills[monster.base.name] = 1
 	emit_signal("gained_exp", monster.base.exp_reward)
+	round_gained_exp += monster.base.exp_reward
 	monsters.erase(monster)
 
 	# Remove from grid
@@ -187,10 +190,7 @@ func monster_died(monster):
 	
 	var game_over = check_if_all_monsters_dead(false)
 	if (game_over): return # would adding the win game situation here cause it to happen too many times if multiple monsters die from poison at the same time?
-	
 
-	# Update UI if needed
-	#game_ui.refresh_monster_data()
 
 func prune_dead_monsters(): 
 	monsters = monsters.filter(is_instance_valid)
@@ -210,6 +210,8 @@ func take_damage(dmg:int=0) -> void:
 	current_hp -= dmg
 	if (current_hp <= 0):
 		spawn_status_message(true)
+		emit_signal("gained_exp", -round_gained_exp)
+		
 		# In case we die while trying to escape
 		if (!escape_timer.is_stopped()): escape_timer.stop()
 
@@ -472,9 +474,7 @@ func damage_cell(r: int, c: int) -> void:
 			"earth": # Earth magic has the DoT ability
 				var poison_dmg = int(current_power * 0.15)
 				monster.apply_poison(poison_dmg, 4)
-		var died = monster.take_damage(dmg, selected_rune.rune_type, crit_hit)
-		if (died):
-			monster_died(monster)
+		monster.take_damage(dmg, selected_rune.rune_type, crit_hit)
 	
 
 func spawn_rune_explosion(row: int, col: int):
