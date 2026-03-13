@@ -461,10 +461,18 @@ func damage_cell(r: int, c: int) -> void:
 		
 		var dmg:int = int(current_power * mult)
 		# Apply poison if rune is poison
-		if selected_rune.rune_type == "earth":
-			var poison_dmg = int(current_power * 0.15)
-			monster.apply_poison(poison_dmg, 4)
-		var died = monster.take_damage(dmg)
+		var crit_hit:bool=false
+		match selected_rune.rune_type:
+			"arcane": # Arcane magic has the ability to Critical strike
+				var crit_chance := get_crit_chance(current_luck)
+				if randf() < crit_chance:
+					dmg = int(dmg * 1.5)  # or 2.0, or a formula
+					crit_hit = true
+				
+			"earth": # Earth magic has the DoT ability
+				var poison_dmg = int(current_power * 0.15)
+				monster.apply_poison(poison_dmg, 4)
+		var died = monster.take_damage(dmg, selected_rune.rune_type, crit_hit)
 		if (died):
 			monster_died(monster)
 	
@@ -504,3 +512,8 @@ func get_element_multiplier(rune_element: String, monster) -> float:
 	if rune_element in monster.base.resistances:
 		return 0.5
 	return 1.0
+
+func get_crit_chance(luck: int) -> float:
+	var max_crit := 0.35
+	var k := 30.0
+	return max_crit * (luck / (luck + k))

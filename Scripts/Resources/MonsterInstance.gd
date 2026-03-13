@@ -53,8 +53,8 @@ func become_elite():
 func update_individual_atk_label() -> void:
 	$atk.text = str(individual_turns_left)
 
-func take_damage(dmg:int=1, dmg_color_type:String="arcane") -> bool:
-	spawn_damage_label(dmg, dmg_color_type)
+func take_damage(dmg:int=1, dmg_color_type:String="arcane", crit_hit:bool=false) -> bool:
+	spawn_damage_label(dmg, dmg_color_type, crit_hit)
 	current_hp -= dmg
 	hp_label.text = str(current_hp)
 	animate_hit()
@@ -63,8 +63,6 @@ func take_damage(dmg:int=1, dmg_color_type:String="arcane") -> bool:
 		spawn_xp_label()
 		queue_free() # will be enhanced later
 		return true
-		
-		
 	return false
 
 func spawn_xp_label() -> void:
@@ -74,14 +72,14 @@ func spawn_xp_label() -> void:
 	label.global_position = %AnimatedSprite2D.global_position + Vector2(-5, 50)
 	label.show_label(base.exp_reward)
 
-func spawn_damage_label(amount: float, dmg_color_type:String="arcane") -> void:
+func spawn_damage_label(amount: float, dmg_color_type:String="arcane", crit_hit:bool=false) -> void:
 	var label = damage_label.instantiate()
 	my_grid.spawn_to_fx_container(label)
 
 	# Position relative to the wall sprite
 	label.global_position = %AnimatedSprite2D.global_position  + Vector2(-35, -50)
 
-	label.show_label(amount, dmg_color[dmg_color_type])
+	label.show_label(amount, dmg_color[dmg_color_type], crit_hit)
 
 func apply_poison(dmg:int, turns:int) -> void:
 	if (status_effects.has(POISON)):
