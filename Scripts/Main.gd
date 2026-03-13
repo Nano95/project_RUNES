@@ -27,8 +27,7 @@ var bonus_stats:Dictionary
 
 var battle_data:Dictionary = {
 	"family": "slimes",
-	"index": 1,
-	"selected_runes": [] # Eventually be coming from save file.
+	"index": 1
 }
 
 func _ready() -> void:

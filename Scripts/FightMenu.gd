@@ -70,7 +70,7 @@ func setup_monster_grid() -> void:
 	if (main.game_data.unlocked_monster_families[main.battle_data["family"]]):
 		_on_family_selected(main.battle_data["family"])
 		var first_monster = MonsterDatabase[main.battle_data["family"]][0]
-		_on_monster_selected(0, first_monster)
+		_on_monster_selected(1, first_monster)
 	
 
 func _on_family_selected(family: String) -> void:
