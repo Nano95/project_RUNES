@@ -18,10 +18,10 @@ var status_effects = {
 		#"turns_remaining": 0
 	#}
 }
-var POISON:String = "poison"
+var POISON:String = "earth"
 var dmg_color:Dictionary = {
 	"arcane": "ff6969",
-	"poison": "bbff69"
+	"earth": "bbff69"
 }
 
 signal died
