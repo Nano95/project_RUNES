@@ -83,7 +83,7 @@ func escape_pressed_behavior() -> void:
 	if (escape_in_progress):
 		return
 	escape_in_progress = true
-	advance_turn()
+	advance_turn(true)
 	escape_timer_counter += 1
 	game_ui.disable_back_button(true)
 	escape_timer.stop()
@@ -91,7 +91,7 @@ func escape_pressed_behavior() -> void:
 	escape_timer.call_deferred("start")
 
 func escape_timer_timeout() -> void:
-	advance_turn()
+	advance_turn(true)
 	escape_timer_counter += 1
 	if (escape_timer_counter >= 3):
 		escape_timer.stop()
@@ -239,18 +239,27 @@ func apply_group_attack(dmg:int= 0) -> void:
 	if (dmg > 0):
 		take_damage(dmg)
 
-func advance_turn():
+func advance_turn(is_escaping=false):
 	if !game_is_active: return
-	prune_dead_monsters()
-	runes_used += 1
-		# Data
-	main.game_data.runes_used += 1
+	# Advancing turns should be happening when a rune is used
+	if (!is_escaping):
+		runes_used += 1
+		main.game_data.runes_used += 1
 	# 1. Decrement group timer
 	group_turns_left -= 1
-	# 2. Decrement elite timers FIRST
+	
+	# 2A. Decrement elite timers FIRST
 	for monster in monsters:
 		if monster.is_elite_or_boss():
 			monster.individual_turns_left -= 1
+	# 2B.
+	print("=======")
+	for monster in monsters:
+		monster.process_status_effect()
+	# Remove monsters killed by poison BEFORE attacks
+	prune_dead_monsters()
+	if check_if_all_monsters_dead(true):
+		return
 	
 	# 3. Now calculate the next attack using UPDATED timers
 	var next_attack = calculate_next_incoming_attack()
@@ -272,20 +281,12 @@ func advance_turn():
 
 	# 5. Apply elite attacks that fire this turn
 	for monster in monsters:
-		# 5A. Status effects tick here
-		monster.process_status_effect() 
-		# If poison killed the monster, skip its attack 
-		if (monster.current_hp <= 0): continue
 		if monster.is_elite_or_boss():
 			if monster.individual_turns_left <= 0:
 				take_damage(monster.current_power)
 				monster.individual_turns_left = monster.base.attack_speed
 				
 		monster.update_individual_atk_label()
-	# Check victory after poison ticks from process_status_effect
-	prune_dead_monsters()
-	if check_if_all_monsters_dead(true):
-		return
 
 	# 6. Recalculate preview AFTER attacks resolve (optional but clean)
 	next_attack = calculate_next_incoming_attack()
@@ -326,7 +327,6 @@ func calculate_next_elite_attack() -> Dictionary:
 		"damage": total_damage,
 		"source": "elite"
 	}
-
 
 # This is purely for UI
 func calculate_next_incoming_attack() -> Dictionary:
@@ -472,7 +472,7 @@ func damage_cell(r: int, c: int) -> void:
 	if (is_instance_valid(monster)):
 		var mult:float = get_element_multiplier(selected_rune.rune_type, monster)
 		# Earth runes deal slightly less direct damage 
-		if selected_rune.rune_type == "earth": 
+		if (selected_rune.rune_type == "earth"): 
 			mult *= 0.75
 		
 		var dmg:int = int(current_power * mult)
@@ -486,6 +486,7 @@ func damage_cell(r: int, c: int) -> void:
 					crit_hit = true
 				
 			"earth": # Earth magic has the DoT ability
+				print("Applying poison at time: ", Time.get_ticks_msec())
 				var poison_dmg = int(current_power * 0.15)
 				monster.apply_poison(poison_dmg, 4)
 		monster.take_damage(dmg, selected_rune.rune_type, crit_hit)
