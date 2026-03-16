@@ -195,10 +195,7 @@ func monster_died(monster):
 		main.game_data.total_run_monster_kills[monster.base.name] = 1
 	emit_signal("gained_exp", monster.base.exp_reward)
 	round_gained_exp += monster.base.exp_reward
-	monsters.erase(monster)
-
-	# Remove from grid
-	my_grid.clear_monster(monster)
+	
 	#game_ui.update_monster_damage(calculate_group_power()) # I dont think we want to update this as game ends
 	roll_loot(monster.base)
 	
@@ -206,8 +203,14 @@ func monster_died(monster):
 	if (game_over): return # would adding the win game situation here cause it to happen too many times if multiple monsters die from poison at the same time?
 
 
-func prune_dead_monsters(): 
-	monsters = monsters.filter(is_instance_valid)
+func prune_dead_monsters(): # iterate a shallow copy to avoid mutation issues
+	for monster in monsters.duplicate():
+		if (monster.is_pending_death or monster.is_queued_for_deletion()):
+			if monsters.has(monster):
+				monsters.erase(monster)
+			my_grid.clear_monster(monster)
+			monster.queue_free()
+				# Remove from grid
 
 func check_if_all_monsters_dead(spawn_msg:bool=false) -> bool:
 	if monsters.is_empty():
@@ -253,13 +256,16 @@ func advance_turn(is_escaping=false):
 		if monster.is_elite_or_boss():
 			monster.individual_turns_left -= 1
 	# 2B.
-	print("=======")
 	for monster in monsters:
-		monster.process_status_effect()
+		if monster.is_pending_death or monster.is_queued_for_deletion() or not monster.is_inside_tree():
+			continue
+		if !(monster.is_pending_death):
+			monster.process_status_effect()
 	# Remove monsters killed by poison BEFORE attacks
 	prune_dead_monsters()
 	if check_if_all_monsters_dead(true):
 		return
+	
 	
 	# 3. Now calculate the next attack using UPDATED timers
 	var next_attack = calculate_next_incoming_attack()

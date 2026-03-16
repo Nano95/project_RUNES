@@ -23,6 +23,7 @@ var dmg_color:Dictionary = {
 	"arcane": "ff6969",
 	"earth": "bbff69"
 }
+var is_pending_death:bool=false
 
 signal died
 func _ready() -> void:
@@ -55,14 +56,13 @@ func update_individual_atk_label() -> void:
 
 func take_damage(dmg:int=1, dmg_color_type:String="arcane", crit_hit:bool=false) -> bool:
 	spawn_damage_label(dmg, dmg_color_type, crit_hit)
-	print("dmg ", dmg)
 	current_hp -= dmg
 	hp_label.text = str(current_hp)
 	animate_hit()
 	if (current_hp <= 0):
+		is_pending_death = true
 		emit_signal("died")
 		spawn_xp_label()
-		queue_free() # will be enhanced later
 		return true
 	return false
 
@@ -92,11 +92,8 @@ func apply_poison(dmg:int, turns:int) -> void:
 	#add_status_icon(POISON) # optional # it should be a Vcontainer 
 
 func process_status_effect() -> void:
-	print("Check: ", status_effects.has(POISON))
 	if (status_effects.has(POISON)):
-		print("- ", status_effects[POISON])
 		if (status_effects[POISON]["turns_remaining"] > 0):
-			print("Damage")
 			take_damage(status_effects[POISON]["damage_per_tick"], POISON)
 			status_effects[POISON]["turns_remaining"] -= 1
 			if (status_effects[POISON]["turns_remaining"] <= 0):
