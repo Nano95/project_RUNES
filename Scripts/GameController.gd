@@ -68,7 +68,7 @@ func start_game(restart:bool=false) -> void:
 		current_focus = max_focus
 		heal(1000)
 		
-	spawn_stage(main.battle_data["index"], 10)
+	spawn_stage(main.battle_data["index"], (10 + Utils.get_unlocked_number_of_families()))
 	var next_attack = calculate_next_incoming_attack()
 	game_ui.update_monster_data(next_attack.turns, next_attack.damage)
 	game_ui.update_focus(current_focus)
@@ -98,7 +98,6 @@ func escape_timer_timeout() -> void:
 		if (current_hp > 0):
 			spawn_status_message(false, false, true)
 			return
-	
 
 func setup_stats() -> void:
 	max_hp = Utils.get_stat_for_ui("health") + main.bonus_stats.health
@@ -460,15 +459,19 @@ func activate_instant_rune(pressed_rune:RuneData):
 	game_ui.update_rune_qty(pressed_rune.name, new_qty)
 	advance_turn()
 
-#func _apply_instant_rune(rune: RuneData):
 func _apply_instant_rune(type: String):
+	var base_heal:int = 0
 	match type:
 		"light_heal":
-			heal(10)
+			base_heal = 10
 		"great_heal":
-			heal(25)
+			base_heal = 25
 		#"reduce_timers":
 			#reduce_all_monster_timers(1)
+	var percent:float = max_focus * 0.01
+	var bonus:int = int(ceil(base_heal * percent))
+	print("Bonus: ", base_heal + bonus)
+	heal(base_heal + bonus)
 
 func damage_cell(r: int, c: int) -> void:
 	if !(my_grid.is_valid(r, c)): return

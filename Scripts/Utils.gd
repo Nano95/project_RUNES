@@ -73,6 +73,17 @@ func format_time(value) -> String:
 
 	return ":".join(parts)
 
+func get_unlocked_number_of_families() -> int:
+	if (!main_node):
+		return 0
+	
+	var fams:Dictionary = main_node.game_data['unlocked_monster_families']
+	var counter:int = 0
+	for fam_unlocked in fams.values():
+		if (fam_unlocked):
+			counter += 1
+	
+	return counter
 
 func roll_rarity() -> String:
 	var roll := randf()
