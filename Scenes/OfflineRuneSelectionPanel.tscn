@@ -134,10 +134,11 @@ offset_bottom = 577.0
 [node name="SlotsContainer" type="GridContainer" parent="Panel/Slots/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 11
-theme_override_constants/v_separation = 101
+theme_override_constants/v_separation = 7
 columns = 4
 
 [node name="OfflineRuneSelectionButton" parent="Panel/Slots/ScrollContainer/SlotsContainer" instance=ExtResource("5_iow1g")]
+custom_minimum_size = Vector2(147, 191)
 layout_mode = 2
 
 [node name="TextureRect" parent="Panel/Slots/ScrollContainer/SlotsContainer/OfflineRuneSelectionButton/Panel/Panel" index="0"]
