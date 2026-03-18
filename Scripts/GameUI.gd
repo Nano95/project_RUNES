@@ -50,7 +50,7 @@ func setup_rune_buttons() -> void:
 			btn.pressed.connect(game_controller.change_selected_rune.bind(current_rune))
 		else:
 			# Healing runes
-			btn.pressed.connect(game_controller.activate_instant_rune.bind(current_rune))
+			btn.pressed.connect(game_controller.activate_instant_rune.bind(current_rune, btn))
 		
 		rune_buttons[rune_name] = btn
 		rune_btns_container.add_child(btn)

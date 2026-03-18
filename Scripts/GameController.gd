@@ -162,8 +162,8 @@ func spawn_status_message(died:bool=false, no_focus:bool=false, escaped:bool=fal
 	if (xp_gain > 0):
 		var xp_lbl = xp_label.instantiate()
 		my_grid.spawn_to_fx_container(xp_lbl)
-		xp_lbl.global_position = game_ui.mana_icon.global_position + Vector2(10, 100)
-		xp_lbl.show_label(xp_gain)
+		xp_lbl.global_position = game_ui.mana_icon.global_position + Vector2(20, 80)
+		xp_lbl.show_label("+" + str(xp_gain) + " XP", 20)
 		emit_signal("gained_exp", xp_gain)
 	
 	if (no_focus and !escape_in_progress):
@@ -448,18 +448,20 @@ func on_cell_tapped(row, col) -> void:
 	game_ui.update_rune_qty(selected_rune.name, new_qty)
 	advance_turn()
 
-
-func activate_instant_rune(pressed_rune:RuneData):
+# btn parameter is needed to know the position of where we will spawn a label
+func activate_instant_rune(pressed_rune:RuneData, btn:Button=null):
 	if (!game_is_active): return
 	if (!main.game_data.rune_inv.get(pressed_rune.name)): return
 	if (!focus_check(pressed_rune)): return
-	
-	_apply_instant_rune(pressed_rune.pattern)
+	var lbl_pos:Vector2=Vector2.ZERO
+	if (btn):
+		lbl_pos = btn.global_position + btn.size/2
+	_apply_instant_rune(pressed_rune.pattern, lbl_pos)
 	var new_qty = main.game_data.remove_rune_from_inv(pressed_rune, 1)
 	game_ui.update_rune_qty(pressed_rune.name, new_qty)
 	advance_turn()
 
-func _apply_instant_rune(type: String):
+func _apply_instant_rune(type: String, lbl_position:Vector2):
 	var base_heal:int = 0
 	match type:
 		"light_heal":
@@ -472,6 +474,13 @@ func _apply_instant_rune(type: String):
 	var bonus:int = int(ceil(base_heal * percent))
 	print("Bonus: ", base_heal + bonus)
 	heal(base_heal + bonus)
+	
+	if (lbl_position != Vector2.ZERO):
+		var heal_lbl = xp_label.instantiate()
+		game_ui.add_child(heal_lbl)
+		heal_lbl.global_position = lbl_position
+		heal_lbl.show_label("+" + str(base_heal + bonus), -100)
+		heal_lbl.set_color(Utils.PASTEL_GREEN)
 
 func damage_cell(r: int, c: int) -> void:
 	if !(my_grid.is_valid(r, c)): return
@@ -527,6 +536,29 @@ func damage_3x3(r, c) -> void:
 	for dr in range(-1, 2):
 		for dc in range(-1, 2):
 			damage_cell(r+dr, c+dc)
+
+func damage_electric_diamond(r: int, c: int) -> void:
+	var offsets = [
+		Vector2i(-2, 0),
+		Vector2i(-1, -1), Vector2i(-1, 1),
+		Vector2i(0, -2), Vector2i(0, 0), Vector2i(0, 2),
+		Vector2i(1, -1), Vector2i(1, 1),
+		Vector2i(2, 0)
+	]
+
+	for off in offsets:
+		damage_cell(r + off.x, c + off.y)
+
+func damage_electric_x(r: int, c: int) -> void:
+	var offsets = [
+		Vector2i(-1, -1), Vector2i(-1, 1),
+		Vector2i(0, 0),
+		Vector2i(1, -1), Vector2i(1, 1)
+	]
+
+	for off in offsets:
+		damage_cell(r + off.x, c + off.y)
+
 
 func get_element_multiplier(rune_element: String, monster) -> float:
 	if rune_element in monster.base.immunities:

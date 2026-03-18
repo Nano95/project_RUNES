@@ -1,8 +1,11 @@
 extends Control
 
-func show_label(amount: float) -> void:
+func set_color(color:Color) -> void:
+	$Label.self_modulate = color
+
+func show_label(lbl_text:String, amount: float) -> void:
 	z_index = 10
-	$Label.text = "+" + str(amount) + " XP"
+	$Label.text = lbl_text
 
 	# Start small and slightly below the monster
 	var starting_position = global_position
@@ -16,7 +19,7 @@ func show_label(amount: float) -> void:
 		.set_ease(Tween.EASE_OUT)
 
 	# --- FLOAT UP ---
-	tween.parallel().tween_property(self, "global_position", starting_position + Vector2(0.0, 20), 0.85)\
+	tween.parallel().tween_property(self, "global_position", starting_position + Vector2(0.0, amount), 0.85)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_OUT)
 

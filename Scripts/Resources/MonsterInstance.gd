@@ -19,9 +19,11 @@ var status_effects = {
 	#}
 }
 var POISON:String = "earth"
+var STUN:String = "electric"
 var dmg_color:Dictionary = {
 	"arcane": "ff6969",
-	"earth": "bbff69"
+	"earth": "bbff69",
+	"electric": "ffde42"
 }
 var is_pending_death:bool=false
 
@@ -71,7 +73,7 @@ func spawn_xp_label() -> void:
 	
 	my_grid.spawn_to_fx_container(label)
 	label.global_position = %AnimatedSprite2D.global_position + Vector2(-5, 50)
-	label.show_label(base.exp_reward)
+	label.show_label("+" + str(base.exp_reward) + " XP", 20.0)
 
 func spawn_damage_label(amount: float, dmg_color_type:String="arcane", crit_hit:bool=false) -> void:
 	var label = damage_label.instantiate()
