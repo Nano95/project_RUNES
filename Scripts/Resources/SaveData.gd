@@ -175,3 +175,72 @@ func add_crafted_runes_by_name(runes:Dictionary) -> void:
 		else:
 			total_runes_obtained[rune_name] = qty
 	
+func reset_data() -> void:
+	rune_inv = { # Start pack
+	"Arcane Cross": 100,
+	"Arcane Explosion": 80,
+	"Arcane Strike": 250,
+	"Light Healing": 25
+}
+	current_level = 1
+	total_exp = 0 # true am
+	current_exp = 0 # Drive
+	total_gold = 0
+	current_gold = 0
+	total_essences = {
+		"arcane": 0,
+		"fire": 0,
+		"ice": 0,
+		"earth": 0,
+		"electric": 0
+	}
+	current_essences = {
+		"arcane": 0,
+		"fire": 0,
+		"ice": 0,
+		"earth": 0,
+		"electric": 0
+	}
+	selected_battle_runes = {
+		"slot1": null,
+		"slot2": null,
+		"slot3": null,
+		"slot4": null,
+		"slot5": null,
+		"slot6": null,
+		"slot7": null,
+		"slot8": null,
+	}
+	offline_runes = {
+		"slot1": null,
+		"slot2": null,
+		"slot3": null,
+		"slot4": null,
+		"slot5": null,
+		"slot6": null
+	}
+	offline_rune_timestamps = { 
+		"slot1": 0, 
+		"slot2": 0,
+		"slot3": 0,
+		"slot4": 0,
+		"slot5": 0,
+		"slot6": 0
+	}
+	unlocked_monster_families = {
+		"slimes": false,
+		"orcs": false,
+		"sandlings": false,
+		"dwarves": false,
+	}
+	available_ap = 0
+	base_stats = { "health": 10, "focus": 10, "power": 10, "luck": 10 }
+	allocated_stats = { "health": 0, "focus": 0, "power": 0, "luck": 0 }
+	
+	# STATS
+	runes_used = 0
+	enemies_killed = 0
+	total_runes_obtained = {}
+	current_run_runes_obtained = {}
+	total_monster_kills = {}
+	total_run_monster_kills = {}

@@ -243,8 +243,14 @@ func backup_game() -> void:
 		print("No save or backup found. Creating new player data.")
 		reset_data()
 
+# ⚠️ Do NOT replace the entire game_data resource.
+# Reloading the scene does NOT reset autoloads, so any script holding a
+# reference to the old game_data will keep pointing to that stale object.
+# This causes dangling references, broken signals, and UI desync.
+# Instead, reset the existing game_data fields in-place to keep all references valid.
+# which may explain the bug in Idle Expedition when resetting and muting the game or something
 func reset_data() -> void:
-	# create new 'player_data' object and replace the previous save data
+	# create new 'game_data' object and replace the previous save data
 	game_data = SaveData.new()
 	verify_save_directory(save_data_path)
 	ResourceSaver.save(game_data, save_data_path + save_data_name)

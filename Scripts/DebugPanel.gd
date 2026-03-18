@@ -2,6 +2,7 @@ extends Control
 class_name DebugPanel
 
 @export var button_group:ButtonGroup
+@export var confirmation_panel:PackedScene
 var qty_multiplier:int = 1000
 
 @export var btn1000:Button
@@ -29,6 +30,7 @@ func connect_buttons() -> void:
 	exp_btn.pressed.connect(give_exp)
 	gold_btn.pressed.connect(give_gold)
 	$backdropButton.pressed.connect(delete_debug)
+	$ColorRect/Panel/Control/resetBtn.pressed.connect(spawn_reset_panel)
 
 func delete_debug() -> void:
 	queue_free()
@@ -58,3 +60,13 @@ func qty_button_pressed(toggled) -> void:
 			qty_multiplier = 1000
 	
 	print("-debug multi: ", qty_multiplier)
+
+
+func spawn_reset_panel() -> void:
+	var panel = confirmation_panel.instantiate()
+	panel.setup(reset_game, "Reset game", "Warning! If you press yes, you will reset all of your data!")
+	main_node.spawn_to_top_ui_layer(panel)
+
+func reset_game() -> void:
+	main_node.reset_data()
+	get_tree().reload_current_scene()

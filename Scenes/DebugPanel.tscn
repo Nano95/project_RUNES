@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dq67y5pmx8adc"]
+[gd_scene load_steps=7 format=3 uid="uid://dq67y5pmx8adc"]
 
 [ext_resource type="Script" uid="uid://dwwd78td8c38m" path="res://Scripts/DebugPanel.gd" id="1_28dv6"]
 [ext_resource type="ButtonGroup" uid="uid://br2b15cqpspy" path="res://Resources/StatsButtonQty.tres" id="2_n44sy"]
 [ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="3_imyrc"]
+[ext_resource type="PackedScene" uid="uid://du5vvoc8xc6j8" path="res://Scenes/ConfirmationPanel.tscn" id="3_n44sy"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="4_o7tuo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kbq37"]
@@ -16,6 +17,7 @@ anchor_right = 1.0
 grow_horizontal = 2
 script = ExtResource("1_28dv6")
 button_group = ExtResource("2_n44sy")
+confirmation_panel = ExtResource("3_n44sy")
 btn1000 = NodePath("ColorRect/Panel/Control/qtyBtn1")
 btn20000 = NodePath("ColorRect/Panel/Control/qtyBtn2")
 btn500000 = NodePath("ColorRect/Panel/Control/qtyBtn3")
@@ -174,3 +176,21 @@ theme_override_font_sizes/font_size = 70
 toggle_mode = true
 button_group = ExtResource("2_n44sy")
 text = "Gold"
+
+[node name="resetBtn" type="Button" parent="ColorRect/Panel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 139.0
+offset_top = 756.0
+offset_right = 440.0
+offset_bottom = 916.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("4_o7tuo")
+theme_override_font_sizes/font_size = 70
+toggle_mode = true
+button_group = ExtResource("2_n44sy")
+text = "Reset"
