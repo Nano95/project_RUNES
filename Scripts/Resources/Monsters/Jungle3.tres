@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://c6w4coqapxsuo"]
+
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_bh3vt"]
+
+[resource]
+script = ExtResource("1_bh3vt")
+name = "Tribal Cannibal"
+max_hp = 68
+power = 28
+exp_reward = 31
+min_gold_reward = 14
+max_gold_reward = 18
+essence_type = "arcane"
+min_essence_amount = 6
+max_essence_amount = 9
+anim_offset_y = -10
+anim_name = "jungle3"
+weaknesses = Array[String]([])
+resistances = Array[String](["arcane", "earth"])
+metadata/_custom_type_script = "uid://dljne2akmlj0u"

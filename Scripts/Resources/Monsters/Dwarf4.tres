@@ -15,4 +15,6 @@ min_essence_amount = 7
 max_essence_amount = 9
 anim_offset_y = -12
 anim_name = "dwarf4"
+weaknesses = Array[String](["electric"])
+resistances = Array[String](["arcane"])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

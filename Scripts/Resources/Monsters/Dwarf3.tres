@@ -15,4 +15,5 @@ min_essence_amount = 4
 max_essence_amount = 5
 anim_offset_y = -12
 anim_name = "dwarf3"
+resistances = Array[String](["fire"])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

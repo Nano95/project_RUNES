@@ -10,7 +10,7 @@ class_name FightMenu
 @export var rune_button:PackedScene
 @export var select_runes_panel:PackedScene
 @onready var monster_info:Control = $ColorRect/Panel/MonsterInfo
-var areas:Array = ["slimes", "orcs", "sandlings", "dwarves"]
+var areas:Array = [] # Set in the _ready function 
 
 var selected_family: String = ""
 var selected_monster_index: int = -1
@@ -23,6 +23,7 @@ var rune_data:Dictionary
 func _ready() -> void:
 	Utils.animate_summary_in_happy(self)
 	rune_data = RuneDatabase.runes
+	areas = MonsterDatabase.monster_stage_cost.keys()
 	setup_monster_grid()
 	setup_rune_grid()
 	start_button.pressed.connect(main.spawn_game)

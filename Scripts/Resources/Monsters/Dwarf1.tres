@@ -13,7 +13,6 @@ max_gold_reward = 17
 essence_type = "arcane"
 min_essence_amount = 5
 max_essence_amount = 7
-attack_speed = 4
 anim_offset_y = -10
 anim_name = "dwarf1"
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

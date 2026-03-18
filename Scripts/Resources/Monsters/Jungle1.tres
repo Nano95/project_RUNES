@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://cdanp5ecx1lqw"]
+
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_wcrsr"]
+
+[resource]
+script = ExtResource("1_wcrsr")
+name = "Poison Shroom"
+max_hp = 63
+power = 23
+exp_reward = 23
+min_gold_reward = 9
+max_gold_reward = 18
+essence_type = "earth"
+min_essence_amount = 5
+max_essence_amount = 8
+anim_offset_y = -10
+anim_name = "jungle1"
+weaknesses = Array[String](["fire", "ice"])
+resistances = Array[String](["earth", "arcane"])
+metadata/_custom_type_script = "uid://dljne2akmlj0u"

@@ -68,6 +68,7 @@ class_name SaveData
 	"orcs": false,
 	"sandlings": false,
 	"dwarves": false,
+	"jungle": false
 }
 @export var available_ap:int = 0
 @export var base_stats:Dictionary = { "health": 10, "focus": 10, "power": 10, "luck": 10 }
@@ -117,8 +118,8 @@ func get_rune_count(rune_name:String) -> int:
 	return 0
 
 func add_rune_to_inv(rune:RuneData, qty:int, notify:bool = false) -> void:
-	print("notify... ", notify)
-	#if (notify && is_instance_valid(Utils)):
+	if (notify && is_instance_valid(Utils)):
+		pass
 		#Utils.spawn_notification(item_name, quantity)
 	if rune.name in rune_inv:
 		rune_inv[rune.name] += qty
@@ -232,6 +233,7 @@ func reset_data() -> void:
 		"orcs": false,
 		"sandlings": false,
 		"dwarves": false,
+		"jungle": false
 	}
 	available_ap = 0
 	base_stats = { "health": 10, "focus": 10, "power": 10, "luck": 10 }

@@ -15,4 +15,5 @@ min_essence_amount = 2
 max_essence_amount = 9
 anim_offset_y = -13
 anim_name = "sandling4"
+resistances = Array[String](["fire"])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

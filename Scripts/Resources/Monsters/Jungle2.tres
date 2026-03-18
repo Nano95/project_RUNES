@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://byibburqll40v"]
+
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_amqe6"]
+
+[resource]
+script = ExtResource("1_amqe6")
+name = "Giant Murder Ant"
+max_hp = 60
+power = 32
+exp_reward = 30
+min_gold_reward = 11
+max_gold_reward = 20
+essence_type = "fire"
+min_essence_amount = 6
+max_essence_amount = 9
+anim_offset_y = -10
+anim_name = "jungle2"
+weaknesses = Array[String]([])
+resistances = Array[String](["arcane"])
+metadata/_custom_type_script = "uid://dljne2akmlj0u"
