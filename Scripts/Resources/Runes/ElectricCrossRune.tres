@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RuneData" load_steps=3 format=3 uid="uid://du7e5716qgh8w"]
+
+[ext_resource type="Texture2D" uid="uid://q7kilkhngkw4" path="res://Sprites/Runes/ELECTRIC_CROSS_RUNE.png" id="1_237s0"]
+[ext_resource type="Script" uid="uid://wqovi0smk0qq" path="res://Scripts/RuneData.gd" id="2_6kcbs"]
+
+[resource]
+script = ExtResource("2_6kcbs")
+name = "Electric Cross"
+mini_name = "Ele Cross"
+icon = ExtResource("1_237s0")
+pattern = "cross"
+focus_cost = 5
+rune_type = "electric"
+essence_type = "electric"
+buy_cost = 30
+craft_time = 9
+essence_cost = 6
+metadata/_custom_type_script = "uid://wqovi0smk0qq"

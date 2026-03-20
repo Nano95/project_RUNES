@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RuneData" load_steps=3 format=3 uid="uid://corylgyyxcldk"]
+
+[ext_resource type="Texture2D" uid="uid://c2pmftwnr8xy0" path="res://Sprites/Runes/ELECTRIC_STRIKE_RUNE.png" id="1_1ei67"]
+[ext_resource type="Script" uid="uid://wqovi0smk0qq" path="res://Scripts/RuneData.gd" id="2_ihgwr"]
+
+[resource]
+script = ExtResource("2_ihgwr")
+name = "Electric Strike"
+mini_name = "Ele Str"
+icon = ExtResource("1_1ei67")
+pattern = "strike"
+focus_cost = 2
+rune_type = "electric"
+essence_type = "electric"
+buy_cost = 15
+craft_time = 6
+essence_cost = 3
+metadata/_custom_type_script = "uid://wqovi0smk0qq"

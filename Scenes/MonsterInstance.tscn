@@ -849,10 +849,11 @@ xp_label = ExtResource("3_qfc3e")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
+modulate = Color(1, 1, 0, 1)
 material = SubResource("ShaderMaterial_q5h8j")
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_krk12")
-animation = &"jungle1"
+animation = &"sandling3"
 offset = Vector2(0, 1)
 
 [node name="Hp" parent="." instance=ExtResource("8_rovrv")]

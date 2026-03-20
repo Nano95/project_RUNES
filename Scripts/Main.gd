@@ -99,12 +99,10 @@ func _notification(what):
 	if (what == NOTIFICATION_WM_WINDOW_FOCUS_IN):
 		# IOS and PC
 		if !(OS.get_name() == "Android"):
-			print("- OS.get_name(): ", OS.get_name())
 			focus_in_notification()
 	
 	if (what == NOTIFICATION_APPLICATION_RESUMED):
 		if (OS.get_name() == "Android"):
-			print("- OS.get_name()2 ", OS.get_name())
 			focus_in_notification()
 	
 	elif (what == NOTIFICATION_WM_WINDOW_FOCUS_OUT):
@@ -141,7 +139,6 @@ func focus_out_notification() -> void:
 		if (game_data["offline_rune_timestamps"][slot] == 0): continue
 		game_data["offline_rune_timestamps"][slot] = Time.get_unix_time_from_system()
 	save_game()
-	print("-debug: FOCUS OUT")
 
 func check_offline_time_and_rewards() -> void:
 	# gets most recent time to calculate total time played
@@ -151,10 +148,8 @@ func check_offline_time_and_rewards() -> void:
 
 	if (last > 3):
 		var elapsed:int = now - last
-		print("FOCUS IN — elapsed: ", Utils.format_time(elapsed))
 		var info = info_pop_up.instantiate() as InfoPopup
 		spawn_to_top_ui_layer(info)
-		info.show_info(str("Gone: ", Utils.format_time(elapsed)))
 		var results = CraftingSystem.process_elapsed(elapsed, game_data)
 		game_data.add_crafted_runes_by_name(results)
 		if (results.keys().size() > 0):

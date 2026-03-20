@@ -69,7 +69,7 @@ func format_time(value) -> String:
 	if minutes > 0 or hours > 0:
 		parts.append("%02d" % minutes)
 
-	parts.append("%02d" % seconds)
+	parts.append("%02ds" % seconds)
 
 	return ":".join(parts)
 

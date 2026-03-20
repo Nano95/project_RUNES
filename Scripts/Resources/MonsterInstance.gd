@@ -17,9 +17,10 @@ var status_effects = {
 		#"damage_per_tick": 0,
 		#"turns_remaining": 0
 	#}
+	#"stun": 0
 }
 var POISON:String = "earth"
-var STUN:String = "electric"
+var STUN:String = "electric" # KEEP IN SYNC WITH GAME CONTROLLER
 var dmg_color:Dictionary = {
 	"arcane": "ff6969",
 	"earth": "bbff69",
@@ -93,6 +94,15 @@ func apply_poison(dmg:int, turns:int) -> void:
 
 	#add_status_icon(POISON) # optional # it should be a Vcontainer 
 
+ #Change color of stun so that i can validate this working
+func apply_stun(turns: int) -> void:
+	# If already stunned, refresh or extend — your choice
+	if !status_effects.has(STUN):
+		status_effects[STUN] = turns
+	else:
+		status_effects[STUN] = max(status_effects[STUN], turns)
+
+
 func process_status_effect() -> void:
 	if (status_effects.has(POISON)):
 		if (status_effects[POISON]["turns_remaining"] > 0):
@@ -101,6 +111,14 @@ func process_status_effect() -> void:
 			if (status_effects[POISON]["turns_remaining"] <= 0):
 				status_effects.erase(POISON)
 				#remove_status_icon(POISON)
+	
+	if status_effects.has(STUN):
+		status_effects[STUN] -= 1
+		if status_effects[STUN] <= 0:
+			status_effects.erase(STUN)
+		# Stunned monsters skip ALL other processing
+		return
+	
 
 func animate_hit() -> void:
 	# ANIMATE SIZE

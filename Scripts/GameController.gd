@@ -47,6 +47,8 @@ signal gained_exp
 var escape_timer_counter:int = 0
 var escape_in_progress:bool = false
 
+var STUN:String = "electric" # KEEP IN SYNC WITH MONSTER INSTANCE 'STUN'
+
 func _ready() -> void:
 	%Camera2D.setup(null) # temporary null until i know what i need to do
 	setup_stats()
@@ -68,7 +70,8 @@ func start_game(restart:bool=false) -> void:
 		current_focus = max_focus
 		heal(1000)
 		
-	spawn_stage(main.battle_data["index"], (10 + Utils.get_unlocked_number_of_families()))
+	# Max should be 20
+	spawn_stage(main.battle_data["index"], (10 + min(10,Utils.get_unlocked_number_of_families())))
 	var next_attack = calculate_next_incoming_attack()
 	game_ui.update_monster_data(next_attack.turns, next_attack.damage)
 	game_ui.update_focus(current_focus)
@@ -159,6 +162,7 @@ func spawn_status_message(died:bool=false, no_focus:bool=false, escaped:bool=fal
 	if (msg != focus_msg):
 		lbl.animation_complete.connect(spawn_summary_panel.bind(msg))
 	
+	game_ui.update_monster_data(0, 0)
 	if (xp_gain > 0):
 		var xp_lbl = xp_label.instantiate()
 		my_grid.spawn_to_fx_container(xp_lbl)
@@ -265,7 +269,6 @@ func advance_turn(is_escaping=false):
 	if check_if_all_monsters_dead(true):
 		return
 	
-	
 	# 3. Now calculate the next attack using UPDATED timers
 	var next_attack = calculate_next_incoming_attack()
 	
@@ -288,6 +291,12 @@ func advance_turn(is_escaping=false):
 	for monster in monsters:
 		if monster.is_elite_or_boss():
 			if monster.individual_turns_left <= 0:
+				if monster.status_effects.has(STUN): # SKIP ATTACK IF STUNNED
+					monster.status_effects[STUN] -= 1
+					if monster.status_effects[STUN] <= 0:
+						monster.status_effects.erase(STUN)
+					monster.individual_turns_left = monster.base.attack_speed
+					continue
 				take_damage(monster.current_power)
 				monster.individual_turns_left = monster.base.attack_speed
 				
@@ -310,8 +319,10 @@ func calculate_group_power() -> int:
 			continue
 		if monster.is_elite_or_boss():
 			continue
+		if monster.status_effects.has(STUN):
+			continue
+		
 		total_power += monster.current_power
-	
 	return total_power
 
 func calculate_next_elite_attack() -> Dictionary:
@@ -338,7 +349,7 @@ func calculate_next_incoming_attack() -> Dictionary:
 	var elite_turn = calculate_next_elite_attack()
 	var monster_group_turns = group_turns_left
 	var monster_group_damage = calculate_group_power()
-	if (monster_group_damage == 0): monster_group_turns = INF # This means group enemies are dead - elite is alive
+	#if (monster_group_damage == 0): monster_group_turns = INF # This means group enemies are dead - elite is alive
 	# Compare which attack is sooner
 	if (elite_turn.turns < monster_group_turns):
 		return elite_turn
@@ -439,10 +450,14 @@ func on_cell_tapped(row, col) -> void:
 	match selected_rune.pattern:
 		"strike":
 			damage_single(row, col)
-		"cross":
+		"plus":
 			damage_plus(row, col)
 		"expl":
 			damage_3x3(row, col)
+		"cross":
+			damage_cross(row, col)
+		"diamond":
+			damage_diamond(row, col)
 	
 	var new_qty = main.game_data.remove_rune_from_inv(selected_rune, 1)
 	game_ui.update_rune_qty(selected_rune.name, new_qty)
@@ -472,7 +487,6 @@ func _apply_instant_rune(type: String, lbl_position:Vector2):
 			#reduce_all_monster_timers(1)
 	var percent:float = max_focus * 0.01
 	var bonus:int = int(ceil(base_heal * percent))
-	print("Bonus: ", base_heal + bonus)
 	heal(base_heal + bonus)
 	
 	if (lbl_position != Vector2.ZERO):
@@ -490,9 +504,11 @@ func damage_cell(r: int, c: int) -> void:
 	if (is_instance_valid(monster)):
 		var mult:float = get_element_multiplier(selected_rune.rune_type, monster)
 		# Earth runes deal slightly less direct damage 
-		if (selected_rune.rune_type == "earth"): 
-			mult *= 0.75
-		
+		match selected_rune.rune_type:
+			"earth": # Earth magic has the DoT ability
+				mult *= 0.75
+			"electric": # Stuns
+				mult *= .8
 		var dmg:int = int(current_power * mult)
 		# Apply poison if rune is poison
 		var crit_hit:bool=false
@@ -504,11 +520,15 @@ func damage_cell(r: int, c: int) -> void:
 					crit_hit = true
 				
 			"earth": # Earth magic has the DoT ability
-				print("Applying poison at time: ", Time.get_ticks_msec())
 				var poison_dmg = int(current_power * 0.15)
 				monster.apply_poison(poison_dmg, 4)
+			"electric":
+				#make it 100% for now to test
+				var stun_chance := 0.3 + (current_luck * .02)
+				if randf() < stun_chance:
+					var duration:int = 3
+					monster.apply_stun(duration)
 		monster.take_damage(dmg, selected_rune.rune_type, crit_hit)
-	
 
 func spawn_rune_explosion(row: int, col: int):
 	var rune = rune_animation.instantiate()
@@ -537,7 +557,7 @@ func damage_3x3(r, c) -> void:
 		for dc in range(-1, 2):
 			damage_cell(r+dr, c+dc)
 
-func damage_electric_diamond(r: int, c: int) -> void:
+func damage_diamond(r: int, c: int) -> void:
 	var offsets = [
 		Vector2i(-2, 0),
 		Vector2i(-1, -1), Vector2i(-1, 1),
@@ -549,7 +569,7 @@ func damage_electric_diamond(r: int, c: int) -> void:
 	for off in offsets:
 		damage_cell(r + off.x, c + off.y)
 
-func damage_electric_x(r: int, c: int) -> void:
+func damage_cross(r: int, c: int) -> void:
 	var offsets = [
 		Vector2i(-1, -1), Vector2i(-1, 1),
 		Vector2i(0, 0),

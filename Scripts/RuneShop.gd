@@ -28,6 +28,7 @@ func setup_shop() -> void:
 	$Panel/TypesContainer/arcane.pressed.connect(show_runes_for_element.bind("arcane"))
 	$Panel/TypesContainer/healing.pressed.connect(show_runes_for_element.bind("life"))
 	$Panel/TypesContainer/earth.pressed.connect(show_runes_for_element.bind("earth"))
+	$Panel/TypesContainer/electric.pressed.connect(show_runes_for_element.bind("electric"))
 
 func show_runes_for_element(element: String):
 	# clear them first

@@ -1,9 +1,10 @@
-[gd_scene load_steps=32 format=3 uid="uid://d2g2e823fkk04"]
+[gd_scene load_steps=40 format=3 uid="uid://d2g2e823fkk04"]
 
 [ext_resource type="Script" uid="uid://bo0ds2kjs8dux" path="res://Scripts/RuneAnimation.gd" id="1_h5b0l"]
 [ext_resource type="Texture2D" uid="uid://64bw7b0rb4xm" path="res://Sprites/animations/EXPLOSION_2_SS.png" id="2_8ilhm"]
 [ext_resource type="Texture2D" uid="uid://bg31s6oacmyfs" path="res://Sprites/animations/earth_explosion.png" id="3_68aoj"]
 [ext_resource type="Texture2D" uid="uid://bwkrimx3od3f5" path="res://Sprites/animations/magic_explosion3.png" id="4_uk4y1"]
+[ext_resource type="Texture2D" uid="uid://knmrrrqp7lhi" path="res://Sprites/animations/electric_explosion.png" id="4_xcdel"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vi048"]
 atlas = ExtResource("4_uk4y1")
@@ -60,6 +61,34 @@ region = Rect2(0, 160, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_q8iva"]
 atlas = ExtResource("3_68aoj")
 region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcmdh"]
+atlas = ExtResource("4_xcdel")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gr8h7"]
+atlas = ExtResource("4_xcdel")
+region = Rect2(0, 40, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbor1"]
+atlas = ExtResource("4_xcdel")
+region = Rect2(0, 80, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iro5q"]
+atlas = ExtResource("4_xcdel")
+region = Rect2(0, 120, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l62j7"]
+atlas = ExtResource("4_xcdel")
+region = Rect2(0, 160, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yffw"]
+atlas = ExtResource("4_xcdel")
+region = Rect2(0, 200, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mys1b"]
+atlas = ExtResource("4_xcdel")
+region = Rect2(0, 240, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_68aoj"]
 atlas = ExtResource("2_8ilhm")
@@ -165,6 +194,32 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_vcmdh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gr8h7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbor1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iro5q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l62j7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6yffw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mys1b")
+}],
+"loop": false,
+"name": &"electric",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_68aoj")
 }, {
 "duration": 1.0,
@@ -211,6 +266,6 @@ script = ExtResource("1_h5b0l")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_bvj6b")
-animation = &"earth"
+animation = &"electric"
 frame = 6
 frame_progress = 1.0

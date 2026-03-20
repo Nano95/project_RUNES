@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2rttg80j12x4"]
+[gd_scene load_steps=9 format=3 uid="uid://b2rttg80j12x4"]
 
 [ext_resource type="Script" uid="uid://11hg5ph8jse1" path="res://Scripts/RuneShop.gd" id="1_3w4oh"]
 [ext_resource type="PackedScene" uid="uid://g8h5rl7ffb3c" path="res://Scenes/RuneShopButton.tscn" id="3_f5wc8"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://duwfmvpb1gi26" path="res://Sprites/Runes/HEALING_ICON.png" id="6_psxnm"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="6_r014n"]
 [ext_resource type="Texture2D" uid="uid://caw0lcvwp11bs" path="res://Sprites/Runes/EARTH_ICON.png" id="7_psxnm"]
+[ext_resource type="Texture2D" uid="uid://b6wjln8kgde2u" path="res://Sprites/Runes/ELECTRIC_ICON.png" id="8_la3t4"]
 [ext_resource type="ButtonGroup" uid="uid://b3bkme5g3nkds" path="res://Resources/shopBtnQty.tres" id="11_r014n"]
 
 [node name="ShopPanel" type="Control" node_paths=PackedStringArray("btn1", "btn10", "btn100")]
@@ -90,6 +91,21 @@ theme_override_font_sizes/font_size = 100
 toggle_mode = true
 button_group = ExtResource("11_r014n")
 icon = ExtResource("7_psxnm")
+icon_alignment = 1
+expand_icon = true
+
+[node name="electric" type="Button" parent="Panel/TypesContainer"]
+layout_mode = 0
+offset_left = 377.0
+offset_right = 669.5
+offset_bottom = 138.00002
+scale = Vector2(0.4, 0.4)
+theme_override_constants/outline_size = 35
+theme_override_fonts/font = ExtResource("6_r014n")
+theme_override_font_sizes/font_size = 100
+toggle_mode = true
+button_group = ExtResource("11_r014n")
+icon = ExtResource("8_la3t4")
 icon_alignment = 1
 expand_icon = true
 
