@@ -1,7 +1,7 @@
 extends Control
 class_name GameUI
 
-@onready var rune_button: PackedScene = preload("res://Scenes/BattleRuneButton.tscn")
+@export var rune_button:PackedScene
 
 var main:MainNode
 var game_controller:GameController

@@ -131,6 +131,8 @@ func remove_rune_from_inv(rune:RuneData, qty:int) -> int:
 	rune_inv[rune.name] -= qty
 	if (rune_inv[rune.name] <= 0):
 		rune_inv.erase(rune.name)
+		clear_rune_from_battle_loadout(rune.name)
+		
 		return 0
 	
 	return rune_inv[rune.name]
@@ -175,7 +177,14 @@ func add_crafted_runes_by_name(runes:Dictionary) -> void:
 			total_runes_obtained[rune_name] += qty
 		else:
 			total_runes_obtained[rune_name] = qty
-	
+
+func clear_rune_from_battle_loadout(rune_name: String) -> void:
+	for slot in selected_battle_runes.keys():
+		if selected_battle_runes[slot] == rune_name:
+			selected_battle_runes[slot] = null
+			return
+
+
 func reset_data() -> void:
 	rune_inv = { # Start pack
 	"Arcane Cross": 100,

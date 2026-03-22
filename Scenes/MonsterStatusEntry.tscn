@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://dro8w5yumbupd"]
+
+[ext_resource type="Script" uid="uid://cy7v27csqd3la" path="res://Scripts/MonsterStatusEntry.gd" id="1_802pe"]
+[ext_resource type="Texture2D" uid="uid://brrrce515osvm" path="res://Sprites/EARTH_STATUS_ICON.png" id="1_dasf0"]
+[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_802pe"]
+[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="3_00oai"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bgl2h"]
+resource_local_to_scene = true
+shader = ExtResource("3_00oai")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="Node2D" type="Control" node_paths=PackedStringArray("img", "lbl")]
+custom_minimum_size = Vector2(30, 45)
+layout_mode = 3
+anchors_preset = 0
+offset_left = -15.0
+offset_top = -22.0
+offset_right = 15.0
+offset_bottom = 23.0
+pivot_offset = Vector2(15, 22)
+script = ExtResource("1_802pe")
+img = NodePath("TextureRect")
+lbl = NodePath("Label")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -1.9999998
+offset_right = 35.0
+offset_bottom = 38.0
+scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("1_dasf0")
+
+[node name="Label" parent="." instance=ExtResource("2_802pe")]
+material = SubResource("ShaderMaterial_bgl2h")
+layout_mode = 0
+offset_left = 4.9999995
+offset_top = 12.000001
+offset_right = 105.0
+offset_bottom = 149.0
+scale = Vector2(0.2, 0.2)
+text = "5"
+horizontal_alignment = 1

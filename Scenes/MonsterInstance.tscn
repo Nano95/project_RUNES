@@ -1,4 +1,4 @@
-[gd_scene load_steps=135 format=3 uid="uid://xxup1p8e76di"]
+[gd_scene load_steps=136 format=3 uid="uid://xxup1p8e76di"]
 
 [ext_resource type="Script" uid="uid://cpm362jinw3ou" path="res://Scripts/Resources/MonsterInstance.gd" id="1_ld5e8"]
 [ext_resource type="Texture2D" uid="uid://g6ycv2s2cnuv" path="res://Sprites/monsters/orc1.png" id="2_1o6kg"]
@@ -31,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://lq5d3grtipb5" path="res://Sprites/monsters/Slime2.png" id="18_20cav"]
 [ext_resource type="Texture2D" uid="uid://dkjy1j20688xn" path="res://Sprites/monsters/Slime3.png" id="19_ox7g6"]
 [ext_resource type="Texture2D" uid="uid://dtrrjxgfysnjj" path="res://Sprites/monsters/Slime4.png" id="20_e8v2i"]
+[ext_resource type="PackedScene" uid="uid://dro8w5yumbupd" path="res://Scenes/MonsterStatusEntry.tscn" id="32_rqp80"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q5h8j"]
 resource_local_to_scene = true
@@ -845,13 +846,15 @@ shader = ExtResource("9_0suyq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="MonsterInstance" type="Node2D"]
+[node name="MonsterInstance" type="Node2D" node_paths=PackedStringArray("status_container")]
 script = ExtResource("1_ld5e8")
 status_popup_ref = ExtResource("2_r8pyg")
+status_entry = ExtResource("32_rqp80")
 damage_label = ExtResource("2_q5h8j")
 xp_label = ExtResource("3_qfc3e")
 STUN_ICON = ExtResource("5_r8pyg")
 POISON_ICON = ExtResource("6_rqp80")
+status_container = NodePath("StatusContainer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
@@ -889,3 +892,11 @@ visible = false
 position = Vector2(-50, -43)
 scale = Vector2(4, 4)
 texture = ExtResource("12_qfc3e")
+
+[node name="StatusContainer" type="VBoxContainer" parent="."]
+offset_left = 38.0
+offset_top = -62.0
+offset_right = 67.0
+offset_bottom = 64.0
+mouse_filter = 2
+theme_override_constants/separation = -8

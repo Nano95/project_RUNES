@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://b7xgkus4u2361"]
+[gd_scene load_steps=20 format=3 uid="uid://b7xgkus4u2361"]
 
 [ext_resource type="Script" uid="uid://dygepuv8uhpel" path="res://Scripts/GameUI.gd" id="1_po7eo"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_frnsy"]
+[ext_resource type="PackedScene" uid="uid://d3gwj83kl6yvi" path="res://Scenes/BattleRuneButton.tscn" id="2_qecx7"]
 [ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="3_co6lq"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="4_frnsy"]
 [ext_resource type="Texture2D" uid="uid://2mjbs0mmr2ya" path="res://Sprites/mid_progress_bar_top.png" id="5_co6lq"]
@@ -53,6 +54,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_po7eo")
+rune_button = ExtResource("2_qecx7")
 back_btn = NodePath("TopSection/BackBtn")
 hp_bar = NodePath("TopSection/HpBar")
 xp_bar = NodePath("TopSection/XpBar")

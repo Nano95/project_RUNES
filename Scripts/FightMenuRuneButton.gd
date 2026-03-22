@@ -23,6 +23,10 @@ func setup(id:int, r:RuneData, m:MainNode ,cta:Callable, close_cta) -> void:
 		$Panel/Button.pressed.connect(cta.bind(id))
 
 func populate_rune_data() -> void:
+	if (!rune): return
+	if (!main.game_data.rune_inv.has(rune.name)):
+		return
+	print("- rune.name: ", rune.name)
 	if (rune is not RuneData): return
 	$Panel/Panel2/Select.hide()
 	$Panel/Panel/runeIcon.texture = rune.icon 

@@ -4,10 +4,12 @@ class_name MonsterInstance
 
 @onready var hp_label:Label = $Hp
 @export var status_popup_ref:Resource
+@export var status_entry:Resource
 @export var damage_label:Resource
 @export var xp_label:Resource
 @export var STUN_ICON:Texture
 @export var POISON_ICON:Texture
+@export var status_container:VBoxContainer
 
 var POISON:String = "earth"
 var STUN:String = "electric" # KEEP IN SYNC WITH GAME CONTROLLER
@@ -98,33 +100,56 @@ func apply_poison(dmg:int, turns:int) -> void:
 		spawn_status(POISON)
 		status_effects[POISON] = {"damage_per_tick": dmg, "turns_remaining": turns }
 
-	#add_status_icon(POISON) # optional # it should be a Vcontainer 
+	var entry = add_or_update_status(
+		POISON,
+		POISON_ICON,
+		turns
+	)
+	status_effects[POISON]["ui_entry"] = entry
 
  #Change color of stun so that i can validate this working
 func apply_stun(turns: int) -> void:
 	# If already stunned, refresh or extend — your choice
-	if !status_effects.has(STUN):
+	if (!status_effects.has(STUN)):
 		spawn_status(STUN)
-		status_effects[STUN] = turns
+		status_effects[STUN] = {
+			"turns_remaining": turns,
+		}
 	else:
-		status_effects[STUN] = max(status_effects[STUN], turns)
+		status_effects[STUN]["turns_remaining"] = max(
+			status_effects[STUN]["turns_remaining"], 
+			turns
+		)
 
+	# Create or update UI entry
+	var entry = add_or_update_status(
+		STUN, 
+		STUN_ICON, 
+		status_effects[STUN]["turns_remaining"]
+	)
+	print("-status_effects: ", status_effects)
+	status_effects[STUN]["ui_entry"] = entry
 
 func process_status_effect() -> void:
 	if (status_effects.has(POISON)):
 		if (status_effects[POISON]["turns_remaining"] > 0):
 			take_damage(status_effects[POISON]["damage_per_tick"], POISON)
 			status_effects[POISON]["turns_remaining"] -= 1
+			if (status_effects[POISON].has("ui_entry") and status_effects[POISON]["ui_entry"] is MonsterStatusEntry):
+				status_effects[POISON]["ui_entry"].update_label(status_effects[POISON]["turns_remaining"])
 			if (status_effects[POISON]["turns_remaining"] <= 0):
+				if (status_effects[POISON].has("ui_entry")):
+					status_effects[POISON]["ui_entry"].delete_animation()
 				status_effects.erase(POISON)
-				#remove_status_icon(POISON)
 	
-	if status_effects.has(STUN):
-		status_effects[STUN] -= 1
-		if status_effects[STUN] <= 0:
+	if (status_effects.has(STUN)):
+		status_effects[STUN]["turns_remaining"] -= 1
+		if (status_effects[STUN].has("ui_entry") and status_effects[STUN]["ui_entry"] is MonsterStatusEntry):
+			status_effects[STUN]["ui_entry"].update_label(status_effects[STUN]["turns_remaining"])
+		if (status_effects[STUN]["turns_remaining"] <= 0):
+			if (status_effects[STUN].has("ui_entry")):
+				status_effects[STUN]["ui_entry"].delete_animation()
 			status_effects.erase(STUN)
-		# Stunned monsters skip ALL other processing
-		return
 
 func spawn_status(type:String) -> void:
 	var status = status_popup_ref.instantiate() as MonsterStatusPopup
@@ -136,7 +161,20 @@ func spawn_status(type:String) -> void:
 			status.animate_me(STUN_ICON)
 		_:
 			pass
-			
+
+func add_or_update_status(status_name: String, icon: Texture, turns: int) -> MonsterStatusEntry:
+	var entry:MonsterStatusEntry
+	if (status_effects.has(status_name) and status_effects[status_name].has("ui_entry")):
+		entry = status_effects[status_name]["ui_entry"] as MonsterStatusEntry
+		entry.update_label(turns)
+		return entry
+
+	# Create new entry
+	entry = status_entry.instantiate() as MonsterStatusEntry
+	entry.setup(icon, turns)
+	status_container.add_child(entry)
+	status_effects[status_name]["ui_entry"] = entry
+	return entry
 
 func animate_hit() -> void:
 	# ANIMATE SIZE

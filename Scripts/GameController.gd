@@ -292,8 +292,8 @@ func advance_turn(is_escaping=false):
 		if monster.is_elite_or_boss():
 			if monster.individual_turns_left <= 0:
 				if monster.status_effects.has(STUN): # SKIP ATTACK IF STUNNED
-					monster.status_effects[STUN] -= 1
-					if monster.status_effects[STUN] <= 0:
+					monster.status_effects[STUN]["turns_remaining"] -= 1
+					if monster.status_effects[STUN]["turns_remaining"] <= 0:
 						monster.status_effects.erase(STUN)
 					monster.individual_turns_left = monster.base.attack_speed
 					continue
