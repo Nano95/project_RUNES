@@ -2,9 +2,15 @@
 extends Node2D
 class_name MonsterInstance
 
+@onready var hp_label:Label = $Hp
+@export var status_popup_ref:Resource
 @export var damage_label:Resource
 @export var xp_label:Resource
-@onready var hp_label:Label = $Hp
+@export var STUN_ICON:Texture
+@export var POISON_ICON:Texture
+
+var POISON:String = "earth"
+var STUN:String = "electric" # KEEP IN SYNC WITH GAME CONTROLLER
 var base: MonsterBase
 var current_hp: int
 var individual_turns_left:int = 5 # only used by elites/bosses
@@ -19,8 +25,7 @@ var status_effects = {
 	#}
 	#"stun": 0
 }
-var POISON:String = "earth"
-var STUN:String = "electric" # KEEP IN SYNC WITH GAME CONTROLLER
+
 var dmg_color:Dictionary = {
 	"arcane": "ff6969",
 	"earth": "bbff69",
@@ -90,6 +95,7 @@ func apply_poison(dmg:int, turns:int) -> void:
 		status_effects[POISON]["damage_per_tick"] += dmg
 		status_effects[POISON]["turns_remaining"] += turns
 	else:
+		spawn_status(POISON)
 		status_effects[POISON] = {"damage_per_tick": dmg, "turns_remaining": turns }
 
 	#add_status_icon(POISON) # optional # it should be a Vcontainer 
@@ -98,6 +104,7 @@ func apply_poison(dmg:int, turns:int) -> void:
 func apply_stun(turns: int) -> void:
 	# If already stunned, refresh or extend — your choice
 	if !status_effects.has(STUN):
+		spawn_status(STUN)
 		status_effects[STUN] = turns
 	else:
 		status_effects[STUN] = max(status_effects[STUN], turns)
@@ -118,7 +125,18 @@ func process_status_effect() -> void:
 			status_effects.erase(STUN)
 		# Stunned monsters skip ALL other processing
 		return
-	
+
+func spawn_status(type:String) -> void:
+	var status = status_popup_ref.instantiate() as MonsterStatusPopup
+	add_child(status)
+	match type:
+		POISON:
+			status.animate_me(POISON_ICON)
+		STUN:
+			status.animate_me(STUN_ICON)
+		_:
+			pass
+			
 
 func animate_hit() -> void:
 	# ANIMATE SIZE

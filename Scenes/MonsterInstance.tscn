@@ -1,14 +1,17 @@
-[gd_scene load_steps=132 format=3 uid="uid://xxup1p8e76di"]
+[gd_scene load_steps=135 format=3 uid="uid://xxup1p8e76di"]
 
 [ext_resource type="Script" uid="uid://cpm362jinw3ou" path="res://Scripts/Resources/MonsterInstance.gd" id="1_ld5e8"]
 [ext_resource type="Texture2D" uid="uid://g6ycv2s2cnuv" path="res://Sprites/monsters/orc1.png" id="2_1o6kg"]
 [ext_resource type="Shader" uid="uid://mwjsuxab2wkc" path="res://Shaders/colorOverride.gdshader" id="2_idaby"]
 [ext_resource type="PackedScene" uid="uid://dlpj0y82cin1o" path="res://Scenes/DamageLabel.tscn" id="2_q5h8j"]
+[ext_resource type="PackedScene" uid="uid://dgrtbm1wo10py" path="res://Scenes/StatusPopup.tscn" id="2_r8pyg"]
 [ext_resource type="Texture2D" uid="uid://colvn7cidgkxv" path="res://Sprites/monsters/orc2.png" id="3_idaby"]
 [ext_resource type="PackedScene" uid="uid://dsw781t07yq02" path="res://Scenes/FloatingLabel.tscn" id="3_qfc3e"]
 [ext_resource type="Texture2D" uid="uid://b48cbdl3eqdnx" path="res://Sprites/monsters/orc_3.png" id="4_q5h8j"]
 [ext_resource type="Texture2D" uid="uid://b8pv2m0gqluqu" path="res://Sprites/monsters/orc_4.png" id="5_5k806"]
+[ext_resource type="Texture2D" uid="uid://cgrrpac6d6j1r" path="res://Sprites/ELECTRIC_STATUS_ICON.png" id="5_r8pyg"]
 [ext_resource type="Texture2D" uid="uid://c0nruuo0e3apc" path="res://Sprites/monsters/Dwarf_1.png" id="5_wqo53"]
+[ext_resource type="Texture2D" uid="uid://brrrce515osvm" path="res://Sprites/EARTH_STATUS_ICON.png" id="6_rqp80"]
 [ext_resource type="Texture2D" uid="uid://b0wni20roas5x" path="res://Sprites/monsters/Dwarf_2.png" id="6_xgj37"]
 [ext_resource type="Texture2D" uid="uid://gaino1aag6hf" path="res://Sprites/monsters/Dwarf_3.png" id="7_20cav"]
 [ext_resource type="Texture2D" uid="uid://n78un3cnjmfm" path="res://Sprites/monsters/Dwarf_4.png" id="8_jtc8k"]
@@ -844,8 +847,11 @@ shader_parameter/activate = false
 
 [node name="MonsterInstance" type="Node2D"]
 script = ExtResource("1_ld5e8")
+status_popup_ref = ExtResource("2_r8pyg")
 damage_label = ExtResource("2_q5h8j")
 xp_label = ExtResource("3_qfc3e")
+STUN_ICON = ExtResource("5_r8pyg")
+POISON_ICON = ExtResource("6_rqp80")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true

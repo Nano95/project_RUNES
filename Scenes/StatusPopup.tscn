@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgrtbm1wo10py"]
+
+[ext_resource type="Script" uid="uid://kyov17hk8q73" path="res://Scripts/StatusPopup.gd" id="1_dylat"]
+[ext_resource type="Texture2D" uid="uid://cgrrpac6d6j1r" path="res://Sprites/ELECTRIC_STATUS_ICON.png" id="2_pyo4q"]
+
+[node name="StatusPopup" type="Node2D"]
+script = ExtResource("1_dylat")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_pyo4q")
