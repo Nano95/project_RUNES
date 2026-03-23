@@ -38,7 +38,6 @@ func setup_rune_grid() -> void:
 	for btn in rune_grid_container.get_children():
 		btn.queue_free()
 	
-	print("Setting up... ", main.game_data.selected_battle_runes)
 	for i in range(1, 5):
 		var selected_runes_data:Dictionary = main.game_data.selected_battle_runes
 		var slot:String = "slot" + str(i)
@@ -95,7 +94,6 @@ func try_unlock_family(family: String):
 	var cost = MonsterDatabase.monster_stage_cost[family]
 
 	if main.game_data.current_gold < cost:
-		print(" NOT ENOUGH MONEY! ")
 		#show_not_enough_gold_popup()
 		return
 

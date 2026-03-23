@@ -127,7 +127,6 @@ func apply_stun(turns: int) -> void:
 		STUN_ICON, 
 		status_effects[STUN]["turns_remaining"]
 	)
-	print("-status_effects: ", status_effects)
 	status_effects[STUN]["ui_entry"] = entry
 
 func process_status_effect() -> void:

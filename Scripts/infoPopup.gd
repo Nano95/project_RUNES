@@ -9,7 +9,6 @@ var rise_distance := 180  # pixels upward
 
 func show_info(info:String) -> void:
 	lbl.text = info
-	print("INFO Pop up ", info)
 	# Start animation
 	animate_popup()
 

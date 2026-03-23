@@ -93,13 +93,10 @@ func compute_summary(game_data) -> Dictionary:
 		for slot in slot_list:
 			if (slot.essence_cost < min_cost): 
 				min_cost = slot.essence_cost
-			print("Rune: ", slot.rune_name)
-			print("essence: ", slot.essence_cost, " craft time: ", slot.craft_time)
+
 			total_ess_per_sec += float(slot.essence_cost) / float(slot.craft_time)
 			total_runes_per_sec += 1.0 / float(slot.craft_time)
 
-		print("--- total_ess_per_sec: ", total_ess_per_sec)
-		print("--- total_runes_per_sec: ", total_runes_per_sec)
 		var pool:int = essence_pools.get(essence_type, 0)
 		var time_to_empty:float
 		if pool < min_cost:
@@ -191,7 +188,6 @@ func _load_slots(game_data) -> Array:
 		var key := "slot%d" % i
 		slots.append(SlotInfo.new(rune, key))
 
-	print("Loaded slots: ", slots)
 	return slots
 
 # ------------------------------------------------------------
