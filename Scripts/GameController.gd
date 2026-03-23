@@ -602,8 +602,8 @@ func damage_cross(r: int, c: int) -> void:
 		damage_cell(r + off.x, c + off.y)
 
 func roll_luck_focus_refund() -> bool:
-	var chance := current_luck * 75  # example: 0.5% per Luck
-	#var chance := current_luck * 0.15  # 10=1.5%|20=3.0%|30=4.5%|40=6.0%|50=7.5%
+	#var chance := current_luck * 75 
+	var chance := current_luck * 0.15  # 10=1.5%|20=3.0%|30=4.5%|40=6.0%|50=7.5%
 	var roll := randf() * 100.0
 
 	if (roll <= chance):
