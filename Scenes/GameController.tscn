@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0atfxrsqnbfu"]
+[gd_scene load_steps=10 format=3 uid="uid://d0atfxrsqnbfu"]
 
 [ext_resource type="Script" uid="uid://duaqtbkpkw5q8" path="res://Scripts/GameController.gd" id="1_fyej0"]
 [ext_resource type="PackedScene" uid="uid://cko7e16hwbxg6" path="res://Scenes/GameStatusPopup.tscn" id="2_7fjnr"]
 [ext_resource type="PackedScene" uid="uid://xxup1p8e76di" path="res://Scenes/MonsterInstance.tscn" id="2_gbhfg"]
+[ext_resource type="PackedScene" uid="uid://ng24gtgd1fqi" path="res://Scenes/LuckPopup.tscn" id="2_kgcrq"]
 [ext_resource type="Script" uid="uid://cy02ldenav82t" path="res://Scripts/CameraController.gd" id="2_occvc"]
 [ext_resource type="PackedScene" uid="uid://bi1c8jgwhnhki" path="res://Scenes/SummaryPanel.tscn" id="3_06oto"]
 [ext_resource type="PackedScene" uid="uid://vqwmc6txdxui" path="res://Scenes/MyGrid.tscn" id="4_06oto"]
@@ -24,6 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_fyej0")
+luck_popup = ExtResource("2_kgcrq")
 status_message = ExtResource("2_7fjnr")
 monster_instance = ExtResource("2_gbhfg")
 summary_panel_ref = ExtResource("3_06oto")

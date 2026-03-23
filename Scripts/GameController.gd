@@ -1,6 +1,7 @@
 extends Control
 class_name GameController
 
+@export var luck_popup:PackedScene
 @export var status_message:PackedScene
 @export var monster_instance:Resource # Used in Grid
 @export var summary_panel_ref: Resource
@@ -24,6 +25,7 @@ var selected_monster_index:int=1
 
 var PADDING:Vector2 = Vector2(44, 225)
 var selected_rune:RuneData
+var selected_rune_btn_ref:Button
 
 ### Stats
 var max_hp:int
@@ -418,8 +420,9 @@ func roll_loot(monster: MonsterBase) -> void:
 ######################
 ########### RUNE STUFF
 ######################
-func change_selected_rune(rune:RuneData) -> void:
+func change_selected_rune(rune:RuneData, btn:Button=null) -> void:
 	selected_rune = rune
+	selected_rune_btn_ref = btn
 
 # needed when we start the game
 func select_available_rune() -> void:
@@ -441,13 +444,22 @@ func get_modified_rune_cost(rune:RuneData) -> int:
 	var final_cost = base_cost + adjustment
 	return max(1, final_cost)
 
-func focus_check(pressed_rune:RuneData) -> bool:
+func focus_check(pressed_rune:RuneData, pressed_btn:Button=null) -> bool:
 	var cost:int = get_modified_rune_cost(pressed_rune)
 	if (current_focus < cost):
 		game_ui.shake_mana_icon()
 		return false
 	
-	current_focus -= cost
+	var lucky_focus_refund:bool = roll_luck_focus_refund()
+	if (lucky_focus_refund):
+		if (pressed_btn):
+			var popup := luck_popup.instantiate()
+			popup.global_position = pressed_btn.global_position
+			popup.global_position.x += pressed_btn.size.x/2
+			popup.setup("Free Cast!")
+			game_ui.add_child(popup)
+	else:
+		current_focus -= cost
 	if (cost > 0): 
 		game_ui.update_focus(current_focus)
 	return true
@@ -455,7 +467,7 @@ func focus_check(pressed_rune:RuneData) -> bool:
 func on_cell_tapped(row, col) -> void:
 	if (!game_is_active): return
 	if (!main.game_data.rune_inv.get(selected_rune.name)): return
-	if (!focus_check(selected_rune)): return # This check must go after checking for inventory! Otherwise focus is subtracted when we dont have enough
+	if (!focus_check(selected_rune, selected_rune_btn_ref)): return # This check must go after checking for inventory! Otherwise focus is subtracted when we dont have enough
 	# Here is now where we have to subtract and make checks for focus used
 	match selected_rune.pattern:
 		"strike":
@@ -477,7 +489,7 @@ func on_cell_tapped(row, col) -> void:
 func activate_instant_rune(pressed_rune:RuneData, btn:Button=null):
 	if (!game_is_active): return
 	if (!main.game_data.rune_inv.get(pressed_rune.name)): return
-	if (!focus_check(pressed_rune)): return
+	if (!focus_check(pressed_rune, btn)): return
 	var lbl_pos:Vector2=Vector2.ZERO
 	if (btn):
 		lbl_pos = btn.global_position + btn.size/2
@@ -589,6 +601,14 @@ func damage_cross(r: int, c: int) -> void:
 	for off in offsets:
 		damage_cell(r + off.x, c + off.y)
 
+func roll_luck_focus_refund() -> bool:
+	var chance := current_luck * 75  # example: 0.5% per Luck
+	#var chance := current_luck * 0.15  # 10=1.5%|20=3.0%|30=4.5%|40=6.0%|50=7.5%
+	var roll := randf() * 100.0
+
+	if (roll <= chance):
+		return true
+	return false
 
 func get_element_multiplier(rune_element: String, monster) -> float:
 	if rune_element in monster.base.immunities:

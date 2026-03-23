@@ -47,7 +47,7 @@ func setup_rune_buttons() -> void:
 		btn.setup(current_rune, main.game_data.get_rune_count(rune_name))
 		if (current_rune.activation == "grid"):
 			# Attack runes
-			btn.pressed.connect(game_controller.change_selected_rune.bind(current_rune))
+			btn.pressed.connect(game_controller.change_selected_rune.bind(current_rune, btn))
 		else:
 			# Healing runes
 			btn.pressed.connect(game_controller.activate_instant_rune.bind(current_rune, btn))
