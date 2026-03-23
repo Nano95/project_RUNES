@@ -432,15 +432,25 @@ func select_available_rune() -> void:
 		selected_rune = RuneDatabase.runes[rune_name]
 		return
 
+# Also leveraged in the Game_UI Script
+func get_modified_rune_cost(rune:RuneData) -> int:
+	var base_cost = rune.focus_cost
+	var diff = current_power - current_focus
+	@warning_ignore("integer_division")
+	var adjustment = diff / 10  # floors automatically
+	var final_cost = base_cost + adjustment
+	return max(1, final_cost)
+
 func focus_check(pressed_rune:RuneData) -> bool:
-	if (current_focus < pressed_rune.focus_cost):
+	var cost:int = get_modified_rune_cost(pressed_rune)
+	if (current_focus < cost):
 		game_ui.shake_mana_icon()
 		return false
 	
-	current_focus -= pressed_rune.focus_cost
-	if (pressed_rune.focus_cost > 0): game_ui.update_focus(current_focus)
+	current_focus -= cost
+	if (cost > 0): 
+		game_ui.update_focus(current_focus)
 	return true
-
 
 func on_cell_tapped(row, col) -> void:
 	if (!game_is_active): return

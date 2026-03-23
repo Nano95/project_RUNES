@@ -54,10 +54,17 @@ func setup_rune_buttons() -> void:
 		
 		rune_buttons[rune_name] = btn
 		rune_btns_container.add_child(btn)
+	
+	update_rune_button_focus_cost()
 
 func update_rune_qty(rune_name: String, new_qty: int) -> void:
 	if rune_name in rune_buttons:
 		rune_buttons[rune_name].set_rune_qty(new_qty)
+
+func update_rune_button_focus_cost() -> void:
+	for btn in rune_buttons.values():
+		var cost:int = game_controller.get_modified_rune_cost(btn.rune_data)
+		btn.refresh_cost_display(cost)
 
 func setup_hp(player_hp:float, player_max_hp:float) -> void:
 	hp_bar.max_value = BAR_CONST
