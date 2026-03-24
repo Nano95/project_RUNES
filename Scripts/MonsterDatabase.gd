@@ -33,10 +33,10 @@ var dwarves:Array = [
 ]
 
 var jungle:Array = [
-	preload("res://Scripts/Resources/Monsters/Jungle1.tres"),
-	preload("res://Scripts/Resources/Monsters/Jungle2.tres"),
-	preload("res://Scripts/Resources/Monsters/Jungle3.tres"),
-	preload("res://Scripts/Resources/Monsters/Jungle4.tres"),
+	preload("res://Scripts/Resources/Monsters/Jungles1.tres"),
+	preload("res://Scripts/Resources/Monsters/Jungles2.tres"),
+	preload("res://Scripts/Resources/Monsters/Jungles3.tres"),
+	preload("res://Scripts/Resources/Monsters/Jungles4.tres"),
 ]
 
 func get_monster(family:String, index) -> MonsterBase:
