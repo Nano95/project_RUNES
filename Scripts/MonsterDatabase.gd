@@ -31,6 +31,7 @@ var dwarves:Array = [
 	preload("res://Scripts/Resources/Monsters/Dwarf3.tres"),
 	preload("res://Scripts/Resources/Monsters/Dwarf4.tres")
 ]
+
 var jungle:Array = [
 	preload("res://Scripts/Resources/Monsters/Jungle1.tres"),
 	preload("res://Scripts/Resources/Monsters/Jungle2.tres"),
