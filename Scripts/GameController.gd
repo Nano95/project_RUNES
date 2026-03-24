@@ -438,7 +438,7 @@ func select_available_rune() -> void:
 # Also leveraged in the Game_UI Script
 func get_modified_rune_cost(rune:RuneData) -> int:
 	var base_cost = rune.focus_cost
-	var diff = current_power - current_focus
+	var diff = base_power - max_focus
 	@warning_ignore("integer_division")
 	var adjustment = diff / 10  # floors automatically
 	var final_cost = base_cost + adjustment
@@ -453,16 +453,20 @@ func focus_check(pressed_rune:RuneData, pressed_btn:Button=null) -> bool:
 	var lucky_focus_refund:bool = roll_luck_focus_refund()
 	if (lucky_focus_refund):
 		if (pressed_btn):
-			var popup := luck_popup.instantiate()
-			popup.global_position = pressed_btn.global_position
-			popup.global_position.x += pressed_btn.size.x/2
-			popup.setup("Free Cast!")
-			game_ui.add_child(popup)
+			var pos = pressed_btn.global_position
+			pos.x += pressed_btn.size.x/2
+			spawn_luck_popup(pos, "Free Focus!")
 	else:
 		current_focus -= cost
 	if (cost > 0): 
 		game_ui.update_focus(current_focus)
 	return true
+
+func spawn_luck_popup(new_position:Vector2, txt:String) -> void:
+	var popup := luck_popup.instantiate()
+	popup.global_position = new_position
+	popup.setup(txt)
+	game_ui.add_child(popup)
 
 func on_cell_tapped(row, col) -> void:
 	if (!game_is_active): return

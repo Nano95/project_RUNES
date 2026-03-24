@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_j8dds")
 name = "Slime Youngling"
-max_hp = 18
+max_hp = 15
 power = 2
 exp_reward = 7
 min_gold_reward = 1

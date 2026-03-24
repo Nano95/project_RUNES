@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_1jr2k")
 name = "Elite Slime"
-max_hp = 29
+max_hp = 27
 power = 6
 exp_reward = 15
 min_gold_reward = 4

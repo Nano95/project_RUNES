@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_ctjo7")
 name = "Agony Slime"
-max_hp = 24
+max_hp = 21
 power = 4
 exp_reward = 10
 min_gold_reward = 3
