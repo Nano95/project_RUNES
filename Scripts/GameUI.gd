@@ -39,6 +39,7 @@ func setup_rune_buttons() -> void:
 	if !(is_instance_valid(game_controller)): return
 	if (!main.game_data.selected_battle_runes): return
 	rune_buttons = {}
+	var counter:int = 0
 	for rune_name in main.game_data.selected_battle_runes.values():
 		if (rune_name == null):
 			continue
@@ -54,6 +55,9 @@ func setup_rune_buttons() -> void:
 		
 		rune_buttons[rune_name] = btn
 		rune_btns_container.add_child(btn)
+		if (counter == 0):
+			game_controller.change_selected_rune(current_rune, btn)
+		counter += 1
 	
 	update_rune_button_focus_cost()
 

@@ -3,6 +3,7 @@ class_name FightMenuRuneButton
 
 var rune:RuneData
 var main:MainNode
+
 func _ready() -> void:
 	populate_rune_data()
 

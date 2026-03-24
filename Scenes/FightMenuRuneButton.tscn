@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cby5cdsq4bcyo"]
+[gd_scene load_steps=8 format=3 uid="uid://cby5cdsq4bcyo"]
 
 [ext_resource type="Texture2D" uid="uid://cbtr8w3ak64pc" path="res://Sprites/Runes/BLANK_CLEAR_ICON.png" id="2_3gfna"]
 [ext_resource type="Script" uid="uid://jj0fcb5mx0c5" path="res://Scripts/FightMenuRuneButton.gd" id="3_00aqc"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="5_lhn1g"]
-[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="6_at73j"]
+[ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="6_at73j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_or8xw"]
 resource_local_to_scene = true
@@ -12,6 +12,12 @@ shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oa0bc"]
+resource_local_to_scene = true
+shader = ExtResource("6_at73j")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_28mqd"]
 resource_local_to_scene = true
 shader = ExtResource("6_at73j")
 shader_parameter/time = 4.750000002218258e-07
@@ -90,7 +96,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Select" parent="Panel/Panel2" instance=ExtResource("5_lhn1g")]
-material = SubResource("ShaderMaterial_oa0bc")
+material = SubResource("ShaderMaterial_28mqd")
 layout_mode = 0
 offset_right = 1099.9999
 offset_bottom = 339.99988

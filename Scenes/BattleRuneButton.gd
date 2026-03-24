@@ -2,6 +2,8 @@ extends Button
 
 var qty:int = 0
 var rune_data:RuneData
+var active_luck_popups: Array = [] # This EXACT NAME is needed only for components
+# That may stack luck popups so that they wont sit on top of each other 
 @onready var manaLbl = $manaLbl
 func setup(rune:RuneData, _qty:int=1) -> void:
 	rune_data = rune

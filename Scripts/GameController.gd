@@ -455,17 +455,21 @@ func focus_check(pressed_rune:RuneData, pressed_btn:Button=null) -> bool:
 		if (pressed_btn):
 			var pos = pressed_btn.global_position
 			pos.x += pressed_btn.size.x/2
-			spawn_luck_popup(pos, "Free Focus!")
+			spawn_luck_popup(pos, "Free Focus!", pressed_btn)
 	else:
 		current_focus -= cost
 	if (cost > 0): 
 		game_ui.update_focus(current_focus)
 	return true
 
-func spawn_luck_popup(new_position:Vector2, txt:String) -> void:
+func spawn_luck_popup(new_position:Vector2, txt:String, popup_owner:Node=null) -> void:
 	var popup := luck_popup.instantiate()
 	popup.global_position = new_position
-	popup.setup(txt)
+	var additional_dst:float = 0.0
+	if (popup_owner):
+		popup.my_owner = popup_owner
+		additional_dst = (popup_owner.active_luck_popups.size() * 130)
+	popup.setup(txt, additional_dst)
 	game_ui.add_child(popup)
 
 func on_cell_tapped(row, col) -> void:
@@ -485,7 +489,15 @@ func on_cell_tapped(row, col) -> void:
 		"diamond":
 			damage_diamond(row, col)
 	
-	var new_qty = main.game_data.remove_rune_from_inv(selected_rune, 1)
+	# ADD another luck event, same as the one in focus_check. but Free Rune!
+	var lucky_focus_refund:bool = roll_luck_focus_refund()
+	var qty_to_remove:int = 1
+	if (lucky_focus_refund):
+		var pos = selected_rune_btn_ref.global_position
+		pos.x += selected_rune_btn_ref.size.x/2
+		spawn_luck_popup(pos, "Free Rune!", selected_rune_btn_ref)
+		qty_to_remove = 0
+	var new_qty = main.game_data.remove_rune_from_inv(selected_rune, qty_to_remove)
 	game_ui.update_rune_qty(selected_rune.name, new_qty)
 	advance_turn()
 
@@ -605,6 +617,7 @@ func damage_cross(r: int, c: int) -> void:
 	for off in offsets:
 		damage_cell(r + off.x, c + off.y)
 
+# will be used for both free rune and free focus!
 func roll_luck_focus_refund() -> bool:
 	#var chance := current_luck * 75 
 	var chance := current_luck * 0.15  # 10=1.5%|20=3.0%|30=4.5%|40=6.0%|50=7.5%
