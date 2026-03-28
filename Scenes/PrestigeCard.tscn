@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://cwkj7x8555wk3"]
+
+[ext_resource type="Script" uid="uid://1e1uw72aycok" path="res://Scripts/PrestigeCard.gd" id="1_shk1f"]
+[ext_resource type="Texture2D" uid="uid://dl3oj1spaftum" path="res://Sprites/UI/prestige_cards_yes.png" id="2_emx5b"]
+[ext_resource type="Texture2D" uid="uid://tyh6qxpsvs2o" path="res://Sprites/UI/prestige_cards_no.png" id="2_u6l2e"]
+[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_emx5b"]
+[ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="4_k6jf2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_04u4u"]
+resource_local_to_scene = true
+shader = ExtResource("4_k6jf2")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u6l2e"]
+resource_local_to_scene = true
+shader = ExtResource("4_k6jf2")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="PrestigeCard" type="Control" node_paths=PackedStringArray("card_name", "card_desc", "panel", "card_button")]
+custom_minimum_size = Vector2(288, 144)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 288.0
+offset_bottom = 144.0
+pivot_offset = Vector2(144, 72)
+script = ExtResource("1_shk1f")
+card_name = NodePath("name")
+card_desc = NodePath("desc")
+panel = NodePath("Panel")
+card_button = NodePath("Button")
+card_yes = ExtResource("2_emx5b")
+card_no = ExtResource("2_u6l2e")
+
+[node name="Panel" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 120.0
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_u6l2e")
+
+[node name="name" parent="." instance=ExtResource("3_emx5b")]
+material = SubResource("ShaderMaterial_04u4u")
+layout_mode = 1
+offset_top = 0.666667
+offset_right = 956.6666
+offset_bottom = 191.77777
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.47843137)
+text = "Relentless"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="desc" parent="." instance=ExtResource("3_emx5b")]
+material = SubResource("ShaderMaterial_u6l2e")
+layout_mode = 1
+offset_left = 3.0
+offset_top = 57.0
+offset_right = 1765.5
+offset_bottom = 588.25
+scale = Vector2(0.16, 0.16)
+text = "Sleight of hand expert. Make 20% more gold from monsters. "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 288.0
+offset_bottom = 144.0

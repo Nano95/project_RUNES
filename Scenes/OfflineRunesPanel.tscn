@@ -1,16 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://w1anjwd6ku5f"]
+[gd_scene load_steps=11 format=3 uid="uid://w1anjwd6ku5f"]
 
 [ext_resource type="Script" uid="uid://cjn4rwvwos7w6" path="res://Scripts/OfflineRunesPanel.gd" id="1_holjq"]
 [ext_resource type="PackedScene" uid="uid://c75p27x2gpgt3" path="res://Scenes/OfflineRuneSlot.tscn" id="2_holjq"]
-[ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="3_7nav1"]
 [ext_resource type="PackedScene" uid="uid://cfuov8orkxl0o" path="res://Scenes/MyListLabel.tscn" id="3_s7eqj"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="4_qj4xs"]
-[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="5_rxgki"]
-[ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="6_qxrmt"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_55pba"]
-shader = ExtResource("3_7nav1")
-shader_parameter/lod = 3.3600001596
+[ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="5_rxgki"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8k8yn"]
 resource_local_to_scene = true
@@ -30,7 +24,19 @@ shader = ExtResource("5_rxgki")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="OfflineRunesPanel" type="Control" node_paths=PackedStringArray("close_btn", "slots_container", "essence_summary_container", "rune_summary_container")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ufdrt"]
+resource_local_to_scene = true
+shader = ExtResource("5_rxgki")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7nav1"]
+resource_local_to_scene = true
+shader = ExtResource("5_rxgki")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="OfflineRunesPanel" type="Control" node_paths=PackedStringArray("slots_container", "essence_summary_container", "rune_summary_container")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -46,58 +52,38 @@ grow_vertical = 2
 pivot_offset = Vector2(360, 640)
 script = ExtResource("1_holjq")
 rune_slot_ref = ExtResource("2_holjq")
-close_btn = NodePath("ColorRect/Panel/Title/Exit")
-slots_container = NodePath("ColorRect/Panel/Slots/SlotsContainer")
-essence_summary_container = NodePath("ColorRect/Panel/Summary/Panel/EssenceTimes/ScrollContainer/MarginContainer/VBoxContainer")
-rune_summary_container = NodePath("ColorRect/Panel/Summary/Panel/RuneProduction/ScrollContainer/MarginContainer/VBoxContainer")
+slots_container = NodePath("Panel/Slots/SlotsContainer")
+essence_summary_container = NodePath("Panel/Summary/Panel/EssenceTimes/ScrollContainer/MarginContainer/VBoxContainer")
+rune_summary_container = NodePath("Panel/Summary/Panel/RuneProduction/ScrollContainer/MarginContainer/VBoxContainer")
 my_lbl = ExtResource("3_s7eqj")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_55pba")
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 29.0
-offset_right = 722.0
-offset_bottom = 1176.0
+offset_left = 21.0
+offset_top = -4.0
+offset_right = 700.0
+offset_bottom = 1095.0
 
-[node name="Panel" type="Panel" parent="ColorRect"]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 21.0
-offset_right = 698.0
-offset_bottom = 1120.0
-
-[node name="Title" type="Panel" parent="ColorRect/Panel"]
+[node name="Title" type="Panel" parent="Panel"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 82.0
 grow_horizontal = 2
 
-[node name="Title" parent="ColorRect/Panel/Title" instance=ExtResource("4_qj4xs")]
+[node name="Title" parent="Panel/Title" instance=ExtResource("4_qj4xs")]
 material = SubResource("ShaderMaterial_8k8yn")
 layout_mode = 0
 offset_left = 1.0
 offset_top = 4.0
-offset_right = 1032.4814
+offset_right = 1256.5555
 offset_bottom = 141.0
 scale = Vector2(0.54, 0.54)
 text = "Idle Rune Making"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Exit" type="Button" parent="ColorRect/Panel/Title"]
-layout_mode = 0
-offset_left = 558.0
-offset_right = 758.0
-offset_bottom = 138.0
-scale = Vector2(0.6, 0.6)
-theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("6_qxrmt")
-theme_override_font_sizes/font_size = 100
-text = "x"
-
-[node name="Slots" type="Panel" parent="ColorRect/Panel"]
+[node name="Slots" type="Panel" parent="Panel"]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -108,7 +94,7 @@ offset_bottom = 192.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SlotsInfo" parent="ColorRect/Panel/Slots" instance=ExtResource("4_qj4xs")]
+[node name="SlotsInfo" parent="Panel/Slots" instance=ExtResource("4_qj4xs")]
 material = SubResource("ShaderMaterial_duup7")
 layout_mode = 0
 offset_left = 47.0
@@ -118,7 +104,7 @@ offset_bottom = 140.00002
 scale = Vector2(0.4, 0.4)
 text = "Pick your runes!"
 
-[node name="SlotsContainer" type="VBoxContainer" parent="ColorRect/Panel/Slots"]
+[node name="SlotsContainer" type="VBoxContainer" parent="Panel/Slots"]
 layout_mode = 0
 offset_left = 46.999996
 offset_top = 65.0
@@ -127,15 +113,15 @@ offset_bottom = 752.1746
 scale = Vector2(0.9, 0.9)
 theme_override_constants/separation = 50
 
-[node name="OfflineRuneSlot" parent="ColorRect/Panel/Slots/SlotsContainer" instance=ExtResource("2_holjq")]
+[node name="OfflineRuneSlot" parent="Panel/Slots/SlotsContainer" instance=ExtResource("2_holjq")]
 custom_minimum_size = Vector2(590, 244)
 layout_mode = 2
 
-[node name="OfflineRuneSlot2" parent="ColorRect/Panel/Slots/SlotsContainer" instance=ExtResource("2_holjq")]
+[node name="OfflineRuneSlot2" parent="Panel/Slots/SlotsContainer" instance=ExtResource("2_holjq")]
 custom_minimum_size = Vector2(0, 247)
 layout_mode = 2
 
-[node name="Summary" type="Panel" parent="ColorRect/Panel"]
+[node name="Summary" type="Panel" parent="Panel"]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -146,7 +132,7 @@ offset_bottom = 550.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SummaryLbl" parent="ColorRect/Panel/Summary" instance=ExtResource("4_qj4xs")]
+[node name="SummaryLbl" parent="Panel/Summary" instance=ExtResource("4_qj4xs")]
 material = SubResource("ShaderMaterial_s7eqj")
 layout_mode = 0
 offset_left = 47.0
@@ -156,7 +142,7 @@ offset_bottom = 135.00002
 scale = Vector2(0.4, 0.4)
 text = "Summary"
 
-[node name="SummaryContainer" type="VBoxContainer" parent="ColorRect/Panel/Summary"]
+[node name="SummaryContainer" type="VBoxContainer" parent="Panel/Summary"]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 65.0
@@ -165,15 +151,15 @@ offset_bottom = 343.88885
 scale = Vector2(0.9, 0.9)
 theme_override_constants/separation = 0
 
-[node name="Panel" type="Panel" parent="ColorRect/Panel/Summary"]
+[node name="Panel" type="Panel" parent="Panel/Summary"]
 layout_mode = 0
 offset_left = 48.0
 offset_top = 58.0
 offset_right = 627.0
 offset_bottom = 325.0
 
-[node name="Depletion" parent="ColorRect/Panel/Summary/Panel" instance=ExtResource("4_qj4xs")]
-material = SubResource("ShaderMaterial_s7eqj")
+[node name="Depletion" parent="Panel/Summary/Panel" instance=ExtResource("4_qj4xs")]
+material = SubResource("ShaderMaterial_ufdrt")
 layout_mode = 0
 offset_left = 21.000004
 offset_top = 1.9999962
@@ -181,29 +167,29 @@ offset_right = 1834.3333
 offset_bottom = 139.0
 text = "Essence depletion times"
 
-[node name="EssenceTimes" type="Panel" parent="ColorRect/Panel/Summary/Panel"]
+[node name="EssenceTimes" type="Panel" parent="Panel/Summary/Panel"]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 44.0
-offset_right = 527.0
+offset_right = 558.0
 offset_bottom = 124.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/Panel/Summary/Panel/EssenceTimes"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/Summary/Panel/EssenceTimes"]
 layout_mode = 0
-offset_right = 505.0
+offset_right = 536.0
 offset_bottom = 67.0
 horizontal_scroll_mode = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/Panel/Summary/Panel/EssenceTimes/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Summary/Panel/EssenceTimes/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/Panel/Summary/Panel/EssenceTimes/ScrollContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Summary/Panel/EssenceTimes/ScrollContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="RuneProduction2" parent="ColorRect/Panel/Summary/Panel" instance=ExtResource("4_qj4xs")]
-material = SubResource("ShaderMaterial_s7eqj")
+[node name="RuneProduction2" parent="Panel/Summary/Panel" instance=ExtResource("4_qj4xs")]
+material = SubResource("ShaderMaterial_7nav1")
 layout_mode = 0
 offset_left = 21.0
 offset_top = 127.0
@@ -211,23 +197,23 @@ offset_right = 1834.3333
 offset_bottom = 264.0
 text = "Runes expected output"
 
-[node name="RuneProduction" type="Panel" parent="ColorRect/Panel/Summary/Panel"]
+[node name="RuneProduction" type="Panel" parent="Panel/Summary/Panel"]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 165.0
-offset_right = 527.0
+offset_right = 558.0
 offset_bottom = 261.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/Panel/Summary/Panel/RuneProduction"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/Summary/Panel/RuneProduction"]
 layout_mode = 0
-offset_right = 505.0
+offset_right = 536.0
 offset_bottom = 93.0
 horizontal_scroll_mode = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/Panel/Summary/Panel/RuneProduction/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Summary/Panel/RuneProduction/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/Panel/Summary/Panel/RuneProduction/ScrollContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Summary/Panel/RuneProduction/ScrollContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 25

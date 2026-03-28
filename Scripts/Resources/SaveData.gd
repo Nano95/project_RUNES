@@ -255,3 +255,85 @@ func reset_data() -> void:
 	current_run_runes_obtained = {}
 	total_monster_kills = {}
 	total_run_monster_kills = {}
+
+
+@export var blessings:Array = [
+	{
+		id = "offline_production_25",
+		name = "Deep Sleep",
+		desc = "Rest Hard. Offline rune production is 25% faster",
+		toggled = false,
+		cost = 40,
+		type = "offline", #?
+		category = "runes" #?
+	},
+	{
+		id = "essence_package",
+		name = "Inner Reservoir", # better name?
+		desc = "Begin each run with 1,500 essence of every type.", # Better desc?
+		toggled = false,
+		cost = 50,
+		type = "economy", #?
+		category = "essence" #?
+	},
+	{
+		id = "pickpocket",
+		name = "Pick Pocket", # better name?
+		desc = "Earn 20% more gold from defeated monsters.", # Better desc?
+		toggled = false,
+		cost = 70,
+		type = "economy", #?
+		category = "gold" #?
+	},
+	{
+		id = "extra_rune_slot",
+		name = "Battle", # better name?
+		desc = "+1 rune slot available in battle.", # Better desc?
+		toggled = false,
+		cost = 100,
+		type = "combat", #?
+		category = "buff" #?
+	}
+]
+@export var curses:Array = [
+	{
+		id = "monster_hp_25",
+		name = "Bloodthirst", # better name?
+		desc = "Monsters spawn with 25% more health.", # Better desc?
+		toggled = false,
+		type = "combat", #?
+		category = "monsters" #?
+	},
+	{
+		id = "death_toll",
+		name = "Death’s Toll", # better name?
+		desc = "House always wins. You don't preserve the loot gained in that floor if you die.", # Better desc?
+		toggled = false,
+		type = "economy", #?
+		category = "loot" #?
+	},
+	{
+		id = "monster_elites_20",
+		name = "Ascended Foes", # better name? something more on the evil side? Monsters leaders increasing
+		desc = "Elite monsters appear 20% more often.", # Better desc?
+		toggled = false,
+		type = "combat", #?
+		category = "monsters" #?
+	},
+	{
+		id = "monster_speed_1",
+		name = "Relentless", # better name? something about th
+		desc = "Monsters attack 1 turn faster.", # Better desc?
+		toggled = false,
+		type = "combat", #?
+		category = "monsters" #?
+	},
+	{
+		id = "arcane_debuff_15",
+		name = "Arcane Fracture", # better name? something about th
+		desc = "Your arcane spells deal 15% less damage.", # Better desc?
+		toggled = false,
+		type = "combat", #?
+		category = "debuff" #?
+	},
+]

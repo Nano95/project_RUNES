@@ -2,7 +2,6 @@ extends Control
 class_name OfflineRunesPanel
 
 @export var rune_slot_ref:PackedScene
-@export var close_btn:Button
 @export var slots_container:VBoxContainer
 @export var essence_summary_container:VBoxContainer
 @export var rune_summary_container:VBoxContainer
@@ -15,7 +14,6 @@ func _ready() -> void:
 
 func setup(m:MainNode) -> void:
 	main = m
-	close_btn.pressed.connect(exit)
 
 func populate_container() -> void:
 	clear_children(slots_container)

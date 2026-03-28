@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjd8lmuyg3fi0"]
+
+[ext_resource type="Script" uid="uid://tm1i1kouju3f" path="res://Scripts/MenuSideButtons.gd" id="1_ruo4j"]
+[ext_resource type="Texture2D" uid="uid://crhi3tb08fpjv" path="res://icon.svg" id="2_a8540"]
+
+[node name="SideButton" type="Control" node_paths=PackedStringArray("button")]
+custom_minimum_size = Vector2(110, 76)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 110.0
+offset_bottom = 76.0
+script = ExtResource("1_ruo4j")
+button = NodePath("Button")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 109.0
+offset_bottom = 76.0
+toggle_mode = true
+icon = ExtResource("2_a8540")
+icon_alignment = 1
+expand_icon = true

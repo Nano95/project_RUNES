@@ -4,26 +4,17 @@
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="2_ghw46"]
 [ext_resource type="PackedScene" uid="uid://2dvdykbjounr" path="res://Scenes/FightMenu.tscn" id="2_if7li"]
 [ext_resource type="Curve" uid="uid://bdkmegreb07jj" path="res://Resources/xpCurve.tres" id="2_koqhg"]
-[ext_resource type="ButtonGroup" uid="uid://br2b15cqpspy" path="res://Resources/StatsButtonQty.tres" id="3_df05h"]
 [ext_resource type="ButtonGroup" uid="uid://dwmdxhjybfguq" path="res://Resources/EquipmentSlot.tres" id="3_koqhg"]
 [ext_resource type="PackedScene" uid="uid://w1anjwd6ku5f" path="res://Scenes/OfflineRunesPanel.tscn" id="3_rrcx7"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="4_df05h"]
-[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="5_8um5k"]
+[ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="5_8um5k"]
+[ext_resource type="PackedScene" uid="uid://cpvxinojrf0q2" path="res://Scenes/PrestigePanel.tscn" id="5_7467j"]
 [ext_resource type="PackedScene" uid="uid://bclknj3c05tf" path="res://Scenes/InventoryButton.tscn" id="6_8um5k"]
+[ext_resource type="PackedScene" uid="uid://d28prqhsmaiob" path="res://Scenes/StatsContainer.tscn" id="7_8e205"]
 [ext_resource type="PackedScene" uid="uid://b2rttg80j12x4" path="res://Scenes/RuneShop.tscn" id="9_cmrfp"]
-[ext_resource type="Texture2D" uid="uid://llqj70wrm8i3" path="res://Sprites/Runes/ARCANE_STRIKE_RUNE.png" id="9_loo7a"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_koqhg"]
-resource_local_to_scene = true
-shader = ExtResource("5_8um5k")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cmrfp"]
-resource_local_to_scene = true
-shader = ExtResource("5_8um5k")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
+[ext_resource type="Script" uid="uid://xa01fjjqd0pp" path="res://Scripts/SideButtonsContainer.gd" id="13_fh7cp"]
+[ext_resource type="ButtonGroup" uid="uid://ikn15qsvufie" path="res://Resources/SideMenuButtonsGroup.tres" id="14_7467j"]
+[ext_resource type="PackedScene" uid="uid://cjd8lmuyg3fi0" path="res://Scenes/SideButton.tscn" id="15_2x1g0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_if7li"]
 resource_local_to_scene = true
@@ -37,9 +28,7 @@ shader = ExtResource("5_8um5k")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_cmrfp"]
-
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("start_btn", "lvl_label", "ap_label", "btn1", "btn10", "btn100", "clear_stats_btn", "debugton", "eq_slot_1_btn", "eq_slot_2_btn", "health_increase_btn", "focus_increase_btn", "power_increase_btn", "luck_increase_btn", "health_decrease_btn", "focus_decrease_btn", "power_decrease_btn", "luck_decrease_btn", "open_offline_runes_btn", "inventory_grid", "generate_btn")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("eq_slot_1_btn", "eq_slot_2_btn", "nav_buttons_container", "inventory_grid", "generate_btn")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,356 +39,16 @@ mouse_filter = 2
 script = ExtResource("1_8saeu")
 fight_menu = ExtResource("2_if7li")
 offline_rune_panel = ExtResource("3_rrcx7")
+shop_panel = ExtResource("9_cmrfp")
+prestige_panel = ExtResource("5_7467j")
+stats_panel = ExtResource("7_8e205")
 xp_curve = ExtResource("2_koqhg")
-start_btn = NodePath("StartButton")
-button_group = ExtResource("3_df05h")
 equipment_slot_group = ExtResource("3_koqhg")
-lvl_label = NodePath("StatsContainer/Panel/Labels/LvLabel")
-ap_label = NodePath("StatsContainer/Panel/Labels/ApLabel")
-btn1 = NodePath("StatsContainer/Panel/statsBtn1")
-btn10 = NodePath("StatsContainer/Panel/statsBtn2")
-btn100 = NodePath("StatsContainer/Panel/statsBtn3")
-clear_stats_btn = NodePath("StatsContainer/Panel/ClearButton")
-debugton = NodePath("Debugton")
 eq_slot_1_btn = NodePath("Equipment/Panel/Equipment/slot1")
 eq_slot_2_btn = NodePath("Equipment/Panel/Equipment/slot2")
-health_increase_btn = NodePath("StatsContainer/Panel/Labels/PlusHealth")
-focus_increase_btn = NodePath("StatsContainer/Panel/Labels/PlusFocus")
-power_increase_btn = NodePath("StatsContainer/Panel/Labels/PlusPower")
-luck_increase_btn = NodePath("StatsContainer/Panel/Labels/PlusLuck")
-health_decrease_btn = NodePath("StatsContainer/Panel/Labels/MinusHealth")
-focus_decrease_btn = NodePath("StatsContainer/Panel/Labels/MinusFocus")
-power_decrease_btn = NodePath("StatsContainer/Panel/Labels/MinusPower")
-luck_decrease_btn = NodePath("StatsContainer/Panel/Labels/MinusLuck")
-open_offline_runes_btn = NodePath("RuneMakingPanel")
+nav_buttons_container = NodePath("BottomInfoPanel/NavButtonsContainer")
 inventory_grid = NodePath("Equipment/Panel/Inventory/ScrollContainer/MarginContainer/GridContainer")
 generate_btn = NodePath("Equipment/Panel/Inventory/Button")
-
-[node name="StartButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -594.0
-offset_right = 200.0
-offset_bottom = -443.99997
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.8, 0.8)
-pivot_offset = Vector2(200, 75)
-theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("2_ghw46")
-theme_override_font_sizes/font_size = 100
-text = "Fight!"
-
-[node name="RuneMakingPanel" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 185.0
-offset_top = -587.0
-offset_right = 337.0
-offset_bottom = -452.0
-grow_horizontal = 2
-grow_vertical = 2
-icon = ExtResource("9_loo7a")
-icon_alignment = 1
-expand_icon = true
-
-[node name="StatsContainer" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_top = -520.0
-offset_bottom = -520.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Panel" type="Panel" parent="StatsContainer"]
-layout_mode = 0
-offset_left = -258.0
-offset_top = 86.0
-offset_right = 258.0
-offset_bottom = 586.0
-
-[node name="statsBtn1" type="Button" parent="StatsContainer/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -233.0
-offset_top = 23.0
-offset_right = 67.0
-offset_bottom = 183.0
-grow_horizontal = 2
-scale = Vector2(0.5, 0.5)
-theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("2_ghw46")
-theme_override_font_sizes/font_size = 100
-toggle_mode = true
-button_group = ExtResource("3_df05h")
-text = "1x"
-
-[node name="statsBtn2" type="Button" parent="StatsContainer/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -75.0
-offset_top = 23.0
-offset_right = 225.0
-offset_bottom = 183.0
-grow_horizontal = 2
-scale = Vector2(0.5, 0.5)
-theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("2_ghw46")
-theme_override_font_sizes/font_size = 100
-toggle_mode = true
-button_group = ExtResource("3_df05h")
-text = "10x"
-
-[node name="statsBtn3" type="Button" parent="StatsContainer/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 83.0
-offset_top = 23.0
-offset_right = 383.0
-offset_bottom = 183.0
-grow_horizontal = 2
-scale = Vector2(0.5, 0.5)
-theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("2_ghw46")
-theme_override_font_sizes/font_size = 100
-toggle_mode = true
-button_group = ExtResource("3_df05h")
-text = "100x"
-
-[node name="ClearButton" type="Button" parent="StatsContainer/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 128.0
-offset_top = 434.99994
-offset_right = 428.0
-offset_bottom = 573.0
-grow_horizontal = 2
-scale = Vector2(0.4, 0.4)
-theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("2_ghw46")
-theme_override_font_sizes/font_size = 100
-text = "Clear"
-
-[node name="Labels" type="Control" parent="StatsContainer/Panel"]
-anchors_preset = 0
-offset_left = -43.0
-offset_top = 141.0
-offset_right = -43.0
-offset_bottom = 141.0
-
-[node name="LvLabel" parent="StatsContainer/Panel/Labels" instance=ExtResource("4_df05h")]
-material = SubResource("ShaderMaterial_koqhg")
-layout_mode = 0
-offset_left = 4.999996
-offset_top = -31.0
-offset_right = 605.0
-offset_bottom = 106.0
-scale = Vector2(0.4, 0.4)
-text = "Lv: 1"
-horizontal_alignment = 2
-
-[node name="ApLabel" parent="StatsContainer/Panel/Labels" instance=ExtResource("4_df05h")]
-material = SubResource("ShaderMaterial_cmrfp")
-layout_mode = 0
-offset_left = 258.0
-offset_top = -31.0
-offset_right = 858.0
-offset_bottom = 106.0
-scale = Vector2(0.4, 0.4)
-text = "| AP: 100"
-
-[node name="HealthRich" type="RichTextLabel" parent="StatsContainer/Panel/Labels"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 244.0
-offset_top = 31.0
-offset_right = 1269.0
-offset_bottom = 162.81824
-scale = Vector2(0.44, 0.44)
-mouse_filter = 2
-theme_override_constants/outline_size = 42
-theme_override_fonts/normal_font = ExtResource("2_ghw46")
-theme_override_fonts/bold_font = ExtResource("2_ghw46")
-theme_override_fonts/bold_italics_font = ExtResource("2_ghw46")
-theme_override_fonts/italics_font = ExtResource("2_ghw46")
-theme_override_fonts/mono_font = ExtResource("2_ghw46")
-theme_override_font_sizes/normal_font_size = 100
-bbcode_enabled = true
-text = " Health: "
-
-[node name="FocusRich" type="RichTextLabel" parent="StatsContainer/Panel/Labels"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 244.0
-offset_top = 101.0
-offset_right = 1269.0
-offset_bottom = 232.81824
-scale = Vector2(0.44, 0.44)
-mouse_filter = 2
-theme_override_constants/outline_size = 42
-theme_override_fonts/normal_font = ExtResource("2_ghw46")
-theme_override_fonts/bold_font = ExtResource("2_ghw46")
-theme_override_fonts/bold_italics_font = ExtResource("2_ghw46")
-theme_override_fonts/italics_font = ExtResource("2_ghw46")
-theme_override_fonts/mono_font = ExtResource("2_ghw46")
-theme_override_font_sizes/normal_font_size = 100
-bbcode_enabled = true
-text = " Speed: "
-
-[node name="PowerRich" type="RichTextLabel" parent="StatsContainer/Panel/Labels"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 244.0
-offset_top = 171.0
-offset_right = 1269.0
-offset_bottom = 302.81824
-scale = Vector2(0.44, 0.44)
-mouse_filter = 2
-theme_override_constants/outline_size = 42
-theme_override_fonts/normal_font = ExtResource("2_ghw46")
-theme_override_fonts/bold_font = ExtResource("2_ghw46")
-theme_override_fonts/bold_italics_font = ExtResource("2_ghw46")
-theme_override_fonts/italics_font = ExtResource("2_ghw46")
-theme_override_fonts/mono_font = ExtResource("2_ghw46")
-theme_override_font_sizes/normal_font_size = 100
-bbcode_enabled = true
-text = " Power: "
-
-[node name="LuckRich" type="RichTextLabel" parent="StatsContainer/Panel/Labels"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 244.0
-offset_top = 241.0
-offset_right = 1269.0
-offset_bottom = 372.81824
-scale = Vector2(0.44, 0.44)
-mouse_filter = 2
-theme_override_constants/outline_size = 42
-theme_override_fonts/normal_font = ExtResource("2_ghw46")
-theme_override_fonts/bold_font = ExtResource("2_ghw46")
-theme_override_fonts/bold_italics_font = ExtResource("2_ghw46")
-theme_override_fonts/italics_font = ExtResource("2_ghw46")
-theme_override_fonts/mono_font = ExtResource("2_ghw46")
-theme_override_font_sizes/normal_font_size = 100
-bbcode_enabled = true
-text = " Luck: "
-
-[node name="PlusHealth" type="Button" parent="StatsContainer/Panel/Labels"]
-layout_mode = 0
-offset_left = 178.0
-offset_top = 27.999996
-offset_right = 358.0
-offset_bottom = 208.0
-scale = Vector2(0.35, 0.35)
-theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("2_ghw46")
-theme_override_font_sizes/font_size = 100
-text = "+"
-
-[node name="MinusHealth" type="Button" parent="StatsContainer/Panel/Labels"]
-layout_mode = 0
-offset_left = 105.00001
-offset_top = 27.999996
-offset_right = 285.0
-offset_bottom = 208.0
-scale = Vector2(0.35, 0.35)
-theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("2_ghw46")
-theme_override_font_sizes/font_size = 100
-text = "-"
-
-[node name="PlusFocus" type="Button" parent="StatsContainer/Panel/Labels"]
-layout_mode = 0
-offset_left = 178.0
-offset_top = 98.0
-offset_right = 358.0
-offset_bottom = 278.0
-scale = Vector2(0.35, 0.35)
-theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("2_ghw46")
-theme_override_font_sizes/font_size = 100
-text = "+"
-
-[node name="MinusFocus" type="Button" parent="StatsContainer/Panel/Labels"]
-layout_mode = 0
-offset_left = 105.00001
-offset_top = 98.0
-offset_right = 285.0
-offset_bottom = 278.0
-scale = Vector2(0.35, 0.35)
-theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("2_ghw46")
-theme_override_font_sizes/font_size = 100
-text = "-"
-
-[node name="PlusPower" type="Button" parent="StatsContainer/Panel/Labels"]
-layout_mode = 0
-offset_left = 178.0
-offset_top = 168.0
-offset_right = 358.0
-offset_bottom = 348.0
-scale = Vector2(0.35, 0.35)
-theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("2_ghw46")
-theme_override_font_sizes/font_size = 100
-text = "+"
-
-[node name="MinusPower" type="Button" parent="StatsContainer/Panel/Labels"]
-layout_mode = 0
-offset_left = 105.00001
-offset_top = 168.0
-offset_right = 285.0
-offset_bottom = 348.0
-scale = Vector2(0.35, 0.35)
-theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("2_ghw46")
-theme_override_font_sizes/font_size = 100
-text = "-"
-
-[node name="PlusLuck" type="Button" parent="StatsContainer/Panel/Labels"]
-layout_mode = 0
-offset_left = 178.0
-offset_top = 238.0
-offset_right = 358.0
-offset_bottom = 418.0
-scale = Vector2(0.35, 0.35)
-theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("2_ghw46")
-theme_override_font_sizes/font_size = 100
-text = "+"
-
-[node name="MinusLuck" type="Button" parent="StatsContainer/Panel/Labels"]
-layout_mode = 0
-offset_left = 105.00001
-offset_top = 238.0
-offset_right = 285.0
-offset_bottom = 418.0
-scale = Vector2(0.35, 0.35)
-theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("2_ghw46")
-theme_override_font_sizes/font_size = 100
-text = "-"
 
 [node name="Equipment" type="Control" parent="."]
 visible = false
@@ -516,20 +165,6 @@ layout_mode = 0
 offset_right = 97.0
 offset_bottom = 97.0
 
-[node name="Debugton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -348.0
-offset_top = -587.0
-offset_right = -260.0
-offset_bottom = -452.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="BottomInfoPanel" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 12
@@ -538,6 +173,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="NavButtonsContainer" type="HBoxContainer" parent="BottomInfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -145.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -2
+script = ExtResource("13_fh7cp")
+side_buttons_group = ExtResource("14_7467j")
+side_button_ref = ExtResource("15_2x1g0")
 
 [node name="Panel" type="Panel" parent="BottomInfoPanel"]
 layout_mode = 1
@@ -567,9 +216,3 @@ theme_override_font_sizes/bold_font_size = 30
 bbcode_enabled = true
 text = "[img=40]res://Sprites/GOLD_ICON.png[/img] 3.45k  |  [img=40]res://Sprites/ESSENCE_ICON.png[/img] Physical: 447
 "
-
-[node name="ShopPanel" parent="." instance=ExtResource("9_cmrfp")]
-layout_mode = 1
-offset_top = 326.0
-offset_bottom = 326.0
-button_group = SubResource("ButtonGroup_cmrfp")

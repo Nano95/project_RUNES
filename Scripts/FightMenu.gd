@@ -9,7 +9,7 @@ class_name FightMenu
 @export var my_button:PackedScene
 @export var rune_button:PackedScene
 @export var select_runes_panel:PackedScene
-@onready var monster_info:Control = $ColorRect/Panel/MonsterInfo
+@onready var monster_info:Control = $Panel/MonsterInfo
 var areas:Array = [] # Set in the _ready function 
 
 var selected_family: String = ""
@@ -28,8 +28,8 @@ func _ready() -> void:
 	setup_rune_grid()
 	start_button.pressed.connect(main.spawn_game)
 	exit_button.pressed.connect(close)
-	$ColorRect/Panel/ToggleMonsterInfo.pressed.connect(toggle_monster_info)
-	$ColorRect/Panel/MonsterInfo/Button.pressed.connect(toggle_monster_info)
+	$Panel/ToggleMonsterInfo.pressed.connect(toggle_monster_info)
+	$Panel/MonsterInfo/Button.pressed.connect(toggle_monster_info)
 
 func setup(main_node:MainNode) -> void:
 	main = main_node
@@ -121,7 +121,7 @@ func close() -> void:
 	Utils.animate_summary_out_and_free(self)
 
 func toggle_monster_info() -> void:
-	$ColorRect/Panel/ChooseRunes.visible = !$ColorRect/Panel/ChooseRunes.visible
+	$Panel/ChooseRunes.visible = !$Panel/ChooseRunes.visible
 	monster_info.visible = !monster_info.visible
 
 func open_rune_selection_panel(id:int) -> void:

@@ -1,11 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://2dvdykbjounr"]
+[gd_scene load_steps=26 format=3 uid="uid://2dvdykbjounr"]
 
 [ext_resource type="Script" uid="uid://crgoc5n1t752c" path="res://Scripts/FightMenu.gd" id="1_ipivn"]
 [ext_resource type="PackedScene" uid="uid://b37x20v0etu6t" path="res://Scenes/MyButton.tscn" id="2_0c1bx"]
-[ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="2_p854w"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_x5u2f"]
 [ext_resource type="PackedScene" uid="uid://bu2xji8e1uu4y" path="res://Scenes/RuneSelectionPanel.tscn" id="4_6sloi"]
-[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="4_ov7x6"]
+[ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="4_ov7x6"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="5_utror"]
 [ext_resource type="PackedScene" uid="uid://cby5cdsq4bcyo" path="res://Scenes/FightMenuRuneButton.tscn" id="6_f0u7t"]
 [ext_resource type="Script" uid="uid://der06tyl3xyu3" path="res://Scripts/MonsterInfoPanel.gd" id="6_ou8aj"]
@@ -15,10 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://by8eyn77jli18" path="res://Sprites/GOLD_ICON.png" id="8_ryii3"]
 [ext_resource type="Texture2D" uid="uid://d2edg60502vj0" path="res://Sprites/MONSTER_ICON.png" id="8_v0ir0"]
 [ext_resource type="Texture2D" uid="uid://cis363l7mtswe" path="res://Sprites/arcane_ESSENCE_ICON.png" id="9_0c1bx"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_55pba"]
-shader = ExtResource("2_p854w")
-shader_parameter/lod = 3.0000001425
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8k8yn"]
 resource_local_to_scene = true
@@ -101,31 +96,23 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(360, 640)
 script = ExtResource("1_ipivn")
-monster_grid_container = NodePath("ColorRect/Panel/Family/MarginContainer/GridContainer")
-location_grid_container = NodePath("ColorRect/Panel/Location/MarginContainer/GridContainer")
-rune_grid_container = NodePath("ColorRect/Panel/ChooseRunes/MarginContainer/GridContainer")
-start_button = NodePath("ColorRect/Panel/Fight")
-exit_button = NodePath("ColorRect/Panel/Close")
+monster_grid_container = NodePath("Panel/Family/MarginContainer/GridContainer")
+location_grid_container = NodePath("Panel/Location/MarginContainer/GridContainer")
+rune_grid_container = NodePath("Panel/ChooseRunes/MarginContainer/GridContainer")
+start_button = NodePath("Panel/Fight")
+exit_button = NodePath("Panel/Close")
 my_button = ExtResource("2_0c1bx")
 rune_button = ExtResource("6_f0u7t")
 select_runes_panel = ExtResource("4_6sloi")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_55pba")
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 29.0
-offset_right = 722.0
-offset_bottom = 1176.0
+offset_left = 21.0
+offset_top = -4.0
+offset_right = 700.0
+offset_bottom = 1095.0
 
-[node name="Panel" type="Panel" parent="ColorRect"]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 21.0
-offset_right = 698.0
-offset_bottom = 1120.0
-
-[node name="ChooseMonster" parent="ColorRect/Panel" instance=ExtResource("3_x5u2f")]
+[node name="ChooseMonster" parent="Panel" instance=ExtResource("3_x5u2f")]
 material = SubResource("ShaderMaterial_8k8yn")
 layout_mode = 0
 offset_left = 327.0
@@ -137,7 +124,7 @@ text = "Monster"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ChooseMonster2" parent="ColorRect/Panel" instance=ExtResource("3_x5u2f")]
+[node name="ChooseMonster2" parent="Panel" instance=ExtResource("3_x5u2f")]
 material = SubResource("ShaderMaterial_ipivn")
 layout_mode = 0
 offset_left = 1.9999847
@@ -149,26 +136,26 @@ text = "Area"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Family" type="ScrollContainer" parent="ColorRect/Panel"]
+[node name="Family" type="ScrollContainer" parent="Panel"]
 layout_mode = 0
 offset_left = 14.0
 offset_top = 93.0
 offset_right = 335.0
 offset_bottom = 560.0
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/Panel/Family"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Family"]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="GridContainer" type="GridContainer" parent="ColorRect/Panel/Family/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="Panel/Family/MarginContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 80
 
-[node name="Location" type="ScrollContainer" parent="ColorRect/Panel"]
+[node name="Location" type="ScrollContainer" parent="Panel"]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 0
 offset_left = 343.0
@@ -176,18 +163,18 @@ offset_top = 93.0
 offset_right = 664.0
 offset_bottom = 560.0
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/Panel/Location"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Location"]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="GridContainer" type="GridContainer" parent="ColorRect/Panel/Location/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="Panel/Location/MarginContainer"]
 layout_mode = 2
 theme_override_constants/v_separation = 80
 
-[node name="ChooseRunes" parent="ColorRect/Panel" instance=ExtResource("3_x5u2f")]
+[node name="ChooseRunes" parent="Panel" instance=ExtResource("3_x5u2f")]
 material = SubResource("ShaderMaterial_p854w")
 layout_mode = 0
 offset_left = 1.9999847
@@ -199,7 +186,7 @@ text = "Choose Runes"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/Panel/ChooseRunes"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/ChooseRunes"]
 layout_mode = 0
 offset_left = 7.4074364
 offset_top = 127.77771
@@ -210,14 +197,14 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="GridContainer" type="GridContainer" parent="ColorRect/Panel/ChooseRunes/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="Panel/ChooseRunes/MarginContainer"]
 custom_minimum_size = Vector2(1200, 550)
 layout_mode = 2
 theme_override_constants/h_separation = 35
 theme_override_constants/v_separation = 0
 columns = 4
 
-[node name="ToggleMonsterInfo" type="Button" parent="ColorRect/Panel"]
+[node name="ToggleMonsterInfo" type="Button" parent="Panel"]
 layout_mode = 0
 offset_left = 564.00006
 offset_top = 705.0
@@ -231,7 +218,7 @@ icon = ExtResource("8_v0ir0")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Fight" type="Button" parent="ColorRect/Panel"]
+[node name="Fight" type="Button" parent="Panel"]
 layout_mode = 0
 offset_left = 207.99998
 offset_top = 980.99994
@@ -243,7 +230,7 @@ theme_override_fonts/font = ExtResource("5_utror")
 theme_override_font_sizes/font_size = 100
 text = "Let's go!"
 
-[node name="Close" type="Button" parent="ColorRect/Panel"]
+[node name="Close" type="Button" parent="Panel"]
 layout_mode = 0
 offset_left = 17.000092
 offset_top = 980.99994
@@ -255,7 +242,7 @@ theme_override_fonts/font = ExtResource("5_utror")
 theme_override_font_sizes/font_size = 100
 text = "x"
 
-[node name="MonsterInfo" type="Panel" parent="ColorRect/Panel" node_paths=PackedStringArray("hp_lbl", "xp_lbl", "atk_lbl", "gold_lbl", "essence_lbl", "name_lbl", "desc_lbl", "loot_lbl", "essence_icon")]
+[node name="MonsterInfo" type="Panel" parent="Panel" node_paths=PackedStringArray("hp_lbl", "xp_lbl", "atk_lbl", "gold_lbl", "essence_lbl", "name_lbl", "desc_lbl", "loot_lbl", "essence_icon")]
 visible = false
 layout_mode = 0
 offset_left = 14.0
@@ -273,21 +260,21 @@ desc_lbl = NodePath("Panel3/Lore")
 loot_lbl = NodePath("Panel4/Loot")
 essence_icon = NodePath("Panel/ESSENCE")
 
-[node name="Panel" type="Panel" parent="ColorRect/Panel/MonsterInfo"]
+[node name="Panel" type="Panel" parent="Panel/MonsterInfo"]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 9.0
 offset_right = 180.0
 offset_bottom = 285.0
 
-[node name="Panel" type="Panel" parent="ColorRect/Panel/MonsterInfo/Panel"]
+[node name="Panel" type="Panel" parent="Panel/MonsterInfo/Panel"]
 layout_mode = 0
 offset_left = 55.0
 offset_top = 6.0
 offset_right = 183.0
 offset_bottom = 260.03076
 
-[node name="HP" type="TextureRect" parent="ColorRect/Panel/MonsterInfo/Panel"]
+[node name="HP" type="TextureRect" parent="Panel/MonsterInfo/Panel"]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 10.0
@@ -295,7 +282,7 @@ offset_right = 51.0
 offset_bottom = 58.0
 texture = ExtResource("6_utror")
 
-[node name="lbl" parent="ColorRect/Panel/MonsterInfo/Panel/HP" instance=ExtResource("3_x5u2f")]
+[node name="lbl" parent="Panel/MonsterInfo/Panel/HP" instance=ExtResource("3_x5u2f")]
 material = SubResource("ShaderMaterial_f0u7t")
 layout_mode = 0
 offset_left = 52.0
@@ -307,7 +294,7 @@ text = "999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="XP" type="TextureRect" parent="ColorRect/Panel/MonsterInfo/Panel"]
+[node name="XP" type="TextureRect" parent="Panel/MonsterInfo/Panel"]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 62.0
@@ -315,7 +302,7 @@ offset_right = 51.0
 offset_bottom = 110.0
 texture = ExtResource("8_0c1bx")
 
-[node name="lbl" parent="ColorRect/Panel/MonsterInfo/Panel/XP" instance=ExtResource("3_x5u2f")]
+[node name="lbl" parent="Panel/MonsterInfo/Panel/XP" instance=ExtResource("3_x5u2f")]
 material = SubResource("ShaderMaterial_v0ir0")
 layout_mode = 0
 offset_left = 52.0
@@ -327,7 +314,7 @@ text = "999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ATK" type="TextureRect" parent="ColorRect/Panel/MonsterInfo/Panel"]
+[node name="ATK" type="TextureRect" parent="Panel/MonsterInfo/Panel"]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 114.0
@@ -335,7 +322,7 @@ offset_right = 51.0
 offset_bottom = 162.0
 texture = ExtResource("7_ou8aj")
 
-[node name="lbl" parent="ColorRect/Panel/MonsterInfo/Panel/ATK" instance=ExtResource("3_x5u2f")]
+[node name="lbl" parent="Panel/MonsterInfo/Panel/ATK" instance=ExtResource("3_x5u2f")]
 material = SubResource("ShaderMaterial_6sloi")
 layout_mode = 0
 offset_left = 52.0
@@ -347,7 +334,7 @@ text = "999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="GOLD" type="TextureRect" parent="ColorRect/Panel/MonsterInfo/Panel"]
+[node name="GOLD" type="TextureRect" parent="Panel/MonsterInfo/Panel"]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 166.0
@@ -355,7 +342,7 @@ offset_right = 51.0
 offset_bottom = 214.0
 texture = ExtResource("8_ryii3")
 
-[node name="lbl" parent="ColorRect/Panel/MonsterInfo/Panel/GOLD" instance=ExtResource("3_x5u2f")]
+[node name="lbl" parent="Panel/MonsterInfo/Panel/GOLD" instance=ExtResource("3_x5u2f")]
 material = SubResource("ShaderMaterial_ke3j0")
 layout_mode = 0
 offset_left = 52.0
@@ -367,7 +354,7 @@ text = "999-9.0k"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ESSENCE" type="TextureRect" parent="ColorRect/Panel/MonsterInfo/Panel"]
+[node name="ESSENCE" type="TextureRect" parent="Panel/MonsterInfo/Panel"]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 218.0
@@ -375,7 +362,7 @@ offset_right = 51.0
 offset_bottom = 266.0
 texture = ExtResource("9_0c1bx")
 
-[node name="lbl" parent="ColorRect/Panel/MonsterInfo/Panel/ESSENCE" instance=ExtResource("3_x5u2f")]
+[node name="lbl" parent="Panel/MonsterInfo/Panel/ESSENCE" instance=ExtResource("3_x5u2f")]
 material = SubResource("ShaderMaterial_n6iuk")
 layout_mode = 0
 offset_left = 52.0
@@ -387,14 +374,14 @@ text = "999-1.3k"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Panel2" type="Panel" parent="ColorRect/Panel/MonsterInfo"]
+[node name="Panel2" type="Panel" parent="Panel/MonsterInfo"]
 layout_mode = 0
 offset_left = 195.0
 offset_top = 4.0
 offset_right = 600.0
 offset_bottom = 44.0
 
-[node name="Name" parent="ColorRect/Panel/MonsterInfo/Panel2" instance=ExtResource("3_x5u2f")]
+[node name="Name" parent="Panel/MonsterInfo/Panel2" instance=ExtResource("3_x5u2f")]
 material = SubResource("ShaderMaterial_k44dd")
 layout_mode = 0
 offset_left = 4.0
@@ -404,14 +391,14 @@ offset_bottom = 136.0
 theme_override_constants/line_spacing = 14
 text = "Orc Warrior"
 
-[node name="Panel3" type="Panel" parent="ColorRect/Panel/MonsterInfo"]
+[node name="Panel3" type="Panel" parent="Panel/MonsterInfo"]
 layout_mode = 0
 offset_left = 195.0
 offset_top = 47.0
 offset_right = 636.0
 offset_bottom = 197.0
 
-[node name="Lore" parent="ColorRect/Panel/MonsterInfo/Panel3" instance=ExtResource("3_x5u2f")]
+[node name="Lore" parent="Panel/MonsterInfo/Panel3" instance=ExtResource("3_x5u2f")]
 material = SubResource("ShaderMaterial_c37k1")
 layout_mode = 0
 offset_left = 1.0
@@ -423,14 +410,14 @@ theme_override_constants/line_spacing = -19
 theme_override_constants/paragraph_spacing = -29
 text = "This is a lore description of the monster, there will be some details but maybe not too many. Enough to provoke feelings of some sort if anything dramatic pops up."
 
-[node name="Panel4" type="Panel" parent="ColorRect/Panel/MonsterInfo"]
+[node name="Panel4" type="Panel" parent="Panel/MonsterInfo"]
 layout_mode = 0
 offset_left = 195.0
 offset_top = 201.0
 offset_right = 636.0
 offset_bottom = 285.0
 
-[node name="Loot" parent="ColorRect/Panel/MonsterInfo/Panel4" instance=ExtResource("3_x5u2f")]
+[node name="Loot" parent="Panel/MonsterInfo/Panel4" instance=ExtResource("3_x5u2f")]
 material = SubResource("ShaderMaterial_bfk1v")
 layout_mode = 0
 offset_left = 1.0
@@ -442,7 +429,7 @@ theme_override_constants/line_spacing = 14
 text = "Notable Loot:
 None"
 
-[node name="Button" type="Button" parent="ColorRect/Panel/MonsterInfo"]
+[node name="Button" type="Button" parent="Panel/MonsterInfo"]
 layout_mode = 0
 offset_left = 604.0
 offset_top = 3.0
