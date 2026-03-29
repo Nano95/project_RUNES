@@ -136,6 +136,32 @@ func roll_mod_amount(stat: String, level: int, rarity: String) -> float:
 
 	return (level * 0.5 + randi_range(5, 15)) * rarity_mult * stat_mult
 
+
+func calculate_reward(base_amount: float, reward_type: String) -> int:
+	var bonus := 0.0
+
+	# Blessings ADD
+	for b in main_node.game_data.blessings:
+		if not b["toggled"]:
+			continue
+
+		if b["id"].begins_with("mod_%s-" % reward_type):
+			var parts = b["id"].split("-")
+			var percent = parts[1].to_float()
+			bonus += percent / 100.0
+
+	# Curses SUBTRACT
+	for c in main_node.game_data.curses:
+		if not c["toggled"]:
+			continue
+
+		if c["id"].begins_with("mod_%s-" % reward_type):
+			var parts = c["id"].split("-")
+			var percent = parts[1].to_float()
+			bonus -= percent / 100.0
+
+	return int(ceil(base_amount * (1.0 + bonus)))
+
 func spawn_reward_label(pos: Vector2, amount: int) -> void:
 	# Instance the label
 	var label: Label = my_label.instantiate()

@@ -265,108 +265,125 @@ func reset_data() -> void:
 
 @export var blessings:Array = [
 	{
-		id = "offline_production_25",
+		id = "offline_production-20",
 		name = "Deep Sleep",
-		desc = "Rest Hard. Offline rune production is 25% faster",
+		desc = "Rest Hard. Offline rune production is 20% faster",
 		toggled = false,
 		cost = 40,
-		type = "offline", #?
-		category = "runes" #?
+		type = "offline",
+		category = "runes"
 	},
 	{
 		id = "essence_package",
-		name = "Inner Reservoir", # better name?
-		desc = "Begin each run with 1,500 essence of every type.", # Better desc?
+		name = "Inner Reservoir",
+		desc = "Begin each run with 1,500 essence of every type.",
 		toggled = false,
 		cost = 50,
-		type = "economy", #?
-		category = "essence" #?
+		type = "economy",
+		category = "essence"
 	},
 	{
-		id = "extra_gold_20",
-		name = "Pick Pocket", # better name?
-		desc = "Earn 20% more gold from defeated monsters.", # Better desc?
+		id = "mod_gold-20",
+		name = "Pick Pocket",
+		desc = "Earn 20% more gold from defeated monsters.",
 		toggled = false,
 		cost = 70,
-		type = "economy", #?
-		category = "gold" #?
+		type = "economy",
+		category = "gold"
 	},
 	{
 		id = "extra_rune_slot",
-		name = "Battle", # better name?
-		desc = "+1 rune slot available in battle.", # Better desc?
+		name = "Battle",
+		desc = "+1 rune slot available in battle.",
 		toggled = false,
 		cost = 100,
-		type = "combat", #?
-		category = "buff" #?
+		type = "combat",
+		category = "buff"
 	},
 	{
-		id = "extra_rune_slot",
-		name = "Battle-ready", # better name?
-		desc = "+1 rune slot available in battle.", # Better desc?
+		id = "mod_essences-10",
+		name = "Channeler",
+		desc = "Earn 10% more essences from defeated monsters.",
 		toggled = false,
-		cost = 100,
-		type = "economy", #?
-		category = "exp" #?
+		cost = 30,
+		type = "economy",
+		category = "essence"
 	},
 	{
-		id = "extra_exp_15",
-		name = "Student", # better name?
-		desc = "Earn 15% more exp from defeated monsters.", # Better desc?
+		id = "mod_essences-15",
+		name = "Grand Channeler",
+		desc = "Earn 15% more essences from defeated monsters.",
+		toggled = false,
+		cost = 50,
+		type = "economy",
+		category = "essence"
+	},
+	{
+		id = "mod_exp-15",
+		name = "Student",
+		desc = "Earn 15% more exp from defeated monsters.",
 		toggled = false,
 		cost = 40,
-		type = "economy", #?
-		category = "exp" #?
+		type = "economy",
+		category = "exp"
 	},
 	{
-		id = "extra_exp_20",
-		name = "Senpai", # better name?
-		desc = "Earn 20% more exp from defeated monsters.", # Better desc?
+		id = "mod_exp-20",
+		name = "Scholar",
+		desc = "Earn 20% more exp from defeated monsters.",
 		toggled = false,
 		cost = 95,
-		type = "economy", #?
-		category = "exp" #?
+		type = "economy",
+		category = "exp"
 	},
 ]
 @export var curses:Array = [
 	{
-		id = "monster_hp_25",
-		name = "Bloodthirst", # better name?
-		desc = "Monsters spawn with 25% more health.", # Better desc?
+		id = "monster_hp-25",
+		name = "Bloodthirst",
+		desc = "Monsters spawn with 25% more health.",
 		toggled = false,
-		type = "combat", #?
-		category = "monsters" #?
+		type = "combat",
+		category = "monsters"
 	},
 	{
 		id = "death_toll",
-		name = "Death’s Toll", # better name?
-		desc = "House always wins. You don't preserve the loot gained in that floor if you die.", # Better desc?
+		name = "Death’s Toll",
+		desc = "House always wins. You don't preserve the loot gained in that floor if you die.",
 		toggled = false,
-		type = "economy", #?
-		category = "loot" #?
+		type = "economy",
+		category = "loot"
 	},
 	{
-		id = "monster_elites_20",
-		name = "Ascended Foes", # better name? something more on the evil side? Monsters leaders increasing
-		desc = "Elite monsters appear 20% more often.", # Better desc?
+		id = "monster_elites-20",
+		name = "Ascended Foes",
+		desc = "Elite monsters appear 20% more often.",
 		toggled = false,
-		type = "combat", #?
-		category = "monsters" #?
+		type = "combat",
+		category = "monsters"
 	},
 	{
-		id = "monster_speed_1",
-		name = "Relentless", # better name? something about th
-		desc = "Monsters attack 1 turn faster.", # Better desc?
+		id = "monster_speed-1",
+		name = "Relentless",
+		desc = "Monsters attack 1 turn faster.",
 		toggled = false,
-		type = "combat", #?
-		category = "monsters" #?
+		type = "combat",
+		category = "monsters"
 	},
 	{
-		id = "arcane_debuff_15",
-		name = "Arcane Fracture", # better name? something about th
-		desc = "Your arcane spells deal 15% less damage.", # Better desc?
+		id = "arcane_debuff-15",
+		name = "Arcane Fracture",
+		desc = "Your arcane spells deal 15% less damage.",
 		toggled = false,
-		type = "combat", #?
-		category = "debuff" #?
+		type = "combat",
+		category = "debuff"
+	},
+	{
+		id = "mod_exp_gold-10",
+		name = "Stubborn",
+		desc = "Earn 10% less exp from defeated monsters.",
+		toggled = false,
+		type = "economy",
+		category = "exp"
 	},
 ]

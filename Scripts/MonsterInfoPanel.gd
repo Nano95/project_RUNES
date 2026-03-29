@@ -13,7 +13,7 @@ class_name MonsterInfoPanel
 
 func update_panel(monster:MonsterBase) -> void:
 	hp_lbl.text = str(monster.max_hp)
-	xp_lbl.text = str(monster.exp_reward)
+	xp_lbl.text = str(Utils.calculate_reward(monster.exp_reward, "exp"))
 	atk_lbl.text = str(monster.power)
 	gold_lbl.text = str(monster.min_gold_reward, "-", monster.max_gold_reward)
 	essence_lbl.text = str(monster.min_essence_amount, "-", monster.max_essence_amount)

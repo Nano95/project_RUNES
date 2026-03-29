@@ -198,8 +198,9 @@ func monster_died(monster):
 		main.game_data.total_run_monster_kills[monster.base.name] += 1
 	else:
 		main.game_data.total_run_monster_kills[monster.base.name] = 1
-	emit_signal("gained_exp", monster.base.exp_reward)
-	round_gained_exp += monster.base.exp_reward
+	var final_exp = Utils.calculate_exp(monster.base.exp_reward, "exp")
+	emit_signal("gained_exp", final_exp)
+	round_gained_exp += final_exp
 	
 	#game_ui.update_monster_damage(calculate_group_power()) # I dont think we want to update this as game ends
 	roll_loot(monster.base)
