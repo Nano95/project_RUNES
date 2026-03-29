@@ -73,8 +73,14 @@ class_name SaveData
 @export var available_ap:int = 0
 @export var base_stats:Dictionary = { "health": 10, "focus": 10, "power": 10, "luck": 10 }
 @export var allocated_stats:Dictionary = { "health": 0, "focus": 0, "power": 0, "luck": 0 }
-
+@export var prestige_points_available:int = 0 
+@export var prestige_points_spent:int = 0 
+@export var prestige_level:int = 0
+@export var prestige_unlocked:bool = false
 @export_category("Stats")
+
+@export var highest_level_reached:int = 0
+@export var total_prestige_points_earned:int = 0
 @export var runes_used:int = 0
 @export var enemies_killed:int = 0
 @export var total_runes_obtained: Dictionary = {
@@ -277,7 +283,7 @@ func reset_data() -> void:
 		category = "essence" #?
 	},
 	{
-		id = "pickpocket",
+		id = "extra_gold_20",
 		name = "Pick Pocket", # better name?
 		desc = "Earn 20% more gold from defeated monsters.", # Better desc?
 		toggled = false,
@@ -293,7 +299,34 @@ func reset_data() -> void:
 		cost = 100,
 		type = "combat", #?
 		category = "buff" #?
-	}
+	},
+	{
+		id = "extra_rune_slot",
+		name = "Battle-ready", # better name?
+		desc = "+1 rune slot available in battle.", # Better desc?
+		toggled = false,
+		cost = 100,
+		type = "economy", #?
+		category = "exp" #?
+	},
+	{
+		id = "extra_exp_15",
+		name = "Student", # better name?
+		desc = "Earn 15% more exp from defeated monsters.", # Better desc?
+		toggled = false,
+		cost = 40,
+		type = "economy", #?
+		category = "exp" #?
+	},
+	{
+		id = "extra_exp_20",
+		name = "Senpai", # better name?
+		desc = "Earn 20% more exp from defeated monsters.", # Better desc?
+		toggled = false,
+		cost = 95,
+		type = "economy", #?
+		category = "exp" #?
+	},
 ]
 @export var curses:Array = [
 	{

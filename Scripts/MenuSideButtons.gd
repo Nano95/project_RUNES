@@ -47,3 +47,6 @@ func _on_toggled(pressed: bool) -> void:
 		play_selected()
 	else:
 		play_unselected()
+
+func emit_my_cta() -> void:
+	button.pressed.emit()

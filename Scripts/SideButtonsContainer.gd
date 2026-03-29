@@ -48,6 +48,7 @@ func populate_buttons() -> void:
 		side_buttons.append(btn)
 		v_id += 1
 	
+	side_buttons[0].emit_my_cta()
 	for i in range(side_buttons.size()):
 		var btn = side_buttons[i]
 		btn.play_slide_in(i * 0.1) # cascading delay
