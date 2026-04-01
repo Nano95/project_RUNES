@@ -28,6 +28,9 @@ var bonus_stats:Dictionary
 
 var main:MainNode
 func _ready() -> void:
+	btn1.toggled.connect(qty_button_pressed)
+	btn10.toggled.connect(qty_button_pressed)
+	btn100.toggled.connect(qty_button_pressed)
 	health_increase_btn.pressed.connect(add_subtract_stats.bind(true, STAT_NAMES.HEALTH))
 	focus_increase_btn.pressed.connect(add_subtract_stats.bind(true, STAT_NAMES.FOCUS))
 	power_increase_btn.pressed.connect(add_subtract_stats.bind(true, STAT_NAMES.POWER))
@@ -37,6 +40,7 @@ func _ready() -> void:
 	power_decrease_btn.pressed.connect(add_subtract_stats.bind(false, STAT_NAMES.POWER))
 	luck_decrease_btn.pressed.connect(add_subtract_stats.bind(false, STAT_NAMES.LUCK))
 	clear_stats_btn.pressed.connect(reset_all_ap)
+	recalc_player_stats()
 
 func qty_button_pressed(toggled) -> void:
 	if !toggled: return

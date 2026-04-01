@@ -38,7 +38,12 @@ func setup_rune_grid() -> void:
 	for btn in rune_grid_container.get_children():
 		btn.queue_free()
 	
-	for i in range(1, 5):
+	var extra_slot_blessing = Utils.find_blessing_curse(true, "extra_rune_slot")
+	var bonus_buttons = 0
+	if (extra_slot_blessing.keys().size()):
+		bonus_buttons = 1 if (extra_slot_blessing["toggled"]) else 0
+	
+	for i in range(1, 5 + bonus_buttons): # Exclusive
 		var selected_runes_data:Dictionary = main.game_data.selected_battle_runes
 		var slot:String = "slot" + str(i)
 		var btn := rune_button.instantiate() as FightMenuRuneButton

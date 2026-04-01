@@ -98,7 +98,7 @@ pivot_offset = Vector2(360, 640)
 script = ExtResource("1_ipivn")
 monster_grid_container = NodePath("Panel/Family/MarginContainer/GridContainer")
 location_grid_container = NodePath("Panel/Location/MarginContainer/GridContainer")
-rune_grid_container = NodePath("Panel/ChooseRunes/MarginContainer/GridContainer")
+rune_grid_container = NodePath("Panel/ChooseRunes/MarginContainer/ScrollContainer/GridContainer")
 start_button = NodePath("Panel/Fight")
 exit_button = NodePath("Panel/Close")
 my_button = ExtResource("2_0c1bx")
@@ -188,21 +188,23 @@ vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/ChooseRunes"]
 layout_mode = 0
-offset_left = 7.4074364
-offset_top = 127.77771
-offset_right = 1237.4075
-offset_bottom = 697.7777
-theme_override_constants/margin_left = 15
+offset_left = 27.777805
+offset_top = 142.59253
+offset_right = 1218.5186
+offset_bottom = 537.037
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 10
 
-[node name="GridContainer" type="GridContainer" parent="Panel/ChooseRunes/MarginContainer"]
-custom_minimum_size = Vector2(1200, 550)
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/ChooseRunes/MarginContainer"]
+custom_minimum_size = Vector2(1175, 0)
+layout_mode = 2
+vertical_scroll_mode = 3
+
+[node name="GridContainer" type="GridContainer" parent="Panel/ChooseRunes/MarginContainer/ScrollContainer"]
+custom_minimum_size = Vector2(1175, 372)
 layout_mode = 2
 theme_override_constants/h_separation = 35
 theme_override_constants/v_separation = 0
-columns = 4
+columns = 10
 
 [node name="ToggleMonsterInfo" type="Button" parent="Panel"]
 layout_mode = 0

@@ -28,21 +28,18 @@ func play_slide_in(delay: float) -> void:
 
 
 func play_selected() -> void:
-	print("-test selected")
 	var t := create_tween()
 	t.tween_property(self, "position:y", original_position.y - 20, 0.15)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_OUT)
 
 func play_unselected() -> void:
-	print("- unselected")
 	var t := create_tween()
 	t.tween_property(self, "position:y", original_position.y, 0.15)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_OUT)
 
 func _on_toggled(pressed: bool) -> void:
-	print("- pressed ", pressed)
 	if pressed:
 		play_selected()
 	else:

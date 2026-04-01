@@ -198,7 +198,7 @@ func monster_died(monster):
 		main.game_data.total_run_monster_kills[monster.base.name] += 1
 	else:
 		main.game_data.total_run_monster_kills[monster.base.name] = 1
-	var final_exp = Utils.calculate_exp(monster.base.exp_reward, "exp")
+	var final_exp = Utils.calculate_reward(monster.base.exp_reward, "exp")
 	emit_signal("gained_exp", final_exp)
 	round_gained_exp += final_exp
 	
@@ -207,7 +207,6 @@ func monster_died(monster):
 	
 	var game_over = check_if_all_monsters_dead(false)
 	if (game_over): return # would adding the win game situation here cause it to happen too many times if multiple monsters die from poison at the same time?
-
 
 func prune_dead_monsters(): # iterate a shallow copy to avoid mutation issues
 	for monster in monsters.duplicate():

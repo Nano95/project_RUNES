@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="1_3e3wy"]
 [ext_resource type="Script" uid="uid://d2k3jgvrhrp00" path="res://Scripts/StatsContainer.gd" id="1_qrb63"]
-[ext_resource type="ButtonGroup" uid="uid://br2b15cqpspy" path="res://Resources/StatsButtonQty.tres" id="2_qrb63"]
+[ext_resource type="ButtonGroup" uid="uid://co53jn543oyn7" path="res://Resources/StatsButtonGroup.tres" id="2_qwnji"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_qwnji"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="4_78253"]
 
@@ -44,7 +44,7 @@ health_decrease_btn = NodePath("Panel/Labels/MinusHealth")
 focus_decrease_btn = NodePath("Panel/Labels/MinusFocus")
 power_decrease_btn = NodePath("Panel/Labels/MinusPower")
 luck_decrease_btn = NodePath("Panel/Labels/MinusLuck")
-button_group = ExtResource("2_qrb63")
+button_group = ExtResource("2_qwnji")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
@@ -68,7 +68,7 @@ theme_override_constants/outline_size = 30
 theme_override_fonts/font = ExtResource("1_3e3wy")
 theme_override_font_sizes/font_size = 100
 toggle_mode = true
-button_group = ExtResource("2_qrb63")
+button_group = ExtResource("2_qwnji")
 text = "1x"
 
 [node name="statsBtn2" type="Button" parent="Panel"]
@@ -86,7 +86,7 @@ theme_override_constants/outline_size = 30
 theme_override_fonts/font = ExtResource("1_3e3wy")
 theme_override_font_sizes/font_size = 100
 toggle_mode = true
-button_group = ExtResource("2_qrb63")
+button_group = ExtResource("2_qwnji")
 text = "10x"
 
 [node name="statsBtn3" type="Button" parent="Panel"]
@@ -104,7 +104,7 @@ theme_override_constants/outline_size = 30
 theme_override_fonts/font = ExtResource("1_3e3wy")
 theme_override_font_sizes/font_size = 100
 toggle_mode = true
-button_group = ExtResource("2_qrb63")
+button_group = ExtResource("2_qwnji")
 text = "100x"
 
 [node name="ClearButton" type="Button" parent="Panel"]

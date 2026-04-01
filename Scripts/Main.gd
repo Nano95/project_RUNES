@@ -223,19 +223,19 @@ func backup_game() -> void:
 		if backup != null:
 			game_data = backup.duplicate(true)
 			save_game() # Save it back as the main file
-			print("Restored from backup.")
+			print_debug("Restored from backup.")
 		else:
-			print("Backup file exists but couldn't be loaded. TRYING AGAIN")
+			print_debug("Backup file exists but couldn't be loaded. TRYING AGAIN")
 			backup = ResourceLoader.load(backup_path)
 			if backup != null:
 				game_data = backup.duplicate(true)
 				save_game() # Save it back as the main file
-				print("Restored from backup.")
+				print_debug("Restored from backup.")
 			else:
 				# wellp.
 				reset_data()
 	else:
-		print("No save or backup found. Creating new player data.")
+		print_debug("No save or backup found. Creating new player data.")
 		reset_data()
 
 # ⚠️ Do NOT replace the entire game_data resource.

@@ -162,6 +162,14 @@ func calculate_reward(base_amount: float, reward_type: String) -> int:
 
 	return int(ceil(base_amount * (1.0 + bonus)))
 
+func find_blessing_curse(is_blessing:bool, id_to_find:String) -> Dictionary:
+	var arr = main_node.game_data.blessings if (is_blessing) else main_node.game_data.curses
+	for item in arr:
+		if (item.id == id_to_find):
+			return item
+	
+	return {}
+
 func spawn_reward_label(pos: Vector2, amount: int) -> void:
 	# Instance the label
 	var label: Label = my_label.instantiate()

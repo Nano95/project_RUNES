@@ -43,10 +43,8 @@ func give_gold() -> void:
 	#main_node.game_data.total_gold += qty_multiplier # Dont give it to total gold?? Avoids the stat getting inflated.
 
 func qty_button_pressed(toggled) -> void:
-	print("toggled ", toggled)
 	if !toggled: return
 	var button_pressed = button_group.get_pressed_button()
-	print("Name: ", button_pressed.name)
 	match button_pressed.name:
 		btn1000.name:
 			qty_multiplier = 1000
@@ -58,8 +56,6 @@ func qty_button_pressed(toggled) -> void:
 			qty_multiplier = 90000000
 		_:
 			qty_multiplier = 1000
-	
-	print("-debug multi: ", qty_multiplier)
 
 
 func spawn_reset_panel() -> void:

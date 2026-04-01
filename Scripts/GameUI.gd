@@ -39,8 +39,17 @@ func setup_rune_buttons() -> void:
 	if !(is_instance_valid(game_controller)): return
 	if (!main.game_data.selected_battle_runes): return
 	rune_buttons = {}
-	var counter:int = 0
-	for rune_name in main.game_data.selected_battle_runes.values():
+	
+	var rune_name:String = ""
+	var extra_slot_blessing = Utils.find_blessing_curse(true, "extra_rune_slot")
+	var bonus_buttons = 0
+	var selected_runes = main.game_data.selected_battle_runes.values()
+	if (extra_slot_blessing.keys().size()):
+		bonus_buttons = 1 if (extra_slot_blessing["toggled"]) else 0
+	
+	for counter in range(0, 4 + bonus_buttons): # Exclusive
+		if (selected_runes[counter] == null): continue
+		rune_name = selected_runes[counter]
 		if (rune_name == null):
 			continue
 		var current_rune = RuneDatabase.runes[rune_name]

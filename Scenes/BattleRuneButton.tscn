@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b18ao2eimbmku" path="res://Sprites/MANA_ICON.png" id="2_lg8pf"]
 [ext_resource type="Script" uid="uid://c11nmmtllhkk8" path="res://Scenes/BattleRuneButton.gd" id="2_wlwmb"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_wlwmb"]
-[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="4_b1aft"]
+[ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="4_b1aft"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gk35u"]
 resource_local_to_scene = true
@@ -21,6 +21,7 @@ shader_parameter/activate = false
 [node name="RuneButton1" type="Button"]
 custom_minimum_size = Vector2(155, 125)
 size_flags_horizontal = 3
+mouse_filter = 1
 icon = ExtResource("1_ss5nf")
 icon_alignment = 1
 expand_icon = true
