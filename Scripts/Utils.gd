@@ -19,6 +19,7 @@ const PASTEL_GREEN = Color(0.6, 1.0, 0.6)
 const PASTEL_RED   = Color(1.0, 0.6, 0.6)
 const RED   = Color(0.966, 0.0, 0.252, 1.0)
 const STATUS_MESSAGE_VICTORY:String = "Victory!"
+const STATUS_MESSAGE_LOST:String = "You ded :("
 const MODALS_POSITION:Vector2 = Vector2(0, 38)
 const all_runes:Array = ["single", "plus", "aoe3"] # temporary until we figure out how runes become available
 

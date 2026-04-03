@@ -262,6 +262,12 @@ func reset_data() -> void:
 	total_monster_kills = {}
 	total_run_monster_kills = {}
 
+func is_curse_active(curse_name:String) -> bool:
+	for curse in curses:
+		if (curse["id"] == curse_name):
+			return curse["toggled"]
+	
+	return false
 
 @export var blessings:Array = [
 	{
@@ -348,7 +354,7 @@ func reset_data() -> void:
 	},
 	{
 		id = "death_toll",
-		name = "Death’s Toll",
+		name = "Death's Toll",
 		desc = "House always wins. You don't preserve the loot gained in that floor if you die.",
 		toggled = false,
 		type = "economy",

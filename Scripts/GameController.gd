@@ -41,13 +41,15 @@ var enemies_killed:int
 var runes_used:int
 var total_exp:int
 var total_gold:int
-var loot_summary:Dictionary
+var full_loot_summary:Dictionary = { "gold" : 0 } # For the full run summary
+var current_loot_summary:Dictionary = { "gold" : 0 } # For the current floor's summary
 var round_gained_exp:int=0
 
 signal gained_exp
 
 var escape_timer_counter:int = 0
 var escape_in_progress:bool = false
+var loot_curse_active:bool = false
 
 var STUN:String = "electric" # KEEP IN SYNC WITH MONSTER INSTANCE 'STUN'
 
@@ -113,6 +115,7 @@ func setup_stats() -> void:
 	base_luck = current_luck
 	current_power = Utils.get_stat_for_ui("power") + main.bonus_stats.power
 	base_power = current_power
+	loot_curse_active = main.game_data.is_curse_active("death_toll")
 
 func spawn_grid() -> void:
 	my_grid = my_grid_ref.instantiate()
@@ -140,6 +143,36 @@ func spawn_stage(stage: int, count: int):
 		var cell = my_grid.pick_empty_cell()
 		my_grid.spawn_monster_into_cell(cell.x, cell.y, base)
 
+func apply_loot_if_allowed(result_msg:String) -> void:
+	var player_lost = (result_msg == Utils.STATUS_MESSAGE_LOST)
+	if (loot_curse_active and player_lost):
+		# Curse active + lost = discard loot
+		current_loot_summary.clear()
+		return
+
+	# Otherwise, apply current run loot to permanent totals
+	var gained_gold:int = current_loot_summary["gold"]
+	main.game_data.current_gold += gained_gold
+	main.game_data.total_gold += gained_gold
+	if (!full_loot_summary.has("gold")):
+		full_loot_summary["gold"] = 0
+	full_loot_summary["gold"] += gained_gold
+
+	for essence_type in current_loot_summary.keys():
+		#main.game_data.total_essences[essence_type] += main.game_data.current_essences[essence_type]
+		if (!essence_type.contains("essence")): continue
+		var qty:int = current_loot_summary[essence_type]
+		var ess_type:String = essence_type.split(" ")[0] # "electric essence" -> "electric"
+		main.game_data.current_essences[ess_type] += qty
+		main.game_data.total_essences[ess_type] += qty
+		
+		# Now update the full summary
+		if (!full_loot_summary.has(essence_type)):
+			full_loot_summary[essence_type] = 0
+		full_loot_summary[essence_type] += qty
+	# Reset current run loot
+	current_loot_summary = { "gold" : 0 }
+
 func spawn_status_message(died:bool=false, no_focus:bool=false, escaped:bool=false) -> void:
 	if (!game_is_active): return
 	var msg = Utils.STATUS_MESSAGE_VICTORY
@@ -147,13 +180,12 @@ func spawn_status_message(died:bool=false, no_focus:bool=false, escaped:bool=fal
 	var focus_msg:String = "No more focus! Escaping..."
 	game_is_active = false
 	if (died):
-		msg = "You Ded :("
+		msg = Utils.STATUS_MESSAGE_LOST
 		xp_gain = 0
 	elif (no_focus):
 		msg = focus_msg
-		
 		game_is_active = true # Have to do this so that escape behavior will work
-	elif(escaped):
+	elif (escaped):
 		msg = "Escaped! :D"
 		@warning_ignore("integer_division")
 		xp_gain = int(current_focus/4)
@@ -162,6 +194,8 @@ func spawn_status_message(died:bool=false, no_focus:bool=false, escaped:bool=fal
 	lbl.setup(msg)
 	main.spawn_to_top_ui_layer(lbl)
 	if (msg != focus_msg):
+		apply_loot_if_allowed(msg)
+		# HERE IS WHERE I THINK WE SHOULKD HAVE THE LOGIC
 		lbl.animation_complete.connect(spawn_summary_panel.bind(msg))
 	
 	game_ui.update_monster_data(0, 0)
@@ -176,7 +210,7 @@ func spawn_status_message(died:bool=false, no_focus:bool=false, escaped:bool=fal
 		await get_tree().create_timer(1.0).timeout
 		escape_pressed_behavior()
 
-func spawn_summary_panel(message:String="mmm!") -> void:
+func spawn_summary_panel(message:String="mmm!") -> void:	
 	game_ui.disable_back_button(false) # Just in case in any scenario
 	var panel = summary_panel_ref.instantiate()
 	panel.setup(self, main, message)
@@ -390,28 +424,25 @@ func roll_loot(monster: MonsterBase) -> void:
 	var min_essence_mod = Utils.calculate_reward(monster.min_essence_amount, "essences")
 	var max_essence_mod = Utils.calculate_reward(monster.max_essence_amount, "essences")
 	var essence_amount := randi_range(min_essence_mod, max_essence_mod)
-	main.game_data.current_essences[monster.essence_type] += essence_amount
-	main.game_data.total_essences[monster.essence_type] += essence_amount
 	
 	# Now add loot to notifications and summary loot.
 	var essence_key:String = str(monster.essence_type + " essence")
 	game_ui.loot_manager.add_loot_from_key(essence_key, essence_amount)
-	if !(loot_summary.has(essence_key)):
-		loot_summary[essence_key] = 0
-	loot_summary[essence_key] += essence_amount
+	if !(current_loot_summary.has(essence_key)):
+		current_loot_summary[essence_key] = 0
+	current_loot_summary[essence_key] += essence_amount
 	### --- GOLD (chance-based) ---
 	var final_gold_chance = monster.gold_chance + (current_luck * 0.01)
 	if (randf() <= (final_gold_chance)):
 		var min_gold_mod = Utils.calculate_reward(monster.min_gold_reward, "gold")
 		var max_gold_mod = Utils.calculate_reward(monster.max_gold_reward, "gold")
 		var gold_amount := randi_range(min_gold_mod, max_gold_mod)
-		main.game_data.current_gold += gold_amount
-		main.game_data.total_gold += gold_amount
+
 		
 		game_ui.loot_manager.add_loot_from_key("gold", gold_amount)
-		if !(loot_summary.has("gold")):
-			loot_summary["gold"] = 0
-		loot_summary["gold"] += gold_amount
+		if !(current_loot_summary.has("gold")):
+			current_loot_summary["gold"] = 0
+		current_loot_summary["gold"] += gold_amount
 		
 	### --- EQUIPMENT (rare) ---
 	#if randf() <= monster.equipment_chance and monster.equipment_pool.size() > 0:

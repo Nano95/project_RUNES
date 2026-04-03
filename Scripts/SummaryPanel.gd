@@ -29,8 +29,9 @@ func setup_labels() -> void:
 	setup_loot()
 
 func setup_loot() -> void:
-	var all_loot = game_controller.loot_summary
+	var all_loot = game_controller.full_loot_summary
 	for loot in all_loot.keys():
+		if (all_loot[loot] == 0): continue # Dont show if something has 0 qty. (GOLD)
 		var data = ItemsDatabase.loot_data[loot]
 		var lbl = loot_labels.instantiate()
 		lbl.scale *= 2
