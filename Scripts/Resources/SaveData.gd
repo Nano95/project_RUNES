@@ -339,7 +339,7 @@ func reset_data() -> void:
 ]
 @export var curses:Array = [
 	{
-		id = "monster_hp-25",
+		id = "mod_hp-25",
 		name = "Bloodthirst",
 		desc = "Monsters spawn with 25% more health.",
 		toggled = false,
@@ -355,7 +355,7 @@ func reset_data() -> void:
 		category = "loot"
 	},
 	{
-		id = "monster_elites-20",
+		id = "mod_elites-20",
 		name = "Ascended Foes",
 		desc = "Elite monsters appear 20% more often.",
 		toggled = false,

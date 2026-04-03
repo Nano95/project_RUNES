@@ -43,7 +43,8 @@ func _ready() -> void:
 
 func setup(monster_base: MonsterBase, grid:MyGrid):
 	base = monster_base
-	current_hp = base.max_hp
+	var mod_hp:int = Utils.calculate_monster_hp(base.max_hp)
+	current_hp = mod_hp
 	current_power = base.power
 	individual_turns_left = base.attack_speed
 	$AnimatedSprite2D.play(base.anim_name)

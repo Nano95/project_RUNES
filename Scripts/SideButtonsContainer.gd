@@ -34,7 +34,7 @@ func setup(m:MainNode, menu:MainMenu) -> void:
 		},
 		{
 			"icon": preload("res://Sprites/BUG_ICON.png"),
-			"callable": main_menu.spawn_debug_things
+			"callable": main_menu.open_debug_things
 		}
 	]
 	populate_buttons()

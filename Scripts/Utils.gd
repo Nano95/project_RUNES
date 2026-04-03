@@ -162,6 +162,30 @@ func calculate_reward(base_amount: float, reward_type: String) -> int:
 
 	return int(ceil(base_amount * (1.0 + bonus)))
 
+func calculate_monster_hp(base_hp: float) -> int:
+	var bonus := 0.0
+#
+	## Blessings ADD
+	#for b in blessings:
+		#if b["toggled"] and b["id"].begins_with("monster_hp-"):
+			#var percent = b["id"].split("-")[1].to_float()
+			#bonus -= percent / 100.0
+
+	# Curses SUBTRACT
+	for c in main_node.game_data.curses:
+		if c["toggled"] and c["id"].begins_with("mod_hp-"):
+			var percent = c["id"].split("-")[1].to_float()
+			bonus += percent / 100.0
+
+	# Equipment (can be positive or negative)
+	#for e in equipment_mods:
+		#if e["id"].begins_with("monster_hp-"):
+			#var percent = e["id"].split("-")[1].to_float()
+			#bonus += (percent / 100.0) * (e.get("sign", 1)) # sign = +1 or -1
+
+	# Final HP (always round up)
+	return int(ceil(base_hp * (1.0 + bonus)))
+
 func find_blessing_curse(is_blessing:bool, id_to_find:String) -> Dictionary:
 	var arr = main_node.game_data.blessings if (is_blessing) else main_node.game_data.curses
 	for item in arr:

@@ -387,7 +387,9 @@ func get_monster_for_stage(stage: int) -> MonsterBase:
 
 func roll_loot(monster: MonsterBase) -> void:
 	# --- ESSENCE (always drops) ---
-	var essence_amount := randi_range(monster.min_essence_amount, monster.max_essence_amount)
+	var min_essence_mod = Utils.calculate_reward(monster.min_essence_amount, "essences")
+	var max_essence_mod = Utils.calculate_reward(monster.max_essence_amount, "essences")
+	var essence_amount := randi_range(min_essence_mod, max_essence_mod)
 	main.game_data.current_essences[monster.essence_type] += essence_amount
 	main.game_data.total_essences[monster.essence_type] += essence_amount
 	
@@ -400,7 +402,9 @@ func roll_loot(monster: MonsterBase) -> void:
 	### --- GOLD (chance-based) ---
 	var final_gold_chance = monster.gold_chance + (current_luck * 0.01)
 	if (randf() <= (final_gold_chance)):
-		var gold_amount := randi_range(monster.min_gold_reward, monster.max_gold_reward)
+		var min_gold_mod = Utils.calculate_reward(monster.min_gold_reward, "gold")
+		var max_gold_mod = Utils.calculate_reward(monster.max_gold_reward, "gold")
+		var gold_amount := randi_range(min_gold_mod, max_gold_mod)
 		main.game_data.current_gold += gold_amount
 		main.game_data.total_gold += gold_amount
 		

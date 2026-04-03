@@ -118,8 +118,10 @@ func open_stats() -> void:
 	active_menu_ref.setup(main)
 	main.spawn_to_top_ui_layer(active_menu_ref)
 
-func spawn_debug_things() -> void:
-
+func open_debug_things() -> void:
+	if (is_instance_valid(active_menu_ref)):
+		active_menu_ref.queue_free()
+	
 	active_menu_ref = debug_panel.instantiate()
 	active_menu_ref.setup(self, main)
 	main.spawn_to_top_ui_layer(active_menu_ref)
