@@ -150,6 +150,7 @@ func check_offline_time_and_rewards() -> void:
 		var elapsed:int = now - last
 		var info = info_pop_up.instantiate() as InfoPopup
 		spawn_to_top_ui_layer(info)
+		info.show_info(str("Gone: ", Utils.format_time(elapsed)))
 		var results = CraftingSystem.process_elapsed(elapsed, game_data)
 		game_data.add_crafted_runes_by_name(results)
 		if (results.keys().size() > 0):

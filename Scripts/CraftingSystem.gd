@@ -25,6 +25,7 @@ extends Node
 #   { "Arcane Cross": 12, "Earth Burst": 5 }
 #
 func process_elapsed(elapsed:int, game_data) -> Dictionary:
+	var now = Time.get_unix_time_from_system()
 	var produced := {}
 	if elapsed <= 0:
 		return produced
@@ -38,12 +39,12 @@ func process_elapsed(elapsed:int, game_data) -> Dictionary:
 		var last_ts:int = game_data.offline_rune_timestamps[slot_key]
 
 		# If this slot has never been updated, initialize it
-		if last_ts == 0:
-			game_data.offline_rune_timestamps[slot_key] = Time.get_unix_time_from_system()
+		if (last_ts == 0):
+			game_data.offline_rune_timestamps[slot_key] = now
 			continue
 
 		@warning_ignore("narrowing_conversion")
-		slot_elapsed = Time.get_unix_time_from_system() - last_ts
+		slot_elapsed = now - last_ts
 
 		# How many full crafts completed?
 		var cycles:int = slot_elapsed / slot.craft_time
@@ -53,16 +54,15 @@ func process_elapsed(elapsed:int, game_data) -> Dictionary:
 		var pool:int = essence_pools.get(slot.essence_type, 0)
 		var cycles_possible:int = min(cycles, pool / slot.essence_cost)
 
-		if cycles_possible > 0:
+		if (cycles_possible > 0):
 			# Produce runes
 			produced[slot.rune_name] = produced.get(slot.rune_name, 0) + cycles_possible
-
 			# Subtract essences
 			essence_pools[slot.essence_type] = pool - (cycles_possible * slot.essence_cost)
 
 		# Update timestamp to reflect leftover partial progress
 		var leftover_time:int = slot_elapsed % slot.craft_time
-		game_data.offline_rune_timestamps[slot_key] = Time.get_unix_time_from_system() - leftover_time
+		game_data.offline_rune_timestamps[slot_key] = now - leftover_time
 
 	return produced
 
