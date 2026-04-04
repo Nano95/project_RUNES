@@ -24,36 +24,34 @@ extends Node
 # Returns a dictionary like:
 #   { "Arcane Cross": 12, "Earth Burst": 5 }
 #
-func process_elapsed(elapsed:int, game_data) -> Dictionary:
-	var now = Time.get_unix_time_from_system()
+func process_elapsed(game_data) -> Dictionary:
 	var produced := {}
-	if elapsed <= 0:
-		return produced
-
+	var now = Time.get_unix_time_from_system()
 	var essence_pools:Dictionary = game_data.current_essences
 	var slots := _load_slots(game_data)
-	var slot_elapsed:int = 0
 
 	for slot in slots:
 		var slot_key:String = slot.slot_key
-		var last_ts:int = game_data.offline_rune_timestamps[slot_key]
+		var last_ts:int = game_data.offline_rune_timestamps.get(slot_key, 0)
 
 		# If this slot has never been updated, initialize it
 		if (last_ts == 0):
+			print_debug("Continuing for %s under last_ts %d" % [slot_key, last_ts])
 			game_data.offline_rune_timestamps[slot_key] = now
 			continue
 
 		@warning_ignore("narrowing_conversion")
-		slot_elapsed = now - last_ts
+		var elapsed = now - last_ts
+		if (elapsed < slot.craft_time):
+			print("Continuing for %s on elapsed (%d) < craft_time (%d): " % [slot_key, elapsed, slot.craft_time])
+			continue
 
 		# How many full crafts completed?
-		var cycles:int = slot_elapsed / slot.craft_time
-		if cycles <= 0:
-			continue
+		var cycles:int = int(elapsed / slot.craft_time)
 		# Check if essence pool has enough
 		var pool:int = essence_pools.get(slot.essence_type, 0)
-		var cycles_possible:int = min(cycles, pool / slot.essence_cost)
-
+		var cycles_possible = min(cycles, pool / slot.essence_cost)
+		print_debug("Ending cycles for %s: Cycles possible = %d  : " % [slot_key, cycles_possible])
 		if (cycles_possible > 0):
 			# Produce runes
 			produced[slot.rune_name] = produced.get(slot.rune_name, 0) + cycles_possible
@@ -61,9 +59,10 @@ func process_elapsed(elapsed:int, game_data) -> Dictionary:
 			essence_pools[slot.essence_type] = pool - (cycles_possible * slot.essence_cost)
 
 		# Update timestamp to reflect leftover partial progress
-		var leftover_time:int = slot_elapsed % slot.craft_time
+		var leftover_time = int(elapsed) % slot.craft_time
 		game_data.offline_rune_timestamps[slot_key] = now - leftover_time
 
+	print_debug("Produced : ", produced)
 	return produced
 
 
