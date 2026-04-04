@@ -48,7 +48,9 @@ func spawn_monster_into_cell(row: int, col: int, base: MonsterBase):
 	monster.setup(base, self)
 
 	# mutation
-	if (randf() < 0.05):
+	var mod_chance:float = (.01 * Utils.get_blessing_curse_amount(false, "monster_elites-10"))
+	print("New Chance: ",  0.05 + mod_chance)
+	if (randf() < 0.05 + mod_chance):
 		monster.become_elite()
 
 	# convert grid coords → world coords

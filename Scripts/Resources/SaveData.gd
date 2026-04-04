@@ -361,9 +361,9 @@ func is_curse_active(curse_name:String) -> bool:
 		category = "loot"
 	},
 	{
-		id = "mod_elites-20",
+		id = "mod_elites-10",
 		name = "Ascended Foes",
-		desc = "Elite monsters appear 20% more often.",
+		desc = "Elite monsters appear 10% more often.",
 		toggled = false,
 		type = "combat",
 		category = "monsters"
