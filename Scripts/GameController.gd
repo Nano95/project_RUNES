@@ -51,15 +51,19 @@ var escape_timer_counter:int = 0
 var escape_in_progress:bool = false
 var loot_curse_active:bool = false
 
-var STUN:String = "electric" # KEEP IN SYNC WITH MONSTER INSTANCE 'STUN'
+var arcane_dmg_modifier:float = 1.0
+var earth_dmg_modifier:float = 1.0
+var electric_dmg_modifier:float = 1.0
+
+var STUN:String = "electric" # KEEP THIS IN-SYNC WITH MONSTER INSTANCE 'STUN'
 
 func _ready() -> void:
 	%Camera2D.setup(null) # temporary null until i know what i need to do
 	setup_stats()
 	spawn_grid()
+	make_buff_debuff_calculations()
 	start_game()
 	# OnReady lets turn all of the names into data for the battle rune buttons to work
-	#THIS IS THE NEXT THING TO DO
 	select_available_rune()
 
 func start_game(restart:bool=false) -> void:
@@ -581,12 +585,13 @@ func damage_cell(r: int, c: int) -> void:
 		var mult:float = get_element_multiplier(selected_rune.rune_type, monster)
 		# Earth runes deal slightly less direct damage 
 		match selected_rune.rune_type:
+			"arcane":
+				mult *= arcane_dmg_modifier
 			"earth": # Earth magic has the DoT ability
-				mult *= 0.75
+				mult *= earth_dmg_modifier
 			"electric": # Stuns
-				mult *= .8
+				mult *= electric_dmg_modifier
 		var dmg:int = int(current_power * mult)
-		# Apply poison if rune is poison
 		var crit_hit:bool=false
 		match selected_rune.rune_type:
 			"arcane": # Arcane magic has the ability to Critical strike
@@ -678,3 +683,8 @@ func get_crit_chance(luck: int) -> float:
 	var max_crit := 0.35
 	var k := 30.0
 	return max_crit * (luck / (luck + k))
+
+func make_buff_debuff_calculations() -> void:
+	arcane_dmg_modifier = 1.0 - Utils.get_blessing_curse_amount(false, "arcane_debuff-15") * .01
+	earth_dmg_modifier = 0.75
+	electric_dmg_modifier = .8
