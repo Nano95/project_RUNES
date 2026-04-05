@@ -43,6 +43,7 @@ func _ready() -> void:
 	
 	# GIVE PLAYER REWARDS
 	if !(OS.get_name() == "Windows"):
+		print("===- Starting offline check from _ready")
 		check_offline_time_and_rewards()
 
 func spawn_main_menu() -> void:
@@ -128,6 +129,7 @@ func _notification(what):
 
 
 func focus_in_notification() -> void:
+	print("===- Starting offline check from focus_in_notif")
 	check_offline_time_and_rewards()
 
 func focus_out_notification() -> void:

@@ -15,7 +15,9 @@ var POISON:String = "earth"
 var STUN:String = "electric" # KEEP IN SYNC WITH GAME CONTROLLER
 var base: MonsterBase
 var current_hp: int
-var individual_turns_left:int = 5 # only used by elites/bosses
+var base_attack_speed:int=5 # This is the reference to the monster attack_speed property
+var individual_turns_left:int = 5 # only used by elites/bosses 
+### For general enemies, attack speed controlled in gameController.gd - GENERAL_STARTING_TURNS_LEFT
 var current_power:int=1
 var is_elite:bool = false
 var is_boss:bool = false
@@ -46,7 +48,9 @@ func setup(monster_base: MonsterBase, grid:MyGrid):
 	var mod_hp:int = Utils.calculate_monster_hp(base.max_hp)
 	current_hp = mod_hp
 	current_power = base.power
-	individual_turns_left = base.attack_speed
+	base_attack_speed = base.attack_speed # Below, if a curse is toggled, we lower by 1.
+	base_attack_speed -= 1 if (Utils.is_blessing_curse_toggled(false, "mod_monster_speed-1")) else 0
+	individual_turns_left = base_attack_speed
 	$AnimatedSprite2D.play(base.anim_name)
 	#$AnimatedSprite2D.offset.y = base.anim_offset_y
 	my_grid = grid
@@ -60,7 +64,7 @@ func become_elite():
 	$atk.visible = true
 	current_hp = int(current_hp * 1.5)
 	current_power = int(base.power * 1.5)
-	individual_turns_left = base.attack_speed - 1 # elites attack faster
+	individual_turns_left = base_attack_speed - 1 # elites attack faster
 
 func update_individual_atk_label() -> void:
 	$atk.text = str(individual_turns_left)

@@ -195,6 +195,14 @@ func find_blessing_curse(is_blessing:bool, id_to_find:String) -> Dictionary:
 	
 	return {}
 
+func is_blessing_curse_toggled(is_blessing:bool, id_to_find:String) -> bool:
+	var arr = main_node.game_data.blessings if (is_blessing) else main_node.game_data.curses
+	for item in arr:
+		if (item.id == id_to_find):
+			return item.toggled
+	
+	return false
+
 func get_blessing_curse_amount(is_blessing:bool, id_to_find:String) -> int:
 	var arr = main_node.game_data.blessings if (is_blessing) else main_node.game_data.curses
 	for item in arr:
@@ -202,7 +210,6 @@ func get_blessing_curse_amount(is_blessing:bool, id_to_find:String) -> int:
 			continue
 		if (!item.toggled):
 			continue
-		print("-item.id.split", item.id.split("-"))
 		return int(item.id.split("-")[1]) # split 'monster_elites-10'
 	
 	return 0

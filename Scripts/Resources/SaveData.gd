@@ -369,7 +369,7 @@ func is_curse_active(curse_name:String) -> bool:
 		category = "monsters"
 	},
 	{
-		id = "monster_speed-1",
+		id = "mod_monster_speed-1",
 		name = "Relentless",
 		desc = "Monsters attack 1 turn faster.",
 		toggled = false,

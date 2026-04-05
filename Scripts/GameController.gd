@@ -116,6 +116,9 @@ func setup_stats() -> void:
 	current_power = Utils.get_stat_for_ui("power") + main.bonus_stats.power
 	base_power = current_power
 	loot_curse_active = main.game_data.is_curse_active("death_toll")
+	
+	GENERAL_STARTING_TURNS_LEFT -= 1 if (Utils.is_blessing_curse_toggled(false, "mod_monster_speed-1")) else 0
+	group_turns_left = GENERAL_STARTING_TURNS_LEFT
 
 func spawn_grid() -> void:
 	my_grid = my_grid_ref.instantiate()
@@ -331,10 +334,10 @@ func advance_turn(is_escaping=false):
 					monster.status_effects[STUN]["turns_remaining"] -= 1
 					if monster.status_effects[STUN]["turns_remaining"] <= 0:
 						monster.status_effects.erase(STUN)
-					monster.individual_turns_left = monster.base.attack_speed
+					monster.individual_turns_left = monster.base_attack_speed
 					continue
 				take_damage(monster.current_power)
-				monster.individual_turns_left = monster.base.attack_speed
+				monster.individual_turns_left = monster.base_attack_speed
 				
 		monster.update_individual_atk_label()
 
