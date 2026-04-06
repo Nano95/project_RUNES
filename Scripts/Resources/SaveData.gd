@@ -271,7 +271,7 @@ func is_curse_active(curse_name:String) -> bool:
 
 @export var blessings:Array = [
 	{
-		id = "offline_production-20",
+		id = "mod_offline_production-20",
 		name = "Deep Sleep",
 		desc = "Rest Hard. Offline rune production is 20% faster",
 		toggled = false,

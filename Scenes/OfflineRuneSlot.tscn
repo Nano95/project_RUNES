@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="1_6awvn"]
 [ext_resource type="Script" uid="uid://d3yehmdd0fcnm" path="res://Scripts/OfflineRuneSlot.gd" id="1_qn8tj"]
-[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="2_qn8tj"]
+[ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="2_qn8tj"]
 [ext_resource type="PackedScene" uid="uid://cp1msxhypma6i" path="res://Scenes/OfflineRuneSelectionPanel.tscn" id="2_v3syb"]
 [ext_resource type="Texture2D" uid="uid://llqj70wrm8i3" path="res://Sprites/Runes/ARCANE_STRIKE_RUNE.png" id="3_mth0g"]
 

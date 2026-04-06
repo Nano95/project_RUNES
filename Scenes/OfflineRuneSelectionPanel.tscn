@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ctkw6kx3b8hew" path="res://Scripts/OfflineRunesSelectionPanel.gd" id="1_iow1g"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="4_l8sm1"]
 [ext_resource type="PackedScene" uid="uid://101a4tcc6v3" path="res://Scenes/OfflineRuneSelectionButton.tscn" id="5_iow1g"]
-[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="5_lbyph"]
+[ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="5_lbyph"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="6_bjq66"]
 [ext_resource type="Texture2D" uid="uid://cbtr8w3ak64pc" path="res://Sprites/Runes/BLANK_CLEAR_ICON.png" id="7_i4p6k"]
 

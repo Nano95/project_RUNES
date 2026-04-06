@@ -13,15 +13,15 @@ const RARITY_COLORS := {
 	"rare":     Color(0.4, 0.6, 1.0),   # soft blue
 	"legendary": Color(1.0, 0.8, 0.3)   # gold-ish
 }
-const HP_GREEN = Color(0.238, 0.734, 0.208, 1.0)
-const HP_YELLOW = Color(0.985, 0.924, 0.31, 1.0)
-const PASTEL_GREEN = Color(0.6, 1.0, 0.6)
-const PASTEL_RED   = Color(1.0, 0.6, 0.6)
-const RED   = Color(0.966, 0.0, 0.252, 1.0)
+const HP_GREEN:Color = Color(0.238, 0.734, 0.208, 1.0)
+const HP_YELLOW:Color = Color(0.985, 0.924, 0.31, 1.0)
+const PASTEL_GREEN:Color = Color(0.6, 1.0, 0.6)
+const PASTEL_RED:Color   = Color(1.0, 0.6, 0.6)
+const RED:Color   = Color(0.966, 0.0, 0.252, 1.0)
 const STATUS_MESSAGE_VICTORY:String = "Victory!"
 const STATUS_MESSAGE_LOST:String = "You ded :("
 const MODALS_POSITION:Vector2 = Vector2(0, 38)
-const all_runes:Array = ["single", "plus", "aoe3"] # temporary until we figure out how runes become available
+var crafting_speed_mult:float = 1.0
 
 func setup(main:MainNode) -> void:
 	main_node = main
@@ -213,6 +213,10 @@ func get_blessing_curse_amount(is_blessing:bool, id_to_find:String) -> int:
 		return int(item.id.split("-")[1]) # split 'monster_elites-10'
 	
 	return 0
+
+func update_crafting_speed():
+	var blessing_bonus = get_blessing_curse_amount(true, "mod_offline_production-20") # returns 20
+	crafting_speed_mult = 1.0 - (blessing_bonus * 0.01)
 
 func spawn_reward_label(pos: Vector2, amount: int) -> void:
 	# Instance the label

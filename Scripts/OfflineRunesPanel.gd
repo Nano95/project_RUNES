@@ -10,6 +10,7 @@ class_name OfflineRunesPanel
 var main:MainNode
 func _ready() -> void:
 	Utils.animate_summary_in_happy(self)
+	Utils.update_crafting_speed()
 	populate_container()
 
 func setup(m:MainNode) -> void:

@@ -39,6 +39,7 @@ func _ready() -> void:
 	
 	# Now game things
 	Utils.setup(self)
+	Utils.update_crafting_speed()
 	spawn_main_menu()
 	
 	# GIVE PLAYER REWARDS
@@ -149,6 +150,7 @@ func check_offline_time_and_rewards() -> void:
 	var last:int = game_data.last_crafting_timestamp
 
 	if (last > 3):
+		Utils.update_crafting_speed()
 		var elapsed:int = now - last
 		var info = info_pop_up.instantiate() as InfoPopup
 		spawn_to_top_ui_layer(info)

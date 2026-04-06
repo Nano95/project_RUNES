@@ -61,5 +61,5 @@ func update_rune_data() -> void:
 	# Calculations:
 	var ess_per_hour:int = floor((float(rune.essence_cost) / float(rune.craft_time)) * 3600)
 	essence_hr_lbl.text = str(ess_per_hour)
-	var runes_per_hour:int = floor((1.0 / float(rune.craft_time)) * 3600.0)
+	var runes_per_hour:int = floor((1.0 / float(rune.craft_time * Utils.crafting_speed_mult)) * 3600.0)
 	runes_hr_lbl.text = str(runes_per_hour) 

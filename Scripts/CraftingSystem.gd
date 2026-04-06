@@ -118,7 +118,6 @@ func compute_summary(game_data) -> Dictionary:
 		else:
 			time_to_empty = float(pool) / float(total_ess_per_sec)
 		
-		print("Essence type:", essence_type, "pool:", pool, "slots:", slot_list.size())
 		# Expected output per rune
 		for slot in slot_list:
 			var expected := int(time_to_empty * (1.0 / slot.craft_time))
@@ -185,7 +184,9 @@ func _load_slots(game_data) -> Array:
 			continue
 
 		var key := "slot%d" % i
-		slots.append(SlotInfo.new(rune, key))
+		var slot_info:SlotInfo = SlotInfo.new(rune, key)
+		slot_info.craft_time = max(2, int(rune.craft_time * Utils.crafting_speed_mult)) # cannot go below 2s
+		slots.append(slot_info)
 
 	return slots
 
