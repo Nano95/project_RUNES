@@ -2,10 +2,12 @@ extends Control
 class_name GameUI
 
 @export var rune_button:PackedScene
+@export var settings_panel:PackedScene
 
 var main:MainNode
 var game_controller:GameController
 @export var back_btn:Button
+@export var settings_btn:Button
 @export var hp_bar:TextureProgressBar
 @export var xp_bar:TextureProgressBar
 @export var hp_label:Label
@@ -34,6 +36,7 @@ func setup_game_controller(gc:GameController) -> void:
 	setup_hp(game_controller.current_hp, game_controller.max_hp)
 	xp_bar.setup(main, game_controller)
 	setup_rune_buttons()
+	settings_btn.pressed.connect(spawn_settings)
 
 func setup_rune_buttons() -> void:
 	if !(is_instance_valid(game_controller)): return
@@ -142,6 +145,11 @@ func update_monster_damage(power:int) -> void:
 	dmg_tween = create_tween()
 	dmg_tween.tween_property(monster_damage, "scale", Vector2(.3, .3), 0.4)\
 		.set_trans(Tween.TRANS_CUBIC)
+
+func spawn_settings() -> void:
+	var pnl = settings_panel.instantiate()
+	pnl.setup(main, game_controller)
+	main.spawn_to_top_ui_layer(pnl)
 
 func shake_mana_icon() -> void:
 	Utils.warn_shake_node(mana_icon)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://b7xgkus4u2361"]
+[gd_scene load_steps=21 format=3 uid="uid://b7xgkus4u2361"]
 
 [ext_resource type="Script" uid="uid://dygepuv8uhpel" path="res://Scripts/GameUI.gd" id="1_po7eo"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_frnsy"]
 [ext_resource type="PackedScene" uid="uid://d3gwj83kl6yvi" path="res://Scenes/BattleRuneButton.tscn" id="2_qecx7"]
-[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="3_co6lq"]
+[ext_resource type="PackedScene" uid="uid://om2m83fmhqt5" path="res://Scenes/BattleSettingsPanel.tscn" id="3_0hwcy"]
+[ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="3_co6lq"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="4_frnsy"]
 [ext_resource type="Texture2D" uid="uid://2mjbs0mmr2ya" path="res://Sprites/mid_progress_bar_top.png" id="5_co6lq"]
 [ext_resource type="Texture2D" uid="uid://b8vfc4t74gkpt" path="res://Sprites/FULL_ATK.png" id="5_d8tla"]
@@ -45,7 +46,7 @@ shader = ExtResource("3_co6lq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="GameUI" type="Control" node_paths=PackedStringArray("back_btn", "hp_bar", "xp_bar", "hp_label", "monster_turns", "monster_damage", "rune_btns_container", "mana_icon", "focus_label", "loot_manager")]
+[node name="GameUI" type="Control" node_paths=PackedStringArray("back_btn", "settings_btn", "hp_bar", "xp_bar", "hp_label", "monster_turns", "monster_damage", "rune_btns_container", "mana_icon", "focus_label", "loot_manager")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,7 +56,9 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_po7eo")
 rune_button = ExtResource("2_qecx7")
+settings_panel = ExtResource("3_0hwcy")
 back_btn = NodePath("TopSection/BackBtn")
+settings_btn = NodePath("TopSection/SettingsBtn")
 hp_bar = NodePath("TopSection/HpBar")
 xp_bar = NodePath("TopSection/XpBar")
 hp_label = NodePath("TopSection/HpBar/HpLabel")
@@ -96,6 +99,18 @@ theme_override_constants/outline_size = 30
 theme_override_fonts/font = ExtResource("4_frnsy")
 theme_override_font_sizes/font_size = 100
 text = "<-"
+
+[node name="SettingsBtn" type="Button" parent="TopSection"]
+layout_mode = 0
+offset_left = 588.0
+offset_top = -68.0
+offset_right = 798.0
+offset_bottom = 88.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("4_frnsy")
+theme_override_font_sizes/font_size = 100
+text = "?"
 
 [node name="QuickRespawn" type="Button" parent="TopSection"]
 visible = false

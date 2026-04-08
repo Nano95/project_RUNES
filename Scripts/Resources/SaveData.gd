@@ -55,7 +55,7 @@ class_name SaveData
 	"slot5": null,
 	"slot6": null
 }
-@export var offline_rune_timestamps = { 
+@export var slot_progress = { 
 	"slot1": 0, 
 	"slot2": 0,
 	"slot3": 0,
@@ -105,6 +105,9 @@ class_name SaveData
 	#"slime hatchling": 20,
 	#"elite slime": 10,
 }
+
+@export_category("Settings")
+@export var grid_opacity:float = 1.0 # from 0.0 to 1.0
 
 func add_item_to_inventory(item: EquipmentInstance) -> void:
 	inventory.append(item)
@@ -156,9 +159,7 @@ func set_offline_rune_slot(id:int, data) -> void:
 		data = null
 	var slot_label:String = str("slot", id)
 	offline_runes[slot_label] = data
-	# Reset the timestamp
-	if (data == null):
-		offline_rune_timestamps[slot_label] = 0
+	slot_progress[slot_label] = 0
 
 # Returns null or string
 func get_offline_rune_slot(id):
@@ -235,7 +236,7 @@ func reset_data() -> void:
 		"slot5": null,
 		"slot6": null
 	}
-	offline_rune_timestamps = { 
+	slot_progress = { 
 		"slot1": 0, 
 		"slot2": 0,
 		"slot3": 0,

@@ -8,6 +8,7 @@ var cell_size := Vector2(128, 128)
 var game_controller:GameController
 var grid_origin :Vector2= Vector2.ZERO
 var cells = [] # 2D array storing monster instances or null
+var tiles_arr = []
 
 """
 (0,0) (0,1) (0,2)
@@ -32,6 +33,7 @@ func _ready():
 			)
 			cell.connect("cell_pressed", _on_cell_pressed)
 			$TileContainer.add_child(cell)
+			tiles_arr.append(cell.get_child(0))
 
 func setup(gc:GameController) -> void:
 	game_controller = gc
@@ -90,6 +92,11 @@ func highlight_cell(row, col, color):
 	var index = row * cols + col
 	var sprite = $CellContainer.get_child(index)
 	sprite.modulate = color
+
+func adjust_tile_opacity(percentage:float) -> void:
+	for tile in tiles_arr:
+		tile.self_modulate = Color(1.0, 1.0, 1.0, percentage)
+
 
 func grid_to_world(row: int, col: int) -> Vector2:
 	return Vector2(

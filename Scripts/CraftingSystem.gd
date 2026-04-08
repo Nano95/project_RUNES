@@ -24,47 +24,116 @@ extends Node
 # Returns a dictionary like:
 #   { "Arcane Cross": 12, "Earth Burst": 5 }
 #
+
 func process_elapsed(game_data) -> Dictionary:
 	var produced := {}
 	var now = Time.get_unix_time_from_system()
-	var essence_pools:Dictionary = game_data.current_essences
-	var slots := _load_slots(game_data)
 
+	# Global elapsed time
+	var last_ts = game_data.last_crafting_timestamp
+	if last_ts == 0:
+		game_data.last_crafting_timestamp = now
+		return produced
+
+	var elapsed = float(now - last_ts)
+	print("=== Offline crafting start ===")
+	print("Elapsed: ", elapsed)
+	if elapsed <= 0:
+		return produced
+
+	var max_elapsed = 24 * 3600.0  # 24 hours in seconds
+
+	if elapsed > max_elapsed:
+		elapsed = max_elapsed
+
+	var slots = _load_slots(game_data)
+	var essence_pools = game_data.current_essences
+	var blocked_slots = {}
+
+	# Ensure progress dictionary exists
+	if not game_data.slot_progress:
+		game_data.slot_progress = {}
+
+	# Initialize missing progress entries
 	for slot in slots:
-		var slot_key:String = slot.slot_key
-		var last_ts:int = game_data.offline_rune_timestamps.get(slot_key, 0)
+		if not game_data.slot_progress.has(slot.slot_key):
+			game_data.slot_progress[slot.slot_key] = 0.0
 
-		# If this slot has never been updated, initialize it
-		if (last_ts == 0):
-			print_debug("Continuing for %s under last_ts %d" % [slot_key, last_ts])
-			game_data.offline_rune_timestamps[slot_key] = now
-			continue
+		print("%s: craft_time=%.3f, start_progress=%.3f" %
+			[slot.slot_key, slot.craft_time, game_data.slot_progress[slot.slot_key]])
 
-		@warning_ignore("narrowing_conversion")
-		var elapsed = now - last_ts
-		if (elapsed < slot.craft_time):
-			print("Continuing for %s on elapsed (%d) < craft_time (%d): " % [slot_key, elapsed, slot.craft_time])
-			continue
+	var remaining = elapsed
 
-		# How many full crafts completed?
-		var cycles:int = int(elapsed / slot.craft_time)
-		# Check if essence pool has enough
-		var pool:int = essence_pools.get(slot.essence_type, 0)
-		var cycles_possible = min(cycles, pool / slot.essence_cost)
-		print_debug("Ending cycles for %s: Cycles possible = %d  : " % [slot_key, cycles_possible])
-		if (cycles_possible > 0):
-			# Produce runes
-			produced[slot.rune_name] = produced.get(slot.rune_name, 0) + cycles_possible
-			# Subtract essences
-			essence_pools[slot.essence_type] = pool - (cycles_possible * slot.essence_cost)
+	while remaining > 0:
+		var next_event_time = INF
+		var active_slots = 0
 
-		# Update timestamp to reflect leftover partial progress
-		var leftover_time = int(elapsed) % slot.craft_time
-		game_data.offline_rune_timestamps[slot_key] = now - leftover_time
+		# Determine next event time
+		for slot in slots:
+			if blocked_slots.has(slot.slot_key):
+				continue
 
-	print_debug("Produced : ", produced)
+			active_slots += 1
+			var progress = game_data.slot_progress[slot.slot_key]
+			var time_left = slot.craft_time - progress
+
+			if time_left < next_event_time:
+				next_event_time = time_left
+
+		# If no active slots remain, break
+		if active_slots == 0:
+			print("All slots blocked. Ending early.")
+			break
+
+		# If next event is beyond remaining time, advance and exit
+		if next_event_time > remaining:
+			for slot in slots:
+				if not blocked_slots.has(slot.slot_key):
+					game_data.slot_progress[slot.slot_key] += remaining
+			remaining = 0
+			break
+
+		print("Next event in %.3f seconds (remaining=%.3f)" %
+			[next_event_time, remaining])
+
+		# Advance progress
+		for slot in slots:
+			if not blocked_slots.has(slot.slot_key):
+				game_data.slot_progress[slot.slot_key] += next_event_time
+
+		remaining -= next_event_time
+
+		# Process crafts
+		for slot in slots:
+			var key = slot.slot_key
+			if blocked_slots.has(key):
+				continue
+
+			if game_data.slot_progress[key] >= slot.craft_time:
+				var pool = essence_pools.get(slot.essence_type, 0)
+
+				if pool >= slot.essence_cost:
+					essence_pools[slot.essence_type] = pool - slot.essence_cost
+					produced[slot.rune_name] = produced.get(slot.rune_name, 0) + 1
+					game_data.slot_progress[key] -= slot.craft_time
+
+					#print("%s crafted %s (cost=%d). New essence=%d" %
+						#[key, slot.rune_name, slot.essence_cost, essence_pools[slot.essence_type]])
+
+				else:
+					blocked_slots[key] = true
+					game_data.slot_progress[key] = slot.craft_time
+					print("%s blocked (not enough essence)" % key)
+
+			#print("%s: new_progress=%.3f" %
+				#[key, game_data.slot_progress[key]])
+
+	game_data.last_crafting_timestamp = now
+	print("Produced: ", produced)
+	print("New timestamp: ", game_data.last_crafting_timestamp)
+	print("=== Offline crafting end ===")
+
 	return produced
-
 
 func compute_summary(game_data) -> Dictionary:
 	var essence_pools:Dictionary = game_data.current_essences

@@ -65,7 +65,10 @@ func format_time(value) -> String:
 	var parts := []
 
 	if hours > 0:
-		parts.append("%02d" % hours)
+		if (hours >= 24):
+			parts.append("Max 24+")
+		else:
+			parts.append("%02d" % hours)
 
 	if minutes > 0 or hours > 0:
 		parts.append("%02d" % minutes)

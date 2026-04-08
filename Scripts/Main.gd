@@ -137,10 +137,6 @@ func focus_out_notification() -> void:
 	# calculates total time played - app on but out of focus
 	@warning_ignore("narrowing_conversion")
 	game_data.last_crafting_timestamp = Time.get_unix_time_from_system()
-	# NEW: update per-slot timestamps so they don't drift 
-	for slot in game_data["offline_rune_timestamps"].keys():
-		if (game_data["offline_rune_timestamps"][slot] == 0): continue
-		game_data["offline_rune_timestamps"][slot] = Time.get_unix_time_from_system()
 	save_game()
 
 func check_offline_time_and_rewards() -> void:
