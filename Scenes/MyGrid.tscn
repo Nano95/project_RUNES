@@ -17,6 +17,7 @@ script = ExtResource("1_3h6cw")
 cell_btn = ExtResource("2_wnmpo")
 
 [node name="HelpfulMarker" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, -2.3841858e-07)
 scale = Vector2(0.29999998, 0.4)
 texture = ExtResource("3_1qoqy")

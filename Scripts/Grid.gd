@@ -6,10 +6,11 @@ class_name MyGrid
 @export var cols := 5
 var cell_size := Vector2(128, 128)
 var game_controller:GameController
-var grid_origin :Vector2= Vector2.ZERO
 var cells = [] # 2D array storing monster instances or null
 var tiles_arr = []
-
+# This seems to be the general center spot, i got in 3 different devices
+# so as much as i dont want to hardcode it, it seems to be consistent
+var Y_POS_STARTING:float = 225
 """
 (0,0) (0,1) (0,2)
 (1,0) (1,1) (1,2)
@@ -17,7 +18,7 @@ var tiles_arr = []
 """
 var padding := -4.0
 func _ready():
-	grid_origin = global_position
+	# initialize Grid
 	cells.resize(rows)
 	for r in rows:
 		cells[r] = []
@@ -34,6 +35,10 @@ func _ready():
 			cell.connect("cell_pressed", _on_cell_pressed)
 			$TileContainer.add_child(cell)
 			tiles_arr.append(cell.get_child(0))
+	
+	# initialize Configs
+	position.y = game_controller.main.game_data.grid_y_pos_offset
+	adjust_tile_opacity(game_controller.main.game_data.grid_opacity)
 
 func setup(gc:GameController) -> void:
 	game_controller = gc
@@ -51,7 +56,6 @@ func spawn_monster_into_cell(row: int, col: int, base: MonsterBase):
 
 	# mutation
 	var mod_chance:float = (.01 * Utils.get_blessing_curse_amount(false, "monster_elites-10"))
-	print("New Chance: ",  0.05 + mod_chance)
 	if (randf() < 0.05 + mod_chance):
 		monster.become_elite()
 
@@ -97,6 +101,8 @@ func adjust_tile_opacity(percentage:float) -> void:
 	for tile in tiles_arr:
 		tile.self_modulate = Color(1.0, 1.0, 1.0, percentage)
 
+func adjust_grid_height(y_pos:float) -> void:
+	position.y = y_pos
 
 func grid_to_world(row: int, col: int) -> Vector2:
 	return Vector2(

@@ -108,6 +108,7 @@ class_name SaveData
 
 @export_category("Settings")
 @export var grid_opacity:float = 1.0 # from 0.0 to 1.0
+@export var grid_y_pos_offset:float = 0.0 
 
 func add_item_to_inventory(item: EquipmentInstance) -> void:
 	inventory.append(item)
