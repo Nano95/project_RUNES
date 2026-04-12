@@ -37,6 +37,7 @@ func opacity_slider_updated(val:float) -> void:
 
 func two_tap_btn_cta() -> void:
 	main.game_data.two_tap_attack = !main.game_data.two_tap_attack
+	game_controller.change_preview_color()
 
 func setup(m:MainNode, gc:GameController) -> void:
 	main = m

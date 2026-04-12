@@ -16,6 +16,8 @@ grow_vertical = 2
 script = ExtResource("1_3h6cw")
 tile_container = NodePath("TileContainer")
 cell_btn = ExtResource("2_wnmpo")
+rows = null
+cols = null
 
 [node name="HelpfulMarker" type="Sprite2D" parent="."]
 visible = false

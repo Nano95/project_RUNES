@@ -11,13 +11,14 @@ shader_parameter/glow_strength = 2.0
 shader_parameter/pulse_speed = 9.67000045606512
 shader_parameter/glow_color = Color(0.29803923, 1, 0.49019608, 1)
 
-[node name="Button" type="Button" node_paths=PackedStringArray("preview_texture")]
+[node name="Button" type="Button" node_paths=PackedStringArray("tile_texture", "preview_texture")]
 self_modulate = Color(1, 1, 1, 0)
 offset_left = -4.0
 offset_top = -4.0
 offset_right = 132.0
 offset_bottom = 132.0
 script = ExtResource("2_xkwnv")
+tile_texture = NodePath("CellBtn")
 preview_texture = NodePath("preview")
 
 [node name="CellBtn" type="TextureRect" parent="."]

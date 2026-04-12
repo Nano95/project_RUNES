@@ -466,6 +466,12 @@ func roll_loot(monster: MonsterBase) -> void:
 func change_selected_rune(rune:RuneData, btn:Button=null) -> void:
 	selected_rune = rune
 	selected_rune_btn_ref = btn
+	if (main.game_data.two_tap_attack):
+		# Change the color and preview.
+		change_preview_color()
+		print("preview_target: ", preview_target)
+		if (preview_target != null):
+			check_preview_logic(preview_target.x, preview_target.y, true)
 
 # needed when we start the game
 func select_available_rune() -> void:
@@ -701,10 +707,12 @@ func make_buff_debuff_calculations() -> void:
 	earth_dmg_modifier = 0.75
 	electric_dmg_modifier = .8
 
-func check_preview_logic(row, col) -> bool:
+# readjust is an OVERRIDE for the regular logic for the situation where we 
+# are selecting a new rune while the preview is already onon.
+func check_preview_logic(row, col, readjust:bool=false) -> bool:
 	my_grid.clear_preview_cells() # Clear it to clear anything previous 
 	# if it's on and we do not currently have a preview vector stored, store it
-	if (preview_target == null):
+	if (preview_target == null or readjust):
 		preview_target = Vector2i(row, col)
 		process_preview_attack_cell(row, col, true)
 		return false
@@ -731,3 +739,19 @@ func process_preview_attack_cell(row:int, col:int, preview:bool) -> void:
 			damage_cross(row, col, preview)
 		"diamond":
 			damage_diamond(row, col, preview)
+
+func change_preview_color() -> void:
+	var color := Color.WHITE
+	match selected_rune.rune_type:
+		"electric":
+			color = Color(1.0, 0.9, 0.2, 1.0)
+		"arcane":
+			color = Color(0.8, 0.4, 1.0, 1.0)
+		"earth":
+			color = Color(0.38, 1.0, 0.008, 1.0)
+		"fire":
+			color = Color(0.969, 0.38, 0.0, 1.0)
+		"ice":
+			color = Color(0.0, 0.882, 1.0, 1.0)
+
+	my_grid.set_preview_color(color)

@@ -36,7 +36,7 @@ func _ready():
 			)
 			cell.connect("cell_pressed", _on_cell_pressed)
 			$TileContainer.add_child(cell)
-			tiles_arr.append(cell.get_child(0))
+			tiles_arr.append(cell)
 	
 	# initialize Configs
 	position.y = game_controller.main.game_data.grid_y_pos_offset
@@ -94,6 +94,14 @@ func pick_empty_cell() -> Vector2i:
 				list.append(Vector2i(r, c))
 	return list.pick_random()
 
+func adjust_tile_opacity(percentage:float) -> void:
+	for tile in tiles_arr:
+		tile.set_my_modulate(Color(1.0, 1.0, 1.0, percentage))
+
+func set_preview_color(color:Color) -> void:
+	for tile in tiles_arr:
+		tile.set_color(color)
+
 func preview_cell(row, col, preview:bool):
 	if (!is_valid(row, col)): return
 	preview_arr.append(Vector2(row, col))
@@ -109,10 +117,6 @@ func clear_preview_cells() -> void:
 		if (sprite):
 			sprite.turn_on_preview(false)
 	preview_arr.clear()
-
-func adjust_tile_opacity(percentage:float) -> void:
-	for tile in tiles_arr:
-		tile.self_modulate = Color(1.0, 1.0, 1.0, percentage)
 
 func adjust_grid_height(y_pos:float) -> void:
 	position.y = y_pos
