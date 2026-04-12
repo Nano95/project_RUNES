@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cmn3pncj5s2h" path="res://Scenes/CellBtn.tscn" id="2_wnmpo"]
 [ext_resource type="Texture2D" uid="uid://t3ffb8unegpu" path="res://Sprites/AccessorySquare.png" id="3_1qoqy"]
 
-[node name="Grid" type="Control"]
+[node name="Grid" type="Control" node_paths=PackedStringArray("tile_container")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -14,6 +14,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3h6cw")
+tile_container = NodePath("TileContainer")
 cell_btn = ExtResource("2_wnmpo")
 
 [node name="HelpfulMarker" type="Sprite2D" parent="."]

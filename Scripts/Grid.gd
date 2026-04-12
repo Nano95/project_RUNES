@@ -1,6 +1,7 @@
 extends Control
 class_name MyGrid
 
+@export var tile_container:Control
 @export var cell_btn:PackedScene
 @export var rows := 7
 @export var cols := 5
@@ -8,6 +9,7 @@ var cell_size := Vector2(128, 128)
 var game_controller:GameController
 var cells = [] # 2D array storing monster instances or null
 var tiles_arr = []
+var preview_arr = []
 # This seems to be the general center spot, i got in 3 different devices
 # so as much as i dont want to hardcode it, it seems to be consistent
 var Y_POS_STARTING:float = 225
@@ -92,10 +94,21 @@ func pick_empty_cell() -> Vector2i:
 				list.append(Vector2i(r, c))
 	return list.pick_random()
 
-func highlight_cell(row, col, color):
+func preview_cell(row, col, preview:bool):
+	if (!is_valid(row, col)): return
+	preview_arr.append(Vector2(row, col))
 	var index = row * cols + col
-	var sprite = $CellContainer.get_child(index)
-	sprite.modulate = color
+	var sprite = tile_container.get_child(index)
+	if (sprite and is_valid(row, col)):
+		sprite.turn_on_preview(preview)
+
+func clear_preview_cells() -> void:
+	for vector in preview_arr:
+		var index = vector.x * cols + vector.y
+		var sprite = tile_container.get_child(index)
+		if (sprite):
+			sprite.turn_on_preview(false)
+	preview_arr.clear()
 
 func adjust_tile_opacity(percentage:float) -> void:
 	for tile in tiles_arr:

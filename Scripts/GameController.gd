@@ -26,6 +26,7 @@ var selected_monster_index:int=1
 var PADDING:Vector2 = Vector2(44, 225)
 var selected_rune:RuneData
 var selected_rune_btn_ref:Button
+var preview_target = null   # stores (row, col) or null
 
 ### Stats
 var max_hp:int
@@ -517,19 +518,12 @@ func spawn_luck_popup(new_position:Vector2, txt:String, popup_owner:Node=null) -
 func on_cell_tapped(row, col) -> void:
 	if (!game_is_active): return
 	if (!main.game_data.rune_inv.get(selected_rune.name)): return
+	if (main.game_data.two_tap_attack):
+		if (!check_preview_logic(row, col)): return # Check if two mode attack is on
+	
 	if (!focus_check(selected_rune, selected_rune_btn_ref)): return # This check must go after checking for inventory! Otherwise focus is subtracted when we dont have enough
 	# Here is now where we have to subtract and make checks for focus used
-	match selected_rune.pattern:
-		"strike":
-			damage_single(row, col)
-		"plus":
-			damage_plus(row, col)
-		"expl":
-			damage_3x3(row, col)
-		"cross":
-			damage_cross(row, col)
-		"diamond":
-			damage_diamond(row, col)
+	process_preview_attack_cell(row, col, false)
 	
 	# ADD another luck event, same as the one in focus_check. but Free Rune!
 	var lucky_focus_refund:bool = roll_luck_focus_refund()
@@ -617,10 +611,16 @@ func spawn_rune_explosion(row: int, col: int):
 	rune.position = my_grid.grid_to_world(row, col)
 	my_grid.add_to_rune_container(rune)
 
-func damage_single(r, c) -> void:
-	damage_cell(r, c)
+func preview_cell(r: int, c: int) -> void:
+	my_grid.preview_cell(r,c, true)
 
-func damage_plus(row, col) -> void:
+func damage_single(r, c, preview:bool=false) -> void:
+	if (preview):
+		preview_cell(r, c)
+	else:
+		damage_cell(r, c)
+
+func damage_plus(row, col, preview:bool=false) -> void:
 	var plus_offsets = [
 		Vector2i(0, 0),   # center
 		Vector2i(-1, 0),  # up
@@ -631,14 +631,20 @@ func damage_plus(row, col) -> void:
 	for offset in plus_offsets:
 		var r = row + offset.x
 		var c = col + offset.y
-		damage_cell(r, c)
+		if (preview):
+			preview_cell(r, c)
+		else:
+			damage_cell(r, c)
 
-func damage_3x3(r, c) -> void:
+func damage_3x3(r, c, preview:bool=false) -> void:
 	for dr in range(-1, 2):
 		for dc in range(-1, 2):
-			damage_cell(r+dr, c+dc)
+			if (preview):
+				preview_cell(r + dr, c + dc)
+			else:
+				damage_cell(r + dr, c + dc)
 
-func damage_diamond(r: int, c: int) -> void:
+func damage_diamond(r: int, c: int, preview:bool=false) -> void:
 	var offsets = [
 		Vector2i(-2, 0),
 		Vector2i(-1, -1), Vector2i(-1, 1),
@@ -648,9 +654,12 @@ func damage_diamond(r: int, c: int) -> void:
 	]
 
 	for off in offsets:
-		damage_cell(r + off.x, c + off.y)
+		if (preview):
+			preview_cell(r + off.x, c + off.y)
+		else:
+			damage_cell(r + off.x, c + off.y)
 
-func damage_cross(r: int, c: int) -> void:
+func damage_cross(r: int, c: int, preview:bool=false) -> void:
 	var offsets = [
 		Vector2i(-1, -1), Vector2i(-1, 1),
 		Vector2i(0, 0),
@@ -658,7 +667,10 @@ func damage_cross(r: int, c: int) -> void:
 	]
 
 	for off in offsets:
-		damage_cell(r + off.x, c + off.y)
+		if (preview):
+			preview_cell(r + off.x, c + off.y)
+		else:
+			damage_cell(r + off.x, c + off.y)
 
 # will be used for both free rune and free focus!
 func roll_luck_focus_refund() -> bool:
@@ -688,3 +700,34 @@ func make_buff_debuff_calculations() -> void:
 	arcane_dmg_modifier = 1.0 - Utils.get_blessing_curse_amount(false, "arcane_debuff-15") * .01
 	earth_dmg_modifier = 0.75
 	electric_dmg_modifier = .8
+
+func check_preview_logic(row, col) -> bool:
+	my_grid.clear_preview_cells() # Clear it to clear anything previous 
+	# if it's on and we do not currently have a preview vector stored, store it
+	if (preview_target == null):
+		preview_target = Vector2i(row, col)
+		process_preview_attack_cell(row, col, true)
+		return false
+	else:
+		# If preview target exists, now just compare to see if they are equal
+		if (preview_target == Vector2i(row, col)):
+			preview_target = null # Clear and attack back in the cell_tapped func
+			return true
+		else:
+			# Otherwise have to re-set the preview target and preview in the new spot.
+			preview_target = Vector2i(row, col)
+			process_preview_attack_cell(row, col, true)
+			return false
+
+func process_preview_attack_cell(row:int, col:int, preview:bool) -> void:
+	match selected_rune.pattern:
+		"strike":
+			damage_single(row, col, preview)
+		"plus":
+			damage_plus(row, col, preview)
+		"expl":
+			damage_3x3(row, col, preview)
+		"cross":
+			damage_cross(row, col, preview)
+		"diamond":
+			damage_diamond(row, col, preview)

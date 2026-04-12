@@ -17,7 +17,7 @@ shader = ExtResource("4_38l7f")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="BattleSettingsPanel" type="Control" node_paths=PackedStringArray("opacity_slider", "grid_pos_slider", "exit_btn")]
+[node name="BattleSettingsPanel" type="Control" node_paths=PackedStringArray("opacity_slider", "grid_pos_slider", "two_tap_btn", "exit_btn")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -32,8 +32,9 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(360, 640)
 script = ExtResource("1_cysne")
-opacity_slider = NodePath("Panel/Settings/gridOpacityPanel/GridOpacitySlider")
-grid_pos_slider = NodePath("Panel/Settings/gridYposition/GridPositionSlider")
+opacity_slider = NodePath("Panel/Settings/VBoxContainer/gridOpacityPanel/GridOpacitySlider")
+grid_pos_slider = NodePath("Panel/Settings/VBoxContainer/gridYposition/GridPositionSlider")
+two_tap_btn = NodePath("Panel/Settings/VBoxContainer/TwoTaps/CheckButton")
 exit_btn = NodePath("Panel/Title/Exit")
 
 [node name="Button" type="Button" parent="."]
@@ -99,14 +100,17 @@ offset_bottom = 346.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="gridOpacityPanel" type="Panel" parent="Panel/Settings"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Settings"]
 layout_mode = 0
-offset_left = 13.5
-offset_top = 7.0
-offset_right = 667.5
-offset_bottom = 69.0
+offset_right = 677.5
+offset_bottom = 596.0
+theme_override_constants/separation = 10
 
-[node name="Info" parent="Panel/Settings/gridOpacityPanel" instance=ExtResource("3_6x4le")]
+[node name="gridOpacityPanel" type="Panel" parent="Panel/Settings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Info" parent="Panel/Settings/VBoxContainer/gridOpacityPanel" instance=ExtResource("3_6x4le")]
 material = SubResource("ShaderMaterial_duup7")
 layout_mode = 0
 offset_left = 2.000002
@@ -117,7 +121,7 @@ scale = Vector2(0.35, 0.35)
 text = "Grid Opacity"
 horizontal_alignment = 1
 
-[node name="GridOpacitySlider" type="HSlider" parent="Panel/Settings/gridOpacityPanel"]
+[node name="GridOpacitySlider" type="HSlider" parent="Panel/Settings/VBoxContainer/gridOpacityPanel"]
 layout_mode = 0
 offset_left = 270.0
 offset_right = 647.0
@@ -126,14 +130,11 @@ max_value = 1.0
 step = 0.01
 ticks_on_borders = true
 
-[node name="gridYposition" type="Panel" parent="Panel/Settings"]
-layout_mode = 0
-offset_left = 13.5
-offset_top = 77.0
-offset_right = 667.5
-offset_bottom = 139.0
+[node name="gridYposition" type="Panel" parent="Panel/Settings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
 
-[node name="Info" parent="Panel/Settings/gridYposition" instance=ExtResource("3_6x4le")]
+[node name="Info" parent="Panel/Settings/VBoxContainer/gridYposition" instance=ExtResource("3_6x4le")]
 material = SubResource("ShaderMaterial_duup7")
 layout_mode = 0
 offset_left = 3.000002
@@ -144,7 +145,7 @@ scale = Vector2(0.35, 0.35)
 text = "Grid y-position"
 horizontal_alignment = 1
 
-[node name="GridPositionSlider" type="HSlider" parent="Panel/Settings/gridYposition"]
+[node name="GridPositionSlider" type="HSlider" parent="Panel/Settings/VBoxContainer/gridYposition"]
 layout_mode = 0
 offset_left = 270.0
 offset_right = 647.0
@@ -153,3 +154,27 @@ min_value = -150.0
 max_value = 150.0
 step = 0.5
 ticks_on_borders = true
+
+[node name="TwoTaps" type="Panel" parent="Panel/Settings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Info" parent="Panel/Settings/VBoxContainer/TwoTaps" instance=ExtResource("3_6x4le")]
+material = SubResource("ShaderMaterial_duup7")
+layout_mode = 0
+offset_left = 3.000002
+offset_top = 3.0
+offset_right = 754.4285
+offset_bottom = 140.0
+scale = Vector2(0.35, 0.35)
+text = "2-tap attack"
+horizontal_alignment = 1
+
+[node name="CheckButton" type="CheckButton" parent="Panel/Settings/VBoxContainer/TwoTaps"]
+layout_mode = 0
+offset_left = 411.5
+offset_top = 5.0
+offset_right = 455.5
+offset_bottom = 29.0
+scale = Vector2(2, 2)
+alignment = 1

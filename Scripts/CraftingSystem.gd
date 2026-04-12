@@ -93,8 +93,6 @@ func process_elapsed(game_data) -> Dictionary:
 			remaining = 0
 			break
 
-		print("Next event in %.3f seconds (remaining=%.3f)" %
-			[next_event_time, remaining])
 
 		# Advance progress
 		for slot in slots:
@@ -130,7 +128,6 @@ func process_elapsed(game_data) -> Dictionary:
 
 	game_data.last_crafting_timestamp = now
 	print("Produced: ", produced)
-	print("New timestamp: ", game_data.last_crafting_timestamp)
 	print("=== Offline crafting end ===")
 
 	return produced
