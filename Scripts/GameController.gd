@@ -200,6 +200,7 @@ func spawn_status_message(died:bool=false, no_focus:bool=false, escaped:bool=fal
 	
 	var lbl = status_message.instantiate() as GameStatusPopup
 	lbl.setup(msg)
+	if (main.game_data.fast_mode): lbl.set_fast_mode(true)
 	main.spawn_to_top_ui_layer(lbl)
 	if (msg != focus_msg):
 		apply_loot_if_allowed(msg)
@@ -469,7 +470,6 @@ func change_selected_rune(rune:RuneData, btn:Button=null) -> void:
 	if (main.game_data.two_tap_attack):
 		# Change the color and preview.
 		change_preview_color()
-		print("preview_target: ", preview_target)
 		if (preview_target != null):
 			check_preview_logic(preview_target.x, preview_target.y, true)
 
@@ -527,8 +527,9 @@ func on_cell_tapped(row, col) -> void:
 	if (main.game_data.two_tap_attack):
 		if (!check_preview_logic(row, col)): return # Check if two mode attack is on
 	
-	if (!focus_check(selected_rune, selected_rune_btn_ref)): return # This check must go after checking for inventory! Otherwise focus is subtracted when we dont have enough
 	# Here is now where we have to subtract and make checks for focus used
+	if (!focus_check(selected_rune, selected_rune_btn_ref)): return # This check must go after checking for inventory! Otherwise focus is subtracted when we dont have enough
+	
 	process_preview_attack_cell(row, col, false)
 	
 	# ADD another luck event, same as the one in focus_check. but Free Rune!
@@ -708,7 +709,7 @@ func make_buff_debuff_calculations() -> void:
 	electric_dmg_modifier = .8
 
 # readjust is an OVERRIDE for the regular logic for the situation where we 
-# are selecting a new rune while the preview is already onon.
+# are selecting a new rune while the preview is already on.
 func check_preview_logic(row, col, readjust:bool=false) -> bool:
 	my_grid.clear_preview_cells() # Clear it to clear anything previous 
 	# if it's on and we do not currently have a preview vector stored, store it
@@ -727,7 +728,12 @@ func check_preview_logic(row, col, readjust:bool=false) -> bool:
 			process_preview_attack_cell(row, col, true)
 			return false
 
+func clear_preview_cells() -> void: # Used from battle settings panel script
+	preview_target = null
+	my_grid.clear_preview_cells()
+
 func process_preview_attack_cell(row:int, col:int, preview:bool) -> void:
+	if (!preview): %Camera2D.add_shake(10.0)
 	match selected_rune.pattern:
 		"strike":
 			damage_single(row, col, preview)

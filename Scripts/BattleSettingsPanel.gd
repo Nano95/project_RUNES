@@ -4,6 +4,7 @@ class_name BattleSettingsPanel
 @export var opacity_slider:HSlider
 @export var grid_pos_slider:HSlider
 @export var two_tap_btn:CheckButton
+@export var fast_mode_btn:CheckButton
 @export var exit_btn:Button
 
 var main:MainNode
@@ -20,6 +21,8 @@ func _ready() -> void:
 	initialize_grid_y_position_slider()
 	two_tap_btn.button_pressed = main.game_data.two_tap_attack
 	two_tap_btn.pressed.connect(two_tap_btn_cta)
+	fast_mode_btn.button_pressed = main.game_data.fast_mode
+	fast_mode_btn.pressed.connect(fast_mode_btn_cta)
 
 func initialize_grid_y_position_slider() -> void:
 	grid_pos_slider.min_value = game_controller.my_grid.Y_POS_STARTING - 120
@@ -38,6 +41,12 @@ func opacity_slider_updated(val:float) -> void:
 func two_tap_btn_cta() -> void:
 	main.game_data.two_tap_attack = !main.game_data.two_tap_attack
 	game_controller.change_preview_color()
+	if (!main.game_data.two_tap_attack and game_controller.preview_target != null):
+		game_controller.clear_preview_cells()
+
+func fast_mode_btn_cta() -> void:
+	main.game_data.fast_mode = !main.game_data.fast_mode
+
 
 func setup(m:MainNode, gc:GameController) -> void:
 	main = m

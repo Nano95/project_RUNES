@@ -17,7 +17,7 @@ shader = ExtResource("4_38l7f")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="BattleSettingsPanel" type="Control" node_paths=PackedStringArray("opacity_slider", "grid_pos_slider", "two_tap_btn", "exit_btn")]
+[node name="BattleSettingsPanel" type="Control" node_paths=PackedStringArray("opacity_slider", "grid_pos_slider", "two_tap_btn", "fast_mode_btn", "exit_btn")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -35,6 +35,7 @@ script = ExtResource("1_cysne")
 opacity_slider = NodePath("Panel/Settings/VBoxContainer/gridOpacityPanel/GridOpacitySlider")
 grid_pos_slider = NodePath("Panel/Settings/VBoxContainer/gridYposition/GridPositionSlider")
 two_tap_btn = NodePath("Panel/Settings/VBoxContainer/TwoTaps/CheckButton")
+fast_mode_btn = NodePath("Panel/Settings/VBoxContainer/FastMode/CheckButton")
 exit_btn = NodePath("Panel/Title/Exit")
 
 [node name="Button" type="Button" parent="."]
@@ -171,6 +172,30 @@ text = "2-tap attack"
 horizontal_alignment = 1
 
 [node name="CheckButton" type="CheckButton" parent="Panel/Settings/VBoxContainer/TwoTaps"]
+layout_mode = 0
+offset_left = 411.5
+offset_top = 5.0
+offset_right = 455.5
+offset_bottom = 29.0
+scale = Vector2(2, 2)
+alignment = 1
+
+[node name="FastMode" type="Panel" parent="Panel/Settings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Info" parent="Panel/Settings/VBoxContainer/FastMode" instance=ExtResource("3_6x4le")]
+material = SubResource("ShaderMaterial_duup7")
+layout_mode = 0
+offset_left = 3.000002
+offset_top = 3.0
+offset_right = 754.4285
+offset_bottom = 140.0
+scale = Vector2(0.35, 0.35)
+text = "Fast mode"
+horizontal_alignment = 1
+
+[node name="CheckButton" type="CheckButton" parent="Panel/Settings/VBoxContainer/FastMode"]
 layout_mode = 0
 offset_left = 411.5
 offset_top = 5.0
