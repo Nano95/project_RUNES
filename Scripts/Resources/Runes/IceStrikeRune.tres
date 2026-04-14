@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RuneData" load_steps=3 format=3 uid="uid://dj61mhnt0xtcx"]
+
+[ext_resource type="Texture2D" uid="uid://blecssvx7xc46" path="res://Sprites/Runes/ICE_STRIKE_RUNE.png" id="1_duhby"]
+[ext_resource type="Script" uid="uid://wqovi0smk0qq" path="res://Scripts/RuneData.gd" id="2_iwpyv"]
+
+[resource]
+script = ExtResource("2_iwpyv")
+name = "Ice Strike"
+mini_name = "Ice Str"
+icon = ExtResource("1_duhby")
+pattern = "strike"
+focus_cost = 2
+rune_type = "ice"
+essence_type = "ice"
+buy_cost = 15
+craft_time = 6
+essence_cost = 3
+metadata/_custom_type_script = "uid://wqovi0smk0qq"

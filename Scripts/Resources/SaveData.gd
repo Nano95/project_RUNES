@@ -73,14 +73,17 @@ class_name SaveData
 @export var available_ap:int = 0
 @export var base_stats:Dictionary = { "health": 10, "focus": 10, "power": 10, "luck": 10 }
 @export var allocated_stats:Dictionary = { "health": 0, "focus": 0, "power": 0, "luck": 0 }
-@export var prestige_points_available:int = 0 
-@export var prestige_points_spent:int = 0 
+@export var blessing_coins_available:int = 0 
+@export var blessing_coins_spent:int = 0 
 @export var prestige_level:int = 0
 @export var prestige_unlocked:bool = false
+@export var blessing_coins:int = 0
 @export_category("Stats")
 
 @export var highest_level_reached:int = 0
 @export var total_prestige_points_earned:int = 0
+@export var total_exp_lifetime: int = 0
+@export var total_gold_lifetime: int = 0
 @export var runes_used:int = 0
 @export var enemies_killed:int = 0
 @export var total_runes_obtained: Dictionary = {
@@ -194,6 +197,8 @@ func clear_rune_from_battle_loadout(rune_name: String) -> void:
 			selected_battle_runes[slot] = null
 			return
 
+func get_ascension_level() -> int:
+	return 40 + (prestige_level * 20)
 
 func reset_data() -> void:
 	rune_inv = { # Start pack

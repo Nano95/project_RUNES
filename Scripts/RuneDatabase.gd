@@ -16,6 +16,13 @@ func _load_runes():
 	runes["Electric Strike"] = preload("res://Scripts/Resources/Runes/ElectricStrikeRune.tres")
 	runes["Electric Cross"] = preload("res://Scripts/Resources/Runes/ElectricCrossRune.tres")
 	runes["Electric Explosion"] = preload("res://Scripts/Resources/Runes/ElectricExplosionRune.tres")
+	runes["Fire Strike"] = preload("res://Scripts/Resources/Runes/FireStrikeRune.tres")
+	runes["Fire Cross"] = preload("res://Scripts/Resources/Runes/FireCrossRune.tres")
+	runes["Fire Explosion"] = preload("res://Scripts/Resources/Runes/FireExplosionRune.tres")
+	runes["Ice Strike"] = preload("res://Scripts/Resources/Runes/IceStrikeRune.tres")
+	runes["Ice Cross"] = preload("res://Scripts/Resources/Runes/IceCrossRune.tres")
+	runes["Ice Exiiplosion"] = preload("res://Scripts/Resources/Runes/IceExplosionRune.tres")
+	
 	# Healing rune
 	runes["Light Healing"] = preload("res://Scripts/Resources/Runes/LightHealingRune.tres")
 	runes["Great Healing"] = preload("res://Scripts/Resources/Runes/GreatHealingRune.tres")

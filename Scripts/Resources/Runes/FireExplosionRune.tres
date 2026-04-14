@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RuneData" load_steps=3 format=3 uid="uid://fyrhnh0u5ams"]
+
+[ext_resource type="Texture2D" uid="uid://cmrx7xa5wrfli" path="res://Sprites/Runes/FIRE_EXPLOSION_RUNE.png" id="1_tg48j"]
+[ext_resource type="Script" uid="uid://wqovi0smk0qq" path="res://Scripts/RuneData.gd" id="2_sgv25"]
+
+[resource]
+script = ExtResource("2_sgv25")
+name = "FireExplosion"
+mini_name = "Fir Expl"
+icon = ExtResource("1_tg48j")
+pattern = "diamond"
+focus_cost = 9
+rune_type = "fire"
+essence_type = "fire"
+buy_cost = 120
+craft_time = 14
+essence_cost = 12
+metadata/_custom_type_script = "uid://wqovi0smk0qq"
