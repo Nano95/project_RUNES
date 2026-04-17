@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_bl486")
-name = "Ice"
+name = "Ice Explosion"
 mini_name = "Ice Expl"
 icon = ExtResource("1_py4qc")
 pattern = "diamond"

@@ -50,6 +50,8 @@ func setup_rune_grid() -> void:
 		# Get the rune if it is saved
 		var slot_rune_data = null
 		if (selected_runes_data[slot] != null): 
+			print("- selected_runes_data[slot] ", selected_runes_data[slot])
+			print("_ rune_data ", rune_data)
 			slot_rune_data = rune_data[selected_runes_data[slot]]
 		btn.setup(i, slot_rune_data, main, open_rune_selection_panel, null)
 		rune_grid_container.add_child(btn)

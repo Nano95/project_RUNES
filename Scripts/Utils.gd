@@ -66,7 +66,7 @@ func format_time(value) -> String:
 
 	if hours > 0:
 		if (hours >= 24):
-			parts.append("Max 24+")
+			return "Max 24H+"
 		else:
 			parts.append("%02d" % hours)
 

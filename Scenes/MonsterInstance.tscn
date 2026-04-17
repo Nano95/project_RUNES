@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=3 uid="uid://xxup1p8e76di"]
+[gd_scene load_steps=138 format=3 uid="uid://xxup1p8e76di"]
 
 [ext_resource type="Script" uid="uid://cpm362jinw3ou" path="res://Scripts/Resources/MonsterInstance.gd" id="1_ld5e8"]
 [ext_resource type="Texture2D" uid="uid://g6ycv2s2cnuv" path="res://Sprites/monsters/orc1.png" id="2_1o6kg"]
@@ -15,9 +15,11 @@
 [ext_resource type="Texture2D" uid="uid://b0wni20roas5x" path="res://Sprites/monsters/Dwarf_2.png" id="6_xgj37"]
 [ext_resource type="Texture2D" uid="uid://gaino1aag6hf" path="res://Sprites/monsters/Dwarf_3.png" id="7_20cav"]
 [ext_resource type="Texture2D" uid="uid://n78un3cnjmfm" path="res://Sprites/monsters/Dwarf_4.png" id="8_jtc8k"]
+[ext_resource type="Texture2D" uid="uid://cerofln3xcb7n" path="res://Sprites/FIRE_STATUS_ICON.png" id="8_krk12"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="8_rovrv"]
-[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="9_0suyq"]
+[ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="9_0suyq"]
 [ext_resource type="Texture2D" uid="uid://8wtdlkvjlwsh" path="res://Sprites/monsters/Jungle_1.png" id="9_ki37i"]
+[ext_resource type="Texture2D" uid="uid://bpmgpgc2elw6k" path="res://Sprites/ICE_STATUS_ICON.png" id="9_slj30"]
 [ext_resource type="Texture2D" uid="uid://c64n205p05dbp" path="res://Sprites/monsters/Jungle_2.png" id="10_jdu6h"]
 [ext_resource type="Texture2D" uid="uid://dkfihb5ypu6kn" path="res://Sprites/tiny_heart.png" id="10_qfc3e"]
 [ext_resource type="Texture2D" uid="uid://dl2012wct63pa" path="res://Sprites/monsters/Jungle_3.png" id="11_g02pr"]
@@ -854,6 +856,8 @@ damage_label = ExtResource("2_q5h8j")
 xp_label = ExtResource("3_qfc3e")
 STUN_ICON = ExtResource("5_r8pyg")
 POISON_ICON = ExtResource("6_rqp80")
+BURN_ICON = ExtResource("8_krk12")
+FROST_ICON = ExtResource("9_slj30")
 status_container = NodePath("StatusContainer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

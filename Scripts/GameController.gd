@@ -55,6 +55,8 @@ var loot_curse_active:bool = false
 var arcane_dmg_modifier:float = 1.0
 var earth_dmg_modifier:float = 1.0
 var electric_dmg_modifier:float = 1.0
+var fire_dmg_modifier:float = 1.0
+var ice_dmg_modifier:float = 1.0
 
 var STUN:String = "electric" # KEEP THIS IN-SYNC WITH MONSTER INSTANCE 'STUN'
 
@@ -366,9 +368,12 @@ func calculate_group_power() -> int:
 			continue
 		if monster.status_effects.has(STUN):
 			continue
-		
-		total_power += monster.current_power
-	return total_power
+		var dmg = monster.current_power
+		if (monster.is_frosty()):
+			dmg *= .75
+		total_power += dmg
+	
+	return int(floor(total_power))
 
 func calculate_next_elite_attack() -> Dictionary:
 	var best_turns = 1000
@@ -381,7 +386,10 @@ func calculate_next_elite_attack() -> Dictionary:
 	# Second pass: sum all elites that attack on that turn
 	for monster in monsters:
 		if monster.is_elite_or_boss() and monster.individual_turns_left == best_turns:
-			total_damage += monster.current_power
+			var dmg = monster.current_power
+			if (monster.is_frosty()):
+				dmg *= .75
+			total_damage += dmg
 
 	return {
 		"turns": best_turns,
@@ -592,6 +600,10 @@ func damage_cell(r: int, c: int) -> void:
 				mult *= earth_dmg_modifier
 			"electric": # Stuns
 				mult *= electric_dmg_modifier
+			"fire": # Burns
+				mult *= fire_dmg_modifier
+			"ice": # Frozen
+				mult *= ice_dmg_modifier
 		var dmg:int = int(current_power * mult)
 		var crit_hit:bool=false
 		match selected_rune.rune_type:
@@ -610,6 +622,17 @@ func damage_cell(r: int, c: int) -> void:
 				if randf() < stun_chance:
 					var duration:int = 3
 					monster.apply_stun(duration)
+			"fire":
+				#make it 100% for now to test
+				var burn_chance := 0.4 + (current_luck * .02)
+				if randf() < burn_chance:
+					monster.apply_burn(3)
+			"ice":
+				#make it 100% for now to test
+				var frost_chance := 0.4 + (current_luck * .02)
+				if randf() < frost_chance:
+					monster.apply_frost(3)
+			
 		monster.take_damage(dmg, selected_rune.rune_type, crit_hit)
 
 func spawn_rune_explosion(row: int, col: int):
@@ -707,6 +730,8 @@ func make_buff_debuff_calculations() -> void:
 	arcane_dmg_modifier = 1.0 - Utils.get_blessing_curse_amount(false, "arcane_debuff-15") * .01
 	earth_dmg_modifier = 0.75
 	electric_dmg_modifier = .8
+	fire_dmg_modifier = .7
+	ice_dmg_modifier = .7
 
 # readjust is an OVERRIDE for the regular logic for the situation where we 
 # are selecting a new rune while the preview is already on.

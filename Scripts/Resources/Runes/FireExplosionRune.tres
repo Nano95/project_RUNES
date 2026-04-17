@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_sgv25")
-name = "FireExplosion"
+name = "Fire Explosion"
 mini_name = "Fir Expl"
 icon = ExtResource("1_tg48j")
 pattern = "diamond"

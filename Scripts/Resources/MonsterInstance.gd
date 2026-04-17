@@ -9,10 +9,14 @@ class_name MonsterInstance
 @export var xp_label:Resource
 @export var STUN_ICON:Texture
 @export var POISON_ICON:Texture
+@export var BURN_ICON:Texture
+@export var FROST_ICON:Texture
 @export var status_container:VBoxContainer
 
 var POISON:String = "earth"
 var STUN:String = "electric" # KEEP IN SYNC WITH GAME CONTROLLER
+var BURN:String = "burn"
+var FROST:String = "frost"
 var base: MonsterBase
 var current_hp: int
 var base_attack_speed:int=5 # This is the reference to the monster attack_speed property
@@ -33,7 +37,9 @@ var status_effects = {
 var dmg_color:Dictionary = {
 	"arcane": "ff6969",
 	"earth": "bbff69",
-	"electric": "ffde42"
+	"electric": "ffde42",
+	"fire": "ff9a00",
+	"ice": "3fd0d4"
 }
 var is_pending_death:bool=false
 
@@ -70,6 +76,10 @@ func update_individual_atk_label() -> void:
 	$atk.text = str(individual_turns_left)
 
 func take_damage(dmg:int=1, dmg_color_type:String="arcane", crit_hit:bool=false) -> bool:
+	if (BURN in status_effects):
+		print("BURN Dmg increase: ", dmg, " -> ", int(ceil(1.2 * dmg)))
+		dmg = int(ceil(1.2 * dmg))
+	
 	spawn_damage_label(dmg, dmg_color_type, crit_hit)
 	current_hp -= dmg
 	hp_label.text = str(current_hp)
@@ -112,7 +122,6 @@ func apply_poison(dmg:int, turns:int) -> void:
 	)
 	status_effects[POISON]["ui_entry"] = entry
 
- #Change color of stun so that i can validate this working
 func apply_stun(turns: int) -> void:
 	# If already stunned, refresh or extend — your choice
 	if (!status_effects.has(STUN)):
@@ -134,6 +143,48 @@ func apply_stun(turns: int) -> void:
 	)
 	status_effects[STUN]["ui_entry"] = entry
 
+func apply_burn(turns: int) -> void:
+	# If already stunned, refresh or extend — your choice
+	if (!status_effects.has(BURN)):
+		spawn_status(BURN)
+		status_effects[BURN] = {
+			"turns_remaining": turns,
+		}
+	else:
+		status_effects[BURN]["turns_remaining"] = max(
+			2, # I think for burns, it should not stack. will just be maxed herePlus maybe bonus later
+			turns
+		)
+
+	# Create or update UI entry
+	var entry = add_or_update_status(
+		BURN, 
+		BURN_ICON, 
+		status_effects[BURN]["turns_remaining"]
+	)
+	status_effects[BURN]["ui_entry"] = entry
+
+func apply_frost(turns: int) -> void:
+	# If already stunned, refresh or extend — your choice
+	if (!status_effects.has(FROST)):
+		spawn_status(FROST)
+		status_effects[FROST] = {
+			"turns_remaining": turns,
+		}
+	else:
+		status_effects[FROST]["turns_remaining"] = max(
+			2, # I think for burns, it should not stack. will just be maxed herePlus maybe bonus later
+			turns
+		)
+
+	# Create or update UI entry
+	var entry = add_or_update_status(
+		FROST, 
+		FROST_ICON, 
+		status_effects[FROST]["turns_remaining"]
+	)
+	status_effects[FROST]["ui_entry"] = entry
+
 func process_status_effect() -> void:
 	if (status_effects.has(POISON)):
 		if (status_effects[POISON]["turns_remaining"] > 0):
@@ -154,6 +205,24 @@ func process_status_effect() -> void:
 			if (status_effects[STUN].has("ui_entry")):
 				status_effects[STUN]["ui_entry"].delete_animation()
 			status_effects.erase(STUN)
+	
+	if (status_effects.has(BURN)):
+		status_effects[BURN]["turns_remaining"] -= 1
+		if (status_effects[BURN].has("ui_entry") and status_effects[BURN]["ui_entry"] is MonsterStatusEntry):
+			status_effects[BURN]["ui_entry"].update_label(status_effects[BURN]["turns_remaining"])
+		if (status_effects[BURN]["turns_remaining"] <= 0):
+			if (status_effects[BURN].has("ui_entry")):
+				status_effects[BURN]["ui_entry"].delete_animation()
+			status_effects.erase(BURN)
+	
+	if (status_effects.has(FROST)):
+		status_effects[FROST]["turns_remaining"] -= 1
+		if (status_effects[FROST].has("ui_entry") and status_effects[FROST]["ui_entry"] is MonsterStatusEntry):
+			status_effects[FROST]["ui_entry"].update_label(status_effects[FROST]["turns_remaining"])
+		if (status_effects[FROST]["turns_remaining"] <= 0):
+			if (status_effects[FROST].has("ui_entry")):
+				status_effects[FROST]["ui_entry"].delete_animation()
+			status_effects.erase(FROST)
 
 func spawn_status(type:String) -> void:
 	var status = status_popup_ref.instantiate() as MonsterStatusPopup
@@ -163,6 +232,10 @@ func spawn_status(type:String) -> void:
 			status.animate_me(POISON_ICON)
 		STUN:
 			status.animate_me(STUN_ICON)
+		BURN:
+			status.animate_me(BURN_ICON)
+		FROST:
+			status.animate_me(FROST_ICON)
 		_:
 			pass
 
@@ -179,6 +252,9 @@ func add_or_update_status(status_name: String, icon: Texture, turns: int) -> Mon
 	status_container.add_child(entry)
 	status_effects[status_name]["ui_entry"] = entry
 	return entry
+
+func is_frosty() -> bool:
+	return FROST in status_effects
 
 func animate_hit() -> void:
 	# ANIMATE SIZE
