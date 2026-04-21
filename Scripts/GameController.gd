@@ -157,7 +157,7 @@ func apply_loot_if_allowed(result_msg:String) -> void:
 	var player_lost = (result_msg == Utils.STATUS_MESSAGE_LOST)
 	if (loot_curse_active and player_lost):
 		# Curse active + lost = discard loot
-		current_loot_summary.clear()
+		current_loot_summary = { "gold" : 0 }
 		return
 
 	# Otherwise, apply current run loot to permanent totals
@@ -370,7 +370,7 @@ func calculate_group_power() -> int:
 			continue
 		var dmg = monster.current_power
 		if (monster.is_frosty()):
-			dmg *= .75
+			dmg *= .6
 		total_power += dmg
 	
 	return int(floor(total_power))
@@ -388,7 +388,7 @@ func calculate_next_elite_attack() -> Dictionary:
 		if monster.is_elite_or_boss() and monster.individual_turns_left == best_turns:
 			var dmg = monster.current_power
 			if (monster.is_frosty()):
-				dmg *= .75
+				dmg *= .6
 			total_damage += dmg
 
 	return {

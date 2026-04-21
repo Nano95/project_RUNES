@@ -102,12 +102,12 @@ func equip_item(pressed_button:InventoryButton, item:EquipmentInstance) -> void:
 func setup_side_buttons() -> void:
 	nav_buttons_container.setup(main, self)
 
-func open_prestige() -> void:
+func open_prestige(is_debug:bool=false) -> void:
 	if (is_instance_valid(active_menu_ref)):
 		active_menu_ref.queue_free()
 	
 	active_menu_ref = prestige_panel.instantiate()
-	active_menu_ref.setup(main)
+	active_menu_ref.setup(main, is_debug)
 	main.spawn_to_top_ui_layer(active_menu_ref)
 
 func open_stats() -> void:

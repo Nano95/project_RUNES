@@ -11,6 +11,7 @@ var qty_multiplier:int = 1000
 @export var btn90000000:Button
 @export var exp_btn:Button
 @export var gold_btn:Button
+@export var prestige_btn:Button
 
 var main_menu:MainMenu
 var main_node:MainNode
@@ -29,7 +30,7 @@ func connect_buttons() -> void:
 	btn90000000.toggled.connect(qty_button_pressed)
 	exp_btn.pressed.connect(give_exp)
 	gold_btn.pressed.connect(give_gold)
-	$backdropButton.pressed.connect(delete_debug)
+	prestige_btn.pressed.connect(main_menu.open_prestige.bind(true))
 	$ColorRect/Panel/Control/resetBtn.pressed.connect(spawn_reset_panel)
 
 func delete_debug() -> void:

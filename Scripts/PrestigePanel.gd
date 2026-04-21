@@ -1,25 +1,90 @@
 extends Control
 class_name PrestigePanel
 
+@export var skill_upgrade_ui:PackedScene
 @export var prestige_card:PackedScene
+@export var upgrades_v_container:VBoxContainer
 @export var grid_container:GridContainer
 @export var title:Label
-@export var back_btn:Button
-@export var next_btn:Button
+@export var info_panel:Panel
+@export var upgrades_panel:Panel
+@export var buff_debuff_panel:Panel
+
+@export_category("Initial")
+@export var requirement_label:Label
+@export var begin_ascension_btn:Button
+
+@export_category("Upgrades")
+@export var count_lbl:RichTextLabel
+
+@export_category("Nav")
 @export var upgrades_btn:Button
 @export var blessings_btn:Button
 @export var curses_btn:Button
 
+var prestige_in_process:bool = false
+var in_debug_mode:bool = false
 var main:MainNode
+var TOTAL_UPGRADE_COUNT_AVAILABLE:int
+var temp_upgrades := {
+	"arcane": 0,
+	"earth": 0,
+	"electric": 0,
+	"fire": 0,
+	"ice": 0
+}
 
 func _ready() -> void:
-	setup_blessings()
 	upgrades_btn.pressed.connect(open_upgrades)
 	blessings_btn.pressed.connect(open_blessings)
 	curses_btn.pressed.connect(open_curses)
+	
+	if (in_debug_mode): open_upgrades() # No need to see info panel in debug mode.
+	else: 
+		info_panel.visible = true
+		upgrades_panel.visible = false
+		buff_debuff_panel.visible = false
+		disable_all_nav_buttons()
+		begin_ascension_btn.pressed.connect(open_upgrades)
+		init_temp_upgrades()
+		TOTAL_UPGRADE_COUNT_AVAILABLE = get_invested_points() + (3 * (main.game_data.prestige_level + 1))
 
-func setup(m:MainNode) -> void:
+
+func setup(m:MainNode, is_debug:bool=false) -> void:
 	main = m
+	in_debug_mode = is_debug
+
+func check_prestige_requirements():
+	var required = main.game_data.get_ascension_level()
+	var current_level = main.game_data.current_level
+
+	var requirements_met:bool = current_level >= required
+	if (requirements_met):
+		# Player can begin the prestige sequence
+		requirement_label.text = "Level %d has been reached!" % required
+		begin_ascension_btn.pressed.connect(begin_ascension_process)
+	else:
+		requirement_label.text = "Reach level %d to prestige" % required
+	
+	begin_ascension_btn.disabled = !requirements_met
+
+func begin_ascension_process() -> void:
+	prestige_in_process = true
+	upgrades_panel.visible = true
+	info_panel.visible = false
+
+func update_count_label() -> void:
+	var spent := 0
+	for key in temp_upgrades.keys():
+		spent += main.game_data.element_upgrades[key] + temp_upgrades[key]
+	var remaining := TOTAL_UPGRADE_COUNT_AVAILABLE - spent
+	
+	if (remaining > 0):
+		count_lbl.text = "[center]You have [color=#7CFF7C]%d[/color] point(s) left[/center]" % remaining
+		blessings_btn.disabled = true
+	else:
+		count_lbl.text = "[center]When you're ready, continue![/center]"
+		blessings_btn.disabled = false
 
 func setup_blessings() -> void:
 	clear_cards()
@@ -37,24 +102,68 @@ func populate_cards(arr:Array, is_blessing:bool=true) -> void:
 		grid_container.add_child(card)
 
 func open_upgrades()-> void:
-	upgrades_btn.disabled = true
-	blessings_btn.disabled = false
-	curses_btn.disabled = false
+	upgrades_btn.disabled = false
 	play_selected(upgrades_btn)
+	setup_upgrades()
+	update_count_label()
+	info_panel.visible = false
+	upgrades_panel.visible = true
+	buff_debuff_panel.visible = false
 
 func open_blessings() -> void:
-	upgrades_btn.disabled = false
-	blessings_btn.disabled = true
-	curses_btn.disabled = false
 	play_selected(blessings_btn)
+	info_panel.visible = false
+	upgrades_panel.visible = false
+	buff_debuff_panel.visible = true
 	setup_blessings()
 
 func open_curses() -> void:
-	upgrades_btn.disabled = false
-	blessings_btn.disabled = false
-	curses_btn.disabled = true
 	play_selected(curses_btn)
+	upgrades_panel.visible = false
+	info_panel.visible = false
+	buff_debuff_panel.visible = true
 	setup_curses()
+
+func setup_upgrades() -> void:
+	clear_upgrades()
+	var elements:Array=["arcane", "earth", "electric", "fire", "ice"]
+	for element in elements:
+		var upgrades = skill_upgrade_ui.instantiate()
+		upgrades.setup(main, self, element)
+		upgrades_v_container.add_child(upgrades)
+
+func try_adjust_upgrade(element:String, delta:int) -> int:
+	var current_total_spent := 0
+
+	# Calculate total spent including temp upgrades
+	for key in temp_upgrades.keys():
+		current_total_spent += main.game_data.element_upgrades[key] + temp_upgrades[key]
+
+	var new_total_spent := current_total_spent + delta
+
+	# Prevent going below zero for this element
+	if (main.game_data.element_upgrades[element] + temp_upgrades[element] + delta < 0):
+		return -1
+
+	# Prevent exceeding total allowed
+	if (new_total_spent > TOTAL_UPGRADE_COUNT_AVAILABLE):
+		return -1
+
+	# Apply the change
+	temp_upgrades[element] += delta
+	update_count_label()
+	return temp_upgrades[element]
+
+func get_invested_points() -> int:
+	var points:int = 0
+	for key in main.game_data.element_upgrades.keys():
+		points += main.game_data.element_upgrades[key]
+	return points
+
+func disable_all_nav_buttons() -> void:
+	upgrades_btn.disabled = true
+	blessings_btn.disabled = true
+	curses_btn.disabled = true
 
 func play_selected(btn:Button) -> void:
 	var og_y_pos:float = btn.position.y
@@ -66,6 +175,22 @@ func play_selected(btn:Button) -> void:
 		.set_trans(Tween.TRANS_CUBIC)\
 		.set_ease(Tween.EASE_OUT)
 
+# When prestige is complete, commit all of the upgrades!
+
+func init_temp_upgrades() -> void:
+	for key in main.game_data.element_upgrades.keys():
+		temp_upgrades[key] += main.game_data.element_upgrades[key]
+	
+	print("Tempt upgrades: ", temp_upgrades)
+
+func commit_upgrades():
+	for key in temp_upgrades.keys():
+		main.game_data.element_upgrades[key] += temp_upgrades[key]
+
 func clear_cards() -> void:
 	for card in grid_container.get_children():
 		card.queue_free()
+
+func clear_upgrades() -> void:
+	for upgrade in upgrades_v_container.get_children():
+		upgrade.queue_free()

@@ -10,7 +10,7 @@
 shader = ExtResource("3_imyrc")
 shader_parameter/lod = 2.000000095
 
-[node name="DebugPanel" type="Control" node_paths=PackedStringArray("btn1000", "btn20000", "btn500000", "btn90000000", "exp_btn", "gold_btn")]
+[node name="DebugPanel" type="Control" node_paths=PackedStringArray("btn1000", "btn20000", "btn500000", "btn90000000", "exp_btn", "gold_btn", "prestige_btn")]
 layout_mode = 3
 anchors_preset = 10
 anchor_right = 1.0
@@ -24,19 +24,7 @@ btn500000 = NodePath("ColorRect/Panel/Control/qtyBtn3")
 btn90000000 = NodePath("ColorRect/Panel/Control/qtyBtn4")
 exp_btn = NodePath("ColorRect/Panel/Control/expBtn")
 gold_btn = NodePath("ColorRect/Panel/Control/goldBtn")
-
-[node name="backdropButton" type="Button" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -363.0
-offset_top = -330.0
-offset_right = 391.0
-offset_bottom = 1570.0
-grow_horizontal = 2
-grow_vertical = 2
+prestige_btn = NodePath("ColorRect/Panel/Control/prestigeBtn")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_kbq37")
@@ -196,3 +184,21 @@ theme_override_font_sizes/font_size = 70
 toggle_mode = true
 button_group = ExtResource("2_n44sy")
 text = "Reset"
+
+[node name="prestigeBtn" type="Button" parent="ColorRect/Panel/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -74.0
+offset_top = 277.0
+offset_right = 227.0
+offset_bottom = 437.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("4_o7tuo")
+theme_override_font_sizes/font_size = 70
+toggle_mode = true
+button_group = ExtResource("2_n44sy")
+text = "Prestige"

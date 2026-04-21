@@ -109,6 +109,15 @@ class_name SaveData
 	#"elite slime": 10,
 }
 
+@export_category("Upgrades")
+@export var element_upgrades := {
+	"arcane": 0,
+	"earth": 0,
+	"electric": 0,
+	"fire": 0,
+	"ice": 0
+}
+
 @export_category("Settings")
 @export var grid_opacity:float = 1.0 # from 0.0 to 1.0
 @export var grid_y_pos_offset:float = 0.0
@@ -198,7 +207,7 @@ func clear_rune_from_battle_loadout(rune_name: String) -> void:
 			return
 
 func get_ascension_level() -> int:
-	return 40 + (prestige_level * 20)
+	return 40 + (prestige_level * 10)
 
 func reset_data() -> void:
 	rune_inv = { # Start pack
@@ -208,8 +217,8 @@ func reset_data() -> void:
 	"Light Healing": 25
 }
 	current_level = 1
-	total_exp = 0 # true am
-	current_exp = 0 # Drive
+	total_exp = 0 
+	current_exp = 0
 	total_gold = 0
 	current_gold = 0
 	total_essences = {
@@ -270,6 +279,8 @@ func reset_data() -> void:
 	current_run_runes_obtained = {}
 	total_monster_kills = {}
 	total_run_monster_kills = {}
+	
+	# TODO: Loop through blessings and curses and set them all to untoggled and locked
 
 func is_curse_active(curse_name:String) -> bool:
 	for curse in curses:
@@ -284,6 +295,7 @@ func is_curse_active(curse_name:String) -> bool:
 		name = "Deep Sleep",
 		desc = "Rest Hard. Offline rune production is 20% faster",
 		toggled = false,
+		locked = true,
 		cost = 40,
 		type = "offline",
 		category = "runes"
@@ -293,6 +305,7 @@ func is_curse_active(curse_name:String) -> bool:
 		name = "Inner Reservoir",
 		desc = "Begin each run with 1,500 essence of every type.",
 		toggled = false,
+		locked = true,
 		cost = 50,
 		type = "economy",
 		category = "essence"
@@ -302,6 +315,7 @@ func is_curse_active(curse_name:String) -> bool:
 		name = "Pick Pocket",
 		desc = "Earn 20% more gold from defeated monsters.",
 		toggled = false,
+		locked = true,
 		cost = 70,
 		type = "economy",
 		category = "gold"
@@ -311,6 +325,7 @@ func is_curse_active(curse_name:String) -> bool:
 		name = "Battle",
 		desc = "+1 rune slot available in battle.",
 		toggled = false,
+		locked = true,
 		cost = 100,
 		type = "combat",
 		category = "buff"
@@ -320,6 +335,7 @@ func is_curse_active(curse_name:String) -> bool:
 		name = "Channeler",
 		desc = "Earn 10% more essences from defeated monsters.",
 		toggled = false,
+		locked = true,
 		cost = 30,
 		type = "economy",
 		category = "essence"
@@ -329,6 +345,7 @@ func is_curse_active(curse_name:String) -> bool:
 		name = "Grand Channeler",
 		desc = "Earn 15% more essences from defeated monsters.",
 		toggled = false,
+		locked = true,
 		cost = 50,
 		type = "economy",
 		category = "essence"
@@ -338,6 +355,7 @@ func is_curse_active(curse_name:String) -> bool:
 		name = "Student",
 		desc = "Earn 15% more exp from defeated monsters.",
 		toggled = false,
+		locked = true,
 		cost = 40,
 		type = "economy",
 		category = "exp"
@@ -347,6 +365,7 @@ func is_curse_active(curse_name:String) -> bool:
 		name = "Scholar",
 		desc = "Earn 20% more exp from defeated monsters.",
 		toggled = false,
+		locked = true,
 		cost = 95,
 		type = "economy",
 		category = "exp"

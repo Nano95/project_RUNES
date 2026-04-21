@@ -77,8 +77,8 @@ func update_individual_atk_label() -> void:
 
 func take_damage(dmg:int=1, dmg_color_type:String="arcane", crit_hit:bool=false) -> bool:
 	if (BURN in status_effects):
-		print("BURN Dmg increase: ", dmg, " -> ", int(ceil(1.2 * dmg)))
-		dmg = int(ceil(1.2 * dmg))
+		print("BURN Dmg increase: ", dmg, " -> ", int(ceil(1.4 * dmg)))
+		dmg = int(ceil(1.4 * dmg))
 	
 	spawn_damage_label(dmg, dmg_color_type, crit_hit)
 	current_hp -= dmg

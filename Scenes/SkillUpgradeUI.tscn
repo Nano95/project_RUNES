@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://dbi5tnplbhkmx"]
+
+[ext_resource type="Script" uid="uid://d28ysfw1kihrh" path="res://Scripts/SkillUpgradeUI.gd" id="1_rbqd4"]
+[ext_resource type="Texture2D" uid="uid://dq07wpdco2smy" path="res://Sprites/ESSENCE_ICON.png" id="2_khqdj"]
+[ext_resource type="Texture2D" uid="uid://bippvlcmoxyst" path="res://Sprites/animations/skill_upgrade_levels.png" id="2_nxj30"]
+[ext_resource type="Texture2D" uid="uid://brrrce515osvm" path="res://Sprites/EARTH_STATUS_ICON.png" id="3_tbc4d"]
+[ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="3_xyed7"]
+[ext_resource type="Texture2D" uid="uid://cerofln3xcb7n" path="res://Sprites/FIRE_STATUS_ICON.png" id="4_nxj30"]
+[ext_resource type="Texture2D" uid="uid://cgrrpac6d6j1r" path="res://Sprites/ELECTRIC_STATUS_ICON.png" id="4_x0fka"]
+[ext_resource type="Texture2D" uid="uid://bpmgpgc2elw6k" path="res://Sprites/ICE_STATUS_ICON.png" id="6_8siry"]
+
+[node name="SkillUpgradeUI" type="Control" node_paths=PackedStringArray("icon_sprite", "sprite")]
+custom_minimum_size = Vector2(663, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 663.0
+offset_bottom = 109.0
+script = ExtResource("1_rbqd4")
+icon_sprite = NodePath("Panel/icon")
+sprite = NodePath("Panel/Sprite2D")
+arcane_icon = ExtResource("2_khqdj")
+earth_icon = ExtResource("3_tbc4d")
+electric_icon = ExtResource("4_x0fka")
+fire_icon = ExtResource("4_nxj30")
+ice_icon = ExtResource("6_8siry")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_top = 16.0
+offset_right = 332.0
+offset_bottom = 62.0
+scale = Vector2(2, 2)
+
+[node name="icon" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = -9.0
+offset_right = 182.0
+offset_bottom = 23.0
+texture = ExtResource("4_nxj30")
+
+[node name="subtract" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 2.5
+offset_top = 4.0
+offset_right = 252.5
+offset_bottom = 194.0
+scale = Vector2(0.2, 0.2)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("3_xyed7")
+theme_override_font_sizes/font_size = 100
+text = "-"
+
+[node name="add" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 278.5
+offset_top = 4.0
+offset_right = 528.5
+offset_bottom = 194.0
+scale = Vector2(0.2, 0.2)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("3_xyed7")
+theme_override_font_sizes/font_size = 100
+text = "+"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel"]
+position = Vector2(166, 33.5)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_nxj30")
+vframes = 10

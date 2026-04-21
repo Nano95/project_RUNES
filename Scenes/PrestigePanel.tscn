@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cpvxinojrf0q2"]
+[gd_scene load_steps=11 format=3 uid="uid://cpvxinojrf0q2"]
 
 [ext_resource type="Script" uid="uid://brow3k8krvigc" path="res://Scripts/PrestigePanel.gd" id="1_7bcao"]
+[ext_resource type="PackedScene" uid="uid://dbi5tnplbhkmx" path="res://Scenes/SkillUpgradeUI.tscn" id="2_bfhdp"]
 [ext_resource type="PackedScene" uid="uid://cwkj7x8555wk3" path="res://Scenes/PrestigeCard.tscn" id="5_7bcao"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="5_m542g"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="6_o5vfw"]
@@ -18,7 +19,19 @@ shader = ExtResource("6_o5vfw")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="PrestigePanel" type="Control" node_paths=PackedStringArray("grid_container", "title", "back_btn", "next_btn", "upgrades_btn", "blessings_btn", "curses_btn")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6w8xd"]
+resource_local_to_scene = true
+shader = ExtResource("6_o5vfw")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_saqp3"]
+resource_local_to_scene = true
+shader = ExtResource("6_o5vfw")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="PrestigePanel" type="Control" node_paths=PackedStringArray("upgrades_v_container", "grid_container", "title", "info_panel", "upgrades_panel", "buff_debuff_panel", "requirement_label", "begin_ascension_btn", "count_lbl", "upgrades_btn", "blessings_btn", "curses_btn")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -33,11 +46,17 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(360, 640)
 script = ExtResource("1_7bcao")
+skill_upgrade_ui = ExtResource("2_bfhdp")
 prestige_card = ExtResource("5_7bcao")
-grid_container = NodePath("Panel/Prestiges/MarginContainer/VScrollBar/CardContainer")
+upgrades_v_container = NodePath("Panel/Upgrades/ListPanel/VBoxContainer")
+grid_container = NodePath("Panel/BuffsDebuffs/MarginContainer/VScrollBar/CardContainer")
 title = NodePath("Panel/Title/Title")
-back_btn = NodePath("ButtonNav/Upgrades")
-next_btn = NodePath("ButtonNav/Blessings")
+info_panel = NodePath("Panel/InfoPanel")
+upgrades_panel = NodePath("Panel/Upgrades")
+buff_debuff_panel = NodePath("Panel/BuffsDebuffs")
+requirement_label = NodePath("Panel/InfoPanel/Info")
+begin_ascension_btn = NodePath("Panel/InfoPanel/ListPanel/Ascend")
+count_lbl = NodePath("Panel/Upgrades/ListPanel/RichTextLabel")
 upgrades_btn = NodePath("ButtonNav/Upgrades")
 blessings_btn = NodePath("ButtonNav/Blessings")
 curses_btn = NodePath("ButtonNav/Curses")
@@ -67,7 +86,8 @@ text = "Ascensions"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Prestiges" type="Panel" parent="Panel"]
+[node name="InfoPanel" type="Panel" parent="Panel"]
+visible = false
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -78,13 +98,120 @@ offset_bottom = 419.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InfoPanel" type="Panel" parent="Panel/Prestiges"]
+[node name="InfoPanel" type="Panel" parent="Panel/InfoPanel"]
 layout_mode = 0
 offset_right = 678.0
 offset_bottom = 64.0
 
-[node name="Info" parent="Panel/Prestiges" instance=ExtResource("5_m542g")]
+[node name="Info" parent="Panel/InfoPanel" instance=ExtResource("5_m542g")]
 material = SubResource("ShaderMaterial_duup7")
+layout_mode = 0
+offset_left = 2.0000038
+offset_top = 3.0000153
+offset_right = 1696.9999
+offset_bottom = 140.00002
+scale = Vector2(0.4, 0.4)
+text = "Level 120 has been reached!"
+horizontal_alignment = 1
+
+[node name="ListPanel" type="Panel" parent="Panel/InfoPanel"]
+layout_mode = 0
+offset_top = 80.0
+offset_right = 679.0
+offset_bottom = 759.0
+
+[node name="Ascend" type="Button" parent="Panel/InfoPanel/ListPanel"]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 271.0
+offset_right = 560.0
+offset_bottom = 439.0
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("7_3a1v2")
+theme_override_font_sizes/font_size = 50
+text = "Begin Ascension"
+
+[node name="Upgrades" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -448.5
+offset_bottom = 419.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InfoPanel" type="Panel" parent="Panel/Upgrades"]
+layout_mode = 0
+offset_right = 678.0
+offset_bottom = 64.0
+
+[node name="Info" parent="Panel/Upgrades" instance=ExtResource("5_m542g")]
+material = SubResource("ShaderMaterial_6w8xd")
+layout_mode = 0
+offset_left = 21.000002
+offset_top = 3.0000153
+offset_right = 1588.4999
+offset_bottom = 140.00002
+scale = Vector2(0.4, 0.4)
+text = "Pick your upgrades!"
+horizontal_alignment = 1
+
+[node name="ListPanel" type="Panel" parent="Panel/Upgrades"]
+layout_mode = 0
+offset_top = 80.0
+offset_right = 679.0
+offset_bottom = 868.0
+
+[node name="Info2" parent="Panel/Upgrades/ListPanel" instance=ExtResource("5_m542g")]
+material = SubResource("ShaderMaterial_6w8xd")
+layout_mode = 0
+offset_left = 18.000002
+offset_top = 3.999977
+offset_right = 2168.0
+offset_bottom = 300.66678
+text = "Each point increases element damage output by 2.5%"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Upgrades/ListPanel"]
+layout_mode = 0
+offset_top = 732.0
+offset_right = 1697.4999
+offset_bottom = 874.4999
+scale = Vector2(0.4, 0.4)
+theme_override_constants/outline_size = 35
+theme_override_fonts/normal_font = ExtResource("7_3a1v2")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[center]You have 3 point(s) left[/center]"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Upgrades/ListPanel"]
+layout_mode = 0
+offset_top = 94.0
+offset_right = 678.0
+offset_bottom = 729.0
+theme_override_constants/separation = 130
+
+[node name="BuffsDebuffs" type="Panel" parent="Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -448.5
+offset_bottom = 419.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InfoPanel" type="Panel" parent="Panel/BuffsDebuffs"]
+layout_mode = 0
+offset_right = 678.0
+offset_bottom = 64.0
+
+[node name="Info" parent="Panel/BuffsDebuffs" instance=ExtResource("5_m542g")]
+material = SubResource("ShaderMaterial_saqp3")
 layout_mode = 0
 offset_left = 21.000002
 offset_top = 3.0000153
@@ -92,14 +219,15 @@ offset_right = 1588.4999
 offset_bottom = 140.00002
 scale = Vector2(0.4, 0.4)
 text = "Pick your blessings!"
+horizontal_alignment = 1
 
-[node name="ListPanel" type="Panel" parent="Panel/Prestiges"]
+[node name="ListPanel" type="Panel" parent="Panel/BuffsDebuffs"]
 layout_mode = 0
 offset_top = 80.0
 offset_right = 679.0
 offset_bottom = 759.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/Prestiges"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/BuffsDebuffs"]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 99.0
@@ -107,10 +235,10 @@ offset_right = 659.0
 offset_bottom = 736.0
 theme_override_constants/margin_left = 20
 
-[node name="VScrollBar" type="ScrollContainer" parent="Panel/Prestiges/MarginContainer"]
+[node name="VScrollBar" type="ScrollContainer" parent="Panel/BuffsDebuffs/MarginContainer"]
 layout_mode = 2
 
-[node name="CardContainer" type="GridContainer" parent="Panel/Prestiges/MarginContainer/VScrollBar"]
+[node name="CardContainer" type="GridContainer" parent="Panel/BuffsDebuffs/MarginContainer/VScrollBar"]
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 19
