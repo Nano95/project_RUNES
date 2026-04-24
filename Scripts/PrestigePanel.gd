@@ -16,6 +16,12 @@ class_name PrestigePanel
 
 @export_category("Upgrades")
 @export var count_lbl:RichTextLabel
+@export_category("Blessings")
+@export var blessings_container:Control
+@export var ap_count_lbl:RichTextLabel
+@export var undo_blessings_btn:Button
+@export_category("Curse")
+@export var curses_container:Control
 
 @export_category("Nav")
 @export var upgrades_btn:Button
@@ -26,18 +32,23 @@ var prestige_in_process:bool = false
 var in_debug_mode:bool = false
 var main:MainNode
 var TOTAL_UPGRADE_COUNT_AVAILABLE:int
-var temp_upgrades := {
+var temp_upgrades:Dictionary = {
 	"arcane": 0,
 	"earth": 0,
 	"electric": 0,
 	"fire": 0,
 	"ice": 0
 }
+var temp_blessings:Array = []
+var temp_curses:Array = []
+var blessing_coins_available:int
+var blessing_coins_spent:int = 0
 
 func _ready() -> void:
 	upgrades_btn.pressed.connect(open_upgrades)
 	blessings_btn.pressed.connect(open_blessings)
 	curses_btn.pressed.connect(open_curses)
+	undo_blessings_btn.pressed.connect(setup_blessings.bind(true))
 	
 	if (in_debug_mode): open_upgrades() # No need to see info panel in debug mode.
 	else: 
@@ -47,8 +58,9 @@ func _ready() -> void:
 		disable_all_nav_buttons()
 		begin_ascension_btn.pressed.connect(open_upgrades)
 		init_temp_upgrades()
+		initialize_temp_blessings()
 		TOTAL_UPGRADE_COUNT_AVAILABLE = get_invested_points() + (3 * (main.game_data.prestige_level + 1))
-
+		initialize_temp_curses()
 
 func setup(m:MainNode, is_debug:bool=false) -> void:
 	main = m
@@ -82,13 +94,18 @@ func update_count_label() -> void:
 	if (remaining > 0):
 		count_lbl.text = "[center]You have [color=#7CFF7C]%d[/color] point(s) left[/center]" % remaining
 		blessings_btn.disabled = true
+		curses_btn.disabled = true
 	else:
 		count_lbl.text = "[center]When you're ready, continue![/center]"
 		blessings_btn.disabled = false
 
-func setup_blessings() -> void:
+func setup_blessings(reset:bool=false) -> void:
 	clear_cards()
-	populate_cards(main.game_data.blessings, true)
+	if (in_debug_mode):
+		populate_cards(main.game_data.blessings, true)
+	else:
+		if (reset): initialize_temp_blessings() # Will reset things.
+		populate_cards(temp_blessings, true)
 
 func setup_curses() -> void:
 	clear_cards()
@@ -98,7 +115,7 @@ func populate_cards(arr:Array, is_blessing:bool=true) -> void:
 	# Arr of dictionaries
 	for dict in arr:
 		var card = prestige_card.instantiate()
-		card.setup(main, is_blessing, dict)
+		card.setup(main, self, is_blessing, dict)
 		grid_container.add_child(card)
 
 func open_upgrades()-> void:
@@ -115,13 +132,18 @@ func open_blessings() -> void:
 	info_panel.visible = false
 	upgrades_panel.visible = false
 	buff_debuff_panel.visible = true
+	blessings_container.visible = true
+	curses_container.visible = false
 	setup_blessings()
+	curses_btn.disabled = false
 
 func open_curses() -> void:
 	play_selected(curses_btn)
 	upgrades_panel.visible = false
 	info_panel.visible = false
 	buff_debuff_panel.visible = true
+	blessings_container.visible = false
+	curses_container.visible = true
 	setup_curses()
 
 func setup_upgrades() -> void:
@@ -165,6 +187,78 @@ func disable_all_nav_buttons() -> void:
 	blessings_btn.disabled = true
 	curses_btn.disabled = true
 
+func init_temp_upgrades() -> void:
+	for key in main.game_data.element_upgrades.keys():
+		temp_upgrades[key] += main.game_data.element_upgrades[key]
+
+func initialize_temp_blessings() -> void:
+	temp_blessings = []
+	for b in main.game_data.blessings:
+		temp_blessings.append(b.duplicate(true)) # deep copy - does not modify the og data
+	# Blessing currency = permanent + current level
+	blessing_coins_available = main.game_data.blessing_coins + main.game_data.current_level
+	blessing_coins_spent = 0
+	update_blessing_coins_label()
+
+func initialize_temp_curses() -> void:
+	temp_curses = []
+	for b in main.game_data.blessings:
+		temp_curses.append(b.duplicate(true)) # deep copy - does not modify the og data
+
+func blessing_coins_left() -> int:
+	return blessing_coins_available - blessing_coins_spent
+
+func update_blessing_coins_label() -> void:
+	var remaining:int = blessing_coins_left()
+	if (remaining > 0):
+		ap_count_lbl.text = "[center]You have [color=#7CFF7C]%d[/color] AP(s)[/center]" % remaining
+	else:
+		ap_count_lbl.text = "[center]You have %d APs[/center]" % remaining
+
+func try_purchase_blessing(id:String) -> bool:
+	var blessing = get_temp_blessing(id)
+	if (blessing.cost > blessing_coins_left()):
+		Utils.warn_shake_node(ap_count_lbl)
+		return false
+	
+	blessing.locked = false
+	blessing_coins_spent += blessing.cost
+	update_blessing_coins_label()
+	return true
+
+func get_temp_blessing(id:String) -> Dictionary:
+	for b in temp_blessings:
+		if b.id == id:
+			return b
+	return {}
+
+# When prestige is complete, commit all of the upgrades!
+func commit_upgrades():
+	for key in temp_upgrades.keys():
+		main.game_data.element_upgrades[key] += temp_upgrades[key]
+
+func commit_blessings():
+	for i in temp_blessings.size():
+		main.game_data.blessings[i] = temp_blessings[i]
+	# Update permanent blessing currency
+	main.game_data.blessing_coins = blessing_coins_left()
+
+func commit_curses():
+	for i in temp_curses.size():
+		main.game_data.curses[i] = temp_curses[i]
+	# Update permanent blessing currency
+	main.game_data.prestige_level += 1
+	# In a parent function that calls all commits we will call the reset function from saveData
+	# not full reset but prestige reset.
+	
+func clear_cards() -> void:
+	for card in grid_container.get_children():
+		card.queue_free()
+
+func clear_upgrades() -> void:
+	for upgrade in upgrades_v_container.get_children():
+		upgrade.queue_free()
+
 func play_selected(btn:Button) -> void:
 	var og_y_pos:float = btn.position.y
 	var t := create_tween()
@@ -174,23 +268,3 @@ func play_selected(btn:Button) -> void:
 	t.tween_property(btn, "position:y", og_y_pos, 0.15)\
 		.set_trans(Tween.TRANS_CUBIC)\
 		.set_ease(Tween.EASE_OUT)
-
-# When prestige is complete, commit all of the upgrades!
-
-func init_temp_upgrades() -> void:
-	for key in main.game_data.element_upgrades.keys():
-		temp_upgrades[key] += main.game_data.element_upgrades[key]
-	
-	print("Tempt upgrades: ", temp_upgrades)
-
-func commit_upgrades():
-	for key in temp_upgrades.keys():
-		main.game_data.element_upgrades[key] += temp_upgrades[key]
-
-func clear_cards() -> void:
-	for card in grid_container.get_children():
-		card.queue_free()
-
-func clear_upgrades() -> void:
-	for upgrade in upgrades_v_container.get_children():
-		upgrade.queue_free()

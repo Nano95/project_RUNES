@@ -31,7 +31,7 @@ shader = ExtResource("6_o5vfw")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="PrestigePanel" type="Control" node_paths=PackedStringArray("upgrades_v_container", "grid_container", "title", "info_panel", "upgrades_panel", "buff_debuff_panel", "requirement_label", "begin_ascension_btn", "count_lbl", "upgrades_btn", "blessings_btn", "curses_btn")]
+[node name="PrestigePanel" type="Control" node_paths=PackedStringArray("upgrades_v_container", "grid_container", "title", "info_panel", "upgrades_panel", "buff_debuff_panel", "requirement_label", "begin_ascension_btn", "count_lbl", "blessings_container", "ap_count_lbl", "undo_blessings_btn", "curses_container", "upgrades_btn", "blessings_btn", "curses_btn")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -57,6 +57,10 @@ buff_debuff_panel = NodePath("Panel/BuffsDebuffs")
 requirement_label = NodePath("Panel/InfoPanel/Info")
 begin_ascension_btn = NodePath("Panel/InfoPanel/ListPanel/Ascend")
 count_lbl = NodePath("Panel/Upgrades/ListPanel/RichTextLabel")
+blessings_container = NodePath("Panel/BuffsDebuffs/BlessingInfo")
+ap_count_lbl = NodePath("Panel/BuffsDebuffs/BlessingInfo/apRichText")
+undo_blessings_btn = NodePath("Panel/BuffsDebuffs/BlessingInfo/Undo")
+curses_container = NodePath("Panel/BuffsDebuffs/CurseInfo")
 upgrades_btn = NodePath("ButtonNav/Upgrades")
 blessings_btn = NodePath("ButtonNav/Blessings")
 curses_btn = NodePath("ButtonNav/Curses")
@@ -132,6 +136,7 @@ theme_override_font_sizes/font_size = 50
 text = "Begin Ascension"
 
 [node name="Upgrades" type="Panel" parent="Panel"]
+visible = false
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -194,7 +199,6 @@ offset_bottom = 729.0
 theme_override_constants/separation = 130
 
 [node name="BuffsDebuffs" type="Panel" parent="Panel"]
-visible = false
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -210,16 +214,92 @@ layout_mode = 0
 offset_right = 678.0
 offset_bottom = 64.0
 
-[node name="Info" parent="Panel/BuffsDebuffs" instance=ExtResource("5_m542g")]
+[node name="BlessingInfo" type="Control" parent="Panel/BuffsDebuffs"]
+anchors_preset = 0
+
+[node name="Info" parent="Panel/BuffsDebuffs/BlessingInfo" instance=ExtResource("5_m542g")]
 material = SubResource("ShaderMaterial_saqp3")
 layout_mode = 0
-offset_left = 21.000002
+offset_left = 21.0
 offset_top = 3.0000153
 offset_right = 1588.4999
 offset_bottom = 140.00002
 scale = Vector2(0.4, 0.4)
 text = "Pick your blessings!"
 horizontal_alignment = 1
+
+[node name="apRichText" type="RichTextLabel" parent="Panel/BuffsDebuffs/BlessingInfo"]
+layout_mode = 0
+offset_top = 772.0
+offset_right = 1002.4999
+offset_bottom = 914.4999
+scale = Vector2(0.4, 0.4)
+theme_override_constants/outline_size = 35
+theme_override_fonts/normal_font = ExtResource("7_3a1v2")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[center]You have 1200 AP(s)[/center]"
+
+[node name="bottomInfo" parent="Panel/BuffsDebuffs/BlessingInfo" instance=ExtResource("5_m542g")]
+material = SubResource("ShaderMaterial_saqp3")
+layout_mode = 0
+offset_left = 12.0
+offset_top = 828.99994
+offset_right = 1956.9998
+offset_bottom = 994.0005
+scale = Vector2(0.2, 0.2)
+text = "When you're ready, continue to 'Curse'"
+horizontal_alignment = 1
+
+[node name="Undo" type="Button" parent="Panel/BuffsDebuffs/BlessingInfo"]
+layout_mode = 0
+offset_left = 404.0
+offset_top = 765.0
+offset_right = 672.0
+offset_bottom = 861.0
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("7_3a1v2")
+theme_override_font_sizes/font_size = 50
+text = "Undo"
+
+[node name="CurseInfo" type="Control" parent="Panel/BuffsDebuffs"]
+visible = false
+anchors_preset = 0
+
+[node name="Info" parent="Panel/BuffsDebuffs/CurseInfo" instance=ExtResource("5_m542g")]
+material = SubResource("ShaderMaterial_saqp3")
+layout_mode = 0
+offset_left = 21.0
+offset_top = 3.0000153
+offset_right = 1588.4999
+offset_bottom = 140.00002
+scale = Vector2(0.4, 0.4)
+text = "Permanent Curses"
+horizontal_alignment = 1
+
+[node name="bottomInfo" parent="Panel/BuffsDebuffs/CurseInfo" instance=ExtResource("5_m542g")]
+material = SubResource("ShaderMaterial_saqp3")
+layout_mode = 0
+offset_left = 11.0
+offset_top = 773.99994
+offset_right = 1910.9998
+offset_bottom = 1214.0005
+scale = Vector2(0.2, 0.2)
+text = "Every Ascension triggers the next curse. 
+
+Curses stack!"
+horizontal_alignment = 1
+
+[node name="Complete" type="Button" parent="Panel/BuffsDebuffs/CurseInfo"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 765.0
+offset_right = 669.0
+offset_bottom = 863.0
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("7_3a1v2")
+theme_override_font_sizes/font_size = 50
+text = "Complete"
 
 [node name="ListPanel" type="Panel" parent="Panel/BuffsDebuffs"]
 layout_mode = 0

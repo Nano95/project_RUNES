@@ -73,11 +73,9 @@ class_name SaveData
 @export var available_ap:int = 0
 @export var base_stats:Dictionary = { "health": 10, "focus": 10, "power": 10, "luck": 10 }
 @export var allocated_stats:Dictionary = { "health": 0, "focus": 0, "power": 0, "luck": 0 }
-@export var blessing_coins_available:int = 0 
-@export var blessing_coins_spent:int = 0 
+@export var blessing_coins:int = 0
 @export var prestige_level:int = 0
 @export var prestige_unlocked:bool = false
-@export var blessing_coins:int = 0
 @export_category("Stats")
 
 @export var highest_level_reached:int = 0

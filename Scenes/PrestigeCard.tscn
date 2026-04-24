@@ -18,7 +18,7 @@ shader = ExtResource("4_k6jf2")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="PrestigeCard" type="Control" node_paths=PackedStringArray("card_name", "card_desc", "panel", "card_button")]
+[node name="PrestigeCard" type="Control" node_paths=PackedStringArray("card_name", "card_desc", "card_cost", "panel", "card_button")]
 custom_minimum_size = Vector2(288, 144)
 layout_mode = 3
 anchors_preset = 0
@@ -28,6 +28,7 @@ pivot_offset = Vector2(144, 72)
 script = ExtResource("1_shk1f")
 card_name = NodePath("name")
 card_desc = NodePath("desc")
+card_cost = NodePath("cost")
 panel = NodePath("Panel")
 card_button = NodePath("Button")
 card_yes = ExtResource("2_emx5b")
@@ -43,9 +44,9 @@ texture = ExtResource("2_u6l2e")
 [node name="name" parent="." instance=ExtResource("3_emx5b")]
 material = SubResource("ShaderMaterial_04u4u")
 layout_mode = 1
-offset_top = 0.666667
+offset_top = -2.0
 offset_right = 956.6666
-offset_bottom = 191.77777
+offset_bottom = 141.33333
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.47843137)
 text = "Relentless"
 horizontal_alignment = 1
@@ -60,6 +61,18 @@ offset_right = 1765.5
 offset_bottom = 588.25
 scale = Vector2(0.16, 0.16)
 text = "Sleight of hand expert. Make 20% more gold from monsters. "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="cost" parent="." instance=ExtResource("3_emx5b")]
+material = SubResource("ShaderMaterial_u6l2e")
+layout_mode = 1
+offset_left = 3.0
+offset_top = 34.0
+offset_right = 1771.75
+offset_bottom = 196.5
+scale = Vector2(0.16, 0.16)
+text = "AP cost: 100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
