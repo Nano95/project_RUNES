@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwkj7x8555wk3"]
+[gd_scene load_steps=9 format=3 uid="uid://cwkj7x8555wk3"]
 
 [ext_resource type="Script" uid="uid://1e1uw72aycok" path="res://Scripts/PrestigeCard.gd" id="1_shk1f"]
 [ext_resource type="Texture2D" uid="uid://dl3oj1spaftum" path="res://Sprites/UI/prestige_cards_yes.png" id="2_emx5b"]
 [ext_resource type="Texture2D" uid="uid://tyh6qxpsvs2o" path="res://Sprites/UI/prestige_cards_no.png" id="2_u6l2e"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_emx5b"]
+[ext_resource type="Texture2D" uid="uid://dx2t3bwl2by6a" path="res://Sprites/UI/prestige_cards_standby.png" id="4_emx5b"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="4_k6jf2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_04u4u"]
@@ -33,6 +34,7 @@ panel = NodePath("Panel")
 card_button = NodePath("Button")
 card_yes = ExtResource("2_emx5b")
 card_no = ExtResource("2_u6l2e")
+card_standby = ExtResource("4_emx5b")
 
 [node name="Panel" type="TextureRect" parent="."]
 layout_mode = 0

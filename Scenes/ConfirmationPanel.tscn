@@ -3,8 +3,12 @@
 [ext_resource type="Script" uid="uid://bsjn7x8wbef4f" path="res://Scripts/ConfirmationPanel.gd" id="1_uquxi"]
 [ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="2_gy5pk"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_m6xbl"]
-[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="4_40jii"]
+[ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="4_40jii"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="5_wsfxt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f4pl4"]
+shader = ExtResource("2_gy5pk")
+shader_parameter/lod = 2.000000095
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6elt3"]
 resource_local_to_scene = true
@@ -18,10 +22,6 @@ shader = ExtResource("4_40jii")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f4pl4"]
-shader = ExtResource("2_gy5pk")
-shader_parameter/lod = 1.674000079515
-
 [node name="ConfirmationPanel" type="Control"]
 layout_mode = 3
 anchors_preset = 8
@@ -32,6 +32,14 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_uquxi")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_f4pl4")
+layout_mode = 0
+offset_left = -761.0
+offset_top = -889.0
+offset_right = 722.0
+offset_bottom = 941.0
 
 [node name="Exitbutton" type="Button" parent="."]
 self_modulate = Color(1, 1, 1, 0)
@@ -64,9 +72,9 @@ grow_vertical = 2
 material = SubResource("ShaderMaterial_6elt3")
 layout_mode = 0
 offset_left = 1.0
-offset_top = 43.0
+offset_top = 31.5
 offset_right = 1252.8518
-offset_bottom = 180.0
+offset_bottom = 168.5
 scale = Vector2(0.54, 0.54)
 text = "<set title>"
 horizontal_alignment = 1
@@ -76,9 +84,9 @@ vertical_alignment = 1
 material = SubResource("ShaderMaterial_rjptq")
 layout_mode = 0
 offset_left = 6.0
-offset_top = 157.0
+offset_top = 143.5
 offset_right = 2236.0002
-offset_bottom = 853.6666
+offset_bottom = 930.1666
 text = "<SomeDescription>"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -108,12 +116,3 @@ theme_override_font_sizes/font_size = 100
 text = "No"
 icon_alignment = 1
 expand_icon = true
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_f4pl4")
-layout_mode = 0
-offset_left = 2.0
-offset_top = 361.0
-offset_right = 722.0
-offset_bottom = 941.0

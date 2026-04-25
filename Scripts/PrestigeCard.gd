@@ -8,6 +8,7 @@ class_name PrestigeCard
 @export var card_button:Button
 @export var card_yes:Texture
 @export var card_no:Texture
+@export var card_standby:Texture
 
 var og_scale:Vector2
 var is_blessing:bool = true
@@ -16,17 +17,18 @@ var prestige_panel:PrestigePanel
 var data:Dictionary
 var card_id:String
 var in_debug_mode:bool=false # NEW - not in use yet. When debug mode is on, we dont need to purchase to toggle on
-
+var order_id:int=-1
 func _ready() -> void:
 	og_scale = scale
 
-func setup(main_node:MainNode, prestige_panel_ref:PrestigePanel, blessing:bool, my_data:Dictionary) -> void:
+func setup(main_node:MainNode, prestige_panel_ref:PrestigePanel, blessing:bool, my_data:Dictionary, int_id:int=-1) -> void:
 	main = main_node
 	prestige_panel = prestige_panel_ref
 	in_debug_mode = prestige_panel.in_debug_mode
 	is_blessing = blessing
 	data = my_data
 	card_id = data['id']
+	order_id = int_id # Used for curses since they come in order.
 	setup_ui()
 	# Connect button
 	card_button.pressed.connect(card_pressed)
@@ -34,8 +36,15 @@ func setup(main_node:MainNode, prestige_panel_ref:PrestigePanel, blessing:bool, 
 func setup_ui() -> void:
 	card_name.text = data['name']
 	card_desc.text = data['desc']
-	panel.texture = card_yes if (data['toggled']) else card_no
 	update_card_cost()
+	panel.texture = card_yes if (data['toggled']) else card_no
+	if (in_debug_mode): return
+	if (is_blessing): return
+	# For curses, under regular scenarios we turn green if toggled, but standby, if it's the new curse
+	# That is GOING to be committed. if it has already been committed, then it stays as green.
+	if (main.game_data.prestige_level == order_id):
+		data["toggled"] = true
+		panel.texture = card_standby
 
 func update_card_cost() -> void:
 	if (is_blessing):

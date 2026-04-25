@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cpvxinojrf0q2"]
+[gd_scene load_steps=12 format=3 uid="uid://cpvxinojrf0q2"]
 
 [ext_resource type="Script" uid="uid://brow3k8krvigc" path="res://Scripts/PrestigePanel.gd" id="1_7bcao"]
 [ext_resource type="PackedScene" uid="uid://dbi5tnplbhkmx" path="res://Scenes/SkillUpgradeUI.tscn" id="2_bfhdp"]
+[ext_resource type="PackedScene" uid="uid://du5vvoc8xc6j8" path="res://Scenes/ConfirmationPanel.tscn" id="4_6w8xd"]
 [ext_resource type="PackedScene" uid="uid://cwkj7x8555wk3" path="res://Scenes/PrestigeCard.tscn" id="5_7bcao"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="5_m542g"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="6_o5vfw"]
@@ -31,7 +32,7 @@ shader = ExtResource("6_o5vfw")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="PrestigePanel" type="Control" node_paths=PackedStringArray("upgrades_v_container", "grid_container", "title", "info_panel", "upgrades_panel", "buff_debuff_panel", "requirement_label", "begin_ascension_btn", "count_lbl", "blessings_container", "ap_count_lbl", "undo_blessings_btn", "curses_container", "upgrades_btn", "blessings_btn", "curses_btn")]
+[node name="PrestigePanel" type="Control" node_paths=PackedStringArray("upgrades_v_container", "grid_container", "title", "info_panel", "upgrades_panel", "buff_debuff_panel", "requirement_label", "begin_ascension_btn", "count_lbl", "blessings_container", "ap_count_lbl", "undo_blessings_btn", "curses_container", "complete_ascension_btn", "upgrades_btn", "blessings_btn", "curses_btn")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -48,6 +49,7 @@ pivot_offset = Vector2(360, 640)
 script = ExtResource("1_7bcao")
 skill_upgrade_ui = ExtResource("2_bfhdp")
 prestige_card = ExtResource("5_7bcao")
+confirmation_panel = ExtResource("4_6w8xd")
 upgrades_v_container = NodePath("Panel/Upgrades/ListPanel/VBoxContainer")
 grid_container = NodePath("Panel/BuffsDebuffs/MarginContainer/VScrollBar/CardContainer")
 title = NodePath("Panel/Title/Title")
@@ -61,6 +63,7 @@ blessings_container = NodePath("Panel/BuffsDebuffs/BlessingInfo")
 ap_count_lbl = NodePath("Panel/BuffsDebuffs/BlessingInfo/apRichText")
 undo_blessings_btn = NodePath("Panel/BuffsDebuffs/BlessingInfo/Undo")
 curses_container = NodePath("Panel/BuffsDebuffs/CurseInfo")
+complete_ascension_btn = NodePath("Panel/BuffsDebuffs/CurseInfo/Complete")
 upgrades_btn = NodePath("ButtonNav/Upgrades")
 blessings_btn = NodePath("ButtonNav/Blessings")
 curses_btn = NodePath("ButtonNav/Curses")

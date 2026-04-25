@@ -204,8 +204,8 @@ func clear_rune_from_battle_loadout(rune_name: String) -> void:
 			selected_battle_runes[slot] = null
 			return
 
-func get_ascension_level() -> int:
-	return 40 + (prestige_level * 10)
+func get_ascension_level(offset:int=0) -> int:
+	return 40 + ((prestige_level + offset) * 10)
 
 func reset_data() -> void:
 	rune_inv = { # Start pack

@@ -3,6 +3,7 @@ class_name PrestigePanel
 
 @export var skill_upgrade_ui:PackedScene
 @export var prestige_card:PackedScene
+@export var confirmation_panel:PackedScene
 @export var upgrades_v_container:VBoxContainer
 @export var grid_container:GridContainer
 @export var title:Label
@@ -22,6 +23,7 @@ class_name PrestigePanel
 @export var undo_blessings_btn:Button
 @export_category("Curse")
 @export var curses_container:Control
+@export var complete_ascension_btn:Button
 
 @export_category("Nav")
 @export var upgrades_btn:Button
@@ -49,6 +51,7 @@ func _ready() -> void:
 	blessings_btn.pressed.connect(open_blessings)
 	curses_btn.pressed.connect(open_curses)
 	undo_blessings_btn.pressed.connect(setup_blessings.bind(true))
+	complete_ascension_btn.pressed.connect(complete_ascension)
 	
 	if (in_debug_mode): open_upgrades() # No need to see info panel in debug mode.
 	else: 
@@ -109,14 +112,19 @@ func setup_blessings(reset:bool=false) -> void:
 
 func setup_curses() -> void:
 	clear_cards()
-	populate_cards(main.game_data.curses, false)
+	if (in_debug_mode):
+		populate_cards(main.game_data.curses, false)
+	else:
+		populate_cards(temp_curses, false)
 
 func populate_cards(arr:Array, is_blessing:bool=true) -> void:
 	# Arr of dictionaries
+	var i:int=0
 	for dict in arr:
 		var card = prestige_card.instantiate()
-		card.setup(main, self, is_blessing, dict)
+		card.setup(main, self, is_blessing, dict, i)
 		grid_container.add_child(card)
+		i += 1
 
 func open_upgrades()-> void:
 	upgrades_btn.disabled = false
@@ -202,7 +210,7 @@ func initialize_temp_blessings() -> void:
 
 func initialize_temp_curses() -> void:
 	temp_curses = []
-	for b in main.game_data.blessings:
+	for b in main.game_data.curses:
 		temp_curses.append(b.duplicate(true)) # deep copy - does not modify the og data
 
 func blessing_coins_left() -> int:
@@ -232,6 +240,22 @@ func get_temp_blessing(id:String) -> Dictionary:
 			return b
 	return {}
 
+func complete_ascension() -> void:
+	print("Committing all and resetting.")
+	var pnl = confirmation_panel.instantiate()
+	var pnl_title:String = "Are you sure?"
+	var desc:String = "You cannot modify your upgrades and blessings until your next ascension!\
+	\n\nNext ascension level at: Lv. %d" % main.game_data.get_ascension_level(1)
+	pnl.setup(commit_and_ascend, pnl_title, desc, true)
+	main.spawn_to_top_ui_layer(pnl)
+	# No actually pop open a modal saying ARE YOU SURE YOU ARE DONE? Next ASC is at max lvl x
+
+func commit_and_ascend() -> void:
+	print("COMMIT!!!! YES AND FADE OUT AND SCENE!")
+	commit_upgrades()
+	commit_blessings()
+	commit_curses()
+
 # When prestige is complete, commit all of the upgrades!
 func commit_upgrades():
 	for key in temp_upgrades.keys():
@@ -244,6 +268,8 @@ func commit_blessings():
 	main.game_data.blessing_coins = blessing_coins_left()
 
 func commit_curses():
+	print("- temp_curses ", temp_curses)
+	print(' - main.game_data.curses: ', main.game_data.curses)
 	for i in temp_curses.size():
 		main.game_data.curses[i] = temp_curses[i]
 	# Update permanent blessing currency
