@@ -5,7 +5,6 @@ class_name FightMenu
 @export var location_grid_container:GridContainer
 @export var rune_grid_container:GridContainer
 @export var start_button:Button
-@export var exit_button:Button
 @export var my_button:PackedScene
 @export var rune_button:PackedScene
 @export var select_runes_panel:PackedScene
@@ -27,7 +26,6 @@ func _ready() -> void:
 	setup_monster_grid()
 	setup_rune_grid()
 	start_button.pressed.connect(main.spawn_game)
-	exit_button.pressed.connect(close)
 	$Panel/ToggleMonsterInfo.pressed.connect(toggle_monster_info)
 	$Panel/MonsterInfo/Button.pressed.connect(toggle_monster_info)
 
@@ -49,9 +47,7 @@ func setup_rune_grid() -> void:
 		var btn := rune_button.instantiate() as FightMenuRuneButton
 		# Get the rune if it is saved
 		var slot_rune_data = null
-		if (selected_runes_data[slot] != null): 
-			print("- selected_runes_data[slot] ", selected_runes_data[slot])
-			print("_ rune_data ", rune_data)
+		if (selected_runes_data[slot] != null):
 			slot_rune_data = rune_data[selected_runes_data[slot]]
 		btn.setup(i, slot_rune_data, main, open_rune_selection_panel, null)
 		rune_grid_container.add_child(btn)

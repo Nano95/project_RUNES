@@ -11,6 +11,9 @@ var main:MainNode
 func setup(m:MainNode, menu:MainMenu) -> void:
 	main = m
 	main_menu = menu
+	set_button_array()
+
+func set_button_array() -> void:
 	side_buttons_data = [
 		{
 			"icon": preload("res://Sprites/SWORD_LARGE_ICON.png"),
@@ -28,18 +31,23 @@ func setup(m:MainNode, menu:MainMenu) -> void:
 			"icon": preload("res://Sprites/SHOPS_ICON.png"),
 			"callable": main_menu.open_shop
 		},
-		{
+	]
+	if (main.game_data.prestige_level >= 1 or main.game_data.prestige_unlocked):
+		side_buttons_data.append({
 			"icon": preload("res://Sprites/PRESTIGE_ICON.png"),
 			"callable": main_menu.open_prestige
-		},
-		{
+		})
+	if (true):
+		side_buttons_data.append({
 			"icon": preload("res://Sprites/BUG_ICON.png"),
 			"callable": main_menu.open_debug_things
-		}
-	]
+		})
 	populate_buttons()
-
 func populate_buttons() -> void:
+	# Clear children first
+	for child in get_children():
+		child.queue_free()
+	
 	var v_id=0
 	for btn_data in side_buttons_data:
 		var btn = side_button_ref.instantiate()

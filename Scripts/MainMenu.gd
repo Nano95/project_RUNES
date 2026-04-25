@@ -146,7 +146,9 @@ func add_xp(amount: float) -> void:
 
 func on_level_up():
 	main.game_data.current_level += 1
+	main.game_data.current_exp = 0
 	main.game_data.available_ap += 5
+	main.game_data.check_prestige_unlocked()
 
 func xp_required_for_level(level: int) -> float:
 	return xp_curve.sample(level)

@@ -74,6 +74,7 @@ func on_level_up():
 	main.game_data.current_level += 1
 	main.game_data.current_exp = 0
 	main.game_data.available_ap += 5
+	main.game_data.check_prestige_unlocked()
 
 	if (main.game_ui_ref.has_method('play_level_up_flash')):
 		main.game_ui_ref.play_level_up_flash()

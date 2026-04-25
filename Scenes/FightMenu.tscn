@@ -81,7 +81,7 @@ shader = ExtResource("4_ov7x6")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="FightPanel" type="Control" node_paths=PackedStringArray("monster_grid_container", "location_grid_container", "rune_grid_container", "start_button", "exit_button")]
+[node name="FightPanel" type="Control" node_paths=PackedStringArray("monster_grid_container", "location_grid_container", "rune_grid_container", "start_button")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -100,7 +100,6 @@ monster_grid_container = NodePath("Panel/Family/MarginContainer/GridContainer")
 location_grid_container = NodePath("Panel/Location/MarginContainer/GridContainer")
 rune_grid_container = NodePath("Panel/ChooseRunes/MarginContainer/ScrollContainer/GridContainer")
 start_button = NodePath("Panel/Fight")
-exit_button = NodePath("Panel/Close")
 my_button = ExtResource("2_0c1bx")
 rune_button = ExtResource("6_f0u7t")
 select_runes_panel = ExtResource("4_6sloi")
@@ -222,27 +221,15 @@ expand_icon = true
 
 [node name="Fight" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 207.99998
+offset_left = 115.00001
 offset_top = 980.99994
-offset_right = 855.14276
+offset_right = 762.14276
 offset_bottom = 1119.0
 scale = Vector2(0.7, 0.7)
 theme_override_constants/outline_size = 30
 theme_override_fonts/font = ExtResource("5_utror")
 theme_override_font_sizes/font_size = 100
 text = "Let's go!"
-
-[node name="Close" type="Button" parent="Panel"]
-layout_mode = 0
-offset_left = 17.000092
-offset_top = 980.99994
-offset_right = 217.00009
-offset_bottom = 1119.0
-scale = Vector2(0.7, 0.7)
-theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("5_utror")
-theme_override_font_sizes/font_size = 100
-text = "x"
 
 [node name="MonsterInfo" type="Panel" parent="Panel" node_paths=PackedStringArray("hp_lbl", "xp_lbl", "atk_lbl", "gold_lbl", "essence_lbl", "name_lbl", "desc_lbl", "loot_lbl", "essence_icon")]
 visible = false

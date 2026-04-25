@@ -207,6 +207,10 @@ func clear_rune_from_battle_loadout(rune_name: String) -> void:
 func get_ascension_level(offset:int=0) -> int:
 	return 40 + ((prestige_level + offset) * 10)
 
+func check_prestige_unlocked() -> bool:
+	prestige_unlocked = current_level >= get_ascension_level()
+	return prestige_unlocked
+
 func reset_data() -> void:
 	rune_inv = { # Start pack
 	"Arcane Cross": 100,
