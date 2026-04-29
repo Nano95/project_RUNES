@@ -127,6 +127,7 @@ func open_debug_things() -> void:
 	main.spawn_to_top_ui_layer(active_menu_ref)
 
 func add_xp(amount: float) -> void:
+	print("Adding exp: ", amount)
 	main.game_data.current_exp += amount
 	main.game_data.total_exp += amount
 
@@ -146,7 +147,7 @@ func add_xp(amount: float) -> void:
 
 func on_level_up():
 	main.game_data.current_level += 1
-	main.game_data.current_exp = 0
+	#main.game_data.current_exp = 0 # do not do this. it prevents bulk leveling
 	main.game_data.available_ap += 5
 	main.game_data.check_prestige_unlocked()
 

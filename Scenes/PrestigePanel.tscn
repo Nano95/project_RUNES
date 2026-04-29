@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpvxinojrf0q2"]
+[gd_scene load_steps=16 format=3 uid="uid://cpvxinojrf0q2"]
 
 [ext_resource type="Script" uid="uid://brow3k8krvigc" path="res://Scripts/PrestigePanel.gd" id="1_7bcao"]
 [ext_resource type="PackedScene" uid="uid://dbi5tnplbhkmx" path="res://Scenes/SkillUpgradeUI.tscn" id="2_bfhdp"]
@@ -26,13 +26,37 @@ shader = ExtResource("6_o5vfw")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2nbnd"]
+resource_local_to_scene = true
+shader = ExtResource("6_o5vfw")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_saqp3"]
 resource_local_to_scene = true
 shader = ExtResource("6_o5vfw")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="PrestigePanel" type="Control" node_paths=PackedStringArray("upgrades_v_container", "grid_container", "title", "info_panel", "upgrades_panel", "buff_debuff_panel", "requirement_label", "begin_ascension_btn", "count_lbl", "blessings_container", "ap_count_lbl", "undo_blessings_btn", "curses_container", "complete_ascension_btn", "upgrades_btn", "blessings_btn", "curses_btn")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tipgh"]
+resource_local_to_scene = true
+shader = ExtResource("6_o5vfw")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m542g"]
+resource_local_to_scene = true
+shader = ExtResource("6_o5vfw")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o5vfw"]
+resource_local_to_scene = true
+shader = ExtResource("6_o5vfw")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="PrestigePanel" type="Control" node_paths=PackedStringArray("upgrades_v_container", "grid_container", "title", "info_panel", "upgrades_panel", "buff_debuff_panel", "requirement_label", "begin_ascension_btn", "count_lbl", "blessings_container", "ap_count_lbl", "undo_blessings_btn", "blessing_bottom_info", "curses_container", "complete_ascension_btn", "curse_bottom_info", "upgrades_btn", "blessings_btn", "curses_btn")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -62,8 +86,10 @@ count_lbl = NodePath("Panel/Upgrades/ListPanel/RichTextLabel")
 blessings_container = NodePath("Panel/BuffsDebuffs/BlessingInfo")
 ap_count_lbl = NodePath("Panel/BuffsDebuffs/BlessingInfo/apRichText")
 undo_blessings_btn = NodePath("Panel/BuffsDebuffs/BlessingInfo/Undo")
+blessing_bottom_info = NodePath("Panel/BuffsDebuffs/BlessingInfo/bottomInfo")
 curses_container = NodePath("Panel/BuffsDebuffs/CurseInfo")
 complete_ascension_btn = NodePath("Panel/BuffsDebuffs/CurseInfo/Complete")
+curse_bottom_info = NodePath("Panel/BuffsDebuffs/CurseInfo/bottomInfo")
 upgrades_btn = NodePath("ButtonNav/Upgrades")
 blessings_btn = NodePath("ButtonNav/Blessings")
 curses_btn = NodePath("ButtonNav/Curses")
@@ -173,7 +199,7 @@ offset_right = 679.0
 offset_bottom = 868.0
 
 [node name="Info2" parent="Panel/Upgrades/ListPanel" instance=ExtResource("5_m542g")]
-material = SubResource("ShaderMaterial_6w8xd")
+material = SubResource("ShaderMaterial_2nbnd")
 layout_mode = 0
 offset_left = 18.000002
 offset_top = 3.999977
@@ -244,7 +270,7 @@ bbcode_enabled = true
 text = "[center]You have 1200 AP(s)[/center]"
 
 [node name="bottomInfo" parent="Panel/BuffsDebuffs/BlessingInfo" instance=ExtResource("5_m542g")]
-material = SubResource("ShaderMaterial_saqp3")
+material = SubResource("ShaderMaterial_tipgh")
 layout_mode = 0
 offset_left = 12.0
 offset_top = 828.99994
@@ -270,7 +296,7 @@ visible = false
 anchors_preset = 0
 
 [node name="Info" parent="Panel/BuffsDebuffs/CurseInfo" instance=ExtResource("5_m542g")]
-material = SubResource("ShaderMaterial_saqp3")
+material = SubResource("ShaderMaterial_m542g")
 layout_mode = 0
 offset_left = 21.0
 offset_top = 3.0000153
@@ -281,7 +307,7 @@ text = "Permanent Curses"
 horizontal_alignment = 1
 
 [node name="bottomInfo" parent="Panel/BuffsDebuffs/CurseInfo" instance=ExtResource("5_m542g")]
-material = SubResource("ShaderMaterial_saqp3")
+material = SubResource("ShaderMaterial_o5vfw")
 layout_mode = 0
 offset_left = 11.0
 offset_top = 773.99994

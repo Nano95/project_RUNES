@@ -77,9 +77,8 @@ class_name SaveData
 @export var prestige_level:int = 0
 @export var prestige_unlocked:bool = false
 @export_category("Stats")
-
 @export var highest_level_reached:int = 0
-@export var total_prestige_points_earned:int = 0
+@export var total_blessing_coins_earned:int = 0
 @export var total_exp_lifetime: int = 0
 @export var total_gold_lifetime: int = 0
 @export var runes_used:int = 0
@@ -121,6 +120,12 @@ class_name SaveData
 @export var grid_y_pos_offset:float = 0.0
 @export var two_tap_attack:bool = false
 @export var fast_mode:bool = false
+
+func reset_settings() -> void:
+	grid_opacity = 1.0
+	grid_y_pos_offset = 0.0
+	two_tap_attack = false
+	fast_mode = false
 
 func add_item_to_inventory(item: EquipmentInstance) -> void:
 	inventory.append(item)
@@ -211,13 +216,87 @@ func check_prestige_unlocked() -> bool:
 	prestige_unlocked = current_level >= get_ascension_level()
 	return prestige_unlocked
 
+func ascension_restart_data() -> void:
+	rune_inv = { # Start pack
+		"Arcane Cross": 100,
+		"Arcane Explosion": 80,
+		"Arcane Strike": 250,
+		"Light Healing": 25
+	}
+	total_blessing_coins_earned += current_level 
+	current_level = 1
+	total_exp_lifetime += int(total_exp) # In the stats panel it can be a sum of these 2
+	total_exp = 0 
+	current_exp = 0
+	total_gold_lifetime += int(total_gold)
+	total_gold = 0
+	current_gold = 0
+	var inner_reservoir:bool = is_blessing_active("essence_package")
+	var ess_num:int = 1500 if (inner_reservoir) else 0
+	total_essences = {
+		"arcane": ess_num,
+		"fire": ess_num,
+		"ice": ess_num,
+		"earth": ess_num,
+		"electric": ess_num
+	}
+	current_essences = {
+		"arcane": ess_num,
+		"fire": ess_num,
+		"ice": ess_num,
+		"earth": ess_num,
+		"electric": ess_num
+	}
+	selected_battle_runes = {
+		"slot1": null,
+		"slot2": null,
+		"slot3": null,
+		"slot4": null,
+		"slot5": null,
+		"slot6": null,
+		"slot7": null,
+		"slot8": null,
+	}
+	offline_runes = {
+		"slot1": null,
+		"slot2": null,
+		"slot3": null,
+		"slot4": null,
+		"slot5": null,
+		"slot6": null
+	}
+	slot_progress = { 
+		"slot1": 0, 
+		"slot2": 0,
+		"slot3": 0,
+		"slot4": 0,
+		"slot5": 0,
+		"slot6": 0
+	}
+	unlocked_monster_families = {
+		"slimes": false,
+		"orcs": false,
+		"sandlings": false,
+		"dwarves": false,
+		"jungle": false
+	}
+	available_ap = 0
+	base_stats = { "health": 10, "focus": 10, "power": 10, "luck": 10 }
+	allocated_stats = { "health": 0, "focus": 0, "power": 0, "luck": 0 }
+	
+	# CURRENT STATS -- NOT TOTAL ACROSS ALL RUNS
+	current_run_runes_obtained = {}
+	total_run_monster_kills = {}
+	prestige_level += 1
+	prestige_unlocked = false
+
 func reset_data() -> void:
 	rune_inv = { # Start pack
-	"Arcane Cross": 100,
-	"Arcane Explosion": 80,
-	"Arcane Strike": 250,
-	"Light Healing": 25
-}
+		"Arcane Cross": 100,
+		"Arcane Explosion": 80,
+		"Arcane Strike": 250,
+		"Light Healing": 25
+	}
 	current_level = 1
 	total_exp = 0 
 	current_exp = 0
@@ -282,7 +361,33 @@ func reset_data() -> void:
 	total_monster_kills = {}
 	total_run_monster_kills = {}
 	
-	# TODO: Loop through blessings and curses and set them all to untoggled and locked
+	blessing_coins = 0
+	prestige_level = 0
+	prestige_unlocked = false
+	
+	highest_level_reached = 0
+	total_blessing_coins_earned = 0
+	total_exp_lifetime = 0
+	total_gold_lifetime = 0
+	
+	element_upgrades = {
+		"arcane": 0,
+		"earth": 0,
+		"electric": 0,
+		"fire": 0,
+		"ice": 0
+	}
+	
+	last_crafting_timestamp = 0
+	reset_blessings()
+	reset_curses()
+
+func is_blessing_active(blessing_name:String) -> bool:
+	for blessing in blessings:
+		if (blessing["id"] == blessing_name):
+			return blessing["toggled"]
+	
+	return false
 
 func is_curse_active(curse_name:String) -> bool:
 	for curse in curses:
@@ -324,7 +429,7 @@ func is_curse_active(curse_name:String) -> bool:
 	},
 	{
 		id = "extra_rune_slot",
-		name = "Battle",
+		name = "Extra Channel",
 		desc = "+1 rune slot available in battle.",
 		toggled = false,
 		locked = true,
@@ -375,14 +480,6 @@ func is_curse_active(curse_name:String) -> bool:
 ]
 @export var curses:Array = [
 	{
-		id = "mod_hp-25",
-		name = "Bloodthirst",
-		desc = "Monsters spawn with 25% more health.",
-		toggled = false,
-		type = "combat",
-		category = "monsters"
-	},
-	{
 		id = "death_toll",
 		name = "Death's Toll",
 		desc = "House always wins. You don't preserve the loot gained in that floor if you die.",
@@ -399,20 +496,28 @@ func is_curse_active(curse_name:String) -> bool:
 		category = "monsters"
 	},
 	{
-		id = "mod_monster_speed-1",
-		name = "Relentless",
-		desc = "Monsters attack 1 turn faster.",
-		toggled = false,
-		type = "combat",
-		category = "monsters"
-	},
-	{
 		id = "arcane_debuff-15",
 		name = "Arcane Fracture",
 		desc = "Your arcane spells deal 15% less damage.",
 		toggled = false,
 		type = "combat",
 		category = "debuff"
+	},
+	{
+		id = "mod_hp-25",
+		name = "Bloodthirst",
+		desc = "Monsters spawn with 25% more health.",
+		toggled = false,
+		type = "combat",
+		category = "monsters"
+	},
+	{
+		id = "mod_monster_speed-1",
+		name = "Relentless",
+		desc = "Monsters attack 1 turn faster.",
+		toggled = false,
+		type = "combat",
+		category = "monsters"
 	},
 	{
 		id = "mod_exp_gold-10",
@@ -423,3 +528,12 @@ func is_curse_active(curse_name:String) -> bool:
 		category = "exp"
 	},
 ]
+
+func reset_blessings() -> void:
+	for blessing in blessings:
+		blessing['toggled'] = false
+		blessing['locked'] = true
+
+func reset_curses() -> void:
+	for curse in curses:
+		curse['toggled'] = false

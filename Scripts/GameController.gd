@@ -531,6 +531,7 @@ func spawn_luck_popup(new_position:Vector2, txt:String, popup_owner:Node=null) -
 
 func on_cell_tapped(row, col) -> void:
 	if (!game_is_active): return
+	if (!selected_rune): return
 	if (!main.game_data.rune_inv.get(selected_rune.name)): return
 	if (main.game_data.two_tap_attack):
 		if (!check_preview_logic(row, col)): return # Check if two mode attack is on
@@ -727,11 +728,35 @@ func get_crit_chance(luck: int) -> float:
 	return max_crit * (luck / (luck + k))
 
 func make_buff_debuff_calculations() -> void:
-	arcane_dmg_modifier = 1.0 - Utils.get_blessing_curse_amount(false, "arcane_debuff-15") * .01
-	earth_dmg_modifier = 0.75
-	electric_dmg_modifier = .8
-	fire_dmg_modifier = .7
-	ice_dmg_modifier = .7
+	# Base modifiers (before upgrades)
+	var arcane_base = 1.0 - Utils.get_blessing_curse_amount(false, "arcane_debuff-15") * 0.01
+	var earth_base = 0.75
+	var electric_base = 0.8
+	var fire_base = 0.7
+	var ice_base = 0.7
+
+	# Additive upgrade bonuses (+0.025 per level)
+	var arcane_bonus = main.game_data.element_upgrades["arcane"] * 0.025
+	var earth_bonus = main.game_data.element_upgrades["earth"] * 0.025
+	var electric_bonus = main.game_data.element_upgrades["electric"] * 0.025
+	var fire_bonus = main.game_data.element_upgrades["fire"] * 0.025
+	var ice_bonus = main.game_data.element_upgrades["ice"] * 0.025
+
+	# Final modifiers (base + additive bonus)
+	arcane_dmg_modifier = arcane_base + arcane_bonus
+	earth_dmg_modifier = earth_base + earth_bonus
+	electric_dmg_modifier = electric_base + electric_bonus
+	fire_dmg_modifier = fire_base + fire_bonus
+	ice_dmg_modifier = ice_base + ice_bonus
+
+	print("=== ELEMENTAL DAMAGE MODIFIERS (ADDITIVE) ===")
+	print("Arcane:   ", arcane_dmg_modifier, " (upg=", main.game_data.element_upgrades["arcane"], ")")
+	print("Earth:    ", earth_dmg_modifier, " (upg=", main.game_data.element_upgrades["earth"], ")")
+	print("Electric: ", electric_dmg_modifier, " (upg=", main.game_data.element_upgrades["electric"], ")")
+	print("Fire:     ", fire_dmg_modifier, " (upg=", main.game_data.element_upgrades["fire"], ")")
+	print("Ice:      ", ice_dmg_modifier, " (upg=", main.game_data.element_upgrades["ice"], ")")
+	print("=============================================")
+
 
 # readjust is an OVERRIDE for the regular logic for the situation where we 
 # are selecting a new rune while the preview is already on.

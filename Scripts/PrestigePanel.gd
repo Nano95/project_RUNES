@@ -21,9 +21,11 @@ class_name PrestigePanel
 @export var blessings_container:Control
 @export var ap_count_lbl:RichTextLabel
 @export var undo_blessings_btn:Button
+@export var blessing_bottom_info:Label
 @export_category("Curse")
 @export var curses_container:Control
 @export var complete_ascension_btn:Button
+@export var curse_bottom_info:Label
 
 @export_category("Nav")
 @export var upgrades_btn:Button
@@ -53,27 +55,31 @@ func _ready() -> void:
 	undo_blessings_btn.pressed.connect(setup_blessings.bind(true))
 	complete_ascension_btn.pressed.connect(complete_ascension)
 	
-	if (in_debug_mode): open_upgrades() # No need to see info panel in debug mode.
-	else: 
+	if (in_debug_mode): 
+		open_upgrades() # No need to see info panel in debug mode.
+		return
+	
+	init_temp_upgrades()
+	initialize_temp_blessings()
+	initialize_temp_curses()
+	if (check_prestige_requirements()):
 		info_panel.visible = true
 		upgrades_panel.visible = false
 		buff_debuff_panel.visible = false
 		disable_all_nav_buttons()
 		begin_ascension_btn.pressed.connect(open_upgrades)
-		init_temp_upgrades()
-		initialize_temp_blessings()
 		TOTAL_UPGRADE_COUNT_AVAILABLE = get_invested_points() + (3 * (main.game_data.prestige_level + 1))
-		initialize_temp_curses()
+	else:
+		# Need to allow the menu to be seen without being interacted with.
+		open_upgrades()
 
 func setup(m:MainNode, is_debug:bool=false) -> void:
 	main = m
 	in_debug_mode = is_debug
 
-func check_prestige_requirements():
+func check_prestige_requirements() -> bool:
 	var required = main.game_data.get_ascension_level()
-	var current_level = main.game_data.current_level
-
-	var requirements_met:bool = current_level >= required
+	var requirements_met:bool = main.game_data.prestige_unlocked
 	if (requirements_met):
 		# Player can begin the prestige sequence
 		requirement_label.text = "Level %d has been reached!" % required
@@ -82,6 +88,7 @@ func check_prestige_requirements():
 		requirement_label.text = "Reach level %d to prestige" % required
 	
 	begin_ascension_btn.disabled = !requirements_met
+	return requirements_met
 
 func begin_ascension_process() -> void:
 	prestige_in_process = true
@@ -89,6 +96,9 @@ func begin_ascension_process() -> void:
 	info_panel.visible = false
 
 func update_count_label() -> void:
+	if (!main.game_data.prestige_unlocked):
+		count_lbl.hide()
+		return
 	var spent := 0
 	for key in temp_upgrades.keys():
 		spent += main.game_data.element_upgrades[key] + temp_upgrades[key]
@@ -109,6 +119,11 @@ func setup_blessings(reset:bool=false) -> void:
 	else:
 		if (reset): initialize_temp_blessings() # Will reset things.
 		populate_cards(temp_blessings, true)
+	
+	if (!main.game_data.prestige_unlocked):
+		ap_count_lbl.hide()
+		blessing_bottom_info.hide()
+		undo_blessings_btn.hide()
 
 func setup_curses() -> void:
 	clear_cards()
@@ -116,6 +131,10 @@ func setup_curses() -> void:
 		populate_cards(main.game_data.curses, false)
 	else:
 		populate_cards(temp_curses, false)
+	
+	if (!main.game_data.prestige_unlocked):
+		curse_bottom_info.hide()
+		complete_ascension_btn.hide()
 
 func populate_cards(arr:Array, is_blessing:bool=true) -> void:
 	# Arr of dictionaries
@@ -159,7 +178,7 @@ func setup_upgrades() -> void:
 	var elements:Array=["arcane", "earth", "electric", "fire", "ice"]
 	for element in elements:
 		var upgrades = skill_upgrade_ui.instantiate()
-		upgrades.setup(main, self, element)
+		upgrades.setup(main, self, element, in_debug_mode)
 		upgrades_v_container.add_child(upgrades)
 
 func try_adjust_upgrade(element:String, delta:int) -> int:
@@ -241,7 +260,6 @@ func get_temp_blessing(id:String) -> Dictionary:
 	return {}
 
 func complete_ascension() -> void:
-	print("Committing all and resetting.")
 	var pnl = confirmation_panel.instantiate()
 	var pnl_title:String = "Are you sure?"
 	var desc:String = "You cannot modify your upgrades and blessings until your next ascension!\
@@ -251,15 +269,20 @@ func complete_ascension() -> void:
 	# No actually pop open a modal saying ARE YOU SURE YOU ARE DONE? Next ASC is at max lvl x
 
 func commit_and_ascend() -> void:
-	print("COMMIT!!!! YES AND FADE OUT AND SCENE!")
 	commit_upgrades()
 	commit_blessings()
 	commit_curses()
+	main.game_data.ascension_restart_data()
+	main.save_game()
+	call_deferred("restart_scene")
+
+func restart_scene() -> void:
+	get_tree().reload_current_scene()
 
 # When prestige is complete, commit all of the upgrades!
 func commit_upgrades():
 	for key in temp_upgrades.keys():
-		main.game_data.element_upgrades[key] += temp_upgrades[key]
+		main.game_data.element_upgrades[key] = temp_upgrades[key]
 
 func commit_blessings():
 	for i in temp_blessings.size():
@@ -268,14 +291,8 @@ func commit_blessings():
 	main.game_data.blessing_coins = blessing_coins_left()
 
 func commit_curses():
-	print("- temp_curses ", temp_curses)
-	print(' - main.game_data.curses: ', main.game_data.curses)
 	for i in temp_curses.size():
 		main.game_data.curses[i] = temp_curses[i]
-	# Update permanent blessing currency
-	main.game_data.prestige_level += 1
-	# In a parent function that calls all commits we will call the reset function from saveData
-	# not full reset but prestige reset.
 	
 func clear_cards() -> void:
 	for card in grid_container.get_children():

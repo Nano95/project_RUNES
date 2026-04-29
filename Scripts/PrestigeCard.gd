@@ -16,7 +16,7 @@ var main:MainNode
 var prestige_panel:PrestigePanel
 var data:Dictionary
 var card_id:String
-var in_debug_mode:bool=false # NEW - not in use yet. When debug mode is on, we dont need to purchase to toggle on
+var in_debug_mode:bool=false
 var order_id:int=-1
 func _ready() -> void:
 	og_scale = scale
@@ -61,6 +61,7 @@ func card_pressed() -> void:
 		toggle_card()
 		return
 
+	if (!main.game_data.prestige_unlocked): return
 	# If this is a blessing, enforce purchase logic
 	# Curses are automatically toggled on based on prestige level
 	if (is_blessing):

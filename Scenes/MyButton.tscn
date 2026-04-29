@@ -31,6 +31,7 @@ offset_top = 53.999996
 offset_right = 669.99994
 offset_bottom = 133.99998
 scale = Vector2(0.4, 0.4)
+mouse_filter = 1
 theme_override_constants/outline_size = 10
 theme_override_fonts/normal_font = ExtResource("1_a8uc2")
 theme_override_font_sizes/normal_font_size = 50
