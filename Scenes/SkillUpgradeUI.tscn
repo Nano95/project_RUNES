@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dbi5tnplbhkmx"]
+[gd_scene load_steps=10 format=3 uid="uid://dbi5tnplbhkmx"]
 
 [ext_resource type="Script" uid="uid://d28ysfw1kihrh" path="res://Scripts/SkillUpgradeUI.gd" id="1_rbqd4"]
 [ext_resource type="Texture2D" uid="uid://dq07wpdco2smy" path="res://Sprites/ESSENCE_ICON.png" id="2_khqdj"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cerofln3xcb7n" path="res://Sprites/FIRE_STATUS_ICON.png" id="4_nxj30"]
 [ext_resource type="Texture2D" uid="uid://cgrrpac6d6j1r" path="res://Sprites/ELECTRIC_STATUS_ICON.png" id="4_x0fka"]
 [ext_resource type="Texture2D" uid="uid://bpmgpgc2elw6k" path="res://Sprites/ICE_STATUS_ICON.png" id="6_8siry"]
+[ext_resource type="Theme" uid="uid://6l1e7tacwmvs" path="res://Resources/Themes/SubpanelT2_theme_res.tres" id="7_tbc4d"]
 
 [node name="SkillUpgradeUI" type="Control" node_paths=PackedStringArray("icon_sprite", "sprite")]
 custom_minimum_size = Vector2(663, 0)
@@ -26,25 +27,27 @@ ice_icon = ExtResource("6_8siry")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
-offset_top = 16.0
-offset_right = 332.0
-offset_bottom = 62.0
-scale = Vector2(2, 2)
+offset_left = -2.0
+offset_top = 1.0
+offset_right = 628.0
+offset_bottom = 104.0
+theme = ExtResource("7_tbc4d")
 
 [node name="icon" type="TextureRect" parent="Panel"]
 layout_mode = 0
-offset_left = 150.0
-offset_top = -9.0
-offset_right = 182.0
-offset_bottom = 23.0
+offset_left = 273.0
+offset_top = -18.0
+offset_right = 305.0
+offset_bottom = 14.0
+scale = Vector2(2, 2)
 texture = ExtResource("4_nxj30")
 
 [node name="subtract" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 2.5
-offset_top = 4.0
-offset_right = 252.5
-offset_bottom = 194.0
+offset_left = 6.0
+offset_top = 11.999998
+offset_right = 395.99997
+offset_bottom = 407.0
 scale = Vector2(0.2, 0.2)
 theme_override_constants/outline_size = 20
 theme_override_fonts/font = ExtResource("3_xyed7")
@@ -53,10 +56,10 @@ text = "-"
 
 [node name="add" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 278.5
-offset_top = 4.0
-offset_right = 528.5
-offset_bottom = 194.0
+offset_left = 530.0
+offset_top = 12.0
+offset_right = 1000.0
+offset_bottom = 407.0
 scale = Vector2(0.2, 0.2)
 theme_override_constants/outline_size = 20
 theme_override_fonts/font = ExtResource("3_xyed7")
@@ -64,7 +67,7 @@ theme_override_font_sizes/font_size = 100
 text = "+"
 
 [node name="Sprite2D" type="Sprite2D" parent="Panel"]
-position = Vector2(166, 33.5)
-scale = Vector2(1.5, 1.5)
+position = Vector2(306, 67)
+scale = Vector2(3, 3)
 texture = ExtResource("2_nxj30")
 vframes = 10

@@ -7,9 +7,9 @@ class_name PrestigePanel
 @export var upgrades_v_container:VBoxContainer
 @export var grid_container:GridContainer
 @export var title:Label
-@export var info_panel:Panel
-@export var upgrades_panel:Panel
-@export var buff_debuff_panel:Panel
+@export var info_panel:Control
+@export var upgrades_panel:Control
+@export var buff_debuff_panel:Control
 
 @export_category("Initial")
 @export var requirement_label:Label

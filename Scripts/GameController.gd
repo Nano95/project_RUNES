@@ -749,14 +749,6 @@ func make_buff_debuff_calculations() -> void:
 	fire_dmg_modifier = fire_base + fire_bonus
 	ice_dmg_modifier = ice_base + ice_bonus
 
-	print("=== ELEMENTAL DAMAGE MODIFIERS (ADDITIVE) ===")
-	print("Arcane:   ", arcane_dmg_modifier, " (upg=", main.game_data.element_upgrades["arcane"], ")")
-	print("Earth:    ", earth_dmg_modifier, " (upg=", main.game_data.element_upgrades["earth"], ")")
-	print("Electric: ", electric_dmg_modifier, " (upg=", main.game_data.element_upgrades["electric"], ")")
-	print("Fire:     ", fire_dmg_modifier, " (upg=", main.game_data.element_upgrades["fire"], ")")
-	print("Ice:      ", ice_dmg_modifier, " (upg=", main.game_data.element_upgrades["ice"], ")")
-	print("=============================================")
-
 
 # readjust is an OVERRIDE for the regular logic for the situation where we 
 # are selecting a new rune while the preview is already on.
