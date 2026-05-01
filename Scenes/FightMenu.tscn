@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://2dvdykbjounr"]
+[gd_scene load_steps=27 format=3 uid="uid://2dvdykbjounr"]
 
 [ext_resource type="Script" uid="uid://crgoc5n1t752c" path="res://Scripts/FightMenu.gd" id="1_ipivn"]
 [ext_resource type="PackedScene" uid="uid://b37x20v0etu6t" path="res://Scenes/MyButton.tscn" id="2_0c1bx"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_x5u2f"]
 [ext_resource type="PackedScene" uid="uid://bu2xji8e1uu4y" path="res://Scenes/RuneSelectionPanel.tscn" id="4_6sloi"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="4_ov7x6"]
+[ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="5_6sloi"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="5_utror"]
 [ext_resource type="PackedScene" uid="uid://cby5cdsq4bcyo" path="res://Scenes/FightMenuRuneButton.tscn" id="6_f0u7t"]
 [ext_resource type="Script" uid="uid://der06tyl3xyu3" path="res://Scripts/MonsterInfoPanel.gd" id="6_ou8aj"]
@@ -110,6 +111,7 @@ offset_left = 21.0
 offset_top = -4.0
 offset_right = 700.0
 offset_bottom = 1095.0
+theme = ExtResource("5_6sloi")
 
 [node name="ChooseMonster" parent="Panel" instance=ExtResource("3_x5u2f")]
 material = SubResource("ShaderMaterial_8k8yn")

@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cby5cdsq4bcyo"]
+[gd_scene load_steps=10 format=3 uid="uid://cby5cdsq4bcyo"]
 
 [ext_resource type="Texture2D" uid="uid://cbtr8w3ak64pc" path="res://Sprites/Runes/BLANK_CLEAR_ICON.png" id="2_3gfna"]
+[ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="2_cuo2q"]
 [ext_resource type="Script" uid="uid://jj0fcb5mx0c5" path="res://Scripts/FightMenuRuneButton.gd" id="3_00aqc"]
+[ext_resource type="Theme" uid="uid://bbbw1in72yvu1" path="res://Resources/Themes/Subpanel_theme_res.tres" id="3_cuo2q"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="5_lhn1g"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="6_at73j"]
 
@@ -24,11 +26,11 @@ shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
 [node name="FightRuneSelectionButton" type="Control"]
-custom_minimum_size = Vector2(275, 374)
+custom_minimum_size = Vector2(291, 291)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 275.0
-offset_bottom = 374.0
+offset_right = 291.0
+offset_bottom = 391.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
@@ -36,34 +38,39 @@ script = ExtResource("3_00aqc")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
-offset_right = 220.0
-offset_bottom = 295.6561
-scale = Vector2(1.25, 1.25)
+offset_right = 145.0
+offset_bottom = 195.5
+scale = Vector2(2, 2)
 mouse_filter = 1
+theme = ExtResource("2_cuo2q")
 
 [node name="Panel" type="Panel" parent="Panel"]
 layout_mode = 0
-offset_right = 220.0
-offset_bottom = 220.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 128.5
+offset_bottom = 130.0
 mouse_filter = 1
+theme = ExtResource("3_cuo2q")
 
 [node name="runeIcon" type="TextureRect" parent="Panel/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1.0
-offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_3gfna")
+stretch_mode = 5
 
 [node name="Panel2" type="Panel" parent="Panel"]
 layout_mode = 0
-offset_top = 227.0
-offset_right = 220.5
-offset_bottom = 296.0
+offset_left = 16.0
+offset_top = 134.0
+offset_right = 129.0
+offset_bottom = 179.5
 mouse_filter = 1
+theme = ExtResource("3_cuo2q")
 
 [node name="typeTexture" type="TextureRect" parent="Panel/Panel2"]
 visible = false
@@ -78,12 +85,12 @@ scale = Vector2(0.4, 0.4)
 visible = false
 material = SubResource("ShaderMaterial_or8xw")
 layout_mode = 0
-offset_left = 1.0
+offset_left = -16.0
 offset_top = 4.0
-offset_right = 1095.9999
+offset_right = 947.3333
 offset_bottom = 141.0
-scale = Vector2(0.2, 0.2)
-text = "Arcane Strike"
+scale = Vector2(0.15, 0.15)
+text = "Electric Explosion"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -91,19 +98,22 @@ vertical_alignment = 1
 visible = false
 material = SubResource("ShaderMaterial_oa0bc")
 layout_mode = 0
-offset_top = 35.0
-offset_right = 1099.9999
-offset_bottom = 172.0
+offset_left = -15.5
+offset_top = 22.0
+offset_right = 709.49994
+offset_bottom = 159.0
 scale = Vector2(0.2, 0.2)
-text = "Quantity: 50000"
+text = "50000x"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Select" parent="Panel/Panel2" instance=ExtResource("5_lhn1g")]
 material = SubResource("ShaderMaterial_28mqd")
 layout_mode = 0
-offset_right = 1099.9999
-offset_bottom = 339.99988
+offset_left = -3.5
+offset_top = -0.50000024
+offset_right = 596.49994
+offset_bottom = 248.5
 scale = Vector2(0.2, 0.2)
 text = "SELECT RUNE"
 horizontal_alignment = 1
