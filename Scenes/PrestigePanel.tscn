@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cpvxinojrf0q2"]
+[gd_scene load_steps=19 format=3 uid="uid://cpvxinojrf0q2"]
 
 [ext_resource type="Script" uid="uid://brow3k8krvigc" path="res://Scripts/PrestigePanel.gd" id="1_7bcao"]
 [ext_resource type="PackedScene" uid="uid://dbi5tnplbhkmx" path="res://Scenes/SkillUpgradeUI.tscn" id="2_bfhdp"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cwkj7x8555wk3" path="res://Scenes/PrestigeCard.tscn" id="5_7bcao"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="5_m542g"]
 [ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="5_saqp3"]
+[ext_resource type="Theme" uid="uid://6l1e7tacwmvs" path="res://Resources/Themes/SubpanelT2_theme_res.tres" id="6_m542g"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="6_o5vfw"]
 [ext_resource type="Theme" uid="uid://bbbw1in72yvu1" path="res://Resources/Themes/Subpanel_theme_res.tres" id="6_tipgh"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="7_3a1v2"]
@@ -112,7 +113,7 @@ offset_top = 16.0
 offset_right = -16.0
 offset_bottom = 90.0
 grow_horizontal = 2
-theme = ExtResource("6_tipgh")
+theme = ExtResource("6_m542g")
 
 [node name="Title" parent="Panel/Title" instance=ExtResource("5_m542g")]
 material = SubResource("ShaderMaterial_8k8yn")

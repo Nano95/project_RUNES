@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://d28prqhsmaiob"]
+[gd_scene load_steps=9 format=3 uid="uid://d28prqhsmaiob"]
 
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="1_3e3wy"]
 [ext_resource type="Script" uid="uid://d2k3jgvrhrp00" path="res://Scripts/StatsContainer.gd" id="1_qrb63"]
 [ext_resource type="ButtonGroup" uid="uid://co53jn543oyn7" path="res://Resources/StatsButtonGroup.tres" id="2_qwnji"]
+[ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="3_78253"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_qwnji"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="4_78253"]
 
@@ -48,10 +49,11 @@ button_group = ExtResource("2_qwnji")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
-offset_left = -258.0
-offset_top = 86.0
-offset_right = 258.0
+offset_left = -340.0
+offset_top = -55.0
+offset_right = 339.0
 offset_bottom = 586.0
+theme = ExtResource("3_78253")
 
 [node name="statsBtn1" type="Button" parent="Panel"]
 layout_mode = 1

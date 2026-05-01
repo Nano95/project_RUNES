@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://bu2xji8e1uu4y"]
+[gd_scene load_steps=14 format=3 uid="uid://bu2xji8e1uu4y"]
 
 [ext_resource type="Script" uid="uid://bf0df0cc043fd" path="res://Scripts/RuneSelectionPanel.gd" id="1_8ubi5"]
 [ext_resource type="PackedScene" uid="uid://cby5cdsq4bcyo" path="res://Scenes/FightMenuRuneButton.tscn" id="2_0ljy1"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_0ljy1"]
-[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="4_xyqm1"]
+[ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="3_xyqm1"]
+[ext_resource type="Theme" uid="uid://6l1e7tacwmvs" path="res://Resources/Themes/SubpanelT2_theme_res.tres" id="4_vtxks"]
+[ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="4_xyqm1"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="5_vtxks"]
+[ext_resource type="Theme" uid="uid://bbbw1in72yvu1" path="res://Resources/Themes/Subpanel_theme_res.tres" id="8_42ego"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8k8yn"]
 resource_local_to_scene = true
@@ -60,9 +63,9 @@ clear_rune_button = NodePath("Panel/Slots/ScrollContainer/SlotsContainer/FightRu
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = -468.0
-offset_top = -317.0
+offset_top = -329.0
 offset_right = 1188.0
-offset_bottom = 1442.0
+offset_bottom = 1430.0
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -71,27 +74,31 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 22.5
-offset_top = 201.0
-offset_right = 701.5
-offset_bottom = 897.0
+offset_left = 21.0
+offset_top = -3.0
+offset_right = 700.0
+offset_bottom = 1095.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_xyqm1")
 
 [node name="Title" type="Panel" parent="Panel"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
+offset_left = 15.5
+offset_top = 16.0
+offset_right = -16.5
 offset_bottom = 82.0
 grow_horizontal = 2
+theme = ExtResource("4_vtxks")
 
 [node name="Title" parent="Panel/Title" instance=ExtResource("3_0ljy1")]
 material = SubResource("ShaderMaterial_8k8yn")
 layout_mode = 0
 offset_left = 1.0
-offset_top = 4.0
-offset_right = 1032.4814
-offset_bottom = 141.0
+offset_top = -7.0
+offset_right = 984.3333
 scale = Vector2(0.54, 0.54)
 text = "Select Slot1 Rune"
 horizontal_alignment = 1
@@ -99,9 +106,10 @@ vertical_alignment = 1
 
 [node name="Exit" type="Button" parent="Panel/Title"]
 layout_mode = 0
-offset_left = 558.0
-offset_right = 758.0
-offset_bottom = 138.0
+offset_left = 533.0
+offset_top = -3.0
+offset_right = 733.0
+offset_bottom = 135.0
 scale = Vector2(0.6, 0.6)
 theme_override_constants/outline_size = 30
 theme_override_fonts/font = ExtResource("5_vtxks")
@@ -114,34 +122,38 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -250.0
-offset_bottom = 346.0
+offset_left = 16.0
+offset_top = -446.0
+offset_right = -16.0
+offset_bottom = 533.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("8_42ego")
 
 [node name="SlotsInfo" parent="Panel/Slots" instance=ExtResource("3_0ljy1")]
 material = SubResource("ShaderMaterial_duup7")
 layout_mode = 0
-offset_left = 47.0
-offset_top = 3.0000153
-offset_right = 1614.4999
-offset_bottom = 140.00002
+offset_left = 42.0
+offset_top = 7.0
+offset_right = 1511.9999
+offset_bottom = 144.0
 scale = Vector2(0.4, 0.4)
 text = ""
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/Slots"]
 layout_mode = 0
-offset_left = 22.5
+offset_left = 6.000002
 offset_top = 62.0
-offset_right = 658.5
-offset_bottom = 577.0
+offset_right = 381.58826
+offset_bottom = 593.7648
+scale = Vector2(1.7, 1.7)
 horizontal_scroll_mode = 0
 
 [node name="SlotsContainer" type="GridContainer" parent="Panel/Slots/ScrollContainer"]
 layout_mode = 2
-theme_override_constants/h_separation = 11
-theme_override_constants/v_separation = 0
-columns = 4
+theme_override_constants/h_separation = -6
+theme_override_constants/v_separation = -80
+columns = 3
 
 [node name="FightRuneSelectionButton" parent="Panel/Slots/ScrollContainer/SlotsContainer" instance=ExtResource("2_0ljy1")]
 layout_mode = 2

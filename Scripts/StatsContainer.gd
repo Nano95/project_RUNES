@@ -28,6 +28,7 @@ var bonus_stats:Dictionary
 
 var main:MainNode
 func _ready() -> void:
+	Utils.animate_summary_in_happy(self)
 	btn1.toggled.connect(qty_button_pressed)
 	btn10.toggled.connect(qty_button_pressed)
 	btn100.toggled.connect(qty_button_pressed)
@@ -137,6 +138,9 @@ func update_lvl_label() -> void:
 
 func update_ap_label() -> void:
 	ap_label.text = "| AP: " + str(main.game_data.available_ap)
+
+func close() -> void:
+	Utils.animate_summary_out_and_free(self)
 
 func set_all_labels() -> void:
 	set_health_label()
