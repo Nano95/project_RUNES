@@ -4,11 +4,11 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1et4j"]
 texture = ExtResource("1_frtfg")
-texture_margin_left = 12.0
-texture_margin_top = 12.0
-texture_margin_right = 12.0
-texture_margin_bottom = 12.0
-region_rect = Rect2(0, 0, 240, 240)
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+region_rect = Rect2(0, 0, 120, 120)
 
 [resource]
 Panel/styles/panel = SubResource("StyleBoxTexture_1et4j")
