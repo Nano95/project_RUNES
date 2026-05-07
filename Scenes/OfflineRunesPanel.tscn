@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://w1anjwd6ku5f"]
+[gd_scene load_steps=14 format=3 uid="uid://w1anjwd6ku5f"]
 
 [ext_resource type="Script" uid="uid://cjn4rwvwos7w6" path="res://Scripts/OfflineRunesPanel.gd" id="1_holjq"]
 [ext_resource type="PackedScene" uid="uid://c75p27x2gpgt3" path="res://Scenes/OfflineRuneSlot.tscn" id="2_holjq"]
 [ext_resource type="PackedScene" uid="uid://cfuov8orkxl0o" path="res://Scenes/MyListLabel.tscn" id="3_s7eqj"]
+[ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="4_holjq"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="4_qj4xs"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="5_rxgki"]
+[ext_resource type="Theme" uid="uid://bbbw1in72yvu1" path="res://Resources/Themes/Subpanel_theme_res.tres" id="7_ufdrt"]
+[ext_resource type="Theme" uid="uid://6l1e7tacwmvs" path="res://Resources/Themes/SubpanelT2_theme_res.tres" id="8_7nav1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8k8yn"]
 resource_local_to_scene = true
@@ -63,6 +66,7 @@ offset_left = 21.0
 offset_top = -4.0
 offset_right = 700.0
 offset_bottom = 1095.0
+theme = ExtResource("4_holjq")
 
 [node name="Title" type="Panel" parent="Panel"]
 layout_mode = 1
@@ -89,17 +93,20 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -448.5
+offset_left = 16.0
+offset_top = -463.5
+offset_right = -16.0
 offset_bottom = 192.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_ufdrt")
 
 [node name="SlotsInfo" parent="Panel/Slots" instance=ExtResource("4_qj4xs")]
 material = SubResource("ShaderMaterial_duup7")
 layout_mode = 0
 offset_left = 47.0
 offset_top = 3.0000153
-offset_right = 1614.4999
+offset_right = 1551.9999
 offset_bottom = 140.00002
 scale = Vector2(0.4, 0.4)
 text = "Pick your runes!"
@@ -127,10 +134,13 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = 210.5
-offset_bottom = 550.5
+offset_left = 16.0
+offset_top = 196.5
+offset_right = -16.0
+offset_bottom = 533.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_ufdrt")
 
 [node name="SummaryLbl" parent="Panel/Summary" instance=ExtResource("4_qj4xs")]
 material = SubResource("ShaderMaterial_s7eqj")
@@ -154,9 +164,10 @@ theme_override_constants/separation = 0
 [node name="Panel" type="Panel" parent="Panel/Summary"]
 layout_mode = 0
 offset_left = 48.0
-offset_top = 58.0
+offset_top = 55.0
 offset_right = 627.0
-offset_bottom = 325.0
+offset_bottom = 321.0
+theme = ExtResource("7_ufdrt")
 
 [node name="Depletion" parent="Panel/Summary/Panel" instance=ExtResource("4_qj4xs")]
 material = SubResource("ShaderMaterial_ufdrt")
@@ -173,6 +184,7 @@ offset_left = 22.0
 offset_top = 44.0
 offset_right = 558.0
 offset_bottom = 124.0
+theme = ExtResource("8_7nav1")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/Summary/Panel/EssenceTimes"]
 layout_mode = 0
@@ -203,6 +215,7 @@ offset_left = 22.0
 offset_top = 165.0
 offset_right = 558.0
 offset_bottom = 261.0
+theme = ExtResource("8_7nav1")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/Summary/Panel/RuneProduction"]
 layout_mode = 0

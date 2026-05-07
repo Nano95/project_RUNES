@@ -14,6 +14,9 @@ var main:MainNode
 var main_menu:MainMenu
 var shop_current_element:String = "arcane"
 
+func _ready() -> void:
+	Utils.animate_summary_in_happy(self)
+
 func setup(main_node:MainNode, main_menu_node:MainMenu) -> void:
 	main = main_node
 	main_menu = main_menu_node

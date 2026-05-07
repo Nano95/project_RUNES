@@ -1,10 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://c75p27x2gpgt3"]
+[gd_scene load_steps=18 format=3 uid="uid://c75p27x2gpgt3"]
 
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="1_6awvn"]
 [ext_resource type="Script" uid="uid://d3yehmdd0fcnm" path="res://Scripts/OfflineRuneSlot.gd" id="1_qn8tj"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="2_qn8tj"]
 [ext_resource type="PackedScene" uid="uid://cp1msxhypma6i" path="res://Scenes/OfflineRuneSelectionPanel.tscn" id="2_v3syb"]
 [ext_resource type="Texture2D" uid="uid://llqj70wrm8i3" path="res://Sprites/Runes/ARCANE_STRIKE_RUNE.png" id="3_mth0g"]
+[ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="3_t71ac"]
+[ext_resource type="Theme" uid="uid://6l1e7tacwmvs" path="res://Resources/Themes/SubpanelT2_theme_res.tres" id="3_xsn2c"]
+[ext_resource type="Theme" uid="uid://herb326sm84p" path="res://Resources/Themes/SubpanelT3_theme_res.tres" id="7_t71ac"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ygd5c"]
 resource_local_to_scene = true
@@ -83,16 +86,18 @@ rune_selection_panel = ExtResource("2_v3syb")
 layout_mode = 0
 offset_right = 590.0
 offset_bottom = 244.0
+theme = ExtResource("3_t71ac")
 
 [node name="SlotLbl" parent="Panel" instance=ExtResource("1_6awvn")]
 material = SubResource("ShaderMaterial_ygd5c")
 layout_mode = 0
-offset_left = 16.0
-offset_top = -2.0
-offset_right = 348.0
-offset_bottom = 135.0
+offset_left = 9.0
+offset_top = 7.0
+offset_right = 379.0
+offset_bottom = 144.0
 scale = Vector2(0.5, 0.5)
 text = "Slot 1"
+horizontal_alignment = 1
 
 [node name="TapLbl" parent="Panel" instance=ExtResource("1_6awvn")]
 visible = false
@@ -114,10 +119,11 @@ vertical_alignment = 1
 
 [node name="NamePanel" type="Panel" parent="Panel"]
 layout_mode = 0
-offset_left = 181.0
-offset_top = 11.0
-offset_right = 569.0
-offset_bottom = 58.0
+offset_left = 186.0
+offset_top = 16.0
+offset_right = 574.0
+offset_bottom = 63.0
+theme = ExtResource("3_xsn2c")
 
 [node name="NameValue" parent="Panel/NamePanel" instance=ExtResource("1_6awvn")]
 material = SubResource("ShaderMaterial_v3syb")
@@ -137,10 +143,11 @@ vertical_alignment = 1
 
 [node name="RuneTexture" type="Panel" parent="Panel"]
 layout_mode = 0
-offset_left = 13.0
-offset_top = 69.0
-offset_right = 169.0
-offset_bottom = 226.0
+offset_left = 20.0
+offset_top = 67.0
+offset_right = 176.0
+offset_bottom = 224.0
+theme = ExtResource("3_xsn2c")
 
 [node name="rune" type="TextureRect" parent="Panel/RuneTexture"]
 layout_mode = 1
@@ -153,46 +160,48 @@ texture = ExtResource("3_mth0g")
 
 [node name="InfoPanel" type="Panel" parent="Panel"]
 layout_mode = 0
-offset_left = 180.0
-offset_top = 69.0
-offset_right = 569.0
-offset_bottom = 226.0
+offset_left = 206.0
+offset_top = 67.0
+offset_right = 553.0
+offset_bottom = 224.0
+theme = ExtResource("3_xsn2c")
 
 [node name="essenceLabel" parent="Panel/InfoPanel" instance=ExtResource("1_6awvn")]
 material = SubResource("ShaderMaterial_l7x2l")
 layout_mode = 0
-offset_left = 7.0
-offset_top = 25.0
-offset_right = 1031.0
-offset_bottom = 162.0
+offset_left = 32.0
+offset_top = 23.0
+offset_right = 1056.0
+offset_bottom = 160.0
 scale = Vector2(0.25, 0.25)
 text = "Essence"
 
 [node name="essenceHour" parent="Panel/InfoPanel" instance=ExtResource("1_6awvn")]
 material = SubResource("ShaderMaterial_xsn2c")
 layout_mode = 0
-offset_left = 7.0
-offset_top = 60.0
-offset_right = 1031.0
-offset_bottom = 197.0
+offset_left = 32.0
+offset_top = 58.0
+offset_right = 1056.0
+offset_bottom = 195.0
 scale = Vector2(0.25, 0.25)
 text = "Essence/hour"
 
 [node name="runesHour" parent="Panel/InfoPanel" instance=ExtResource("1_6awvn")]
 material = SubResource("ShaderMaterial_t71ac")
 layout_mode = 0
-offset_left = 7.0
-offset_top = 95.0
-offset_right = 1031.0
-offset_bottom = 232.0
+offset_left = 32.0
+offset_top = 93.0
+offset_right = 1056.0
+offset_bottom = 230.0
 scale = Vector2(0.25, 0.25)
 text = "Runes/hour"
 
 [node name="Panel" type="Panel" parent="Panel/InfoPanel"]
 layout_mode = 0
-offset_left = 257.0
-offset_right = 389.0
+offset_left = 215.0
+offset_right = 347.0
 offset_bottom = 157.0
+theme = ExtResource("7_t71ac")
 
 [node name="essenceValue" parent="Panel/InfoPanel/Panel" instance=ExtResource("1_6awvn")]
 material = SubResource("ShaderMaterial_qgr5s")
@@ -230,8 +239,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 5.0
-offset_right = 5.0
+offset_left = 12.0
+offset_top = -2.0
+offset_right = 12.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Arcane"

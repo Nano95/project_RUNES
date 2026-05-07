@@ -49,6 +49,7 @@ var blessing_coins_available:int
 var blessing_coins_spent:int = 0
 
 func _ready() -> void:
+	Utils.animate_summary_in_happy(self)
 	upgrades_btn.pressed.connect(open_upgrades)
 	blessings_btn.pressed.connect(open_blessings)
 	curses_btn.pressed.connect(open_curses)
