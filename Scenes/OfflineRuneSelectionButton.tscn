@@ -1,24 +1,26 @@
-[gd_scene load_steps=8 format=3 uid="uid://101a4tcc6v3"]
+[gd_scene format=3 uid="uid://101a4tcc6v3"]
 
 [ext_resource type="Script" uid="uid://dglxqoa8gljsm" path="res://Scripts/OfflineRuneSelectionButton.gd" id="1_oa0bc"]
 [ext_resource type="Texture2D" uid="uid://llqj70wrm8i3" path="res://Sprites/Runes/ARCANE_STRIKE_RUNE.png" id="1_rcutc"]
+[ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="2_7n3pg"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_oa0bc"]
-[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="3_r71sb"]
+[ext_resource type="Theme" uid="uid://bbbw1in72yvu1" path="res://Resources/Themes/Subpanel_theme_res.tres" id="3_or8xw"]
+[ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="3_r71sb"]
 [ext_resource type="Texture2D" uid="uid://cis363l7mtswe" path="res://Sprites/arcane_ESSENCE_ICON.png" id="4_7n3pg"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_or8xw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wlqyv"]
 resource_local_to_scene = true
 shader = ExtResource("3_r71sb")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oa0bc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gkx8f"]
 resource_local_to_scene = true
 shader = ExtResource("3_r71sb")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="OfflineRuneSelectionButton" type="Control"]
+[node name="OfflineRuneSelectionButton" type="Control" unique_id=440867104]
 custom_minimum_size = Vector2(147, 194)
 layout_mode = 3
 anchors_preset = 0
@@ -28,17 +30,21 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_oa0bc")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=569140860]
 layout_mode = 0
 offset_right = 147.0
 offset_bottom = 195.0
+theme = ExtResource("2_7n3pg")
 
-[node name="Panel" type="Panel" parent="Panel"]
+[node name="Panel" type="Panel" parent="Panel" unique_id=452514861]
 layout_mode = 0
-offset_right = 147.0
-offset_bottom = 147.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 131.0
+offset_bottom = 133.0
+theme = ExtResource("3_or8xw")
 
-[node name="TextureRect" type="TextureRect" parent="Panel/Panel"]
+[node name="TextureRect" type="TextureRect" parent="Panel/Panel" unique_id=123721866]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,44 +52,49 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_rcutc")
+stretch_mode = 5
 
-[node name="Panel2" type="Panel" parent="Panel"]
+[node name="Panel2" type="Panel" parent="Panel" unique_id=1034698641]
 layout_mode = 0
-offset_top = 149.0
-offset_right = 147.0
-offset_bottom = 195.0
+offset_left = 16.0
+offset_top = 137.0
+offset_right = 131.0
+offset_bottom = 179.0
+theme = ExtResource("3_or8xw")
 
-[node name="essLabel" parent="Panel/Panel2" instance=ExtResource("2_oa0bc")]
-material = SubResource("ShaderMaterial_or8xw")
+[node name="essLabel" parent="Panel/Panel2" unique_id=1425719350 instance=ExtResource("2_oa0bc")]
+material = SubResource("ShaderMaterial_wlqyv")
 layout_mode = 0
-offset_left = 49.0
-offset_right = 702.3334
-offset_bottom = 137.0
+offset_left = 27.0
+offset_top = 1.0
+offset_right = 680.3334
+offset_bottom = 138.0
 scale = Vector2(0.15, 0.15)
 text = "/craft: 500"
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Panel/Panel2"]
+[node name="TextureRect" type="TextureRect" parent="Panel/Panel2" unique_id=1218732833]
 layout_mode = 0
-offset_left = 30.999998
-offset_top = 3.0000038
-offset_right = 71.0
-offset_bottom = 43.000004
+offset_left = 9.0
+offset_top = 4.000004
+offset_right = 49.0
+offset_bottom = 44.000004
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("4_7n3pg")
 
-[node name="runeLabel" parent="Panel/Panel2" instance=ExtResource("2_oa0bc")]
-material = SubResource("ShaderMaterial_oa0bc")
+[node name="runeLabel" parent="Panel/Panel2" unique_id=22633345 instance=ExtResource("2_oa0bc")]
+material = SubResource("ShaderMaterial_gkx8f")
 layout_mode = 0
-offset_top = 24.0
-offset_right = 980.0
-offset_bottom = 161.0
+offset_left = -16.0
+offset_top = 19.0
+offset_right = 964.0
+offset_bottom = 156.0
 scale = Vector2(0.15, 0.15)
 text = "secs/craft: 500"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Panel"]
+[node name="Button" type="Button" parent="Panel" unique_id=174966392]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15

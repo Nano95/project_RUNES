@@ -1,45 +1,50 @@
-[gd_scene load_steps=14 format=3 uid="uid://bu2xji8e1uu4y"]
+[gd_scene format=3 uid="uid://bu2xji8e1uu4y"]
 
 [ext_resource type="Script" uid="uid://bf0df0cc043fd" path="res://Scripts/RuneSelectionPanel.gd" id="1_8ubi5"]
 [ext_resource type="PackedScene" uid="uid://cby5cdsq4bcyo" path="res://Scenes/FightMenuRuneButton.tscn" id="2_0ljy1"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_0ljy1"]
+[ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="3_vtxks"]
 [ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="3_xyqm1"]
 [ext_resource type="Theme" uid="uid://6l1e7tacwmvs" path="res://Resources/Themes/SubpanelT2_theme_res.tres" id="4_vtxks"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="4_xyqm1"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="5_vtxks"]
 [ext_resource type="Theme" uid="uid://bbbw1in72yvu1" path="res://Resources/Themes/Subpanel_theme_res.tres" id="8_42ego"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8k8yn"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_42ego"]
+shader = ExtResource("3_vtxks")
+shader_parameter/lod = 2.0400000969
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nj03s"]
 resource_local_to_scene = true
 shader = ExtResource("4_xyqm1")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_duup7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ab56x"]
 resource_local_to_scene = true
 shader = ExtResource("4_xyqm1")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_or8xw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e6kce"]
 resource_local_to_scene = true
 shader = ExtResource("4_xyqm1")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oa0bc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i2bj6"]
 resource_local_to_scene = true
 shader = ExtResource("4_xyqm1")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hhha7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u8pe5"]
 resource_local_to_scene = true
 shader = ExtResource("4_xyqm1")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="RunesSelectionPanel" type="Control" node_paths=PackedStringArray("exit_btn", "grid_container", "clear_rune_button")]
+[node name="RunesSelectionPanel" type="Control" unique_id=1422491494 node_paths=PackedStringArray("exit_btn", "grid_container", "clear_rune_button")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -59,7 +64,15 @@ exit_btn = NodePath("Panel/Title/Exit")
 grid_container = NodePath("Panel/Slots/ScrollContainer/SlotsContainer")
 clear_rune_button = NodePath("Panel/Slots/ScrollContainer/SlotsContainer/FightRuneSelectionButton")
 
-[node name="Button" type="Button" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1490303943]
+material = SubResource("ShaderMaterial_42ego")
+layout_mode = 0
+offset_left = -490.0
+offset_top = -208.0
+offset_right = 1250.0
+offset_bottom = 1317.0
+
+[node name="Button" type="Button" parent="." unique_id=1487808789]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = -468.0
@@ -67,7 +80,7 @@ offset_top = -329.0
 offset_right = 1188.0
 offset_bottom = 1430.0
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1946320803]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -82,7 +95,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_xyqm1")
 
-[node name="Title" type="Panel" parent="Panel"]
+[node name="Title" type="Panel" parent="Panel" unique_id=907482334]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -93,8 +106,8 @@ offset_bottom = 82.0
 grow_horizontal = 2
 theme = ExtResource("4_vtxks")
 
-[node name="Title" parent="Panel/Title" instance=ExtResource("3_0ljy1")]
-material = SubResource("ShaderMaterial_8k8yn")
+[node name="Title" parent="Panel/Title" unique_id=1645937726 instance=ExtResource("3_0ljy1")]
+material = SubResource("ShaderMaterial_nj03s")
 layout_mode = 0
 offset_left = 1.0
 offset_top = -7.0
@@ -104,7 +117,7 @@ text = "Select Slot1 Rune"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Exit" type="Button" parent="Panel/Title"]
+[node name="Exit" type="Button" parent="Panel/Title" unique_id=567416416]
 layout_mode = 0
 offset_left = 533.0
 offset_top = -3.0
@@ -116,7 +129,7 @@ theme_override_fonts/font = ExtResource("5_vtxks")
 theme_override_font_sizes/font_size = 100
 text = "x"
 
-[node name="Slots" type="Panel" parent="Panel"]
+[node name="Slots" type="Panel" parent="Panel" unique_id=1629551851]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -130,8 +143,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("8_42ego")
 
-[node name="SlotsInfo" parent="Panel/Slots" instance=ExtResource("3_0ljy1")]
-material = SubResource("ShaderMaterial_duup7")
+[node name="SlotsInfo" parent="Panel/Slots" unique_id=1655274556 instance=ExtResource("3_0ljy1")]
+material = SubResource("ShaderMaterial_ab56x")
 layout_mode = 0
 offset_left = 42.0
 offset_top = 7.0
@@ -140,7 +153,7 @@ offset_bottom = 144.0
 scale = Vector2(0.4, 0.4)
 text = ""
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/Slots"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/Slots" unique_id=1790410679]
 layout_mode = 0
 offset_left = 6.000002
 offset_top = 62.0
@@ -149,23 +162,23 @@ offset_bottom = 593.7648
 scale = Vector2(1.7, 1.7)
 horizontal_scroll_mode = 0
 
-[node name="SlotsContainer" type="GridContainer" parent="Panel/Slots/ScrollContainer"]
+[node name="SlotsContainer" type="GridContainer" parent="Panel/Slots/ScrollContainer" unique_id=1189612813]
 layout_mode = 2
 theme_override_constants/h_separation = -6
 theme_override_constants/v_separation = -80
 columns = 3
 
-[node name="FightRuneSelectionButton" parent="Panel/Slots/ScrollContainer/SlotsContainer" instance=ExtResource("2_0ljy1")]
+[node name="FightRuneSelectionButton" parent="Panel/Slots/ScrollContainer/SlotsContainer" unique_id=52370282 instance=ExtResource("2_0ljy1")]
 layout_mode = 2
 
-[node name="nameLabel" parent="Panel/Slots/ScrollContainer/SlotsContainer/FightRuneSelectionButton/Panel/Panel2" index="1"]
-material = SubResource("ShaderMaterial_or8xw")
+[node name="nameLabel" parent="Panel/Slots/ScrollContainer/SlotsContainer/FightRuneSelectionButton/Panel/Panel2" parent_id_path=PackedInt32Array(52370282, 145544920) index="1" unique_id=1561022595]
+material = SubResource("ShaderMaterial_e6kce")
 
-[node name="Qty" parent="Panel/Slots/ScrollContainer/SlotsContainer/FightRuneSelectionButton/Panel/Panel2" index="2"]
-material = SubResource("ShaderMaterial_oa0bc")
+[node name="Qty" parent="Panel/Slots/ScrollContainer/SlotsContainer/FightRuneSelectionButton/Panel/Panel2" parent_id_path=PackedInt32Array(52370282, 145544920) index="2" unique_id=1194671436]
+material = SubResource("ShaderMaterial_i2bj6")
 
-[node name="Select" parent="Panel/Slots/ScrollContainer/SlotsContainer/FightRuneSelectionButton/Panel/Panel2" index="3"]
-material = SubResource("ShaderMaterial_hhha7")
+[node name="Select" parent="Panel/Slots/ScrollContainer/SlotsContainer/FightRuneSelectionButton/Panel/Panel2" parent_id_path=PackedInt32Array(52370282, 145544920) index="3" unique_id=1401267503]
+material = SubResource("ShaderMaterial_u8pe5")
 text = "CLEAR"
 
 [editable path="Panel/Slots/ScrollContainer/SlotsContainer/FightRuneSelectionButton"]

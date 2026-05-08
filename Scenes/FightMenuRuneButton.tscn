@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cby5cdsq4bcyo"]
+[gd_scene format=3 uid="uid://cby5cdsq4bcyo"]
 
 [ext_resource type="Texture2D" uid="uid://cbtr8w3ak64pc" path="res://Sprites/Runes/BLANK_CLEAR_ICON.png" id="2_3gfna"]
 [ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="2_cuo2q"]
@@ -7,25 +7,25 @@
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="5_lhn1g"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="6_at73j"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_or8xw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cuo2q"]
 resource_local_to_scene = true
 shader = ExtResource("6_at73j")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oa0bc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lhn1g"]
 resource_local_to_scene = true
 shader = ExtResource("6_at73j")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_28mqd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_at73j"]
 resource_local_to_scene = true
 shader = ExtResource("6_at73j")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="FightRuneSelectionButton" type="Control"]
+[node name="FightRuneSelectionButton" type="Control" unique_id=437824848]
 custom_minimum_size = Vector2(291, 391)
 layout_mode = 3
 anchors_preset = 0
@@ -36,7 +36,7 @@ size_flags_vertical = 3
 mouse_filter = 1
 script = ExtResource("3_00aqc")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=320250751]
 layout_mode = 0
 offset_right = 145.0
 offset_bottom = 195.5
@@ -44,7 +44,7 @@ scale = Vector2(2, 2)
 mouse_filter = 1
 theme = ExtResource("2_cuo2q")
 
-[node name="Panel" type="Panel" parent="Panel"]
+[node name="Panel" type="Panel" parent="Panel" unique_id=1423309541]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
@@ -53,17 +53,18 @@ offset_bottom = 130.0
 mouse_filter = 1
 theme = ExtResource("3_cuo2q")
 
-[node name="runeIcon" type="TextureRect" parent="Panel/Panel"]
+[node name="runeIcon" type="TextureRect" parent="Panel/Panel" unique_id=783970715]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_3gfna")
 stretch_mode = 5
 
-[node name="Panel2" type="Panel" parent="Panel"]
+[node name="Panel2" type="Panel" parent="Panel" unique_id=145544920]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 134.0
@@ -72,7 +73,7 @@ offset_bottom = 179.5
 mouse_filter = 1
 theme = ExtResource("3_cuo2q")
 
-[node name="typeTexture" type="TextureRect" parent="Panel/Panel2"]
+[node name="typeTexture" type="TextureRect" parent="Panel/Panel2" unique_id=751438127]
 visible = false
 layout_mode = 0
 offset_left = 181.0
@@ -81,9 +82,9 @@ offset_right = 275.99994
 offset_bottom = -131.00009
 scale = Vector2(0.4, 0.4)
 
-[node name="nameLabel" parent="Panel/Panel2" instance=ExtResource("5_lhn1g")]
+[node name="nameLabel" parent="Panel/Panel2" unique_id=1561022595 instance=ExtResource("5_lhn1g")]
 visible = false
-material = SubResource("ShaderMaterial_or8xw")
+material = SubResource("ShaderMaterial_cuo2q")
 layout_mode = 0
 offset_left = -16.0
 offset_top = 4.0
@@ -94,9 +95,9 @@ text = "Electric Explosion"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Qty" parent="Panel/Panel2" instance=ExtResource("5_lhn1g")]
+[node name="Qty" parent="Panel/Panel2" unique_id=1194671436 instance=ExtResource("5_lhn1g")]
 visible = false
-material = SubResource("ShaderMaterial_oa0bc")
+material = SubResource("ShaderMaterial_lhn1g")
 layout_mode = 0
 offset_left = -15.5
 offset_top = 22.0
@@ -107,8 +108,8 @@ text = "50000x"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Select" parent="Panel/Panel2" instance=ExtResource("5_lhn1g")]
-material = SubResource("ShaderMaterial_28mqd")
+[node name="Select" parent="Panel/Panel2" unique_id=1401267503 instance=ExtResource("5_lhn1g")]
+material = SubResource("ShaderMaterial_at73j")
 layout_mode = 0
 offset_left = -3.5
 offset_top = -0.50000024
@@ -119,7 +120,7 @@ text = "SELECT RUNE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Panel"]
+[node name="Button" type="Button" parent="Panel" unique_id=178878634]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15

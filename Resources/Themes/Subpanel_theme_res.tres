@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bbbw1in72yvu1"]
+[gd_resource type="Theme" format=3 uid="uid://bbbw1in72yvu1"]
 
 [ext_resource type="Texture2D" uid="uid://d3et5gnwpmxba" path="res://Sprites/UI/Subpanel_Theme_v3.png" id="1_frtfg"]
 
