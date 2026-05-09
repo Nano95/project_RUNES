@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://b7xgkus4u2361"]
+[gd_scene format=3 uid="uid://b7xgkus4u2361"]
 
 [ext_resource type="Script" uid="uid://dygepuv8uhpel" path="res://Scripts/GameUI.gd" id="1_po7eo"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_frnsy"]
 [ext_resource type="PackedScene" uid="uid://d3gwj83kl6yvi" path="res://Scenes/BattleRuneButton.tscn" id="2_qecx7"]
 [ext_resource type="PackedScene" uid="uid://om2m83fmhqt5" path="res://Scenes/BattleSettingsPanel.tscn" id="3_0hwcy"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="3_co6lq"]
+[ext_resource type="Theme" uid="uid://6l1e7tacwmvs" path="res://Resources/Themes/SubpanelT2_theme_res.tres" id="4_eh46d"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="4_frnsy"]
 [ext_resource type="Texture2D" uid="uid://2mjbs0mmr2ya" path="res://Sprites/mid_progress_bar_top.png" id="5_co6lq"]
 [ext_resource type="Texture2D" uid="uid://b8vfc4t74gkpt" path="res://Sprites/FULL_ATK.png" id="5_d8tla"]
@@ -16,37 +17,37 @@
 [ext_resource type="Script" uid="uid://csqoa81ypjofv" path="res://Scripts/LootManager.gd" id="12_us4cf"]
 [ext_resource type="PackedScene" uid="uid://dakbi23goa01y" path="res://Scenes/LootEntry.tscn" id="13_qecx7"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j41el"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5s36o"]
 resource_local_to_scene = true
 shader = ExtResource("3_co6lq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8oijl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y2kyv"]
 resource_local_to_scene = true
 shader = ExtResource("3_co6lq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ed32"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ifpd"]
 resource_local_to_scene = true
 shader = ExtResource("3_co6lq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_co6lq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hyinc"]
 resource_local_to_scene = true
 shader = ExtResource("3_co6lq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0hwcy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j2gl1"]
 resource_local_to_scene = true
 shader = ExtResource("3_co6lq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="GameUI" type="Control" node_paths=PackedStringArray("back_btn", "settings_btn", "hp_bar", "xp_bar", "hp_label", "monster_turns", "monster_damage", "rune_btns_container", "mana_icon", "focus_label", "loot_manager")]
+[node name="GameUI" type="Control" unique_id=935331695 node_paths=PackedStringArray("back_btn", "settings_btn", "hp_bar", "xp_bar", "hp_label", "monster_turns", "monster_damage", "rune_btns_container", "mana_icon", "focus_label", "loot_manager")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -69,7 +70,7 @@ mana_icon = NodePath("TopSection/FocusIcon")
 focus_label = NodePath("TopSection/FocusIcon/focusLabel")
 loot_manager = NodePath("LootManager")
 
-[node name="TopSection" type="Control" parent="."]
+[node name="TopSection" type="Control" parent="." unique_id=1469509628]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -80,15 +81,16 @@ offset_right = -360.0
 offset_bottom = 77.0
 grow_horizontal = 2
 
-[node name="Panel" type="Panel" parent="TopSection"]
+[node name="Panel" type="Panel" parent="TopSection" unique_id=1027068474]
 z_index = -1
 layout_mode = 0
 offset_left = 6.0
 offset_top = 11.0
 offset_right = 714.0
 offset_bottom = 152.0
+theme = ExtResource("4_eh46d")
 
-[node name="BackBtn" type="Button" parent="TopSection"]
+[node name="BackBtn" type="Button" parent="TopSection" unique_id=341487896]
 layout_mode = 0
 offset_left = 25.0
 offset_top = -68.0
@@ -100,7 +102,7 @@ theme_override_fonts/font = ExtResource("4_frnsy")
 theme_override_font_sizes/font_size = 100
 text = "<-"
 
-[node name="SettingsBtn" type="Button" parent="TopSection"]
+[node name="SettingsBtn" type="Button" parent="TopSection" unique_id=1019381976]
 layout_mode = 0
 offset_left = 588.0
 offset_top = -68.0
@@ -112,7 +114,7 @@ theme_override_fonts/font = ExtResource("4_frnsy")
 theme_override_font_sizes/font_size = 100
 text = "?"
 
-[node name="QuickRespawn" type="Button" parent="TopSection"]
+[node name="QuickRespawn" type="Button" parent="TopSection" unique_id=480038541]
 visible = false
 layout_mode = 0
 offset_left = 588.0
@@ -125,7 +127,7 @@ theme_override_fonts/font = ExtResource("4_frnsy")
 theme_override_font_sizes/font_size = 100
 text = "->"
 
-[node name="HpBar" type="TextureProgressBar" parent="TopSection"]
+[node name="HpBar" type="TextureProgressBar" parent="TopSection" unique_id=332857752]
 layout_mode = 0
 offset_left = 23.0
 offset_top = 23.0
@@ -137,8 +139,8 @@ texture_over = ExtResource("5_co6lq")
 texture_progress = ExtResource("7_tii1l")
 tint_progress = Color(0.51250005, 1, 0.35000002, 1)
 
-[node name="HpLabel" parent="TopSection/HpBar" instance=ExtResource("2_frnsy")]
-material = SubResource("ShaderMaterial_j41el")
+[node name="HpLabel" parent="TopSection/HpBar" unique_id=1486001269 instance=ExtResource("2_frnsy")]
+material = SubResource("ShaderMaterial_5s36o")
 layout_mode = 0
 offset_top = 0.2500011
 offset_right = 1337.5
@@ -148,7 +150,7 @@ text = "2000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="XpBar" type="TextureProgressBar" parent="TopSection" node_paths=PackedStringArray("xp_lbl")]
+[node name="XpBar" type="TextureProgressBar" parent="TopSection" unique_id=163275558 node_paths=PackedStringArray("xp_lbl")]
 layout_mode = 0
 offset_left = 378.0
 offset_top = 23.0
@@ -163,8 +165,8 @@ script = ExtResource("8_tii1l")
 xp_curve = ExtResource("9_8dgta")
 xp_lbl = NodePath("XpLabel")
 
-[node name="XpLabel" parent="TopSection/XpBar" instance=ExtResource("2_frnsy")]
-material = SubResource("ShaderMaterial_8oijl")
+[node name="XpLabel" parent="TopSection/XpBar" unique_id=764721853 instance=ExtResource("2_frnsy")]
+material = SubResource("ShaderMaterial_y2kyv")
 layout_mode = 0
 offset_top = 0.2500011
 offset_right = 1337.5
@@ -174,7 +176,7 @@ text = "2000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DamagedIcon" type="TextureRect" parent="TopSection"]
+[node name="DamagedIcon" type="TextureRect" parent="TopSection" unique_id=1914600016]
 z_index = -1
 layout_mode = 0
 offset_left = 59.0
@@ -184,8 +186,8 @@ offset_bottom = 107.0
 scale = Vector2(2, 2)
 texture = ExtResource("6_j41el")
 
-[node name="totalAtkLabel" parent="TopSection/DamagedIcon" instance=ExtResource("2_frnsy")]
-material = SubResource("ShaderMaterial_4ed32")
+[node name="totalAtkLabel" parent="TopSection/DamagedIcon" unique_id=2134382516 instance=ExtResource("2_frnsy")]
+material = SubResource("ShaderMaterial_7ifpd")
 layout_mode = 0
 offset_left = 5.0
 offset_top = -49.5
@@ -195,7 +197,7 @@ pivot_offset = Vector2(60, 68.5)
 text = "50"
 vertical_alignment = 1
 
-[node name="AttackIcon" type="TextureRect" parent="TopSection"]
+[node name="AttackIcon" type="TextureRect" parent="TopSection" unique_id=900766328]
 z_index = -1
 layout_mode = 0
 offset_left = 280.0
@@ -205,8 +207,8 @@ offset_bottom = 107.0
 scale = Vector2(2, 2)
 texture = ExtResource("5_d8tla")
 
-[node name="turnsLabel" parent="TopSection/AttackIcon" instance=ExtResource("2_frnsy")]
-material = SubResource("ShaderMaterial_co6lq")
+[node name="turnsLabel" parent="TopSection/AttackIcon" unique_id=1244465 instance=ExtResource("2_frnsy")]
+material = SubResource("ShaderMaterial_hyinc")
 layout_mode = 0
 offset_left = 6.0
 offset_top = -49.500008
@@ -216,7 +218,7 @@ pivot_offset = Vector2(60, 68)
 text = "30"
 vertical_alignment = 1
 
-[node name="FocusIcon" type="TextureRect" parent="TopSection"]
+[node name="FocusIcon" type="TextureRect" parent="TopSection" unique_id=1447536329]
 z_index = -1
 layout_mode = 0
 offset_left = 488.0
@@ -226,8 +228,8 @@ offset_bottom = 107.0
 scale = Vector2(2, 2)
 texture = ExtResource("11_0hwcy")
 
-[node name="focusLabel" parent="TopSection/FocusIcon" instance=ExtResource("2_frnsy")]
-material = SubResource("ShaderMaterial_0hwcy")
+[node name="focusLabel" parent="TopSection/FocusIcon" unique_id=285287565 instance=ExtResource("2_frnsy")]
+material = SubResource("ShaderMaterial_j2gl1")
 layout_mode = 0
 offset_left = 6.0
 offset_top = -49.500008
@@ -237,7 +239,7 @@ pivot_offset = Vector2(60, 68)
 text = "30"
 vertical_alignment = 1
 
-[node name="BottomSection" type="Control" parent="."]
+[node name="BottomSection" type="Control" parent="." unique_id=1776967263]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -247,7 +249,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="BottomSection"]
+[node name="MarginContainer" type="MarginContainer" parent="BottomSection" unique_id=2142037499]
 layout_mode = 0
 offset_left = -360.0
 offset_top = -149.0
@@ -258,14 +260,14 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 15
 
-[node name="ScrollContainer" type="ScrollContainer" parent="BottomSection/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="BottomSection/MarginContainer" unique_id=1111276155]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomSection/MarginContainer/ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomSection/MarginContainer/ScrollContainer" unique_id=1927436802]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="LootManager" type="VBoxContainer" parent="."]
+[node name="LootManager" type="VBoxContainer" parent="." unique_id=1811978185]
 layout_mode = 0
 offset_top = 261.0
 offset_right = 40.0

@@ -1,16 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://dq67y5pmx8adc"]
+[gd_scene format=3 uid="uid://dq67y5pmx8adc"]
 
 [ext_resource type="Script" uid="uid://dwwd78td8c38m" path="res://Scripts/DebugPanel.gd" id="1_28dv6"]
 [ext_resource type="ButtonGroup" uid="uid://br2b15cqpspy" path="res://Resources/StatsButtonQty.tres" id="2_n44sy"]
 [ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="3_imyrc"]
 [ext_resource type="PackedScene" uid="uid://du5vvoc8xc6j8" path="res://Scenes/ConfirmationPanel.tscn" id="3_n44sy"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="4_o7tuo"]
+[ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="5_imyrc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kbq37"]
 shader = ExtResource("3_imyrc")
 shader_parameter/lod = 2.000000095
 
-[node name="DebugPanel" type="Control" node_paths=PackedStringArray("btn1000", "btn20000", "btn500000", "btn90000000", "exp_btn", "gold_btn", "prestige_btn")]
+[node name="DebugPanel" type="Control" unique_id=1319309147 node_paths=PackedStringArray("btn1000", "btn20000", "btn500000", "btn90000000", "exp_btn", "gold_btn", "prestige_btn")]
 layout_mode = 3
 anchors_preset = 10
 anchor_right = 1.0
@@ -26,7 +27,7 @@ exp_btn = NodePath("ColorRect/Panel/Control/expBtn")
 gold_btn = NodePath("ColorRect/Panel/Control/goldBtn")
 prestige_btn = NodePath("ColorRect/Panel/Control/prestigeBtn")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1454591219]
 material = SubResource("ShaderMaterial_kbq37")
 layout_mode = 1
 anchors_preset = 14
@@ -40,7 +41,7 @@ offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="ColorRect"]
+[node name="Panel" type="Panel" parent="ColorRect" unique_id=1130318218]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,14 +52,15 @@ offset_right = -20.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("5_imyrc")
 
-[node name="Control" type="Control" parent="ColorRect/Panel"]
+[node name="Control" type="Control" parent="ColorRect/Panel" unique_id=107241147]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 
-[node name="qtyBtn1" type="Button" parent="ColorRect/Panel/Control"]
+[node name="qtyBtn1" type="Button" parent="ColorRect/Panel/Control" unique_id=114149393]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -77,7 +79,7 @@ button_pressed = true
 button_group = ExtResource("2_n44sy")
 text = "1000x"
 
-[node name="qtyBtn2" type="Button" parent="ColorRect/Panel/Control"]
+[node name="qtyBtn2" type="Button" parent="ColorRect/Panel/Control" unique_id=1050819985]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -95,7 +97,7 @@ toggle_mode = true
 button_group = ExtResource("2_n44sy")
 text = "20000x"
 
-[node name="qtyBtn3" type="Button" parent="ColorRect/Panel/Control"]
+[node name="qtyBtn3" type="Button" parent="ColorRect/Panel/Control" unique_id=2081159294]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -113,7 +115,7 @@ toggle_mode = true
 button_group = ExtResource("2_n44sy")
 text = "500000x"
 
-[node name="qtyBtn4" type="Button" parent="ColorRect/Panel/Control"]
+[node name="qtyBtn4" type="Button" parent="ColorRect/Panel/Control" unique_id=1967265140]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -131,7 +133,7 @@ toggle_mode = true
 button_group = ExtResource("2_n44sy")
 text = "90000000x"
 
-[node name="expBtn" type="Button" parent="ColorRect/Panel/Control"]
+[node name="expBtn" type="Button" parent="ColorRect/Panel/Control" unique_id=1345540096]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -149,7 +151,7 @@ toggle_mode = true
 button_group = ExtResource("2_n44sy")
 text = "Exp"
 
-[node name="goldBtn" type="Button" parent="ColorRect/Panel/Control"]
+[node name="goldBtn" type="Button" parent="ColorRect/Panel/Control" unique_id=1438252832]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -167,7 +169,7 @@ toggle_mode = true
 button_group = ExtResource("2_n44sy")
 text = "Gold"
 
-[node name="resetBtn" type="Button" parent="ColorRect/Panel/Control"]
+[node name="resetBtn" type="Button" parent="ColorRect/Panel/Control" unique_id=839197238]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -185,7 +187,7 @@ toggle_mode = true
 button_group = ExtResource("2_n44sy")
 text = "Reset"
 
-[node name="prestigeBtn" type="Button" parent="ColorRect/Panel/Control"]
+[node name="prestigeBtn" type="Button" parent="ColorRect/Panel/Control" unique_id=1648366577]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

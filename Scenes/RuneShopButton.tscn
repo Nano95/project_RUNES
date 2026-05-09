@@ -1,82 +1,87 @@
-[gd_scene load_steps=9 format=3 uid="uid://g8h5rl7ffb3c"]
+[gd_scene format=3 uid="uid://g8h5rl7ffb3c"]
 
 [ext_resource type="Texture2D" uid="uid://llqj70wrm8i3" path="res://Sprites/Runes/ARCANE_STRIKE_RUNE.png" id="1_e80ax"]
 [ext_resource type="Script" uid="uid://crlaf48j3vxme" path="res://Scripts/RuneShopButton.gd" id="1_skh3y"]
 [ext_resource type="Texture2D" uid="uid://by8eyn77jli18" path="res://Sprites/GOLD_ICON.png" id="2_skh3y"]
+[ext_resource type="Theme" uid="uid://herb326sm84p" path="res://Resources/Themes/SubpanelT3_theme_res.tres" id="3_3oj5a"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_f8rnn"]
-[ext_resource type="Shader" path="res://Shaders/ArcadeFlash.gdshader" id="4_yipkq"]
+[ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="4_yipkq"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="5_j2a1v"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pek62"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1e07c"]
 resource_local_to_scene = true
 shader = ExtResource("4_yipkq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_glnfx"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8sgoo"]
 resource_local_to_scene = true
 shader = ExtResource("4_yipkq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="RuneShopButton" type="Control"]
+[node name="RuneShopButton" type="Control" unique_id=1359522942]
 layout_mode = 3
 anchors_preset = 0
+offset_right = 400.0
+offset_bottom = 95.0
 script = ExtResource("1_skh3y")
 
-[node name="Button" type="Button" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=332255643]
 layout_mode = 0
-offset_left = 198.0
+offset_left = 1.5258789e-05
 offset_top = 1.0000014
-offset_right = 750.49994
-offset_bottom = 173.49998
+offset_right = 514.0
+offset_bottom = 96.0
+mouse_filter = 2
+theme = ExtResource("3_3oj5a")
+
+[node name="Button" type="Button" parent="Panel" unique_id=237371953]
+layout_mode = 0
+offset_left = 313.99997
+offset_top = 3.999999
+offset_right = 791.4999
+offset_bottom = 231.49997
 scale = Vector2(0.4, 0.4)
 theme_override_constants/outline_size = 35
 theme_override_fonts/font = ExtResource("5_j2a1v")
 theme_override_font_sizes/font_size = 100
 text = "Buy"
 
-[node name="Panel" type="Panel" parent="Button"]
-z_index = -1
+[node name="RuneTexture" type="TextureRect" parent="Panel" unique_id=560519165]
 layout_mode = 0
-offset_left = -494.99997
-offset_right = 552.4999
-offset_bottom = 172.49998
-mouse_filter = 2
-
-[node name="RuneTexture" type="TextureRect" parent="Button"]
-layout_mode = 0
-offset_left = -495.0
-offset_right = -429.99997
-offset_bottom = 68.250015
+offset_left = -1.5258789e-05
+offset_right = 37.599983
+offset_bottom = 38.399998
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("1_e80ax")
+stretch_mode = 4
 
-[node name="Gold" type="TextureRect" parent="Button/RuneTexture"]
+[node name="Gold" type="TextureRect" parent="Panel/RuneTexture" unique_id=1028049969]
 layout_mode = 0
-offset_left = 63.0
-offset_top = 7.999997
-offset_right = 121.0
-offset_bottom = 66.0
-scale = Vector2(0.5, 0.5)
+offset_left = 36.0
+offset_top = 6.5999985
+offset_right = 94.0
+offset_bottom = 64.600006
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_skh3y")
 
-[node name="Label" parent="Button/RuneTexture" instance=ExtResource("3_f8rnn")]
-material = SubResource("ShaderMaterial_pek62")
+[node name="Label" parent="Panel/RuneTexture" unique_id=487793281 instance=ExtResource("3_f8rnn")]
+material = SubResource("ShaderMaterial_1e07c")
 layout_mode = 0
-offset_left = 93.0
-offset_top = 4.999997
-offset_right = 505.0
-offset_bottom = 142.0
-scale = Vector2(0.25, 0.25)
+offset_left = 51.600002
+offset_top = 3.1999996
+offset_right = 463.6
+offset_bottom = 140.2
+scale = Vector2(0.15, 0.15)
 text = "100"
 
-[node name="owned" parent="Button/RuneTexture" instance=ExtResource("3_f8rnn")]
-material = SubResource("ShaderMaterial_glnfx")
+[node name="owned" parent="Panel/RuneTexture" unique_id=1215012347 instance=ExtResource("3_f8rnn")]
+material = SubResource("ShaderMaterial_8sgoo")
 layout_mode = 0
-offset_left = 62.0
-offset_top = 41.999996
-offset_right = 888.6666
-offset_bottom = 179.0
-scale = Vector2(0.15, 0.15)
+offset_left = 35.6
+offset_top = 21.6
+offset_right = 672.93335
+offset_bottom = 160.2667
+scale = Vector2(0.1, 0.1)
 text = "Owned: "
