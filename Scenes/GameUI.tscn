@@ -8,14 +8,14 @@
 [ext_resource type="Theme" uid="uid://6l1e7tacwmvs" path="res://Resources/Themes/SubpanelT2_theme_res.tres" id="4_eh46d"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="4_frnsy"]
 [ext_resource type="Texture2D" uid="uid://2mjbs0mmr2ya" path="res://Sprites/mid_progress_bar_top.png" id="5_co6lq"]
-[ext_resource type="Texture2D" uid="uid://b8vfc4t74gkpt" path="res://Sprites/FULL_ATK.png" id="5_d8tla"]
-[ext_resource type="Texture2D" uid="uid://bc5ptbig8ogjf" path="res://Sprites/Damaged_icon.png" id="6_j41el"]
 [ext_resource type="Texture2D" uid="uid://opa2rothhy7x" path="res://Sprites/mid_progress_bar_progress.png" id="7_tii1l"]
 [ext_resource type="Script" uid="uid://dt4un2465kwr1" path="res://Scripts/XpBarController.gd" id="8_tii1l"]
 [ext_resource type="Curve" uid="uid://bdkmegreb07jj" path="res://Resources/xpCurve.tres" id="9_8dgta"]
-[ext_resource type="Texture2D" uid="uid://b18ao2eimbmku" path="res://Sprites/MANA_ICON.png" id="11_0hwcy"]
+[ext_resource type="Texture2D" uid="uid://7y1l608t68tc" path="res://Sprites/SWORD_ICON_v2.png" id="12_eh46d"]
 [ext_resource type="Script" uid="uid://csqoa81ypjofv" path="res://Scripts/LootManager.gd" id="12_us4cf"]
+[ext_resource type="Texture2D" uid="uid://bu4vdh2ysw12x" path="res://Sprites/HOURGLASS_ICON.png" id="13_5s36o"]
 [ext_resource type="PackedScene" uid="uid://dakbi23goa01y" path="res://Scenes/LootEntry.tscn" id="13_qecx7"]
+[ext_resource type="Texture2D" uid="uid://ba0tbqqe7jo6v" path="res://Sprites/MANA_ICON_v2.png" id="14_y2kyv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5s36o"]
 resource_local_to_scene = true
@@ -130,9 +130,9 @@ text = "->"
 [node name="HpBar" type="TextureProgressBar" parent="TopSection" unique_id=332857752]
 layout_mode = 0
 offset_left = 23.0
-offset_top = 23.0
+offset_top = 16.0
 offset_right = 103.0
-offset_bottom = 33.0
+offset_bottom = 26.0
 scale = Vector2(4, 4)
 value = 50.0
 texture_over = ExtResource("5_co6lq")
@@ -153,9 +153,9 @@ vertical_alignment = 1
 [node name="XpBar" type="TextureProgressBar" parent="TopSection" unique_id=163275558 node_paths=PackedStringArray("xp_lbl")]
 layout_mode = 0
 offset_left = 378.0
-offset_top = 23.0
+offset_top = 16.0
 offset_right = 458.0
-offset_bottom = 33.0
+offset_bottom = 26.0
 scale = Vector2(4, 4)
 value = 50.0
 texture_over = ExtResource("5_co6lq")
@@ -179,20 +179,20 @@ vertical_alignment = 1
 [node name="DamagedIcon" type="TextureRect" parent="TopSection" unique_id=1914600016]
 z_index = -1
 layout_mode = 0
-offset_left = 59.0
-offset_top = 67.0
-offset_right = 99.0
-offset_bottom = 107.0
-scale = Vector2(2, 2)
-texture = ExtResource("6_j41el")
+offset_left = 27.0
+offset_top = 24.0
+offset_right = 187.0
+offset_bottom = 184.0
+texture = ExtResource("12_eh46d")
 
 [node name="totalAtkLabel" parent="TopSection/DamagedIcon" unique_id=2134382516 instance=ExtResource("2_frnsy")]
 material = SubResource("ShaderMaterial_7ifpd")
 layout_mode = 0
-offset_left = 5.0
-offset_top = -49.5
-offset_right = 283.33334
-offset_bottom = 87.5
+offset_left = 88.0
+offset_top = 11.000008
+offset_right = 366.33337
+offset_bottom = 148.0
+scale = Vector2(0.6, 0.6)
 pivot_offset = Vector2(60, 68.5)
 text = "50"
 vertical_alignment = 1
@@ -200,20 +200,20 @@ vertical_alignment = 1
 [node name="AttackIcon" type="TextureRect" parent="TopSection" unique_id=900766328]
 z_index = -1
 layout_mode = 0
-offset_left = 280.0
-offset_top = 67.0
-offset_right = 320.0
-offset_bottom = 107.0
-scale = Vector2(2, 2)
-texture = ExtResource("5_d8tla")
+offset_left = 241.0
+offset_top = 24.0
+offset_right = 401.0
+offset_bottom = 184.0
+texture = ExtResource("13_5s36o")
 
 [node name="turnsLabel" parent="TopSection/AttackIcon" unique_id=1244465 instance=ExtResource("2_frnsy")]
 material = SubResource("ShaderMaterial_hyinc")
 layout_mode = 0
-offset_left = 6.0
-offset_top = -49.500008
-offset_right = 226.0
-offset_bottom = 87.49999
+offset_left = 93.0
+offset_top = 10.0
+offset_right = 313.0
+offset_bottom = 147.0
+scale = Vector2(0.6, 0.6)
 pivot_offset = Vector2(60, 68)
 text = "30"
 vertical_alignment = 1
@@ -221,20 +221,21 @@ vertical_alignment = 1
 [node name="FocusIcon" type="TextureRect" parent="TopSection" unique_id=1447536329]
 z_index = -1
 layout_mode = 0
-offset_left = 488.0
-offset_top = 67.0
-offset_right = 528.0
-offset_bottom = 107.0
-scale = Vector2(2, 2)
-texture = ExtResource("11_0hwcy")
+offset_left = 453.0
+offset_top = 30.0
+offset_right = 613.0
+offset_bottom = 190.0
+mouse_filter = 2
+texture = ExtResource("14_y2kyv")
 
 [node name="focusLabel" parent="TopSection/FocusIcon" unique_id=285287565 instance=ExtResource("2_frnsy")]
 material = SubResource("ShaderMaterial_j2gl1")
 layout_mode = 0
-offset_left = 6.0
-offset_top = -49.500008
-offset_right = 226.0
-offset_bottom = 87.49999
+offset_left = 101.0
+offset_top = 4.0
+offset_right = 321.0
+offset_bottom = 141.0
+scale = Vector2(0.6, 0.6)
 pivot_offset = Vector2(60, 68)
 text = "30"
 vertical_alignment = 1

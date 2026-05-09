@@ -132,7 +132,7 @@ func update_monster_turns(turns:int) -> void:
 	monster_turns.scale = Vector2(danger_scale, danger_scale)
 	if (turns_tween and turns_tween.is_running()): turns_tween.kill()
 	turns_tween = create_tween()
-	turns_tween.tween_property(monster_turns, "scale", Vector2(.3, .3), 0.4)\
+	turns_tween.tween_property(monster_turns, "scale", Vector2(.6, .6), 0.4)\
 		.set_trans(Tween.TRANS_CUBIC)
 
 func update_monster_damage(power:int) -> void:
@@ -143,7 +143,7 @@ func update_monster_damage(power:int) -> void:
 	if (dmg_tween and dmg_tween.is_running()): dmg_tween.kill()
 	monster_damage.scale = Vector2(.4, .4)
 	dmg_tween = create_tween()
-	dmg_tween.tween_property(monster_damage, "scale", Vector2(.3, .3), 0.4)\
+	dmg_tween.tween_property(monster_damage, "scale", Vector2(.6, .6), 0.4)\
 		.set_trans(Tween.TRANS_CUBIC)
 
 func spawn_settings() -> void:
@@ -162,7 +162,7 @@ func update_focus(focus:int) -> void:
 	if (focus_tween and focus_tween.is_running()): focus_tween.kill()
 	focus_label.scale = Vector2(.4, .4)
 	focus_tween = create_tween()
-	focus_tween.tween_property(focus_label, "scale", Vector2(.3, .3), 0.4)\
+	focus_tween.tween_property(focus_label, "scale", Vector2(.6, .6), 0.4)\
 		.set_trans(Tween.TRANS_CUBIC)
 
 func tween_hp_bar(from: float, to: float, clr:Color) -> void:
