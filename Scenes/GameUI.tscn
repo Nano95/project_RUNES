@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://opa2rothhy7x" path="res://Sprites/mid_progress_bar_progress.png" id="7_tii1l"]
 [ext_resource type="Script" uid="uid://dt4un2465kwr1" path="res://Scripts/XpBarController.gd" id="8_tii1l"]
 [ext_resource type="Curve" uid="uid://bdkmegreb07jj" path="res://Resources/xpCurve.tres" id="9_8dgta"]
-[ext_resource type="Texture2D" uid="uid://7y1l608t68tc" path="res://Sprites/SWORD_ICON_v2.png" id="12_eh46d"]
+[ext_resource type="Texture2D" uid="uid://dbhsjuosesa1" path="res://Sprites/HIT_ICON.png" id="12_eh46d"]
 [ext_resource type="Script" uid="uid://csqoa81ypjofv" path="res://Scripts/LootManager.gd" id="12_us4cf"]
 [ext_resource type="Texture2D" uid="uid://bu4vdh2ysw12x" path="res://Sprites/HOURGLASS_ICON.png" id="13_5s36o"]
 [ext_resource type="PackedScene" uid="uid://dakbi23goa01y" path="res://Scenes/LootEntry.tscn" id="13_qecx7"]
@@ -179,18 +179,18 @@ vertical_alignment = 1
 [node name="DamagedIcon" type="TextureRect" parent="TopSection" unique_id=1914600016]
 z_index = -1
 layout_mode = 0
-offset_left = 27.0
+offset_left = 25.0
 offset_top = 24.0
-offset_right = 187.0
+offset_right = 185.0
 offset_bottom = 184.0
 texture = ExtResource("12_eh46d")
 
 [node name="totalAtkLabel" parent="TopSection/DamagedIcon" unique_id=2134382516 instance=ExtResource("2_frnsy")]
 material = SubResource("ShaderMaterial_7ifpd")
 layout_mode = 0
-offset_left = 88.0
+offset_left = 97.00001
 offset_top = 11.000008
-offset_right = 366.33337
+offset_right = 375.33337
 offset_bottom = 148.0
 scale = Vector2(0.6, 0.6)
 pivot_offset = Vector2(60, 68.5)

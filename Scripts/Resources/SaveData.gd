@@ -120,6 +120,8 @@ class_name SaveData
 @export var grid_y_pos_offset:float = 0.0
 @export var two_tap_attack:bool = false
 @export var fast_mode:bool = false
+@export var player_screenshake:bool = true
+@export var enemy_screenshake:bool = true
 
 func reset_settings() -> void:
 	grid_opacity = 1.0

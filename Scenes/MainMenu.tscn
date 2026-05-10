@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://blmp3gywbfee1"]
+[gd_scene format=3 uid="uid://blmp3gywbfee1"]
 
 [ext_resource type="Script" uid="uid://mqmfo2nmeldy" path="res://Scripts/MainMenu.gd" id="1_8saeu"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="2_ghw46"]
@@ -15,20 +15,21 @@
 [ext_resource type="Script" uid="uid://xa01fjjqd0pp" path="res://Scripts/SideButtonsContainer.gd" id="13_fh7cp"]
 [ext_resource type="ButtonGroup" uid="uid://ikn15qsvufie" path="res://Resources/SideMenuButtonsGroup.tres" id="14_7467j"]
 [ext_resource type="PackedScene" uid="uid://cjd8lmuyg3fi0" path="res://Scenes/SideButton.tscn" id="15_2x1g0"]
+[ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="16_2x1g0"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_if7li"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_riqfo"]
 resource_local_to_scene = true
 shader = ExtResource("5_8um5k")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xim88"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yxkem"]
 resource_local_to_scene = true
 shader = ExtResource("5_8um5k")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("eq_slot_1_btn", "eq_slot_2_btn", "nav_buttons_container", "inventory_grid", "generate_btn")]
+[node name="MainMenu" type="Control" unique_id=89611811 node_paths=PackedStringArray("eq_slot_1_btn", "eq_slot_2_btn", "nav_buttons_container", "inventory_grid", "generate_btn")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,7 +51,7 @@ nav_buttons_container = NodePath("BottomInfoPanel/NavButtonsContainer")
 inventory_grid = NodePath("Equipment/Panel/Inventory/ScrollContainer/MarginContainer/GridContainer")
 generate_btn = NodePath("Equipment/Panel/Inventory/Button")
 
-[node name="Equipment" type="Control" parent="."]
+[node name="Equipment" type="Control" parent="." unique_id=1054842210]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -61,7 +62,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="Equipment"]
+[node name="Panel" type="Panel" parent="Equipment" unique_id=46883824]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -76,13 +77,13 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(324, 256)
 
-[node name="Inventory" type="Control" parent="Equipment/Panel"]
+[node name="Inventory" type="Control" parent="Equipment/Panel" unique_id=1384580276]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Title" parent="Equipment/Panel/Inventory" instance=ExtResource("4_df05h")]
-material = SubResource("ShaderMaterial_if7li")
+[node name="Title" parent="Equipment/Panel/Inventory" unique_id=1529691904 instance=ExtResource("4_df05h")]
+material = SubResource("ShaderMaterial_riqfo")
 layout_mode = 0
 offset_left = 236.0
 offset_top = 1.0
@@ -91,7 +92,7 @@ offset_bottom = 138.0
 text = "Inventory"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="Equipment/Panel/Inventory"]
+[node name="Button" type="Button" parent="Equipment/Panel/Inventory" unique_id=236819972]
 layout_mode = 0
 offset_left = 455.0
 offset_right = 915.0
@@ -102,33 +103,33 @@ theme_override_fonts/font = ExtResource("2_ghw46")
 theme_override_font_sizes/font_size = 100
 text = "Generate"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Equipment/Panel/Inventory"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Equipment/Panel/Inventory" unique_id=227313544]
 layout_mode = 0
 offset_top = 59.0
 offset_right = 642.0
 offset_bottom = 346.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Equipment/Panel/Inventory/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Equipment/Panel/Inventory/ScrollContainer" unique_id=704473182]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 1
 
-[node name="GridContainer" type="GridContainer" parent="Equipment/Panel/Inventory/ScrollContainer/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="Equipment/Panel/Inventory/ScrollContainer/MarginContainer" unique_id=327156992]
 layout_mode = 2
 theme_override_constants/v_separation = 9
 
-[node name="InventoryButton" parent="Equipment/Panel/Inventory/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("6_8um5k")]
+[node name="InventoryButton" parent="Equipment/Panel/Inventory/ScrollContainer/MarginContainer/GridContainer" unique_id=234876013 instance=ExtResource("6_8um5k")]
 layout_mode = 2
 
-[node name="Equipment" type="Control" parent="Equipment/Panel"]
+[node name="Equipment" type="Control" parent="Equipment/Panel" unique_id=1587690654]
 anchors_preset = 0
 offset_top = 303.0
 offset_bottom = 303.0
 
-[node name="equipmentTitle" parent="Equipment/Panel/Equipment" instance=ExtResource("4_df05h")]
-material = SubResource("ShaderMaterial_xim88")
+[node name="equipmentTitle" parent="Equipment/Panel/Equipment" unique_id=1052533148 instance=ExtResource("4_df05h")]
+material = SubResource("ShaderMaterial_yxkem")
 layout_mode = 0
 offset_left = 236.0
 offset_top = 53.0
@@ -137,7 +138,7 @@ offset_bottom = 190.0
 text = "Equipment"
 horizontal_alignment = 1
 
-[node name="slot1" type="Button" parent="Equipment/Panel/Equipment"]
+[node name="slot1" type="Button" parent="Equipment/Panel/Equipment" unique_id=133026997]
 layout_mode = 0
 offset_left = 202.0
 offset_top = 102.0
@@ -146,12 +147,12 @@ offset_bottom = 199.0
 toggle_mode = true
 button_group = ExtResource("3_koqhg")
 
-[node name="icon" type="TextureRect" parent="Equipment/Panel/Equipment/slot1"]
+[node name="icon" type="TextureRect" parent="Equipment/Panel/Equipment/slot1" unique_id=675897382]
 layout_mode = 0
 offset_right = 97.0
 offset_bottom = 97.0
 
-[node name="slot2" type="Button" parent="Equipment/Panel/Equipment"]
+[node name="slot2" type="Button" parent="Equipment/Panel/Equipment" unique_id=1523517063]
 layout_mode = 0
 offset_left = 343.0
 offset_top = 102.0
@@ -160,12 +161,12 @@ offset_bottom = 199.0
 toggle_mode = true
 button_group = ExtResource("3_koqhg")
 
-[node name="icon" type="TextureRect" parent="Equipment/Panel/Equipment/slot2"]
+[node name="icon" type="TextureRect" parent="Equipment/Panel/Equipment/slot2" unique_id=1170902270]
 layout_mode = 0
 offset_right = 97.0
 offset_bottom = 97.0
 
-[node name="BottomInfoPanel" type="Control" parent="."]
+[node name="BottomInfoPanel" type="Control" parent="." unique_id=1184276626]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -174,7 +175,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="NavButtonsContainer" type="HBoxContainer" parent="BottomInfoPanel"]
+[node name="NavButtonsContainer" type="HBoxContainer" parent="BottomInfoPanel" unique_id=1003383094]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -188,7 +189,7 @@ script = ExtResource("13_fh7cp")
 side_buttons_group = ExtResource("14_7467j")
 side_button_ref = ExtResource("15_2x1g0")
 
-[node name="Panel" type="Panel" parent="BottomInfoPanel"]
+[node name="Panel" type="Panel" parent="BottomInfoPanel" unique_id=712055156]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -196,8 +197,9 @@ anchor_bottom = 1.0
 offset_top = -69.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("16_2x1g0")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="BottomInfoPanel/Panel"]
+[node name="RichTextLabel" type="RichTextLabel" parent="BottomInfoPanel/Panel" unique_id=1879292811]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
