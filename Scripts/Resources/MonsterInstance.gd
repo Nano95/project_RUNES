@@ -45,6 +45,7 @@ var is_pending_death:bool=false
 
 signal died
 func _ready() -> void:
+	animate_spawn()
 	hp_label.text = str(current_hp)
 	if (is_elite or is_boss):
 		update_individual_atk_label()
@@ -255,6 +256,17 @@ func add_or_update_status(status_name: String, icon: Texture, turns: int) -> Mon
 
 func is_frosty() -> bool:
 	return FROST in status_effects
+
+func animate_spawn() -> void:
+	scale = Vector2(0.2, 0.2)
+
+	var t := create_tween()
+	t.tween_property(self, "scale", Vector2(1.1, 1.1), 0.15)\
+		.set_trans(Tween.TRANS_CUBIC)\
+		.set_ease(Tween.EASE_OUT)
+	t.tween_property(self, "scale", Vector2.ONE, 0.25)\
+		.set_trans(Tween.TRANS_BACK)\
+		.set_ease(Tween.EASE_IN_OUT)
 
 func animate_hit() -> void:
 	# ANIMATE SIZE

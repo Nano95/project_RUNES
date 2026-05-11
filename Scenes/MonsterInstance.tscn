@@ -1,4 +1,4 @@
-[gd_scene load_steps=138 format=3 uid="uid://xxup1p8e76di"]
+[gd_scene format=3 uid="uid://xxup1p8e76di"]
 
 [ext_resource type="Script" uid="uid://cpm362jinw3ou" path="res://Scripts/Resources/MonsterInstance.gd" id="1_ld5e8"]
 [ext_resource type="Texture2D" uid="uid://g6ycv2s2cnuv" path="res://Sprites/monsters/orc1.png" id="2_1o6kg"]
@@ -836,19 +836,19 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ha12"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_krk12"]
 resource_local_to_scene = true
 shader = ExtResource("9_0suyq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qfc3e"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_slj30"]
 resource_local_to_scene = true
 shader = ExtResource("9_0suyq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="MonsterInstance" type="Node2D" node_paths=PackedStringArray("status_container")]
+[node name="MonsterInstance" type="Node2D" unique_id=1830111385 node_paths=PackedStringArray("status_container")]
 script = ExtResource("1_ld5e8")
 status_popup_ref = ExtResource("2_r8pyg")
 status_entry = ExtResource("32_rqp80")
@@ -860,7 +860,7 @@ BURN_ICON = ExtResource("8_krk12")
 FROST_ICON = ExtResource("9_slj30")
 status_container = NodePath("StatusContainer")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2137731070]
 unique_name_in_owner = true
 modulate = Color(1, 1, 0, 1)
 material = SubResource("ShaderMaterial_q5h8j")
@@ -869,35 +869,35 @@ sprite_frames = SubResource("SpriteFrames_krk12")
 animation = &"sandling3"
 offset = Vector2(0, 1)
 
-[node name="Hp" parent="." instance=ExtResource("8_rovrv")]
-material = SubResource("ShaderMaterial_5ha12")
+[node name="Hp" parent="." unique_id=657281785 instance=ExtResource("8_rovrv")]
+material = SubResource("ShaderMaterial_krk12")
 offset_left = -37.0
 offset_top = 31.0
 offset_right = 266.3333
 offset_bottom = 168.0
 text = "300"
 
-[node name="HealthIcon" type="Sprite2D" parent="."]
+[node name="HealthIcon" type="Sprite2D" parent="." unique_id=173466833]
 position = Vector2(-53, 53)
 scale = Vector2(4, 4)
 texture = ExtResource("10_qfc3e")
 
-[node name="atk" parent="." instance=ExtResource("8_rovrv")]
+[node name="atk" parent="." unique_id=761100371 instance=ExtResource("8_rovrv")]
 visible = false
-material = SubResource("ShaderMaterial_qfc3e")
+material = SubResource("ShaderMaterial_slj30")
 offset_left = -26.0
 offset_top = -64.0
 offset_right = 147.33333
 offset_bottom = 73.0
 text = "1"
 
-[node name="AtkIcon" type="Sprite2D" parent="."]
+[node name="AtkIcon" type="Sprite2D" parent="." unique_id=492188207]
 visible = false
 position = Vector2(-50, -43)
 scale = Vector2(4, 4)
 texture = ExtResource("12_qfc3e")
 
-[node name="StatusContainer" type="VBoxContainer" parent="."]
+[node name="StatusContainer" type="VBoxContainer" parent="." unique_id=304209053]
 offset_left = 38.0
 offset_top = -62.0
 offset_right = 67.0
