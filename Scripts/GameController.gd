@@ -638,8 +638,8 @@ func damage_cell(r: int, c: int) -> void:
 
 func spawn_rune_explosion(row: int, col: int):
 	var rune = rune_animation.instantiate()
-	rune.setup(selected_rune.rune_type)
 	rune.position = my_grid.grid_to_world(row, col)
+	rune.setup(selected_rune.rune_type, main.game_data.rune_particles, my_grid)
 	my_grid.add_to_rune_container(rune)
 
 func preview_cell(r: int, c: int) -> void:

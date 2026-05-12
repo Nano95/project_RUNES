@@ -1,11 +1,16 @@
-[gd_scene load_steps=57 format=3 uid="uid://d2g2e823fkk04"]
+[gd_scene format=3 uid="uid://d2g2e823fkk04"]
 
 [ext_resource type="Script" uid="uid://bo0ds2kjs8dux" path="res://Scripts/RuneAnimation.gd" id="1_h5b0l"]
+[ext_resource type="PackedScene" uid="uid://dbbr7kua6bdjg" path="res://Scenes/particles_arcane.tscn" id="2_6adow"]
 [ext_resource type="Texture2D" uid="uid://64bw7b0rb4xm" path="res://Sprites/animations/EXPLOSION_2_SS.png" id="2_8ilhm"]
 [ext_resource type="Texture2D" uid="uid://bg31s6oacmyfs" path="res://Sprites/animations/earth_explosion.png" id="3_68aoj"]
+[ext_resource type="PackedScene" uid="uid://5emqv5cqsyc2" path="res://Scenes/particles_fire.tscn" id="3_m3swx"]
+[ext_resource type="PackedScene" uid="uid://cua5ixvokyydw" path="res://Scenes/particles_ice.tscn" id="4_0dwvd"]
 [ext_resource type="Texture2D" uid="uid://bwkrimx3od3f5" path="res://Sprites/animations/magic_explosion3.png" id="4_uk4y1"]
 [ext_resource type="Texture2D" uid="uid://knmrrrqp7lhi" path="res://Sprites/animations/electric_explosion.png" id="4_xcdel"]
+[ext_resource type="PackedScene" uid="uid://bjxile8kyk1xv" path="res://Scenes/particles_earth.tscn" id="5_7wfgl"]
 [ext_resource type="Texture2D" uid="uid://3gioasmqrmcj" path="res://Sprites/animations/fire_explosion.png" id="5_xcdel"]
+[ext_resource type="PackedScene" uid="uid://ckn7epxeifstp" path="res://Scenes/particles_electric.tscn" id="6_bvj6b"]
 [ext_resource type="Texture2D" uid="uid://di3rd7s22yis4" path="res://Sprites/animations/ice_explosion.png" id="6_m3oby"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vi048"]
@@ -377,10 +382,15 @@ animations = [{
 "speed": 16.0
 }]
 
-[node name="RuneAnimation" type="Node2D"]
+[node name="RuneAnimation" type="Node2D" unique_id=1049409816]
 script = ExtResource("1_h5b0l")
+p_arcane = ExtResource("2_6adow")
+p_fire = ExtResource("3_m3swx")
+p_ice = ExtResource("4_0dwvd")
+p_earth = ExtResource("5_7wfgl")
+p_electric = ExtResource("6_bvj6b")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1325103555]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_bvj6b")
 animation = &"ice"

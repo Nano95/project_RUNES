@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://5emqv5cqsyc2"]
+
+[sub_resource type="Gradient" id="Gradient_boono"]
+offsets = PackedFloat32Array(0, 0.05464481, 0.284153, 0.78142077, 1)
+colors = PackedColorArray(1, 0.47843137, 0, 1, 1, 0.64705884, 0, 1, 0.3529412, 0.22745098, 0.11764706, 1, 0.025616705, 0.016508535, 0.008538902, 0.072580636, 0, 0, 0, 0)
+
+[node name="CPUParticles2D" type="CPUParticles2D" unique_id=1067268396]
+amount = 30
+lifetime = 0.49
+explosiveness = 1.0
+randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 5.61
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, -10)
+initial_velocity_min = 10.0
+initial_velocity_max = 25.0
+angular_velocity_min = 10.0
+angular_velocity_max = 40.0
+scale_amount_min = 1.3
+scale_amount_max = 2.4
+color_ramp = SubResource("Gradient_boono")

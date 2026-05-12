@@ -122,12 +122,16 @@ class_name SaveData
 @export var fast_mode:bool = false
 @export var player_screenshake:bool = true
 @export var enemy_screenshake:bool = true
+@export var rune_particles:bool = true
 
 func reset_settings() -> void:
 	grid_opacity = 1.0
 	grid_y_pos_offset = 0.0
 	two_tap_attack = false
 	fast_mode = false
+	player_screenshake = true
+	enemy_screenshake = true
+	rune_particles = true
 
 func add_item_to_inventory(item: EquipmentInstance) -> void:
 	inventory.append(item)
@@ -381,6 +385,8 @@ func reset_data() -> void:
 	}
 	
 	last_crafting_timestamp = 0
+	
+	reset_settings()
 	reset_blessings()
 	reset_curses()
 
