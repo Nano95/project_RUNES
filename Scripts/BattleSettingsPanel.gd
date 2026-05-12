@@ -5,6 +5,7 @@ class_name BattleSettingsPanel
 @export var grid_pos_slider:HSlider
 @export var two_tap_btn:CheckButton
 @export var fast_mode_btn:CheckButton
+@export var particles_btn:CheckButton
 @export var exit_btn:Button
 
 var main:MainNode
@@ -23,6 +24,8 @@ func _ready() -> void:
 	two_tap_btn.pressed.connect(two_tap_btn_cta)
 	fast_mode_btn.button_pressed = main.game_data.fast_mode
 	fast_mode_btn.pressed.connect(fast_mode_btn_cta)
+	particles_btn.button_pressed = main.game_data.rune_particles
+	particles_btn.pressed.connect(particles_on)
 
 func initialize_grid_y_position_slider() -> void:
 	grid_pos_slider.min_value = game_controller.my_grid.Y_POS_STARTING - 120
@@ -47,6 +50,8 @@ func two_tap_btn_cta() -> void:
 func fast_mode_btn_cta() -> void:
 	main.game_data.fast_mode = !main.game_data.fast_mode
 
+func particles_on() -> void:
+	main.game_data.rune_particles = !main.game_data.rune_particles
 
 func setup(m:MainNode, gc:GameController) -> void:
 	main = m

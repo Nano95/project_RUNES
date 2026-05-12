@@ -383,6 +383,7 @@ animations = [{
 }]
 
 [node name="RuneAnimation" type="Node2D" unique_id=1049409816]
+z_index = 1
 script = ExtResource("1_h5b0l")
 p_arcane = ExtResource("2_6adow")
 p_fire = ExtResource("3_m3swx")

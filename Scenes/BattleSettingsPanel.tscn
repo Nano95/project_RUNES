@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://om2m83fmhqt5"]
+[gd_scene format=3 uid="uid://om2m83fmhqt5"]
 
 [ext_resource type="Script" uid="uid://c6a78ucl2yypx" path="res://Scripts/BattleSettingsPanel.gd" id="1_cysne"]
 [ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="2_fkalu"]
@@ -8,13 +8,25 @@
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="5_mbgvw"]
 [ext_resource type="Theme" uid="uid://bbbw1in72yvu1" path="res://Resources/Themes/Subpanel_theme_res.tres" id="7_mbgvw"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8k8yn"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fkalu"]
 resource_local_to_scene = true
 shader = ExtResource("4_38l7f")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_duup7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6x4le"]
+resource_local_to_scene = true
+shader = ExtResource("4_38l7f")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_38l7f"]
+resource_local_to_scene = true
+shader = ExtResource("4_38l7f")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mbgvw"]
 resource_local_to_scene = true
 shader = ExtResource("4_38l7f")
 shader_parameter/time = 4.750000002218258e-07
@@ -32,13 +44,7 @@ shader = ExtResource("4_38l7f")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pda45"]
-resource_local_to_scene = true
-shader = ExtResource("4_38l7f")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[node name="BattleSettingsPanel" type="Control" node_paths=PackedStringArray("opacity_slider", "grid_pos_slider", "two_tap_btn", "fast_mode_btn", "exit_btn")]
+[node name="BattleSettingsPanel" type="Control" unique_id=691827393 node_paths=PackedStringArray("opacity_slider", "grid_pos_slider", "two_tap_btn", "fast_mode_btn", "particles_btn", "exit_btn")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -57,9 +63,10 @@ opacity_slider = NodePath("Panel/Settings/VBoxContainer/gridOpacityPanel/GridOpa
 grid_pos_slider = NodePath("Panel/Settings/VBoxContainer/gridYposition/GridPositionSlider")
 two_tap_btn = NodePath("Panel/Settings/VBoxContainer/TwoTaps/CheckButton")
 fast_mode_btn = NodePath("Panel/Settings/VBoxContainer/FastMode/CheckButton")
+particles_btn = NodePath("Panel/Settings/VBoxContainer/Particles/CheckButton")
 exit_btn = NodePath("Panel/Title/Exit")
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=731632581]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = -469.0
@@ -67,7 +74,7 @@ offset_top = -335.0
 offset_right = 1187.0
 offset_bottom = 1424.0
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=93015211]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -82,7 +89,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_fkalu")
 
-[node name="Title" type="Panel" parent="Panel"]
+[node name="Title" type="Panel" parent="Panel" unique_id=1665655823]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -93,8 +100,8 @@ offset_bottom = 98.0
 grow_horizontal = 2
 theme = ExtResource("3_38l7f")
 
-[node name="Title" parent="Panel/Title" instance=ExtResource("3_6x4le")]
-material = SubResource("ShaderMaterial_8k8yn")
+[node name="Title" parent="Panel/Title" unique_id=311842543 instance=ExtResource("3_6x4le")]
+material = SubResource("ShaderMaterial_fkalu")
 layout_mode = 0
 offset_left = 1.0
 offset_top = 4.0
@@ -105,7 +112,7 @@ text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Exit" type="Button" parent="Panel/Title"]
+[node name="Exit" type="Button" parent="Panel/Title" unique_id=203842688]
 layout_mode = 0
 offset_left = 521.0
 offset_top = -3.0
@@ -117,7 +124,7 @@ theme_override_fonts/font = ExtResource("5_mbgvw")
 theme_override_font_sizes/font_size = 100
 text = "x"
 
-[node name="Settings" type="Panel" parent="Panel"]
+[node name="Settings" type="Panel" parent="Panel" unique_id=1031044923]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -131,19 +138,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7_mbgvw")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Settings"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Settings" unique_id=1309126917]
 layout_mode = 0
 offset_right = 648.0
 offset_bottom = 570.0
 theme_override_constants/separation = 10
 
-[node name="gridOpacityPanel" type="Panel" parent="Panel/Settings/VBoxContainer"]
+[node name="gridOpacityPanel" type="Panel" parent="Panel/Settings/VBoxContainer" unique_id=1221493730]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("3_38l7f")
 
-[node name="Info" parent="Panel/Settings/VBoxContainer/gridOpacityPanel" instance=ExtResource("3_6x4le")]
-material = SubResource("ShaderMaterial_duup7")
+[node name="Info" parent="Panel/Settings/VBoxContainer/gridOpacityPanel" unique_id=479189346 instance=ExtResource("3_6x4le")]
+material = SubResource("ShaderMaterial_6x4le")
 layout_mode = 0
 offset_left = 2.000002
 offset_top = 3.0
@@ -153,7 +160,7 @@ scale = Vector2(0.35, 0.35)
 text = "Grid Opacity"
 horizontal_alignment = 1
 
-[node name="GridOpacitySlider" type="HSlider" parent="Panel/Settings/VBoxContainer/gridOpacityPanel"]
+[node name="GridOpacitySlider" type="HSlider" parent="Panel/Settings/VBoxContainer/gridOpacityPanel" unique_id=1204391073]
 layout_mode = 0
 offset_left = 270.0
 offset_right = 647.0
@@ -162,13 +169,13 @@ max_value = 1.0
 step = 0.01
 ticks_on_borders = true
 
-[node name="gridYposition" type="Panel" parent="Panel/Settings/VBoxContainer"]
+[node name="gridYposition" type="Panel" parent="Panel/Settings/VBoxContainer" unique_id=1788410011]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("3_38l7f")
 
-[node name="Info" parent="Panel/Settings/VBoxContainer/gridYposition" instance=ExtResource("3_6x4le")]
-material = SubResource("ShaderMaterial_tpbi6")
+[node name="Info" parent="Panel/Settings/VBoxContainer/gridYposition" unique_id=1825470195 instance=ExtResource("3_6x4le")]
+material = SubResource("ShaderMaterial_38l7f")
 layout_mode = 0
 offset_left = 3.000002
 offset_top = 3.0
@@ -178,7 +185,7 @@ scale = Vector2(0.35, 0.35)
 text = "Grid y-position"
 horizontal_alignment = 1
 
-[node name="GridPositionSlider" type="HSlider" parent="Panel/Settings/VBoxContainer/gridYposition"]
+[node name="GridPositionSlider" type="HSlider" parent="Panel/Settings/VBoxContainer/gridYposition" unique_id=452398069]
 layout_mode = 0
 offset_left = 270.0
 offset_right = 647.0
@@ -188,13 +195,13 @@ max_value = 150.0
 step = 0.5
 ticks_on_borders = true
 
-[node name="TwoTaps" type="Panel" parent="Panel/Settings/VBoxContainer"]
+[node name="TwoTaps" type="Panel" parent="Panel/Settings/VBoxContainer" unique_id=1819004691]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("3_38l7f")
 
-[node name="Info" parent="Panel/Settings/VBoxContainer/TwoTaps" instance=ExtResource("3_6x4le")]
-material = SubResource("ShaderMaterial_58uuc")
+[node name="Info" parent="Panel/Settings/VBoxContainer/TwoTaps" unique_id=731482794 instance=ExtResource("3_6x4le")]
+material = SubResource("ShaderMaterial_mbgvw")
 layout_mode = 0
 offset_left = 3.000002
 offset_top = 3.0
@@ -204,7 +211,7 @@ scale = Vector2(0.35, 0.35)
 text = "2-tap attack"
 horizontal_alignment = 1
 
-[node name="CheckButton" type="CheckButton" parent="Panel/Settings/VBoxContainer/TwoTaps"]
+[node name="CheckButton" type="CheckButton" parent="Panel/Settings/VBoxContainer/TwoTaps" unique_id=635434338]
 layout_mode = 0
 offset_left = 411.5
 offset_top = 5.0
@@ -213,13 +220,13 @@ offset_bottom = 29.0
 scale = Vector2(2, 2)
 alignment = 1
 
-[node name="FastMode" type="Panel" parent="Panel/Settings/VBoxContainer"]
+[node name="FastMode" type="Panel" parent="Panel/Settings/VBoxContainer" unique_id=1013541793]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("3_38l7f")
 
-[node name="Info" parent="Panel/Settings/VBoxContainer/FastMode" instance=ExtResource("3_6x4le")]
-material = SubResource("ShaderMaterial_pda45")
+[node name="Info" parent="Panel/Settings/VBoxContainer/FastMode" unique_id=1645835470 instance=ExtResource("3_6x4le")]
+material = SubResource("ShaderMaterial_tpbi6")
 layout_mode = 0
 offset_left = 3.000002
 offset_top = 3.0
@@ -229,7 +236,32 @@ scale = Vector2(0.35, 0.35)
 text = "Fast mode"
 horizontal_alignment = 1
 
-[node name="CheckButton" type="CheckButton" parent="Panel/Settings/VBoxContainer/FastMode"]
+[node name="CheckButton" type="CheckButton" parent="Panel/Settings/VBoxContainer/FastMode" unique_id=1601390026]
+layout_mode = 0
+offset_left = 411.5
+offset_top = 5.0
+offset_right = 455.5
+offset_bottom = 29.0
+scale = Vector2(2, 2)
+alignment = 1
+
+[node name="Particles" type="Panel" parent="Panel/Settings/VBoxContainer" unique_id=804167617]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("3_38l7f")
+
+[node name="Info" parent="Panel/Settings/VBoxContainer/Particles" unique_id=1600759261 instance=ExtResource("3_6x4le")]
+material = SubResource("ShaderMaterial_58uuc")
+layout_mode = 0
+offset_left = 3.000002
+offset_top = 3.0
+offset_right = 754.4285
+offset_bottom = 140.0
+scale = Vector2(0.35, 0.35)
+text = "Particles"
+horizontal_alignment = 1
+
+[node name="CheckButton" type="CheckButton" parent="Panel/Settings/VBoxContainer/Particles" unique_id=1107439924]
 layout_mode = 0
 offset_left = 411.5
 offset_top = 5.0
