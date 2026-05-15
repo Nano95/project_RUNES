@@ -1,16 +1,20 @@
 [gd_scene format=3 uid="uid://d3gwj83kl6yvi"]
 
-[ext_resource type="Texture2D" uid="uid://llqj70wrm8i3" path="res://Sprites/Runes/ARCANE_STRIKE_RUNE.png" id="1_ss5nf"]
 [ext_resource type="Script" uid="uid://c11nmmtllhkk8" path="res://Scenes/BattleRuneButton.gd" id="2_wlwmb"]
 [ext_resource type="Texture2D" uid="uid://ba0tbqqe7jo6v" path="res://Sprites/MANA_ICON_v2.png" id="3_lg8pf"]
 [ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_wlwmb"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="4_b1aft"]
+[ext_resource type="Texture2D" uid="uid://bhywo1wkul3r5" path="res://Sprites/battle_button.png" id="4_gk35u"]
+[ext_resource type="Texture2D" uid="uid://0a223jgjtsti" path="res://Sprites/Runes/ARCANE_CROSS_RUNE.png" id="5_gk35u"]
+[ext_resource type="Shader" uid="uid://b4japgb3o64tf" path="res://Shaders/ButtonHighlight.gdshader" id="6_wlwmb"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wlwmb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sr70n"]
 resource_local_to_scene = true
-shader = ExtResource("4_b1aft")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
+shader = ExtResource("6_wlwmb")
+shader_parameter/swirl_strength = 17.0
+shader_parameter/swirl_speed = 3.0
+shader_parameter/color1 = Color(0.2, 0.2, 0.4, 0)
+shader_parameter/color2 = Color(0.9768153, 0.3044844, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b1aft"]
 resource_local_to_scene = true
@@ -18,31 +22,89 @@ shader = ExtResource("4_b1aft")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gk35u"]
+resource_local_to_scene = true
+shader = ExtResource("4_b1aft")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
 [node name="RuneButton1" type="Button" unique_id=1822885512]
-custom_minimum_size = Vector2(155, 125)
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(155, 150)
+offset_right = 155.0
+offset_bottom = 150.0
 size_flags_horizontal = 3
 mouse_filter = 1
-icon = ExtResource("1_ss5nf")
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("2_wlwmb")
 
+[node name="background" type="TextureRect" parent="." unique_id=1459066594]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -67.0
+offset_top = -47.000004
+offset_right = 68.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("4_gk35u")
+
+[node name="Shader" type="TextureRect" parent="." unique_id=148092205]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_sr70n")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.000002
+offset_top = -18.000002
+offset_right = 25.0
+offset_bottom = 10.571411
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("4_gk35u")
+
+[node name="runeSprite" type="TextureRect" parent="." unique_id=1196710209]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = 9.0
+offset_right = -16.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_gk35u")
+
 [node name="TextureRect" type="TextureRect" parent="." unique_id=323078482]
 layout_mode = 0
-offset_left = -19.0
-offset_top = -17.0
-offset_right = 141.0
-offset_bottom = 143.0
+offset_left = -15.0
+offset_top = -14.0
+offset_right = 145.0
+offset_bottom = 146.0
 scale = Vector2(0.5, 0.5)
+mouse_filter = 2
 texture = ExtResource("3_lg8pf")
 stretch_mode = 5
 
 [node name="manaLbl" parent="." unique_id=1548808354 instance=ExtResource("3_wlwmb")]
-material = SubResource("ShaderMaterial_wlwmb")
+material = SubResource("ShaderMaterial_b1aft")
 layout_mode = 0
-offset_top = 11.0
-offset_right = 166.66666
-offset_bottom = 148.0
+offset_left = 4.0
+offset_top = 14.0
+offset_right = 170.66666
+offset_bottom = 151.0
 scale = Vector2(0.25, 0.25)
 text = "8"
 horizontal_alignment = 1
@@ -50,11 +112,11 @@ vertical_alignment = 1
 
 [node name="qty" parent="." unique_id=1037161359 instance=ExtResource("3_wlwmb")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_b1aft")
+material = SubResource("ShaderMaterial_gk35u")
 layout_mode = 0
-offset_top = 94.0
-offset_right = 620.0
-offset_bottom = 231.0
+offset_top = 109.0
+offset_right = 640.0
+offset_bottom = 246.0
 scale = Vector2(0.25, 0.25)
 text = "999.99k"
 horizontal_alignment = 1

@@ -474,7 +474,12 @@ func roll_loot(monster: MonsterBase) -> void:
 ######################
 func change_selected_rune(rune:RuneData, btn:Button=null) -> void:
 	selected_rune = rune
+	
+	# Remove the selection from the previous one to select the new one
+	if (selected_rune_btn_ref):
+		selected_rune_btn_ref.set_unselected()
 	selected_rune_btn_ref = btn
+	selected_rune_btn_ref.set_selected()
 	if (main.game_data.two_tap_attack):
 		# Change the color and preview.
 		change_preview_color()

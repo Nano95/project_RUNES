@@ -17,6 +17,12 @@
 [ext_resource type="PackedScene" uid="uid://dakbi23goa01y" path="res://Scenes/LootEntry.tscn" id="13_qecx7"]
 [ext_resource type="Texture2D" uid="uid://ba0tbqqe7jo6v" path="res://Sprites/MANA_ICON_v2.png" id="14_y2kyv"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eh46d"]
+resource_local_to_scene = true
+shader = ExtResource("3_co6lq")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5s36o"]
 resource_local_to_scene = true
 shader = ExtResource("3_co6lq")
@@ -36,12 +42,6 @@ shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hyinc"]
-resource_local_to_scene = true
-shader = ExtResource("3_co6lq")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j2gl1"]
 resource_local_to_scene = true
 shader = ExtResource("3_co6lq")
 shader_parameter/time = 4.750000002218258e-07
@@ -140,7 +140,7 @@ texture_progress = ExtResource("7_tii1l")
 tint_progress = Color(0.51250005, 1, 0.35000002, 1)
 
 [node name="HpLabel" parent="TopSection/HpBar" unique_id=1486001269 instance=ExtResource("2_frnsy")]
-material = SubResource("ShaderMaterial_5s36o")
+material = SubResource("ShaderMaterial_eh46d")
 layout_mode = 0
 offset_top = 0.2500011
 offset_right = 1337.5
@@ -166,7 +166,7 @@ xp_curve = ExtResource("9_8dgta")
 xp_lbl = NodePath("XpLabel")
 
 [node name="XpLabel" parent="TopSection/XpBar" unique_id=764721853 instance=ExtResource("2_frnsy")]
-material = SubResource("ShaderMaterial_y2kyv")
+material = SubResource("ShaderMaterial_5s36o")
 layout_mode = 0
 offset_top = 0.2500011
 offset_right = 1337.5
@@ -186,7 +186,7 @@ offset_bottom = 184.0
 texture = ExtResource("12_eh46d")
 
 [node name="totalAtkLabel" parent="TopSection/DamagedIcon" unique_id=2134382516 instance=ExtResource("2_frnsy")]
-material = SubResource("ShaderMaterial_7ifpd")
+material = SubResource("ShaderMaterial_y2kyv")
 layout_mode = 0
 offset_left = 97.00001
 offset_top = 10.0
@@ -207,7 +207,7 @@ offset_bottom = 184.0
 texture = ExtResource("13_5s36o")
 
 [node name="turnsLabel" parent="TopSection/AttackIcon" unique_id=1244465 instance=ExtResource("2_frnsy")]
-material = SubResource("ShaderMaterial_hyinc")
+material = SubResource("ShaderMaterial_7ifpd")
 layout_mode = 0
 offset_left = 93.0
 offset_top = 10.0
@@ -229,7 +229,7 @@ mouse_filter = 2
 texture = ExtResource("14_y2kyv")
 
 [node name="focusLabel" parent="TopSection/FocusIcon" unique_id=285287565 instance=ExtResource("2_frnsy")]
-material = SubResource("ShaderMaterial_j2gl1")
+material = SubResource("ShaderMaterial_hyinc")
 layout_mode = 0
 offset_left = 101.0
 offset_top = 6.0
@@ -252,13 +252,13 @@ grow_vertical = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="BottomSection" unique_id=2142037499]
 layout_mode = 0
-offset_left = -360.0
-offset_top = -149.0
-offset_right = 362.0
-offset_bottom = 11.0
-theme_override_constants/margin_left = 30
+offset_left = -364.0
+offset_top = -157.0
+offset_right = 358.0
+offset_bottom = 33.0
+theme_override_constants/margin_left = 31
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 30
+theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 15
 
 [node name="ScrollContainer" type="ScrollContainer" parent="BottomSection/MarginContainer" unique_id=1111276155]

@@ -36,4 +36,4 @@ func setup_loot() -> void:
 		var lbl = loot_labels.instantiate()
 		lbl.scale *= 2
 		lbl.setup(data.name, data.icon, all_loot[loot])
-		$ColorRect/Panel/LootContainer.add_child(lbl)
+		$ColorRect/Panel/Panel/LootContainer.add_child(lbl)

@@ -4,10 +4,22 @@ var qty:int = 0
 var rune_data:RuneData
 var active_luck_popups: Array = [] # This EXACT NAME is needed only for components
 # That may stack luck popups so that they wont sit on top of each other 
+var is_selected:bool=false
+var SHADER_SCALE:Vector2 = Vector2(0.8, 0.8)
+
 @onready var manaLbl = $manaLbl
+
+func _ready() -> void:
+	# Freeze shader animation
+	%Shader.scale = Vector2(0,0)
+	%Shader.material.set("shader_parameter/swirl_speed", 0.0)
+	%Shader.material.set("shader_parameter/swirl_strength", 0.0)
+	if (rune_data):
+		set_vortex_color(rune_data.rune_type)
+
 func setup(rune:RuneData, _qty:int=1) -> void:
 	rune_data = rune
-	icon = rune.icon
+	$runeSprite.texture = rune.icon
 	qty = _qty
 	set_rune_qty(qty)
 
@@ -27,3 +39,67 @@ func refresh_cost_display(modded_cost_value:int):
 		manaLbl.modulate = Color.RED
 	else:
 		manaLbl.modulate = Color(1, 1, 1)
+
+func set_selected() -> void:
+	is_selected = true
+	# Turn on shader animation
+	%Shader.visible = true
+	%Shader.material.set("shader_parameter/swirl_speed", 3.0)
+	%Shader.material.set("shader_parameter/swirl_strength", 17.5)
+	
+	var t := create_tween()
+	t.set_trans(Tween.TRANS_CUBIC)
+	t.set_ease(Tween.EASE_OUT)
+
+	# Fade in
+	t.tween_property(%Shader, "modulate:a", 1.0, 0.15)
+
+	# Grow slightly
+	t.parallel().tween_property(%Shader, "scale", SHADER_SCALE, 0.15)
+
+
+func set_unselected() -> void:
+	is_selected = false
+	var t := create_tween()
+	t.set_trans(Tween.TRANS_CUBIC)
+	t.set_ease(Tween.EASE_IN)
+
+	# Fade out
+	t.tween_property(%Shader, "modulate:a", 0.0, 0.15)
+
+	# Shrink
+	t.parallel().tween_property(%Shader, "scale", Vector2(0.0, 0.0), 0.15)
+
+	# When done, hide it
+	t.tween_callback(func():
+		%Shader.visible = false
+		%Shader.material.set("shader_parameter/swirl_speed", 0.0)
+		%Shader.material.set("shader_parameter/swirl_strength", 0.0)
+	)
+
+	# Freeze shader animation
+
+
+func set_vortex_color(rune_type: String) -> void:
+	var mat = %Shader.material
+	if mat == null:
+		return
+	print("Shader going to be set", rune_type)
+	match rune_type:
+		"arcane":
+			mat.set("shader_parameter/color2", Color(0.82, 0.45, 1.0)) # purple/pink
+			print("Shader going to be set PINK ")
+		"electric":
+			mat.set("shader_parameter/color2", Color(1.0, 0.95, 0.3)) # bright yellow
+			print("Shader going to be set YELLOW ")
+		"fire":
+			mat.set("shader_parameter/color2", Color(1.0, 0.45, 0.15)) # orange/red
+			print("Shader going to be set ORANGE ")
+		"ice":
+			mat.set("shader_parameter/color2", Color(0.221, 0.743, 1.0, 1.0)) # icy blue
+			print("Shader going to be set BLUE ")
+		"earth":
+			mat.set("shader_parameter/color2", Color(0.192, 0.663, 0.0, 1.0)) # greenish earth tone
+			print("Shader going to be set GREEN")
+		_:
+			mat.set("shader_parameter/color_2", Color(1,1,1)) # fallback

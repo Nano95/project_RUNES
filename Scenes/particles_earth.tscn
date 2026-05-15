@@ -8,7 +8,7 @@ colors = PackedColorArray(0, 0.7490196, 0.11764706, 1, 0.5084088, 0.3796003, 0.1
 
 [node name="CPUParticles2D" type="CPUParticles2D" unique_id=207958463]
 amount = 30
-lifetime = 0.5
+lifetime = 0.7
 explosiveness = 1.0
 emission_shape = 1
 emission_sphere_radius = 15.0
@@ -17,7 +17,7 @@ spread = 82.25
 gravity = Vector2(0, 600)
 initial_velocity_min = 20.0
 initial_velocity_max = 300.0
-scale_amount_min = 3.0
-scale_amount_max = 8.0
+scale_amount_min = 4.0
+scale_amount_max = 10.0
 color_ramp = SubResource("Gradient_ih1nw")
 script = ExtResource("1_as866")
