@@ -473,6 +473,9 @@ func roll_loot(monster: MonsterBase) -> void:
 ########### RUNE STUFF
 ######################
 func change_selected_rune(rune:RuneData, btn:Button=null) -> void:
+	# If button is already selected, do nothing!
+	if (btn == selected_rune_btn_ref):
+		return
 	selected_rune = rune
 	
 	# Remove the selection from the previous one to select the new one
