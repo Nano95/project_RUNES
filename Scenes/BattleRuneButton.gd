@@ -88,18 +88,19 @@ func set_vortex_color(rune_type: String) -> void:
 	match rune_type:
 		"arcane":
 			mat.set("shader_parameter/color2", Color(0.82, 0.45, 1.0)) # purple/pink
-			print("Shader going to be set PINK ")
+			mat.set("shader_parameter/outline_color", Color(0.308, 0.0, 0.319, 1.0)) # purple/pink
 		"electric":
-			mat.set("shader_parameter/color2", Color(1.0, 0.95, 0.3)) # bright yellow
-			print("Shader going to be set YELLOW ")
+			mat.set("shader_parameter/color2", Color("fff24dff")) # bright yellow
+			mat.set("shader_parameter/outline_color", Color("fff138")) # bright yellow
 		"fire":
-			mat.set("shader_parameter/color2", Color(1.0, 0.45, 0.15)) # orange/red
-			print("Shader going to be set ORANGE ")
+			mat.set("shader_parameter/color2", Color("ff7326ff")) # orange/red
+			mat.set("shader_parameter/outline_color", Color("ff3a26")) # orange/red
 		"ice":
-			mat.set("shader_parameter/color2", Color(0.221, 0.743, 1.0, 1.0)) # icy blue
-			print("Shader going to be set BLUE ")
+			mat.set("shader_parameter/color2", Color("38bdffff")) # icy blue
+			mat.set("shader_parameter/outline_color", Color("bbf0ff"))
 		"earth":
-			mat.set("shader_parameter/color2", Color(0.192, 0.663, 0.0, 1.0)) # greenish earth tone
-			print("Shader going to be set GREEN")
+			mat.set("shader_parameter/color2", Color("31ff00")) # greenish earth tone
+			mat.set("shader_parameter/outline_color", Color("4c3b00"))
 		_:
 			mat.set("shader_parameter/color_2", Color(1,1,1)) # fallback
+			mat.set("shader_parameter/outline_color", Color("000000ff"))
