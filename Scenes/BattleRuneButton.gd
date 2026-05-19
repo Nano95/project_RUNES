@@ -87,20 +87,25 @@ func set_vortex_color(rune_type: String) -> void:
 	print("Shader going to be set", rune_type)
 	match rune_type:
 		"arcane":
-			mat.set("shader_parameter/color2", Color(0.82, 0.45, 1.0)) # purple/pink
-			mat.set("shader_parameter/outline_color", Color(0.308, 0.0, 0.319, 1.0)) # purple/pink
+			mat.set("shader_parameter/color1", Color(0.308, 0.0, 0.319, 1.0)) # purple/pink
+			mat.set("shader_parameter/color2", Color(0.308, 0.0, 0.319, 1.0)) # purple/pink
+			mat.set("shader_parameter/outline_color", Color(0.82, 0.45, 1.0)) # purple/pink
 		"electric":
-			mat.set("shader_parameter/color2", Color("fff24dff")) # bright yellow
+			mat.set("shader_parameter/color1", Color("fefff2")) # bright yellow
+			mat.set("shader_parameter/color2", Color("00000")) # bright yellow
 			mat.set("shader_parameter/outline_color", Color("fff138")) # bright yellow
 		"fire":
-			mat.set("shader_parameter/color2", Color("ff7326ff")) # orange/red
-			mat.set("shader_parameter/outline_color", Color("ff3a26")) # orange/red
+			mat.set("shader_parameter/color1", Color("cfb300")) # orange/red
+			mat.set("shader_parameter/color2", Color("ff1c1c")) # orange/red
+			mat.set("shader_parameter/outline_color", Color("c75d00")) # orange/red
 		"ice":
-			mat.set("shader_parameter/color2", Color("38bdffff")) # icy blue
-			mat.set("shader_parameter/outline_color", Color("bbf0ff"))
+			mat.set("shader_parameter/color1", Color("00fffb")) # icy blue
+			mat.set("shader_parameter/color2", Color("38bdff")) # icy blue
+			mat.set("shader_parameter/outline_color", Color("99f9f8"))
 		"earth":
-			mat.set("shader_parameter/color2", Color("31ff00")) # greenish earth tone
-			mat.set("shader_parameter/outline_color", Color("4c3b00"))
+			mat.set("shader_parameter/color2", Color("572300")) # greenish earth tone
+			mat.set("shader_parameter/color2", Color("572300")) # greenish earth tone
+			mat.set("shader_parameter/outline_color", Color("67b706"))
 		_:
 			mat.set("shader_parameter/color_2", Color(1,1,1)) # fallback
 			mat.set("shader_parameter/outline_color", Color("000000ff"))

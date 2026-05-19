@@ -13,9 +13,9 @@ resource_local_to_scene = true
 shader = ExtResource("6_wlwmb")
 shader_parameter/swirl_strength = 17.0
 shader_parameter/swirl_speed = 3.0
-shader_parameter/color1 = Color(0.2, 0.2, 0.4, 0)
-shader_parameter/color2 = Color(0.19215687, 1, 0, 1)
-shader_parameter/outline_color = Color(0.29763508, 0.2318697, 0, 1)
+shader_parameter/color1 = Color(0.81, 0.702, 0, 1)
+shader_parameter/color2 = Color(1, 0.110000014, 0.110000014, 1)
+shader_parameter/outline_color = Color(0.78, 0.36400002, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b1aft"]
 resource_local_to_scene = true

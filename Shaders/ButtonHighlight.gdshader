@@ -41,10 +41,10 @@ void fragment() {
     vec2 swirl_uv = vec2(cos(angle), sin(angle)) * radius;
 
     // --- Base noise ---
-    float n = noise(swirl_uv * 6.0 + TIME * 0.5);
+    float n = noise(swirl_uv * 2.0 + TIME * 0.5);
 
     // --- Quantize noise into chunky bands ---
-    float q = floor(n * 4.0) / 4.0;
+    float q = floor(n * 2.0) / 2.0;
 
     // --- Outline detection ---
     // Slightly offset second sample
