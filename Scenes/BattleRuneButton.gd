@@ -6,6 +6,9 @@ var active_luck_popups: Array = [] # This EXACT NAME is needed only for componen
 # That may stack luck popups so that they wont sit on top of each other 
 var is_selected:bool=false
 var SHADER_SCALE:Vector2 = Vector2(0.8, 0.8)
+var press_pos := Vector2.ZERO
+var moved := false
+const TAP_THRESHOLD := 17.0  # pixels
 
 @onready var manaLbl = $manaLbl
 
@@ -16,6 +19,20 @@ func _ready() -> void:
 	%Shader.material.set("shader_parameter/swirl_strength", 0.0)
 	if (rune_data):
 		set_vortex_color(rune_data.rune_type)
+
+func _gui_input(event):
+	if event is InputEventScreenTouch and event.pressed:
+		press_pos = event.position
+		moved = false
+
+	elif event is InputEventScreenDrag:
+		if event.position.distance_to(press_pos) > TAP_THRESHOLD:
+			moved = true  # This is a scroll, not a tap
+
+	elif event is InputEventScreenTouch and not event.pressed:
+		if not moved:
+			emit_signal("pressed")  # or call your select logic
+
 
 func setup(rune:RuneData, _qty:int=1) -> void:
 	rune_data = rune
