@@ -9,7 +9,6 @@ var SHADER_SCALE:Vector2 = Vector2(0.8, 0.8)
 var press_pos := Vector2.ZERO
 var moved := false
 const TAP_THRESHOLD := 17.0  # pixels
-
 @onready var manaLbl = $manaLbl
 
 func _ready() -> void:
@@ -36,7 +35,7 @@ func _gui_input(event):
 
 func setup(rune:RuneData, _qty:int=1) -> void:
 	rune_data = rune
-	$runeSprite.texture = rune.icon
+	%runeSprite.texture = rune.icon
 	qty = _qty
 	set_rune_qty(qty)
 
@@ -73,6 +72,14 @@ func set_selected() -> void:
 
 	# Grow slightly
 	t.parallel().tween_property(%Shader, "scale", SHADER_SCALE, 0.15)
+	# Rune sprite bounce
+	var bounce := create_tween()
+	bounce.set_trans(Tween.TRANS_BACK)
+	bounce.set_ease(Tween.EASE_OUT)
+
+	%runeSprite.scale = Vector2(0.7, 0.7)  # start slightly smaller
+	bounce.tween_property(%runeSprite, "scale", Vector2(1.3, 1.3), 0.18)
+	bounce.tween_property(%runeSprite, "scale", Vector2(1.0, 1.0), 0.18)
 
 
 func set_unselected() -> void:
@@ -105,11 +112,11 @@ func set_vortex_color(rune_type: String) -> void:
 	match rune_type:
 		"arcane":
 			mat.set("shader_parameter/color1", Color(0.308, 0.0, 0.319, 1.0)) # purple/pink
-			mat.set("shader_parameter/color2", Color(0.308, 0.0, 0.319, 1.0)) # purple/pink
+			mat.set("shader_parameter/color2", Color(0.714, 0.029, 0.738, 1.0)) # purple/pink
 			mat.set("shader_parameter/outline_color", Color(0.82, 0.45, 1.0)) # purple/pink
 		"electric":
 			mat.set("shader_parameter/color1", Color("fefff2")) # bright yellow
-			mat.set("shader_parameter/color2", Color("00000")) # bright yellow
+			mat.set("shader_parameter/color2", Color(0.0, 0.0, 0.0, 1.0)) # bright yellow
 			mat.set("shader_parameter/outline_color", Color("fff138")) # bright yellow
 		"fire":
 			mat.set("shader_parameter/color1", Color("cfb300")) # orange/red

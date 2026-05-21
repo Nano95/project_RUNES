@@ -56,16 +56,17 @@ func setup_monster_grid() -> void:
 	for btn in monster_grid_container.get_children():
 		btn.queue_free()
 	var next_family := get_next_unlockable_family()
-	for family in areas:
+	for area in areas:
 		# Only show unlocked families OR the next unlockable one
-		if main.game_data.unlocked_monster_families[family] or family == next_family:
+		if main.game_data.unlocked_monster_families[area] or area == next_family:
 			var btn := my_button.instantiate()
-			var callable:Callable = try_unlock_family.bind(family) if (family == next_family) else _on_family_selected.bind(family)
+			var callable:Callable = try_unlock_family.bind(area) if (area == next_family) else _on_family_selected.bind(area)
 			btn.setup(
-				family,
+				area,
+				false,
 				callable,
 				Vector2(.4, .4),
-				!main.game_data.unlocked_monster_families[family]
+				!main.game_data.unlocked_monster_families[area]
 			)
 
 			monster_grid_container.add_child(btn)
@@ -86,7 +87,7 @@ func _on_family_selected(family: String) -> void:
 	var monsters = MonsterDatabase[family]
 	for i in monsters.size():
 		var btn := my_button.instantiate()
-		btn.setup(monsters[i].name.capitalize(),_on_monster_selected.bind(i + 1, monsters[i]), Vector2(.4, .4))
+		btn.setup(monsters[i].name.capitalize(), true, _on_monster_selected.bind(i + 1, monsters[i]), Vector2(.4, .4))
 		location_grid_container.add_child(btn)
 
 func _on_monster_selected(index: int, monster:MonsterBase) -> void: 

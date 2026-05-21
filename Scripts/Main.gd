@@ -26,7 +26,7 @@ var game_current_level:int = 0
 var bonus_stats:Dictionary
 
 var battle_data:Dictionary = {
-	"family": "slimes",
+	"family": "area1",
 	"index": 1
 }
 

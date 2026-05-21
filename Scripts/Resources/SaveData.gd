@@ -64,7 +64,7 @@ class_name SaveData
 	"slot6": 0
 }
 @export var unlocked_monster_families = {
-	"slimes": false,
+	"area1": false,
 	"orcs": false,
 	"sandlings": false,
 	"dwarves": false,
@@ -280,11 +280,11 @@ func ascension_restart_data() -> void:
 		"slot6": 0
 	}
 	unlocked_monster_families = {
-		"slimes": false,
-		"orcs": false,
-		"sandlings": false,
-		"dwarves": false,
-		"jungle": false
+		"area1": false,
+		"area2": false,
+		"area3": false,
+		"area4": false,
+		"area5": false
 	}
 	available_ap = 0
 	base_stats = { "health": 10, "focus": 10, "power": 10, "luck": 10 }
@@ -349,11 +349,11 @@ func reset_data() -> void:
 		"slot6": 0
 	}
 	unlocked_monster_families = {
-		"slimes": false,
-		"orcs": false,
-		"sandlings": false,
-		"dwarves": false,
-		"jungle": false
+		"area1": false,
+		"area2": false,
+		"area3": false,
+		"area4": false,
+		"area5": false
 	}
 	available_ap = 0
 	base_stats = { "health": 10, "focus": 10, "power": 10, "luck": 10 }

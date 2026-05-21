@@ -1,14 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://b37x20v0etu6t"]
+[gd_scene format=3 uid="uid://b37x20v0etu6t"]
 
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="1_a8uc2"]
 [ext_resource type="Script" uid="uid://b0u33hmqstq1d" path="res://Scripts/MyButton.gd" id="1_xd1w4"]
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" unique_id=1395276429]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_xd1w4")
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=636974934]
 custom_minimum_size = Vector2(670, 182)
 layout_mode = 1
 anchors_preset = 15
@@ -24,7 +24,7 @@ theme_override_fonts/font = ExtResource("1_a8uc2")
 theme_override_font_sizes/font_size = 80
 text = "Slime Youngling"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=904627208]
 visible = false
 layout_mode = 0
 offset_top = 53.999996
