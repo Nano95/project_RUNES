@@ -65,10 +65,10 @@ class_name SaveData
 }
 @export var unlocked_monster_families = {
 	"area1": false,
-	"orcs": false,
-	"sandlings": false,
-	"dwarves": false,
-	"jungle": false
+	"area2": false,
+	"area3": false,
+	"area4": false,
+	"area5": false
 }
 @export var available_ap:int = 0
 @export var base_stats:Dictionary = { "health": 10, "focus": 10, "power": 10, "luck": 10 }
