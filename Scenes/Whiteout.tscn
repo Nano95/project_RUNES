@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://hlxetojmw1rt"]
+
+[ext_resource type="Script" uid="uid://lsxvqttn57dx" path="res://Scripts/whiteout.gd" id="1_353dv"]
+[ext_resource type="Texture2D" uid="uid://t3ffb8unegpu" path="res://Sprites/AccessorySquare.png" id="2_yuc83"]
+
+[node name="Whiteout" type="Control" unique_id=541314787]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_353dv")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1489798082]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_yuc83")

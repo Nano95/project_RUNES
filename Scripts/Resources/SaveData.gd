@@ -70,6 +70,11 @@ class_name SaveData
 	"area4": false,
 	"area5": false
 }
+@export var rested_buffs:Dictionary = {
+	"health": 0,
+	"focus": 0,
+	"power": 0
+}
 @export var available_ap:int = 0
 @export var base_stats:Dictionary = { "health": 10, "focus": 10, "power": 10, "luck": 10 }
 @export var allocated_stats:Dictionary = { "health": 0, "focus": 0, "power": 0, "luck": 0 }
@@ -123,6 +128,7 @@ class_name SaveData
 @export var player_screenshake:bool = true
 @export var enemy_screenshake:bool = true
 @export var rune_particles:bool = true
+@export var damaged_flash:bool = true
 
 func reset_settings() -> void:
 	grid_opacity = 1.0
@@ -132,6 +138,7 @@ func reset_settings() -> void:
 	player_screenshake = true
 	enemy_screenshake = true
 	rune_particles = true
+	damaged_flash = true
 
 func add_item_to_inventory(item: EquipmentInstance) -> void:
 	inventory.append(item)

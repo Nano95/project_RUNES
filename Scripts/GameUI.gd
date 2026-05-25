@@ -6,6 +6,7 @@ class_name GameUI
 
 var main:MainNode
 var game_controller:GameController
+@export var slide_label:PackedScene
 @export var back_btn:Button
 @export var settings_btn:Button
 @export var hp_bar:TextureProgressBar
@@ -24,6 +25,7 @@ var dmg_tween:Tween
 var focus_tween:Tween
 var turns_tween:Tween
 var rune_buttons:Dictionary = {}  # NEW: store buttons by rune name
+
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 
@@ -110,6 +112,12 @@ func update_hp_bar(current_hp: float, max_hp: float, delta: float) -> void:
 		tween_hp_bar(from_percent, to_percent, color)
 
 	hp_label.text = str(new_hp)
+	
+	if (delta < 0):
+		var dmg_lbl = slide_label.instantiate()
+		dmg_lbl.setup(str(delta), 200, null)
+		add_child(dmg_lbl)
+		dmg_lbl.position = hp_bar.position + Vector2(0,20)
 
 func restart() -> void:
 	game_controller.spawn_stage(game_controller.selected_monster_index, 5)

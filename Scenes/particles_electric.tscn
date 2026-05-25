@@ -7,9 +7,9 @@ offsets = PackedFloat32Array(0, 0.15409836, 0.2557377, 0.36979166, 0.5364583, 0.
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0.7490196, 0, 1, 1, 1, 0.42745098, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="CPUParticles2D" type="CPUParticles2D" unique_id=1023885619]
-amount = 25
+amount = 35
 lifetime = 0.4
-explosiveness = 1.0
+explosiveness = 0.92
 randomness = 1.0
 emission_shape = 1
 emission_sphere_radius = 7.6

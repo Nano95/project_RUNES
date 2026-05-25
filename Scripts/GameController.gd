@@ -8,6 +8,7 @@ class_name GameController
 @export var my_grid_ref:Resource
 @export var xp_label:Resource
 @export var rune_animation:Resource
+@export var whiteout:PackedScene
 @export var escape_timer:Timer
 var base_width = ProjectSettings.get_setting("display/window/size/viewport_width")
 var base_height = ProjectSettings.get_setting("display/window/size/viewport_height")
@@ -275,6 +276,10 @@ func take_damage(dmg:int=0) -> void:
 	%Camera2D.add_shake(30.0)
 	game_ui.update_hp_bar(current_hp, max_hp, -dmg)
 	current_hp -= dmg
+	
+	if (main.game_data.damaged_flash):
+		var white = whiteout.instantiate()
+		main.spawn_to_top_ui_layer(white)
 	if (current_hp <= 0):
 		spawn_status_message(true)
 		emit_signal("gained_exp", -round_gained_exp)
@@ -569,6 +574,7 @@ func activate_instant_rune(pressed_rune:RuneData, btn:Button=null):
 	var lbl_pos:Vector2=Vector2.ZERO
 	if (btn):
 		lbl_pos = btn.global_position + btn.size/2
+		btn.animate_grow_and_shrink()
 	_apply_instant_rune(pressed_rune.pattern, lbl_pos)
 	var new_qty = main.game_data.remove_rune_from_inv(pressed_rune, 1)
 	game_ui.update_rune_qty(pressed_rune.name, new_qty)

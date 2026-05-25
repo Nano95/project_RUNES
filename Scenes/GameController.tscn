@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0atfxrsqnbfu"]
+[gd_scene format=3 uid="uid://d0atfxrsqnbfu"]
 
 [ext_resource type="Script" uid="uid://duaqtbkpkw5q8" path="res://Scripts/GameController.gd" id="1_fyej0"]
 [ext_resource type="PackedScene" uid="uid://cko7e16hwbxg6" path="res://Scenes/GameStatusPopup.tscn" id="2_7fjnr"]
@@ -9,8 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://vqwmc6txdxui" path="res://Scenes/MyGrid.tscn" id="4_06oto"]
 [ext_resource type="PackedScene" uid="uid://d2g2e823fkk04" path="res://Scenes/RuneAnimation.tscn" id="5_n0sx1"]
 [ext_resource type="PackedScene" uid="uid://dsw781t07yq02" path="res://Scenes/FloatingLabel.tscn" id="6_ie14q"]
+[ext_resource type="PackedScene" uid="uid://hlxetojmw1rt" path="res://Scenes/Whiteout.tscn" id="9_6br0j"]
 
-[node name="GameController" type="Control" node_paths=PackedStringArray("escape_timer")]
+[node name="GameController" type="Control" unique_id=625447330 node_paths=PackedStringArray("escape_timer")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -32,15 +33,16 @@ summary_panel_ref = ExtResource("3_06oto")
 my_grid_ref = ExtResource("4_06oto")
 xp_label = ExtResource("6_ie14q")
 rune_animation = ExtResource("5_n0sx1")
+whiteout = ExtResource("9_6br0j")
 escape_timer = NodePath("escapeTimer")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=524764270]
 unique_name_in_owner = true
 position = Vector2(360, 640)
 limit_bottom = 1400
 script = ExtResource("2_occvc")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1881220976]
 wait_time = 0.6
 
-[node name="escapeTimer" type="Timer" parent="."]
+[node name="escapeTimer" type="Timer" parent="." unique_id=1524838389]

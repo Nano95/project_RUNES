@@ -44,7 +44,13 @@ shader = ExtResource("4_38l7f")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="BattleSettingsPanel" type="Control" unique_id=691827393 node_paths=PackedStringArray("opacity_slider", "grid_pos_slider", "two_tap_btn", "fast_mode_btn", "particles_btn", "exit_btn")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pda45"]
+resource_local_to_scene = true
+shader = ExtResource("4_38l7f")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="BattleSettingsPanel" type="Control" unique_id=691827393 node_paths=PackedStringArray("opacity_slider", "grid_pos_slider", "two_tap_btn", "fast_mode_btn", "particles_btn", "damaged_flash_btn", "exit_btn")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -64,6 +70,7 @@ grid_pos_slider = NodePath("Panel/Settings/VBoxContainer/gridYposition/GridPosit
 two_tap_btn = NodePath("Panel/Settings/VBoxContainer/TwoTaps/CheckButton")
 fast_mode_btn = NodePath("Panel/Settings/VBoxContainer/FastMode/CheckButton")
 particles_btn = NodePath("Panel/Settings/VBoxContainer/Particles/CheckButton")
+damaged_flash_btn = NodePath("Panel/Settings/VBoxContainer/DamagedFlash/CheckButton")
 exit_btn = NodePath("Panel/Title/Exit")
 
 [node name="Button" type="Button" parent="." unique_id=731632581]
@@ -262,6 +269,31 @@ text = "Particles"
 horizontal_alignment = 1
 
 [node name="CheckButton" type="CheckButton" parent="Panel/Settings/VBoxContainer/Particles" unique_id=1107439924]
+layout_mode = 0
+offset_left = 411.5
+offset_top = 5.0
+offset_right = 455.5
+offset_bottom = 29.0
+scale = Vector2(2, 2)
+alignment = 1
+
+[node name="DamagedFlash" type="Panel" parent="Panel/Settings/VBoxContainer" unique_id=1974071519]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("3_38l7f")
+
+[node name="Info" parent="Panel/Settings/VBoxContainer/DamagedFlash" unique_id=166847533 instance=ExtResource("3_6x4le")]
+material = SubResource("ShaderMaterial_pda45")
+layout_mode = 0
+offset_left = 3.000002
+offset_top = 3.0
+offset_right = 754.4285
+offset_bottom = 140.0
+scale = Vector2(0.35, 0.35)
+text = "Damaged Flash"
+horizontal_alignment = 1
+
+[node name="CheckButton" type="CheckButton" parent="Panel/Settings/VBoxContainer/DamagedFlash" unique_id=661947082]
 layout_mode = 0
 offset_left = 411.5
 offset_top = 5.0

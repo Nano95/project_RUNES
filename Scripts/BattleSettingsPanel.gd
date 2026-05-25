@@ -6,6 +6,7 @@ class_name BattleSettingsPanel
 @export var two_tap_btn:CheckButton
 @export var fast_mode_btn:CheckButton
 @export var particles_btn:CheckButton
+@export var damaged_flash_btn:CheckButton
 @export var exit_btn:Button
 
 var main:MainNode
@@ -26,6 +27,8 @@ func _ready() -> void:
 	fast_mode_btn.pressed.connect(fast_mode_btn_cta)
 	particles_btn.button_pressed = main.game_data.rune_particles
 	particles_btn.pressed.connect(particles_on)
+	damaged_flash_btn.button_pressed = main.game_data.damaged_flash
+	damaged_flash_btn.pressed.connect(damaged_flash_on)
 
 func initialize_grid_y_position_slider() -> void:
 	grid_pos_slider.min_value = game_controller.my_grid.Y_POS_STARTING - 120
@@ -52,6 +55,9 @@ func fast_mode_btn_cta() -> void:
 
 func particles_on() -> void:
 	main.game_data.rune_particles = !main.game_data.rune_particles
+	
+func damaged_flash_on() -> void:
+	main.game_data.damaged_flash = !main.game_data.damaged_flash
 
 func setup(m:MainNode, gc:GameController) -> void:
 	main = m

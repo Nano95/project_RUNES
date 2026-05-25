@@ -38,7 +38,6 @@ func setup(an_name:String, spawn:bool, grid_parent) -> void:
 
 func spawn_particles() -> void:
 	if (particle_scenes.has(anim_name)):
-		print("ATTEMPT SPAWN")
 		var p = particle_scenes[anim_name].instantiate()
 		p.position = position 
 		grid.spawn_to_fx_container(p)

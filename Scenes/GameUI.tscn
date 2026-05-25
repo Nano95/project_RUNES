@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d3gwj83kl6yvi" path="res://Scenes/BattleRuneButton.tscn" id="2_qecx7"]
 [ext_resource type="PackedScene" uid="uid://om2m83fmhqt5" path="res://Scenes/BattleSettingsPanel.tscn" id="3_0hwcy"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="3_co6lq"]
+[ext_resource type="PackedScene" uid="uid://c5jtnkdjhwcn3" path="res://Scenes/IconSlideLabel.tscn" id="4_5s36o"]
 [ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="4_eh46d"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="4_frnsy"]
 [ext_resource type="Texture2D" uid="uid://2mjbs0mmr2ya" path="res://Sprites/mid_progress_bar_top.png" id="5_co6lq"]
@@ -58,6 +59,7 @@ mouse_filter = 2
 script = ExtResource("1_po7eo")
 rune_button = ExtResource("2_qecx7")
 settings_panel = ExtResource("3_0hwcy")
+slide_label = ExtResource("4_5s36o")
 back_btn = NodePath("TopSection/BackBtn")
 settings_btn = NodePath("TopSection/SettingsBtn")
 hp_bar = NodePath("TopSection/HpBar")

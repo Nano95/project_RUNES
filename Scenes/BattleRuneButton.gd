@@ -72,6 +72,28 @@ func set_selected() -> void:
 
 	# Grow slightly
 	t.parallel().tween_property(%Shader, "scale", SHADER_SCALE, 0.15)
+	rune_bounce()
+
+
+func animate_grow_and_shrink() -> void:
+	%Shader.visible = true
+	%Shader.material.set("shader_parameter/swirl_speed", 3.0)
+	%Shader.material.set("shader_parameter/swirl_strength", 17.5)
+	rune_bounce()
+	
+	var t := create_tween()
+	t.set_trans(Tween.TRANS_CUBIC)
+	t.set_ease(Tween.EASE_OUT)
+
+	# Fade in
+	t.tween_property(%Shader, "modulate:a", 1.0, 0.15)
+
+	# Grow slightly
+	t.parallel().tween_property(%Shader, "scale", SHADER_SCALE, 0.15)
+	t.tween_callback(shrink_anim)
+
+# Used without a shader by the instant runes
+func rune_bounce() -> void:
 	# Rune sprite bounce
 	var bounce := create_tween()
 	bounce.set_trans(Tween.TRANS_BACK)
@@ -81,9 +103,11 @@ func set_selected() -> void:
 	bounce.tween_property(%runeSprite, "scale", Vector2(1.3, 1.3), 0.18)
 	bounce.tween_property(%runeSprite, "scale", Vector2(1.0, 1.0), 0.18)
 
-
 func set_unselected() -> void:
 	is_selected = false
+	shrink_anim()
+
+func shrink_anim() -> void:
 	var t := create_tween()
 	t.set_trans(Tween.TRANS_CUBIC)
 	t.set_ease(Tween.EASE_IN)
@@ -100,9 +124,6 @@ func set_unselected() -> void:
 		%Shader.material.set("shader_parameter/swirl_speed", 0.0)
 		%Shader.material.set("shader_parameter/swirl_strength", 0.0)
 	)
-
-	# Freeze shader animation
-
 
 func set_vortex_color(rune_type: String) -> void:
 	var mat = %Shader.material
@@ -130,6 +151,11 @@ func set_vortex_color(rune_type: String) -> void:
 			mat.set("shader_parameter/color2", Color("572300")) # greenish earth tone
 			mat.set("shader_parameter/color2", Color("572300")) # greenish earth tone
 			mat.set("shader_parameter/outline_color", Color("67b706"))
+		"life":
+			mat.set("shader_parameter/color2", Color("00f7ff")) # greenish earth tone
+			mat.set("shader_parameter/color2", Color("00ba25")) # greenish earth tone
+			mat.set("shader_parameter/outline_color", Color("57ffbc"))
 		_:
+			mat.set("shader_parameter/color_1", Color(1,1,1)) # fallback
 			mat.set("shader_parameter/color_2", Color(1,1,1)) # fallback
 			mat.set("shader_parameter/outline_color", Color("000000ff"))
