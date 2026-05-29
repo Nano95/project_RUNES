@@ -14,6 +14,18 @@
 shader = ExtResource("2_w37fs")
 shader_parameter/lod = 1.674000079515
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0kgc7"]
+resource_local_to_scene = true
+shader = ExtResource("4_0kgc7")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m0m58"]
+resource_local_to_scene = true
+shader = ExtResource("4_0kgc7")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_el6yw"]
 resource_local_to_scene = true
 shader = ExtResource("4_0kgc7")
@@ -26,19 +38,7 @@ shader = ExtResource("4_0kgc7")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dxo11"]
-resource_local_to_scene = true
-shader = ExtResource("4_0kgc7")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_duup7"]
-resource_local_to_scene = true
-shader = ExtResource("4_0kgc7")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[node name="SummaryPanel" type="Control" unique_id=227372455 node_paths=PackedStringArray("back_btn", "retry_btn")]
+[node name="SummaryPanel" type="Control" unique_id=227372455 node_paths=PackedStringArray("back_btn", "retry_btn", "rested_battles_label")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -57,6 +57,7 @@ script = ExtResource("1_10axu")
 back_btn = NodePath("ColorRect/Panel/Menu")
 retry_btn = NodePath("ColorRect/Panel/QuickRestart")
 loot_labels = ExtResource("2_10axu")
+rested_battles_label = NodePath("ColorRect/Panel/RichTextLabel")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1188529555]
 material = SubResource("ShaderMaterial_55pba")
@@ -80,7 +81,7 @@ offset_bottom = 100.0
 theme = ExtResource("1_0kgc7")
 
 [node name="Title" parent="ColorRect/Panel" unique_id=752965058 instance=ExtResource("3_sws4i")]
-material = SubResource("ShaderMaterial_el6yw")
+material = SubResource("ShaderMaterial_0kgc7")
 layout_mode = 0
 offset_top = 11.0
 offset_right = 1251.8518
@@ -99,7 +100,7 @@ offset_bottom = 383.0
 theme = ExtResource("7_0kgc7")
 
 [node name="EnemiesDead" parent="ColorRect/Panel" unique_id=1242825951 instance=ExtResource("3_sws4i")]
-material = SubResource("ShaderMaterial_8k8yn")
+material = SubResource("ShaderMaterial_m0m58")
 layout_mode = 0
 offset_left = 93.0
 offset_top = 270.0
@@ -108,7 +109,7 @@ offset_bottom = 407.0
 text = "Enemies pulverized: "
 
 [node name="RunesUsed" parent="ColorRect/Panel" unique_id=1416243901 instance=ExtResource("3_sws4i")]
-material = SubResource("ShaderMaterial_dxo11")
+material = SubResource("ShaderMaterial_el6yw")
 layout_mode = 0
 offset_left = 93.0
 offset_top = 311.0
@@ -116,8 +117,21 @@ offset_right = 2056.3335
 offset_bottom = 448.0
 text = "Runes used: "
 
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/Panel" unique_id=374490073]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 403.0
+offset_right = 1778.0
+offset_bottom = 609.66675
+scale = Vector2(0.3, 0.3)
+theme_override_constants/outline_size = 35
+theme_override_fonts/normal_font = ExtResource("8_sws4i")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[center][wave amp=50 freq=6] Rested battle blessings left: [color=yellow]10[/color][/wave][/center]"
+
 [node name="LootTitle" parent="ColorRect/Panel" unique_id=1957965533 instance=ExtResource("3_sws4i")]
-material = SubResource("ShaderMaterial_duup7")
+material = SubResource("ShaderMaterial_8k8yn")
 layout_mode = 0
 offset_left = 86.0
 offset_top = 619.0

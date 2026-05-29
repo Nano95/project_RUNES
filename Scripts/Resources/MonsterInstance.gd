@@ -25,6 +25,7 @@ var individual_turns_left:int = 5 # only used by elites/bosses
 var current_power:int=1
 var is_elite:bool = false
 var is_boss:bool = false
+var rested_bonus_exp_active:bool = false
 var my_grid:MyGrid
 var status_effects = {
 	#"poison": {
@@ -50,7 +51,7 @@ func _ready() -> void:
 	if (is_elite or is_boss):
 		update_individual_atk_label()
 
-func setup(monster_base: MonsterBase, grid:MyGrid):
+func setup(monster_base: MonsterBase, grid:MyGrid, rested_exp_buff:bool=false):
 	base = monster_base
 	var mod_hp:int = Utils.calculate_monster_hp(base.max_hp)
 	current_hp = mod_hp
@@ -61,6 +62,7 @@ func setup(monster_base: MonsterBase, grid:MyGrid):
 	$AnimatedSprite2D.play(base.anim_name)
 	#$AnimatedSprite2D.offset.y = base.anim_offset_y
 	my_grid = grid
+	rested_bonus_exp_active = rested_exp_buff
 
 func is_elite_or_boss() -> bool:
 	return (is_elite or is_boss)
@@ -97,7 +99,11 @@ func spawn_xp_label() -> void:
 	
 	my_grid.spawn_to_fx_container(label)
 	label.global_position = %AnimatedSprite2D.global_position + Vector2(-5, 50)
-	label.show_label("+" + str(base.exp_reward) + " XP", 20.0)
+	var shown_exp = base.exp_reward
+
+	if (rested_bonus_exp_active):
+		shown_exp = int(ceil(shown_exp * 1.5))
+	label.show_label("+" + str(shown_exp) + " XP", 20.0)
 
 func spawn_damage_label(amount: float, dmg_color_type:String="arcane", crit_hit:bool=false) -> void:
 	var label = damage_label.instantiate()

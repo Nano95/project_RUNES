@@ -100,7 +100,7 @@ func rune_bounce() -> void:
 	bounce.set_ease(Tween.EASE_OUT)
 
 	%runeSprite.scale = Vector2(0.7, 0.7)  # start slightly smaller
-	bounce.tween_property(%runeSprite, "scale", Vector2(1.3, 1.3), 0.18)
+	bounce.tween_property(%runeSprite, "scale", Vector2(1.33, 1.33), 0.18)
 	bounce.tween_property(%runeSprite, "scale", Vector2(1.0, 1.0), 0.18)
 
 func set_unselected() -> void:
@@ -129,7 +129,6 @@ func set_vortex_color(rune_type: String) -> void:
 	var mat = %Shader.material
 	if mat == null:
 		return
-	print("Shader going to be set", rune_type)
 	match rune_type:
 		"arcane":
 			mat.set("shader_parameter/color1", Color(0.308, 0.0, 0.319, 1.0)) # purple/pink

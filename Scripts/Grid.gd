@@ -54,7 +54,9 @@ func spawn_monster_into_cell(row: int, col: int, base: MonsterBase):
 
 	var monster = game_controller.monster_instance.instantiate() as MonsterInstance
 	monster.died.connect(game_controller.monster_died.bind(monster))
-	monster.setup(base, self)
+	
+	var rested_bonus_exp_active:bool = game_controller.main.game_data.rested_data.active_buff == "xp"
+	monster.setup(base, self, rested_bonus_exp_active)
 
 	# mutation
 	var mod_chance:float = (.01 * Utils.get_blessing_curse_amount(false, "monster_elites-10"))

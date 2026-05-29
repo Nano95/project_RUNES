@@ -70,11 +70,15 @@ class_name SaveData
 	"area4": false,
 	"area5": false
 }
-@export var rested_buffs:Dictionary = {
-	"health": 0,
-	"focus": 0,
-	"power": 0
+@export var rested_data := {
+	"active_buff": "",        # "health", "power", "focus", "xp", or ""
+	"battles_left": 0,        # 0–10
+	"charges": 0,             # 0–10
+	"last_logout_time": 0,     # Unix timestamp
+	"minutes_per_charge": 60,
+	"max_charges": 10
 }
+
 @export var available_ap:int = 0
 @export var base_stats:Dictionary = { "health": 10, "focus": 10, "power": 10, "luck": 10 }
 @export var allocated_stats:Dictionary = { "health": 0, "focus": 0, "power": 0, "luck": 0 }
@@ -489,6 +493,26 @@ func is_curse_active(curse_name:String) -> bool:
 		toggled = false,
 		locked = true,
 		cost = 95,
+		type = "economy",
+		category = "exp"
+	},
+	{
+		id = "mod_rested-battle-4",
+		name = "Lasting Rest",
+		desc = "Your restfulness lasts longer, extending the duration of your max rested blessing.",
+		toggled = false,
+		locked = true,
+		cost = 35,
+		type = "economy",
+		category = "exp"
+	},
+	{
+		id = "mod_rested-battle-6",
+		name = "Deep Restoration",
+		desc = "Your restorative energy runs deeper, increasing the number of max rested blessing.",
+		toggled = false,
+		locked = true,
+		cost = 70,
 		type = "economy",
 		category = "exp"
 	},

@@ -63,14 +63,14 @@ var STUN:String = "electric" # KEEP THIS IN-SYNC WITH MONSTER INSTANCE 'STUN'
 
 func _ready() -> void:
 	%Camera2D.setup(null) # temporary null until i know what i need to do
-	setup_stats()
-	spawn_grid()
 	make_buff_debuff_calculations()
+	spawn_grid()
 	start_game()
 	# OnReady lets turn all of the names into data for the battle rune buttons to work
 	select_available_rune()
 
 func start_game(restart:bool=false) -> void:
+	setup_stats()
 	game_is_active = true
 	escape_in_progress = false
 	escape_timer_counter = 0
@@ -123,6 +123,19 @@ func setup_stats() -> void:
 	base_luck = current_luck
 	current_power = Utils.get_stat_for_ui("power") + main.bonus_stats.power
 	base_power = current_power
+	
+	# Apply Rested Buffs (50% bonus)
+	var buff: String = main.game_data.rested_data.active_buff
+	if (buff == "health"):
+		max_hp = int(max_hp * 1.5)
+		current_hp = max_hp
+	elif (buff == "focus"):
+		max_focus = int(max_focus * 1.5)
+		current_focus = max_focus
+	elif (buff == "power"):
+		current_power = int(current_power * 1.5)
+		base_power = current_power
+	
 	loot_curse_active = main.game_data.is_curse_active("death_toll")
 	
 	GENERAL_STARTING_TURNS_LEFT -= 1 if (Utils.is_blessing_curse_toggled(false, "mod_monster_speed-1")) else 0
@@ -245,6 +258,10 @@ func monster_died(monster):
 	else:
 		main.game_data.total_run_monster_kills[monster.base.name] = 1
 	var final_exp = Utils.calculate_reward(monster.base.exp_reward, "exp")
+	
+	# Apply Rested EXP buff (+50%)
+	if (main.game_data.rested_data.active_buff == "xp"):
+		final_exp = int(ceil(final_exp * 1.5))
 	emit_signal("gained_exp", final_exp)
 	round_gained_exp += final_exp
 	
@@ -762,7 +779,6 @@ func make_buff_debuff_calculations() -> void:
 	electric_dmg_modifier = electric_base + electric_bonus
 	fire_dmg_modifier = fire_base + fire_bonus
 	ice_dmg_modifier = ice_base + ice_bonus
-
 
 # readjust is an OVERRIDE for the regular logic for the situation where we 
 # are selecting a new rune while the preview is already on.

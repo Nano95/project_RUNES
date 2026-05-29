@@ -5,6 +5,7 @@ var game_controller: GameController
 @export var back_btn: Button
 @export var retry_btn: Button
 @export var loot_labels: PackedScene
+@export var rested_battles_label: RichTextLabel
 
 func _ready() -> void:
 	setup_labels()
@@ -17,6 +18,7 @@ func _ready() -> void:
 func restart_game() -> void:
 	game_controller.start_game(true)
 	Utils.animate_summary_out_and_free(self)
+	retry_btn.disabled = true
 
 func setup(game: GameController, main_node: MainNode, message:String="Victory!") -> void:
 	main = main_node
@@ -26,6 +28,13 @@ func setup(game: GameController, main_node: MainNode, message:String="Victory!")
 func setup_labels() -> void:
 	$ColorRect/Panel/EnemiesDead.text = "Enemies pulverized: " + str(game_controller.enemies_killed)
 	$ColorRect/Panel/RunesUsed.text = "Runes used: " + str(game_controller.runes_used)
+	
+		# Rested battles left
+	var battles_left:int = main.game_data.rested_data.battles_left
+	if (battles_left):
+		rested_battles_label.text = "[center][wave amp=50 freq=6]Rested battle blessings left: [color=yellow]" + str(battles_left) + "[/color][/wave][/center]"
+	else:
+		rested_battles_label.text = ""
 	setup_loot()
 
 func setup_loot() -> void:

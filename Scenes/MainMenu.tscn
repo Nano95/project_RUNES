@@ -17,13 +17,13 @@
 [ext_resource type="PackedScene" uid="uid://cjd8lmuyg3fi0" path="res://Scenes/SideButton.tscn" id="15_2x1g0"]
 [ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="16_2x1g0"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_riqfo"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2x1g0"]
 resource_local_to_scene = true
 shader = ExtResource("5_8um5k")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yxkem"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_riqfo"]
 resource_local_to_scene = true
 shader = ExtResource("5_8um5k")
 shader_parameter/time = 4.750000002218258e-07
@@ -83,7 +83,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Title" parent="Equipment/Panel/Inventory" unique_id=1529691904 instance=ExtResource("4_df05h")]
-material = SubResource("ShaderMaterial_riqfo")
+material = SubResource("ShaderMaterial_2x1g0")
 layout_mode = 0
 offset_left = 236.0
 offset_top = 1.0
@@ -129,7 +129,7 @@ offset_top = 303.0
 offset_bottom = 303.0
 
 [node name="equipmentTitle" parent="Equipment/Panel/Equipment" unique_id=1052533148 instance=ExtResource("4_df05h")]
-material = SubResource("ShaderMaterial_yxkem")
+material = SubResource("ShaderMaterial_riqfo")
 layout_mode = 0
 offset_left = 236.0
 offset_top = 53.0

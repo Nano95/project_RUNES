@@ -6,6 +6,7 @@ class_name MainNode
 @onready var main_menu_ui:PackedScene = load("res://Scenes/MainMenu.tscn")
 @export var reward_pop_up:PackedScene
 @export var info_pop_up:PackedScene
+@export var rested_panel_ref:PackedScene
 
 @export_category("UI")
 @export var top_layer:CanvasLayer
@@ -21,6 +22,7 @@ var backup_game_data:SaveData
 var game_data:SaveData
 
 var active_menu_ref
+var rested_popup: RestedPanel
 var game_ui_ref: GameUI
 var game_current_level:int = 0
 var bonus_stats:Dictionary
@@ -144,6 +146,16 @@ func check_offline_time_and_rewards() -> void:
 	@warning_ignore("narrowing_conversion")
 	var now:int = Time.get_unix_time_from_system()
 	var last:int = game_data.last_crafting_timestamp
+	
+	# --- RESTED CHECK ---
+	var rested_charges = check_rested_state()
+	print("- rested charges: ", rested_charges)
+	if (rested_charges > 0):
+		if (is_instance_valid(rested_popup)):
+			rested_popup.queue_free()
+		rested_popup = rested_panel_ref.instantiate()
+		rested_popup.setup(self, rested_charges)
+		spawn_to_top_ui_layer(rested_popup)
 
 	if (last > 3):
 		Utils.update_crafting_speed()
@@ -172,6 +184,42 @@ func show_reward_popups(results: Dictionary) -> void:
 
 		# Delay before spawning the next popup
 		await get_tree().create_timer(1.0).timeout
+
+func check_rested_state() -> int:
+	var now := Time.get_unix_time_from_system()
+	var rested := game_data.rested_data
+	var last = rested.get("last_logout_time", 0)
+
+	if last <= 0:
+		rested.last_logout_time = now
+		return 0
+
+	var elapsed = now - last
+
+	# Pull upgradeable values
+	game_data.rested_data.minutes_per_charge = 60
+	game_data.rested_data.max_charges = 10
+
+	if (Utils.is_blessing_curse_toggled(true, "mod_rested-battle-4")):
+		game_data.rested_data.max_charges += 4
+	if (Utils.is_blessing_curse_toggled(true, "mod_rested-battle-6")):
+		game_data.rested_data.max_charges += 6
+	# Convert elapsed time into minutes
+	var minutes_offline:int = int(elapsed / 60)
+
+	# Calculate charges gained
+	var gained:int = int(minutes_offline / game_data.rested_data.minutes_per_charge)
+	gained = clamp(gained, 0, game_data.rested_data.max_charges)
+
+	# Reset buff because player will choose a new one
+	rested.active_buff = ""
+	rested.battles_left = 0
+	rested.charges = gained
+
+	# Update timestamp
+	rested.last_logout_time = now
+
+	return gained
 
 
 ########### SAVE THINGS ##############

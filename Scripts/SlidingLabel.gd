@@ -24,12 +24,12 @@ func animate_and_slide() -> void:
 	scale = Vector2(0.8, 0.8)
 
 	# Bounce 1
-	t.tween_property(self, "scale", Vector2(1.25, 1.25), 0.3)
-	t.tween_property(self, "scale", Vector2(0.9, 0.9), 0.25)
+	t.tween_property(self, "scale", Vector2(1.20, 1.20), 0.3)
+	t.tween_property(self, "scale", Vector2(0.9, 0.9), 0.3)
 
 	# Bounce 2
-	t.tween_property(self, "scale", Vector2(1.1, 1.1), 0.20)
-	t.tween_property(self, "scale", Vector2(1.0, 1.0), 0.15)
+	t.tween_property(self, "scale", Vector2(1.1, 1.1), 0.25)
+	t.tween_property(self, "scale", Vector2(1.0, 1.0), 0.25)
 
 	# --- Slide + Fade ---
 	var final_pos := position.y + slide_distance
