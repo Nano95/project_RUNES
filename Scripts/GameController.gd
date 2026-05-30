@@ -128,12 +128,15 @@ func setup_stats() -> void:
 	var buff: String = main.game_data.rested_data.active_buff
 	if (buff == "health"):
 		max_hp = int(max_hp * 1.5)
+		print("HEALTH RESTED BUFF: ", max_hp)
 		current_hp = max_hp
 	elif (buff == "focus"):
 		max_focus = int(max_focus * 1.5)
+		print("FOCUS RESTED BUFF: ", max_focus)
 		current_focus = max_focus
 	elif (buff == "power"):
 		current_power = int(current_power * 1.5)
+		print("POWER RESTED BUFF: ", current_power)
 		base_power = current_power
 	
 	loot_curse_active = main.game_data.is_curse_active("death_toll")
@@ -218,16 +221,17 @@ func spawn_status_message(died:bool=false, no_focus:bool=false, escaped:bool=fal
 	lbl.setup(msg)
 	if (main.game_data.fast_mode): lbl.set_fast_mode(true)
 	main.spawn_to_top_ui_layer(lbl)
+	# This happens when all messages are done
+	# focus message does not spawn the summary panel, it's informational
 	if (msg != focus_msg):
 		apply_loot_if_allowed(msg)
-		# HERE IS WHERE I THINK WE SHOULKD HAVE THE LOGIC
 		lbl.animation_complete.connect(spawn_summary_panel.bind(msg))
 	
 	game_ui.update_monster_data(0, 0)
 	if (xp_gain > 0):
 		var xp_lbl = xp_label.instantiate()
 		my_grid.spawn_to_fx_container(xp_lbl)
-		xp_lbl.global_position = game_ui.mana_icon.global_position + Vector2(20, 80)
+		xp_lbl.global_position = game_ui.mana_icon.global_position + Vector2(20, 50)
 		xp_lbl.show_label("+" + str(xp_gain) + " XP", 20)
 		emit_signal("gained_exp", xp_gain)
 	
@@ -235,12 +239,14 @@ func spawn_status_message(died:bool=false, no_focus:bool=false, escaped:bool=fal
 		await get_tree().create_timer(1.0).timeout
 		escape_pressed_behavior()
 
-func spawn_summary_panel(message:String="mmm!") -> void:	
+func spawn_summary_panel(message:String="mmm!") -> void:
+	# Will process reset data here since it only happens once
+	subtract_rested_battle()
+	
 	game_ui.disable_back_button(false) # Just in case in any scenario
 	var panel = summary_panel_ref.instantiate()
 	panel.setup(self, main, message)
 	main.spawn_to_top_ui_layer(panel)
-	
 
 func register_monster(monster:MonsterInstance): 
 	monsters.append(monster)
@@ -261,6 +267,7 @@ func monster_died(monster):
 	
 	# Apply Rested EXP buff (+50%)
 	if (main.game_data.rested_data.active_buff == "xp"):
+		print("RESTED XP BUFF!!")
 		final_exp = int(ceil(final_exp * 1.5))
 	emit_signal("gained_exp", final_exp)
 	round_gained_exp += final_exp
@@ -457,6 +464,18 @@ func get_monster_for_stage(stage: int) -> MonsterBase:
 		return MonsterDatabase[selected_monster_family][base_index + 1]
 
 	return base
+
+func subtract_rested_battle() -> void:
+	var rested = main.game_data.rested_data
+
+	if (rested.battles_left > 0):
+		rested.battles_left -= 1
+
+	# If it hits zero, clear the buff
+		if (rested.battles_left <= 0):
+			rested.active_buff = ""
+			rested.battles_left = 0
+
 
 func roll_loot(monster: MonsterBase) -> void:
 	# --- ESSENCE (always drops) ---

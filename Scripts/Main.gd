@@ -139,6 +139,7 @@ func focus_out_notification() -> void:
 	# calculates total time played - app on but out of focus
 	@warning_ignore("narrowing_conversion")
 	game_data.last_crafting_timestamp = Time.get_unix_time_from_system()
+	game_data.rested_data.last_logout_time = Time.get_unix_time_from_system()
 	save_game()
 
 func check_offline_time_and_rewards() -> void:
@@ -148,13 +149,13 @@ func check_offline_time_and_rewards() -> void:
 	var last:int = game_data.last_crafting_timestamp
 	
 	# --- RESTED CHECK ---
-	var rested_charges = check_rested_state()
-	print("- rested charges: ", rested_charges)
-	if (rested_charges > 0):
+	check_rested_state()
+	print("- rested charges: ", game_data.rested_data.charges)
+	if (game_data.rested_data.charges > 0):
 		if (is_instance_valid(rested_popup)):
 			rested_popup.queue_free()
 		rested_popup = rested_panel_ref.instantiate()
-		rested_popup.setup(self, rested_charges)
+		rested_popup.setup(self)
 		spawn_to_top_ui_layer(rested_popup)
 
 	if (last > 3):
@@ -185,14 +186,15 @@ func show_reward_popups(results: Dictionary) -> void:
 		# Delay before spawning the next popup
 		await get_tree().create_timer(1.0).timeout
 
-func check_rested_state() -> int:
+func check_rested_state() -> void:
 	var now := Time.get_unix_time_from_system()
 	var rested := game_data.rested_data
 	var last = rested.get("last_logout_time", 0)
 
 	if last <= 0:
 		rested.last_logout_time = now
-		return 0
+		game_data.rested_data.charges = 0
+		return
 
 	var elapsed = now - last
 
@@ -211,15 +213,7 @@ func check_rested_state() -> int:
 	var gained:int = int(minutes_offline / game_data.rested_data.minutes_per_charge)
 	gained = clamp(gained, 0, game_data.rested_data.max_charges)
 
-	# Reset buff because player will choose a new one
-	rested.active_buff = ""
-	rested.battles_left = 0
-	rested.charges = gained
-
-	# Update timestamp
-	rested.last_logout_time = now
-
-	return gained
+	game_data.rested_data.charges = gained
 
 
 ########### SAVE THINGS ##############

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ng24gtgd1fqi"]
+[gd_scene format=3 uid="uid://ng24gtgd1fqi"]
 
 [ext_resource type="Script" uid="uid://b2qhdv3vvdybe" path="res://Scripts/LuckPopup.gd" id="1_hgmnk"]
 [ext_resource type="Shader" uid="uid://dqwkxbpgvjx0m" path="res://Shaders/Sparkle.gdshader" id="2_mlcte"]
@@ -11,16 +11,16 @@ shader = ExtResource("2_mlcte")
 shader_parameter/time = 0.0
 shader_parameter/activate = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oy83p"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v7pxd"]
 resource_local_to_scene = true
 shader = ExtResource("4_heq5g")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="LuckPopup" type="Node2D"]
+[node name="LuckPopup" type="Node2D" unique_id=1845489466]
 script = ExtResource("1_hgmnk")
 
-[node name="Sprite" type="TextureRect" parent="."]
+[node name="Sprite" type="TextureRect" parent="." unique_id=645541540]
 material = SubResource("ShaderMaterial_hgmnk")
 offset_left = -21.0
 offset_top = -21.0
@@ -28,11 +28,12 @@ offset_right = 19.0
 offset_bottom = 19.0
 scale = Vector2(2, 2)
 pivot_offset = Vector2(21, 21)
+mouse_filter = 2
 texture = ExtResource("2_v7pxd")
 
-[node name="Label" parent="." instance=ExtResource("3_mlcte")]
+[node name="Label" parent="." unique_id=539726350 instance=ExtResource("3_mlcte")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_oy83p")
+material = SubResource("ShaderMaterial_v7pxd")
 offset_left = -89.0
 offset_right = 810.9999
 offset_bottom = 243.33333

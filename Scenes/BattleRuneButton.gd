@@ -147,11 +147,11 @@ func set_vortex_color(rune_type: String) -> void:
 			mat.set("shader_parameter/color2", Color("38bdff")) # icy blue
 			mat.set("shader_parameter/outline_color", Color("99f9f8"))
 		"earth":
+			mat.set("shader_parameter/color1", Color("567823")) # greenish earth tone
 			mat.set("shader_parameter/color2", Color("572300")) # greenish earth tone
-			mat.set("shader_parameter/color2", Color("572300")) # greenish earth tone
-			mat.set("shader_parameter/outline_color", Color("67b706"))
+			mat.set("shader_parameter/outline_color", Color("0f9117"))
 		"life":
-			mat.set("shader_parameter/color2", Color("00f7ff")) # greenish earth tone
+			mat.set("shader_parameter/color1", Color("00f7ff")) # greenish earth tone
 			mat.set("shader_parameter/color2", Color("00ba25")) # greenish earth tone
 			mat.set("shader_parameter/outline_color", Color("57ffbc"))
 		_:

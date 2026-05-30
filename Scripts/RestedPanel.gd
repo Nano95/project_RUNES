@@ -2,7 +2,6 @@ extends Control
 class_name RestedPanel
 
 var main:MainNode
-var charges:int = 0
 @export var gone_for:Label
 @export var gained:Label
 @export var info:Label
@@ -21,10 +20,13 @@ func _ready() -> void:
 	focus_btn.pressed.connect(func(): select_buff("focus"))
 	xp_btn.pressed.connect(func(): select_buff("xp"))
 	setup_labels()
+	# Reset buff because player will choose a new one
+	var rested := main.game_data.rested_data
+	rested.active_buff = ""
+	rested.battles_left = 0
 
-func setup(m:MainNode, new_charges:int=0) -> void:
+func setup(m:MainNode) -> void:
 	main = m
-	charges = new_charges
 
 func setup_labels() -> void:
 	var rested := main.game_data.rested_data
@@ -55,9 +57,9 @@ func select_buff(type:String) -> void:
 
 	# Update save data
 	main.game_data.rested_data.active_buff = type
-	main.game_data.rested_data.battles_left = charges
+	main.game_data.rested_data.battles_left = main.game_data.rested_data.charges
 	main.game_data.rested_data.charges = 0
-
+	
 	# Close the panel
 	Utils.animate_summary_out_and_free(self)
 
