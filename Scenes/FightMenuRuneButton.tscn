@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="2_cuo2q"]
 [ext_resource type="Script" uid="uid://jj0fcb5mx0c5" path="res://Scripts/FightMenuRuneButton.gd" id="3_00aqc"]
 [ext_resource type="Theme" uid="uid://bbbw1in72yvu1" path="res://Resources/Themes/Subpanel_theme_res.tres" id="3_cuo2q"]
-[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="5_lhn1g"]
+[ext_resource type="PackedScene" uid="uid://l7ogby45st2d" path="res://Scenes/MyLabel.tscn" id="5_lhn1g"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="6_at73j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cuo2q"]
@@ -128,4 +128,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2

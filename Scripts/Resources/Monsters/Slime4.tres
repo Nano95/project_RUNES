@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://clqw62ytmprfg"]
+[gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://clqw62ytmprfg"]
 
 [ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_1jr2k"]
 
 [resource]
 script = ExtResource("1_1jr2k")
-name = "Elite Slime"
+name = "Angry Slime"
 max_hp = 27
 power = 6
 exp_reward = 15
@@ -14,6 +14,6 @@ essence_type = "earth"
 min_essence_amount = 3
 max_essence_amount = 5
 anim_offset_y = -10
-anim_name = "slime4"
+anim_name = "a4"
 immunities = Array[String](["earth"])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

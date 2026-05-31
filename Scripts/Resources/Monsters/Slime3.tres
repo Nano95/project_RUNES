@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://din5hfmmwq4bo"]
+[gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://din5hfmmwq4bo"]
 
 [ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_ctjo7"]
 
 [resource]
 script = ExtResource("1_ctjo7")
-name = "Agony Slime"
+name = "Land Wisp"
 max_hp = 21
 power = 4
 exp_reward = 10
@@ -14,6 +14,6 @@ essence_type = "arcane"
 min_essence_amount = 2
 max_essence_amount = 5
 anim_offset_y = -10
-anim_name = "slime3"
+anim_name = "a3"
 resistances = Array[String](["earth"])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

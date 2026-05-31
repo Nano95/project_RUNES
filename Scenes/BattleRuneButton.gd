@@ -30,7 +30,7 @@ func _gui_input(event):
 
 	elif event is InputEventScreenTouch and not event.pressed:
 		if not moved:
-			emit_signal("pressed")  # or call your select logic
+			emit_signal("pressed") # will get two emits, so make the button's MOUSE filter IGNORE
 
 
 func setup(rune:RuneData, _qty:int=1) -> void:

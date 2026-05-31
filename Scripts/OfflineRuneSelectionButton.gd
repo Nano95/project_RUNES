@@ -2,9 +2,25 @@ extends Control
 class_name OfflineRuneSelectionButton
 
 var rune:RuneData
+var press_pos := Vector2.ZERO
+var moved := false
+const TAP_THRESHOLD := 17.0  # pixels
 
 func _ready() -> void:
 	populate_rune_data()
+
+func _gui_input(event):
+	if event is InputEventScreenTouch and event.pressed:
+		press_pos = event.position
+		moved = false
+
+	elif event is InputEventScreenDrag:
+		if event.position.distance_to(press_pos) > TAP_THRESHOLD:
+			moved = true  # This is a scroll, not a tap
+
+	elif event is InputEventScreenTouch and not event.pressed:
+		if not moved:
+			$Panel/Button.emit_signal("pressed")  # will get two emits, so make the button's MOUSE filter IGNORE
 
 func setup(r:RuneData, cta:Callable) -> void:
 	rune = r

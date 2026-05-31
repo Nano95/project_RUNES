@@ -3,18 +3,18 @@
 [ext_resource type="Script" uid="uid://dglxqoa8gljsm" path="res://Scripts/OfflineRuneSelectionButton.gd" id="1_oa0bc"]
 [ext_resource type="Texture2D" uid="uid://llqj70wrm8i3" path="res://Sprites/Runes/ARCANE_STRIKE_RUNE.png" id="1_rcutc"]
 [ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="2_7n3pg"]
-[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_oa0bc"]
+[ext_resource type="PackedScene" uid="uid://l7ogby45st2d" path="res://Scenes/MyLabel.tscn" id="2_oa0bc"]
 [ext_resource type="Theme" uid="uid://bbbw1in72yvu1" path="res://Resources/Themes/Subpanel_theme_res.tres" id="3_or8xw"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="3_r71sb"]
 [ext_resource type="Texture2D" uid="uid://cis363l7mtswe" path="res://Sprites/arcane_ESSENCE_ICON.png" id="4_7n3pg"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wlqyv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7n3pg"]
 resource_local_to_scene = true
 shader = ExtResource("3_r71sb")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gkx8f"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_or8xw"]
 resource_local_to_scene = true
 shader = ExtResource("3_r71sb")
 shader_parameter/time = 4.750000002218258e-07
@@ -28,12 +28,14 @@ offset_right = 147.0
 offset_bottom = 194.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 1
 script = ExtResource("1_oa0bc")
 
 [node name="Panel" type="Panel" parent="." unique_id=569140860]
 layout_mode = 0
 offset_right = 147.0
 offset_bottom = 195.0
+mouse_filter = 1
 theme = ExtResource("2_7n3pg")
 
 [node name="Panel" type="Panel" parent="Panel" unique_id=452514861]
@@ -42,6 +44,7 @@ offset_left = 16.0
 offset_top = 16.0
 offset_right = 131.0
 offset_bottom = 133.0
+mouse_filter = 1
 theme = ExtResource("3_or8xw")
 
 [node name="TextureRect" type="TextureRect" parent="Panel/Panel" unique_id=123721866]
@@ -60,10 +63,11 @@ offset_left = 16.0
 offset_top = 137.0
 offset_right = 131.0
 offset_bottom = 179.0
+mouse_filter = 1
 theme = ExtResource("3_or8xw")
 
 [node name="essLabel" parent="Panel/Panel2" unique_id=1425719350 instance=ExtResource("2_oa0bc")]
-material = SubResource("ShaderMaterial_wlqyv")
+material = SubResource("ShaderMaterial_7n3pg")
 layout_mode = 0
 offset_left = 27.0
 offset_top = 1.0
@@ -83,7 +87,7 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("4_7n3pg")
 
 [node name="runeLabel" parent="Panel/Panel2" unique_id=22633345 instance=ExtResource("2_oa0bc")]
-material = SubResource("ShaderMaterial_gkx8f")
+material = SubResource("ShaderMaterial_or8xw")
 layout_mode = 0
 offset_left = -16.0
 offset_top = 19.0
@@ -102,3 +106,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2

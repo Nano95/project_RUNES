@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b7xgkus4u2361"]
 
 [ext_resource type="Script" uid="uid://dygepuv8uhpel" path="res://Scripts/GameUI.gd" id="1_po7eo"]
-[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="2_frnsy"]
+[ext_resource type="PackedScene" uid="uid://l7ogby45st2d" path="res://Scenes/MyLabel.tscn" id="2_frnsy"]
 [ext_resource type="PackedScene" uid="uid://d3gwj83kl6yvi" path="res://Scenes/BattleRuneButton.tscn" id="2_qecx7"]
 [ext_resource type="PackedScene" uid="uid://om2m83fmhqt5" path="res://Scenes/BattleSettingsPanel.tscn" id="3_0hwcy"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="3_co6lq"]

@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://hvv0jjc5atvd"]
+[gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://hvv0jjc5atvd"]
 
 [ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_irk3m"]
 
 [resource]
 script = ExtResource("1_irk3m")
-name = "Slime Hatchling"
+name = "Leafling"
 max_hp = 10
 power = 1
 exp_reward = 4
@@ -14,7 +14,7 @@ essence_type = "arcane"
 min_essence_amount = 2
 max_essence_amount = 3
 anim_offset_y = -8
-anim_name = "slime1"
+anim_name = "a1"
 weaknesses = Array[String]([])
 resistances = Array[String](["earth"])
 immunities = Array[String]([])
