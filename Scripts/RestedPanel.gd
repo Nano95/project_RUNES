@@ -12,6 +12,8 @@ var main:MainNode
 @export var xp_btn:Button
 @export var outside_btn:Button
 
+signal rested_buff_selected
+
 func _ready() -> void:
 	Utils.animate_summary_in_happy(self)
 	# Connect all buttons to the same handler
@@ -53,13 +55,12 @@ func setup_labels() -> void:
 	reset_info.text = "If you're gone for " + str(rested.minutes_per_charge) + " minutes or more, your current blessing will reset."
 
 func select_buff(type:String) -> void:
-	print("Selected rested buff:", type)
-
 	# Update save data
 	main.game_data.rested_data.active_buff = type
 	main.game_data.rested_data.battles_left = main.game_data.rested_data.charges
 	main.game_data.rested_data.charges = 0
 	
+	emit_signal("rested_buff_selected")
 	# Close the panel
 	Utils.animate_summary_out_and_free(self)
 

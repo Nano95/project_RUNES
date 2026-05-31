@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://xxup1p8e76di"]
 
+[ext_resource type="Shader" uid="uid://bfctgc4hneg2t" path="res://Scenes/monsterShader.gdshader" id="1_18bwx"]
 [ext_resource type="Script" uid="uid://cpm362jinw3ou" path="res://Scripts/Resources/MonsterInstance.gd" id="1_ld5e8"]
 [ext_resource type="Texture2D" uid="uid://g6ycv2s2cnuv" path="res://Sprites/monsters/orc1.png" id="2_1o6kg"]
 [ext_resource type="Shader" uid="uid://mwjsuxab2wkc" path="res://Shaders/colorOverride.gdshader" id="2_idaby"]
@@ -25,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://dl2012wct63pa" path="res://Sprites/monsters/Jungle_3.png" id="11_g02pr"]
 [ext_resource type="Texture2D" uid="uid://dn3khrjmb5uf1" path="res://Sprites/sword_icon.png" id="12_qfc3e"]
 [ext_resource type="Texture2D" uid="uid://cdttuqo8la01g" path="res://Sprites/monsters/Jungle_4.png" id="12_r8pyg"]
+[ext_resource type="Texture2D" uid="uid://bo8axtfeh4y0b" path="res://Sprites/monsters/A1/Slime.png" id="12_vgrej"]
 [ext_resource type="Texture2D" uid="uid://b5rxupwjbp1gy" path="res://Sprites/monsters/Sandling_1.png" id="13_ox7g6"]
 [ext_resource type="Texture2D" uid="uid://psl2oktmuf35" path="res://Sprites/monsters/Sandling_2.png" id="14_e8v2i"]
 [ext_resource type="Texture2D" uid="uid://bvbpsxuhho2ak" path="res://Sprites/monsters/Sandling_3.png" id="15_erbvs"]
@@ -34,11 +36,18 @@
 [ext_resource type="Texture2D" uid="uid://dkjy1j20688xn" path="res://Sprites/monsters/Slime3.png" id="19_ox7g6"]
 [ext_resource type="Texture2D" uid="uid://dtrrjxgfysnjj" path="res://Sprites/monsters/Slime4.png" id="20_e8v2i"]
 [ext_resource type="PackedScene" uid="uid://dro8w5yumbupd" path="res://Scenes/MonsterStatusEntry.tscn" id="32_rqp80"]
+[ext_resource type="Texture2D" uid="uid://cdkcdpvbnplt0" path="res://Sprites/monsters/A1/Leafling.png" id="33_vgrej"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ciouf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q5h8j"]
 resource_local_to_scene = true
 shader = ExtResource("2_idaby")
 shader_parameter/active = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gemdl"]
+atlas = ExtResource("12_vgrej")
+region = Rect2(0, 0, 50, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_krk12"]
 atlas = ExtResource("5_wqo53")
@@ -440,6 +449,14 @@ region = Rect2(140, 0, 28, 20)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_gemdl")
+}],
+"loop": true,
+"name": &"a1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_krk12")
 }, {
 "duration": 1.0,
@@ -836,19 +853,28 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_krk12"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_18bwx"]
+resource_local_to_scene = true
+shader = ExtResource("1_18bwx")
+shader_parameter/amplitude = 1.0
+shader_parameter/frequency_x = 5.0
+shader_parameter/frequency_y = 5.0
+shader_parameter/active = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ckywm"]
 resource_local_to_scene = true
 shader = ExtResource("9_0suyq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_slj30"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nm3hn"]
 resource_local_to_scene = true
 shader = ExtResource("9_0suyq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
 [node name="MonsterInstance" type="Node2D" unique_id=1830111385 node_paths=PackedStringArray("status_container")]
+material = SubResource("ShaderMaterial_ciouf")
 script = ExtResource("1_ld5e8")
 status_popup_ref = ExtResource("2_r8pyg")
 status_entry = ExtResource("32_rqp80")
@@ -864,13 +890,23 @@ status_container = NodePath("StatusContainer")
 unique_name_in_owner = true
 modulate = Color(1, 1, 0, 1)
 material = SubResource("ShaderMaterial_q5h8j")
+position = Vector2(0, -2)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_krk12")
-animation = &"sandling3"
+animation = &"sandling4"
 offset = Vector2(0, 1)
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=873893331]
+material = SubResource("ShaderMaterial_18bwx")
+offset_left = -90.0
+offset_top = -87.0
+offset_right = 89.0
+offset_bottom = 92.0
+mouse_filter = 2
+texture = ExtResource("33_vgrej")
+
 [node name="Hp" parent="." unique_id=657281785 instance=ExtResource("8_rovrv")]
-material = SubResource("ShaderMaterial_krk12")
+material = SubResource("ShaderMaterial_ckywm")
 offset_left = -37.0
 offset_top = 31.0
 offset_right = 266.3333
@@ -884,7 +920,7 @@ texture = ExtResource("10_qfc3e")
 
 [node name="atk" parent="." unique_id=761100371 instance=ExtResource("8_rovrv")]
 visible = false
-material = SubResource("ShaderMaterial_slj30")
+material = SubResource("ShaderMaterial_nm3hn")
 offset_left = -26.0
 offset_top = -64.0
 offset_right = 147.33333

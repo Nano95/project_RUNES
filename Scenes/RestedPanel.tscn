@@ -16,6 +16,36 @@
 shader = ExtResource("2_vy6jj")
 shader_parameter/lod = 2.0400000969
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c3eu0"]
+resource_local_to_scene = true
+shader = ExtResource("5_4iq4f")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4iq4f"]
+resource_local_to_scene = true
+shader = ExtResource("5_4iq4f")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ob88w"]
+resource_local_to_scene = true
+shader = ExtResource("5_4iq4f")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w8xto"]
+resource_local_to_scene = true
+shader = ExtResource("5_4iq4f")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4w4u3"]
+resource_local_to_scene = true
+shader = ExtResource("5_4iq4f")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g6l8a"]
 resource_local_to_scene = true
 shader = ExtResource("5_4iq4f")
@@ -40,38 +70,9 @@ shader = ExtResource("5_4iq4f")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2f6ao"]
-resource_local_to_scene = true
-shader = ExtResource("5_4iq4f")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f0aol"]
-resource_local_to_scene = true
-shader = ExtResource("5_4iq4f")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_elgs1"]
-resource_local_to_scene = true
-shader = ExtResource("5_4iq4f")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_r3iku"]
-resource_local_to_scene = true
-shader = ExtResource("5_4iq4f")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vw63c"]
-resource_local_to_scene = true
-shader = ExtResource("5_4iq4f")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
 [node name="RestedPanel" type="Control" unique_id=1678936201 node_paths=PackedStringArray("gone_for", "gained", "info", "reset_info", "hp_btn", "power_btn", "focus_btn", "xp_btn", "outside_btn")]
 layout_mode = 3
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -143,7 +144,7 @@ offset_right = 660.0
 offset_bottom = 125.0
 
 [node name="Title" parent="Panel/Title" unique_id=482470540 instance=ExtResource("4_c3eu0")]
-material = SubResource("ShaderMaterial_g6l8a")
+material = SubResource("ShaderMaterial_c3eu0")
 layout_mode = 0
 offset_right = 1318.0
 offset_bottom = 242.0
@@ -161,7 +162,7 @@ offset_bottom = 254.0
 theme = ExtResource("6_ob88w")
 
 [node name="Label" parent="Panel/Panel" unique_id=574618127 instance=ExtResource("4_c3eu0")]
-material = SubResource("ShaderMaterial_o0nw8")
+material = SubResource("ShaderMaterial_4iq4f")
 layout_mode = 0
 offset_left = 14.0
 offset_top = 12.0
@@ -170,7 +171,7 @@ offset_bottom = 149.0
 text = "You were gone for:  6H 32M"
 
 [node name="Label2" parent="Panel/Panel" unique_id=1674152602 instance=ExtResource("4_c3eu0")]
-material = SubResource("ShaderMaterial_eehed")
+material = SubResource("ShaderMaterial_ob88w")
 layout_mode = 0
 offset_left = 14.0
 offset_top = 60.0
@@ -179,7 +180,7 @@ offset_bottom = 197.0
 text = "You gained:   10 (maxed) rested charges"
 
 [node name="info1" parent="Panel" unique_id=1807436111 instance=ExtResource("4_c3eu0")]
-material = SubResource("ShaderMaterial_r8rl5")
+material = SubResource("ShaderMaterial_w8xto")
 layout_mode = 0
 offset_left = 16.0
 offset_top = 265.0
@@ -189,7 +190,7 @@ text = "Choose a Rested Blessing (50% bonus) for your next 6 battles"
 horizontal_alignment = 1
 
 [node name="info2" parent="Panel" unique_id=308643674 instance=ExtResource("4_c3eu0")]
-material = SubResource("ShaderMaterial_2f6ao")
+material = SubResource("ShaderMaterial_4w4u3")
 layout_mode = 0
 offset_left = 16.0
 offset_top = 811.0
@@ -217,7 +218,7 @@ mouse_filter = 2
 texture = ExtResource("8_4w4u3")
 
 [node name="Label" parent="Panel/Option1" unique_id=353997808 instance=ExtResource("4_c3eu0")]
-material = SubResource("ShaderMaterial_f0aol")
+material = SubResource("ShaderMaterial_g6l8a")
 layout_mode = 0
 offset_left = 72.0
 offset_right = 1952.0
@@ -252,7 +253,7 @@ mouse_filter = 2
 texture = ExtResource("9_c3eu0")
 
 [node name="Label" parent="Panel/Option2" unique_id=360702299 instance=ExtResource("4_c3eu0")]
-material = SubResource("ShaderMaterial_elgs1")
+material = SubResource("ShaderMaterial_o0nw8")
 layout_mode = 0
 offset_left = 72.0
 offset_right = 1952.0
@@ -287,7 +288,7 @@ mouse_filter = 2
 texture = ExtResource("10_4iq4f")
 
 [node name="Label" parent="Panel/Option3" unique_id=1853320289 instance=ExtResource("4_c3eu0")]
-material = SubResource("ShaderMaterial_r3iku")
+material = SubResource("ShaderMaterial_eehed")
 layout_mode = 0
 offset_left = 72.0
 offset_right = 1952.0
@@ -322,7 +323,7 @@ mouse_filter = 2
 texture = ExtResource("11_ob88w")
 
 [node name="Label" parent="Panel/Option4" unique_id=938199812 instance=ExtResource("4_c3eu0")]
-material = SubResource("ShaderMaterial_vw63c")
+material = SubResource("ShaderMaterial_r8rl5")
 layout_mode = 0
 offset_left = 72.0
 offset_right = 1952.0

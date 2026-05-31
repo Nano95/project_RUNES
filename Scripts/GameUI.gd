@@ -173,6 +173,7 @@ func update_focus(focus:int) -> void:
 	focus_tween.tween_property(focus_label, "scale", Vector2(.6, .6), 0.4)\
 		.set_trans(Tween.TRANS_CUBIC)
 
+
 func tween_hp_bar(from: float, to: float, clr:Color) -> void:
 	hp_bar.value = from  # explicitly set the start
 	hp_tween = create_tween()

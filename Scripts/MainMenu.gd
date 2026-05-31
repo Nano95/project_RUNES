@@ -173,6 +173,9 @@ func update_info_panel() -> void:
 	var total_essence = main.game_data.current_essences
 	$BottomInfoPanel/Panel/RichTextLabel.text = build_loot_summary_bbcode(total_gold, total_essence)
 
+func prep_stats_panel_for_rested_buff(rest_panel:RestedPanel) -> void:
+	rest_panel.rested_buff_selected.connect(stats_panel.set_all_labels)
+
 func build_loot_summary_bbcode(total_gold: int, total_essences: Dictionary) -> String:
 	var gold_icon := "res://Sprites/GOLD_ICON.png"
 

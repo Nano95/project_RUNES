@@ -1,14 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bogmh56si167x"]
+[gd_scene format=3 uid="uid://l7ogby45st2d"]
 
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="1_wbk6d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kn3qh"]
 resource_local_to_scene = true
 shader = ExtResource("1_wbk6d")
-shader_parameter/time = 4.7500000022182576e-07
+shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="Label" type="Label"]
+[node name="Label" type="Label" unique_id=1696817232]
 material = SubResource("ShaderMaterial_kn3qh")
 offset_right = 600.0
 offset_bottom = 130.0

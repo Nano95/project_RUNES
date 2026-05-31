@@ -1,8 +1,6 @@
 extends Control
 class_name StatsContainer
 
-@export var lvl_label:Label
-@export var ap_label:Label
 @export var btn1:Button
 @export var btn10:Button
 @export var btn100:Button
@@ -46,7 +44,6 @@ func _ready() -> void:
 func qty_button_pressed(toggled) -> void:
 	if !toggled: return
 	var button_pressed = button_group.get_pressed_button()
-	print("Name: ", button_pressed.name)
 	match button_pressed.name:
 		btn1.name:
 			stats_multiplier = 1
@@ -56,9 +53,6 @@ func qty_button_pressed(toggled) -> void:
 			stats_multiplier = 100
 		_:
 			stats_multiplier = 1
-	
-	print("-stats multi: ", stats_multiplier)
-
 
 func setup(m:MainNode) -> void:
 	main = m
@@ -72,7 +66,7 @@ func allocate_ap(stat: String, amount: int = 1) -> void:
 
 		main.game_data.available_ap -= can_add
 		main.game_data.allocated_stats[stat] += can_add
-		update_ap_label()
+		update_level_ap_richtext()
 
 	# REMOVING AP
 	if (amount < 0):
@@ -82,7 +76,7 @@ func allocate_ap(stat: String, amount: int = 1) -> void:
 
 		main.game_data.allocated_stats[stat] -= remove_amount
 		main.game_data.available_ap += remove_amount
-		update_ap_label()
+		update_level_ap_richtext()
 
 func add_subtract_stats(should_add:bool=false, type:int=STAT_NAMES.HEALTH) -> void:
 	var stat_name:String = "health"
@@ -100,19 +94,19 @@ func add_subtract_stats(should_add:bool=false, type:int=STAT_NAMES.HEALTH) -> vo
 		STAT_NAMES.HEALTH:
 			#main.player_stats.health += number
 			#main.player_stats.health = clamp(main.player_stats.health, 0, 1999)
-			set_health_label()
+			set_label("health")
 		STAT_NAMES.FOCUS:
 			#main.player_stats.focus += number
 			#main.player_stats.focus = clamp(main.player_stats.focus, 0, 1999)
-			set_focus_label()
+			set_label("focus")
 		STAT_NAMES.POWER:
 			#main.player_stats.power += number
 			#main.player_stats.power = clamp(main.player_stats.power, 0, 1999)
-			set_power_label()
+			set_label("power")
 		STAT_NAMES.LUCK:
 			#main.player_stats.luck += number
 			#main.player_stats.luck = clamp(main.player_stats.luck, 0, 1999)
-			set_luck_label()
+			set_label("luck")
 
 func recalc_player_stats():
 	var stats = {"health": 0, "focus": 0, "power": 0, "luck": 0}
@@ -133,31 +127,50 @@ func reset_all_ap() -> void:
 		main.game_data.allocated_stats[stat] = 0
 		set_all_labels()
 
-func update_lvl_label() -> void:
-	lvl_label.text = "Lv: " + str(main.game_data.current_level)
+func update_level_ap_richtext() -> void:
+	var lvl := main.game_data.current_level
+	var ap := main.game_data.available_ap
 
-func update_ap_label() -> void:
-	ap_label.text = "| AP: " + str(main.game_data.available_ap)
+	var ap_text := str(ap)
+
+	# Color AP if player has points to allocate
+	if (ap > 0):
+		ap_text = "[color=green][wave amp=25 freq=6]" + ap_text + "[/wave][/color]"
+
+	# Build final centered RichText
+	var final_text := "[center]Lv: " + str(lvl) + " | AP: " + ap_text + "[/center]"
+
+	%lvlApStatsRich.bbcode_enabled = true
+	%lvlApStatsRich.text = final_text
 
 func close() -> void:
 	Utils.animate_summary_out_and_free(self)
 
 func set_all_labels() -> void:
-	set_health_label()
-	set_focus_label()
-	set_power_label()
-	set_luck_label()
-	update_lvl_label()
-	update_ap_label()
+	set_label("health")
+	set_label("focus")
+	set_label("power")
+	set_label("luck")
+	update_level_ap_richtext()
+	
+	$Panel/Labels/restedBuffInfo.visible = main.game_data.rested_data.active_buff != ""
 
-func set_health_label() -> void:
-	%HealthRich.text = format_stat_with_bonus("Health", main.game_data.base_stats["health"] + main.game_data.allocated_stats["health"], main.bonus_stats['health'])
-func set_focus_label() -> void:
-	%FocusRich.text = format_stat_with_bonus("Focus", main.game_data.base_stats["focus"] + main.game_data.allocated_stats["focus"], main.bonus_stats['focus'])
-func set_power_label() -> void:
-	%PowerRich.text = format_stat_with_bonus("Power", main.game_data.base_stats["power"] + main.game_data.allocated_stats["power"], main.bonus_stats['power'])
-func set_luck_label() -> void:
-	%LuckRich.text = format_stat_with_bonus("Luck", main.game_data.base_stats["luck"] + main.game_data.allocated_stats["luck"], main.bonus_stats['luck'])
+func set_label(type:String="health") -> void:
+	var base_val = main.game_data.base_stats[type] + main.game_data.allocated_stats[type]
+	var equip_bonus = main.bonus_stats[type]
+	var rested_bonus = get_rested_bonus(type, base_val)
+	
+	var lbl:RichTextLabel
+	match type:
+		"health":
+			lbl = %HealthRich
+		"focus":
+			lbl = %FocusRich
+		"power":
+			lbl = %PowerRich
+		"luck":
+			lbl = %LuckRich
+	lbl.text = format_stat_with_bonus(type.capitalize(), base_val, equip_bonus + rested_bonus)
 
 func format_stat_with_bonus(stat_name:String, base_value: float, bonus_value: float) -> String:
 	if (bonus_value == 0):
@@ -166,7 +179,7 @@ func format_stat_with_bonus(stat_name:String, base_value: float, bonus_value: fl
 		base_value
 	]
 
-	var color := Utils.PASTEL_GREEN if (bonus_value > 0) else Utils.PASTEL_RED
+	var color := Utils.HP_YELLOW if (bonus_value > 0) else Utils.PASTEL_RED
 	var num_sign := "+" if (bonus_value > 0) else ""
 	
 	# Added the space at the beginning for some padding so outline does not fall outside of the size and gets trimmed off
@@ -177,3 +190,15 @@ func format_stat_with_bonus(stat_name:String, base_value: float, bonus_value: fl
 		num_sign,
 		bonus_value
 	]
+func get_rested_bonus(stat:String, value:int) -> int:
+	var buff:String = main.game_data.rested_data.active_buff
+
+	match buff:
+		"health":
+			return ceil(value * 0.5) if (stat == "health") else 0
+		"focus":
+			return ceil(value * 0.5) if (stat == "focus") else 0
+		"power":
+			return ceil(value * 0.5) if (stat == "power") else 0
+		_:
+			return 0
