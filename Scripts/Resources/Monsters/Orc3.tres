@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://rgsbmauh3u3l"]
+[gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://rgsbmauh3u3l"]
 
 [ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_gm006"]
 
 [resource]
 script = ExtResource("1_gm006")
-name = "Orc Warrior"
+name = "Mad Dwarf"
 max_hp = 36
 power = 11
 exp_reward = 20
@@ -14,5 +14,5 @@ essence_type = "arcane"
 min_essence_amount = 4
 max_essence_amount = 6
 anim_offset_y = -13
-anim_name = "orc3"
+anim_name = "a2_3"
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

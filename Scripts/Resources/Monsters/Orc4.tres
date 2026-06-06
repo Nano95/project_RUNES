@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://0n5ocif8cg6b"]
+[gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://0n5ocif8cg6b"]
 
 [ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_m3ned"]
 
 [resource]
 script = ExtResource("1_m3ned")
-name = "Orc Elite"
+name = "Fire Imp"
 max_hp = 42
 power = 13
 exp_reward = 24
@@ -14,5 +14,5 @@ essence_type = "arcane"
 min_essence_amount = 3
 max_essence_amount = 8
 anim_offset_y = -13
-anim_name = "orc4"
+anim_name = "a2_4"
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

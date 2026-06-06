@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://cyj8u6ajt8lth"]
+[gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://cyj8u6ajt8lth"]
 
 [ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_givtv"]
 
 [resource]
 script = ExtResource("1_givtv")
-name = "Flesh Eater"
+name = "Mire Widow"
 max_hp = 55
 power = 22
 exp_reward = 28
@@ -14,6 +14,6 @@ essence_type = "electric"
 min_essence_amount = 2
 max_essence_amount = 9
 anim_offset_y = -13
-anim_name = "sandling4"
+anim_name = "a3_4"
 resistances = Array[String](["fire"])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

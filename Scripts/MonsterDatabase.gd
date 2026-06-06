@@ -58,13 +58,12 @@ var monster_colors = {
 		"col2": Vector3(.633, .793, .543),
 	},
 	"area2": {
-		"col1": Vector3(.445, .488, .449),
-		"col2": Vector3(.664, .723, .602),
+		"col1": Vector3(.297, .211, .09),
+		"col2": Vector3(.355, .285, .133),
 	},
 	"area3": {
-		"col1": Vector3(.875, .652, .367),
-		"col2": Vector3(.973, .836, .535
-		),
+		"col1": Vector3(.445, .488, .449),
+		"col2": Vector3(.664, .723, .602),
 	},
 	"area4": {
 		"col1": Vector3(.297, .211, .09),
@@ -78,8 +77,8 @@ var monster_colors = {
 
 var area_names = {
 	"area1": "Dewdrop Fields",
-	"area2": "Orc Plains",
-	"area3": "Sandling Dunes",
+	"area2": "Cave Depths",
+	"area3": "Dark Mire",
 	"area4": "Royal Caves",
 	"area5": "Forbidden Jungle",
 }

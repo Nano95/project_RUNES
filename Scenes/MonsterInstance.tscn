@@ -29,11 +29,19 @@
 [ext_resource type="Texture2D" uid="uid://cr7jrx4n80x05" path="res://Sprites/monsters/A1/Field_Wisp.png" id="13_krk12"]
 [ext_resource type="Texture2D" uid="uid://b5rxupwjbp1gy" path="res://Sprites/monsters/Sandling_1.png" id="13_ox7g6"]
 [ext_resource type="Texture2D" uid="uid://psl2oktmuf35" path="res://Sprites/monsters/Sandling_2.png" id="14_e8v2i"]
+[ext_resource type="Texture2D" uid="uid://t6r5jamq7aih" path="res://Sprites/monsters/A2/a2_Cave_Orcling.png" id="15_ciouf"]
 [ext_resource type="Texture2D" uid="uid://bvbpsxuhho2ak" path="res://Sprites/monsters/Sandling_3.png" id="15_erbvs"]
 [ext_resource type="Texture2D" uid="uid://b7n5h7lvb4axf" path="res://Sprites/monsters/Sandling_4.png" id="16_jn61m"]
+[ext_resource type="Texture2D" uid="uid://vfua1h0yl14y" path="res://Sprites/monsters/A2/a2_Glowshroom_Crawler.png" id="16_vnof4"]
+[ext_resource type="Texture2D" uid="uid://bp862h0fskjfk" path="res://Sprites/monsters/A2/a2_Mad_Dwarf.png" id="17_vuff0"]
+[ext_resource type="Texture2D" uid="uid://b4xs8p7qbrm5l" path="res://Sprites/monsters/A2/a2_Fire_Imp.png" id="18_a4h1o"]
+[ext_resource type="Texture2D" uid="uid://o6b0c4gfv68d" path="res://Sprites/monsters/A3/a3_Rotcap_Shroom.png" id="19_kj6u1"]
+[ext_resource type="Texture2D" uid="uid://bkdkxtq880snp" path="res://Sprites/monsters/A3/a3_Bog_Leech.png" id="20_gk2du"]
+[ext_resource type="Texture2D" uid="uid://f53ks15m2gah" path="res://Sprites/monsters/A3/a3_Bog_Thing.png" id="21_qtp2d"]
+[ext_resource type="Texture2D" uid="uid://jrnpdwhvvexh" path="res://Sprites/monsters/A3/a3_Mire_Widow.png" id="22_khk1n"]
 [ext_resource type="PackedScene" uid="uid://dro8w5yumbupd" path="res://Scenes/MonsterStatusEntry.tscn" id="32_rqp80"]
 [ext_resource type="Texture2D" uid="uid://cdkcdpvbnplt0" path="res://Sprites/monsters/A1/Leafling.png" id="33_vgrej"]
-[ext_resource type="Texture2D" uid="uid://6n727ey53qyo" path="res://Sprites/monsters/A1/a1_orcling.png" id="37_vgrej"]
+[ext_resource type="Texture2D" uid="uid://7as0a8oq58hy" path="res://Sprites/monsters/A1/a1_orcling.png" id="37_vgrej"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ciouf"]
 
@@ -55,6 +63,38 @@ region = Rect2(0, 0, 50, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ciouf"]
 atlas = ExtResource("12_vgrej")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gk2du"]
+atlas = ExtResource("15_ciouf")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtp2d"]
+atlas = ExtResource("16_vnof4")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khk1n"]
+atlas = ExtResource("17_vuff0")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dlmpw"]
+atlas = ExtResource("18_a4h1o")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7p1q8"]
+atlas = ExtResource("19_kj6u1")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ncrh"]
+atlas = ExtResource("20_gk2du")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5u46y"]
+atlas = ExtResource("21_qtp2d")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2f2c"]
+atlas = ExtResource("22_khk1n")
 region = Rect2(0, 0, 50, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_18bwx"]
@@ -128,7 +168,7 @@ animations = [{
 "texture": ExtResource("33_vgrej")
 }],
 "loop": false,
-"name": &"a1",
+"name": &"a1_1",
 "speed": 0.0
 }, {
 "frames": [{
@@ -136,7 +176,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_slj30")
 }],
 "loop": false,
-"name": &"a2",
+"name": &"a1_2",
 "speed": 0.0
 }, {
 "frames": [{
@@ -144,7 +184,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_vgrej")
 }],
 "loop": false,
-"name": &"a3",
+"name": &"a1_3",
 "speed": 0.0
 }, {
 "frames": [{
@@ -152,7 +192,71 @@ animations = [{
 "texture": SubResource("AtlasTexture_ciouf")
 }],
 "loop": false,
-"name": &"a4",
+"name": &"a1_4",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gk2du")
+}],
+"loop": false,
+"name": &"a2_1",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtp2d")
+}],
+"loop": true,
+"name": &"a2_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khk1n")
+}],
+"loop": true,
+"name": &"a2_3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dlmpw")
+}],
+"loop": true,
+"name": &"a2_4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7p1q8")
+}],
+"loop": false,
+"name": &"a3_1",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ncrh")
+}],
+"loop": true,
+"name": &"a3_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5u46y")
+}],
+"loop": false,
+"name": &"a3_3",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2f2c")
+}],
+"loop": false,
+"name": &"a3_4",
 "speed": 0.0
 }, {
 "frames": [{
@@ -316,7 +420,7 @@ material = SubResource("ShaderMaterial_q5h8j")
 position = Vector2(0, -2)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_krk12")
-animation = &"a3"
+animation = &"a3_4"
 offset = Vector2(0, 1)
 
 [node name="Hp" parent="." unique_id=657281785 instance=ExtResource("8_rovrv")]

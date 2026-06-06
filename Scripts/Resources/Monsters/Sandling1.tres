@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="MonsterBase" load_steps=2 format=3 uid="uid://dfi8m6kvmofmq"]
+[gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://dfi8m6kvmofmq"]
 
 [ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_on335"]
 
 [resource]
 script = ExtResource("1_on335")
-name = "Stalker"
+name = "Rotcap Shroom"
 max_hp = 39
 power = 14
 exp_reward = 17
@@ -14,5 +14,5 @@ essence_type = "arcane"
 min_essence_amount = 5
 max_essence_amount = 7
 anim_offset_y = -9
-anim_name = "sandling1"
+anim_name = "a3_1"
 metadata/_custom_type_script = "uid://dljne2akmlj0u"
