@@ -11,7 +11,7 @@ var area1:Array = [
 	preload("res://Scripts/Resources/Monsters/a1_1.tres"),
 	preload("res://Scripts/Resources/Monsters/a1_2.tres"),
 	preload("res://Scripts/Resources/Monsters/a1_3.tres"),
-	preload("res://Scripts/Resources/Monsters/a1_4.tres")	
+	preload("res://Scripts/Resources/Monsters/a1_4.tres")
 ]
 var area2:Array = [
 	preload("res://Scripts/Resources/Monsters/a2_1.tres"),
