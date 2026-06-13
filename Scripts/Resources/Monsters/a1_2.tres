@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://cqnrrhjhkao2t"]
 
-[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_j8dds"]
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_h8npg"]
 
 [resource]
-script = ExtResource("1_j8dds")
+script = ExtResource("1_h8npg")
 name = "Orcling"
 max_hp = 15
 power = 2
@@ -15,5 +15,6 @@ min_essence_amount = 2
 max_essence_amount = 4
 anim_offset_y = -9
 anim_name = "a1_2"
+weaknesses = Array[String](["fire"])
 resistances = Array[String](["earth"])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

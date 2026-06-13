@@ -1,13 +1,14 @@
 [gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://rgsbmauh3u3l"]
 
-[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_gm006"]
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_nsvl1"]
 
 [resource]
-script = ExtResource("1_gm006")
+script = ExtResource("1_nsvl1")
 name = "Mad Dwarf"
 max_hp = 36
 power = 11
 exp_reward = 20
+gold_chance = 0.9
 min_gold_reward = 5
 max_gold_reward = 14
 essence_type = "arcane"
@@ -15,4 +16,5 @@ min_essence_amount = 4
 max_essence_amount = 6
 anim_offset_y = -13
 anim_name = "a2_3"
+resistances = Array[String](["arcane"])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

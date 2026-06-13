@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://cbtcs4rs3jc4p"]
+
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_ofs76"]
+
+[resource]
+script = ExtResource("1_ofs76")
+name = "Frost Orc"
+max_hp = 70
+power = 26
+exp_reward = 35
+min_gold_reward = 15
+max_gold_reward = 25
+essence_type = "arcane"
+min_essence_amount = 7
+max_essence_amount = 9
+anim_offset_y = -12
+anim_name = "a4_4"
+weaknesses = Array[String](["earth", "electric"])
+resistances = Array[String](["ice"])
+metadata/_custom_type_script = "uid://dljne2akmlj0u"

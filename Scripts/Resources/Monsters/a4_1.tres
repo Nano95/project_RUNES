@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://cs1eyj1tggal1"]
+
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_mw86d"]
+
+[resource]
+script = ExtResource("1_mw86d")
+name = "Frost Bat"
+max_hp = 50
+power = 18
+exp_reward = 20
+min_gold_reward = 6
+max_gold_reward = 17
+essence_type = "arcane"
+min_essence_amount = 5
+max_essence_amount = 7
+anim_offset_y = -10
+anim_name = "a4_1"
+weaknesses = Array[String](["electric"])
+immunities = Array[String](["ice"])
+metadata/_custom_type_script = "uid://dljne2akmlj0u"

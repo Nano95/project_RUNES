@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://c1ofndiffxia0"]
 
-[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_xb32t"]
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_mk2uu"]
 
 [resource]
-script = ExtResource("1_xb32t")
+script = ExtResource("1_mk2uu")
 name = "Glowshroom Crawler"
 max_hp = 31
 power = 9
@@ -15,4 +15,5 @@ min_essence_amount = 4
 max_essence_amount = 5
 anim_offset_y = -11
 anim_name = "a2_2"
+resistances = Array[String](["earth"])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

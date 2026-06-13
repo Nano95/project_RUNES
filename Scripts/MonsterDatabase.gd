@@ -8,34 +8,34 @@ var monsters = {
 	"area5": area5
 }
 var area1:Array = [
-	preload("res://Scripts/Resources/Monsters/Slime1.tres"),
-	preload("res://Scripts/Resources/Monsters/Slime2.tres"),
-	preload("res://Scripts/Resources/Monsters/Slime3.tres"),
-	preload("res://Scripts/Resources/Monsters/Slime4.tres")	
+	preload("res://Scripts/Resources/Monsters/a1_1.tres"),
+	preload("res://Scripts/Resources/Monsters/a1_2.tres"),
+	preload("res://Scripts/Resources/Monsters/a1_3.tres"),
+	preload("res://Scripts/Resources/Monsters/a1_4.tres")	
 ]
 var area2:Array = [
-	preload("res://Scripts/Resources/Monsters/Orc1.tres"),
-	preload("res://Scripts/Resources/Monsters/Orc2.tres"),
-	preload("res://Scripts/Resources/Monsters/Orc3.tres"),
-	preload("res://Scripts/Resources/Monsters/Orc4.tres")
+	preload("res://Scripts/Resources/Monsters/a2_1.tres"),
+	preload("res://Scripts/Resources/Monsters/a2_2.tres"),
+	preload("res://Scripts/Resources/Monsters/a2_3.tres"),
+	preload("res://Scripts/Resources/Monsters/a2_4.tres")
 ]
 var area3:Array = [
-	preload("res://Scripts/Resources/Monsters/Sandling1.tres"),
-	preload("res://Scripts/Resources/Monsters/Sandling2.tres"),
-	preload("res://Scripts/Resources/Monsters/Sandling3.tres"),
-	preload("res://Scripts/Resources/Monsters/Sandling4.tres")
+	preload("res://Scripts/Resources/Monsters/a3_1.tres"),
+	preload("res://Scripts/Resources/Monsters/a3_2.tres"),
+	preload("res://Scripts/Resources/Monsters/a3_3.tres"),
+	preload("res://Scripts/Resources/Monsters/a3_4.tres")
 ]
 var area4:Array = [
-	preload("res://Scripts/Resources/Monsters/Dwarf1.tres"),
-	preload("res://Scripts/Resources/Monsters/Dwarf2.tres"),
-	preload("res://Scripts/Resources/Monsters/Dwarf3.tres"),
-	preload("res://Scripts/Resources/Monsters/Dwarf4.tres")
+	preload("res://Scripts/Resources/Monsters/a4_1.tres"),
+	preload("res://Scripts/Resources/Monsters/a4_2.tres"),
+	preload("res://Scripts/Resources/Monsters/a4_3.tres"),
+	preload("res://Scripts/Resources/Monsters/a4_4.tres")
 ]
 var area5:Array = [
-	preload("res://Scripts/Resources/Monsters/Jungles1.tres"),
-	preload("res://Scripts/Resources/Monsters/Jungles2.tres"),
-	preload("res://Scripts/Resources/Monsters/Jungles3.tres"),
-	preload("res://Scripts/Resources/Monsters/Jungles4.tres"),
+	preload("res://Scripts/Resources/Monsters/a5_1.tres"),
+	preload("res://Scripts/Resources/Monsters/a5_2.tres"),
+	preload("res://Scripts/Resources/Monsters/a5_3.tres"),
+	preload("res://Scripts/Resources/Monsters/a5_4.tres"),
 ]
 
 func get_monster(family:String, index) -> MonsterBase:
@@ -66,12 +66,12 @@ var monster_colors = {
 		"col2": Vector3(.664, .723, .602),
 	},
 	"area4": {
-		"col1": Vector3(.297, .211, .09),
-		"col2": Vector3(.355, .285, .133),
+		"col1": Vector3(0.0, .88, 1.0),
+		"col2": Vector3(.6, 1.0, 1.0),
 	},	
 	"area5": {
-		"col1": Vector3(.223, .386, .266),
-		"col2": Vector3(.305, .482, .313),
+		"col1": Vector3(0.22, 0.28, 0.34),
+		"col2": Vector3(0.32, 0.40, 0.48),
 	},
 }
 
@@ -79,6 +79,6 @@ var area_names = {
 	"area1": "Dewdrop Fields",
 	"area2": "Cave Depths",
 	"area3": "Dark Mire",
-	"area4": "Royal Caves",
-	"area5": "Forbidden Jungle",
+	"area4": "Frost Ridge",
+	"area5": "Storm Cliffs",
 }

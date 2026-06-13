@@ -1,18 +1,20 @@
 [gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://dfi8m6kvmofmq"]
 
-[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_on335"]
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_jovtv"]
 
 [resource]
-script = ExtResource("1_on335")
+script = ExtResource("1_jovtv")
 name = "Rotcap Shroom"
 max_hp = 39
 power = 14
 exp_reward = 17
 min_gold_reward = 6
 max_gold_reward = 17
-essence_type = "arcane"
+essence_type = "earth"
 min_essence_amount = 5
 max_essence_amount = 7
 anim_offset_y = -9
 anim_name = "a3_1"
+weaknesses = Array[String](["electric"])
+immunities = Array[String](["earth"])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

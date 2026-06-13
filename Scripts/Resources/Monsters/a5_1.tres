@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://cdanp5ecx1lqw"]
+
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_8tqty"]
+
+[resource]
+script = ExtResource("1_8tqty")
+name = "Static Wisp"
+max_hp = 63
+power = 23
+exp_reward = 23
+min_gold_reward = 9
+max_gold_reward = 18
+essence_type = "electric"
+min_essence_amount = 5
+max_essence_amount = 8
+anim_offset_y = -10
+anim_name = "a5_1"
+weaknesses = Array[String](["fire", "ice"])
+resistances = Array[String](["fire"])
+immunities = Array[String](["electric"])
+metadata/_custom_type_script = "uid://dljne2akmlj0u"

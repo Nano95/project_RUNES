@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://c8bydn0fvrjys"]
+
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_6ldyi"]
+
+[resource]
+script = ExtResource("1_6ldyi")
+name = "Ice Slime"
+max_hp = 50
+power = 30
+exp_reward = 33
+min_gold_reward = 5
+max_gold_reward = 20
+essence_type = "ice"
+min_essence_amount = 4
+max_essence_amount = 5
+anim_offset_y = -12
+anim_name = "a4_3"
+immunities = Array[String](["ice"])
+metadata/_custom_type_script = "uid://dljne2akmlj0u"

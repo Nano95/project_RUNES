@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://hvv0jjc5atvd"]
 
-[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_irk3m"]
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_x66t0"]
 
 [resource]
-script = ExtResource("1_irk3m")
+script = ExtResource("1_x66t0")
 name = "Leafling"
 max_hp = 10
 power = 1
@@ -15,7 +15,7 @@ min_essence_amount = 2
 max_essence_amount = 3
 anim_offset_y = -8
 anim_name = "a1_1"
-weaknesses = Array[String]([])
-resistances = Array[String](["earth"])
+weaknesses = Array[String](["fire"])
+resistances = Array[String](["earth", "ice"])
 immunities = Array[String]([])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

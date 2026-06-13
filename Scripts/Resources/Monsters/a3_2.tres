@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://cqq652nd08yuv"]
 
-[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_xwwgs"]
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_ysqnq"]
 
 [resource]
-script = ExtResource("1_xwwgs")
+script = ExtResource("1_ysqnq")
 name = "Giant Leech"
 max_hp = 43
 power = 16
@@ -15,4 +15,5 @@ min_essence_amount = 6
 max_essence_amount = 7
 anim_offset_y = -11
 anim_name = "a3_2"
+weaknesses = Array[String](["fire"])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

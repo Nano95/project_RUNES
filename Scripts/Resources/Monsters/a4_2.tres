@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://cxne8jbhwp14t"]
+
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_vxix5"]
+
+[resource]
+script = ExtResource("1_vxix5")
+name = "The Frozen"
+max_hp = 55
+power = 23
+exp_reward = 23
+min_gold_reward = 8
+max_gold_reward = 17
+essence_type = "ice"
+min_essence_amount = 6
+max_essence_amount = 7
+anim_offset_y = -10
+anim_name = "a4_2"
+immunities = Array[String](["ice"])
+metadata/_custom_type_script = "uid://dljne2akmlj0u"

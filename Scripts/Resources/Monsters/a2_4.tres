@@ -1,18 +1,20 @@
 [gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://0n5ocif8cg6b"]
 
-[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_m3ned"]
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_ov2e2"]
 
 [resource]
-script = ExtResource("1_m3ned")
+script = ExtResource("1_ov2e2")
 name = "Fire Imp"
 max_hp = 42
 power = 13
 exp_reward = 24
 min_gold_reward = 6
 max_gold_reward = 15
-essence_type = "arcane"
+essence_type = "fire"
 min_essence_amount = 3
 max_essence_amount = 8
 anim_offset_y = -13
 anim_name = "a2_4"
+weaknesses = Array[String](["ice"])
+immunities = Array[String](["fire"])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"
