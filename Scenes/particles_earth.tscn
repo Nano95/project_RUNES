@@ -1,13 +1,26 @@
 [gd_scene format=3 uid="uid://bjxile8kyk1xv"]
 
 [ext_resource type="Script" uid="uid://cvb4v5jokrblk" path="res://Scripts/RuneParticlesController.gd" id="1_as866"]
+[ext_resource type="Texture2D" uid="uid://cfb4d0rxa7epx" path="res://Sprites/animations/particle_anim2.png" id="1_o7itl"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vd03g"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_65aqw"]
+_data = [Vector2(0.0026246756, 0.9735235), 0.0, 0.0, 0, 0, Vector2(0.90026253, 0.39765787), -2.0415323, -2.0415323, 0, 0, Vector2(0.9921261, 0.013747454), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_ih1nw"]
-offsets = PackedFloat32Array(0, 0.453125, 1)
-colors = PackedColorArray(0, 0.7490196, 0.11764706, 1, 0.5084088, 0.3796003, 0.16519609, 1, 0.42352942, 0.42352942, 0, 0)
+offsets = PackedFloat32Array(0, 0.31549296, 0.84788734, 1)
+colors = PackedColorArray(0, 0.7490196, 0.11764706, 1, 0.5084088, 0.3796003, 0.16519609, 1, 0.50980395, 0.38039216, 0.16470589, 1, 0.42352942, 0.42352942, 0, 0)
 
 [node name="CPUParticles2D" type="CPUParticles2D" unique_id=207958463]
+material = SubResource("CanvasItemMaterial_vd03g")
 amount = 30
+texture = ExtResource("1_o7itl")
 lifetime = 0.7
 explosiveness = 1.0
 emission_shape = 1
@@ -17,7 +30,10 @@ spread = 82.25
 gravity = Vector2(0, 600)
 initial_velocity_min = 20.0
 initial_velocity_max = 300.0
-scale_amount_min = 4.0
-scale_amount_max = 10.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_65aqw")
 color_ramp = SubResource("Gradient_ih1nw")
+anim_speed_min = 1.0
+anim_speed_max = 1.5
 script = ExtResource("1_as866")

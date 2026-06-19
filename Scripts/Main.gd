@@ -199,7 +199,7 @@ func check_rested_state() -> void:
 	var elapsed = now - last
 
 	# Pull upgradeable values
-	game_data.rested_data.minutes_per_charge = 60
+	game_data.rested_data.minutes_per_charge = 20
 	game_data.rested_data.max_charges = 10
 
 	if (Utils.is_blessing_curse_toggled(true, "mod_rested-battle-4")):

@@ -6,7 +6,7 @@
 [ext_resource type="Curve" uid="uid://bdkmegreb07jj" path="res://Resources/xpCurve.tres" id="2_koqhg"]
 [ext_resource type="ButtonGroup" uid="uid://dwmdxhjybfguq" path="res://Resources/EquipmentSlot.tres" id="3_koqhg"]
 [ext_resource type="PackedScene" uid="uid://w1anjwd6ku5f" path="res://Scenes/OfflineRunesPanel.tscn" id="3_rrcx7"]
-[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="4_df05h"]
+[ext_resource type="PackedScene" uid="uid://l7ogby45st2d" path="res://Scenes/MyLabel.tscn" id="4_df05h"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="5_8um5k"]
 [ext_resource type="PackedScene" uid="uid://cpvxinojrf0q2" path="res://Scenes/PrestigePanel.tscn" id="5_7467j"]
 [ext_resource type="PackedScene" uid="uid://bclknj3c05tf" path="res://Scenes/InventoryButton.tscn" id="6_8um5k"]

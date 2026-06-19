@@ -1,14 +1,27 @@
 [gd_scene format=3 uid="uid://ckn7epxeifstp"]
 
 [ext_resource type="Script" uid="uid://cvb4v5jokrblk" path="res://Scripts/RuneParticlesController.gd" id="1_8waye"]
+[ext_resource type="Texture2D" uid="uid://cbxlovex22htd" path="res://Sprites/animations/particle_anim1.png" id="1_ndhdg"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6rvug"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_a3xsf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6299213, 0.6822811), -0.5043788, -0.5043788, 0, 0, Vector2(0.91076124, 0.450611), -2.2926285, -2.2926285, 0, 0, Vector2(0.9763781, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="Gradient" id="Gradient_pocb0"]
 offsets = PackedFloat32Array(0, 0.15409836, 0.2557377, 0.36979166, 0.5364583, 0.7395833, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0.7490196, 0, 1, 1, 1, 0.42745098, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="CPUParticles2D" type="CPUParticles2D" unique_id=1023885619]
+material = SubResource("CanvasItemMaterial_6rvug")
 amount = 35
-lifetime = 0.4
+texture = ExtResource("1_ndhdg")
+lifetime = 0.6
 explosiveness = 0.92
 randomness = 1.0
 emission_shape = 1
@@ -18,8 +31,10 @@ spread = 180.0
 gravity = Vector2(0, 0)
 initial_velocity_min = 250.0
 initial_velocity_max = 500.0
-scale_amount_min = 2.0
-scale_amount_max = 6.0
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_a3xsf")
 color = Color(1, 0.9254902, 1, 1)
 color_ramp = SubResource("Gradient_pocb0")
+anim_speed_min = 1.0
+anim_speed_max = 2.5
 script = ExtResource("1_8waye")
