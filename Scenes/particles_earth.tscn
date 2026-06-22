@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bjxile8kyk1xv"]
 
 [ext_resource type="Script" uid="uid://cvb4v5jokrblk" path="res://Scripts/RuneParticlesController.gd" id="1_as866"]
-[ext_resource type="Texture2D" uid="uid://cfb4d0rxa7epx" path="res://Sprites/animations/particle_anim2.png" id="1_o7itl"]
+[ext_resource type="Texture2D" uid="uid://dmulun8hs6wkl" path="res://Sprites/animations/particle_animation2.png" id="1_o7itl"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vd03g"]
 particles_animation = true
