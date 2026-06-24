@@ -36,8 +36,10 @@ var base_luck:int
 var current_luck:int
 var current_power:int
 var base_power:int
+var true_base_power:int
 var max_focus:int
 var current_focus:int
+var true_base_focus:int
 
 var enemies_killed:int
 var runes_used:int
@@ -123,7 +125,8 @@ func setup_stats() -> void:
 	base_luck = current_luck
 	current_power = Utils.get_stat_for_ui("power") + main.bonus_stats.power
 	base_power = current_power
-	
+	true_base_power = base_power # true_base_power to be used to calculate rune cost
+	true_base_focus = current_focus
 	# Apply Rested Buffs (50% bonus)
 	var buff: String = main.game_data.rested_data.active_buff
 	if (buff == "health"):
@@ -544,10 +547,12 @@ func select_available_rune() -> void:
 # Also leveraged in the Game_UI Script
 func get_modified_rune_cost(rune:RuneData) -> int:
 	var base_cost = rune.focus_cost
-	var diff = base_power - max_focus
+	var diff = true_base_power - true_base_focus
+	print("diff: ", true_base_power, " - ", true_base_focus ," = ", diff)
 	@warning_ignore("integer_division")
 	var adjustment = diff / 10  # floors automatically
 	var final_cost = base_cost + adjustment
+	print("final_cost ", final_cost)
 	return max(1, final_cost)
 
 func focus_check(pressed_rune:RuneData, pressed_btn:Button=null) -> bool:
