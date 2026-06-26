@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dr4nxsos6lrwq" path="res://Scripts/SummaryPanel.gd" id="1_10axu"]
 [ext_resource type="PackedScene" uid="uid://bgmuooukrioal" path="res://Scenes/LootLabelContainer.tscn" id="2_10axu"]
 [ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="2_w37fs"]
-[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_sws4i"]
+[ext_resource type="PackedScene" uid="uid://l7ogby45st2d" path="res://Scenes/MyLabel.tscn" id="3_sws4i"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="4_0kgc7"]
 [ext_resource type="Theme" uid="uid://6l1e7tacwmvs" path="res://Resources/Themes/SubpanelT2_theme_res.tres" id="7_0kgc7"]
 [ext_resource type="Texture2D" uid="uid://blol1i5pqn8oo" path="res://Sprites/RETRY_BUTTON.png" id="7_w37fs"]

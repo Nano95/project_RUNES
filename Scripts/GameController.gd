@@ -186,6 +186,7 @@ func apply_loot_if_allowed(result_msg:String) -> void:
 	full_loot_summary["gold"] += gained_gold
 
 	for loot in current_loot_summary.keys():
+		if (loot == "gold"): continue
 		var qty:int = current_loot_summary[loot]
 		if (!loot.contains("essence")):
 			main.game_data.add_loot_by_name(loot, qty)

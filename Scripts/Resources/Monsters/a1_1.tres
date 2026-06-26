@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://hvv0jjc5atvd"]
 
+[ext_resource type="Script" uid="uid://d2810l4s4ii6i" path="res://Scripts/Resources/LootEntryData.gd" id="1_icb84"]
 [ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_x66t0"]
 
 [resource]

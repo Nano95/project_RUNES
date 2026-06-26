@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_g82a6"]
 script = ExtResource("1_1gyao")
 item = ExtResource("2_pwh3c")
-drop_chance = 0.003
+drop_chance = 0.001
 metadata/_custom_type_script = "uid://d2810l4s4ii6i"
 
 [resource]
