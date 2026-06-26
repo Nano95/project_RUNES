@@ -2,18 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_nsvl1"]
 [ext_resource type="Script" uid="uid://d2810l4s4ii6i" path="res://Scripts/Resources/LootEntryData.gd" id="1_utkpw"]
-[ext_resource type="Resource" uid="uid://yguhgw3vv487" path="res://Scripts/Resources/Loot/IronOre.tres" id="2_mt6b4"]
 [ext_resource type="Resource" uid="uid://dd7jpxe4bhhb7" path="res://Scripts/Resources/Loot/RefinedIron.tres" id="3_jino5"]
-
-[sub_resource type="Resource" id="Resource_5abb1"]
-script = ExtResource("1_utkpw")
-item = ExtResource("2_mt6b4")
-metadata/_custom_type_script = "uid://d2810l4s4ii6i"
 
 [sub_resource type="Resource" id="Resource_v4w21"]
 script = ExtResource("1_utkpw")
 item = ExtResource("3_jino5")
-drop_chance = 0.005
 metadata/_custom_type_script = "uid://d2810l4s4ii6i"
 
 [resource]
@@ -30,6 +23,6 @@ min_essence_amount = 4
 max_essence_amount = 6
 anim_offset_y = -13
 anim_name = "a2_3"
-loot_table = Array[ExtResource("1_utkpw")]([SubResource("Resource_5abb1"), SubResource("Resource_v4w21")])
+loot_table = Array[ExtResource("1_utkpw")]([SubResource("Resource_v4w21")])
 resistances = Array[String](["arcane"])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"
