@@ -41,3 +41,14 @@ func add_loot_from_key(key: String, quantity: int) -> void:
 	var icon:Texture = info["icon"]
 
 	add_loot(loot_name, icon, quantity)
+
+
+func add_loot_by_loot(item:LootItem, quantity: int) -> void:
+	if !item:
+		return
+
+	var loot_name:String = item["name"]
+	var icon:Texture = item["icon"]
+
+	add_loot(loot_name, icon, quantity)
+	

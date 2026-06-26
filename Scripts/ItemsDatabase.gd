@@ -30,5 +30,20 @@ var loot_data = {
 		"name": "Ice Essence",
 		"short_name": "Ice ess",
 		"icon": preload("res://Sprites/ice_ESSENCE_ICON.png")
-	}
+	},
+	"Orc Tooth": {
+		"name": "Orc Tooth",
+		"short_name": "",
+		"icon": preload("res://Sprites/Loot/orc_tooth.png")
+	},
+	"Slime Glob": {
+		"name": "Slime Glob",
+		"short_name": "",
+		"icon": preload("res://Sprites/Loot/slime_glob.png"),
+	},
+	"Elemental Orb": {
+		"name": "Elemental Orb",
+		"short_name": "",
+		"icon": preload("res://Sprites/Loot/elemental_orb.png"),
+	},
 }

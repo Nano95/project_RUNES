@@ -1,6 +1,14 @@
 [gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://dfi8m6kvmofmq"]
 
 [ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_jovtv"]
+[ext_resource type="Script" uid="uid://d2810l4s4ii6i" path="res://Scripts/Resources/LootEntryData.gd" id="1_xhd35"]
+[ext_resource type="Resource" uid="uid://d1l8g1onwhkbh" path="res://Scripts/Resources/Loot/Spores.tres" id="2_m3xb2"]
+
+[sub_resource type="Resource" id="Resource_mr7px"]
+script = ExtResource("1_xhd35")
+item = ExtResource("2_m3xb2")
+drop_chance = 0.01
+metadata/_custom_type_script = "uid://d2810l4s4ii6i"
 
 [resource]
 script = ExtResource("1_jovtv")
@@ -15,6 +23,7 @@ min_essence_amount = 5
 max_essence_amount = 7
 anim_offset_y = -9
 anim_name = "a3_1"
+loot_table = Array[ExtResource("1_xhd35")]([SubResource("Resource_mr7px")])
 weaknesses = Array[String](["electric"])
 immunities = Array[String](["earth"])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

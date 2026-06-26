@@ -1,6 +1,14 @@
 [gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://babritoa8kudi"]
 
 [ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_ijlv8"]
+[ext_resource type="Script" uid="uid://d2810l4s4ii6i" path="res://Scripts/Resources/LootEntryData.gd" id="1_ku370"]
+[ext_resource type="Resource" uid="uid://dqdi3o0uliwly" path="res://Scripts/Resources/Loot/StormFeather.tres" id="2_rggfu"]
+
+[sub_resource type="Resource" id="Resource_s3g87"]
+script = ExtResource("1_ku370")
+item = ExtResource("2_rggfu")
+drop_chance = 0.008
+metadata/_custom_type_script = "uid://d2810l4s4ii6i"
 
 [resource]
 script = ExtResource("1_ijlv8")
@@ -15,6 +23,7 @@ min_essence_amount = 8
 max_essence_amount = 10
 anim_offset_y = -10
 anim_name = "a5_4"
+loot_table = Array[ExtResource("1_ku370")]([SubResource("Resource_s3g87")])
 weaknesses = Array[String](["ice"])
 resistances = Array[String](["arcane", "ice"])
 immunities = Array[String](["electric"])

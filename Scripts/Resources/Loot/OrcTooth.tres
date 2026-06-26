@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LootItem" format=3 uid="uid://ugvgxme0bygr"]
+
+[ext_resource type="Script" uid="uid://dlsfpn58otya" path="res://Scripts/Resources/LootItem.gd" id="1_er7qt"]
+[ext_resource type="Texture2D" uid="uid://bi85qi88bbba5" path="res://Sprites/Loot/orc_tooth.png" id="1_ldqrt"]
+
+[resource]
+script = ExtResource("1_er7qt")
+id = "001_orc_tooth"
+name = "Orc Tooth"
+description = "Dropped by Orc family "
+icon = ExtResource("1_ldqrt")
+metadata/_custom_type_script = "uid://dlsfpn58otya"

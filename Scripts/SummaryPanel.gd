@@ -39,6 +39,7 @@ func setup_labels() -> void:
 
 func setup_loot() -> void:
 	var all_loot = game_controller.full_loot_summary
+	
 	for loot in all_loot.keys():
 		if (all_loot[loot] == 0): continue # Dont show if something has 0 qty. (GOLD)
 		var data = ItemsDatabase.loot_data[loot]

@@ -1,6 +1,14 @@
 [gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://cbtcs4rs3jc4p"]
 
 [ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_ofs76"]
+[ext_resource type="Script" uid="uid://d2810l4s4ii6i" path="res://Scripts/Resources/LootEntryData.gd" id="1_xrh05"]
+[ext_resource type="Resource" uid="uid://ugvgxme0bygr" path="res://Scripts/Resources/Loot/OrcTooth.tres" id="2_puyax"]
+
+[sub_resource type="Resource" id="Resource_ckjqj"]
+script = ExtResource("1_xrh05")
+item = ExtResource("2_puyax")
+drop_chance = 0.018
+metadata/_custom_type_script = "uid://d2810l4s4ii6i"
 
 [resource]
 script = ExtResource("1_ofs76")
@@ -15,6 +23,7 @@ min_essence_amount = 7
 max_essence_amount = 9
 anim_offset_y = -12
 anim_name = "a4_4"
+loot_table = Array[ExtResource("1_xrh05")]([SubResource("Resource_ckjqj")])
 weaknesses = Array[String](["earth", "electric"])
 resistances = Array[String](["ice"])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

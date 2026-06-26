@@ -1,6 +1,14 @@
 [gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://c1ofndiffxia0"]
 
+[ext_resource type="Script" uid="uid://d2810l4s4ii6i" path="res://Scripts/Resources/LootEntryData.gd" id="1_0t0kk"]
 [ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_mk2uu"]
+[ext_resource type="Resource" uid="uid://d1l8g1onwhkbh" path="res://Scripts/Resources/Loot/Spores.tres" id="2_csriy"]
+
+[sub_resource type="Resource" id="Resource_3we8t"]
+script = ExtResource("1_0t0kk")
+item = ExtResource("2_csriy")
+drop_chance = 0.015
+metadata/_custom_type_script = "uid://d2810l4s4ii6i"
 
 [resource]
 script = ExtResource("1_mk2uu")
@@ -15,5 +23,6 @@ min_essence_amount = 4
 max_essence_amount = 5
 anim_offset_y = -11
 anim_name = "a2_2"
+loot_table = Array[ExtResource("1_0t0kk")]([SubResource("Resource_3we8t")])
 resistances = Array[String](["earth"])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

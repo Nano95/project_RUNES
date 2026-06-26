@@ -1,6 +1,14 @@
 [gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://c8bydn0fvrjys"]
 
+[ext_resource type="Script" uid="uid://d2810l4s4ii6i" path="res://Scripts/Resources/LootEntryData.gd" id="1_0bp61"]
 [ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_6ldyi"]
+[ext_resource type="Resource" uid="uid://bijqmaeapustr" path="res://Scripts/Resources/Loot/SlimeGlob.tres" id="2_ft1mc"]
+
+[sub_resource type="Resource" id="Resource_wyhnn"]
+script = ExtResource("1_0bp61")
+item = ExtResource("2_ft1mc")
+drop_chance = 0.018
+metadata/_custom_type_script = "uid://d2810l4s4ii6i"
 
 [resource]
 script = ExtResource("1_6ldyi")
@@ -15,5 +23,6 @@ min_essence_amount = 4
 max_essence_amount = 5
 anim_offset_y = -12
 anim_name = "a4_3"
+loot_table = Array[ExtResource("1_0bp61")]([SubResource("Resource_wyhnn")])
 immunities = Array[String](["ice"])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

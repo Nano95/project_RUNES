@@ -2,7 +2,9 @@ extends Resource
 class_name SaveData
 
 @export_category("General")
-@export var inventory: Array[EquipmentInstance] = []
+@export var loot_inventory:Dictionary = {
+	# "Orc Tooth": 10
+}
 @export var rune_inv: Dictionary = { # Start pack
 	"Arcane Cross": 100,
 	"Arcane Explosion": 80,
@@ -33,7 +35,9 @@ class_name SaveData
 }
 @export var equipped = {
 	"slot1": null,
-	"slot2": null
+	"slot2": null,
+	"slot3": null,
+	"slot4": null,
 }
 
 @export var selected_battle_runes = {
@@ -144,11 +148,22 @@ func reset_settings() -> void:
 	rune_particles = true
 	damaged_flash = true
 
-func add_item_to_inventory(item: EquipmentInstance) -> void:
-	inventory.append(item)
+func add_loot(loot_item: LootItem, qty:int):
+	if not loot_inventory.has(loot_item.name):
+		loot_inventory[loot_item.name] = 0
+	loot_inventory[loot_item.name] += qty
+func add_loot_by_name(loot_name: String, qty:int):
+	if not loot_inventory.has(loot_name):
+		loot_inventory[loot_name] = 0
+	loot_inventory[loot_name] += qty
 
-func remove_item_from_inventory(item: EquipmentInstance) -> void:
-	inventory.erase(item)
+func remove_loot_from_inventory(loot_item: LootItem, qty:int) -> int:
+	loot_inventory[loot_item.name] -= qty
+	if (loot_inventory[loot_item.name] <= 0):
+		loot_inventory.erase(loot_item.name)
+		return 0
+	
+	return loot_inventory[loot_item.name]
 
 func equip(item: EquipmentInstance, slot):
 	equipped[slot] = item

@@ -91,6 +91,7 @@ func take_damage(dmg:int=1, dmg_color_type:String="arcane", crit_hit:bool=false)
 		is_pending_death = true
 		emit_signal("died")
 		spawn_xp_label()
+
 		return true
 	return false
 
@@ -285,3 +286,16 @@ func animate_hit() -> void:
 	var tween2 := create_tween()
 	tween2.tween_property(%AnimatedSprite2D.material, "shader_parameter/active", true, 0.05)
 	tween2.tween_property(%AnimatedSprite2D.material, "shader_parameter/active", false, 0.1)
+
+func roll_loot(monster: MonsterBase) -> Array:
+	var drops: Array = []
+
+	for entry: LootEntryData in monster.loot_table:
+		if randf() <= entry.drop_chance:
+			var amount = randi_range(entry.min_amount, entry.max_amount)
+			drops.append({
+				"item": entry.item,
+				"amount": amount
+			})
+
+	return drops

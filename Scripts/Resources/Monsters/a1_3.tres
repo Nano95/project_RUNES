@@ -1,6 +1,14 @@
 [gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://din5hfmmwq4bo"]
 
+[ext_resource type="Script" uid="uid://d2810l4s4ii6i" path="res://Scripts/Resources/LootEntryData.gd" id="1_cd53b"]
 [ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_yq2rl"]
+[ext_resource type="Resource" uid="uid://q3w2r8w6o27f" path="res://Scripts/Resources/Loot/WispDust.tres" id="2_iq0jc"]
+
+[sub_resource type="Resource" id="Resource_o1w6s"]
+script = ExtResource("1_cd53b")
+item = ExtResource("2_iq0jc")
+drop_chance = 0.01
+metadata/_custom_type_script = "uid://d2810l4s4ii6i"
 
 [resource]
 script = ExtResource("1_yq2rl")
@@ -15,6 +23,7 @@ min_essence_amount = 2
 max_essence_amount = 5
 anim_offset_y = -10
 anim_name = "a1_3"
+loot_table = Array[ExtResource("1_cd53b")]([SubResource("Resource_o1w6s")])
 weaknesses = Array[String](["fire", "electric"])
 resistances = Array[String](["earth"])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

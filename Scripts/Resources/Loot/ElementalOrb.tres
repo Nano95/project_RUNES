@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LootItem" format=3 uid="uid://cx6nja4rk2she"]
+
+[ext_resource type="Texture2D" uid="uid://dka4f8j6ft7hu" path="res://Sprites/Loot/elemental_orb.png" id="1_5stab"]
+[ext_resource type="Script" uid="uid://dlsfpn58otya" path="res://Scripts/Resources/LootItem.gd" id="1_ja6hc"]
+
+[resource]
+script = ExtResource("1_ja6hc")
+id = "005_elemental_orb"
+name = "Elemental Orb"
+description = "Dropped by elemental beings"
+icon = ExtResource("1_5stab")
+metadata/_custom_type_script = "uid://dlsfpn58otya"

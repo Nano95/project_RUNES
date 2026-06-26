@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LootItem" format=3 uid="uid://dd7jpxe4bhhb7"]
+
+[ext_resource type="Script" uid="uid://dlsfpn58otya" path="res://Scripts/Resources/LootItem.gd" id="1_supy0"]
+
+[resource]
+script = ExtResource("1_supy0")
+id = "009_refined_iron"
+name = "Refined Iron"
+description = "Dropped By hoarders and crafted by talented craftsmen"
+metadata/_custom_type_script = "uid://dlsfpn58otya"

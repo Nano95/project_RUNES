@@ -1,6 +1,14 @@
 [gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://c6w4coqapxsuo"]
 
 [ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_b3dj1"]
+[ext_resource type="Script" uid="uid://d2810l4s4ii6i" path="res://Scripts/Resources/LootEntryData.gd" id="1_cidgy"]
+[ext_resource type="Resource" uid="uid://cr22gg2nd6woi" path="res://Scripts/Resources/Loot/BeastFang.tres" id="2_yea6b"]
+
+[sub_resource type="Resource" id="Resource_q4426"]
+script = ExtResource("1_cidgy")
+item = ExtResource("2_yea6b")
+drop_chance = 0.018
+metadata/_custom_type_script = "uid://d2810l4s4ii6i"
 
 [resource]
 script = ExtResource("1_b3dj1")
@@ -15,6 +23,7 @@ min_essence_amount = 6
 max_essence_amount = 9
 anim_offset_y = -10
 anim_name = "a5_3"
+loot_table = Array[ExtResource("1_cidgy")]([SubResource("Resource_q4426")])
 weaknesses = Array[String](["earth"])
 resistances = Array[String](["arcane"])
 immunities = Array[String](["electric"])

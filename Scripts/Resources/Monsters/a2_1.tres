@@ -1,9 +1,17 @@
 [gd_resource type="Resource" script_class="MonsterBase" format=3 uid="uid://qhoj2kh4oyun"]
 
-[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="1_gw14g"]
+[ext_resource type="Script" uid="uid://d2810l4s4ii6i" path="res://Scripts/Resources/LootEntryData.gd" id="1_8ichp"]
+[ext_resource type="Resource" uid="uid://ugvgxme0bygr" path="res://Scripts/Resources/Loot/OrcTooth.tres" id="2_dwjxa"]
+[ext_resource type="Script" uid="uid://dljne2akmlj0u" path="res://Scripts/Resources/MonsterBase.gd" id="3_4wm30"]
+
+[sub_resource type="Resource" id="Resource_asfhs"]
+script = ExtResource("1_8ichp")
+item = ExtResource("2_dwjxa")
+drop_chance = 0.015
+metadata/_custom_type_script = "uid://d2810l4s4ii6i"
 
 [resource]
-script = ExtResource("1_gw14g")
+script = ExtResource("3_4wm30")
 name = "Cave Orcling"
 max_hp = 26
 power = 7
@@ -15,4 +23,5 @@ min_essence_amount = 3
 max_essence_amount = 5
 anim_offset_y = -11
 anim_name = "a2_1"
+loot_table = Array[ExtResource("1_8ichp")]([SubResource("Resource_asfhs")])
 metadata/_custom_type_script = "uid://dljne2akmlj0u"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LootItem" format=3 uid="uid://b42kngb3jfyqx"]
+
+[ext_resource type="Script" uid="uid://dlsfpn58otya" path="res://Scripts/Resources/LootItem.gd" id="1_byihe"]
+
+[resource]
+script = ExtResource("1_byihe")
+id = "011_widow_silk"
+name = "Widow Silk"
+description = "Dropped by Giant Spiders"
+metadata/_custom_type_script = "uid://dlsfpn58otya"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LootItem" format=3 uid="uid://q3w2r8w6o27f"]
+
+[ext_resource type="Script" uid="uid://dlsfpn58otya" path="res://Scripts/Resources/LootItem.gd" id="1_ay1li"]
+
+[resource]
+script = ExtResource("1_ay1li")
+id = "003_wisp_dust"
+name = "Wisp Dust"
+description = "Dropped by whimsy things"
+metadata/_custom_type_script = "uid://dlsfpn58otya"

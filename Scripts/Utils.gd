@@ -140,7 +140,6 @@ func roll_mod_amount(stat: String, level: int, rarity: String) -> float:
 
 	return (level * 0.5 + randi_range(5, 15)) * rarity_mult * stat_mult
 
-
 func calculate_reward(base_amount: float, reward_type: String) -> int:
 	var bonus := 0.0
 

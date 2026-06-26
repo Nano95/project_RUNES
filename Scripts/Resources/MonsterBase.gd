@@ -29,8 +29,7 @@ earth beats Arcane (corruption beats purity)
 @export var anim_name: String
 @export var rarity: int = 1  # 1=common, 2=elite, 3=boss
 
-@export var equipment_chance: float = 0.02
-@export var equipment_pool: Array[String] = []
+@export var loot_table: Array[LootEntryData] = []
 
 @export var weaknesses: Array[String] = [""]
 @export var resistances: Array[String] = [""]

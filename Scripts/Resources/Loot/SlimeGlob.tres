@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LootItem" format=3 uid="uid://bijqmaeapustr"]
+
+[ext_resource type="Script" uid="uid://dlsfpn58otya" path="res://Scripts/Resources/LootItem.gd" id="1_djkrt"]
+[ext_resource type="Texture2D" uid="uid://dji6f85ar8v4v" path="res://Sprites/Loot/slime_glob.png" id="1_kavou"]
+
+[resource]
+script = ExtResource("1_djkrt")
+id = "002_Slime_Glob"
+name = "Slime Glob"
+description = "Dropped By Slimy things"
+icon = ExtResource("1_kavou")
+metadata/_custom_type_script = "uid://dlsfpn58otya"

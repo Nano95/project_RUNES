@@ -131,15 +131,12 @@ func setup_stats() -> void:
 	var buff: String = main.game_data.rested_data.active_buff
 	if (buff == "health"):
 		max_hp = int(max_hp * 1.5)
-		print("HEALTH RESTED BUFF: ", max_hp)
 		current_hp = max_hp
 	elif (buff == "focus"):
 		max_focus = int(max_focus * 1.5)
-		print("FOCUS RESTED BUFF: ", max_focus)
 		current_focus = max_focus
 	elif (buff == "power"):
 		current_power = int(current_power * 1.5)
-		print("POWER RESTED BUFF: ", current_power)
 		base_power = current_power
 	
 	loot_curse_active = main.game_data.is_curse_active("death_toll")
@@ -188,18 +185,21 @@ func apply_loot_if_allowed(result_msg:String) -> void:
 		full_loot_summary["gold"] = 0
 	full_loot_summary["gold"] += gained_gold
 
-	for essence_type in current_loot_summary.keys():
-		#main.game_data.total_essences[essence_type] += main.game_data.current_essences[essence_type]
-		if (!essence_type.contains("essence")): continue
-		var qty:int = current_loot_summary[essence_type]
-		var ess_type:String = essence_type.split(" ")[0] # "electric essence" -> "electric"
-		main.game_data.current_essences[ess_type] += qty
-		main.game_data.total_essences[ess_type] += qty
+	for loot in current_loot_summary.keys():
+		var qty:int = current_loot_summary[loot]
+		if (!loot.contains("essence")):
+			main.game_data.add_loot_by_name(loot, qty)
+		else:
+			var ess_type:String = loot.split(" ")[0] # "electric essence" -> "electric"
+			main.game_data.current_essences[ess_type] += qty
+			main.game_data.total_essences[ess_type] += qty
 		
 		# Now update the full summary
-		if (!full_loot_summary.has(essence_type)):
-			full_loot_summary[essence_type] = 0
-		full_loot_summary[essence_type] += qty
+		if (!full_loot_summary.has(loot)):
+			full_loot_summary[loot] = 0
+		full_loot_summary[loot] += qty
+
+	
 	# Reset current run loot
 	current_loot_summary = { "gold" : 0 }
 
@@ -270,13 +270,12 @@ func monster_died(monster):
 	
 	# Apply Rested EXP buff (+50%)
 	if (main.game_data.rested_data.active_buff == "xp"):
-		print("RESTED XP BUFF!!")
 		final_exp = int(ceil(final_exp * 1.5))
 	emit_signal("gained_exp", final_exp)
 	round_gained_exp += final_exp
 	
 	#game_ui.update_monster_damage(calculate_group_power()) # I dont think we want to update this as game ends
-	roll_loot(monster.base)
+	roll_loot(monster, monster.base)
 	
 	var game_over = check_if_all_monsters_dead(false)
 	if (game_over): return # would adding the win game situation here cause it to happen too many times if multiple monsters die from poison at the same time?
@@ -479,39 +478,40 @@ func subtract_rested_battle() -> void:
 			rested.active_buff = ""
 			rested.battles_left = 0
 
-
-func roll_loot(monster: MonsterBase) -> void:
+func roll_loot(monster_inst:MonsterInstance, monster_base: MonsterBase) -> void:
 	# --- ESSENCE (always drops) ---
-	var min_essence_mod = Utils.calculate_reward(monster.min_essence_amount, "essences")
-	var max_essence_mod = Utils.calculate_reward(monster.max_essence_amount, "essences")
+	var min_essence_mod = Utils.calculate_reward(monster_base.min_essence_amount, "essences")
+	var max_essence_mod = Utils.calculate_reward(monster_base.max_essence_amount, "essences")
 	var essence_amount := randi_range(min_essence_mod, max_essence_mod)
 	
 	# Now add loot to notifications and summary loot.
-	var essence_key:String = str(monster.essence_type + " essence")
+	var essence_key:String = str(monster_base.essence_type + " essence")
 	game_ui.loot_manager.add_loot_from_key(essence_key, essence_amount)
 	if !(current_loot_summary.has(essence_key)):
 		current_loot_summary[essence_key] = 0
 	current_loot_summary[essence_key] += essence_amount
 	### --- GOLD (chance-based) ---
-	var final_gold_chance = monster.gold_chance + (current_luck * 0.01)
+	var final_gold_chance = monster_base.gold_chance + (current_luck * 0.01)
 	if (randf() <= (final_gold_chance)):
-		var min_gold_mod = Utils.calculate_reward(monster.min_gold_reward, "gold")
-		var max_gold_mod = Utils.calculate_reward(monster.max_gold_reward, "gold")
+		var min_gold_mod = Utils.calculate_reward(monster_base.min_gold_reward, "gold")
+		var max_gold_mod = Utils.calculate_reward(monster_base.max_gold_reward, "gold")
 		var gold_amount := randi_range(min_gold_mod, max_gold_mod)
 
-		
 		game_ui.loot_manager.add_loot_from_key("gold", gold_amount)
 		if !(current_loot_summary.has("gold")):
 			current_loot_summary["gold"] = 0
 		current_loot_summary["gold"] += gold_amount
 		
-	### --- EQUIPMENT (rare) ---
-	#if randf() <= monster.equipment_chance and monster.equipment_pool.size() > 0:
-		#var item_id := monster.equipment_pool.pick_random()
-		#var item := ItemDatabase.generate_item(item_id)
-		#main.game_data.add_item_to_inventory(item)
-		#loot_panel.add_loot_entry("Found: " + item.name, item_color, true)
-
+	### LOOT
+	var loot = monster_inst.roll_loot(monster_base)
+	for drop in loot:
+		var item: LootItem = drop["item"]
+		var amount: int = drop["amount"]
+		game_ui.loot_manager.add_loot_by_loot(item, amount)
+		if !(current_loot_summary.has(item.name)):
+			current_loot_summary[item.name] = 0
+		current_loot_summary[item.name] += amount
+		print("Dropped: ", item.name, " x", amount)
 
 ######################
 ########### RUNE STUFF
@@ -548,11 +548,9 @@ func select_available_rune() -> void:
 func get_modified_rune_cost(rune:RuneData) -> int:
 	var base_cost = rune.focus_cost
 	var diff = true_base_power - true_base_focus
-	print("diff: ", true_base_power, " - ", true_base_focus ," = ", diff)
 	@warning_ignore("integer_division")
 	var adjustment = diff / 10  # floors automatically
 	var final_cost = base_cost + adjustment
-	print("final_cost ", final_cost)
 	return max(1, final_cost)
 
 func focus_check(pressed_rune:RuneData, pressed_btn:Button=null) -> bool:

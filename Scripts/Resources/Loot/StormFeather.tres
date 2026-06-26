@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LootItem" format=3 uid="uid://dqdi3o0uliwly"]
+
+[ext_resource type="Script" uid="uid://dlsfpn58otya" path="res://Scripts/Resources/LootItem.gd" id="1_3dlbk"]
+
+[resource]
+script = ExtResource("1_3dlbk")
+id = "015_storm_feather"
+name = "Storm Feather"
+description = "Dropped by Thunder Birds"
+metadata/_custom_type_script = "uid://dlsfpn58otya"
