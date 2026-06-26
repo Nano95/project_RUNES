@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="LootItem" format=3 uid="uid://yguhgw3vv487"]
 
+[ext_resource type="Texture2D" uid="uid://dkwoo1r7nxfmm" path="res://Sprites/Loot/refined_iron.png" id="1_i76bx"]
 [ext_resource type="Script" uid="uid://dlsfpn58otya" path="res://Scripts/Resources/LootItem.gd" id="1_ikmi4"]
 
 [resource]
@@ -7,4 +8,5 @@ script = ExtResource("1_ikmi4")
 id = "006_iron_ore"
 name = "Iron Ore"
 description = "Dropped by hoarders"
+icon = ExtResource("1_i76bx")
 metadata/_custom_type_script = "uid://dlsfpn58otya"

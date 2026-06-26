@@ -1,10 +1,12 @@
 [gd_resource type="Resource" script_class="LootItem" format=3 uid="uid://q3w2r8w6o27f"]
 
 [ext_resource type="Script" uid="uid://dlsfpn58otya" path="res://Scripts/Resources/LootItem.gd" id="1_ay1li"]
+[ext_resource type="Texture2D" uid="uid://800sj1ni1vqb" path="res://Sprites/Loot/wisp_dust.png" id="1_p0vcr"]
 
 [resource]
 script = ExtResource("1_ay1li")
 id = "003_wisp_dust"
 name = "Wisp Dust"
 description = "Dropped by whimsy things"
+icon = ExtResource("1_p0vcr")
 metadata/_custom_type_script = "uid://dlsfpn58otya"

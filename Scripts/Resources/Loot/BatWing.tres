@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="LootItem" format=3 uid="uid://bh0hj2vtp11te"]
 
+[ext_resource type="Texture2D" uid="uid://bekow2mluslu4" path="res://Sprites/Loot/bat_wing.png" id="1_huh4r"]
 [ext_resource type="Script" uid="uid://dlsfpn58otya" path="res://Scripts/Resources/LootItem.gd" id="1_m145r"]
 
 [resource]
@@ -7,4 +8,5 @@ script = ExtResource("1_m145r")
 id = "014_bat_wing"
 name = "Bat Wing"
 description = "Dropped by flying creatures"
+icon = ExtResource("1_huh4r")
 metadata/_custom_type_script = "uid://dlsfpn58otya"

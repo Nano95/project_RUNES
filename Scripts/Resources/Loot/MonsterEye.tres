@@ -1,10 +1,12 @@
 [gd_resource type="Resource" script_class="LootItem" format=3 uid="uid://d6do8ru8tktj"]
 
 [ext_resource type="Script" uid="uid://dlsfpn58otya" path="res://Scripts/Resources/LootItem.gd" id="1_6agb1"]
+[ext_resource type="Texture2D" uid="uid://bpjpiwt30etcu" path="res://Sprites/Loot/monster_eye.png" id="1_piri0"]
 
 [resource]
 script = ExtResource("1_6agb1")
 id = "013_monster_eye"
 name = "Monster Eye"
 description = "Dropped by monsters"
+icon = ExtResource("1_piri0")
 metadata/_custom_type_script = "uid://dlsfpn58otya"

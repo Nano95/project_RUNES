@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="LootItem" format=3 uid="uid://d1l8g1onwhkbh"]
 
+[ext_resource type="Texture2D" uid="uid://pq2twkhtovk" path="res://Sprites/Loot/spores.png" id="1_j8qip"]
 [ext_resource type="Script" uid="uid://dlsfpn58otya" path="res://Scripts/Resources/LootItem.gd" id="1_o1vv2"]
 
 [resource]
@@ -7,4 +8,5 @@ script = ExtResource("1_o1vv2")
 id = "004_spores"
 name = "Spores"
 description = "Dropped by Miscellium derived beings"
+icon = ExtResource("1_j8qip")
 metadata/_custom_type_script = "uid://dlsfpn58otya"

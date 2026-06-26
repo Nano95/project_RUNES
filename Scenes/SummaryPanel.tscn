@@ -138,7 +138,7 @@ offset_top = 619.0
 offset_right = 1350.9999
 offset_bottom = 756.0
 scale = Vector2(0.4, 0.4)
-text = "Loot"
+text = "Loot Summary"
 horizontal_alignment = 1
 
 [node name="Panel" type="Panel" parent="ColorRect/Panel" unique_id=215462470]
@@ -146,15 +146,15 @@ layout_mode = 0
 offset_left = 86.0
 offset_top = 675.0
 offset_right = 593.0
-offset_bottom = 944.0
+offset_bottom = 963.0
 theme = ExtResource("7_0kgc7")
 
 [node name="LootContainer" type="VBoxContainer" parent="ColorRect/Panel/Panel" unique_id=1411579972]
 layout_mode = 0
 offset_left = 7.9999967
-offset_top = 11.999981
+offset_top = 8.999999
 offset_right = 551.3334
-offset_bottom = 288.66666
+offset_bottom = 305.66663
 scale = Vector2(0.9, 0.9)
 theme_override_constants/separation = 0
 
