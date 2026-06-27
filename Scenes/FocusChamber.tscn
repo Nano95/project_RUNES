@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cmjk58xlrisyn" path="res://Scripts/FocusChamber.gd" id="1_dy3kc"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="2_am8t8"]
+[ext_resource type="Texture2D" uid="uid://cdgpbw5ju3g7e" path="res://Sprites/UI/ProgressBar_Outline_Theme.png" id="3_x40oh"]
+[ext_resource type="Texture2D" uid="uid://bn721tr8i7xny" path="res://Sprites/UI/ProgressBar_Progress_Theme.png" id="4_ll06d"]
 
-[node name="FocusChamber" type="Control" unique_id=529604282 node_paths=PackedStringArray("number_pad")]
+[node name="FocusChamber" type="Control" unique_id=529604282 node_paths=PackedStringArray("number_pad", "code_label", "player_label", "timer_progress_bar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +14,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dy3kc")
 number_pad = NodePath("NumPad")
+code_label = NodePath("TopArea/UI/CodeText")
+player_label = NodePath("TopArea/UI/PlayerInput")
+timer_progress_bar = NodePath("TopArea/UI/TextureProgressBar")
 
 [node name="TopArea" type="Control" parent="." unique_id=1051695209]
 layout_mode = 1
@@ -83,6 +88,19 @@ theme_override_font_sizes/font_size = 50
 text = "<Player Text>"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="TopArea/UI" unique_id=1060750290]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 277.0
+offset_right = 690.0
+offset_bottom = 329.0
+max_value = 1000.0
+value = 500.0
+texture_under = ExtResource("3_x40oh")
+texture_progress = ExtResource("4_ll06d")
+texture_progress_offset = Vector2(12, 0)
+tint_progress = Color(0.6864613, 0.83203125, 0.62727356, 1)
 
 [node name="NumPad" type="Control" parent="." unique_id=2010050791]
 layout_mode = 1
