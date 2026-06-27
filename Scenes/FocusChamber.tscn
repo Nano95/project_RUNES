@@ -1,0 +1,327 @@
+[gd_scene format=3 uid="uid://c6k4vynaul5dr"]
+
+[ext_resource type="Script" uid="uid://cmjk58xlrisyn" path="res://Scripts/FocusChamber.gd" id="1_dy3kc"]
+[ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="2_am8t8"]
+
+[node name="FocusChamber" type="Control" unique_id=529604282 node_paths=PackedStringArray("number_pad")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dy3kc")
+number_pad = NodePath("NumPad")
+
+[node name="TopArea" type="Control" parent="." unique_id=1051695209]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -361.0
+offset_top = -628.0
+offset_right = 361.0
+offset_bottom = -203.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI" type="Control" parent="TopArea" unique_id=1839700705]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -343.0
+offset_top = -317.0
+offset_right = 344.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="CodeText" type="Label" parent="TopArea/UI" unique_id=1089946692]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -429.6875
+offset_top = -114.5
+offset_right = 429.6875
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("2_am8t8")
+theme_override_font_sizes/font_size = 90
+text = "<Code text>"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerInput" type="Label" parent="TopArea/UI" unique_id=1678228265]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -429.6875
+offset_top = 26.5
+offset_right = 429.6875
+offset_bottom = 130.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("2_am8t8")
+theme_override_font_sizes/font_size = 50
+text = "<Player Text>"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NumPad" type="Control" parent="." unique_id=2010050791]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -207.0
+offset_right = 362.0
+offset_bottom = 635.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Num1" type="Button" parent="NumPad" unique_id=1454972913]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 15.0
+offset_top = -395.0
+offset_right = 235.0
+offset_bottom = -215.0
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_am8t8")
+theme_override_font_sizes/font_size = 60
+text = "1"
+
+[node name="Num2" type="Button" parent="NumPad" unique_id=527750904]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -394.0
+offset_right = 110.0
+offset_bottom = -214.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_am8t8")
+theme_override_font_sizes/font_size = 60
+text = "2"
+
+[node name="Num3" type="Button" parent="NumPad" unique_id=936927407]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -235.0
+offset_top = -394.0
+offset_right = -15.0
+offset_bottom = -214.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_am8t8")
+theme_override_font_sizes/font_size = 60
+text = "3"
+
+[node name="Num4" type="Button" parent="NumPad" unique_id=1372394008]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 15.0
+offset_top = -194.0
+offset_right = 235.0
+offset_bottom = -14.0
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_am8t8")
+theme_override_font_sizes/font_size = 60
+text = "4"
+
+[node name="Num5" type="Button" parent="NumPad" unique_id=355222687]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -193.0
+offset_right = 110.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_am8t8")
+theme_override_font_sizes/font_size = 60
+text = "5"
+
+[node name="Num6" type="Button" parent="NumPad" unique_id=460019291]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -235.0
+offset_top = -193.0
+offset_right = -15.0
+offset_bottom = -13.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_am8t8")
+theme_override_font_sizes/font_size = 60
+text = "6"
+
+[node name="Num7" type="Button" parent="NumPad" unique_id=1883115723]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 15.0
+offset_top = 7.0
+offset_right = 235.0
+offset_bottom = 187.0
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_am8t8")
+theme_override_font_sizes/font_size = 60
+text = "7"
+
+[node name="Num8" type="Button" parent="NumPad" unique_id=705527368]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = 8.0
+offset_right = 110.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_am8t8")
+theme_override_font_sizes/font_size = 60
+text = "8"
+
+[node name="Num9" type="Button" parent="NumPad" unique_id=1864367229]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -235.0
+offset_top = 8.0
+offset_right = -15.0
+offset_bottom = 188.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_am8t8")
+theme_override_font_sizes/font_size = 60
+text = "9"
+
+[node name="Num0" type="Button" parent="NumPad" unique_id=204263931]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = 208.0
+offset_right = 110.0
+offset_bottom = 388.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_am8t8")
+theme_override_font_sizes/font_size = 60
+text = "0"
+
+[node name="BtnClear" type="Button" parent="NumPad" unique_id=1451094446]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 15.0
+offset_top = 207.0
+offset_right = 235.0
+offset_bottom = 387.0
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 50
+text = "Clear"
+
+[node name="BtnBack" type="Button" parent="NumPad" unique_id=543670315]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -235.0
+offset_top = 208.0
+offset_right = -15.0
+offset_bottom = 388.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 50
+text = "<"
+
+[node name="Others" type="Control" parent="." unique_id=2047561090]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = -20.0
+grow_horizontal = 2
+
+[node name="BtnBack2" type="Button" parent="Others" unique_id=999980831]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -322.0
+offset_top = 18.0
+offset_right = -142.0
+offset_bottom = 102.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 30
+text = "End"
