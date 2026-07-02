@@ -89,6 +89,14 @@ class_name SaveData
 @export var blessing_coins:int = 0
 @export var prestige_level:int = 0
 @export var prestige_unlocked:bool = false
+
+@export_category("Focus Chamber")
+@export var focus_chamber_trial_highscore:int=0
+@export var focus_chamber_practice_easy_highscore:int=0
+@export var focus_chamber_practice_med_highscore:int=0
+@export var focus_chamber_practice_hard_highscore:int=0
+@export var focus_chamber_time_available:int=0
+
 @export_category("Stats")
 @export var highest_level_reached:int = 0
 @export var total_blessing_coins_earned:int = 0

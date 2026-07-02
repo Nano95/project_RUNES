@@ -76,12 +76,12 @@ func spawn_game() -> void:
 	var colors = MonsterDatabase.monster_colors[battle_data["family"]]
 	set_background_colors(colors["col1"], colors["col2"])
 
-func spawn_focus_chamber() -> void:
+func spawn_focus_chamber(is_practice:bool, mode:String) -> void:
 	delete_all_top_ui_children()
 	if (is_instance_valid(active_menu_ref)):
 		active_menu_ref.queue_free()
 	active_menu_ref = focus_chamber.instantiate() as FocusChamber
-	active_menu_ref.setup(self)
+	active_menu_ref.setup(self, is_practice, mode)
 	spawn_to_top_ui_layer(active_menu_ref)
 
 func spawn_to_top_ui_layer(node) -> void:

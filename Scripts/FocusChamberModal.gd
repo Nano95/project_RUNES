@@ -27,10 +27,10 @@ func connect_buttons() -> void:
 	trialBtn.pressed.connect(display_trial_view)
 	backBtn1.pressed.connect(display_main_view)
 	backBtn2.pressed.connect(display_main_view)
-	easyBtn.pressed.connect(spawn_focus_chamber)
-	medBtn.pressed.connect(spawn_focus_chamber)
-	hardBtn.pressed.connect(spawn_focus_chamber)
-	goToTrialBtn.pressed.connect(spawn_focus_chamber)
+	easyBtn.pressed.connect(spawn_focus_chamber.bind(true, "E"))
+	medBtn.pressed.connect(spawn_focus_chamber.bind(true, "M"))
+	hardBtn.pressed.connect(spawn_focus_chamber.bind(true, "H"))
+	goToTrialBtn.pressed.connect(spawn_focus_chamber.bind(false))
 
 func display_practice_view(isVisible:bool=true) -> void:
 	PracticeView.visible = isVisible
@@ -47,5 +47,5 @@ func display_main_view(isVisible:bool=true) -> void:
 	PracticeView.visible = !isVisible
 	trialView.visible = !isVisible
 
-func spawn_focus_chamber() -> void:
-	main.spawn_focus_chamber()
+func spawn_focus_chamber(is_practice:bool=false, mode:String="") -> void:
+	main.spawn_focus_chamber(is_practice, mode)

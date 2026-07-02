@@ -1,0 +1,157 @@
+[gd_scene format=3 uid="uid://b8uu4nm6bh3wy"]
+
+[ext_resource type="Script" uid="uid://bgbnythgbvnq4" path="res://Scripts/FocusChamberSummary.gd" id="1_42cd5"]
+[ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="2_ku0n2"]
+[ext_resource type="Theme" uid="uid://6l1e7tacwmvs" path="res://Resources/Themes/SubpanelT2_theme_res.tres" id="3_7o6th"]
+[ext_resource type="PackedScene" uid="uid://l7ogby45st2d" path="res://Scenes/MyLabel.tscn" id="4_8gtin"]
+[ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="5_pfful"]
+[ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="6_m2ueq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_42cd5"]
+resource_local_to_scene = true
+shader = ExtResource("5_pfful")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ku0n2"]
+resource_local_to_scene = true
+shader = ExtResource("5_pfful")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7o6th"]
+resource_local_to_scene = true
+shader = ExtResource("5_pfful")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="FocusChamberModal" type="Control" unique_id=674759347 node_paths=PackedStringArray("quote_label", "score_label", "highscore_label", "back_button")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -520.0
+offset_bottom = -520.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_42cd5")
+quote_label = NodePath("Panel/Main/quote")
+score_label = NodePath("Panel/Main/score")
+highscore_label = NodePath("Panel/Main/HighscoreTxt")
+back_button = NodePath("Panel/Main/FinishButton")
+
+[node name="Panel" type="Panel" parent="." unique_id=199448428]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -339.5
+offset_top = 178.0
+offset_right = 339.5
+offset_bottom = 891.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = ExtResource("2_ku0n2")
+
+[node name="Title" type="Panel" parent="Panel" unique_id=894986056]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 90.0
+grow_horizontal = 2
+theme = ExtResource("3_7o6th")
+
+[node name="Title" parent="Panel/Title" unique_id=1696817232 instance=ExtResource("4_8gtin")]
+material = SubResource("ShaderMaterial_42cd5")
+layout_mode = 0
+offset_left = 1.0
+offset_top = -3.0
+offset_right = 1254.7037
+offset_bottom = 134.0
+scale = Vector2(0.54, 0.54)
+text = "Summary"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Main" type="Control" parent="Panel" unique_id=173471995]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="quote" parent="Panel/Main" unique_id=526622464 instance=ExtResource("4_8gtin")]
+material = SubResource("ShaderMaterial_ku0n2")
+layout_mode = 0
+offset_left = 16.0
+offset_top = 103.0
+offset_right = 2176.0
+offset_bottom = 453.0
+text = "Meditation is food for the brain."
+horizontal_alignment = 1
+
+[node name="score" parent="Panel/Main" unique_id=1879149634 instance=ExtResource("4_8gtin")]
+material = SubResource("ShaderMaterial_7o6th")
+layout_mode = 0
+offset_left = 16.0
+offset_top = 193.0
+offset_right = 2176.0
+offset_bottom = 543.0
+text = "Score: 10 | Best: 13"
+horizontal_alignment = 1
+
+[node name="HighscoreTxt" type="RichTextLabel" parent="Panel/Main" unique_id=830751739]
+visible = false
+layout_mode = 0
+offset_left = 88.0
+offset_top = 195.0
+offset_right = 1778.0
+offset_bottom = 401.66675
+scale = Vector2(0.3, 0.3)
+theme_override_constants/outline_size = 35
+theme_override_fonts/normal_font = ExtResource("6_m2ueq")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[center][wave amp=50 freq=6][color=#ff0000]B[/color][color=#ff7f00]E[/color][color=#ffff00]S[/color][color=#00ff00]T[/color][color=#0000ff] [/color][color=#4b0082]S[/color][color=#9400d3]C[/color][color=#ff00ff]O[/color][color=#ff1493]R[/color][color=#ff4500]E[/color]
+[/wave][/center]"
+
+[node name="Panel" type="Panel" parent="Panel/Main" unique_id=1493460548]
+layout_mode = 1
+offset_left = 86.0
+offset_top = 285.0
+offset_right = 593.0
+offset_bottom = 573.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = ExtResource("3_7o6th")
+
+[node name="LootContainer" type="VBoxContainer" parent="Panel/Main/Panel" unique_id=205831053]
+layout_mode = 0
+offset_left = 7.9999967
+offset_top = 8.999999
+offset_right = 551.3334
+offset_bottom = 305.66663
+scale = Vector2(0.9, 0.9)
+theme_override_constants/separation = 0
+
+[node name="FinishButton" type="Button" parent="Panel/Main" unique_id=1392681089]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 60.5
+offset_top = 532.00006
+offset_right = 590.4999
+offset_bottom = 741.99994
+grow_horizontal = 2
+scale = Vector2(0.4, 0.4)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("6_m2ueq")
+theme_override_font_sizes/font_size = 100
+text = "<"

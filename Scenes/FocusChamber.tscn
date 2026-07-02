@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cdgpbw5ju3g7e" path="res://Sprites/UI/ProgressBar_Outline_Theme.png" id="3_x40oh"]
 [ext_resource type="Texture2D" uid="uid://bn721tr8i7xny" path="res://Sprites/UI/ProgressBar_Progress_Theme.png" id="4_ll06d"]
 
-[node name="FocusChamber" type="Control" unique_id=529604282 node_paths=PackedStringArray("number_pad", "code_label", "player_input_label", "timer_progress_bar")]
+[node name="FocusChamber" type="Control" unique_id=529604282 node_paths=PackedStringArray("number_pad", "code_label", "player_input_label", "timer_progress_bar", "end_btn")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +17,7 @@ number_pad = NodePath("NumPad")
 code_label = NodePath("TopArea/UI/CodeText")
 player_input_label = NodePath("TopArea/UI/PlayerInput")
 timer_progress_bar = NodePath("TopArea/UI/TextureProgressBar")
+end_btn = NodePath("Others/BtnBack")
 
 [node name="TopArea" type="Control" parent="." unique_id=1051695209]
 layout_mode = 1
@@ -327,7 +328,7 @@ offset_left = -20.0
 offset_right = -20.0
 grow_horizontal = 2
 
-[node name="BtnBack2" type="Button" parent="Others" unique_id=999980831]
+[node name="BtnBack" type="Button" parent="Others" unique_id=999980831]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0

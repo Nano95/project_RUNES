@@ -339,3 +339,22 @@ func warn_shake_node(node) -> void:
 	tween.tween_property(node, "position", original_position + Vector2(-shake_amount / 2.0, 0), shake_time).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(node, "position", original_position + Vector2(shake_amount / 2.0, 0), shake_time).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(node, "position", original_position, shake_time).set_trans(Tween.TRANS_SINE)
+
+func set_rainbow_text(label: RichTextLabel, text: String) -> void:
+	label.clear()
+	var colors := [
+		Color.RED,
+		Color.ORANGE,
+		Color.YELLOW,
+		Color.GREEN,
+		Color.BLUE,
+		Color(0.29, 0, 0.51), # indigo
+		Color.VIOLET
+	]
+
+	var index := 0
+	for _char in text:
+		label.push_color(colors[index % colors.size()])
+		label.append_text(_char)
+		label.pop()
+		index += 1
