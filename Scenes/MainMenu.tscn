@@ -11,19 +11,20 @@
 [ext_resource type="PackedScene" uid="uid://cpvxinojrf0q2" path="res://Scenes/PrestigePanel.tscn" id="5_7467j"]
 [ext_resource type="PackedScene" uid="uid://bclknj3c05tf" path="res://Scenes/InventoryButton.tscn" id="6_8um5k"]
 [ext_resource type="PackedScene" uid="uid://d28prqhsmaiob" path="res://Scenes/StatsContainer.tscn" id="7_8e205"]
+[ext_resource type="PackedScene" uid="uid://byafa33bebqqk" path="res://Scenes/FocusChamberModal.tscn" id="7_riqfo"]
 [ext_resource type="PackedScene" uid="uid://b2rttg80j12x4" path="res://Scenes/RuneShop.tscn" id="9_cmrfp"]
 [ext_resource type="Script" uid="uid://xa01fjjqd0pp" path="res://Scripts/SideButtonsContainer.gd" id="13_fh7cp"]
 [ext_resource type="ButtonGroup" uid="uid://ikn15qsvufie" path="res://Resources/SideMenuButtonsGroup.tres" id="14_7467j"]
 [ext_resource type="PackedScene" uid="uid://cjd8lmuyg3fi0" path="res://Scenes/SideButton.tscn" id="15_2x1g0"]
 [ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="16_2x1g0"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2x1g0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yxkem"]
 resource_local_to_scene = true
 shader = ExtResource("5_8um5k")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_riqfo"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7v4os"]
 resource_local_to_scene = true
 shader = ExtResource("5_8um5k")
 shader_parameter/time = 4.750000002218258e-07
@@ -43,6 +44,7 @@ offline_rune_panel = ExtResource("3_rrcx7")
 shop_panel = ExtResource("9_cmrfp")
 prestige_panel = ExtResource("5_7467j")
 stats_panel = ExtResource("7_8e205")
+focus_chamber_panel = ExtResource("7_riqfo")
 xp_curve = ExtResource("2_koqhg")
 equipment_slot_group = ExtResource("3_koqhg")
 eq_slot_1_btn = NodePath("Equipment/Panel/Equipment/slot1")
@@ -83,7 +85,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Title" parent="Equipment/Panel/Inventory" unique_id=1529691904 instance=ExtResource("4_df05h")]
-material = SubResource("ShaderMaterial_2x1g0")
+material = SubResource("ShaderMaterial_yxkem")
 layout_mode = 0
 offset_left = 236.0
 offset_top = 1.0
@@ -129,7 +131,7 @@ offset_top = 303.0
 offset_bottom = 303.0
 
 [node name="equipmentTitle" parent="Equipment/Panel/Equipment" unique_id=1052533148 instance=ExtResource("4_df05h")]
-material = SubResource("ShaderMaterial_riqfo")
+material = SubResource("ShaderMaterial_7v4os")
 layout_mode = 0
 offset_left = 236.0
 offset_top = 53.0

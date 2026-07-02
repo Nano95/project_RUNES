@@ -31,6 +31,10 @@ func set_button_array() -> void:
 			"icon": preload("res://Sprites/SHOPS_ICON.png"),
 			"callable": main_menu.open_shop
 		},
+		{
+			"icon": preload("res://Sprites/perception_icon.png"),
+			"callable": main_menu.open_focus_chamber_modal
+		},
 	]
 	if (main.game_data.prestige_level >= 1 or main.game_data.prestige_unlocked):
 		side_buttons_data.append({

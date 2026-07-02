@@ -4,6 +4,7 @@ class_name MainNode
 @onready var game_controller:PackedScene = load("res://Scenes/GameController.tscn")
 @onready var game_ui:PackedScene = load("res://Scenes/GameUI.tscn")
 @onready var main_menu_ui:PackedScene = load("res://Scenes/MainMenu.tscn")
+@onready var focus_chamber:PackedScene = load("res://Scenes/FocusChamber.tscn")
 @export var reward_pop_up:PackedScene
 @export var info_pop_up:PackedScene
 @export var rested_panel_ref:PackedScene
@@ -74,6 +75,14 @@ func spawn_game() -> void:
 	game_ui_ref.setup_game_controller(active_menu_ref)
 	var colors = MonsterDatabase.monster_colors[battle_data["family"]]
 	set_background_colors(colors["col1"], colors["col2"])
+
+func spawn_focus_chamber() -> void:
+	delete_all_top_ui_children()
+	if (is_instance_valid(active_menu_ref)):
+		active_menu_ref.queue_free()
+	active_menu_ref = focus_chamber.instantiate() as FocusChamber
+	active_menu_ref.setup(self)
+	spawn_to_top_ui_layer(active_menu_ref)
 
 func spawn_to_top_ui_layer(node) -> void:
 	top_layer.add_child(node)

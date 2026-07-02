@@ -8,6 +8,7 @@ class_name MainMenu
 @export var shop_panel:PackedScene
 @export var prestige_panel:PackedScene
 @export var stats_panel:PackedScene
+@export var focus_chamber_panel:PackedScene
 
 @export var xp_curve:Curve
 @export var equipment_slot_group:ButtonGroup
@@ -166,6 +167,13 @@ func open_shop() -> void:
 		active_menu_ref.queue_free()
 	active_menu_ref = shop_panel.instantiate()
 	active_menu_ref.setup(main, self)
+	main.spawn_to_top_ui_layer(active_menu_ref)
+
+func open_focus_chamber_modal() -> void:
+	if (is_instance_valid(active_menu_ref)):
+		active_menu_ref.queue_free()
+	active_menu_ref = focus_chamber_panel.instantiate()
+	active_menu_ref.setup(main)
 	main.spawn_to_top_ui_layer(active_menu_ref)
 
 func update_info_panel() -> void:
