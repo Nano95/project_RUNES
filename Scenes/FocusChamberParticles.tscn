@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dqpcacy8lhx8i"]
+
+[ext_resource type="Texture2D" uid="uid://dplrsfyabpamg" path="res://Sprites/ESSENCE_SS.png" id="1_8qgk7"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_38ny1"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_illeb"]
+_data = [Vector2(0.007874019, 1), 0.0, 0.6909878, 0, 0, Vector2(0.74278224, 0.71537685), -3.0735593, -3.0735593, 0, 0, Vector2(0.99475074, 0.02036655), -3.5726829, 0.0, 0, 0]
+point_count = 3
+
+[node name="focusChamberParticles" type="CPUParticles2D" unique_id=1299519735]
+material = SubResource("CanvasItemMaterial_38ny1")
+amount = 30
+texture = ExtResource("1_8qgk7")
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(300, 1)
+direction = Vector2(0, -1)
+spread = 30.0
+initial_velocity_min = 80.0
+initial_velocity_max = 300.0
+angular_velocity_min = -190.05
+angular_velocity_max = 211.98
+scale_amount_curve = SubResource("Curve_illeb")
+anim_offset_max = 1.0

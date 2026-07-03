@@ -353,8 +353,10 @@ func set_rainbow_text(label: RichTextLabel, text: String) -> void:
 	]
 
 	var index := 0
+	var rainbow_text := ""
 	for _char in text:
-		label.push_color(colors[index % colors.size()])
-		label.append_text(_char)
-		label.pop()
+		var color = colors[index % colors.size()]
+		rainbow_text += "[color=%s]%s[/color]" % [color.to_html(), _char]
 		index += 1
+	
+	label.text = "[center][wave amp=50 freq=6]%s[/wave][/center]" % rainbow_text

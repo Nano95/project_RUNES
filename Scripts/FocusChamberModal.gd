@@ -18,6 +18,7 @@ var main:MainNode
 func _ready() -> void:
 	display_main_view()
 	connect_buttons()
+	Utils.animate_summary_in_happy(self)
 
 func setup(m:MainNode) -> void:
 	main = m
