@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bgbnythgbvnq4" path="res://Scripts/FocusChamberSummary.gd" id="1_42cd5"]
 [ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="2_7o6th"]
+[ext_resource type="PackedScene" uid="uid://bgmuooukrioal" path="res://Scenes/LootLabelContainer.tscn" id="2_8gtin"]
 [ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="2_ku0n2"]
 [ext_resource type="Theme" uid="uid://6l1e7tacwmvs" path="res://Resources/Themes/SubpanelT2_theme_res.tres" id="3_7o6th"]
 [ext_resource type="PackedScene" uid="uid://l7ogby45st2d" path="res://Scenes/MyLabel.tscn" id="4_8gtin"]
@@ -30,7 +31,7 @@ shader = ExtResource("5_pfful")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="FocusChamberModal" type="Control" unique_id=674759347 node_paths=PackedStringArray("quote_label", "score_label", "highscore_label", "back_button")]
+[node name="FocusChamberModal" type="Control" unique_id=674759347 node_paths=PackedStringArray("quote_label", "score_label", "highscore_label", "back_button", "loot_container")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -46,6 +47,8 @@ quote_label = NodePath("ColorRect/Panel/Main/quote")
 score_label = NodePath("ColorRect/Panel/Main/score")
 highscore_label = NodePath("ColorRect/Panel/Main/HighscoreTxt")
 back_button = NodePath("ColorRect/Panel/Main/FinishButton")
+loot_labels = ExtResource("2_8gtin")
+loot_container = NodePath("ColorRect/Panel/Main/Panel/LootContainer")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1585291196]
 material = SubResource("ShaderMaterial_8gtin")

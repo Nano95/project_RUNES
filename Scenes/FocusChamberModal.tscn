@@ -25,13 +25,43 @@ shader = ExtResource("6_jb7aq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_afrjc"]
+resource_local_to_scene = true
+shader = ExtResource("6_jb7aq")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_54db4"]
+resource_local_to_scene = true
+shader = ExtResource("6_jb7aq")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jb7aq"]
+resource_local_to_scene = true
+shader = ExtResource("6_jb7aq")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_annox"]
 resource_local_to_scene = true
 shader = ExtResource("6_jb7aq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="FocusChamberModal" type="Control" unique_id=674759347 node_paths=PackedStringArray("mainMenuView", "practiceBtn", "trialBtn", "PracticeView", "easyBtn", "medBtn", "hardBtn", "backBtn1", "trialView", "goToTrialBtn", "backBtn2")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6pco4"]
+resource_local_to_scene = true
+shader = ExtResource("6_jb7aq")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6xq21"]
+resource_local_to_scene = true
+shader = ExtResource("6_jb7aq")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="FocusChamberModal" type="Control" unique_id=674759347 node_paths=PackedStringArray("mainMenuView", "practiceBtn", "trialBtn", "PracticeView", "easyBtn", "medBtn", "hardBtn", "backBtn1", "easy_hs", "med_hs", "hard_hs", "trial_hs", "trialView", "goToTrialBtn", "backBtn2")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -51,6 +81,10 @@ easyBtn = NodePath("Panel/Practice/easyBtn")
 medBtn = NodePath("Panel/Practice/medBtn")
 hardBtn = NodePath("Panel/Practice/hardbtn")
 backBtn1 = NodePath("Panel/Practice/Back")
+easy_hs = NodePath("Panel/Practice/best1")
+med_hs = NodePath("Panel/Practice/best2")
+hard_hs = NodePath("Panel/Practice/best3")
+trial_hs = NodePath("Panel/Trial/best4")
 trialView = NodePath("Panel/Trial")
 goToTrialBtn = NodePath("Panel/Trial/goTrialBtn")
 backBtn2 = NodePath("Panel/Trial/Back")
@@ -165,6 +199,16 @@ theme_override_fonts/font = ExtResource("4_gltvd")
 theme_override_font_sizes/font_size = 100
 text = "Easy"
 
+[node name="best1" parent="Panel/Practice" unique_id=1916320797 instance=ExtResource("5_annox")]
+material = SubResource("ShaderMaterial_afrjc")
+layout_mode = 0
+offset_left = 16.0
+offset_top = 287.0
+offset_right = 2176.0
+offset_bottom = 424.0
+text = "Best: 100"
+horizontal_alignment = 1
+
 [node name="medBtn" type="Button" parent="Panel/Practice" unique_id=607334370]
 layout_mode = 1
 anchors_preset = 5
@@ -180,6 +224,16 @@ theme_override_constants/outline_size = 30
 theme_override_fonts/font = ExtResource("4_gltvd")
 theme_override_font_sizes/font_size = 100
 text = "Medium"
+
+[node name="best2" parent="Panel/Practice" unique_id=1734281091 instance=ExtResource("5_annox")]
+material = SubResource("ShaderMaterial_54db4")
+layout_mode = 0
+offset_left = 16.0
+offset_top = 453.0
+offset_right = 2176.0
+offset_bottom = 590.0
+text = "Best: 50"
+horizontal_alignment = 1
 
 [node name="hardbtn" type="Button" parent="Panel/Practice" unique_id=609486937]
 layout_mode = 1
@@ -197,6 +251,16 @@ theme_override_fonts/font = ExtResource("4_gltvd")
 theme_override_font_sizes/font_size = 100
 text = "Hard
 "
+
+[node name="best3" parent="Panel/Practice" unique_id=1666741112 instance=ExtResource("5_annox")]
+material = SubResource("ShaderMaterial_jb7aq")
+layout_mode = 0
+offset_left = 16.0
+offset_top = 616.0
+offset_right = 2176.0
+offset_bottom = 753.0
+text = "Best: 10"
+horizontal_alignment = 1
 
 [node name="Back" type="Button" parent="Panel/Practice" unique_id=128109825]
 layout_mode = 1
@@ -227,7 +291,32 @@ offset_left = 16.0
 offset_top = 103.0
 offset_right = 2176.0
 offset_bottom = 453.0
-text = "A timed mental trial. Gain essences based on the success of your concentration."
+text = "A timed mental trial. Rest and come back for more trials."
+horizontal_alignment = 1
+
+[node name="Info2" parent="Panel/Trial" unique_id=46901148 instance=ExtResource("5_annox")]
+material = SubResource("ShaderMaterial_6pco4")
+layout_mode = 0
+offset_left = 16.0
+offset_top = 257.0
+offset_right = 2176.0
+offset_bottom = 1034.0
+text = "For every correct sequence, get essence rewards!
+
+The longer your stay, longer the sequences will become, but will yield higher rewards.
+
+For every correct answer, you will also get a small amount of time back."
+horizontal_alignment = 1
+
+[node name="best4" parent="Panel/Trial" unique_id=763974126 instance=ExtResource("5_annox")]
+material = SubResource("ShaderMaterial_6xq21")
+layout_mode = 0
+offset_left = 16.0
+offset_top = 564.0
+offset_right = 1645.9999
+offset_bottom = 701.0
+scale = Vector2(0.4, 0.4)
+text = "Best: 10"
 horizontal_alignment = 1
 
 [node name="Back" type="Button" parent="Panel/Trial" unique_id=173291759]
@@ -236,9 +325,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 67.0
-offset_top = 573.0
+offset_top = 659.0
 offset_right = 596.9999
-offset_bottom = 782.9999
+offset_bottom = 868.9999
 grow_horizontal = 2
 scale = Vector2(0.4, 0.4)
 theme_override_constants/outline_size = 30
@@ -252,9 +341,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 356.99997
-offset_top = 573.0
+offset_top = 659.0
 offset_right = 886.9999
-offset_bottom = 782.9999
+offset_bottom = 868.9999
 grow_horizontal = 2
 scale = Vector2(0.4, 0.4)
 theme_override_constants/outline_size = 30

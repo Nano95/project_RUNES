@@ -9,6 +9,10 @@ class_name FocusChamberModal
 @export var medBtn:Button
 @export var hardBtn:Button
 @export var backBtn1:Button
+@export var easy_hs:Label
+@export var med_hs:Label
+@export var hard_hs:Label
+@export var trial_hs:Label
 
 @export var trialView:Control
 @export var goToTrialBtn:Button
@@ -18,6 +22,7 @@ var main:MainNode
 func _ready() -> void:
 	display_main_view()
 	connect_buttons()
+	setup_labels()
 	Utils.animate_summary_in_happy(self)
 
 func setup(m:MainNode) -> void:
@@ -50,3 +55,9 @@ func display_main_view(isVisible:bool=true) -> void:
 
 func spawn_focus_chamber(is_practice:bool=false, mode:String="") -> void:
 	main.spawn_focus_chamber(is_practice, mode)
+
+func setup_labels() -> void:
+	easy_hs.text = "Best: " + str(main.game_data.focus_chamber_practice_easy_highscore)
+	med_hs.text = "Best: " + str(main.game_data.focus_chamber_practice_med_highscore)
+	hard_hs.text = "Best: " + str(main.game_data.focus_chamber_practice_hard_highscore)
+	trial_hs.text = "Best: " + str(main.game_data.focus_chamber_trial_highscore)

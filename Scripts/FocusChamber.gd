@@ -20,9 +20,10 @@ var code_label_tween: Tween
 var shake_tween: Tween
 
 var current_loot_summary:Dictionary
-var timer_duration: float = 30.0
+var timer_duration: float = 25.0
 var timer_remaining: float = 0.0
 var timer_active: bool = false
+var on_correct_addition:float = 1.0
 
 var score:int = 0 # keeps track of how many times the player got it right.
 var main:MainNode
@@ -45,7 +46,6 @@ func _ready() -> void:
 func setup(m:MainNode, ispractice:bool=false, practice_mode:String="") -> void:
 	main = m
 	is_practice = ispractice
-	print("-is_practice : ", is_practice)
 	if (!is_practice):
 		return
 	practice_difficulty = practice_mode
@@ -53,7 +53,6 @@ func setup(m:MainNode, ispractice:bool=false, practice_mode:String="") -> void:
 func _process(delta: float) -> void:
 	if (not timer_active):
 		return
-
 	timer_remaining -= delta
 
 	# Update progress bar (1.0 → 0.0)
@@ -76,18 +75,19 @@ func reward_essences(amount: int = 10) -> void:
 	particles_timer.start(.1)
 	
 	# Do not reward essences in practice mode
-	loot_manager.add_loot_from_key("arcane essence", amount)
 	if (is_practice):
 		return
 	
 	var essence_types := ["arcane", "fire", "ice", "earth", "electric"]
 	var chosen = essence_types[randi() % essence_types.size()]
-
+	loot_manager.add_loot_from_key(chosen + " essence", amount)
+	if !(current_loot_summary.has(chosen + " essence")):
+		current_loot_summary[chosen + " essence"] = 0
+	current_loot_summary[chosen + " essence"] += amount
 	# Add to current essences
-	#main.save_data.current_essences[chosen] += amount
-#
-	## Add to total essences (lifetime)
-	#main.save_data.total_essences[chosen] += amount
+	main.game_data.current_essences[chosen] += amount
+	# Add to total essences (lifetime)
+	main.game_data.total_essences[chosen] += amount
 
 func connect_number_pad() -> void:
 	# Loop through all Button children of this Control node
@@ -112,6 +112,7 @@ func _on_number_pad_button_pressed(button: Button):
 			player_input = player_input.substr(0, player_input.length() - 1)
 	elif (button.text.contains("Clear")):
 		player_input = ""
+		#player_input = str(code_number)
 	else:
 		# Append the number to the input
 		player_input += button.text
@@ -161,12 +162,15 @@ func start_round(start_timer:bool=false) -> void:
 			"E":
 				_length = 4
 				chunk = 4
+				on_correct_addition = .7
 			"M":
 				_length = 6
 				chunk = 3
+				on_correct_addition = 1.5
 			"H":
 				_length = 8
 				chunk = 4
+				on_correct_addition = 2.5
 	else:
 		var diff := get_trial_difficulty(score)
 		_length = diff["length"]
@@ -200,17 +204,21 @@ func on_wrong_code() -> void:
 
 func get_trial_difficulty(_score: int) -> Dictionary:
 	if (_score < 4):
+		on_correct_addition = 0.5
 		return {"length": 4, "chunk": 4}
 	elif (_score < 10):
+		on_correct_addition = 1.4
 		return {"length": 6, "chunk": 3}
 	elif (_score < 15):
+		on_correct_addition = 1.8
 		return {"length": 8, "chunk": 4}
 	else:
+		on_correct_addition = 2.5
 		return {"length": 9, "chunk": 3}
 
 func spawn_summary() -> void:
 	var summary = focus_chamber_summary.instantiate()
-	summary.setup(main, score, is_practice, practice_difficulty)
+	summary.setup(main, self, score, is_practice, practice_difficulty)
 	main.spawn_to_top_ui_layer(summary)
 
 func animate_code_label(target_alpha: float, duration: float = 0.25) -> void:
