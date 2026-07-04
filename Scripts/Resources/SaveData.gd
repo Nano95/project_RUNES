@@ -257,12 +257,33 @@ func check_prestige_unlocked() -> bool:
 	return prestige_unlocked
 
 func ascension_restart_data() -> void:
-	rune_inv = { # Start pack
-		"Arcane Cross": 100,
-		"Arcane Explosion": 80,
-		"Arcane Strike": 250,
-		"Light Healing": 25
-	}
+	var starter_rune_pack:Dictionary = { # Start pack
+			"Arcane Cross": 100,
+			"Arcane Explosion": 80,
+			"Arcane Strike": 250,
+			"Light Healing": 25
+		}
+	
+	var inheritance_active: bool = is_blessing_active("inheritance1_5")
+	if (inheritance_active):
+		var carryover := {}
+		for rune_name in rune_inv.keys():
+			var original_amount = rune_inv[rune_name]
+			var inherited_amount := int(original_amount * 0.05)  # 5% carryover
+			carryover[rune_name] = inherited_amount
+		
+		# Build the new rune inventory fresh from the starter_rune_pack
+		rune_inv = starter_rune_pack
+
+		# Apply carryover to the new rune inventory
+		# Carry over may have all other types of runes, so check for the name so that we can add them without errors
+		for rune_name in carryover.keys():
+			if !(rune_inv.has(rune_name)):
+				rune_inv[rune_name] = 0
+			rune_inv[rune_name] += carryover[rune_name]
+	else:
+		rune_inv = starter_rune_pack
+	
 	total_blessing_coins_earned += current_level 
 	current_level = 1
 	total_exp_lifetime += int(total_exp) # In the stats panel it can be a sum of these 2
@@ -419,6 +440,11 @@ func reset_data() -> void:
 	}
 	
 	last_crafting_timestamp = 0
+	focus_chamber_trial_highscore = 0
+	focus_chamber_practice_easy_highscore = 0
+	focus_chamber_practice_med_highscore = 0
+	focus_chamber_practice_hard_highscore = 0
+	focus_chamber_time_available = 0
 	
 	reset_settings()
 	reset_blessings()
@@ -452,7 +478,7 @@ func is_curse_active(curse_name:String) -> bool:
 	{
 		id = "essence_package",
 		name = "Inner Reservoir",
-		desc = "Begin each run with 1,500 essence of every type.",
+		desc = "Begin each ascension run with 1,500 essence of every type.",
 		toggled = false,
 		locked = true,
 		cost = 50,
@@ -522,7 +548,7 @@ func is_curse_active(curse_name:String) -> bool:
 	{
 		id = "mod_rested-battle-4",
 		name = "Lasting Rest",
-		desc = "Your restfulness lasts longer, extending the duration of your max rested blessing.",
+		desc = "Your restfulness lasts longer, extending the duration of your max rested blessing by 4.",
 		toggled = false,
 		locked = true,
 		cost = 35,
@@ -532,13 +558,23 @@ func is_curse_active(curse_name:String) -> bool:
 	{
 		id = "mod_rested-battle-6",
 		name = "Deep Restoration",
-		desc = "Your restorative energy runs deeper, increasing the number of max rested blessing.",
+		desc = "Your restorative energy runs deeper, further extending the number of max rested blessing by 6.",
 		toggled = false,
 		locked = true,
 		cost = 70,
 		type = "economy",
 		category = "exp"
 	},
+	{
+		id = "inheritance1_5",
+		name = "Inheritance",
+		desc = "Start each ascension run with 5% of your rune inventory.",
+		toggled = false,
+		locked = true,
+		cost = 40,
+		type = "stat",
+		category = "runes"
+	}
 ]
 @export var curses:Array = [
 	{
