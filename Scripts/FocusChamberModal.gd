@@ -18,12 +18,14 @@ class_name FocusChamberModal
 @export var goToTrialBtn:Button
 @export var backBtn2:Button
 @export var trial_timer:Timer
+@export var summary_label:RichTextLabel
 var main:MainNode
 
 func _ready() -> void:
 	display_main_view()
 	connect_buttons()
 	setup_labels()
+	render_focus_summary()
 	Utils.animate_summary_in_happy(self)
 	
 	if (is_focus_chamber_available()):
@@ -66,6 +68,29 @@ func display_main_view(isVisible:bool=true) -> void:
 	mainMenuView.visible = isVisible
 	PracticeView.visible = !isVisible
 	trialView.visible = !isVisible
+
+func build_summary_line(generated: String, typed: String, comparison_string:String) -> String:
+	var color := get_attempt_color(comparison_string, typed)
+	return "[color=#ffffff]%s | [/color][color=%s]%s[/color]" % [generated, color, typed]
+
+func get_attempt_color(generated: String, typed: String) -> String:
+	return Utils.PASTEL_GREEN.to_html() if (typed == generated) else Utils.PASTEL_RED.to_html()
+
+func render_focus_summary() -> void:
+	var text := "[center]"
+
+	if (main.game_data.last_focus_chamber_summary.size() == 0):
+		summary_label.text = "Play in any mode to see the summary here!"
+		return
+	
+	for entry in main.game_data.last_focus_chamber_summary:
+		var generated:String = entry["formatted_generated"]
+		var typed:String = entry["typed"]
+		var comparison:String = entry["generated"]
+		text += build_summary_line(generated, typed, comparison) + "\n"
+
+	text += "[/center]"
+	summary_label.text = text
 
 func spawn_focus_chamber(is_practice:bool=false, mode:String="") -> void:
 	main.spawn_focus_chamber(is_practice, mode)

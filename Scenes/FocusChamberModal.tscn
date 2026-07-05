@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="4_gltvd"]
 [ext_resource type="PackedScene" uid="uid://l7ogby45st2d" path="res://Scenes/MyLabel.tscn" id="5_annox"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="6_jb7aq"]
+[ext_resource type="Theme" uid="uid://bbbw1in72yvu1" path="res://Resources/Themes/Subpanel_theme_res.tres" id="7_54db4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kiavo"]
 resource_local_to_scene = true
@@ -61,7 +62,7 @@ shader = ExtResource("6_jb7aq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="FocusChamberModal" type="Control" unique_id=674759347 node_paths=PackedStringArray("mainMenuView", "practiceBtn", "trialBtn", "PracticeView", "easyBtn", "medBtn", "hardBtn", "backBtn1", "easy_hs", "med_hs", "hard_hs", "trial_hs", "trialView", "goToTrialBtn", "backBtn2", "trial_timer")]
+[node name="FocusChamberModal" type="Control" unique_id=674759347 node_paths=PackedStringArray("mainMenuView", "practiceBtn", "trialBtn", "PracticeView", "easyBtn", "medBtn", "hardBtn", "backBtn1", "easy_hs", "med_hs", "hard_hs", "trial_hs", "trialView", "goToTrialBtn", "backBtn2", "trial_timer", "summary_label")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -89,6 +90,7 @@ trialView = NodePath("Panel/Trial")
 goToTrialBtn = NodePath("Panel/Trial/goTrialBtn")
 backBtn2 = NodePath("Panel/Trial/Back")
 trial_timer = NodePath("trialTimer")
+summary_label = NodePath("Panel/Main/Panel/HighscoreTxt")
 
 [node name="Panel" type="Panel" parent="." unique_id=199448428]
 layout_mode = 0
@@ -132,9 +134,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 67.0
-offset_top = 573.0
+offset_top = 701.0
 offset_right = 596.9999
-offset_bottom = 782.9999
+offset_bottom = 910.9999
 grow_horizontal = 2
 scale = Vector2(0.4, 0.4)
 theme_override_constants/outline_size = 30
@@ -148,9 +150,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 356.99997
-offset_top = 573.0
+offset_top = 701.0
 offset_right = 886.9999
-offset_bottom = 782.9999
+offset_bottom = 910.9999
 grow_horizontal = 2
 scale = Vector2(0.4, 0.4)
 theme_override_constants/outline_size = 30
@@ -167,6 +169,38 @@ offset_right = 2176.0
 offset_bottom = 453.0
 text = "Sharpen your mind. Choose how you wish to focus."
 horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="Panel/Main" unique_id=659816620]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 201.0
+offset_right = 663.0
+offset_bottom = 668.0
+theme = ExtResource("7_54db4")
+
+[node name="HighscoreTxt" type="RichTextLabel" parent="Panel/Main/Panel" unique_id=139006935]
+custom_minimum_size = Vector2(0, 378)
+layout_mode = 0
+offset_left = 15.0
+offset_top = 16.0
+offset_right = 627.0
+offset_bottom = 454.0
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("4_gltvd")
+theme_override_font_sizes/normal_font_size = 33
+bbcode_enabled = true
+text = "[center]
+[color=#ffffff]     1910 |    [/color][color=#00ff00]1910[/color][color=#0000ff][/color]
+[color=#fffff]     1910 |    [/color][color=#ff0000]0910[/color]
+[color=#ffffff]     1910 |    [/color][color=#00ff00]1910[/color][color=#0000ff][/color]
+[color=#fffff]     1910 |    [/color][color=#ff0000]0910[/color]
+[color=#ffffff]     1910 |    [/color][color=#00ff00]1910[/color][color=#0000ff][/color]
+[color=#fffff]     1910 |    [/color][color=#ff0000]0910[/color]
+[color=#ffffff]     1910 |    [/color][color=#00ff00]1910[/color][color=#0000ff][/color]
+[color=#fffff]     1910 |    [/color][color=#ff0000]0910[/color]
+[color=#ffffff]     1910 |    [/color][color=#00ff00]1910[/color][color=#0000ff][/color]
+[color=#fffff]     190010 |    [/color][color=#ff0000]009100[/color]
+[/center]"
 
 [node name="Practice" type="Control" parent="Panel" unique_id=893349269]
 visible = false
@@ -280,6 +314,7 @@ theme_override_font_sizes/font_size = 100
 text = "Back"
 
 [node name="Trial" type="Control" parent="Panel" unique_id=1245789740]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0

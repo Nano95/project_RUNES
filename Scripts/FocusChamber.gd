@@ -42,6 +42,9 @@ func _ready() -> void:
 	timer_progress_bar.max_value = 1.0
 	timer_progress_bar.step = 0.0
 	timer_progress_bar.rounded = false
+	# Clear it!
+	main.game_data.last_focus_chamber_summary = []
+	main.save_game()
 
 func setup(m:MainNode, ispractice:bool=false, practice_mode:String="") -> void:
 	main = m
@@ -69,6 +72,7 @@ func on_time_expired() -> void:
 	main.spawn_to_top_ui_layer(white)
 	disable_buttons(true)
 	slide_banner_label(time_up_label, time_up_panel)
+	main.save_game()
 
 func reward_essences(amount: int = 10) -> void:
 	particles.emitting = true
@@ -124,7 +128,8 @@ func _on_number_pad_button_pressed(button: Button):
 func check_accuracy() -> void:
 	if !(player_input.length() == code_number.length()):
 		return
-	if player_input == code_number:
+	record_focus_attempt(code_label.text, player_input_label.text, code_number, player_input)
+	if (player_input == code_number):
 		on_correct_code()
 	else:
 		on_wrong_code()
@@ -220,6 +225,14 @@ func spawn_summary() -> void:
 	var summary = focus_chamber_summary.instantiate()
 	summary.setup(main, self, score, is_practice, practice_difficulty)
 	main.spawn_to_top_ui_layer(summary)
+
+func record_focus_attempt(generated: String, typed: String, num_generated:String, player_typed:String) -> void:
+	var entry := {
+		"formatted_generated": generated,
+		"typed": typed,
+		"generated": num_generated
+	}
+	main.game_data.last_focus_chamber_summary.append(entry)
 
 func animate_code_label(target_alpha: float, duration: float = 0.25) -> void:
 	# Kill any previous tween

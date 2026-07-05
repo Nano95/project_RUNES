@@ -96,6 +96,7 @@ class_name SaveData
 @export var focus_chamber_practice_med_highscore:int=0
 @export var focus_chamber_practice_hard_highscore:int=0
 @export var focus_chamber_time_available:int=0
+@export var last_focus_chamber_summary:Array = []
 
 @export_category("Stats")
 @export var highest_level_reached:int = 0
