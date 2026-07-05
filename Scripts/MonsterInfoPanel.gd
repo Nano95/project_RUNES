@@ -26,4 +26,18 @@ func update_panel(monster:MonsterBase) -> void:
 	var essence_type:String = "res://Sprites/" + monster.essence_type + "_ESSENCE_ICON.png"
 	essence_icon.texture = load(essence_type)
 	#desc_lbl.text = monster.description
-	#loot_lbl.text = monster.loot_lbl
+	
+	var names := []
+	var text := "Notable Loot: "
+	
+	if (monster.loot_table.is_empty()):
+		loot_lbl.text = text + "None"
+		return
+	
+	for entry in monster.loot_table:
+		if entry.item != null:
+			names.append(entry.item.name)
+	
+	# Join with "', '" between items
+	var formatted := "'" + "' , '".join(names) + "'"
+	loot_lbl.text = text + formatted

@@ -226,7 +226,7 @@ func spawn_summary() -> void:
 	summary.setup(main, self, score, is_practice, practice_difficulty)
 	main.spawn_to_top_ui_layer(summary)
 
-func record_focus_attempt(generated: String, typed: String, num_generated:String, player_typed:String) -> void:
+func record_focus_attempt(generated: String, typed: String, num_generated:String, _player_typed:String) -> void:
 	var entry := {
 		"formatted_generated": generated,
 		"typed": typed,

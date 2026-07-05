@@ -1,8 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://2dvdykbjounr"]
+[gd_scene format=3 uid="uid://2dvdykbjounr"]
 
 [ext_resource type="Script" uid="uid://crgoc5n1t752c" path="res://Scripts/FightMenu.gd" id="1_ipivn"]
 [ext_resource type="PackedScene" uid="uid://b37x20v0etu6t" path="res://Scenes/MyButton.tscn" id="2_0c1bx"]
-[ext_resource type="PackedScene" path="res://Scenes/MyLabel.tscn" id="3_x5u2f"]
+[ext_resource type="PackedScene" uid="uid://l7ogby45st2d" path="res://Scenes/MyLabel.tscn" id="3_x5u2f"]
 [ext_resource type="PackedScene" uid="uid://bu2xji8e1uu4y" path="res://Scenes/RuneSelectionPanel.tscn" id="4_6sloi"]
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="4_ov7x6"]
 [ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="5_6sloi"]
@@ -13,46 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://dnnqjb0eguu63" path="res://Sprites/SWORD_LARGE_ICON.png" id="7_ou8aj"]
 [ext_resource type="Texture2D" uid="uid://trfwff23tnyo" path="res://Sprites/EXP_ICON.png" id="8_0c1bx"]
 [ext_resource type="Texture2D" uid="uid://by8eyn77jli18" path="res://Sprites/GOLD_ICON.png" id="8_ryii3"]
-[ext_resource type="Texture2D" uid="uid://d2edg60502vj0" path="res://Sprites/MONSTER_ICON.png" id="8_v0ir0"]
 [ext_resource type="Texture2D" uid="uid://cis363l7mtswe" path="res://Sprites/arcane_ESSENCE_ICON.png" id="9_0c1bx"]
 [ext_resource type="Theme" uid="uid://bbbw1in72yvu1" path="res://Resources/Themes/Subpanel_theme_res.tres" id="11_n6iuk"]
 [ext_resource type="Theme" uid="uid://6l1e7tacwmvs" path="res://Resources/Themes/SubpanelT2_theme_res.tres" id="17_k44dd"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8k8yn"]
-resource_local_to_scene = true
-shader = ExtResource("4_ov7x6")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ipivn"]
-resource_local_to_scene = true
-shader = ExtResource("4_ov7x6")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_p854w"]
-resource_local_to_scene = true
-shader = ExtResource("4_ov7x6")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f0u7t"]
-resource_local_to_scene = true
-shader = ExtResource("4_ov7x6")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v0ir0"]
-resource_local_to_scene = true
-shader = ExtResource("4_ov7x6")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6sloi"]
-resource_local_to_scene = true
-shader = ExtResource("4_ov7x6")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ke3j0"]
 resource_local_to_scene = true
@@ -84,7 +47,43 @@ shader = ExtResource("4_ov7x6")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="FightPanel" type="Control" node_paths=PackedStringArray("monster_grid_container", "location_grid_container", "rune_grid_container", "start_button")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2k0yo"]
+resource_local_to_scene = true
+shader = ExtResource("4_ov7x6")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5j3b3"]
+resource_local_to_scene = true
+shader = ExtResource("4_ov7x6")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_65e8y"]
+resource_local_to_scene = true
+shader = ExtResource("4_ov7x6")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f4wdc"]
+resource_local_to_scene = true
+shader = ExtResource("4_ov7x6")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_osq1k"]
+resource_local_to_scene = true
+shader = ExtResource("4_ov7x6")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2p2ug"]
+resource_local_to_scene = true
+shader = ExtResource("4_ov7x6")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[node name="FightPanel" type="Control" unique_id=2138717685 node_paths=PackedStringArray("monster_grid_container", "location_grid_container", "rune_grid_container", "start_button", "monster_info")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -106,8 +105,9 @@ start_button = NodePath("Panel/Fight")
 my_button = ExtResource("2_0c1bx")
 rune_button = ExtResource("6_f0u7t")
 select_runes_panel = ExtResource("4_6sloi")
+monster_info = NodePath("Panel/MonsterInfo")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1186606998]
 layout_mode = 0
 offset_left = 21.0
 offset_top = -4.0
@@ -115,8 +115,8 @@ offset_right = 700.0
 offset_bottom = 1095.0
 theme = ExtResource("5_6sloi")
 
-[node name="ChooseMonster" parent="Panel" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_8k8yn")
+[node name="ChooseMonster" parent="Panel" unique_id=1219269667 instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_ke3j0")
 layout_mode = 0
 offset_left = 327.0
 offset_top = 20.0
@@ -127,8 +127,8 @@ text = "Monster"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ChooseMonster2" parent="Panel" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_ipivn")
+[node name="ChooseMonster2" parent="Panel" unique_id=1043463095 instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_n6iuk")
 layout_mode = 0
 offset_left = 1.9999847
 offset_top = 22.0
@@ -139,109 +139,55 @@ text = "Area"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Family" type="ScrollContainer" parent="Panel"]
+[node name="Family" type="ScrollContainer" parent="Panel" unique_id=1190073917]
+custom_minimum_size = Vector2(0, 340)
 layout_mode = 0
 offset_left = 14.0
 offset_top = 93.0
-offset_right = 335.0
-offset_bottom = 560.0
+offset_right = 323.0
+offset_bottom = 434.0
+horizontal_scroll_mode = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/Family"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Family" unique_id=184765430]
+custom_minimum_size = Vector2(0, 320)
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="GridContainer" type="GridContainer" parent="Panel/Family/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="Panel/Family/MarginContainer" unique_id=755336351]
+custom_minimum_size = Vector2(0, 320)
 layout_mode = 2
 theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 80
+theme_override_constants/v_separation = 6
 
-[node name="Location" type="ScrollContainer" parent="Panel"]
+[node name="Location" type="ScrollContainer" parent="Panel" unique_id=2087868889]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 0
 offset_left = 343.0
 offset_top = 93.0
-offset_right = 664.0
-offset_bottom = 560.0
+offset_right = 648.0
+offset_bottom = 434.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/Location"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Location" unique_id=2102413775]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="GridContainer" type="GridContainer" parent="Panel/Location/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="Panel/Location/MarginContainer" unique_id=152841050]
 layout_mode = 2
-theme_override_constants/v_separation = 80
+theme_override_constants/v_separation = 6
 
-[node name="ChooseRunes" parent="Panel" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_p854w")
-layout_mode = 0
-offset_left = 1.9999847
-offset_top = 684.0
-offset_right = 1252.0
-offset_bottom = 821.0
-scale = Vector2(0.54, 0.54)
-text = "Choose Runes"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel/ChooseRunes"]
-layout_mode = 0
-offset_left = 27.777805
-offset_top = 135.18512
-offset_right = 1218.5186
-offset_bottom = 542.5926
-theme_override_constants/margin_top = 10
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/ChooseRunes/MarginContainer"]
-custom_minimum_size = Vector2(1175, 0)
-layout_mode = 2
-vertical_scroll_mode = 3
-
-[node name="GridContainer" type="GridContainer" parent="Panel/ChooseRunes/MarginContainer/ScrollContainer"]
-custom_minimum_size = Vector2(1175, 372)
-layout_mode = 2
-theme_override_constants/h_separation = 6
-theme_override_constants/v_separation = 0
-columns = 10
-
-[node name="ToggleMonsterInfo" type="Button" parent="Panel"]
-layout_mode = 0
-offset_left = 564.00006
-offset_top = 681.0
-offset_right = 671.1429
-offset_bottom = 782.4285
-scale = Vector2(0.7, 0.7)
-theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("5_utror")
-theme_override_font_sizes/font_size = 100
-icon = ExtResource("8_v0ir0")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Fight" type="Button" parent="Panel"]
-layout_mode = 0
-offset_left = 115.00001
-offset_top = 980.99994
-offset_right = 762.14276
-offset_bottom = 1119.0
-scale = Vector2(0.7, 0.7)
-theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("5_utror")
-theme_override_font_sizes/font_size = 100
-text = "Let's go!"
-
-[node name="MonsterInfo" type="Panel" parent="Panel" node_paths=PackedStringArray("hp_lbl", "xp_lbl", "atk_lbl", "gold_lbl", "essence_lbl", "name_lbl", "desc_lbl", "loot_lbl", "essence_icon")]
-visible = false
+[node name="MonsterInfo" type="Panel" parent="Panel" unique_id=1621377664 node_paths=PackedStringArray("hp_lbl", "xp_lbl", "atk_lbl", "gold_lbl", "essence_lbl", "name_lbl", "desc_lbl", "loot_lbl", "essence_icon")]
 layout_mode = 0
 offset_left = 14.0
-offset_top = 679.0
+offset_top = 446.0
 offset_right = 664.0
-offset_bottom = 971.0
+offset_bottom = 738.0
 script = ExtResource("6_ou8aj")
 hp_lbl = NodePath("Panel/HP/lbl")
 xp_lbl = NodePath("Panel/XP/lbl")
@@ -253,7 +199,7 @@ desc_lbl = NodePath("Panel3/Lore")
 loot_lbl = NodePath("Panel4/Loot")
 essence_icon = NodePath("Panel/ESSENCE")
 
-[node name="Panel" type="Panel" parent="Panel/MonsterInfo"]
+[node name="Panel" type="Panel" parent="Panel/MonsterInfo" unique_id=2038385029]
 layout_mode = 0
 offset_left = 73.0
 offset_top = 16.0
@@ -261,7 +207,7 @@ offset_right = 191.0
 offset_bottom = 276.0
 theme = ExtResource("11_n6iuk")
 
-[node name="HP" type="TextureRect" parent="Panel/MonsterInfo/Panel"]
+[node name="HP" type="TextureRect" parent="Panel/MonsterInfo/Panel" unique_id=368383223]
 layout_mode = 0
 offset_left = -52.0
 offset_top = 5.0
@@ -269,8 +215,8 @@ offset_right = -4.0
 offset_bottom = 53.0
 texture = ExtResource("6_utror")
 
-[node name="lbl" parent="Panel/MonsterInfo/Panel/HP" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_f0u7t")
+[node name="lbl" parent="Panel/MonsterInfo/Panel/HP" unique_id=1079176594 instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_k44dd")
 layout_mode = 0
 offset_left = 51.0
 offset_top = 2.999999
@@ -281,7 +227,7 @@ text = "999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="XP" type="TextureRect" parent="Panel/MonsterInfo/Panel"]
+[node name="XP" type="TextureRect" parent="Panel/MonsterInfo/Panel" unique_id=1662612343]
 layout_mode = 0
 offset_left = -52.0
 offset_top = 56.0
@@ -289,8 +235,8 @@ offset_right = -4.0
 offset_bottom = 104.0
 texture = ExtResource("8_0c1bx")
 
-[node name="lbl" parent="Panel/MonsterInfo/Panel/XP" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_v0ir0")
+[node name="lbl" parent="Panel/MonsterInfo/Panel/XP" unique_id=1428487024 instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_c37k1")
 layout_mode = 0
 offset_left = 51.0
 offset_top = 2.999999
@@ -301,7 +247,7 @@ text = "999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ATK" type="TextureRect" parent="Panel/MonsterInfo/Panel"]
+[node name="ATK" type="TextureRect" parent="Panel/MonsterInfo/Panel" unique_id=1779747383]
 layout_mode = 0
 offset_left = -52.0
 offset_top = 106.0
@@ -309,8 +255,8 @@ offset_right = -4.0
 offset_bottom = 154.0
 texture = ExtResource("7_ou8aj")
 
-[node name="lbl" parent="Panel/MonsterInfo/Panel/ATK" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_6sloi")
+[node name="lbl" parent="Panel/MonsterInfo/Panel/ATK" unique_id=239543285 instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_bfk1v")
 layout_mode = 0
 offset_left = 51.0
 offset_top = 2.999999
@@ -321,7 +267,7 @@ text = "999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="GOLD" type="TextureRect" parent="Panel/MonsterInfo/Panel"]
+[node name="GOLD" type="TextureRect" parent="Panel/MonsterInfo/Panel" unique_id=60348579]
 layout_mode = 0
 offset_left = -52.0
 offset_top = 156.0
@@ -329,8 +275,8 @@ offset_right = -4.0
 offset_bottom = 204.0
 texture = ExtResource("8_ryii3")
 
-[node name="lbl" parent="Panel/MonsterInfo/Panel/GOLD" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_ke3j0")
+[node name="lbl" parent="Panel/MonsterInfo/Panel/GOLD" unique_id=133107316 instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_2k0yo")
 layout_mode = 0
 offset_left = 51.0
 offset_top = 2.999999
@@ -341,7 +287,7 @@ text = "999-9.0k"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ESSENCE" type="TextureRect" parent="Panel/MonsterInfo/Panel"]
+[node name="ESSENCE" type="TextureRect" parent="Panel/MonsterInfo/Panel" unique_id=1865294318]
 layout_mode = 0
 offset_left = -52.0
 offset_top = 206.0
@@ -349,8 +295,8 @@ offset_right = -4.0
 offset_bottom = 254.0
 texture = ExtResource("9_0c1bx")
 
-[node name="lbl" parent="Panel/MonsterInfo/Panel/ESSENCE" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_n6iuk")
+[node name="lbl" parent="Panel/MonsterInfo/Panel/ESSENCE" unique_id=1753887488 instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_5j3b3")
 layout_mode = 0
 offset_left = 51.0
 offset_top = 2.999999
@@ -361,7 +307,7 @@ text = "999-1.3k"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Panel2" type="Panel" parent="Panel/MonsterInfo"]
+[node name="Panel2" type="Panel" parent="Panel/MonsterInfo" unique_id=2017134391]
 layout_mode = 0
 offset_left = 195.0
 offset_top = 16.0
@@ -369,8 +315,8 @@ offset_right = 583.0
 offset_bottom = 48.0
 theme = ExtResource("17_k44dd")
 
-[node name="Name" parent="Panel/MonsterInfo/Panel2" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_k44dd")
+[node name="Name" parent="Panel/MonsterInfo/Panel2" unique_id=845536401 instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_65e8y")
 layout_mode = 0
 offset_left = 10.000006
 offset_top = -8.0
@@ -379,7 +325,7 @@ offset_bottom = 129.0
 theme_override_constants/line_spacing = 14
 text = "Orc Warrior"
 
-[node name="Panel3" type="Panel" parent="Panel/MonsterInfo"]
+[node name="Panel3" type="Panel" parent="Panel/MonsterInfo" unique_id=2025154603]
 layout_mode = 0
 offset_left = 195.0
 offset_top = 51.0
@@ -387,8 +333,8 @@ offset_right = 634.0
 offset_bottom = 204.0
 theme = ExtResource("17_k44dd")
 
-[node name="Lore" parent="Panel/MonsterInfo/Panel3" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_c37k1")
+[node name="Lore" parent="Panel/MonsterInfo/Panel3" unique_id=867672188 instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_f4wdc")
 layout_mode = 0
 offset_left = 10.0
 offset_right = 1754.0
@@ -398,7 +344,7 @@ theme_override_constants/line_spacing = -19
 theme_override_constants/paragraph_spacing = -29
 text = "This is a lore description of the monster, there will be some details but maybe not too many. Enough to provoke feelings of some sort if anything dramatic pops up."
 
-[node name="Panel4" type="Panel" parent="Panel/MonsterInfo"]
+[node name="Panel4" type="Panel" parent="Panel/MonsterInfo" unique_id=263703723]
 layout_mode = 0
 offset_left = 195.0
 offset_top = 207.0
@@ -406,8 +352,8 @@ offset_right = 634.0
 offset_bottom = 276.0
 theme = ExtResource("11_n6iuk")
 
-[node name="Loot" parent="Panel/MonsterInfo/Panel4" instance=ExtResource("3_x5u2f")]
-material = SubResource("ShaderMaterial_bfk1v")
+[node name="Loot" parent="Panel/MonsterInfo/Panel4" unique_id=1862159514 instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_osq1k")
 layout_mode = 0
 offset_left = 8.0
 offset_top = 1.0
@@ -418,7 +364,7 @@ theme_override_constants/line_spacing = 14
 text = "Notable Loot:
 None"
 
-[node name="Button" type="Button" parent="Panel/MonsterInfo"]
+[node name="Button" type="Button" parent="Panel/MonsterInfo" unique_id=1583272143]
 layout_mode = 0
 offset_left = 586.00006
 offset_top = 8.0
@@ -429,3 +375,47 @@ theme_override_constants/outline_size = 25
 theme_override_fonts/font = ExtResource("5_utror")
 theme_override_font_sizes/font_size = 100
 text = "x"
+
+[node name="ChooseRunes" parent="Panel" unique_id=1995779852 instance=ExtResource("3_x5u2f")]
+material = SubResource("ShaderMaterial_2p2ug")
+layout_mode = 0
+offset_left = 1.9999847
+offset_top = 674.00006
+offset_right = 1252.0
+offset_bottom = 811.00006
+scale = Vector2(0.54, 0.54)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/ChooseRunes" unique_id=2097863210]
+layout_mode = 0
+offset_left = 27.777805
+offset_top = 135.18512
+offset_right = 1218.5186
+offset_bottom = 542.5926
+theme_override_constants/margin_top = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/ChooseRunes/MarginContainer" unique_id=1705124196]
+custom_minimum_size = Vector2(1175, 0)
+layout_mode = 2
+vertical_scroll_mode = 3
+
+[node name="GridContainer" type="GridContainer" parent="Panel/ChooseRunes/MarginContainer/ScrollContainer" unique_id=377314481]
+custom_minimum_size = Vector2(1175, 372)
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 0
+columns = 10
+
+[node name="Fight" type="Button" parent="Panel" unique_id=2041025943]
+layout_mode = 0
+offset_left = 115.00001
+offset_top = 980.99994
+offset_right = 762.14276
+offset_bottom = 1119.0
+scale = Vector2(0.7, 0.7)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("5_utror")
+theme_override_font_sizes/font_size = 100
+text = "Let's go!"
