@@ -61,7 +61,7 @@ shader = ExtResource("6_jb7aq")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="FocusChamberModal" type="Control" unique_id=674759347 node_paths=PackedStringArray("mainMenuView", "practiceBtn", "trialBtn", "PracticeView", "easyBtn", "medBtn", "hardBtn", "backBtn1", "easy_hs", "med_hs", "hard_hs", "trial_hs", "trialView", "goToTrialBtn", "backBtn2")]
+[node name="FocusChamberModal" type="Control" unique_id=674759347 node_paths=PackedStringArray("mainMenuView", "practiceBtn", "trialBtn", "PracticeView", "easyBtn", "medBtn", "hardBtn", "backBtn1", "easy_hs", "med_hs", "hard_hs", "trial_hs", "trialView", "goToTrialBtn", "backBtn2", "trial_timer")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -88,6 +88,7 @@ trial_hs = NodePath("Panel/Trial/best4")
 trialView = NodePath("Panel/Trial")
 goToTrialBtn = NodePath("Panel/Trial/goTrialBtn")
 backBtn2 = NodePath("Panel/Trial/Back")
+trial_timer = NodePath("trialTimer")
 
 [node name="Panel" type="Panel" parent="." unique_id=199448428]
 layout_mode = 0
@@ -279,7 +280,6 @@ theme_override_font_sizes/font_size = 100
 text = "Back"
 
 [node name="Trial" type="Control" parent="Panel" unique_id=1245789740]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -350,3 +350,5 @@ theme_override_constants/outline_size = 30
 theme_override_fonts/font = ExtResource("4_gltvd")
 theme_override_font_sizes/font_size = 100
 text = "Go!"
+
+[node name="trialTimer" type="Timer" parent="." unique_id=892315124]
