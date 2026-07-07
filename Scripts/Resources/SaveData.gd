@@ -1,6 +1,17 @@
 extends Resource
 class_name SaveData
 
+@export_category("Test_game")
+@export var hp: int = 100
+@export var maxHp: int = 100
+@export var eventCount: int = 0
+@export var gold: int = 0
+@export var xp: int = 0
+@export var level: int = 1
+
+@export var currentArea: String = ""
+@export var inArea: bool = false
+
 @export_category("General")
 @export var loot_inventory:Dictionary = {
 	# "Orc Tooth": 10

@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://rat1lft0dkyi"]
+
+[ext_resource type="Script" uid="uid://c1o4akkfeqp8k" path="res://Scripts/MainController.gd" id="1_3dcjo"]
+[ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="2_n3d01"]
+[ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="3_dajxx"]
+[ext_resource type="Script" uid="uid://mr26jai5yegf" path="res://Scripts/TickSystem.gd" id="4_dajxx"]
+[ext_resource type="Script" uid="uid://cf4ig2g1iawaq" path="res://Scripts/AreaSystem.gd" id="5_fmqth"]
+
+[node name="MainController" type="Control" unique_id=671700929 node_paths=PackedStringArray("tickTimer", "eventLog")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_3dcjo")
+tickTimer = NodePath("TickTimer")
+eventLog = NodePath("UI/EventLogPanel/EventLog")
+
+[node name="UI" type="Control" parent="." unique_id=1458651066]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EventLogPanel" type="Panel" parent="UI" unique_id=863328441]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 250.0
+offset_right = -20.0
+offset_bottom = -290.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_n3d01")
+
+[node name="EventLog" type="RichTextLabel" parent="UI/EventLogPanel" unique_id=439339072]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 28.0
+offset_right = -28.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("3_dajxx")
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+scroll_following = true
+
+[node name="TickTimer" type="Timer" parent="." unique_id=861177701]
+
+[node name="TickSystem" type="Node" parent="." unique_id=2057466830]
+script = ExtResource("4_dajxx")
+metadata/_custom_type_script = "uid://mr26jai5yegf"
+
+[node name="AreaSystem" type="Node" parent="." unique_id=580081968]
+script = ExtResource("5_fmqth")
+metadata/_custom_type_script = "uid://cf4ig2g1iawaq"

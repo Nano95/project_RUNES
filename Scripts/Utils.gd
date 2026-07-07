@@ -360,3 +360,20 @@ func set_rainbow_text(label: RichTextLabel, text: String) -> void:
 		index += 1
 	
 	label.text = "[center][wave amp=50 freq=6]%s[/wave][/center]" % rainbow_text
+##=========================
+# ── COLOR MAP ────────────────────────────────────────────
+const LOG_COLORS = {
+	"combat":  "#e74c3c",
+	"loot":    "#c8880a",
+	"gather":  "#27ae60",
+	"discover":"#5dade2",
+	"system":  "#888888",
+	"omen":    "#9b59b6",
+	"town":    "#c8880a",
+	"danger":  "#e74c3c",
+}
+
+# ── BBCode HELPERS ────────────────────────────────────────
+func format_log(text: String, style: String) -> String:
+	var color = LOG_COLORS.get(style, "#cccccc")
+	return "[color=%s]%s[/color]\n" % [color, text]

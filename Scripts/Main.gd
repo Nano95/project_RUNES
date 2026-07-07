@@ -5,6 +5,7 @@ class_name MainNode
 @onready var game_ui:PackedScene = load("res://Scenes/GameUI.tscn")
 @onready var main_menu_ui:PackedScene = load("res://Scenes/MainMenu.tscn")
 @onready var focus_chamber:PackedScene = load("res://Scenes/FocusChamber.tscn")
+@onready var main_controller:PackedScene = load("res://Scenes/MainController.tscn")
 @export var reward_pop_up:PackedScene
 @export var info_pop_up:PackedScene
 @export var rested_panel_ref:PackedScene
@@ -43,7 +44,8 @@ func _ready() -> void:
 	# Now game things
 	Utils.setup(self)
 	Utils.update_crafting_speed()
-	spawn_main_menu()
+	#spawn_main_menu()
+	spawn_new_game()
 	
 	# GIVE PLAYER REWARDS
 	if !(OS.get_name() == "Windows"):
@@ -82,6 +84,10 @@ func spawn_focus_chamber(is_practice:bool, mode:String) -> void:
 		active_menu_ref.queue_free()
 	active_menu_ref = focus_chamber.instantiate() as FocusChamber
 	active_menu_ref.setup(self, is_practice, mode)
+	spawn_to_top_ui_layer(active_menu_ref)
+
+func spawn_new_game() -> void:
+	active_menu_ref = main_controller.instantiate() as MainController
 	spawn_to_top_ui_layer(active_menu_ref)
 
 func spawn_to_top_ui_layer(node) -> void:

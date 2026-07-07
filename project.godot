@@ -27,6 +27,8 @@ MonsterDatabase="*res://Scripts/MonsterDatabase.gd"
 RuneDatabase="*res://Scripts/RuneDatabase.gd"
 ItemsDatabase="*res://Scripts/ItemsDatabase.gd"
 CraftingSystem="*res://Scripts/CraftingSystem.gd"
+GameEvents="*uid://bvrldkqxg4r2c"
+AreaRegistry="*uid://c55x5g7cvvm6q"
 
 [display]
 
