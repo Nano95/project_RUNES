@@ -21,6 +21,12 @@ class_name SaveData
 @export var isFleeing: bool = false
 @export var fleeTicks: int = 0
 
+@export var inventory: Array[String] = []
+@export var inventoryMax: int = 20
+@export var chest: Array[String] = []
+@export var chestMax: int = 15
+@export var savedGold: int = 0
+
 @export_category("General")
 @export var loot_inventory:Dictionary = {
 	# "Orc Tooth": 10

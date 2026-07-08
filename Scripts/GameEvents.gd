@@ -10,6 +10,12 @@ signal areaEntered(areaName: String)
 signal areaExited
 @warning_ignore("unused_signal")
 signal areaUnlocked(areaName: String)
+@warning_ignore("unused_signal")
+signal goldDeposited(amount: int)
+@warning_ignore("unused_signal")
+signal inventoryChanged
+@warning_ignore("unused_signal")
+signal chestChanged
 
 ### COMBAT
 @warning_ignore("unused_signal")

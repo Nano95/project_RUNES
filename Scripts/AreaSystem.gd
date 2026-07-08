@@ -15,6 +15,16 @@ func enterArea(areaName: String) -> void:
 	GameEvents.areaEntered.emit(areaName)
 
 func exitArea() -> void:
+	var carried = main.game_data.gold
+	if (carried > 0):
+		main.game_data.savedGold += carried
+		main.game_data.gold = 0
+		GameEvents.eventLogged.emit(
+			"You deposit %d gold in town. Total saved: %d." % [carried, main.game_data.savedGold],
+            "town"
+		)
+		GameEvents.goldDeposited.emit(carried)
+	
 	main.game_data.currentArea = ""
 	main.game_data.inArea = false
 	main.save_game()

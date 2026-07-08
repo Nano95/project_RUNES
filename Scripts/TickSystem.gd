@@ -37,7 +37,6 @@ func onTick() -> void:
 	# If an omen occurred (pending monster), 
 	if combatSystem.pendingStrongMonster:
 		combatSystem.pendingStrongMonster = false
-		var main = Utils.getMain()
 		var monster = MonsterRegistry.rollMonster(main.game_data.currentArea, "strong")
 		combatSystem.startCombat(monster)
 		return

@@ -127,7 +127,8 @@ func flee() -> void:
 	GameEvents.combatFled.emit()
 
 func die() -> void:
-	GameEvents.eventLogged.emit("You have died.", "danger")
+	main.game_data.gold = 0
+	GameEvents.eventLogged.emit("You have died. Your gold and inventory are lost.", "danger")
 	clearCombat()
 	GameEvents.playerDied.emit()
 

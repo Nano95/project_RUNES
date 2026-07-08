@@ -7,6 +7,7 @@ class_name UIController
 @export var brewButton: Button
 @export var chestButton: Button
 @export var areaButtons: Array[Button] = []
+@export var inventorySystem: InventorySystem
 @export var areaSystem: AreaSystem
 
 func _ready() -> void:

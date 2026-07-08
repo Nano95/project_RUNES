@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://mr26jai5yegf" path="res://Scripts/TickSystem.gd" id="4_dajxx"]
 [ext_resource type="Script" uid="uid://cf4ig2g1iawaq" path="res://Scripts/AreaSystem.gd" id="5_fmqth"]
 [ext_resource type="Script" uid="uid://cmsfrujy8ifuq" path="res://Scripts/CombatSystem.gd" id="7_1fnpd"]
+[ext_resource type="Script" uid="uid://wy43n82n4e4s" path="res://Scripts/InventorySystem.gd" id="8_ck1p8"]
 
 [node name="MainController" type="Control" unique_id=671700929 node_paths=PackedStringArray("tickTimer", "eventLog")]
 layout_mode = 3
@@ -20,7 +21,7 @@ script = ExtResource("1_3dcjo")
 tickTimer = NodePath("TickTimer")
 eventLog = NodePath("UIController/MarginContainer/VBoxContainer/EventLogPanel/EventLog")
 
-[node name="UIController" type="Control" parent="." unique_id=1458651066 node_paths=PackedStringArray("mainActionRow", "areaSelectRow", "chooseAreaButton", "areaButtons", "areaSystem")]
+[node name="UIController" type="Control" parent="." unique_id=1458651066 node_paths=PackedStringArray("mainActionRow", "areaSelectRow", "chooseAreaButton", "areaButtons", "inventorySystem", "areaSystem")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,6 +33,7 @@ mainActionRow = NodePath("MarginContainer/VBoxContainer/MainActionRow")
 areaSelectRow = NodePath("MarginContainer/VBoxContainer/AreasSelectRow")
 chooseAreaButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/ChooseAreaBtn")
 areaButtons = [NodePath("MarginContainer/VBoxContainer/AreasSelectRow/area1")]
+inventorySystem = NodePath("../InventorySystem")
 areaSystem = NodePath("../AreaSystem")
 
 [node name="MarginContainer" type="MarginContainer" parent="UIController" unique_id=709362305]
@@ -118,3 +120,7 @@ metadata/_custom_type_script = "uid://cf4ig2g1iawaq"
 [node name="CombatSystem" type="Node" parent="." unique_id=1340201122]
 script = ExtResource("7_1fnpd")
 metadata/_custom_type_script = "uid://cmsfrujy8ifuq"
+
+[node name="InventorySystem" type="Node" parent="." unique_id=679220032]
+script = ExtResource("8_ck1p8")
+metadata/_custom_type_script = "uid://wy43n82n4e4s"

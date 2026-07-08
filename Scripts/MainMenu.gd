@@ -79,12 +79,12 @@ func populate_inventory() -> void:
 		buttons_items_dictionary.clear()
 		child.queue_free()
 	
-	for item in main.game_data.inventory:
-		var btn = inv_button.instantiate() as InventoryButton
-		inventory_grid.add_child(btn)
-		buttons_items_dictionary[item.to_string()] = btn
-		btn.equip_button_pressed.connect(equip_item.bind(btn,item))
-		btn.set_item(item)
+	#for item in main.game_data.inventory:
+		#var btn = inv_button.instantiate() as InventoryButton
+		#inventory_grid.add_child(btn)
+		#buttons_items_dictionary[item.to_string()] = btn
+		#btn.equip_button_pressed.connect(equip_item.bind(btn,item))
+		#btn.set_item(item)
 
 func equip_item(pressed_button:InventoryButton, item:EquipmentInstance) -> void:
 	var previous_selection = main.game_data.equipped[current_equipment_slot_selected]
