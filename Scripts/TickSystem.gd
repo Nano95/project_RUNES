@@ -2,6 +2,7 @@ extends Node
 class_name TickSystem
 
 var main:MainNode
+@export var combatSystem:CombatSystem
 
 const EVENT_WEIGHTS = {
 	"nothing_a": 8,
@@ -18,13 +19,30 @@ const EVENT_WEIGHTS = {
 
 func _ready() -> void:
 	main = Utils.get_main()
-	GameEvents.tickFired.connect(_on_tick)
+	GameEvents.tickFired.connect(onTick)
 
-func _on_tick() -> void:
+func onTick() -> void:
 	if (not main.game_data.inArea):
 		return
 	main.game_data.eventCount += 1
 	GameEvents.eventLogged.emit("Event #%d" % main.game_data.eventCount, "system")
+	
+	if (main.game_data.eventCount == 100):
+		AreaRegistry.tryUnlockNext(main.game_data.currentArea)
+	
+	# If in combat, we dont need to go further
+	if (main.game_data.inCombat):
+		return
+	
+	# If an omen occurred (pending monster), 
+	if combatSystem.pendingStrongMonster:
+		combatSystem.pendingStrongMonster = false
+		var main = Utils.getMain()
+		var monster = MonsterRegistry.rollMonster(main.game_data.currentArea, "strong")
+		combatSystem.startCombat(monster)
+		return
+	
+	# Regular events
 	_roll_event()
 
 func _roll_event() -> void:
@@ -39,7 +57,7 @@ func _roll_event() -> void:
 		return
 
 	if roll < 0.52:
-		GameEvents.eventLogged.emit("A monster appears!", "combat")
+		combatSystem.trySpawnMonster(main.game_data.eventCount)
 		return
 
 	if roll < 0.64:

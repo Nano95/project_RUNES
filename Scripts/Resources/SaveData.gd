@@ -9,8 +9,17 @@ class_name SaveData
 @export var xp: int = 0
 @export var level: int = 1
 
-@export var currentArea: String = ""
+@export var currentArea: String = "Town"
 @export var inArea: bool = false
+@export var unlockedAreas: Array[String] = ["Outskirts"]  # Outskirts unlocked by default
+
+@export var inCombat: bool = false
+@export var currentMonsterName: String = ""
+@export var currentMonsterTier: String = ""
+@export var currentMonsterHp: int = 0
+@export var currentMonsterAtk: int = 0
+@export var isFleeing: bool = false
+@export var fleeTicks: int = 0
 
 @export_category("General")
 @export var loot_inventory:Dictionary = {

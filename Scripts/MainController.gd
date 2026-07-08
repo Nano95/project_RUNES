@@ -10,15 +10,11 @@ class_name MainController
 func _ready() -> void:
 	GameEvents.eventLogged.connect(_on_event_logged)
 	tickTimer.wait_time = 1.2
-	tickTimer.timeout.connect(_on_tick)
+	tickTimer.timeout.connect(onTick)
 	tickTimer.start()
-	GameEvents.eventLogged.emit("You are in the safe zone.", "town")
-	await get_tree().create_timer(2.0).timeout
-	$AreaSystem.enterArea("Outskirts")
-	await get_tree().create_timer(3.0).timeout
-	$AreaSystem.exitArea()
+	GameEvents.eventLogged.emit("Welcome back to town!", "town")
 
-func _on_tick() -> void:
+func onTick() -> void:
 	GameEvents.tickFired.emit()
 
 func _on_event_logged(text: String, style: String) -> void:

@@ -22,3 +22,27 @@ func getArea(areaName: String) -> AreaData:
 		if a.areaName == areaName:
 			return a
 	return null
+
+func getNextLockedArea() -> AreaData:
+	var main = Utils.get_main()
+	for a in areas:
+		if not main.game_data.unlockedAreas.has(a.areaName):
+			return a
+	return null
+
+func tryUnlockNext(currentAreaName: String) -> void:
+	var main = Utils.get_main()
+	var currentIndex = -1
+	for i in areas.size():
+		if areas[i].areaName == currentAreaName:
+			currentIndex = i
+			break
+
+	if currentIndex == -1 or currentIndex + 1 >= areas.size():
+		return
+	
+	var nextArea = areas[currentIndex + 1]
+	if not main.game_data.unlockedAreas.has(nextArea.areaName):
+		main.game_data.unlockedAreas.append(nextArea.areaName)
+		main.save_game()
+		GameEvents.areaUnlocked.emit(nextArea.areaName)

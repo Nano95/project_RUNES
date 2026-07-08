@@ -24,4 +24,4 @@ func onAreaEntered(areaName: String) -> void:
 	GameEvents.eventLogged.emit("You enter " + areaName + ".", "discover")
 
 func onAreaExited() -> void:
-	GameEvents.eventLogged.emit("You return to the safe zone.", "town")
+	GameEvents.eventLogged.emit("You return to town safely.", "town")
