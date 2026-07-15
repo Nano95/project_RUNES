@@ -8,6 +8,8 @@ class_name SaveData
 @export var gold: int = 0
 @export var xp: int = 0
 @export var level: int = 1
+@export var currentWeight: float = 0.0
+@export var maxWeight: float = 50.0
 
 @export var currentArea: String = "Town"
 @export var inArea: bool = false
@@ -21,9 +23,10 @@ class_name SaveData
 @export var isFleeing: bool = false
 @export var fleeTicks: int = 0
 
-@export var inventory: Array[String] = []
-@export var inventoryMax: int = 20
+@export var backpack: Array[Dictionary] = []
+@export var backpackMax: int = 20
 @export var chest: Array[String] = []
+@export var chests: Array[ChestData] = []
 @export var chestMax: int = 15
 @export var savedGold: int = 0
 

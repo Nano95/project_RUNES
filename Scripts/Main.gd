@@ -40,6 +40,11 @@ func _ready() -> void:
 	verify_save_directory(save_data_path)
 	verify_save_directory(backup_data_path) #and for backup
 	load_game()
+	# SaveData is a pure data resource with no initialization logic.
+	# We handle first-time setup here in Main to avoid Resource lifecycle
+	# quirks — Resources don't guarantee _ready() or _init() timing when
+	# loaded from disk, so bootstrapping here is safer and more explicit.
+	_bootstrapSaveData() # For Adventure game
 	
 	# Now game things
 	Utils.setup(self)
@@ -51,6 +56,17 @@ func _ready() -> void:
 	if !(OS.get_name() == "Windows"):
 		print("===- Starting offline check from _ready")
 		check_offline_time_and_rewards()
+
+func _bootstrapSaveData() -> void:
+	if game_data.chests.size() == 0:
+		for i in range(6):
+			var chest = ChestData.new()
+			chest.id = i + 1
+			chest.unlocked = i == 0  # only chest 1 unlocked by default
+			# ARray does not need to be assigned on start.. empty by default and that's what we want
+			chest.upgradeLevel = 0
+			game_data.chests.append(chest)
+		save_game()
 
 func spawn_main_menu() -> void:
 	if (is_instance_valid(active_menu_ref)):

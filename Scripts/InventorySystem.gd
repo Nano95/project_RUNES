@@ -6,69 +6,148 @@ var main:MainNode
 func _ready() -> void:
 	main = Utils.get_main()
 	GameEvents.itemDropped.connect(onItemDropped)
+	GameEvents.leveledUp.connect(onLeveledUp)
+	GameEvents.potionUsed.connect(onPotionUsed)
 
 func onItemDropped(itemName: String) -> void:
-	addToInventory(itemName)
+	addToBackpack(itemName)
 
-func addToInventory(itemName: String) -> bool:
-	if main.game_data.inventory.size() >= main.game_data.inventoryMax:
+func onLeveledUp() -> void:
+	
+	main.game_data.maxWeight += 5.0
+	GameEvents.weightChanged.emit()
+
+# ── BACKPACK ─────────────────────────────────────────────
+func addToBackpack(itemName: String, qty: int = 1) -> bool:
+	
+	var item = ItemRegistry.getItem(itemName)
+	if not item:
+		return false
+
+	var weightToAdd = item.weight * qty
+	if (main.game_data.currentWeight + weightToAdd > main.game_data.maxWeight):
 		GameEvents.eventLogged.emit(
-			"Inventory full! %s left behind." % itemName, "system"
+			"Too heavy! %s left behind." % itemName, "system", false
 		)
 		return false
-	main.game_data.inventory.append(itemName)
+
+	var stackCap = ItemRegistry.getStackCap(itemName)
+	var remaining = qty
+
+	# Try to fill existing incomplete stacks first
+	for stack in main.game_data.backpack:
+		if remaining <= 0:
+			break
+		if stack["name"] == itemName and stack["qty"] < stackCap:
+			var space = stackCap - stack["qty"]
+			var toAdd = min(space, remaining)
+			stack["qty"] += toAdd
+			remaining -= toAdd
+
+	# Create new stacks for remainder
+	while remaining > 0:
+		var newStackQty = min(remaining, stackCap)
+		main.game_data.backpack.append({
+			"name": itemName,
+			"qty": newStackQty
+		})
+		remaining -= newStackQty
+
+	main.game_data.currentWeight += weightToAdd
 	main.save_game()
-	GameEvents.inventoryChanged.emit()
+	GameEvents.backpackChanged.emit()
+	GameEvents.weightChanged.emit()
 	return true
 
-func removeFromInventory(itemName: String) -> bool:
-	var idx = main.game_data.inventory.find(itemName)
-	if idx == -1:
+func removeFromBackpack(itemName: String, qty: int = 1) -> bool:
+	
+	if countInBackpack(itemName) < qty:
 		return false
-	main.game_data.inventory.remove_at(idx)
+
+	var item = ItemRegistry.getItem(itemName)
+	var remaining = qty
+
+	# Remove from stacks back to front
+	var i = main.game_data.backpack.size() - 1
+	while i >= 0 and remaining > 0:
+		var stack = main.game_data.backpack[i]
+		if stack["name"] == itemName:
+			var toRemove = min(stack["qty"], remaining)
+			stack["qty"] -= toRemove
+			remaining -= toRemove
+			if stack["qty"] <= 0:
+				main.game_data.backpack.remove_at(i)
+		i -= 1
+
+	if item:
+		main.game_data.currentWeight = max(
+			0.0, main.game_data.currentWeight - (item.weight * qty)
+		)
+
 	main.save_game()
-	GameEvents.inventoryChanged.emit()
+	GameEvents.backpackChanged.emit()
+	GameEvents.weightChanged.emit()
 	return true
 
-func addToChest(itemName: String) -> bool:
-	if main.game_data.chest.size() >= main.game_data.chestMax:
-		GameEvents.eventLogged.emit("Chest is full!", "system")
-		return false
-	main.game_data.chest.append(itemName)
-	main.save_game()
-	GameEvents.chestChanged.emit()
-	return true
-
-func removeFromChest(itemName: String) -> bool:
-	var idx = main.game_data.chest.find(itemName)
-	if idx == -1:
-		return false
-	main.game_data.chest.remove_at(idx)
-	main.save_game()
-	GameEvents.chestChanged.emit()
-	return true
-
-func moveToChest(itemName: String) -> void:
-	if removeFromInventory(itemName):
-		if not addToChest(itemName):
-			addToInventory(itemName)
-
-func moveToInventory(itemName: String) -> void:
-	if removeFromChest(itemName):
-		if not addToInventory(itemName):
-			addToChest(itemName)
-
-func storeAll() -> void:
-	var toMove = main.game_data.inventory.duplicate()
-	for itemName in toMove:
-		moveToChest(itemName)
-
-func hasItem(itemName: String) -> bool:
-	return main.game_data.inventory.has(itemName)
-
-func countItem(itemName: String) -> int:
+func countInBackpack(itemName: String) -> int:
+	
 	var count = 0
-	for item in main.game_data.inventory:
-		if item == itemName:
-			count += 1
+	for stack in main.game_data.backpack:
+		if stack["name"] == itemName:
+			count += stack["qty"]
 	return count
+
+func hasInBackpack(itemName: String, qty: int = 1) -> bool:
+	return countInBackpack(itemName) >= qty
+
+func getBackpackSlotCount() -> int:
+	
+	return main.game_data.backpack.size()
+
+# ── POTIONS ──────────────────────────────────────────────
+func onPotionUsed(itemName: String) -> void:
+	
+	if main.game_data.hp >= main.game_data.maxHp:
+		GameEvents.eventLogged.emit("Already at full HP.", "system", false)
+		return
+	if not hasInBackpack(itemName):
+		return
+	var healAmount = getPotionHeal(itemName)
+	removeFromBackpack(itemName, 1)
+	main.game_data.hp = min(main.game_data.maxHp, main.game_data.hp + healAmount)
+	main.save_game()
+	GameEvents.eventLogged.emit(
+		"Used %s. Restored %d HP." % [itemName, healAmount], "gather", false
+	)
+
+func getPotionHeal(itemName: String) -> int:
+	match itemName:
+		"Health Potion":      return 30
+		"Minor Heal Potion":  return 20
+		"Berry Tonic":        return 15
+		"Field Potion":       return 30
+		"Strong Heal Potion": return 50
+		"Crimson Draught":    return 45
+		"Herbal Elixir":      return 60
+		"Berry Extract":      return 35
+		"Blood Tonic":        return 40
+		"Venom Cure":         return 25
+		"Root Brew":          return 55
+		"Shadow Salve":       return 35
+		"Twilight Potion":    return 70
+	return 0
+
+# ── SHARED HELPER ─────────────────────────────────────────
+func getStackedView(items: Array) -> Array[Dictionary]:
+	# items is already stacked as Array[Dictionary]
+	# Just return it enriched with type info for display
+	var result: Array[Dictionary] = []
+	for stack in items:
+		result.append({
+			"name": stack["name"],
+			"qty": stack["qty"],
+			"type": ItemRegistry.getType(stack["name"]),
+			"stackable": ItemRegistry.isStackable(stack["name"]),
+			"cap": ItemRegistry.getStackCap(stack["name"])
+		})
+	return result

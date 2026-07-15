@@ -10,7 +10,7 @@ const OMENS = [
 	"A shadow passes overhead — nothing is there.",
 ]
 
-var pendingStrongMonster: bool = false
+var pendingStrongMonsterIn: int = 0
 var main:MainNode
 
 func _ready() -> void:
@@ -38,9 +38,9 @@ func startCombat(monster: MonsterData) -> void:
 
 func trySpawnMonster(eventCount: int) -> void:
 	var tier = MonsterRegistry.rollTier(eventCount)
-	if tier == "strong" and eventCount <= 40:
-		pendingStrongMonster = true
-		GameEvents.eventLogged.emit(OMENS[randi() % OMENS.size()], "omen")
+	if (tier == "strong" and eventCount <= 40):
+		pendingStrongMonsterIn = 10
+		GameEvents.eventLogged.emit(OMENS[randi() % OMENS.size()], "omen", true)
 		return
 	if (tier == "elite" and eventCount < 50):
 		tier = "strong"
@@ -50,7 +50,8 @@ func trySpawnMonster(eventCount: int) -> void:
 func onCombatStarted(monster: MonsterData) -> void:
 	GameEvents.eventLogged.emit(
 		"A %s appears! [%s]" % [monster.monsterName, monster.tier.to_upper()],
-        "danger"
+		"danger",
+		true
 	)
 
 func tickCombat() -> void:
@@ -69,7 +70,7 @@ func tickCombat() -> void:
 				main.game_data.currentMonsterName,
 				monsterAtk,
 				main.game_data.fleeTicks
-			], "combat"
+			], "combat", false
 		)
 		if main.game_data.hp <= 0:
 			die()
@@ -85,7 +86,7 @@ func tickCombat() -> void:
 			main.game_data.currentMonsterName,
 			playerAtk,
 			monsterAtk
-		], "combat"
+		], "combat", false
 	)
 
 	if main.game_data.hp <= 0:
@@ -111,25 +112,27 @@ func winCombat() -> void:
 			main.game_data.currentMonsterName,
 			gold,
 			monster.xp
-		], "loot"
+		], "loot", true
 	)
 	var drops = MonsterRegistry.rollDrops(monster)
 	for drop in drops:
-		GameEvents.eventLogged.emit("Looted: %s." % drop, "loot")
+		GameEvents.eventLogged.emit("Looted: %s." % drop, "loot", false)
 		GameEvents.itemDropped.emit(drop)
 	clearCombat()
 	GameEvents.combatWon.emit(gold, monster.xp)
 	main.save_game()
 
 func flee() -> void:
-	GameEvents.eventLogged.emit("You escaped!", "system")
+	GameEvents.eventLogged.emit("You escaped!", "system", false)
 	clearCombat()
 	GameEvents.combatFled.emit()
 
 func die() -> void:
 	main.game_data.gold = 0
-	GameEvents.eventLogged.emit("You have died. Your gold and inventory are lost.", "danger")
+	main.game_data.backpack = []
+	main.game_data.currentWeight = 0.0
 	clearCombat()
+	GameEvents.eventLogged.emit("You have died. Your gold and inventory are lost.", "danger", false)
 	GameEvents.playerDied.emit()
 
 func clearCombat() -> void:
@@ -146,4 +149,4 @@ func onFleeRequested() -> void:
 		return
 	main.game_data.isFleeing = true
 	main.game_data.fleeTicks = 3
-	GameEvents.eventLogged.emit("You attempt to flee...", "system")
+	GameEvents.eventLogged.emit("You attempt to flee...", "system", false)

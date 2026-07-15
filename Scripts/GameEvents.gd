@@ -1,7 +1,7 @@
 extends Node
 
 @warning_ignore("unused_signal")
-signal eventLogged(text: String, style: String)
+signal eventLogged(text: String, style: String, show_number:bool)
 @warning_ignore("unused_signal")
 signal tickFired
 @warning_ignore("unused_signal")
@@ -13,9 +13,39 @@ signal areaUnlocked(areaName: String)
 @warning_ignore("unused_signal")
 signal goldDeposited(amount: int)
 @warning_ignore("unused_signal")
-signal inventoryChanged
+signal checkpointReached
+@warning_ignore("unused_signal")
+signal checkpointContinued
+@warning_ignore("unused_signal")
+signal weightChanged
+@warning_ignore("unused_signal")
+signal itemInspected(itemName: String)
+@warning_ignore("unused_signal")
+signal leveledUp
+@warning_ignore("unused_signal")
+signal potionUsed(itemName: String)
+@warning_ignore("unused_signal")
+signal itemLongPressed(itemName: String)
+@warning_ignore("unused_signal")
+signal itemEquipped(itemName: String)
+@warning_ignore("unused_signal")
+signal gatherStarted(itemName: String, ticks: int)
+@warning_ignore("unused_signal")
+signal gatherTick(itemName: String, ticksLeft: int)
+@warning_ignore("unused_signal")
+signal gatherCompleted(itemName: String)
+@warning_ignore("unused_signal")
+signal chestUnlocked(chestId: int)
+@warning_ignore("unused_signal")
+signal chestUpgraded(chestId: int)
+@warning_ignore("unused_signal")
+signal chestItemMoved(chestId: int)
 @warning_ignore("unused_signal")
 signal chestChanged
+@warning_ignore("unused_signal")
+signal backpackChanged
+@warning_ignore("unused_signal")
+signal hpChanged
 
 ### COMBAT
 @warning_ignore("unused_signal")

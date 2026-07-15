@@ -30,6 +30,7 @@ CraftingSystem="*res://Scripts/CraftingSystem.gd"
 GameEvents="*uid://bvrldkqxg4r2c"
 AreaRegistry="*uid://c55x5g7cvvm6q"
 MonsterRegistry="*uid://bylotew55nqv1"
+ItemRegistry="*uid://be11wblu16sku"
 
 [display]
 

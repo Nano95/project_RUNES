@@ -376,4 +376,10 @@ const LOG_COLORS = {
 # ── BBCode HELPERS ────────────────────────────────────────
 func format_log(text: String, style: String) -> String:
 	var color = LOG_COLORS.get(style, "#cccccc")
-	return "[color=%s]%s[/color]\n" % [color, text]
+	return "[color=%s]%s[/color]" % [color, text]
+
+func format_log_line(number: int, text: String, style: String) -> String:
+	return "%s %s\n" % [
+		format_log("#%d" % number, "system"),
+		format_log(text, style)
+	]

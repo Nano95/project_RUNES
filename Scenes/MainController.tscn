@@ -4,10 +4,166 @@
 [ext_resource type="Theme" uid="uid://bahsos2kud6is" path="res://Resources/Themes/Panel_theme_res.tres" id="2_n3d01"]
 [ext_resource type="Script" uid="uid://c5k7vhn4urdfa" path="res://Scripts/UIController.gd" id="2_racw2"]
 [ext_resource type="FontFile" uid="uid://dkwdv1gjlxyfy" path="res://TikTokSans_24pt-Regular.ttf" id="3_dajxx"]
+[ext_resource type="Script" uid="uid://eb0fcjdjyxjo" path="res://Scripts/StatsDisplay.gd" id="3_ftth8"]
 [ext_resource type="Script" uid="uid://mr26jai5yegf" path="res://Scripts/TickSystem.gd" id="4_dajxx"]
 [ext_resource type="Script" uid="uid://cf4ig2g1iawaq" path="res://Scripts/AreaSystem.gd" id="5_fmqth"]
+[ext_resource type="Theme" uid="uid://6l1e7tacwmvs" path="res://Resources/Themes/SubpanelT2_theme_res.tres" id="5_qjsjv"]
+[ext_resource type="Script" uid="uid://dady54gqn5m7r" path="res://Scripts/InventoryDisplay.gd" id="6_108yi"]
+[ext_resource type="PackedScene" uid="uid://l7ogby45st2d" path="res://Scenes/MyLabel.tscn" id="6_prt4a"]
 [ext_resource type="Script" uid="uid://cmsfrujy8ifuq" path="res://Scripts/CombatSystem.gd" id="7_1fnpd"]
+[ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="7_108yi"]
 [ext_resource type="Script" uid="uid://wy43n82n4e4s" path="res://Scripts/InventorySystem.gd" id="8_ck1p8"]
+[ext_resource type="Theme" uid="uid://bbbw1in72yvu1" path="res://Resources/Themes/Subpanel_theme_res.tres" id="9_8gkgp"]
+[ext_resource type="Script" uid="uid://bnfiijiu0s8yx" path="res://Scripts/ItemActionModal.gd" id="10_ftth8"]
+[ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="10_gpdd1"]
+[ext_resource type="Script" uid="uid://hdtvayj8dw6n" path="res://Scripts/StorageDisplay.gd" id="13_ab47o"]
+[ext_resource type="Theme" uid="uid://herb326sm84p" path="res://Resources/Themes/SubpanelT3_theme_res.tres" id="13_kxegi"]
+[ext_resource type="Script" uid="uid://cbfawhw0v20ea" path="res://Scripts/MonsterBattleOverlay.gd" id="13_vlrs7"]
+[ext_resource type="Script" uid="uid://buhguegqkcr4k" path="res://Scripts/GatherSystem.gd" id="14_6iwwj"]
+[ext_resource type="Script" uid="uid://cbw7r5lrmqf02" path="res://Scripts/ChestSystem.gd" id="20_7kxyy"]
+[ext_resource type="Script" uid="uid://b37mlyqlp46f3" path="res://Scripts/LevelSystem.gd" id="22_3jiro"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ab47o"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3jiro"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xl505"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_knc0e"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i0mvu"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g72ry"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gg2r6"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cssra"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_px8ax"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shy7a"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ipr08"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7g1mk"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ds30n"]
+shader = ExtResource("10_gpdd1")
+shader_parameter/lod = 2.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yym0r"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nmloh"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pp434"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_medgt"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d0b7u"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lbmfx"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1q78x"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8l5l1"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4j0hr"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8whxx"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p5mh2"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
 
 [node name="MainController" type="Control" unique_id=671700929 node_paths=PackedStringArray("tickTimer", "eventLog")]
 layout_mode = 3
@@ -21,7 +177,7 @@ script = ExtResource("1_3dcjo")
 tickTimer = NodePath("TickTimer")
 eventLog = NodePath("UIController/MarginContainer/VBoxContainer/EventLogPanel/EventLog")
 
-[node name="UIController" type="Control" parent="." unique_id=1458651066 node_paths=PackedStringArray("mainActionRow", "areaSelectRow", "chooseAreaButton", "areaButtons", "inventorySystem", "areaSystem")]
+[node name="UIController" type="Control" parent="." unique_id=1458651066 node_paths=PackedStringArray("mainActionRow", "areaSelectRow", "chooseAreaButton", "storageButton", "areaButtons", "inventorySystem", "storageDisplay", "areaSystem", "adventuringRow", "inventoryPanel", "continueButton", "retreatButton")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,9 +188,15 @@ script = ExtResource("2_racw2")
 mainActionRow = NodePath("MarginContainer/VBoxContainer/MainActionRow")
 areaSelectRow = NodePath("MarginContainer/VBoxContainer/AreasSelectRow")
 chooseAreaButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/ChooseAreaBtn")
+storageButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/StorageBtn")
 areaButtons = [NodePath("MarginContainer/VBoxContainer/AreasSelectRow/area1")]
 inventorySystem = NodePath("../InventorySystem")
+storageDisplay = NodePath("StorageModal")
 areaSystem = NodePath("../AreaSystem")
+adventuringRow = NodePath("MarginContainer/VBoxContainer/AdventuringRow")
+inventoryPanel = NodePath("MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay")
+continueButton = NodePath("MarginContainer/VBoxContainer/AdventuringRow/Continue")
+retreatButton = NodePath("MarginContainer/VBoxContainer/AdventuringRow/Retreat")
 
 [node name="MarginContainer" type="MarginContainer" parent="UIController" unique_id=709362305]
 layout_mode = 0
@@ -44,16 +206,226 @@ size_flags_vertical = 3
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 90
+theme_override_constants/margin_bottom = 65
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIController/MarginContainer" unique_id=174457653]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="TopRow" type="Control" parent="UIController/MarginContainer/VBoxContainer" unique_id=724725565]
+[node name="TopRow" type="Control" parent="UIController/MarginContainer/VBoxContainer" unique_id=724725565 node_paths=PackedStringArray("hpValue", "xpValue", "lvValue", "hpBar", "xpBar", "goldLabel", "goldValue", "areaValue", "eventValue")]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 1.5
+script = ExtResource("3_ftth8")
+hpValue = NodePath("StatsLayout/Stats/HP/NUMBER")
+xpValue = NodePath("StatsLayout/Stats/XP/NUMBER")
+lvValue = NodePath("StatsLayout/Stats/XP/LV")
+hpBar = NodePath("StatsLayout/Stats/HP/ProgressBar")
+xpBar = NodePath("StatsLayout/Stats/XP/ProgressBar")
+goldLabel = NodePath("StatsLayout/Stats/Gold/TITLE")
+goldValue = NodePath("StatsLayout/Stats/Gold/QTY")
+areaValue = NodePath("StatsLayout/Panel/LOCATION")
+eventValue = NodePath("StatsLayout/Panel/EVENT")
+
+[node name="StatsLayout" type="VBoxContainer" parent="UIController/MarginContainer/VBoxContainer/TopRow" unique_id=900261903]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Panel" type="Panel" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout" unique_id=1377790297]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme = ExtResource("5_qjsjv")
+
+[node name="LOCATION" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Panel" unique_id=1696817232 instance=ExtResource("6_prt4a")]
+material = SubResource("ShaderMaterial_ab47o")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.9999986
+offset_top = 0.99999857
+offset_right = 1603.6667
+offset_bottom = 101.33299
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+text = "Town"
+vertical_alignment = 1
+
+[node name="EVENT" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Panel" unique_id=278627998 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.83, 0.83, 0.83, 1)
+material = SubResource("ShaderMaterial_3jiro")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.9999986
+offset_top = 0.99999857
+offset_right = 1577.0
+offset_bottom = 101.33299
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 70
+text = "Event #1"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Stats" type="HBoxContainer" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout" unique_id=548009463]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="HP" type="Panel" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats" unique_id=1872387473]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_qjsjv")
+
+[node name="TITLE" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/HP" unique_id=245101516 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.83, 0.83, 0.83, 1)
+material = SubResource("ShaderMaterial_xl505")
+layout_mode = 1
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 707.99994
+offset_bottom = 104.0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 70
+text = "HP"
+vertical_alignment = 1
+
+[node name="NUMBER" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/HP" unique_id=617930616 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.4426837, 0.9765625, 0.33187866, 1)
+material = SubResource("ShaderMaterial_knc0e")
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -17.0
+offset_right = 707.99994
+offset_bottom = 107.0
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 90
+text = "100/100"
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/HP" unique_id=793133424]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = 17.5
+offset_right = 212.0
+offset_bottom = 34.5
+grow_vertical = 2
+value = 80.0
+show_percentage = false
+
+[node name="XP" type="Panel" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats" unique_id=123069569]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_qjsjv")
+
+[node name="TITLE" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/XP" unique_id=2129737308 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.83, 0.83, 0.83, 1)
+material = SubResource("ShaderMaterial_i0mvu")
+layout_mode = 1
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 707.99994
+offset_bottom = 104.0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 70
+text = "XP"
+vertical_alignment = 1
+
+[node name="LV" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/XP" unique_id=1357701338 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.83, 0.83, 0.83, 1)
+material = SubResource("ShaderMaterial_g72ry")
+layout_mode = 1
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 707.99994
+offset_bottom = 104.0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 70
+text = "LVL: 100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="NUMBER" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/XP" unique_id=1918458134 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.33333337, 0.82573533, 0.9764706, 1)
+material = SubResource("ShaderMaterial_gg2r6")
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -17.0
+offset_right = 707.99994
+offset_bottom = 107.0
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 90
+text = "0/100"
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/XP" unique_id=673016376]
+self_modulate = Color(0.20703125, 0.81414795, 1, 1)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = 17.5
+offset_right = 212.0
+offset_bottom = 34.5
+grow_vertical = 2
+value = 50.0
+show_percentage = false
+
+[node name="Gold" type="Panel" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats" unique_id=1342676474]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_qjsjv")
+
+[node name="TITLE" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/Gold" unique_id=476879201 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.83, 0.83, 0.83, 1)
+material = SubResource("ShaderMaterial_cssra")
+layout_mode = 1
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 707.99994
+offset_bottom = 104.0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 70
+text = "Gold"
+vertical_alignment = 1
+
+[node name="QTY" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/Gold" unique_id=1880836942 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.9764706, 0.9664216, 0.33333337, 1)
+material = SubResource("ShaderMaterial_px8ax")
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -17.0
+offset_right = 707.99994
+offset_bottom = 107.0
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 90
+text = "1000"
+vertical_alignment = 1
 
 [node name="EventLogPanel" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=863328441]
 layout_mode = 2
@@ -74,7 +446,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/outline_size = 10
 theme_override_fonts/normal_font = ExtResource("3_dajxx")
-theme_override_font_sizes/normal_font_size = 35
+theme_override_font_sizes/normal_font_size = 28
 bbcode_enabled = true
 scroll_following = true
 
@@ -82,13 +454,23 @@ scroll_following = true
 custom_minimum_size = Vector2(678, 0)
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 15
 
 [node name="ChooseAreaBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=793530980]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Choose Area"
+
+[node name="StorageBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=120215516]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Storage"
 
 [node name="AreasSelectRow" type="GridContainer" parent="UIController/MarginContainer/VBoxContainer" unique_id=2070690060]
 visible = false
@@ -106,11 +488,628 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Hunting Grounds"
 
+[node name="AdventuringRow" type="HBoxContainer" parent="UIController/MarginContainer/VBoxContainer" unique_id=1173755062]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="BackpackDisplay" type="Panel" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow" unique_id=1869722029 node_paths=PackedStringArray("itemFlow", "weightLabel", "spacesLabel", "inventorySystem")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_qjsjv")
+script = ExtResource("6_108yi")
+itemFlow = NodePath("VScrollBar/InventoryGrid")
+weightLabel = NodePath("WEIGHT")
+spacesLabel = NodePath("QTY")
+inventorySystem = NodePath("../../../../../InventorySystem")
+
+[node name="Title" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay" unique_id=1349935487 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_shy7a")
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_right = 1042.0
+offset_bottom = 83.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 60
+text = "Backpack"
+
+[node name="QTY" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay" unique_id=8404646 instance=ExtResource("6_prt4a")]
+material = SubResource("ShaderMaterial_ipr08")
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -248.0
+offset_right = 552.0
+offset_bottom = 83.0
+grow_horizontal = 0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 60
+text = "0 / 20"
+horizontal_alignment = 2
+
+[node name="WEIGHT" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay" unique_id=1267963551 instance=ExtResource("6_prt4a")]
+material = SubResource("ShaderMaterial_7g1mk")
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -689.0
+offset_right = 1604.333
+offset_bottom = 83.0
+grow_horizontal = 0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 60
+text = "Weight: 100 / 1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VScrollBar" type="ScrollContainer" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay" unique_id=1614648927]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 25.0
+offset_right = 681.0
+offset_bottom = 170.0
+horizontal_scroll_mode = 0
+
+[node name="InventoryGrid" type="HFlowContainer" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay/VScrollBar" unique_id=1908519590]
+custom_minimum_size = Vector2(670, 145)
+layout_mode = 2
+theme_override_constants/h_separation = 7
+theme_override_constants/v_separation = 6
+
+[node name="Continue" type="Button" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow" unique_id=1247342207]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Continue"
+
+[node name="Retreat" type="Button" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow" unique_id=1074962399]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Retreat"
+
+[node name="ItemActionContainer" type="ColorRect" parent="UIController" unique_id=1469258999 node_paths=PackedStringArray("itemNameLabel", "equipButton", "dropButton", "cancelButton", "inventorySystem")]
+visible = false
+material = SubResource("ShaderMaterial_ds30n")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_ftth8")
+itemNameLabel = NodePath("ItemActionModal/TitlePanel/Name")
+equipButton = NodePath("ItemActionModal/HBoxContainer/Equip")
+dropButton = NodePath("ItemActionModal/HBoxContainer/Drop")
+cancelButton = NodePath("ItemActionModal/HBoxContainer/Close")
+inventorySystem = NodePath("../../InventorySystem")
+
+[node name="ItemActionModal" type="Panel" parent="UIController/ItemActionContainer" unique_id=981802715]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.0
+offset_top = -366.5
+offset_right = 345.0
+offset_bottom = 366.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("9_8gkgp")
+
+[node name="TitlePanel" type="Panel" parent="UIController/ItemActionContainer/ItemActionModal" unique_id=996083105]
+layout_mode = 0
+offset_right = 690.0
+offset_bottom = 45.0
+theme = ExtResource("5_qjsjv")
+
+[node name="Name" parent="UIController/ItemActionContainer/ItemActionModal/TitlePanel" unique_id=304158171 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_yym0r")
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 9.0
+offset_right = 1043.0
+offset_bottom = 140.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 80
+text = "Item Name"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIController/ItemActionContainer/ItemActionModal" unique_id=1470706122]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -129.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="Equip" type="Button" parent="UIController/ItemActionContainer/ItemActionModal/HBoxContainer" unique_id=737017217]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Equip
+"
+
+[node name="Drop" type="Button" parent="UIController/ItemActionContainer/ItemActionModal/HBoxContainer" unique_id=445470627]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Drop"
+
+[node name="Close" type="Button" parent="UIController/ItemActionContainer/ItemActionModal/HBoxContainer" unique_id=756441955]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Close"
+
+[node name="StorageModal" type="ColorRect" parent="UIController" unique_id=700632207 node_paths=PackedStringArray("backpackFlow", "backpackTitleCap", "backpackWeightLabel", "chestFlow", "chestCapacityLabel", "chestNameLabel", "chestGrid", "upgradeLabel", "upgradeDetails", "buildButton", "closeButton", "chestSystem")]
+visible = false
+material = SubResource("ShaderMaterial_ds30n")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_ab47o")
+backpackFlow = NodePath("StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/VScrollBar/backpackGrid")
+backpackTitleCap = NodePath("StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/HBoxContainer/Title")
+backpackWeightLabel = NodePath("StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/HBoxContainer/Weight")
+chestFlow = NodePath("StoragePanel/MarginContainer/VBoxContainer/chestPanel/TOP/VScrollBar/chestGrid")
+chestCapacityLabel = NodePath("StoragePanel/MarginContainer/VBoxContainer/chestPanel/TOP/Title")
+chestNameLabel = NodePath("StoragePanel/MarginContainer/VBoxContainer/chestPanel/TOP/Title")
+chestGrid = NodePath("StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM/HBoxContainer")
+upgradeLabel = NodePath("StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM/upgradeLabel")
+upgradeDetails = NodePath("StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM/HBoxContainer/upgradeDetails")
+buildButton = NodePath("StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM/HBoxContainer/BuildButton")
+closeButton = NodePath("StoragePanel/MarginContainer/VBoxContainer/ClosePanel")
+chestSystem = NodePath("../../ChestSystem")
+
+[node name="StoragePanel" type="Panel" parent="UIController/StorageModal" unique_id=1273248166]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.0
+offset_top = -610.0
+offset_right = 345.0
+offset_bottom = 569.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("9_8gkgp")
+
+[node name="TitlePanel" type="Panel" parent="UIController/StorageModal/StoragePanel" unique_id=525178169]
+layout_mode = 0
+offset_right = 690.0
+offset_bottom = 45.0
+theme = ExtResource("5_qjsjv")
+
+[node name="Name" parent="UIController/StorageModal/StoragePanel/TitlePanel" unique_id=1856336911 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_nmloh")
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 9.0
+offset_right = 1043.0
+offset_bottom = 140.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 80
+text = "Storage"
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UIController/StorageModal/StoragePanel" unique_id=2089670271]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer" unique_id=316797317]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="backpackPanel" type="Panel" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer" unique_id=1402454724]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("13_kxegi")
+
+[node name="TOP" type="VBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel" unique_id=476456849]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 8.0
+offset_right = 672.0
+offset_bottom = 336.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP" unique_id=649797338]
+layout_mode = 2
+
+[node name="Title" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/HBoxContainer" unique_id=1448538055 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_pp434")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Backpack (0/20)"
+vertical_alignment = 1
+
+[node name="Weight" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/HBoxContainer" unique_id=117332496 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_medgt")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Weight (10/80)oz"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VScrollBar" type="ScrollContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP" unique_id=737082488]
+custom_minimum_size = Vector2(0, 290)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="backpackGrid" type="HFlowContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/VScrollBar" unique_id=1029594101]
+custom_minimum_size = Vector2(670, 280)
+layout_mode = 2
+theme_override_constants/h_separation = 7
+theme_override_constants/v_separation = 6
+
+[node name="chestPanel" type="Panel" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer" unique_id=1642933764]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("13_kxegi")
+
+[node name="TOP" type="VBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestPanel" unique_id=1371929412]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 8.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestPanel/TOP" unique_id=458006425 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_d0b7u")
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Chest 1 (0/20)"
+vertical_alignment = 1
+
+[node name="VScrollBar" type="ScrollContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestPanel/TOP" unique_id=1852514462]
+custom_minimum_size = Vector2(0, 290)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="chestGrid" type="HFlowContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestPanel/TOP/VScrollBar" unique_id=806477718]
+custom_minimum_size = Vector2(670, 280)
+layout_mode = 2
+theme_override_constants/h_separation = 7
+theme_override_constants/v_separation = 6
+
+[node name="chestSelectPanel" type="Panel" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer" unique_id=1200184606]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
+theme = ExtResource("13_kxegi")
+
+[node name="BOTTOM" type="VBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel" unique_id=261696771]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 13.0
+offset_right = 665.0
+offset_bottom = 181.0
+
+[node name="Title" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM" unique_id=123750841 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_lbmfx")
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Chests"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM" unique_id=1334215644]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Chest" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM/HBoxContainer" unique_id=1083178684]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Chest 1"
+
+[node name="Chest2" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM/HBoxContainer" unique_id=35200581]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Chest 2"
+
+[node name="Chest3" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM/HBoxContainer" unique_id=661348212]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Chest 3"
+
+[node name="Chest4" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM/HBoxContainer" unique_id=449736511]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Chest 4"
+
+[node name="Chest5" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM/HBoxContainer" unique_id=1832104945]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Chest 5"
+
+[node name="upgradePanel" type="Panel" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer" unique_id=233616020]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
+theme = ExtResource("13_kxegi")
+
+[node name="BOTTOM" type="VBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel" unique_id=888638861]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 9.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM" unique_id=898538128 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_1q78x")
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Craft Storage Upgrade"
+vertical_alignment = 1
+
+[node name="upgradeLabel" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM" unique_id=913053343 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_8l5l1")
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "MAX UPGRADE COMPLETE"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM" unique_id=1359600201]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="upgradeDetails" type="RichTextLabel" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM/HBoxContainer" unique_id=616643088]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.8
+bbcode_enabled = true
+text = "Upgrade Label"
+
+[node name="BuildButton" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM/HBoxContainer" unique_id=317496883]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Build"
+
+[node name="ClosePanel" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer" unique_id=691294948]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Close"
+
+[node name="MonsterBattleOverlay" type="ColorRect" parent="UIController" unique_id=1221790153 node_paths=PackedStringArray("enemyNameLabel", "enemyHPBar", "enemyHPValue", "fleeButton")]
+visible = false
+material = SubResource("ShaderMaterial_ds30n")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 211.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_vlrs7")
+enemyNameLabel = NodePath("MonsterBattlePanel/MonsterName")
+enemyHPBar = NodePath("MonsterBattlePanel/HpProgressBar")
+enemyHPValue = NodePath("MonsterBattlePanel/MonsterHp")
+fleeButton = NodePath("MonsterBattlePanel/HBoxContainer/Flee")
+
+[node name="MonsterBattlePanel" type="Panel" parent="UIController/MonsterBattleOverlay" unique_id=242767461]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.0
+offset_top = -160.25
+offset_right = 345.0
+offset_bottom = 160.25
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("9_8gkgp")
+
+[node name="TitlePanel" type="Panel" parent="UIController/MonsterBattleOverlay/MonsterBattlePanel" unique_id=1357411910]
+layout_mode = 0
+offset_right = 690.0
+offset_bottom = 45.0
+theme = ExtResource("5_qjsjv")
+
+[node name="Title2" parent="UIController/MonsterBattleOverlay/MonsterBattlePanel/TitlePanel" unique_id=1470752034 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.87, 0.25230002, 0.25230002, 1)
+material = SubResource("ShaderMaterial_4j0hr")
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 9.0
+offset_right = 1043.0
+offset_bottom = 140.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 80
+text = "In Combat..."
+vertical_alignment = 1
+script = ExtResource("14_6iwwj")
+
+[node name="MonsterName" parent="UIController/MonsterBattleOverlay/MonsterBattlePanel" unique_id=163336450 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_8whxx")
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 9.0
+offset_top = 67.75
+offset_right = 1554.0
+offset_bottom = 207.75
+grow_horizontal = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 80
+text = "Monster Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MonsterHp" parent="UIController/MonsterBattleOverlay/MonsterBattlePanel" unique_id=37391184 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_p5mh2")
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 9.0
+offset_top = 104.75
+offset_right = 1554.0
+offset_bottom = 244.75
+grow_horizontal = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 80
+text = "20/30"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HpProgressBar" type="ProgressBar" parent="UIController/MonsterBattleOverlay/MonsterBattlePanel" unique_id=92946487]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.5
+offset_top = -13.5
+offset_right = 152.5
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIController/MonsterBattleOverlay/MonsterBattlePanel" unique_id=1123300176]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -129.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="Flee" type="Button" parent="UIController/MonsterBattleOverlay/MonsterBattlePanel/HBoxContainer" unique_id=1377760354]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 48
+text = "Flee"
+
 [node name="TickTimer" type="Timer" parent="." unique_id=861177701]
 
-[node name="TickSystem" type="Node" parent="." unique_id=2057466830 node_paths=PackedStringArray("combatSystem")]
+[node name="TickSystem" type="Node" parent="." unique_id=2057466830 node_paths=PackedStringArray("combatSystem", "gatherSystem")]
 script = ExtResource("4_dajxx")
 combatSystem = NodePath("../CombatSystem")
+gatherSystem = NodePath("../GatherSystem")
 metadata/_custom_type_script = "uid://mr26jai5yegf"
 
 [node name="AreaSystem" type="Node" parent="." unique_id=580081968]
@@ -124,3 +1123,16 @@ metadata/_custom_type_script = "uid://cmsfrujy8ifuq"
 [node name="InventorySystem" type="Node" parent="." unique_id=679220032]
 script = ExtResource("8_ck1p8")
 metadata/_custom_type_script = "uid://wy43n82n4e4s"
+
+[node name="GatherSystem" type="Node" parent="." unique_id=83814038]
+script = ExtResource("14_6iwwj")
+metadata/_custom_type_script = "uid://buhguegqkcr4k"
+
+[node name="ChestSystem" type="Node" parent="." unique_id=1634084128 node_paths=PackedStringArray("inventorySystem")]
+script = ExtResource("20_7kxyy")
+inventorySystem = NodePath("../InventorySystem")
+metadata/_custom_type_script = "uid://cbw7r5lrmqf02"
+
+[node name="LevelSystem" type="Node" parent="." unique_id=802177787]
+script = ExtResource("22_3jiro")
+metadata/_custom_type_script = "uid://b37mlyqlp46f3"

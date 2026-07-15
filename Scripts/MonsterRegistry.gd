@@ -367,11 +367,13 @@ func rollTier(eventCount: int) -> String:
 	var mediumChance: int
 	var strongChance: int
 	
-	# These do not add up to 100. The remainder is going to be the elite chance
-	if (eventCount <= 15):
-		weakChance = 95; mediumChance = 5; strongChance = 0 # No elite chance
+	# These do not add up to 100. The REMAINDER is going to be the ELITE CHANCE
+	if (eventCount <= 10):
+		weakChance = 100; mediumChance = 0; strongChance = 0 # No elite chance
+	elif (eventCount <= 20):
+		weakChance = 90; mediumChance = 10; strongChance = 0 # No elite chance
 	elif (eventCount <= 40):
-		weakChance = 80; mediumChance = 15; strongChance = 4 # 1% elite chance...
+		weakChance = 70; mediumChance = 25; strongChance = 4 # 1% elite chance...
 	elif (eventCount <= 70):
 		weakChance = 38; mediumChance = 35; strongChance = 25 # 2% 
 	elif (eventCount <= 100):

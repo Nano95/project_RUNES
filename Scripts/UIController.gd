@@ -5,18 +5,31 @@ class_name UIController
 @export var areaSelectRow: GridContainer
 @export var chooseAreaButton: Button
 @export var brewButton: Button
-@export var chestButton: Button
+@export var storageButton: Button
 @export var areaButtons: Array[Button] = []
 @export var inventorySystem: InventorySystem
+@export var storageDisplay: StorageDisplay
 @export var areaSystem: AreaSystem
+@export var adventuringRow: HBoxContainer
+@export var inventoryPanel: Panel
+@export var continueButton: Button
+@export var retreatButton: Button
 
 func _ready() -> void:
 	GameEvents.areaEntered.connect(onAreaEntered)
 	GameEvents.areaExited.connect(onAreaExited)
+	GameEvents.playerDied.connect(onAreaExited)
 	GameEvents.areaUnlocked.connect(onAreaUnlocked)
+	GameEvents.checkpointReached.connect(showCheckpoint)
 	chooseAreaButton.pressed.connect(onChooseAreaPressed)
+	continueButton.pressed.connect(onContinuePressed)
+	retreatButton.pressed.connect(onRetreatPressed)
+	storageButton.pressed.connect(showDisplay)
 	
-
+	mainActionRow.show()
+	areaSelectRow.hide()
+	adventuringRow.hide()
+	
 	for i in areaButtons.size():
 		var idx = i
 		areaButtons[i].pressed.connect(onAreaButtonPressed.bind(idx))
@@ -26,19 +39,45 @@ func _ready() -> void:
 func showSafeZone() -> void:
 	chooseAreaButton.text = "Choose Area"
 	chooseAreaButton.visible = true
+	mainActionRow.show()
+	areaSelectRow.hide()
+	adventuringRow.hide()
+
+func showCheckpoint() -> void:
+	mainActionRow.hide()
+	areaSelectRow.hide()
+	adventuringRow.show()
+	inventoryPanel.visible = false
+	continueButton.visible = true
+	retreatButton.visible = true
+
+func showInventory() -> void:
+	inventoryPanel.visible = true
+	continueButton.visible = false
+	retreatButton.visible = false
+
+func showDisplay() -> void:
+	storageDisplay.open()
 
 func onAreaEntered(_areaName: String) -> void:
-	chooseAreaButton.text = "← Retreat"
-	chooseAreaButton.pressed.disconnect(onChooseAreaPressed)
-	chooseAreaButton.pressed.connect(onRetreatPressed)
+	adventuringRow.visible = true
+	mainActionRow.visible = false
+	areaSelectRow.visible = false
+	showInventory()
+	#chooseAreaButton.text = "← Retreat"
+	#chooseAreaButton.pressed.disconnect(onChooseAreaPressed)
+	#chooseAreaButton.pressed.connect(onRetreatPressed)
+
+func onContinuePressed() -> void:
+	showInventory()
+	GameEvents.eventLogged.emit("You press deeper...", "system", false)
+	GameEvents.checkpointContinued.emit()
 
 func onRetreatPressed() -> void:
 	areaSystem.exitArea()
 
 func onAreaExited() -> void:
 	chooseAreaButton.text = "Choose Area"
-	chooseAreaButton.pressed.disconnect(onRetreatPressed)
-	chooseAreaButton.pressed.connect(onChooseAreaPressed)
 	showSafeZone()
 
 func onChooseAreaPressed() -> void:
@@ -55,7 +94,7 @@ func onAreaButtonPressed(idx: int) -> void:
 
 func onAreaUnlocked(areaName: String) -> void:
 	refreshAreaGrid()
-	GameEvents.eventLogged.emit("A new area is now accessible: " + areaName + ".", "discover")
+	GameEvents.eventLogged.emit("A new area is now accessible: " + areaName + ".", "discover", false)
 
 # Call me when areaGrid becomes visible
 func refreshAreaGrid() -> void:
