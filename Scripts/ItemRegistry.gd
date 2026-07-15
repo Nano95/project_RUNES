@@ -189,19 +189,12 @@ func _register() -> void:
 	_add("Dark Timber",         "ore",        true,  6.2, "Dense and dark grained.",          18)
 
 	# ── POTIONS ──────────────────────────────────────────
-	_add("Health Potion",       "potion",     true,  2.3, "Restores 30 HP.",                  20)
-	_add("Minor Heal Potion",   "potion",     true,  2.3, "Restores 20 HP.",                  12)
-	_add("Berry Tonic",         "potion",     true,  2.2, "Restores 15 HP.",                  10)
-	_add("Field Potion",        "potion",     true,  2.3, "Restores 30 HP.",                  18)
-	_add("Strong Heal Potion",  "potion",     true,  2.3, "Restores 50 HP.",                  35)
-	_add("Crimson Draught",     "potion",     true,  2.3, "Restores 45 HP.",                  30)
-	_add("Herbal Elixir",       "potion",     true,  2.3, "Restores 60 HP.",                  45)
-	_add("Berry Extract",       "potion",     true,  2.3, "Restores 35 HP.",                  25)
-	_add("Blood Tonic",         "potion",     true,  2.3, "Restores 40 HP.",                  28)
-	_add("Venom Cure",          "potion",     true,  2.3, "Restores 25 HP.",                  22)
-	_add("Root Brew",           "potion",     true,  2.3, "Restores 55 HP.",                  40)
-	_add("Shadow Salve",        "potion",     true,  2.3, "Restores 35 HP.",                  25)
-	_add("Twilight Potion",     "potion",     true,  2.3, "Restores 70 HP.",                  55)
+	_add("Berry Extract",       "potion",     true,  2.3, "Restores 15 HP.",                  10)
+	_add("Minor Heal Potion",   "potion",     true,  2.3, "Restores 20 HP.",                  15)
+	_add("Health Potion",       "potion",     true,  2.8, "Restores 30 HP.",                  20)
+	_add("Strong Heal Potion",  "potion",     true,  3.4, "Restores 50 HP.",                  35)
+	_add("Herbal Elixir",       "potion",     true,  3.8, "Restores 60 HP.",                  45)
+	_add("Twilight Potion",     "potion",     true,  5.0, "Restores 70 HP.",                  55)
 
 func _add(itemName: String, itemType: String, stackable: bool, weight: float, description: String, value: int) -> void:
 	var item = ItemData.new()
