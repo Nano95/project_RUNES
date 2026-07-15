@@ -9,6 +9,7 @@ class_name UIController
 @export var areaButtons: Array[Button] = []
 @export var inventorySystem: InventorySystem
 @export var storageDisplay: StorageDisplay
+@export var alchemyDisplay: BrewDisplay
 @export var areaSystem: AreaSystem
 @export var adventuringRow: HBoxContainer
 @export var inventoryPanel: Panel
@@ -25,6 +26,7 @@ func _ready() -> void:
 	continueButton.pressed.connect(onContinuePressed)
 	retreatButton.pressed.connect(onRetreatPressed)
 	storageButton.pressed.connect(showDisplay)
+	brewButton.pressed.connect(showAlchemy)
 	
 	mainActionRow.show()
 	areaSelectRow.hide()
@@ -58,6 +60,9 @@ func showInventory() -> void:
 
 func showDisplay() -> void:
 	storageDisplay.open()
+
+func showAlchemy() -> void:
+	alchemyDisplay.open()
 
 func onAreaEntered(_areaName: String) -> void:
 	adventuringRow.visible = true

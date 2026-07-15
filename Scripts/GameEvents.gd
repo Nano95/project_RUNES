@@ -47,6 +47,13 @@ signal backpackChanged
 @warning_ignore("unused_signal")
 signal hpChanged
 
+@warning_ignore("unused_signal")
+signal recipeDiscovered(recipeName: String)
+@warning_ignore("unused_signal")
+signal brewAttempted(success: bool, resultItem: String)
+@warning_ignore("unused_signal")
+signal timePotionUsed
+
 ### COMBAT
 @warning_ignore("unused_signal")
 signal combatStarted(monster: MonsterData)

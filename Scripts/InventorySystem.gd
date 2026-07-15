@@ -123,10 +123,10 @@ func onPotionUsed(itemName: String) -> void:
 func getPotionHeal(itemName: String) -> int:
 	match itemName:
 		"Berry Extract":      return 15
-		"Minor Heal Potion":  return 20
+		"Minor Health Potion":  return 20
 		"Health Potion":      return 30
 		"Strong Heal Potion": return 50
-		"Herbal Elixir":      return 60
+		#"Herbal Elixir":      return 60
 		"Twilight Potion":    return 70
 	print("- POTION NOT FOUND: ", itemName)
 	return 0

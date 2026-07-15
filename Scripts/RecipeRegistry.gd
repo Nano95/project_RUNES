@@ -1,0 +1,48 @@
+extends Node
+
+var recipes: Array[RecipeData] = []
+
+func _ready() -> void:
+	recipes = [
+		_make("Berry Extract",      {"Red Berry": 1},                                    "Berry Extract",      "heal",      15),
+		_make("Minor Health Potion",{"Wild Herb": 2},                                    "Minor Health Potion","heal",      20),
+		_make("Health Potion",      {"Wild Herb": 3, "Red Berry": 2, "Frog Leg": 1},     "Health Potion",      "heal",      30),
+		_make("Twilight Potion",    {"Gloomcap": 1, "Red Berry": 1, "Wild Herb": 1},     "Twilight Potion",    "heal",      70),
+		_make("Strength Brew",      {"Wild Herb": 2, "Orc Tooth": 1},                    "Strength Brew",      "strength",  5),
+		_make("Swiftness Tonic",    {"Wolf Fang": 1, "Bloodroot": 2},                    "Swiftness Tonic",    "swiftness", 0),
+		_make("Time Potion",        {"Bat Wing": 3, "Bloodroot": 1, "Red Berry": 1},     "Time Potion",        "time",      0),
+		_make("Battle Potion",      {"Rat Fur": 1, "Wild Herb": 1, "Red Berry": 1},      "Battle Potion",      "battle",    0),
+		_make("Regeneration Potion",{"Slime Gel": 2, "Bloodroot": 1},                    "Regeneration Potion","regen",     5),
+	]
+
+func _make(recipeName: String, ingredients: Dictionary, resultItem: String, effectType: String, effectValue: int) -> RecipeData:
+	var r = RecipeData.new()
+	r.recipeName = recipeName
+	r.ingredients = ingredients
+	r.resultItem = resultItem
+	r.effectType = effectType
+	r.effectValue = effectValue
+	return r
+
+func getRecipeKey(ingredients: Dictionary) -> String:
+	# Sort keys so {"Wild Herb":1, "Red Berry":1} == {"Red Berry":1, "Wild Herb":1}
+	var keys = ingredients.keys()
+	keys.sort()
+	var parts = []
+	for k in keys:
+		parts.append("%s:%d" % [k, ingredients[k]])
+	return "|".join(parts)
+
+func findRecipe(ingredients: Dictionary) -> RecipeData:
+	var attemptKey = getRecipeKey(ingredients)
+	for recipe in recipes:
+		if getRecipeKey(recipe.ingredients) == attemptKey:
+			return recipe
+	return null
+
+func getDiscovered(discoveredNames: Array) -> Array[RecipeData]:
+	var result: Array[RecipeData] = []
+	for recipe in recipes:
+		if discoveredNames.has(recipe.recipeName):
+			result.append(recipe)
+	return result

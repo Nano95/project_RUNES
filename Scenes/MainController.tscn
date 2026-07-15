@@ -17,29 +17,13 @@
 [ext_resource type="Script" uid="uid://bnfiijiu0s8yx" path="res://Scripts/ItemActionModal.gd" id="10_ftth8"]
 [ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="10_gpdd1"]
 [ext_resource type="Script" uid="uid://hdtvayj8dw6n" path="res://Scripts/StorageDisplay.gd" id="13_ab47o"]
+[ext_resource type="Script" uid="uid://bel5oivb4n5oe" path="res://Scripts/BrewDisplay.gd" id="13_knc0e"]
 [ext_resource type="Theme" uid="uid://herb326sm84p" path="res://Resources/Themes/SubpanelT3_theme_res.tres" id="13_kxegi"]
 [ext_resource type="Script" uid="uid://cbfawhw0v20ea" path="res://Scripts/MonsterBattleOverlay.gd" id="13_vlrs7"]
 [ext_resource type="Script" uid="uid://buhguegqkcr4k" path="res://Scripts/GatherSystem.gd" id="14_6iwwj"]
 [ext_resource type="Script" uid="uid://cbw7r5lrmqf02" path="res://Scripts/ChestSystem.gd" id="20_7kxyy"]
 [ext_resource type="Script" uid="uid://b37mlyqlp46f3" path="res://Scripts/LevelSystem.gd" id="22_3jiro"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ab47o"]
-resource_local_to_scene = true
-shader = ExtResource("7_108yi")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3jiro"]
-resource_local_to_scene = true
-shader = ExtResource("7_108yi")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xl505"]
-resource_local_to_scene = true
-shader = ExtResource("7_108yi")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
+[ext_resource type="Script" uid="uid://lweo3k4xtgxj" path="res://Scripts/BrewSystem.gd" id="24_i0mvu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_knc0e"]
 resource_local_to_scene = true
@@ -95,10 +79,6 @@ shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ds30n"]
-shader = ExtResource("10_gpdd1")
-shader_parameter/lod = 2.000000095
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yym0r"]
 resource_local_to_scene = true
 shader = ExtResource("7_108yi")
@@ -116,6 +96,10 @@ resource_local_to_scene = true
 shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ds30n"]
+shader = ExtResource("10_gpdd1")
+shader_parameter/lod = 2.50000011875
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_medgt"]
 resource_local_to_scene = true
@@ -165,6 +149,60 @@ shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2yq3t"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jtibr"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_46ofg"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tjyrn"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qs3o"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ul0n"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jmrk2"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1jcrk"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xh5qk"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
 [node name="MainController" type="Control" unique_id=671700929 node_paths=PackedStringArray("tickTimer", "eventLog")]
 layout_mode = 3
 anchors_preset = 15
@@ -177,7 +215,7 @@ script = ExtResource("1_3dcjo")
 tickTimer = NodePath("TickTimer")
 eventLog = NodePath("UIController/MarginContainer/VBoxContainer/EventLogPanel/EventLog")
 
-[node name="UIController" type="Control" parent="." unique_id=1458651066 node_paths=PackedStringArray("mainActionRow", "areaSelectRow", "chooseAreaButton", "storageButton", "areaButtons", "inventorySystem", "storageDisplay", "areaSystem", "adventuringRow", "inventoryPanel", "continueButton", "retreatButton")]
+[node name="UIController" type="Control" parent="." unique_id=1458651066 node_paths=PackedStringArray("mainActionRow", "areaSelectRow", "chooseAreaButton", "brewButton", "storageButton", "areaButtons", "inventorySystem", "storageDisplay", "alchemyDisplay", "areaSystem", "adventuringRow", "inventoryPanel", "continueButton", "retreatButton")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -188,10 +226,12 @@ script = ExtResource("2_racw2")
 mainActionRow = NodePath("MarginContainer/VBoxContainer/MainActionRow")
 areaSelectRow = NodePath("MarginContainer/VBoxContainer/AreasSelectRow")
 chooseAreaButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/ChooseAreaBtn")
+brewButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/Alchemy")
 storageButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/StorageBtn")
 areaButtons = [NodePath("MarginContainer/VBoxContainer/AreasSelectRow/area1")]
 inventorySystem = NodePath("../InventorySystem")
 storageDisplay = NodePath("StorageModal")
+alchemyDisplay = NodePath("BrewingContainer")
 areaSystem = NodePath("../AreaSystem")
 adventuringRow = NodePath("MarginContainer/VBoxContainer/AdventuringRow")
 inventoryPanel = NodePath("MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay")
@@ -242,7 +282,7 @@ size_flags_stretch_ratio = 0.4
 theme = ExtResource("5_qjsjv")
 
 [node name="LOCATION" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Panel" unique_id=1696817232 instance=ExtResource("6_prt4a")]
-material = SubResource("ShaderMaterial_ab47o")
+material = SubResource("ShaderMaterial_knc0e")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -259,7 +299,7 @@ vertical_alignment = 1
 
 [node name="EVENT" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Panel" unique_id=278627998 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.83, 0.83, 0.83, 1)
-material = SubResource("ShaderMaterial_3jiro")
+material = SubResource("ShaderMaterial_i0mvu")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -288,7 +328,7 @@ theme = ExtResource("5_qjsjv")
 
 [node name="TITLE" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/HP" unique_id=245101516 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.83, 0.83, 0.83, 1)
-material = SubResource("ShaderMaterial_xl505")
+material = SubResource("ShaderMaterial_g72ry")
 layout_mode = 1
 offset_left = 8.0
 offset_top = 8.0
@@ -301,7 +341,7 @@ vertical_alignment = 1
 
 [node name="NUMBER" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/HP" unique_id=617930616 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.4426837, 0.9765625, 0.33187866, 1)
-material = SubResource("ShaderMaterial_knc0e")
+material = SubResource("ShaderMaterial_gg2r6")
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -336,7 +376,7 @@ theme = ExtResource("5_qjsjv")
 
 [node name="TITLE" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/XP" unique_id=2129737308 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.83, 0.83, 0.83, 1)
-material = SubResource("ShaderMaterial_i0mvu")
+material = SubResource("ShaderMaterial_cssra")
 layout_mode = 1
 offset_left = 8.0
 offset_top = 8.0
@@ -349,7 +389,7 @@ vertical_alignment = 1
 
 [node name="LV" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/XP" unique_id=1357701338 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.83, 0.83, 0.83, 1)
-material = SubResource("ShaderMaterial_g72ry")
+material = SubResource("ShaderMaterial_px8ax")
 layout_mode = 1
 offset_left = 8.0
 offset_top = 8.0
@@ -363,7 +403,7 @@ vertical_alignment = 1
 
 [node name="NUMBER" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/XP" unique_id=1918458134 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.33333337, 0.82573533, 0.9764706, 1)
-material = SubResource("ShaderMaterial_gg2r6")
+material = SubResource("ShaderMaterial_shy7a")
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -399,7 +439,7 @@ theme = ExtResource("5_qjsjv")
 
 [node name="TITLE" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/Gold" unique_id=476879201 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.83, 0.83, 0.83, 1)
-material = SubResource("ShaderMaterial_cssra")
+material = SubResource("ShaderMaterial_ipr08")
 layout_mode = 1
 offset_left = 8.0
 offset_top = 8.0
@@ -412,7 +452,7 @@ vertical_alignment = 1
 
 [node name="QTY" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/Gold" unique_id=1880836942 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.9764706, 0.9664216, 0.33333337, 1)
-material = SubResource("ShaderMaterial_px8ax")
+material = SubResource("ShaderMaterial_7g1mk")
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -472,6 +512,14 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Storage"
 
+[node name="Alchemy" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=954765678]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Alchemy"
+
 [node name="AreasSelectRow" type="GridContainer" parent="UIController/MarginContainer/VBoxContainer" unique_id=2070690060]
 visible = false
 custom_minimum_size = Vector2(678, 0)
@@ -506,7 +554,7 @@ inventorySystem = NodePath("../../../../../InventorySystem")
 
 [node name="Title" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay" unique_id=1349935487 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_shy7a")
+material = SubResource("ShaderMaterial_yym0r")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -519,7 +567,7 @@ theme_override_font_sizes/font_size = 60
 text = "Backpack"
 
 [node name="QTY" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay" unique_id=8404646 instance=ExtResource("6_prt4a")]
-material = SubResource("ShaderMaterial_ipr08")
+material = SubResource("ShaderMaterial_nmloh")
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 1
 anchors_preset = 1
@@ -535,7 +583,7 @@ text = "0 / 20"
 horizontal_alignment = 2
 
 [node name="WEIGHT" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay" unique_id=1267963551 instance=ExtResource("6_prt4a")]
-material = SubResource("ShaderMaterial_7g1mk")
+material = SubResource("ShaderMaterial_pp434")
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -626,7 +674,7 @@ theme = ExtResource("5_qjsjv")
 
 [node name="Name" parent="UIController/ItemActionContainer/ItemActionModal/TitlePanel" unique_id=304158171 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_yym0r")
+material = SubResource("ShaderMaterial_medgt")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -682,6 +730,287 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Close"
 
+[node name="BrewingContainer" type="ColorRect" parent="UIController" unique_id=678410787 node_paths=PackedStringArray("backpackFlow", "backpackWeightLabel", "backpackSlotLabel", "slot1Container", "slot2Container", "slot3Container", "brewButton", "closeButton", "discoveredFlow", "brewSystem", "inventorySystem")]
+material = SubResource("ShaderMaterial_ds30n")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_knc0e")
+backpackFlow = NodePath("BrewingModal/VBoxContainer/backpackPanel/BackPackContainer/VScrollBar/backpackGrid")
+backpackWeightLabel = NodePath("BrewingModal/VBoxContainer/backpackPanel/BackPackContainer/HBoxContainer/Weight")
+backpackSlotLabel = NodePath("BrewingModal/VBoxContainer/backpackPanel/BackPackContainer/HBoxContainer/Title")
+slot1Container = NodePath("BrewingModal/VBoxContainer/CombinationPanel/HBoxContainer/IngredientsContainer/IngredientContainer1")
+slot2Container = NodePath("BrewingModal/VBoxContainer/CombinationPanel/HBoxContainer/IngredientsContainer/IngredientContainer2")
+slot3Container = NodePath("BrewingModal/VBoxContainer/CombinationPanel/HBoxContainer/IngredientsContainer/IngredientContainer3")
+brewButton = NodePath("BrewingModal/VBoxContainer/HBoxContainer/QuickBrew")
+closeButton = NodePath("BrewingModal/VBoxContainer/closeBtn")
+discoveredFlow = NodePath("BrewingModal/VBoxContainer/DiscoveredPanel/DiscoveredRecipes/VScrollBar/RecipesFlow")
+brewSystem = NodePath("../../BrewSystem")
+inventorySystem = NodePath("../../InventorySystem")
+
+[node name="BrewingModal" type="Panel" parent="UIController/BrewingContainer" unique_id=1036868426]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.0
+offset_top = -505.0
+offset_right = 345.0
+offset_bottom = 473.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("9_8gkgp")
+
+[node name="TitlePanel" type="Panel" parent="UIController/BrewingContainer/BrewingModal" unique_id=1096898878]
+layout_mode = 0
+offset_right = 690.0
+offset_bottom = 45.0
+theme = ExtResource("5_qjsjv")
+
+[node name="Name" parent="UIController/BrewingContainer/BrewingModal/TitlePanel" unique_id=665625787 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_d0b7u")
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 9.0
+offset_right = 1043.0
+offset_bottom = 140.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 80
+text = "Brewing"
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIController/BrewingContainer/BrewingModal" unique_id=1797166464]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 49.5
+offset_right = -8.0
+offset_bottom = -11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="backpackPanel" type="Panel" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer" unique_id=1821208343]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.8
+theme = ExtResource("13_kxegi")
+
+[node name="BackPackContainer" type="VBoxContainer" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/backpackPanel" unique_id=288122973]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.99600005
+anchor_bottom = 0.95300007
+offset_top = -3.0
+offset_right = -0.30804443
+offset_bottom = 12.681992
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/backpackPanel/BackPackContainer" unique_id=1481186451]
+layout_mode = 2
+
+[node name="Title" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/backpackPanel/BackPackContainer/HBoxContainer" unique_id=2117889967 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_lbmfx")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Backpack (0/20)"
+vertical_alignment = 1
+
+[node name="Weight" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/backpackPanel/BackPackContainer/HBoxContainer" unique_id=565692802 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_1q78x")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Weight (10/80)oz"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VScrollBar" type="ScrollContainer" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/backpackPanel/BackPackContainer" unique_id=258842329]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="backpackGrid" type="HFlowContainer" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/backpackPanel/BackPackContainer/VScrollBar" unique_id=1991658653]
+custom_minimum_size = Vector2(670, 180)
+layout_mode = 2
+theme_override_constants/h_separation = 7
+theme_override_constants/v_separation = 6
+
+[node name="CombinationPanel" type="Panel" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer" unique_id=110509656]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.2
+theme = ExtResource("5_qjsjv")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/CombinationPanel" unique_id=2099775821]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -10.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="IngredientsContainer" type="VBoxContainer" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/CombinationPanel/HBoxContainer" unique_id=188906512]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Title" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/CombinationPanel/HBoxContainer/IngredientsContainer" unique_id=1904465088 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_8l5l1")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Chosen Ingredients"
+vertical_alignment = 1
+
+[node name="IngredientContainer1" type="HBoxContainer" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/CombinationPanel/HBoxContainer/IngredientsContainer" unique_id=152273565]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="IngredientContainer2" type="HBoxContainer" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/CombinationPanel/HBoxContainer/IngredientsContainer" unique_id=329379301]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="IngredientContainer3" type="HBoxContainer" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/CombinationPanel/HBoxContainer/IngredientsContainer" unique_id=1914874885]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Arrow" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/CombinationPanel/HBoxContainer" unique_id=902933217 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_4j0hr")
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 60
+text = "→"
+vertical_alignment = 1
+
+[node name="ResultContainer" type="VBoxContainer" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/CombinationPanel/HBoxContainer" unique_id=222359203]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="Button" type="Button" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/CombinationPanel/HBoxContainer/ResultContainer" unique_id=909548690]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_vertical = 6
+text = "?"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer" unique_id=953581651]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/separation = 10
+
+[node name="QuickBrew" type="Button" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/HBoxContainer" unique_id=959816950]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 28
+text = "Quick Brew"
+
+[node name="EasyBrew" type="Button" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/HBoxContainer" unique_id=138534925]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Easy Brew"
+
+[node name="EasyBrew2" type="Button" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/HBoxContainer" unique_id=2125738850]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Med Brew"
+
+[node name="EasyBrew3" type="Button" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/HBoxContainer" unique_id=1222619769]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Hard Brew"
+
+[node name="DiscoveredPanel" type="Panel" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer" unique_id=1903759389]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.7
+theme = ExtResource("13_kxegi")
+
+[node name="DiscoveredRecipes" type="VBoxContainer" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/DiscoveredPanel" unique_id=381386888]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 8.0
+offset_right = 672.0
+offset_bottom = 190.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/DiscoveredPanel/DiscoveredRecipes" unique_id=1516448588]
+layout_mode = 2
+
+[node name="Title" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/DiscoveredPanel/DiscoveredRecipes/HBoxContainer" unique_id=1387508976 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_8whxx")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Discovered Recipes"
+vertical_alignment = 1
+
+[node name="VScrollBar" type="ScrollContainer" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/DiscoveredPanel/DiscoveredRecipes" unique_id=977369745]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="RecipesFlow" type="HFlowContainer" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer/DiscoveredPanel/DiscoveredRecipes/VScrollBar" unique_id=153701826]
+custom_minimum_size = Vector2(670, 150)
+layout_mode = 2
+theme_override_constants/h_separation = 7
+theme_override_constants/v_separation = 6
+
+[node name="closeBtn" type="Button" parent="UIController/BrewingContainer/BrewingModal/VBoxContainer" unique_id=1579972420]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 28
+text = "Close"
+
 [node name="StorageModal" type="ColorRect" parent="UIController" unique_id=700632207 node_paths=PackedStringArray("backpackFlow", "backpackTitleCap", "backpackWeightLabel", "chestFlow", "chestCapacityLabel", "chestNameLabel", "chestGrid", "upgradeLabel", "upgradeDetails", "buildButton", "closeButton", "chestSystem")]
 visible = false
 material = SubResource("ShaderMaterial_ds30n")
@@ -729,7 +1058,7 @@ theme = ExtResource("5_qjsjv")
 
 [node name="Name" parent="UIController/StorageModal/StoragePanel/TitlePanel" unique_id=1856336911 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_nmloh")
+material = SubResource("ShaderMaterial_p5mh2")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -775,7 +1104,7 @@ layout_mode = 2
 
 [node name="Title" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/HBoxContainer" unique_id=1448538055 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_pp434")
+material = SubResource("ShaderMaterial_2yq3t")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
@@ -785,7 +1114,7 @@ vertical_alignment = 1
 
 [node name="Weight" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/HBoxContainer" unique_id=117332496 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_medgt")
+material = SubResource("ShaderMaterial_jtibr")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
@@ -823,7 +1152,7 @@ grow_vertical = 2
 
 [node name="Title" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestPanel/TOP" unique_id=458006425 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_d0b7u")
+material = SubResource("ShaderMaterial_46ofg")
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 20
@@ -856,7 +1185,7 @@ offset_bottom = 181.0
 
 [node name="Title" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM" unique_id=123750841 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_lbmfx")
+material = SubResource("ShaderMaterial_tjyrn")
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 20
@@ -932,7 +1261,7 @@ grow_vertical = 2
 
 [node name="Title" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM" unique_id=898538128 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_1q78x")
+material = SubResource("ShaderMaterial_1qs3o")
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 20
@@ -941,7 +1270,7 @@ vertical_alignment = 1
 
 [node name="upgradeLabel" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM" unique_id=913053343 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_8l5l1")
+material = SubResource("ShaderMaterial_2ul0n")
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 20
@@ -1020,7 +1349,7 @@ theme = ExtResource("5_qjsjv")
 
 [node name="Title2" parent="UIController/MonsterBattleOverlay/MonsterBattlePanel/TitlePanel" unique_id=1470752034 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.87, 0.25230002, 0.25230002, 1)
-material = SubResource("ShaderMaterial_4j0hr")
+material = SubResource("ShaderMaterial_jmrk2")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -1036,7 +1365,7 @@ script = ExtResource("14_6iwwj")
 
 [node name="MonsterName" parent="UIController/MonsterBattleOverlay/MonsterBattlePanel" unique_id=163336450 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_8whxx")
+material = SubResource("ShaderMaterial_1jcrk")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -1053,7 +1382,7 @@ vertical_alignment = 1
 
 [node name="MonsterHp" parent="UIController/MonsterBattleOverlay/MonsterBattlePanel" unique_id=37391184 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_p5mh2")
+material = SubResource("ShaderMaterial_xh5qk")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -1136,3 +1465,8 @@ metadata/_custom_type_script = "uid://cbw7r5lrmqf02"
 [node name="LevelSystem" type="Node" parent="." unique_id=802177787]
 script = ExtResource("22_3jiro")
 metadata/_custom_type_script = "uid://b37mlyqlp46f3"
+
+[node name="BrewSystem" type="Node" parent="." unique_id=1625917832 node_paths=PackedStringArray("inventorySystem")]
+script = ExtResource("24_i0mvu")
+inventorySystem = NodePath("../InventorySystem")
+metadata/_custom_type_script = "uid://lweo3k4xtgxj"

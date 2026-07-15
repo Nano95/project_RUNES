@@ -30,6 +30,8 @@ class_name SaveData
 @export var chestMax: int = 15
 @export var savedGold: int = 0
 
+@export var discoveredRecipes: Array[String] = []
+
 @export_category("General")
 @export var loot_inventory:Dictionary = {
 	# "Orc Tooth": 10

@@ -190,10 +190,10 @@ func _register() -> void:
 
 	# ── POTIONS ──────────────────────────────────────────
 	_add("Berry Extract",       "potion",     true,  2.3, "Restores 15 HP.",                  10)
-	_add("Minor Heal Potion",   "potion",     true,  2.3, "Restores 20 HP.",                  15)
+	_add("Minor Health Potion",   "potion",     true,  2.3, "Restores 20 HP.",                  15)
 	_add("Health Potion",       "potion",     true,  2.8, "Restores 30 HP.",                  20)
 	_add("Strong Heal Potion",  "potion",     true,  3.4, "Restores 50 HP.",                  35)
-	_add("Herbal Elixir",       "potion",     true,  3.8, "Restores 60 HP.",                  45)
+	#_add("Herbal Elixir",       "potion",     true,  3.8, "Restores 60 HP.",                  45)
 	_add("Twilight Potion",     "potion",     true,  5.0, "Restores 70 HP.",                  55)
 
 func _add(itemName: String, itemType: String, stackable: bool, weight: float, description: String, value: int) -> void:

@@ -13,8 +13,8 @@ func xpForNextLevel(level: int) -> int:
 
 func onAreaExited() -> void:
 	# Award return bonus based on how far they went
-	var bonus = main.game_data.eventCount * 2
-	if bonus > 0:
+	var bonus = main.game_data.eventCount * 1 ## This should be adjusted so that it can be variable
+	if (bonus > 0):
 		main.game_data.xp += bonus
 		GameEvents.eventLogged.emit(
 			"Safe return bonus: +%d XP." % bonus, "discover", false
