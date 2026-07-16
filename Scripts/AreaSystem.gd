@@ -7,7 +7,10 @@ func _ready() -> void:
 	GameEvents.areaExited.connect(onAreaExited)
 	GameEvents.playerDied.connect(onPlayerDied)
 	main = Utils.get_main()
-
+	main.set_background_colors(
+		Vector3(0.92, 0.88, 0.65),   # soft butter
+		Vector3(0.70, 0.65, 0.20)    # almost white yellow
+	)
 func enterArea(areaName: String) -> void:
 	main.game_data.currentArea = areaName
 	main.game_data.inArea = true
@@ -39,6 +42,22 @@ func exitArea() -> void:
 
 func onAreaEntered(areaName: String) -> void:
 	GameEvents.eventLogged.emit("You enter " + areaName + ".", "discover", false)
+	
+	print("- areaName: ", areaName)
+	if (areaName == "Town"):
+		main.set_background_colors(Vector3(.297, .211, .09), Vector3(.355, .285, .133))
+	if (areaName == "Hunting Grounds"):
+		main.set_background_colors(Vector3(.516, .691, .473), Vector3(.633, .793, .543))
+	elif (areaName == "Outskirts"):
+		main.set_background_colors(Vector3(.445, .488, .449), Vector3(.664, .723, .602))
+	else:
+		# Default
+		main.set_background_colors(Vector3(.297, .211, .09), Vector3(.355, .285, .133))
 
 func onAreaExited() -> void:
 	GameEvents.eventLogged.emit("You return to town safely.", "town", false)
+
+	main.set_background_colors(
+		Vector3(0.92, 0.88, 0.65),   # soft butter
+		Vector3(0.70, 0.65, 0.20)    # almost white yellow
+	)

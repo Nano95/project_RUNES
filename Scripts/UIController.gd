@@ -16,7 +16,10 @@ class_name UIController
 @export var continueButton: Button
 @export var retreatButton: Button
 
+var main:MainNode
+
 func _ready() -> void:
+	main = Utils.get_main()
 	GameEvents.areaEntered.connect(onAreaEntered)
 	GameEvents.areaExited.connect(onAreaExited)
 	GameEvents.playerDied.connect(onAreaExited)
@@ -91,7 +94,6 @@ func onChooseAreaPressed() -> void:
 	areaSelectRow.visible = true
 
 func onAreaButtonPressed(idx: int) -> void:
-	var main = Utils.get_main()
 	var areaName = main.game_data.unlockedAreas[idx]
 	areaSelectRow.visible = false
 	mainActionRow.visible = true
@@ -101,26 +103,50 @@ func onAreaUnlocked(areaName: String) -> void:
 	refreshAreaGrid()
 	GameEvents.eventLogged.emit("A new area is now accessible: " + areaName + ".", "discover", false)
 
-# Call me when areaGrid becomes visible
 func refreshAreaGrid() -> void:
-	var main = Utils.get_main()
 	var unlocked = main.game_data.unlockedAreas
 	var nextLocked = AreaRegistry.getNextLockedArea()
 
 	for i in areaButtons.size():
 		var btn = areaButtons[i]
-		if (i < unlocked.size()):
+
+		if i < unlocked.size():
 			# Unlocked area
 			btn.visible = true
 			btn.text = unlocked[i]
 			btn.disabled = false
 			btn.modulate = Color(1, 1, 1, 1)
+			# Clear previous connections to avoid duplicates
+			if btn.pressed.is_connected(onAreaButtonPressed):
+				btn.pressed.disconnect(onAreaButtonPressed)
+			if btn.pressed.is_connected(onLockedAreaPressed):
+				btn.pressed.disconnect(onLockedAreaPressed)
+			btn.pressed.connect(onAreaButtonPressed.bind(i))
+
 		elif nextLocked != null and i == unlocked.size():
-			# Next locked area — visible but disabled
+			# Next locked area — visible but disabled looking, still tappable
 			btn.visible = true
 			btn.text = nextLocked.areaName + " 🔒"
-			btn.disabled = true
-			btn.modulate = Color(1, 1, 1, 0.4)
+			btn.disabled = false
+			btn.modulate = Color(1, 1, 1, 0.8)
+			if btn.pressed.is_connected(onAreaButtonPressed):
+				btn.pressed.disconnect(onAreaButtonPressed)
+			if btn.pressed.is_connected(onLockedAreaPressed):
+				btn.pressed.disconnect(onLockedAreaPressed)
+			btn.pressed.connect(onLockedAreaPressed.bind(nextLocked.areaName))
+
 		else:
 			# Hidden
 			btn.visible = false
+
+func onLockedAreaPressed(areaName: String) -> void:
+	var previousArea = ""
+	for i in AreaRegistry.areas.size():
+		if AreaRegistry.areas[i].areaName == areaName and i > 0:
+			previousArea = AreaRegistry.areas[i - 1].areaName
+			break
+	if previousArea != "":
+		GameEvents.eventLogged.emit(
+			"%s is locked. Reach event #100 in %s to unlock it." % [areaName, previousArea],
+			"system", false
+		)

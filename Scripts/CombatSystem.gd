@@ -42,8 +42,10 @@ func trySpawnMonster(eventCount: int) -> void:
 		pendingStrongMonsterIn = 10
 		GameEvents.eventLogged.emit(OMENS[randi() % OMENS.size()], "omen", true)
 		return
-	if (tier == "elite" and eventCount < 50):
-		tier = "strong"
+	if (tier == "elite"):
+		pendingStrongMonsterIn = 10
+		GameEvents.eventLogged.emit(OMENS[randi() % OMENS.size()], "omen", true)
+		return
 	var monster = MonsterRegistry.rollMonster(main.game_data.currentArea, tier)
 	startCombat(monster)
 

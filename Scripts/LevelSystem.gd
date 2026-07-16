@@ -7,6 +7,7 @@ func _ready() -> void:
 	main = Utils.get_main()
 	GameEvents.areaExited.connect(onAreaExited)
 	GameEvents.playerDied.connect(onPlayerDied)
+	GameEvents.combatWon.connect(combat_won)
 
 func xpForNextLevel(level: int) -> int:
 	return level * 70 + (level - 1) * 25
@@ -23,6 +24,9 @@ func onAreaExited() -> void:
 
 func onPlayerDied() -> void:
 	# No return bonus on death
+	checkLevelUp()
+
+func combat_won(_gold:int, _xp:int) -> void:
 	checkLevelUp()
 
 func checkLevelUp() -> void:

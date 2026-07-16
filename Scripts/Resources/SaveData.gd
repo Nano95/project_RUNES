@@ -13,7 +13,7 @@ class_name SaveData
 
 @export var currentArea: String = "Town"
 @export var inArea: bool = false
-@export var unlockedAreas: Array[String] = ["Outskirts"]  # Outskirts unlocked by default
+@export var unlockedAreas: Array[String] = ["Hunting Grounds"]  # Outskirts unlocked by default
 
 @export var inCombat: bool = false
 @export var currentMonsterName: String = ""

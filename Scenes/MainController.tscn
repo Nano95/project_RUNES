@@ -228,7 +228,7 @@ areaSelectRow = NodePath("MarginContainer/VBoxContainer/AreasSelectRow")
 chooseAreaButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/ChooseAreaBtn")
 brewButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/Alchemy")
 storageButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/StorageBtn")
-areaButtons = [NodePath("MarginContainer/VBoxContainer/AreasSelectRow/area1")]
+areaButtons = [NodePath("MarginContainer/VBoxContainer/AreasSelectRow/area1"), NodePath("MarginContainer/VBoxContainer/AreasSelectRow/area2"), NodePath("MarginContainer/VBoxContainer/AreasSelectRow/area3"), NodePath("MarginContainer/VBoxContainer/AreasSelectRow/area4")]
 inventorySystem = NodePath("../InventorySystem")
 storageDisplay = NodePath("StorageModal")
 alchemyDisplay = NodePath("BrewingContainer")
@@ -502,7 +502,7 @@ size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
-text = "Choose Area"
+text = "Travel"
 
 [node name="StorageBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=120215516]
 layout_mode = 2
@@ -528,6 +528,33 @@ size_flags_vertical = 3
 columns = 3
 
 [node name="area1" type="Button" parent="UIController/MarginContainer/VBoxContainer/AreasSelectRow" unique_id=1488179726]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Hunting Grounds"
+
+[node name="area2" type="Button" parent="UIController/MarginContainer/VBoxContainer/AreasSelectRow" unique_id=794916738]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Outskirts"
+
+[node name="area3" type="Button" parent="UIController/MarginContainer/VBoxContainer/AreasSelectRow" unique_id=593624606]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Darkwood Forest"
+
+[node name="area4" type="Button" parent="UIController/MarginContainer/VBoxContainer/AreasSelectRow" unique_id=285783351]
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 size_flags_vertical = 3
@@ -731,6 +758,7 @@ theme_override_font_sizes/font_size = 32
 text = "Close"
 
 [node name="BrewingContainer" type="ColorRect" parent="UIController" unique_id=678410787 node_paths=PackedStringArray("backpackFlow", "backpackWeightLabel", "backpackSlotLabel", "slot1Container", "slot2Container", "slot3Container", "brewButton", "closeButton", "discoveredFlow", "brewSystem", "inventorySystem")]
+visible = false
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
 anchors_preset = 15
