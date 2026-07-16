@@ -48,7 +48,9 @@ func refresh() -> void:
 		btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		var color = getColorForType(entry["type"])
 		btn.add_theme_color_override("font_color", color)
-		if entry["type"] == "potion":
+		btn.add_theme_font_size_override("font_size", 22)
+		btn.custom_minimum_size.y = 47
+		if (entry["type"] == "potion"):
 			btn.button_up.connect(onItemButtonUp.bind(entry["name"], entry["type"]))
 		btn.button_down.connect(onItemButtonDown.bind(entry["name"]))
 		itemFlow.add_child(btn)

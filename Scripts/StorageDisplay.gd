@@ -143,9 +143,10 @@ func _buildChestGrid() -> void:
 		btn.text = "C%d" % chest.id
 		if not chest.unlocked:
 			var cost = ChestSystem.UNLOCK_COSTS[chest.id - 1]
-			btn.text += "\n🔒 %dg" % cost
+			btn.text += "\n🔒\n %dg" % cost
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		btn.toggle_mode = true
+		btn.add_theme_font_size_override("font_size", 30)
 		btn.pressed.connect(onChestSelected.bind(chest.id))
 		chestGrid.add_child(btn)
 
@@ -184,6 +185,8 @@ func _makeItemButton(entry: Dictionary, source: String) -> Button:
 	btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	var newColor = _getColorForType(entry["type"])
 	btn.add_theme_color_override("font_color", newColor)
+	btn.add_theme_font_size_override("font_size", 22)
+	btn.custom_minimum_size.y = 50
 	btn.button_down.connect(onItemButtonDown.bind(entry["name"], source))
 	btn.button_up.connect(onItemButtonUp.bind(entry["name"], source))
 	return btn

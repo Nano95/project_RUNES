@@ -1,10 +1,14 @@
 extends Control
 class_name MainNode
 
-@onready var game_controller:PackedScene = load("res://Scenes/GameController.tscn")
-@onready var game_ui:PackedScene = load("res://Scenes/GameUI.tscn")
-@onready var main_menu_ui:PackedScene = load("res://Scenes/MainMenu.tscn")
-@onready var focus_chamber:PackedScene = load("res://Scenes/FocusChamber.tscn")
+#@onready var game_controller:PackedScene = load("res://Scenes/GameController.tscn")
+@onready var game_controller
+#@onready var game_ui:PackedScene = load("res://Scenes/GameUI.tscn")
+@onready var game_ui
+#@onready var main_menu_ui:PackedScene = load("res://Scenes/MainMenu.tscn")
+@onready var main_menu_ui
+#@onready var focus_chamber:PackedScene = load("res://Scenes/FocusChamber.tscn")
+@onready var focus_chamber
 @onready var main_controller:PackedScene = load("res://Scenes/MainController.tscn")
 @export var reward_pop_up:PackedScene
 @export var info_pop_up:PackedScene
@@ -68,39 +72,39 @@ func _bootstrapSaveData() -> void:
 			game_data.chests.append(chest)
 		save_game()
 
-func spawn_main_menu() -> void:
-	if (is_instance_valid(active_menu_ref)):
-		active_menu_ref.queue_free()
-	active_menu_ref = main_menu_ui.instantiate() as MainMenu
-	active_menu_ref.setup(self)
-	spawn_to_top_ui_layer(active_menu_ref)
-
-func spawn_game() -> void:
-	delete_all_top_ui_children()
-	
-	if (is_instance_valid(game_ui_ref)):
-		game_ui_ref.queue_free()
-	game_ui_ref = game_ui.instantiate() as GameUI
-	game_ui_ref.setup(self)
-	spawn_to_top_ui_layer(game_ui_ref)
-	
-	if (is_instance_valid(active_menu_ref)):
-		active_menu_ref.queue_free()
-	active_menu_ref = game_controller.instantiate() as GameController
-	active_menu_ref.setup(self, game_ui_ref)
-	spawn_to_mid_ui_layer(active_menu_ref)
-	
-	game_ui_ref.setup_game_controller(active_menu_ref)
-	var colors = MonsterDatabase.monster_colors[battle_data["family"]]
-	set_background_colors(colors["col1"], colors["col2"])
-
-func spawn_focus_chamber(is_practice:bool, mode:String) -> void:
-	delete_all_top_ui_children()
-	if (is_instance_valid(active_menu_ref)):
-		active_menu_ref.queue_free()
-	active_menu_ref = focus_chamber.instantiate() as FocusChamber
-	active_menu_ref.setup(self, is_practice, mode)
-	spawn_to_top_ui_layer(active_menu_ref)
+#func spawn_main_menu() -> void:
+	#if (is_instance_valid(active_menu_ref)):
+		#active_menu_ref.queue_free()
+	#active_menu_ref = main_menu_ui.instantiate() as MainMenu
+	#active_menu_ref.setup(self)
+	#spawn_to_top_ui_layer(active_menu_ref)
+#
+#func spawn_game() -> void:
+	#delete_all_top_ui_children()
+	#
+	#if (is_instance_valid(game_ui_ref)):
+		#game_ui_ref.queue_free()
+	#game_ui_ref = game_ui.instantiate() as GameUI
+	#game_ui_ref.setup(self)
+	#spawn_to_top_ui_layer(game_ui_ref)
+	#
+	#if (is_instance_valid(active_menu_ref)):
+		#active_menu_ref.queue_free()
+	#active_menu_ref = game_controller.instantiate() as GameController
+	#active_menu_ref.setup(self, game_ui_ref)
+	#spawn_to_mid_ui_layer(active_menu_ref)
+	#
+	#game_ui_ref.setup_game_controller(active_menu_ref)
+	#var colors = MonsterDatabase.monster_colors[battle_data["family"]]
+	#set_background_colors(colors["col1"], colors["col2"])
+#
+#func spawn_focus_chamber(is_practice:bool, mode:String) -> void:
+	#delete_all_top_ui_children()
+	#if (is_instance_valid(active_menu_ref)):
+		#active_menu_ref.queue_free()
+	#active_menu_ref = focus_chamber.instantiate() as FocusChamber
+	#active_menu_ref.setup(self, is_practice, mode)
+	#spawn_to_top_ui_layer(active_menu_ref)
 
 func spawn_new_game() -> void:
 	active_menu_ref = main_controller.instantiate() as MainController
@@ -119,9 +123,9 @@ func delete_all_top_ui_children() -> void:
 	for child in $FRONT.get_children():
 		child.queue_free()
 
-func purchase_successful_update_ui() -> void:
-	if !(active_menu_ref is MainMenu): return
-	active_menu_ref.update_info_panel()
+#func purchase_successful_update_ui() -> void:
+	#if !(active_menu_ref is MainMenu): return
+	#active_menu_ref.update_info_panel()
 
 func set_background_colors(col1:Vector3, col2:Vector3) -> void:
 	shader_bg.material.set("shader_parameter/color_one", col1)
@@ -151,6 +155,7 @@ func _notification(what):
 			focus_out_notification()
 	
 	elif (what == NOTIFICATION_WM_CLOSE_REQUEST):
+		onHardExit() # SAVE IN THIS FUNCTION
 		# calculates total time played - app closed
 		#latest_timestamp_player_focused_out = Time.get_unix_time_from_system()
 		#if (latest_timestamp_player_focused_in):
@@ -158,20 +163,48 @@ func _notification(what):
 				#var time_calculation = latest_timestamp_player_focused_out - latest_timestamp_player_focused_in
 				#player_data.total_time_played += int(time_calculation)
 			
-		save_game()
 		get_tree().quit() # default behavior
-
+	elif (what == NOTIFICATION_CRASH):
+		onHardExit() # SAVE IN THIS FUNCTION
 
 func focus_in_notification() -> void:
 	print("===- Starting offline check from focus_in_notif")
 	check_offline_time_and_rewards()
+	onAppResumed()
 
 func focus_out_notification() -> void:
 	# calculates total time played - app on but out of focus
 	@warning_ignore("narrowing_conversion")
 	game_data.last_crafting_timestamp = Time.get_unix_time_from_system()
 	game_data.rested_data.last_logout_time = Time.get_unix_time_from_system()
-	save_game()
+	onAppPaused()
+
+func onAppPaused() -> void:
+	# Just stop ticks while in background
+	# State is preserved in memory
+	if (active_menu_ref is MainController):
+		active_menu_ref.tickTimer.stop()
+
+func onAppResumed() -> void:
+	# Resume ticks only if player was mid-run
+	if (active_menu_ref is not MainController):
+			return
+	if (game_data.inArea and not game_data.inCombat):
+		active_menu_ref.tickTimer.start()
+
+func onHardExit() -> void:
+	if game_data.inArea:
+		# Lose the run
+		game_data.inArea = false
+		game_data.currentArea = ""
+		game_data.eventCount = 0
+		game_data.gold = 0
+		game_data.backpack = []
+		game_data.currentWeight = 0.0
+		game_data.inCombat = false
+		game_data.isFleeing = false
+		game_data.fleeTicks = 0
+	get_tree().quit()
 
 func check_offline_time_and_rewards() -> void:
 	# gets most recent time to calculate total time played
@@ -180,28 +213,37 @@ func check_offline_time_and_rewards() -> void:
 	var last:int = game_data.last_crafting_timestamp
 	
 	# --- RESTED CHECK ---
-	check_rested_state()
-	print("- rested charges: ", game_data.rested_data.charges)
-	if (game_data.rested_data.charges > 0):
-		if (is_instance_valid(rested_popup)):
-			rested_popup.queue_free()
-		rested_popup = rested_panel_ref.instantiate()
-		rested_popup.setup(self)
-		spawn_to_top_ui_layer(rested_popup)
+	#check_rested_state()
+	#if (game_data.rested_data.charges > 0):
+		#if (is_instance_valid(rested_popup)):
+			#rested_popup.queue_free()
+		#rested_popup = rested_panel_ref.instantiate()
+		#rested_popup.setup(self)
+		#spawn_to_top_ui_layer(rested_popup)
 
 	if (last > 3):
-		Utils.update_crafting_speed()
+		#Utils.update_crafting_speed()
 		var elapsed:int = now - last
 		var info = info_pop_up.instantiate() as InfoPopup
 		spawn_to_top_ui_layer(info)
 		info.show_info(str("Gone: ", Utils.format_time(elapsed)))
-		var results = CraftingSystem.process_elapsed(game_data)
-		game_data.add_crafted_runes_by_name(results)
-		if (results.keys().size() > 0):
-			show_reward_popups(results)
+		
+		## NOW ADD to the HP without going above maxhp
+		var previousHp = game_data.hp
+		game_data.hp = min(game_data.maxHp, game_data.hp + elapsed)
+		var actualHealed = game_data.hp - previousHp
+		if (actualHealed > 0):
+			GameEvents.hpChanged.emit()
+			GameEvents.eventLogged.emit(
+				"You rested while away. Restored %d HP." % actualHealed, "town", false
+			)
+		#var results = CraftingSystem.process_elapsed(game_data)
+		#game_data.add_crafted_runes_by_name(results)
+		#if (results.keys().size() > 0):
+			#show_reward_popups(results)
 
-		if (active_menu_ref is MainMenu):
-			active_menu_ref.update_info_panel()
+		#if (active_menu_ref is MainMenu):
+			#active_menu_ref.update_info_panel()
 	game_data.last_crafting_timestamp = now
 
 func show_reward_popups(results: Dictionary) -> void:
