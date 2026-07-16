@@ -119,24 +119,6 @@ func triggerCheckpoint() -> void:
 func onCheckpointContinued() -> void:
 	checkpointPending = false
 
-# TODO: Come up with better ones
-func triggerTrap() -> void:
-	var trap = randi() % 3
-	if trap == 0:
-		var dmg = randi_range(8, 16)
-		main.game_data.hp = max(1, main.game_data.hp - dmg)
-		main.save_game()
-		GameEvents.eventLogged.emit("You step on a bear trap! Lost %d HP." % dmg, "combat")
-		GameEvents.combatTick.emit(0, dmg, 0)
-	elif trap == 1:
-		var dmg = randi_range(4, 8)
-		main.game_data.hp = max(1, main.game_data.hp - dmg)
-		main.save_game()
-		GameEvents.eventLogged.emit("A poison dart hits you! Lost %d HP." % dmg, "combat")
-		GameEvents.combatTick.emit(0, dmg, 0)
-	else:
-		GameEvents.eventLogged.emit("You sense something wrong — and sidestep a pitfall.", "system")
-
 func _roll_event() -> void:
 	var roll = randf()
 
@@ -164,9 +146,16 @@ func _roll_event() -> void:
 		gatherSystem.startWoodGather()
 		return
 
-	if roll < 0.87:
-		GameEvents.eventLogged.emit("You find a health potion under a rock.", "loot", true)
-		GameEvents.itemDropped.emit("Health Potion")
+	if (roll < 0.87):
+		if (randf() < 0.70):
+			GameEvents.eventLogged.emit("You find a health potion tucked under a rock.", "loot", true)
+			GameEvents.itemDropped.emit("Health Potion")
+		else:
+			var gold = getAreaGoldFind()
+			main.game_data.gold += gold
+			main.save_game()
+			GameEvents.eventLogged.emit("You find a pouch of gold! +%d gold." % gold, "loot", true)
+			GameEvents.hpChanged.emit()
 		return
 
 	if roll < 0.91:
@@ -175,7 +164,59 @@ func _roll_event() -> void:
 
 	if roll < 0.95:
 		GameEvents.eventLogged.emit("You step on a trap!", "combat", true)
-		#triggerTrap()
+		triggerTrap()
 		return
 
 	GameEvents.eventLogged.emit("A cold wind passes through.", "system", true)
+
+func getAreaGoldFind() -> int:
+	match main.game_data.currentArea:
+		"Hunting Grounds": return randi_range(30, 80)
+		"Outskirts":       return randi_range(50, 120)
+		_:                 return randi_range(30, 80)
+
+func triggerTrap() -> void:
+	var traps = [
+		"You got a splinter climbing a tree for the 'views.'",
+		"You tripped over a root and face planted.",
+		"You got chased by a goose. The goose won.",
+		"You kicked a rock out of frustration... the rock won.",
+		"You accidentally poked yourself with your own sword.",
+		"You sneezed so hard you pulled a muscle.",
+		"You were stung by a bee. You learn you're allergic.",
+		"A sudden gust of wind blew dirt in your eyes.",
+		"You stopped to smell flowers and inhaled a bee.",
+		"You tripped on flat ground. Ego demolished.",
+	]
+
+	# Add area-specific pet trap if we can find a weak monster
+	var weakMonster = getAreaWeakCreature(main.game_data.currentArea)
+	if weakMonster != "":
+		traps.append("You tried to pet a %s. It disagreed." % weakMonster)
+
+	var message = traps[randi() % traps.size()]
+	var dmg = getAreaTrapDamage(main.game_data.currentArea)
+	main.game_data.hp = max(1, main.game_data.hp - dmg)
+	main.save_game()
+	GameEvents.eventLogged.emit(
+		"%s -%d HP." % [message, dmg], "combat", true
+	)
+	GameEvents.hpChanged.emit()
+
+func getAreaWeakCreature(area: String) -> String:
+	if not MonsterRegistry.areaMonsters.has(area):
+		return ""
+	var weakList = MonsterRegistry.areaMonsters[area]["weak"] as Array
+	if weakList.is_empty():
+		return ""
+	var monster = weakList[randi() % weakList.size()] as MonsterData
+	return monster.monsterName
+
+func getAreaTrapDamage(area: String) -> int:
+	match area:
+		"Hunting Grounds":  return randi_range(2, 8)
+		"Outskirts":        return randi_range(5, 15)
+		"Darkwood Forest":  return randi_range(10, 22)
+		"Ashfield Ruins":   return randi_range(15, 30)
+		"The Abyssal Depths": return randi_range(25, 45)
+		_:                  return randi_range(2, 8)
