@@ -8,6 +8,7 @@ class_name CombatOverlay
 
 var main:MainNode
 var monsterMaxHp: int = 0
+var hpTween: Tween
 
 func _ready() -> void:
 	main = Utils.get_main()
@@ -32,10 +33,14 @@ func onCombatStarted(monster: MonsterData) -> void:
 
 func onCombatTick(_playerDmg: int, _monsterDmg: int, monsterHpLeft: int) -> void:
 	var hpLeft = max(0, monsterHpLeft)
-	enemyHPBar.value = hpLeft
 	enemyHPValue.text = "%d / %d" % [hpLeft, monsterMaxHp]
 	updateHPColor(hpLeft)
-
+	# Animate the bar
+	enemyHPBar.max_value = monsterMaxHp
+	if hpTween:
+		hpTween.kill()
+	hpTween = create_tween()
+	hpTween.tween_property(enemyHPBar, "value", monsterHpLeft, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	# Update flee button if currently fleeing
 	if main.game_data.isFleeing:
 		fleeButton.disabled = true

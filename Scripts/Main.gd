@@ -189,8 +189,7 @@ func onAppResumed() -> void:
 	# Resume ticks only if player was mid-run
 	if (active_menu_ref is not MainController):
 			return
-	if (game_data.inArea and not game_data.inCombat):
-		active_menu_ref.tickTimer.start()
+	active_menu_ref.tickTimer.start()
 
 func onHardExit() -> void:
 	if game_data.inArea:
@@ -228,7 +227,8 @@ func check_offline_time_and_rewards() -> void:
 		spawn_to_top_ui_layer(info)
 		info.show_info(str("Gone: ", Utils.format_time(elapsed)))
 		
-		## NOW ADD to the HP without going above maxhp
+		## NOW ADD to the HP without going above maxhp if not in area
+		if (game_data.inArea): return
 		var previousHp = game_data.hp
 		game_data.hp = min(game_data.maxHp, game_data.hp + elapsed)
 		var actualHealed = game_data.hp - previousHp
