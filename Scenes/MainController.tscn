@@ -21,9 +21,11 @@
 [ext_resource type="Theme" uid="uid://herb326sm84p" path="res://Resources/Themes/SubpanelT3_theme_res.tres" id="13_kxegi"]
 [ext_resource type="Script" uid="uid://cbfawhw0v20ea" path="res://Scripts/MonsterBattleOverlay.gd" id="13_vlrs7"]
 [ext_resource type="Script" uid="uid://buhguegqkcr4k" path="res://Scripts/GatherSystem.gd" id="14_6iwwj"]
+[ext_resource type="Script" uid="uid://dweasp2efehkt" path="res://Scripts/EquipmentModal.gd" id="16_ds30n"]
 [ext_resource type="Script" uid="uid://cbw7r5lrmqf02" path="res://Scripts/ChestSystem.gd" id="20_7kxyy"]
 [ext_resource type="Script" uid="uid://b37mlyqlp46f3" path="res://Scripts/LevelSystem.gd" id="22_3jiro"]
 [ext_resource type="Script" uid="uid://lweo3k4xtgxj" path="res://Scripts/BrewSystem.gd" id="24_i0mvu"]
+[ext_resource type="Script" uid="uid://rpg0wv8k2g7q" path="res://Scripts/EquipmentSystem.gd" id="25_i0mvu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_knc0e"]
 resource_local_to_scene = true
@@ -99,7 +101,7 @@ shader_parameter/activate = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ds30n"]
 shader = ExtResource("10_gpdd1")
-shader_parameter/lod = 2.50000011875
+shader_parameter/lod = 3.0000001425
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_medgt"]
 resource_local_to_scene = true
@@ -185,6 +187,114 @@ shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p0dnj"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ucm65"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tqqnj"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ryv8"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0a853"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_01qki"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pes2p"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7urtk"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_acljg"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vqh4c"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4exnt"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ax22c"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o2vow"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x7npw"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sk1pp"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_is0r6"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w7uob"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ix6u"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jmrk2"]
 resource_local_to_scene = true
 shader = ExtResource("7_108yi")
@@ -215,7 +325,7 @@ script = ExtResource("1_3dcjo")
 tickTimer = NodePath("TickTimer")
 eventLog = NodePath("UIController/MarginContainer/VBoxContainer/EventLogPanel/EventLog")
 
-[node name="UIController" type="Control" parent="." unique_id=1458651066 node_paths=PackedStringArray("mainActionRow", "areaSelectRow", "chooseAreaButton", "brewButton", "storageButton", "areaButtons", "inventorySystem", "storageDisplay", "alchemyDisplay", "areaSystem", "adventuringRow", "inventoryPanel", "continueButton", "retreatButton")]
+[node name="UIController" type="Control" parent="." unique_id=1458651066 node_paths=PackedStringArray("mainActionRow", "areaSelectRow", "chooseAreaButton", "brewButton", "storageButton", "armoryButton", "areaButtons", "inventorySystem", "storageDisplay", "alchemyDisplay", "equipmentDisplay", "areaSystem", "adventuringRow", "inventoryPanel", "continueButton", "retreatButton")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -226,12 +336,14 @@ script = ExtResource("2_racw2")
 mainActionRow = NodePath("MarginContainer/VBoxContainer/MainActionRow")
 areaSelectRow = NodePath("MarginContainer/VBoxContainer/AreasSelectRow")
 chooseAreaButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/ChooseAreaBtn")
-brewButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/Alchemy")
+brewButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/AlchemyBtn")
 storageButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/StorageBtn")
+armoryButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/ArmoryBtn")
 areaButtons = [NodePath("MarginContainer/VBoxContainer/AreasSelectRow/area1"), NodePath("MarginContainer/VBoxContainer/AreasSelectRow/area2"), NodePath("MarginContainer/VBoxContainer/AreasSelectRow/area3"), NodePath("MarginContainer/VBoxContainer/AreasSelectRow/area4")]
 inventorySystem = NodePath("../InventorySystem")
 storageDisplay = NodePath("StorageModal")
 alchemyDisplay = NodePath("BrewingContainer")
+equipmentDisplay = NodePath("EquipmentModal")
 areaSystem = NodePath("../AreaSystem")
 adventuringRow = NodePath("MarginContainer/VBoxContainer/AdventuringRow")
 inventoryPanel = NodePath("MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay")
@@ -504,6 +616,14 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Travel"
 
+[node name="ArmoryBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=198991235]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Armory"
+
 [node name="StorageBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=120215516]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -512,7 +632,7 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Storage"
 
-[node name="Alchemy" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=954765678]
+[node name="AlchemyBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=954765678]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
@@ -1039,7 +1159,7 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 28
 text = "Close"
 
-[node name="StorageModal" type="ColorRect" parent="UIController" unique_id=700632207 node_paths=PackedStringArray("backpackFlow", "backpackTitleCap", "backpackWeightLabel", "chestFlow", "chestCapacityLabel", "chestNameLabel", "chestGrid", "upgradeLabel", "upgradeDetails", "buildButton", "closeButton", "chestSystem")]
+[node name="StorageModal" type="ColorRect" parent="UIController" unique_id=700632207 node_paths=PackedStringArray("backpackFlow", "backpackTitleCap", "backpackWeightLabel", "chestFlow", "chestCapacityLabel", "chestNameLabel", "chestGrid", "upgradeLabel", "upgradeDetails", "buildButton", "closeButton", "chestSystem", "inventorySystem")]
 visible = false
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
@@ -1061,6 +1181,7 @@ upgradeDetails = NodePath("StoragePanel/MarginContainer/VBoxContainer/upgradePan
 buildButton = NodePath("StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM/HBoxContainer/BuildButton")
 closeButton = NodePath("StoragePanel/MarginContainer/VBoxContainer/ClosePanel")
 chestSystem = NodePath("../../ChestSystem")
+inventorySystem = NodePath("../../InventorySystem")
 
 [node name="StoragePanel" type="Panel" parent="UIController/StorageModal" unique_id=1273248166]
 layout_mode = 1
@@ -1152,12 +1273,12 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="VScrollBar" type="ScrollContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP" unique_id=737082488]
-custom_minimum_size = Vector2(0, 290)
+custom_minimum_size = Vector2(0, 260)
 layout_mode = 2
 horizontal_scroll_mode = 0
 
 [node name="backpackGrid" type="HFlowContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/VScrollBar" unique_id=1029594101]
-custom_minimum_size = Vector2(670, 280)
+custom_minimum_size = Vector2(670, 260)
 layout_mode = 2
 theme_override_constants/h_separation = 7
 theme_override_constants/v_separation = 6
@@ -1336,7 +1457,506 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Close"
 
+[node name="EquipmentModal" type="ColorRect" parent="UIController" unique_id=195611784 node_paths=PackedStringArray("totalStatsLabel", "helmetButton", "armorButton", "legsButton", "bootsButton", "weaponButton", "shieldButton", "ringButton", "amuletButton", "comparePanel", "instructions", "selectedNameLabel", "selectedEquipType", "selectedEquipTypeValue", "equippedName", "equippedNameStatValue", "compareStats", "equipButton", "closeButton", "backpackFlow", "equipmentSystem", "inventorySystem")]
+material = SubResource("ShaderMaterial_ds30n")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_ds30n")
+totalStatsLabel = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/title/TotalStats")
+helmetButton = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Helmet/BuildButton")
+armorButton = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Armor/BuildButton")
+legsButton = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Legs/BuildButton")
+bootsButton = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Boots/BuildButton")
+weaponButton = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Weapon/BuildButton")
+shieldButton = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Shield/BuildButton")
+ringButton = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Ring/BuildButton")
+amuletButton = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Amulet/BuildButton")
+comparePanel = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel/VBoxContainer")
+instructions = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel/Instructions")
+selectedNameLabel = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel/VBoxContainer/EquipName")
+selectedEquipType = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel/VBoxContainer/HBoxContainer/SelectedType")
+selectedEquipTypeValue = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel/VBoxContainer/HBoxContainer/value")
+equippedName = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel/VBoxContainer/HBoxContainer2/EquippedName")
+equippedNameStatValue = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel/VBoxContainer/HBoxContainer2/value")
+compareStats = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel/VBoxContainer/Difference/stat")
+equipButton = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/ActionButtons/EquipButton")
+closeButton = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/ActionButtons/CloseButton")
+backpackFlow = NodePath("EquipmentPanel/MarginContainer/VBoxContainer/Backpack/ScrollContainer/TOP/VScrollBar/chestGrid")
+equipmentSystem = NodePath("../../EquipmentSystem")
+inventorySystem = NodePath("../../InventorySystem")
+
+[node name="EquipmentPanel" type="Panel" parent="UIController/EquipmentModal" unique_id=2028943966]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.0
+offset_top = -610.0
+offset_right = 345.0
+offset_bottom = 569.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("9_8gkgp")
+
+[node name="TitlePanel" type="Panel" parent="UIController/EquipmentModal/EquipmentPanel" unique_id=1087450750]
+layout_mode = 0
+offset_right = 690.0
+offset_bottom = 45.0
+theme = ExtResource("5_qjsjv")
+
+[node name="Name" parent="UIController/EquipmentModal/EquipmentPanel/TitlePanel" unique_id=650077845 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_p0dnj")
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 9.0
+offset_right = 1043.0
+offset_bottom = 140.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 80
+text = "Equipment"
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UIController/EquipmentModal/EquipmentPanel" unique_id=1005408235]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer" unique_id=1571641631]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="backpackPanel" type="Panel" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer" unique_id=1444131427]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.3
+theme = ExtResource("13_kxegi")
+
+[node name="TOP" type="VBoxContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel" unique_id=1835247401]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 8.0
+offset_right = 672.0
+offset_bottom = 336.0
+theme_override_constants/separation = 15
+
+[node name="title" type="HBoxContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP" unique_id=606179607]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.3
+
+[node name="Title" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/title" unique_id=1679798299 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_ucm65")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Equipped Slots"
+vertical_alignment = 1
+
+[node name="TotalStats" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/title" unique_id=1590243282 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_tqqnj")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "ATK 10 | DEF 100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Helmet" type="HBoxContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP" unique_id=1068645947]
+layout_mode = 2
+
+[node name="Title" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Helmet" unique_id=1567364518 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7890625, 0.7890625, 0.7890625, 1)
+material = SubResource("ShaderMaterial_1ryv8")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Helmet"
+vertical_alignment = 1
+
+[node name="BuildButton" type="Button" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Helmet" unique_id=813784818]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "[empty]"
+
+[node name="Armor" type="HBoxContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP" unique_id=1276436965]
+layout_mode = 2
+
+[node name="Title" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Armor" unique_id=93699683 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7890625, 0.7890625, 0.7890625, 1)
+material = SubResource("ShaderMaterial_0a853")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Armor"
+vertical_alignment = 1
+
+[node name="BuildButton" type="Button" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Armor" unique_id=1008115780]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "[empty]"
+
+[node name="Legs" type="HBoxContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP" unique_id=801880285]
+layout_mode = 2
+
+[node name="Title" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Legs" unique_id=1318612563 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7890625, 0.7890625, 0.7890625, 1)
+material = SubResource("ShaderMaterial_01qki")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Legs"
+vertical_alignment = 1
+
+[node name="BuildButton" type="Button" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Legs" unique_id=723589534]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "[empty]"
+
+[node name="Boots" type="HBoxContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP" unique_id=1141225123]
+layout_mode = 2
+
+[node name="Title" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Boots" unique_id=1485985639 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7890625, 0.7890625, 0.7890625, 1)
+material = SubResource("ShaderMaterial_pes2p")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Boots"
+vertical_alignment = 1
+
+[node name="BuildButton" type="Button" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Boots" unique_id=657771939]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "[empty]"
+
+[node name="Weapon" type="HBoxContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP" unique_id=558505225]
+layout_mode = 2
+
+[node name="Title" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Weapon" unique_id=1345561131 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7890625, 0.7890625, 0.7890625, 1)
+material = SubResource("ShaderMaterial_7urtk")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Weapon"
+vertical_alignment = 1
+
+[node name="BuildButton" type="Button" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Weapon" unique_id=1524348201]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "[empty]"
+
+[node name="Shield" type="HBoxContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP" unique_id=1223412195]
+layout_mode = 2
+
+[node name="Title" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Shield" unique_id=1362475713 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7890625, 0.7890625, 0.7890625, 1)
+material = SubResource("ShaderMaterial_acljg")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Shield"
+vertical_alignment = 1
+
+[node name="BuildButton" type="Button" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Shield" unique_id=1544702354]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "[empty]"
+
+[node name="Ring" type="HBoxContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP" unique_id=256351209]
+layout_mode = 2
+
+[node name="Title" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Ring" unique_id=92651158 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7890625, 0.7890625, 0.7890625, 1)
+material = SubResource("ShaderMaterial_vqh4c")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Ring"
+vertical_alignment = 1
+
+[node name="BuildButton" type="Button" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Ring" unique_id=1947265228]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "[empty]"
+
+[node name="Amulet" type="HBoxContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP" unique_id=47200195]
+layout_mode = 2
+
+[node name="Title" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Amulet" unique_id=411352090 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7890625, 0.7890625, 0.7890625, 1)
+material = SubResource("ShaderMaterial_4exnt")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Amulet"
+vertical_alignment = 1
+
+[node name="BuildButton" type="Button" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/backpackPanel/TOP/Amulet" unique_id=1239433459]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "[empty]"
+
+[node name="StatsPanel" type="Panel" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer" unique_id=1094949275]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.7
+theme = ExtResource("13_kxegi")
+
+[node name="Instructions" type="RichTextLabel" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel" unique_id=1071285845]
+visible = false
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 12.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("3_dajxx")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+bbcode_enabled = true
+text = "[i][center]Select an equipped item or a backpack item[/center][/i]"
+scroll_following = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel" unique_id=1423971062]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 12.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EquipName" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel/VBoxContainer" unique_id=993156706 instance=ExtResource("6_prt4a")]
+material = SubResource("ShaderMaterial_ax22c")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+text = "Helmet"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel/VBoxContainer" unique_id=754121525]
+layout_mode = 2
+
+[node name="SelectedType" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel/VBoxContainer/HBoxContainer" unique_id=1720732603 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+material = SubResource("ShaderMaterial_o2vow")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "Helmet"
+vertical_alignment = 1
+
+[node name="value" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel/VBoxContainer/HBoxContainer" unique_id=1027036860 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+material = SubResource("ShaderMaterial_x7npw")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "+2"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel/VBoxContainer" unique_id=893854531]
+layout_mode = 2
+
+[node name="EquippedName" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel/VBoxContainer/HBoxContainer2" unique_id=1904326021 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+material = SubResource("ShaderMaterial_sk1pp")
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "Equipped: Orcish Axe +1"
+vertical_alignment = 1
+
+[node name="value" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel/VBoxContainer/HBoxContainer2" unique_id=15795941 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+material = SubResource("ShaderMaterial_is0r6")
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "+2"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Difference" type="HBoxContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel/VBoxContainer" unique_id=741676397]
+layout_mode = 2
+
+[node name="Difference" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel/VBoxContainer/Difference" unique_id=1449602996 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+material = SubResource("ShaderMaterial_w7uob")
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "Difference"
+vertical_alignment = 1
+
+[node name="stat" type="RichTextLabel" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/StatsPanel/VBoxContainer/Difference" unique_id=2036252189]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("3_dajxx")
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "[right]^ -30 ATK[/right]"
+scroll_following = true
+
+[node name="Backpack" type="Panel" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer" unique_id=1789565387]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("13_kxegi")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/Backpack" unique_id=339012283]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="TOP" type="VBoxContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/Backpack/ScrollContainer" unique_id=510172676]
+layout_mode = 2
+
+[node name="Title" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/Backpack/ScrollContainer/TOP" unique_id=677036573 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_6ix6u")
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "   Backpack - Equipment"
+vertical_alignment = 1
+
+[node name="VScrollBar" type="ScrollContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/Backpack/ScrollContainer/TOP" unique_id=220056392]
+custom_minimum_size = Vector2(0, 203)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="chestGrid" type="HFlowContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/Backpack/ScrollContainer/TOP/VScrollBar" unique_id=379687764]
+custom_minimum_size = Vector2(670, 200)
+layout_mode = 2
+theme_override_constants/h_separation = 7
+theme_override_constants/v_separation = 6
+
+[node name="ActionButtons" type="HBoxContainer" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer" unique_id=1142085703]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/separation = 15
+
+[node name="EquipButton" type="Button" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/ActionButtons" unique_id=857224002]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Equip"
+
+[node name="CloseButton" type="Button" parent="UIController/EquipmentModal/EquipmentPanel/MarginContainer/VBoxContainer/ActionButtons" unique_id=1998889077]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Close"
+
 [node name="MonsterBattleOverlay" type="ColorRect" parent="UIController" unique_id=1221790153 node_paths=PackedStringArray("enemyNameLabel", "enemyHPBar", "enemyHPValue", "fleeButton")]
+visible = false
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
 anchors_preset = 15
@@ -1472,8 +2092,9 @@ metadata/_custom_type_script = "uid://mr26jai5yegf"
 script = ExtResource("5_fmqth")
 metadata/_custom_type_script = "uid://cf4ig2g1iawaq"
 
-[node name="CombatSystem" type="Node" parent="." unique_id=1340201122]
+[node name="CombatSystem" type="Node" parent="." unique_id=1340201122 node_paths=PackedStringArray("equipmentSystem")]
 script = ExtResource("7_1fnpd")
+equipmentSystem = NodePath("../EquipmentSystem")
 metadata/_custom_type_script = "uid://cmsfrujy8ifuq"
 
 [node name="InventorySystem" type="Node" parent="." unique_id=679220032]
@@ -1484,9 +2105,10 @@ metadata/_custom_type_script = "uid://wy43n82n4e4s"
 script = ExtResource("14_6iwwj")
 metadata/_custom_type_script = "uid://buhguegqkcr4k"
 
-[node name="ChestSystem" type="Node" parent="." unique_id=1634084128 node_paths=PackedStringArray("inventorySystem")]
+[node name="ChestSystem" type="Node" parent="." unique_id=1634084128 node_paths=PackedStringArray("inventorySystem", "equipmentSystem")]
 script = ExtResource("20_7kxyy")
 inventorySystem = NodePath("../InventorySystem")
+equipmentSystem = NodePath("../EquipmentSystem")
 metadata/_custom_type_script = "uid://cbw7r5lrmqf02"
 
 [node name="LevelSystem" type="Node" parent="." unique_id=802177787]
@@ -1497,3 +2119,9 @@ metadata/_custom_type_script = "uid://b37mlyqlp46f3"
 script = ExtResource("24_i0mvu")
 inventorySystem = NodePath("../InventorySystem")
 metadata/_custom_type_script = "uid://lweo3k4xtgxj"
+
+[node name="EquipmentSystem" type="Node" parent="." unique_id=790708326 node_paths=PackedStringArray("inventorySystem", "chestSystem")]
+script = ExtResource("25_i0mvu")
+inventorySystem = NodePath("../InventorySystem")
+chestSystem = NodePath("../ChestSystem")
+metadata/_custom_type_script = "uid://rpg0wv8k2g7q"

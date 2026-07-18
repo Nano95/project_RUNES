@@ -2,6 +2,7 @@ extends Node
 class_name ChestSystem
 
 @export var inventorySystem: InventorySystem
+@export var equipmentSystem: EquipmentSystem
 var main:MainNode
 
 # Unlock costs in saved gold (never carried gold)

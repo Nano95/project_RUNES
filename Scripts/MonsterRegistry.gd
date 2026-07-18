@@ -9,19 +9,23 @@ func _ready() -> void:
 				_make("Giant Rat", "weak", 15, 4, 6, 1, 5, [
 					_drop("Rat Tail", 0.45),
 					_drop("Creature Fang", 0.05),
+					_drop("Orcish Axe", 1.0),
 				]),
 				_make("Green Slime", "weak", 12, 3, 5, 1, 4, [
 					_drop("Slime Gel", 0.45),
+					_drop("Orcish Axe", 1.0),
 				]),
 				_make("Cave Bat", "weak", 10, 4, 6, 0, 3, [
 					_drop("Bat Wing", 0.45),
 					_drop("Creature Fang", 0.05),
+					_drop("Orcish Axe", 1.0),
 				]),
 			],
 			"medium": [
 				_make("Orc Scout", "medium", 35, 10, 20, 5, 14, [
 					_drop("Orc Tooth", 0.45),
 					_drop("Beast Skin", 0.25),
+					_drop("Iron Helmet", 0.1)
 				]),
 				_make("Wild Wolf", "medium", 30, 9, 18, 4, 12, [
 					_drop("Beast Skin", 0.35),
@@ -36,6 +40,7 @@ func _ready() -> void:
 					_drop("Orc Tooth", 0.45),
 					_drop("Beast Skin", 0.20),
 					_drop("Orcish Axe", 0.05),
+					_drop("Reinforced Shield", 0.1)
 				]),
 				_make("War Wolf", "strong", 60, 22, 48, 12, 26, [
 					_drop("Beast Skin", 0.35),
@@ -67,6 +72,7 @@ func _ready() -> void:
 			"medium": [
 				_make("Rotworm", "medium", 65, 16, 32, 10, 22, [
 					_drop("Creature Fang", 0.20),
+					_drop("Fang Spear", 0.01)
 				]),
 				_make("Cyclops", "medium", 80, 22, 40, 15, 30, [
 					_drop("Cyclops Eye", 0.25),
@@ -104,6 +110,7 @@ func _ready() -> void:
 			"weak": [
 				_make("Rotworm", "weak", 65, 12, 20, 8, 16, [
 					_drop("Creature Fang", 0.20),
+					_drop("Fang Spear", 0.01)
 				]),
 				_make("Stone Troll", "weak", 120, 18, 25, 10, 20, [
 					_drop("Copper Ore", 0.90),

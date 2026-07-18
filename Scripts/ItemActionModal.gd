@@ -28,7 +28,7 @@ func onEquipPressed() -> void:
 	hide()
 
 func onDropPressed() -> void:
-	inventorySystem.removeFromInventory(currentItem)
+	inventorySystem.removeFromBackpack(currentItem)
 	GameEvents.eventLogged.emit("Dropped %s." % currentItem, "system", false)
 	hide()
 

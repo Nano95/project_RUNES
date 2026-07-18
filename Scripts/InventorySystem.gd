@@ -10,7 +10,15 @@ func _ready() -> void:
 	GameEvents.potionUsed.connect(onPotionUsed)
 
 func onItemDropped(itemName: String) -> void:
-	addToBackpack(itemName)
+	var def = ItemRegistry.getEquipmentDef(itemName)
+	if (def):
+		# Roll a unique instance for equipment
+		var instance = ItemRegistry.rollEquipmentInstance(itemName)
+		addEquipmentToBackpack(instance)
+	else:
+		addToBackpack(itemName)
+	
+	print("dropping: ", itemName, " def found: ", def != null)
 
 func onLeveledUp() -> void:
 	
@@ -54,6 +62,20 @@ func addToBackpack(itemName: String, qty: int = 1) -> bool:
 		remaining -= newStackQty
 
 	main.game_data.currentWeight += weightToAdd
+	main.save_game()
+	GameEvents.backpackChanged.emit()
+	GameEvents.weightChanged.emit()
+	return true
+
+func addEquipmentToBackpack(instance: Dictionary) -> bool:
+	var item = ItemRegistry.getItem(instance["name"])
+	if not item:
+		return false
+	if main.game_data.currentWeight + item.weight > main.game_data.maxWeight:
+		GameEvents.eventLogged.emit("Too heavy to carry!", "system", false)
+		return false
+	main.game_data.backpack.append(instance)
+	main.game_data.currentWeight += item.weight
 	main.save_game()
 	GameEvents.backpackChanged.emit()
 	GameEvents.weightChanged.emit()

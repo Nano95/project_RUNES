@@ -45,7 +45,16 @@ signal chestChanged
 @warning_ignore("unused_signal")
 signal backpackChanged
 @warning_ignore("unused_signal")
+signal equipmentChanged
+
+@warning_ignore("unused_signal")
 signal hpChanged
+@warning_ignore("unused_signal")
+signal poisonApplied(dmgPerTick: int)
+@warning_ignore("unused_signal")
+signal stunApplied
+@warning_ignore("unused_signal")
+signal lifeStealApplied(pct: int)
 
 @warning_ignore("unused_signal")
 signal recipeDiscovered(recipeName: String)

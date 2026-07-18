@@ -10,6 +10,8 @@ const OMENS = [
 	"A shadow passes overhead — nothing is there.",
 ]
 
+@export var equipmentSystem:EquipmentSystem
+
 var pendingStrongMonsterIn: int = 0
 var main:MainNode
 
@@ -57,20 +59,29 @@ func onCombatStarted(monster: MonsterData) -> void:
 	)
 
 func tickCombat() -> void:
-	var playerAtk = randi_range(5, 12) + int(main.game_data.level * 1.5)
+	var playerAtk = randi_range(5, 12) + equipmentSystem.getTotalAttack()
 	main.game_data.currentMonsterHp -= playerAtk
-	var monsterAtk = randi_range(
+
+	# Weapon effects on hit
+	equipmentSystem.applyWeaponEffectOnHit()
+
+	# Monster attack reduced by defense, minimum 1
+	var rawMonsterAtk = randi_range(
 		int(main.game_data.currentMonsterAtk * 0.7),
 		main.game_data.currentMonsterAtk
 	)
-	main.game_data.hp = max(0, main.game_data.hp - monsterAtk)
+	var reducedAtk = max(1, rawMonsterAtk - equipmentSystem.getTotalDefense())
+
+	# Cursed shield check
+	var finalAtk = equipmentSystem.applyCursedShieldOnHit(reducedAtk)
+	main.game_data.hp = max(0, main.game_data.hp - finalAtk)
 
 	if main.game_data.isFleeing:
 		main.game_data.fleeTicks -= 1
 		GameEvents.eventLogged.emit(
 			"Fleeing... %s hits for %d dmg. Escaping in %d ticks..." % [
 				main.game_data.currentMonsterName,
-				monsterAtk,
+				finalAtk,
 				main.game_data.fleeTicks
 			], "combat", false
 		)
@@ -80,14 +91,14 @@ func tickCombat() -> void:
 		if main.game_data.fleeTicks <= 0:
 			flee()
 			return
-		GameEvents.combatTick.emit(playerAtk, monsterAtk, main.game_data.currentMonsterHp)
+		GameEvents.combatTick.emit(playerAtk, finalAtk, main.game_data.currentMonsterHp)
 		return
 
 	GameEvents.eventLogged.emit(
 		"You hit %s for %d. It strikes back for %d." % [
 			main.game_data.currentMonsterName,
 			playerAtk,
-			monsterAtk
+			finalAtk
 		], "combat", false
 	)
 
@@ -99,7 +110,7 @@ func tickCombat() -> void:
 		winCombat()
 		return
 
-	GameEvents.combatTick.emit(playerAtk, monsterAtk, main.game_data.currentMonsterHp)
+	GameEvents.combatTick.emit(playerAtk, finalAtk, main.game_data.currentMonsterHp)
 
 func winCombat() -> void:
 	var monster = MonsterRegistry.rollMonster(

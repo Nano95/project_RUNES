@@ -32,6 +32,15 @@ class_name SaveData
 
 @export var discoveredRecipes: Array[String] = []
 
+@export var equippedWeapon: Dictionary = {}
+@export var equippedShield: Dictionary = {}
+@export var equippedArmor: Dictionary = {}
+@export var equippedHelmet: Dictionary = {}
+@export var equippedLegs: Dictionary = {}
+@export var equippedBoots: Dictionary = {}
+@export var equippedRing: Dictionary = {}
+@export var equippedAmulet: Dictionary = {}
+
 @export_category("General")
 @export var loot_inventory:Dictionary = {
 	# "Orc Tooth": 10
