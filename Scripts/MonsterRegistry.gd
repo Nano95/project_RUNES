@@ -9,16 +9,13 @@ func _ready() -> void:
 				_make("Giant Rat", "weak", 15, 4, 6, 1, 5, [
 					_drop("Rat Tail", 0.45),
 					_drop("Creature Fang", 0.05),
-					_drop("Orcish Axe", 1.0),
 				]),
 				_make("Green Slime", "weak", 12, 3, 5, 1, 4, [
 					_drop("Slime Gel", 0.45),
-					_drop("Orcish Axe", 1.0),
 				]),
 				_make("Cave Bat", "weak", 10, 4, 6, 0, 3, [
 					_drop("Bat Wing", 0.45),
 					_drop("Creature Fang", 0.05),
-					_drop("Orcish Axe", 1.0),
 				]),
 			],
 			"medium": [
