@@ -54,6 +54,10 @@ folder_colors={
 "res://Sprites/": "purple"
 }
 
+[gui]
+
+theme/custom="uid://3dmu3g4p1u1e"
+
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true

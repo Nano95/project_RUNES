@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://cbfawhw0v20ea" path="res://Scripts/MonsterBattleOverlay.gd" id="13_vlrs7"]
 [ext_resource type="Script" uid="uid://buhguegqkcr4k" path="res://Scripts/GatherSystem.gd" id="14_6iwwj"]
 [ext_resource type="Script" uid="uid://dweasp2efehkt" path="res://Scripts/EquipmentModal.gd" id="16_ds30n"]
+[ext_resource type="Theme" uid="uid://3dmu3g4p1u1e" path="res://Resources/Themes/ButtonTheme1.tres" id="17_g72ry"]
 [ext_resource type="Script" uid="uid://cbw7r5lrmqf02" path="res://Scripts/ChestSystem.gd" id="20_7kxyy"]
 [ext_resource type="Script" uid="uid://b37mlyqlp46f3" path="res://Scripts/LevelSystem.gd" id="22_3jiro"]
 [ext_resource type="Script" uid="uid://lweo3k4xtgxj" path="res://Scripts/BrewSystem.gd" id="24_i0mvu"]
@@ -611,6 +612,7 @@ theme_override_constants/separation = 15
 [node name="ChooseAreaBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=793530980]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("17_g72ry")
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
@@ -619,6 +621,7 @@ text = "Travel"
 [node name="ArmoryBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=198991235]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("17_g72ry")
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
@@ -627,6 +630,7 @@ text = "Armory"
 [node name="StorageBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=120215516]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("17_g72ry")
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
@@ -635,6 +639,7 @@ text = "Storage"
 [node name="AlchemyBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=954765678]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("17_g72ry")
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
@@ -1458,6 +1463,7 @@ theme_override_font_sizes/font_size = 32
 text = "Close"
 
 [node name="EquipmentModal" type="ColorRect" parent="UIController" unique_id=195611784 node_paths=PackedStringArray("totalStatsLabel", "helmetButton", "armorButton", "legsButton", "bootsButton", "weaponButton", "shieldButton", "ringButton", "amuletButton", "comparePanel", "instructions", "selectedNameLabel", "selectedEquipType", "selectedEquipTypeValue", "equippedName", "equippedNameStatValue", "compareStats", "equipButton", "closeButton", "backpackFlow", "equipmentSystem", "inventorySystem")]
+visible = false
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
 anchors_preset = 15
@@ -1600,6 +1606,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
+theme = ExtResource("17_g72ry")
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
@@ -1623,6 +1630,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
+theme = ExtResource("17_g72ry")
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
@@ -1646,6 +1654,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
+theme = ExtResource("17_g72ry")
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
@@ -1669,6 +1678,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
+theme = ExtResource("17_g72ry")
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
@@ -1692,6 +1702,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
+theme = ExtResource("17_g72ry")
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
@@ -1715,6 +1726,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
+theme = ExtResource("17_g72ry")
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
@@ -1738,6 +1750,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
+theme = ExtResource("17_g72ry")
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
@@ -1761,6 +1774,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
+theme = ExtResource("17_g72ry")
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
@@ -1940,6 +1954,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.3
+theme = ExtResource("17_g72ry")
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
@@ -1950,6 +1965,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.3
+theme = ExtResource("17_g72ry")
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32

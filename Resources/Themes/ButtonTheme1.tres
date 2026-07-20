@@ -1,0 +1,18 @@
+[gd_resource type="Theme" format=3 uid="uid://3dmu3g4p1u1e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0mios"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.6015625, 0.6015625, 0.6015625, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+shadow_size = 1
+
+[resource]
+Button/styles/normal = SubResource("StyleBoxFlat_0mios")
