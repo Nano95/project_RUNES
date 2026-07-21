@@ -21,12 +21,14 @@
 [ext_resource type="Theme" uid="uid://herb326sm84p" path="res://Resources/Themes/SubpanelT3_theme_res.tres" id="13_kxegi"]
 [ext_resource type="Script" uid="uid://cbfawhw0v20ea" path="res://Scripts/MonsterBattleOverlay.gd" id="13_vlrs7"]
 [ext_resource type="Script" uid="uid://buhguegqkcr4k" path="res://Scripts/GatherSystem.gd" id="14_6iwwj"]
+[ext_resource type="Script" uid="uid://dnx5jud3bj3h2" path="res://Scripts/MerchantDisplay.gd" id="16_cssra"]
 [ext_resource type="Script" uid="uid://dweasp2efehkt" path="res://Scripts/EquipmentModal.gd" id="16_ds30n"]
 [ext_resource type="Theme" uid="uid://3dmu3g4p1u1e" path="res://Resources/Themes/ButtonTheme1.tres" id="17_g72ry"]
 [ext_resource type="Script" uid="uid://cbw7r5lrmqf02" path="res://Scripts/ChestSystem.gd" id="20_7kxyy"]
 [ext_resource type="Script" uid="uid://b37mlyqlp46f3" path="res://Scripts/LevelSystem.gd" id="22_3jiro"]
 [ext_resource type="Script" uid="uid://lweo3k4xtgxj" path="res://Scripts/BrewSystem.gd" id="24_i0mvu"]
 [ext_resource type="Script" uid="uid://rpg0wv8k2g7q" path="res://Scripts/EquipmentSystem.gd" id="25_i0mvu"]
+[ext_resource type="Script" uid="uid://lua0kwyswmk4" path="res://Scripts/MerchantSystem.gd" id="29_px8ax"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_knc0e"]
 resource_local_to_scene = true
@@ -141,6 +143,30 @@ shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8whxx"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hurik"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1sljs"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sg6du"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8myfu"]
 resource_local_to_scene = true
 shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
@@ -326,7 +352,7 @@ script = ExtResource("1_3dcjo")
 tickTimer = NodePath("TickTimer")
 eventLog = NodePath("UIController/MarginContainer/VBoxContainer/EventLogPanel/EventLog")
 
-[node name="UIController" type="Control" parent="." unique_id=1458651066 node_paths=PackedStringArray("mainActionRow", "areaSelectRow", "chooseAreaButton", "brewButton", "storageButton", "armoryButton", "areaButtons", "inventorySystem", "storageDisplay", "alchemyDisplay", "equipmentDisplay", "areaSystem", "adventuringRow", "inventoryPanel", "continueButton", "retreatButton")]
+[node name="UIController" type="Control" parent="." unique_id=1458651066 node_paths=PackedStringArray("mainActionRow", "areaSelectRow", "chooseAreaButton", "brewButton", "storageButton", "armoryButton", "merchantButton", "areaButtons", "inventorySystem", "storageDisplay", "alchemyDisplay", "equipmentDisplay", "merchantDisplay", "areaSystem", "adventuringRow", "inventoryPanel", "continueButton", "retreatButton")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -336,15 +362,17 @@ grow_vertical = 2
 script = ExtResource("2_racw2")
 mainActionRow = NodePath("MarginContainer/VBoxContainer/MainActionRow")
 areaSelectRow = NodePath("MarginContainer/VBoxContainer/AreasSelectRow")
-chooseAreaButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/ChooseAreaBtn")
-brewButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/AlchemyBtn")
-storageButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/StorageBtn")
-armoryButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/ArmoryBtn")
-areaButtons = [NodePath("MarginContainer/VBoxContainer/AreasSelectRow/area1"), NodePath("MarginContainer/VBoxContainer/AreasSelectRow/area2"), NodePath("MarginContainer/VBoxContainer/AreasSelectRow/area3"), NodePath("MarginContainer/VBoxContainer/AreasSelectRow/area4")]
+chooseAreaButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/MainActionRow/ChooseAreaBtn")
+brewButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/MainActionRow/AlchemyBtn")
+storageButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/MainActionRow/StorageBtn")
+armoryButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/MainActionRow/ArmoryBtn")
+merchantButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/MainActionRow/MerchantBtn")
+areaButtons = [NodePath("MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow/area1"), NodePath("MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow/area2"), NodePath("MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow/area3"), NodePath("MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow/area4")]
 inventorySystem = NodePath("../InventorySystem")
 storageDisplay = NodePath("StorageModal")
 alchemyDisplay = NodePath("BrewingContainer")
 equipmentDisplay = NodePath("EquipmentModal")
+merchantDisplay = NodePath("MerchantContainer")
 areaSystem = NodePath("../AreaSystem")
 adventuringRow = NodePath("MarginContainer/VBoxContainer/AdventuringRow")
 inventoryPanel = NodePath("MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay")
@@ -603,13 +631,20 @@ theme_override_font_sizes/normal_font_size = 28
 bbcode_enabled = true
 scroll_following = true
 
-[node name="MainActionRow" type="HBoxContainer" parent="UIController/MarginContainer/VBoxContainer" unique_id=1725090560]
+[node name="MainActionRow" type="ScrollContainer" parent="UIController/MarginContainer/VBoxContainer" unique_id=23115074]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MainActionRow" type="GridContainer" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=780816887]
 custom_minimum_size = Vector2(678, 0)
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 15
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 13
+columns = 3
 
-[node name="ChooseAreaBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=793530980]
+[node name="ChooseAreaBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow/MainActionRow" unique_id=793530980]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("17_g72ry")
@@ -618,7 +653,8 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Travel"
 
-[node name="ArmoryBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=198991235]
+[node name="ArmoryBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow/MainActionRow" unique_id=198991235]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("17_g72ry")
@@ -627,7 +663,8 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Armory"
 
-[node name="StorageBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=120215516]
+[node name="StorageBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow/MainActionRow" unique_id=120215516]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("17_g72ry")
@@ -636,7 +673,8 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Storage"
 
-[node name="AlchemyBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=954765678]
+[node name="AlchemyBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow/MainActionRow" unique_id=954765678]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("17_g72ry")
@@ -645,47 +683,64 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Alchemy"
 
-[node name="AreasSelectRow" type="GridContainer" parent="UIController/MarginContainer/VBoxContainer" unique_id=2070690060]
+[node name="MerchantBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow/MainActionRow" unique_id=34585174]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("17_g72ry")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Merchant"
+
+[node name="AreasSelectRow" type="ScrollContainer" parent="UIController/MarginContainer/VBoxContainer" unique_id=2075402911]
 visible = false
-custom_minimum_size = Vector2(678, 0)
+custom_minimum_size = Vector2(0, 202)
 layout_mode = 2
 size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="AreasSelectRow" type="GridContainer" parent="UIController/MarginContainer/VBoxContainer/AreasSelectRow" unique_id=2070690060]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 19
 columns = 3
 
-[node name="area1" type="Button" parent="UIController/MarginContainer/VBoxContainer/AreasSelectRow" unique_id=1488179726]
-custom_minimum_size = Vector2(230, 0)
+[node name="area1" type="Button" parent="UIController/MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow" unique_id=1488179726]
+custom_minimum_size = Vector2(221, 74)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 4
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "Hunting Grounds"
 
-[node name="area2" type="Button" parent="UIController/MarginContainer/VBoxContainer/AreasSelectRow" unique_id=794916738]
-custom_minimum_size = Vector2(230, 0)
+[node name="area2" type="Button" parent="UIController/MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow" unique_id=794916738]
+custom_minimum_size = Vector2(221, 74)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 4
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "Outskirts"
 
-[node name="area3" type="Button" parent="UIController/MarginContainer/VBoxContainer/AreasSelectRow" unique_id=593624606]
-custom_minimum_size = Vector2(230, 0)
+[node name="area3" type="Button" parent="UIController/MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow" unique_id=593624606]
+custom_minimum_size = Vector2(221, 74)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 4
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "Darkwood Forest"
 
-[node name="area4" type="Button" parent="UIController/MarginContainer/VBoxContainer/AreasSelectRow" unique_id=285783351]
-custom_minimum_size = Vector2(230, 0)
+[node name="area4" type="Button" parent="UIController/MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow" unique_id=285783351]
+custom_minimum_size = Vector2(221, 74)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 4
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "Hunting Grounds"
 
 [node name="AdventuringRow" type="HBoxContainer" parent="UIController/MarginContainer/VBoxContainer" unique_id=1173755062]
@@ -1162,6 +1217,284 @@ size_flags_stretch_ratio = 0.3
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 28
+text = "Close"
+
+[node name="MerchantContainer" type="ColorRect" parent="UIController" unique_id=129010332 node_paths=PackedStringArray("goldLabel", "potionsTab", "equipmentTab", "itemsVBox", "detailName", "detailDesc", "detailStat", "buyButton", "closeButton", "merchantSystem")]
+material = SubResource("ShaderMaterial_ds30n")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_cssra")
+goldLabel = NodePath("MerchantPanel/TitlePanel/Gold")
+potionsTab = NodePath("MerchantPanel/VBoxContainer/Categories/Potions")
+equipmentTab = NodePath("MerchantPanel/VBoxContainer/Categories/Equipment")
+itemsVBox = NodePath("MerchantPanel/VBoxContainer/ItemsPanel/ItemsContainer/VScrollBar/ItemsList")
+detailName = NodePath("MerchantPanel/VBoxContainer/InfoPanel/DiscoveredRecipes/ItemName")
+detailDesc = NodePath("MerchantPanel/VBoxContainer/InfoPanel/DiscoveredRecipes/Description")
+detailStat = NodePath("MerchantPanel/VBoxContainer/InfoPanel/DiscoveredRecipes/Stats")
+buyButton = NodePath("MerchantPanel/VBoxContainer/BottomActions/BuyBtn")
+closeButton = NodePath("MerchantPanel/VBoxContainer/BottomActions/CloseBtn")
+merchantSystem = NodePath("../../MerchantSystem")
+
+[node name="MerchantPanel" type="Panel" parent="UIController/MerchantContainer" unique_id=1417883117]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.0
+offset_top = -505.0
+offset_right = 345.0
+offset_bottom = 473.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("9_8gkgp")
+
+[node name="TitlePanel" type="Panel" parent="UIController/MerchantContainer/MerchantPanel" unique_id=719232640]
+layout_mode = 0
+offset_right = 690.0
+offset_bottom = 45.0
+theme = ExtResource("5_qjsjv")
+
+[node name="Name" parent="UIController/MerchantContainer/MerchantPanel/TitlePanel" unique_id=1919689286 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_hurik")
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 9.0
+offset_right = 1043.0
+offset_bottom = 140.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 80
+text = "Merchant"
+vertical_alignment = 1
+
+[node name="Gold" parent="UIController/MerchantContainer/MerchantPanel/TitlePanel" unique_id=1413023271 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_1sljs")
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 163.0
+offset_right = 1197.0
+offset_bottom = 140.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 80
+text = "Bank $1000"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIController/MerchantContainer/MerchantPanel" unique_id=792797559]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 49.5
+offset_right = -8.0
+offset_bottom = -11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Categories" type="HBoxContainer" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer" unique_id=648724255]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+theme_override_constants/separation = 10
+
+[node name="Potions" type="Button" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer/Categories" unique_id=2069016464]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme = ExtResource("17_g72ry")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 28
+text = "Potions"
+
+[node name="Equipment" type="Button" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer/Categories" unique_id=1685268802]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme = ExtResource("17_g72ry")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Equipment"
+
+[node name="ItemsPanel" type="Panel" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer" unique_id=1851640776]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("13_kxegi")
+
+[node name="ItemsContainer" type="VBoxContainer" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer/ItemsPanel" unique_id=7832122]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer/ItemsPanel/ItemsContainer" unique_id=421700737]
+layout_mode = 2
+
+[node name="Title" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer/ItemsPanel/ItemsContainer/HBoxContainer" unique_id=1250030446 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_sg6du")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Equipment"
+vertical_alignment = 1
+
+[node name="VScrollBar" type="ScrollContainer" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer/ItemsPanel/ItemsContainer" unique_id=303395248]
+custom_minimum_size = Vector2(0, 271)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="ItemsList" type="VBoxContainer" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer/ItemsPanel/ItemsContainer/VScrollBar" unique_id=404915640]
+custom_minimum_size = Vector2(670, 270)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="InfoPanel" type="Panel" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer" unique_id=57202275]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme = ExtResource("13_kxegi")
+
+[node name="Instructions" type="RichTextLabel" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer/InfoPanel" unique_id=802122809]
+visible = false
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 12.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("3_dajxx")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+bbcode_enabled = true
+text = "[i][center]Select any item to see information here.[/center][/i]"
+scroll_following = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DiscoveredRecipes" type="Control" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer/InfoPanel" unique_id=1554067341]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -3.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer/InfoPanel/DiscoveredRecipes" unique_id=1681143752 instance=ExtResource("6_prt4a")]
+material = SubResource("ShaderMaterial_8myfu")
+layout_mode = 0
+offset_left = 9.0
+offset_top = 2.5
+offset_right = 679.0
+offset_bottom = 44.5
+scale = Vector2(1, 1)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "Discovered Recipes"
+vertical_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer/InfoPanel/DiscoveredRecipes" unique_id=1068387353]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 71.5
+offset_right = -8.0
+offset_bottom = -79.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("3_dajxx")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+bbcode_enabled = true
+text = "Select any item to see information here."
+scroll_following = true
+vertical_alignment = 1
+
+[node name="Stats" type="RichTextLabel" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer/InfoPanel/DiscoveredRecipes" unique_id=1130788074]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 124.5
+offset_right = -8.0
+offset_bottom = -16.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("3_dajxx")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+bbcode_enabled = true
+text = "[i]Select any item to see stats here.[/i]"
+scroll_active = false
+
+[node name="BottomActions" type="HBoxContainer" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer" unique_id=656209029]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+theme_override_constants/separation = 10
+
+[node name="BuyBtn" type="Button" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer/BottomActions" unique_id=1196013949]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme = ExtResource("17_g72ry")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 28
+text = "Buy
+"
+
+[node name="CloseBtn" type="Button" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer/BottomActions" unique_id=838940260]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme = ExtResource("17_g72ry")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
 text = "Close"
 
 [node name="StorageModal" type="ColorRect" parent="UIController" unique_id=700632207 node_paths=PackedStringArray("backpackFlow", "backpackTitleCap", "backpackWeightLabel", "chestFlow", "chestCapacityLabel", "chestNameLabel", "chestGrid", "upgradeLabel", "upgradeDetails", "buildButton", "closeButton", "chestSystem", "inventorySystem")]
@@ -2141,3 +2474,8 @@ script = ExtResource("25_i0mvu")
 inventorySystem = NodePath("../InventorySystem")
 chestSystem = NodePath("../ChestSystem")
 metadata/_custom_type_script = "uid://rpg0wv8k2g7q"
+
+[node name="MerchantSystem" type="Node" parent="." unique_id=2070630327 node_paths=PackedStringArray("inventorySystem")]
+script = ExtResource("29_px8ax")
+inventorySystem = NodePath("../InventorySystem")
+metadata/_custom_type_script = "uid://lua0kwyswmk4"

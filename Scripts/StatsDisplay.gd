@@ -30,7 +30,7 @@ func _ready() -> void:
 	GameEvents.leveledUp.connect(playLevelUpEffect)
 	
 	refresh()
-	goldLabel.text = "Saved Gold"
+	goldLabel.text = "Bank"
 	goldValue.text = str(main.game_data.savedGold)
 
 func onPlayerDied() -> void:
@@ -53,7 +53,7 @@ func refresh() -> void:
 		goldLabel.text = "Gold"
 		goldValue.text = str(gd.gold)
 	else:
-		goldLabel.text = "Saved Gold"
+		goldLabel.text = "Bank"
 		goldValue.text = str(gd.savedGold)
 
 	# Area
@@ -115,7 +115,7 @@ func onAreaEntered(areaName: String) -> void:
 func onAreaExited() -> void:
 	areaValue.text = "Town"
 	eventValue.text = ""
-	goldLabel.text = "Saved Gold"
+	goldLabel.text = "Bank"
 	goldValue.text = str(main.game_data.savedGold)
 
 func onGoldDeposited(_amount: int) -> void:

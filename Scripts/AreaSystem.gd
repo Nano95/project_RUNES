@@ -30,7 +30,7 @@ func exitArea() -> void:
 		main.game_data.savedGold += carried
 		main.game_data.gold = 0
 		GameEvents.eventLogged.emit(
-			"You deposit %d gold in town. Total saved: %d." % [carried, main.game_data.savedGold],
+			"You deposit %d gold in town. Bank: %d." % [carried, main.game_data.savedGold],
 			"town", false
 		)
 		GameEvents.goldDeposited.emit(carried)

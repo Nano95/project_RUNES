@@ -1,17 +1,19 @@
 extends Control
 class_name UIController
 
-@export var mainActionRow: HBoxContainer
-@export var areaSelectRow: GridContainer
+@export var mainActionRow: ScrollContainer
+@export var areaSelectRow: ScrollContainer
 @export var chooseAreaButton: Button
 @export var brewButton: Button
 @export var storageButton: Button
 @export var armoryButton: Button
+@export var merchantButton: Button
 @export var areaButtons: Array[Button] = []
 @export var inventorySystem: InventorySystem
 @export var storageDisplay: StorageDisplay
 @export var alchemyDisplay: BrewDisplay
 @export var equipmentDisplay:EquipmentDisplay
+@export var merchantDisplay: MerchantDisplay
 @export var areaSystem: AreaSystem
 @export var adventuringRow: HBoxContainer
 @export var inventoryPanel: Panel
@@ -33,6 +35,7 @@ func _ready() -> void:
 	storageButton.pressed.connect(showDisplay)
 	brewButton.pressed.connect(showAlchemy)
 	armoryButton.pressed.connect(showArmory)
+	merchantButton.pressed.connect(showMerchant)
 	
 	mainActionRow.show()
 	areaSelectRow.hide()
@@ -72,6 +75,9 @@ func showAlchemy() -> void:
 
 func showArmory() -> void:
 	equipmentDisplay.open()
+
+func showMerchant() -> void:
+	merchantDisplay.open()
 
 func onAreaEntered(_areaName: String) -> void:
 	adventuringRow.visible = true

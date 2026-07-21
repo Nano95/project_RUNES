@@ -22,6 +22,8 @@ func getStackCap(itemName: String) -> int:
 	return STACK_CAPS.get(item.itemType, 1)
 
 func _register() -> void:
+
+	_equip("Wooden Shield",      "shield", false, "defense", 1, 2, "none", 0, 0.0, "Better than nothing.",         30)
 	_equip("Crude Blade",       "weapon", false, "attack",  1,  3,  "none",           0,    0.0,  "A crude blade.",                20)
 	_equip("Orcish Axe",        "weapon", false, "attack",  3,  6,  "none",           0,    0.0,  "A crude but heavy axe.",        40)
 	_equip("Bandit Blade",      "weapon", false, "attack",  2,  5,  "none",           0,    0.0,  "Notched but sharp.",            35)
@@ -42,6 +44,7 @@ func _register() -> void:
 	_equip("Dark Knight Helm",  "helmet", false, "defense", 4,  7,  "none",           0,    0.0,  "Forged in shadow.",             90)
 	_equip("Reinforced Boots",  "boots",  false, "defense", 1,  3,  "none",           0,    0.0,  "Sturdy and well-made.",         55)
 	# Rings and amulets — no stat type, effect driven
+	_equip("Ring of Protection", "ring",   false, "defense", 1, 2, "none", 0, 0.0, "A plain ring, solid defense.", 80)
 	_equip("Ring of Vitality",  "ring",   false, "none",    0,  0,  "checkpoint_heal",10,   1.0,  "Pulses with warm energy.",      200)
 	_equip("Ring of Greed",     "ring",   false, "none",    0,  0,  "gold_bonus",     15,   1.0,  "Smells faintly of coin.",       180)
 	_equip("Ring of Wisdom",    "ring",   false, "none",    0,  0,  "xp_bonus",       15,   1.0,  "Hums with ancient knowledge.",  180)
@@ -131,6 +134,8 @@ func isStackable(itemName: String) -> bool:
 	var item = getItem(itemName)
 	return item.stackable if item else false
 
+# _equip registers an item in the equipmentDefs (definitions) dictionary
+# it covers equipment-specific properties that only gear needs:
 func _equip(itemName: String, slot: String, twoHanded: bool, statType: String,
 			statMin: int, statMax: int, effectType: String, effectValue: int,
 			effectChance: float, description: String, value: int) -> void:
