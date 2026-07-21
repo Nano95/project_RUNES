@@ -42,14 +42,14 @@ func refresh() -> void:
 		var btn = Button.new()
 		# Show qty / cap for stackable items
 		if entry["stackable"] and entry["qty"] > 1:
-			btn.text = "%s %d/%d" % [entry["name"], entry["qty"], entry["cap"]]
+			btn.text = " %s %d/%d " % [entry["name"], entry["qty"], entry["cap"]]
 		else:
-			btn.text = entry["name"]
+			btn.text = " " + entry["name"] + " "
 		btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		var color = getColorForType(entry["type"])
 		btn.add_theme_color_override("font_color", color)
 		btn.add_theme_font_size_override("font_size", 22)
-		btn.custom_minimum_size.y = 47
+		btn.custom_minimum_size = Vector2(150,60)
 		if (entry["type"] == "potion"):
 			btn.button_up.connect(onItemButtonUp.bind(entry["name"], entry["type"]))
 		btn.button_down.connect(onItemButtonDown.bind(entry["name"]))

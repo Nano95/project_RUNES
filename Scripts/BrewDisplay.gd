@@ -72,11 +72,11 @@ func refreshBackpack() -> void:
 		var btn = Button.new()
 		var inUse = currentCombo.get(entry["name"], 0)
 		var available = entry["qty"] - inUse
-		btn.text = "%s x%d" % [entry["name"], available]
+		btn.text = " %s x%d " % [entry["name"], available]
 		btn.disabled = available <= 0 or slotOrder.size() >= 3 and not currentCombo.has(entry["name"])
 		btn.add_theme_color_override("font_color", Color("#27ae60"))
 		btn.add_theme_font_size_override("font_size", 22)
-		btn.custom_minimum_size.y = 47
+		btn.custom_minimum_size = Vector2(150,50)
 		btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		btn.pressed.connect(onIngredientPressed.bind(entry["name"]))
 		backpackFlow.add_child(btn)
@@ -156,6 +156,7 @@ func refreshDiscovered() -> void:
 		btn.text = "%s — %s" % [recipe.recipeName, " + ".join(parts)]
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		btn.add_theme_color_override("font_color", Color("#8e44ad"))
+		btn.custom_minimum_size = Vector2(150,50)
 		btn.pressed.connect(onRecipeAutoFill.bind(recipe))
 		discoveredFlow.add_child(btn)
 

@@ -744,12 +744,12 @@ theme_override_font_sizes/font_size = 24
 text = "Hunting Grounds"
 
 [node name="AdventuringRow" type="HBoxContainer" parent="UIController/MarginContainer/VBoxContainer" unique_id=1173755062]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
 [node name="BackpackDisplay" type="Panel" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow" unique_id=1869722029 node_paths=PackedStringArray("itemFlow", "weightLabel", "spacesLabel", "inventorySystem")]
+custom_minimum_size = Vector2(0, 280)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("5_qjsjv")
@@ -809,15 +809,15 @@ vertical_alignment = 1
 layout_mode = 0
 offset_left = 12.0
 offset_top = 25.0
-offset_right = 681.0
-offset_bottom = 170.0
+offset_right = 682.0
+offset_bottom = 269.0
 horizontal_scroll_mode = 0
 
 [node name="InventoryGrid" type="HFlowContainer" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay/VScrollBar" unique_id=1908519590]
-custom_minimum_size = Vector2(670, 145)
+custom_minimum_size = Vector2(670, 244)
 layout_mode = 2
-theme_override_constants/h_separation = 7
-theme_override_constants/v_separation = 6
+theme_override_constants/h_separation = 9
+theme_override_constants/v_separation = 12
 
 [node name="Continue" type="Button" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow" unique_id=1247342207]
 visible = false
@@ -1220,6 +1220,7 @@ theme_override_font_sizes/font_size = 28
 text = "Close"
 
 [node name="MerchantContainer" type="ColorRect" parent="UIController" unique_id=129010332 node_paths=PackedStringArray("goldLabel", "potionsTab", "equipmentTab", "itemsVBox", "detailName", "detailDesc", "detailStat", "buyButton", "closeButton", "merchantSystem")]
+visible = false
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
 anchors_preset = 15

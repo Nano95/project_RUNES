@@ -179,14 +179,14 @@ func _makeItemButton(entry: Dictionary, source: String) -> Button:
 	var btn = Button.new()
 	var cap = entry.get("cap", 1)
 	if (entry["qty"] > 1):
-		btn.text = "%s %d/%d" % [entry["name"], entry["qty"], cap]
+		btn.text = " %s %d/%d " % [entry["name"], entry["qty"], cap]
 	else:
-		btn.text = entry["name"]
+		btn.text = " " + entry["name"] + " "
 	btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	var newColor = _getColorForType(entry["type"])
 	btn.add_theme_color_override("font_color", newColor)
 	btn.add_theme_font_size_override("font_size", 22)
-	btn.custom_minimum_size.y = 50
+	btn.custom_minimum_size = Vector2(150,50)
 	btn.button_down.connect(onItemButtonDown.bind(entry["name"], source))
 	btn.button_up.connect(onItemButtonUp.bind(entry["name"], source))
 	return btn

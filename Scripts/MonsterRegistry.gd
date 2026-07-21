@@ -6,29 +6,29 @@ func _ready() -> void:
 	areaMonsters = {
 		"Hunting Grounds": {
 			"weak": [
-				_make("Giant Rat", "weak", 15, 4, 6, 1, 5, [
+				_make("Giant Rat", "weak", 15, 9, 6, 1, 5, [
 					_drop("Rat Tail", 0.45),
 					_drop("Creature Fang", 0.05),
 				]),
-				_make("Green Slime", "weak", 12, 3, 5, 1, 4, [
+				_make("Green Slime", "weak", 12, 8, 5, 1, 4, [
 					_drop("Slime Gel", 0.45),
 				]),
-				_make("Cave Bat", "weak", 10, 4, 6, 0, 3, [
+				_make("Cave Bat", "weak", 10, 6, 6, 0, 3, [
 					_drop("Bat Wing", 0.45),
 					_drop("Creature Fang", 0.05),
 				]),
 			],
 			"medium": [
-				_make("Orc Scout", "medium", 35, 10, 20, 5, 14, [
+				_make("Orc Scout", "medium", 35, 11, 20, 5, 14, [
 					_drop("Orc Tooth", 0.45),
 					_drop("Beast Skin", 0.25),
 					_drop("Iron Helmet", 0.1)
 				]),
-				_make("Wild Wolf", "medium", 30, 9, 18, 4, 12, [
+				_make("Wild Wolf", "medium", 30, 10, 18, 4, 12, [
 					_drop("Beast Skin", 0.35),
 					_drop("Giant Fang", 0.01),
 				]),
-				_make("Bog Frog", "medium", 28, 8, 16, 3, 10, [
+				_make("Bog Frog", "medium", 28, 12, 16, 3, 10, [
 					_drop("Frog Leg", 0.45),
 				]),
 			],
@@ -54,15 +54,15 @@ func _ready() -> void:
 
 		"Outskirts": {
 			"weak": [
-				_make("Orc Scout", "weak", 35, 8, 15, 4, 10, [
+				_make("Orc Scout", "weak", 35, 11, 20, 5, 14, [
 					_drop("Orc Tooth", 0.45),
 					_drop("Beast Skin", 0.25),
 				]),
-				_make("Wild Wolf", "weak", 30, 7, 14, 3, 9, [
+				_make("Wild Wolf", "weak", 30, 10, 18, 4, 12, [
 					_drop("Beast Skin", 0.35),
 					_drop("Giant Fang", 0.01),
 				]),
-				_make("Bog Frog", "weak", 28, 6, 12, 2, 8, [
+				_make("Bog Frog", "weak", 28, 12, 16, 3, 10, [
 					_drop("Frog Leg", 0.45),
 				]),
 			],

@@ -103,9 +103,7 @@ func refreshBackpack() -> void:
 	var hasEquipment = false
 
 	for stack in main.game_data.backpack:
-		print("- ", stack)
 		if not stack.get("isEquipment", false):
-			print("IS EQUIPMEnt -- NO")
 			continue
 		hasEquipment = true
 		var btn = Button.new()
@@ -116,9 +114,10 @@ func refreshBackpack() -> void:
 		var statStr = ""
 		if statType != "none":
 			statStr = " (%s +%d)" % [statType.to_upper(), statBonus]
-		btn.text = "%s%s%s" % [stack["name"], enhStr, statStr]
+		btn.text = " %s%s%s " % [stack["name"], enhStr, statStr]
 		btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		btn.add_theme_color_override("font_color", Color("#e74c3c"))
+		btn.custom_minimum_size = Vector2(150,50)
 		btn.pressed.connect(onBackpackItemPressed.bind(stack))
 		backpackFlow.add_child(btn)
 

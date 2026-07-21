@@ -126,23 +126,23 @@ func _roll_event() -> void:
 		GameEvents.eventLogged.emit("...", "system", true)
 		return
 
-	if roll < 0.28:
+	if roll < 0.29:
 		GameEvents.eventLogged.emit("All is quiet. Nothing stirs.", "system", true)
 		return
 
-	if roll < 0.52:
+	if roll < 0.53:
 		combatSystem.trySpawnMonster(main.game_data.eventCount)
 		return
 
-	if roll < 0.64:
+	if roll < 0.62:
 		gatherSystem.startOreGather()
 		return
 
-	if roll < 0.74:
+	if roll < 0.76:
 		gatherSystem.startForage()
 		return
 
-	if roll < 0.82:
+	if roll < 0.80:
 		gatherSystem.startWoodGather()
 		return
 
