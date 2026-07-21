@@ -107,7 +107,7 @@ func _getStatText(itemName: String) -> String:
 
 func _getPotionHeal(itemName: String) -> int:
 	match itemName:
-		"Minor Heal Potion": return 20
+		"Minor Health Potion": return 20
 		"Health Potion":     return 30
 	return 0
 

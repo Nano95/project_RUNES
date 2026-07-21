@@ -3,7 +3,8 @@ class_name MerchantSystem
 
 const STOCK: Array[Dictionary] = [
 	# Potions
-	{ "name": "Minor Heal Potion", "category": "potion",    "cost": 20  },
+	{ "name": "Minor Health Potion", "category": "potion",    "cost": 20  },
+	{ "name": "Minor Battle Potion", "category": "potion",    "cost": 20  },
 	{ "name": "Health Potion",     "category": "potion",    "cost": 10 }, # CHEAP FOR NOW
 	# Equipment
 	{ "name": "Wooden Shield",      "category": "equipment", "cost": 80  },

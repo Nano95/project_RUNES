@@ -128,6 +128,15 @@ func getBackpackSlotCount() -> int:
 
 # ── POTIONS ──────────────────────────────────────────────
 func onPotionUsed(itemName: String) -> void:
+	var specialPotions = [
+		"Strength Brew", "Swiftness Tonic",
+		"Time Potion", "Regeneration Potion",
+		"Minor Battle Potion", "Battle Potion", "Great Battle Potion"
+	]
+	# Special potions are handled by their respective systems -- otherwise we assume it's a healing potion
+	if specialPotions.has(itemName):
+		removeFromBackpack(itemName, 1)
+		return
 	
 	if main.game_data.hp >= main.game_data.maxHp:
 		GameEvents.eventLogged.emit("Already at full HP.", "system", false)

@@ -215,3 +215,17 @@ func rollDrops(monster: MonsterData) -> Array[String]:
 		if randf() <= entry.dropChance:
 			drops.append(entry.itemName)
 	return drops
+
+func getMonsterByName(monsterName: String) -> MonsterData:
+	for area in areaMonsters:
+		for tier in areaMonsters[area]:
+			for monster in areaMonsters[area][tier]:
+				if monster.monsterName == monsterName:
+					return monster
+	return null
+
+func getMonsterByAreaNameTier(monsterName: String, tier: String, area: String) -> MonsterData:
+	for monster in areaMonsters[area][tier]:
+		if monster.monsterName == monsterName:
+			return monster
+	return null

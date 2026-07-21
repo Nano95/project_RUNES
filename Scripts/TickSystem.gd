@@ -107,6 +107,18 @@ func onAreaExited() -> void:
 
 # Takes in two dummy params because combatWon emits two arguments, but are not needed here
 func onCombatResolved(_a = null, _b = null) -> void:
+	# Decrement battle potion counter after each combat
+	if combatSystem.isBattlePotionActive():
+		combatSystem.battlePotionEventsLeft -= 1
+		if combatSystem.battlePotionEventsLeft > 0:
+			GameEvents.eventLogged.emit(
+				"Battle potion active — %d events remaining." % combatSystem.battlePotionEventsLeft,
+				"danger", false
+			)
+		else:
+			GameEvents.eventLogged.emit(
+				"Battle potion wore off.", "system", false
+			)
 	# Combat finished — check if a checkpoint was waiting
 	if checkpointPending:
 		GameEvents.checkpointReached.emit()
@@ -121,11 +133,13 @@ func onCheckpointContinued() -> void:
 
 func _roll_event() -> void:
 	var roll = randf()
-
-	if roll < 0.08:
-		GameEvents.eventLogged.emit("...", "system", true)
+	# Battle potion active — 90% monster chance
+	if combatSystem.isBattlePotionActive():
+		if randf() < 0.90:
+			combatSystem.trySpawnMonster(main.game_data.eventCount)
+		else:
+			GameEvents.eventLogged.emit("The area feels tense...", "system", true)
 		return
-
 	if roll < 0.29:
 		GameEvents.eventLogged.emit("All is quiet. Nothing stirs.", "system", true)
 		return

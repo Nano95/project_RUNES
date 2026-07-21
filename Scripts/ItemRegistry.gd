@@ -108,6 +108,9 @@ func _register() -> void:
 	_add("Strong Heal Potion",  "potion",     true,  3.4, "Restores 50 HP.",                  35)
 	#_add("Herbal Elixir",       "potion",     true,  3.8, "Restores 60 HP.",                  45)
 	_add("Twilight Potion",     "potion",     true,  5.0, "Restores 70 HP.",                  55)
+	_add("Minor Battle Potion", "potion",     true, 2.3, "Attracts monsters for 3 events.",   25)
+	_add("Battle Potion",       "potion",     true, 2.3, "Attracts monsters for 6 events.",   45)
+	_add("Great Battle Potion", "potion",     true, 2.3, "Attracts monsters for 10 events.",  80)
 
 func _add(itemName: String, itemType: String, stackable: bool, weight: float, description: String, value: int) -> void:
 	var item = ItemData.new()

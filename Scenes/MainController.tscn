@@ -744,6 +744,7 @@ theme_override_font_sizes/font_size = 24
 text = "Hunting Grounds"
 
 [node name="AdventuringRow" type="HBoxContainer" parent="UIController/MarginContainer/VBoxContainer" unique_id=1173755062]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10

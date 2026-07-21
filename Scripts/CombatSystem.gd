@@ -11,7 +11,7 @@ const OMENS = [
 ]
 
 @export var equipmentSystem:EquipmentSystem
-
+var battlePotionEventsLeft: int = 0
 var pendingStrongMonsterIn: int = 0
 var main:MainNode
 
@@ -20,6 +20,7 @@ func _ready() -> void:
 	GameEvents.tickFired.connect(onTick)
 	GameEvents.combatStarted.connect(onCombatStarted)
 	GameEvents.fleeRequested.connect(onFleeRequested)
+	GameEvents.potionUsed.connect(onPotionUsed)
 
 func onTick() -> void:
 	if not main.game_data.inArea:
@@ -69,7 +70,7 @@ func tickCombat() -> void:
 	var rawMonsterAtk = randi_range(
 		int(main.game_data.currentMonsterAtk * 0.7),
 		main.game_data.currentMonsterAtk
-	)
+	) + 5 # Giving all monsters a bit more atk since they seem a bit underpowered rn
 	var reducedAtk = max(1, rawMonsterAtk - equipmentSystem.getTotalDefense())
 
 	# Cursed shield check
@@ -113,10 +114,14 @@ func tickCombat() -> void:
 	GameEvents.combatTick.emit(playerAtk, finalAtk, main.game_data.currentMonsterHp)
 
 func winCombat() -> void:
-	var monster = MonsterRegistry.rollMonster(
-		main.game_data.currentArea,
-		main.game_data.currentMonsterTier
+	var monster = MonsterRegistry.getMonsterByAreaNameTier(
+		main.game_data.currentMonsterName,
+		main.game_data.currentMonsterTier, 
+		main.game_data.currentArea
 	)
+	if not monster:
+		clearCombat()
+		return
 	var gold = randi_range(monster.goldMin, monster.goldMax)
 	main.game_data.gold += gold
 	main.game_data.xp += monster.xp
@@ -125,7 +130,7 @@ func winCombat() -> void:
 			main.game_data.currentMonsterName,
 			gold,
 			monster.xp
-		], "loot", true
+		], "loot", false
 	)
 	var drops = MonsterRegistry.rollDrops(monster)
 	for drop in drops:
@@ -163,3 +168,33 @@ func onFleeRequested() -> void:
 	main.game_data.isFleeing = true
 	main.game_data.fleeTicks = 3
 	GameEvents.eventLogged.emit("You attempt to flee...", "system", false)
+
+func onPotionUsed(itemName: String) -> void:
+	match itemName:
+		"Minor Battle Potion":
+			battlePotionEventsLeft += 3
+			GameEvents.eventLogged.emit(
+				"Minor Battle Potion consumed. Monsters attracted for %d events." % battlePotionEventsLeft,
+				"danger", false
+			)
+		"Battle Potion":
+			battlePotionEventsLeft += 6
+			GameEvents.eventLogged.emit(
+				"Battle Potion consumed. Monsters attracted for %d events." % battlePotionEventsLeft,
+				"danger", false
+			)
+		"Great Battle Potion":
+			battlePotionEventsLeft += 10
+			GameEvents.eventLogged.emit(
+				"Great Battle Potion consumed. Monsters attracted for %d events." % battlePotionEventsLeft,
+				"danger", false
+			)
+
+func isBattlePotionActive() -> bool:
+	return battlePotionEventsLeft > 0
+
+func onAreaExited() -> void:
+	battlePotionEventsLeft = 0
+
+func onPlayerDied() -> void:
+	battlePotionEventsLeft = 0
