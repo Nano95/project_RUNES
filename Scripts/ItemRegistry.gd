@@ -24,10 +24,13 @@ func getStackCap(itemName: String) -> int:
 func _register() -> void:
 
 	# CRAFT EQUIPS
+	_equip("Copper Legs", "legs", false, "defense", 2, 4, "none", 0, 0.0, "Sturdy copper leggings.", 40)
+	_equip("Iron Legs",   "legs", false, "defense", 4, 7, "none", 0, 0.0, "Reliable iron leggings.", 70)
+	_equip("Golden Legs", "legs", false, "defense", 5, 9, "none", 0, 0.0, "Gleaming golden leggings.", 110)
 	_equip("Copper Sword", "weapon", false, "attack",  2, 4,  "none", 0, 0.0, "A solid copper blade.", 45)
 	_equip("Iron Sword",   "weapon", false, "attack",  4, 7,  "none", 0, 0.0, "A reliable iron sword.", 75)
 	_equip("Iron Shield",  "shield", false, "defense", 3, 5,  "none", 0, 0.0, "A sturdy iron shield.",  65)
-	_equip("Gold Helmet",  "helmet", false, "defense", 4, 6,  "none", 0, 0.0, "A gleaming gold helm.",  90)
+	_equip("Golden Armor",  "armor", false, "defense", 5, 7,  "none", 0, 0.0, "A gleaming gold armor.",  90)
 	_equip("Orc Helmet",   "helmet", false, "defense", 3, 6,  "none", 0, 0.0, "Crude but effective.",   80)
 	_equip("Fang Spear",        "weapon", false, "attack",  4,  7,  "none",           0,    0.0,  "Tipped with a creature fang.",  55)
 	
@@ -75,21 +78,9 @@ func _register() -> void:
 
 	# ── OUTSKIRTS ─────────────────────────────────────────────
 	_add("Cyclops Eye",     "part",      true,  0.5, "Still staring.",                    40)
-	_add("Leather Armor",   "equipment", false, 3.5, "Basic leather protection.",         45)
-	_add("Leather Helmet",  "equipment", false, 2.0, "A simple leather helm.",            30)
-	_add("Shaman Staff",    "equipment", false, 2.0, "Humming with dark energy.",         65)
-	_add("Copper Ore",      "ore",       true,  0.5, "Common metal ore.",                 8)
-	_add("Iron Ore",        "ore",       true,  0.8, "Heavy and valuable.",               15)
-	_add("Coal",            "ore",       true,  0.6, "Burns long and hot.",               10)
-	_add("Gold Ore",        "ore",       true,  1.2, "Heavy and precious.",               35)
-	_add("War Hammer",      "equipment", false, 5.0, "Crushes bone and armor alike.",     80)
-	_add("Reinforced Boots","equipment", false, 2.5, "Sturdy and well-made.",             55)
-
+	
 	# ── DARKWOOD FOREST ───────────────────────────────────────
-	_add("Elven Helmet",    "equipment", false, 1.5, "Light and finely crafted.",         70)
 	_add("Spider Silk",     "part",      true,  0.2, "Stronger than steel.",              30)
-	_add("Bark Shield",     "equipment", false, 3.5, "Carved from ancient wood.",         85)
-	_add("Banshee Veil",    "equipment", false, 1.0, "Woven from wailing spirits.",       120)
 
 	# ── FORAGEABLES ───────────────────────────────────────
 	_add("Wild Herb",           "forageable", true,  0.5, "Common but useful.",               5)
@@ -102,6 +93,7 @@ func _register() -> void:
 	_add("Iron Ore",            "ore",        true,  1.8, "Heavy and valuable.",              15)
 	_add("Coal",                "ore",        true,  1.6, "Burns long and hot.",              10)
 	_add("Tin Ore",             "ore",        true,  1.5, "Useful for alloys.",               12)
+	_add("Gold Ore",        "ore",       true,  1.2, "Heavy and precious.",               35)
 
 	# ── BARS ─────────────────────────────────────────────
 	_add("Copper Bar", "ore", true, 0.8, "Smelted copper.",     15)
@@ -170,7 +162,6 @@ func _equip(itemName: String, slot: String, twoHanded: bool, statType: String,
 	e.description = description
 	e.value = value
 	equipmentDefs[itemName] = e
-	print("equipment defs count: ", equipmentDefs.size())
 	# Also register in items dict for weight/type lookup
 	_add(itemName, "equipment", false, _getEquipWeight(slot), description, value)
 

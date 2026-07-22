@@ -16,7 +16,9 @@ class_name BlacksmithDisplay
 @export var enhancePip1: Panel
 @export var enhancePip2: Panel
 @export var enhancePip3: Panel
-@export var enhanceCost: Label
+@export var enhanceInstructions: RichTextLabel
+@export var enhanceDataList: VBoxContainer
+@export var enhanceCost: RichTextLabel
 @export var enhanceStatLabel: RichTextLabel
 @export var blacksmithSystem: BlacksmithSystem
 @export var equipmentSystem: EquipmentSystem
@@ -26,11 +28,6 @@ var currentTab: String = "smelt"
 var selectedRecipe: BlacksmithRecipe = null
 var selectedEquip: Dictionary = {}
 
-const ENHANCE_COSTS = [
-	{ "gold": 200, "material": "Iron Bar", "qty": 1 },
-	{ "gold": 500, "material": "Iron Bar", "qty": 2 },
-	{ "gold": 1000,"material": "Gold Bar", "qty": 1 },
-]
 
 var main:MainNode
 
@@ -41,7 +38,13 @@ func _ready() -> void:
 	craftTab.pressed.connect(onCraftTabPressed)
 	enhanceTab.pressed.connect(onEnhanceTabPressed)
 	actionButton.pressed.connect(onActionPressed)
-	closeButton.pressed.connect(hide)
+	closeButton.pressed.connect(onClose)
+	hide()
+
+func onClose() -> void:
+	# put things back to how they were
+	infoPanel.show() # crafts
+	enhancePanel.hide()
 	hide()
 
 func open() -> void:
@@ -74,13 +77,13 @@ func onInventoryChanged() -> void:
 func onCraftTabPressed() -> void:
 	currentTab = "smelt"
 	selectedRecipe = null
-	craftTab.modulate = Color(1, 1, 1, 1)
-	enhanceTab.modulate = Color(1, 1, 1, 0.5)
+	enhancePanel.hide()
+	infoPanel.show() # crafts
 	refresh()
 
 func refreshRecipes() -> void:
 	var children = recipesVBox.get_children()
-	for i in range(2, children.size()):
+	for i in range(0, children.size()):
 		children[i].free()
 
 	var smeltRecipes = BlacksmithRegistry.getAvailableRecipes("smelt")
@@ -102,9 +105,7 @@ func refreshRecipes() -> void:
 		
 		recipesVBox.add_child(header)
 		for recipe in smeltRecipes:
-			print("adding button for: ", recipe.recipeName)
-			recipesVBox.add_child(_makeRecipeButton(recipe) )
-			print("vbox child count after add: ", recipesVBox.get_child_count())
+			recipesVBox.add_child(_makeRecipeButton(recipe))
 
 	if not forgeRecipes.is_empty():
 		var header = Label.new()
@@ -117,7 +118,7 @@ func refreshRecipes() -> void:
 
 func _makeRecipeButton(recipe: BlacksmithRecipe) -> Button:
 	var btn = Button.new()
-	btn.text = recipe.recipeName
+	btn.text = "  " + recipe.recipeName + "  "
 	btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	btn.pressed.connect(onRecipeSelected.bind(recipe))
 	btn.custom_minimum_size = Vector2(150,50)
@@ -175,13 +176,15 @@ func onEnhanceTabPressed() -> void:
 	currentTab = "enhance"
 	selectedRecipe = null
 	selectedEquip = {}
-	craftTab.modulate = Color(1, 1, 1, 0.5)
-	enhanceTab.modulate = Color(1, 1, 1, 1)
+	enhanceInstructions.show()
+	enhanceDataList.hide()
+	enhancePanel.show()
+	infoPanel.hide() # crafts
 	refresh()
 
 func refreshEnhanceList() -> void:
 	for child in enhanceEquipFlow.get_children():
-		child.free()
+		child.queue_free()
 	var hasItems = false
 
 	for stack in main.game_data.backpack:
@@ -191,10 +194,13 @@ func refreshEnhanceList() -> void:
 			continue
 		hasItems = true
 		var btn = Button.new()
+		
 		var enh = stack.get("enhancement", 0)
 		var enhStr = " +%d" % enh if enh > 0 else ""
 		btn.text = stack["name"] + enhStr
-		btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		btn.custom_minimum_size = Vector2(150,50)
+		btn.add_theme_font_size_override("font_size", 22)
 		if selectedEquip.get("instanceId") == stack.get("instanceId"):
 			btn.add_theme_color_override("font_color", Color("#c8880a"))
 		btn.pressed.connect(onEquipSelected.bind(stack))
@@ -214,38 +220,43 @@ func onEquipSelected(instance: Dictionary) -> void:
 
 func refreshEnhanceDetail() -> void:
 	if selectedEquip.is_empty():
-		enhanceName.text = "Select an item"
+		enhanceInstructions.show()
+		enhanceDataList.hide()
+		enhanceName.text = "  Select an item"
 		enhanceCost.text = ""
 		enhanceStatLabel.text = ""
 		_updatePips(0)
 		return
 
-	
+	enhanceInstructions.hide()
+	enhanceDataList.show()
 	var enh = selectedEquip.get("enhancement", 0)
-	enhanceName.text = selectedEquip.get("name", "")
+	enhanceName.text = "  " + selectedEquip.get("name", "")
 	_updatePips(enh)
 
 	if enh >= 3:
-		enhanceCost.text = "Max enhancement reached."
+		enhanceCost.text = "  Max enhancement reached."
 		enhanceStatLabel.text = ""
 		return
 
-	var cost = ENHANCE_COSTS[enh]
-	var haveMat = BlacksmithRegistry.countMaterial(cost["material"])
+	var cost = equipmentSystem.getEnhancementCost(selectedEquip)
+	var materialNeeded = cost["materials"].keys()[0]
+	var materialQty = cost["materials"][materialNeeded]
+	var haveMat = inventorySystem.countInBackpack(materialNeeded)
 	var haveGold = main.game_data.savedGold >= cost["gold"]
-	var hasMat = haveMat >= cost["qty"]
+	var hasMat = haveMat >= materialQty
 
 	var goldColor = "#c8880a" if haveGold else "#c0392b"
 	var matColor = "#27ae60" if hasMat else "#c0392b"
 
-	enhanceCost.text = "+%d → [color=%s]%dg[/color] + [color=%s]%dx %s[/color]" % [
-		enh + 1, goldColor, cost["gold"], matColor, cost["qty"], cost["material"]
+	enhanceCost.text = "[color=%s]  %dg[/color] + [color=%s]%dx %s[/color]" % [
+		goldColor, cost["gold"], matColor, materialQty, materialNeeded
 	]
 
 	var statType = selectedEquip.get("statType", "")
 	var current = selectedEquip.get("statBonus", 0) + enh
 	enhanceStatLabel.bbcode_enabled = true
-	enhanceStatLabel.text = "[color=#888888]%s[/color] [color=#ffffff]+%d[/color] → [color=#27ae60]+%d[/color]" % [
+	enhanceStatLabel.text = "[color=#888888]  %s[/color] [color=#ffffff]+%d[/color] → [color=#27ae60]+%d[/color]" % [
 		statType.to_upper(), current, current + 1
 	]
 func _updatePips(level: int) -> void:
@@ -259,8 +270,10 @@ func refreshActionButton() -> void:
 		actionButton.text = "Enhance"
 		if selectedEquip.is_empty() or selectedEquip.get("enhancement", 0) >= 3:
 			actionButton.disabled = true
+			print("_ EMPTY, disabling")
 			return
 		actionButton.disabled = not equipmentSystem.canEnhance(selectedEquip)
+		print("- canEnhance, ",  not equipmentSystem.canEnhance(selectedEquip))
 	else:
 		actionButton.text = "Craft"
 		actionButton.disabled = selectedRecipe == null

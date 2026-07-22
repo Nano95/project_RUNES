@@ -60,7 +60,7 @@ func onCombatStarted(monster: MonsterData) -> void:
 	)
 
 func tickCombat() -> void:
-	var playerAtk = randi_range(5, 12) + equipmentSystem.getTotalAttack()
+	var playerAtk = randi_range(4, 9) + equipmentSystem.getTotalAttack()
 	main.game_data.currentMonsterHp -= playerAtk
 
 	# Weapon effects on hit

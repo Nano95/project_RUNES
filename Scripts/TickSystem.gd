@@ -207,7 +207,7 @@ func getAreaGoldFind() -> int:
 	match main.game_data.currentArea:
 		"Hunting Grounds": return randi_range(30, 80)
 		"Outskirts":       return randi_range(50, 120)
-		_:                 return randi_range(30, 80)
+		_:                 return randi_range(130, 180)
 
 func triggerTrap() -> void:
 	var traps = [

@@ -204,18 +204,6 @@ shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tcxn3"]
-resource_local_to_scene = true
-shader = ExtResource("7_108yi")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wgw7l"]
-resource_local_to_scene = true
-shader = ExtResource("7_108yi")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p5mh2"]
 resource_local_to_scene = true
 shader = ExtResource("7_108yi")
@@ -1556,7 +1544,7 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Close"
 
-[node name="BlacksmithContainer" type="ColorRect" parent="UIController" unique_id=2089522709 node_paths=PackedStringArray("craftTab", "enhanceTab", "recipesVBox", "infoPanel", "infoName", "infoStat", "infoIngredients", "actionButton", "closeButton", "enhanceEquipFlow", "enhancePanel", "enhanceName", "enhancePip1", "enhancePip2", "enhancePip3", "enhanceCost", "enhanceStatLabel", "blacksmithSystem", "equipmentSystem", "inventorySystem")]
+[node name="BlacksmithContainer" type="ColorRect" parent="UIController" unique_id=2089522709 node_paths=PackedStringArray("craftTab", "enhanceTab", "recipesVBox", "infoPanel", "infoName", "infoStat", "infoIngredients", "actionButton", "closeButton", "enhanceEquipFlow", "enhancePanel", "enhanceName", "enhancePip1", "enhancePip2", "enhancePip3", "enhanceInstructions", "enhanceDataList", "enhanceCost", "enhanceStatLabel", "blacksmithSystem", "equipmentSystem", "inventorySystem")]
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
 anchors_preset = 15
@@ -1580,8 +1568,10 @@ enhanceName = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxC
 enhancePip1 = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer/Pip1")
 enhancePip2 = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer/Pip2")
 enhancePip3 = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer/Pip3")
-enhanceCost = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/HBoxContainer/Cost")
-enhanceStatLabel = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/HBoxContainer/Instructions")
+enhanceInstructions = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/Instructions")
+enhanceDataList = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer")
+enhanceCost = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/Cost2")
+enhanceStatLabel = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/Instructions")
 blacksmithSystem = NodePath("../../BlacksmithSystem")
 equipmentSystem = NodePath("../../EquipmentSystem")
 inventorySystem = NodePath("../../InventorySystem")
@@ -1701,6 +1691,7 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="CraftInfoPanel" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer" unique_id=2092591289]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
@@ -1758,7 +1749,6 @@ text = "  Result: Attack +4"
 vertical_alignment = 1
 
 [node name="EnhancementInfoPanel" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer" unique_id=94403885]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
@@ -1805,22 +1795,12 @@ theme_override_font_sizes/font_size = 24
 text = "  Item Name"
 vertical_alignment = 1
 
-[node name="Result" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer" unique_id=1746518859 instance=ExtResource("6_prt4a")]
-self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_tcxn3")
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 20
-text = "  Result: Attack +4"
-vertical_alignment = 1
-
 [node name="PipsContainer" type="HBoxContainer" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer" unique_id=689072246]
 layout_mode = 2
 
 [node name="Panel" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=132272848]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(2, 0)
+custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 
 [node name="Pip1" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=1720618154]
@@ -1839,12 +1819,9 @@ custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
 theme = ExtResource("5_qjsjv")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer" unique_id=1637972182]
-layout_mode = 2
-
-[node name="Instructions" type="RichTextLabel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/HBoxContainer" unique_id=517871733]
+[node name="Instructions" type="RichTextLabel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer" unique_id=517871733]
 self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
-custom_minimum_size = Vector2(0, 31)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
@@ -1853,21 +1830,23 @@ theme_override_font_sizes/normal_font_size = 28
 theme_override_font_sizes/bold_italics_font_size = 22
 theme_override_font_sizes/italics_font_size = 22
 bbcode_enabled = true
-text = "[i][center]Select any item to see information here.[/center][/i]"
+text = "[i][center]  Select any item to see information here.[/center][/i]"
 scroll_following = true
 vertical_alignment = 1
 
-[node name="Cost" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/HBoxContainer" unique_id=1810635525 instance=ExtResource("6_prt4a")]
-self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_wgw7l")
+[node name="Cost2" type="RichTextLabel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer" unique_id=758758048]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 1
-size_flags_stretch_ratio = 0.2
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 20
-text = "100g"
-horizontal_alignment = 2
+theme_override_fonts/normal_font = ExtResource("3_dajxx")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+bbcode_enabled = true
+text = "[i][center]  Select any item to see information here.[/center][/i]"
+scroll_following = true
 vertical_alignment = 1
 
 [node name="BottomActions" type="HBoxContainer" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer" unique_id=635759410]

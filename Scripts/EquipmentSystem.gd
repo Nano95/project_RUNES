@@ -172,6 +172,8 @@ func applyCursedShieldOnHit(incomingDamage: int) -> int:
 # ── ENHANCEMENT ───────────────────────────────────────────
 func canEnhance(instance: Dictionary) -> bool:
 	
+	print("_ maxed out? ", instance.get("enhancement", 0) >= 3)
+	print("- enough gold? ", main.game_data.savedGold < getEnhancementCost(instance)["gold"])
 	if instance.get("enhancement", 0) >= 3:
 		return false
 	var cost = getEnhancementCost(instance)
@@ -179,15 +181,16 @@ func canEnhance(instance: Dictionary) -> bool:
 		return false
 	for mat in cost["materials"]:
 		if inventorySystem.countInBackpack(mat) + \
-		   chestSystem.countMaterialAnywhere(mat) < cost["materials"][mat]:
+			chestSystem.countMaterialAnywhere(mat) < cost["materials"][mat]:
+			print(str(inventorySystem.countInBackpack(mat)), " + ", str(chestSystem.countMaterialAnywhere(mat)), " < ", str(cost["materials"][mat]))
 			return false
 	return true
 
 func getEnhancementCost(instance: Dictionary) -> Dictionary:
 	match instance.get("enhancement", 0):
-		0: return { "gold": 200, "materials": { "Iron Ore": 2 } }
-		1: return { "gold": 500, "materials": { "Gold Ore": 2 } }
-		2: return { "gold": 1000, "materials": { "Dark Essence": 1 } }
+		0: return { "gold": 200, "materials": { "Iron Bar": 1 } }
+		1: return { "gold": 500, "materials": { "Gold Bar": 2 } }
+		2: return { "gold": 1000, "materials": { "Dark Essence": 3 } }
 	return {}
 
 func enhanceItem(instance: Dictionary) -> void:

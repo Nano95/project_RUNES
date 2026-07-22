@@ -6,9 +6,9 @@ func _ready() -> void:
 	main = Utils.get_main()
 	recipes = [
 		# Smelting
-		_make("Copper Bar", "Copper Bar", {"Copper Ore": 3, "Coal": 1}, "smelt"),
-		_make("Iron Bar",   "Iron Bar",   {"Iron Ore": 3,   "Coal": 1}, "smelt"),
-		_make("Gold Bar",   "Gold Bar",   {"Gold Ore": 3,   "Coal": 2}, "smelt"),
+		_make("Copper Bar", "Copper Bar", {"Copper Ore": 3, "Coal": 2}, "smelt"),
+		_make("Iron Bar",   "Iron Bar",   {"Iron Ore": 3,   "Coal": 2}, "smelt"),
+		_make("Gold Bar",   "Gold Bar",   {"Gold Ore": 3,   "Coal": 3}, "smelt"),
 		
 		_make("Coal (Oak)",    "Coal", {"Oak Log": 2},   "smelt"),
 		_make("Coal (Pine)",   "Coal", {"Pine Wood": 2}, "smelt"),
@@ -17,8 +17,13 @@ func _ready() -> void:
 		# Forging
 		_make("Copper Sword", "Copper Sword", {"Copper Bar": 2},                              "forge"),
 		_make("Iron Sword",   "Iron Sword",   {"Iron Bar": 2},                                "forge"),
-		_make("Iron Shield",  "Iron Shield",  {"Iron Bar": 1, "Copper Bar": 1},               "forge"),
-		_make("Gold Helmet",  "Gold Helmet",  {"Gold Bar": 1, "Iron Bar": 1},                 "forge"),
+		_make("Iron Shield",  "Iron Shield",  {"Iron Bar": 3, "Copper Bar": 1},               "forge"),
+		
+		_make("Copper Legs",  "Copper Legs",  {"Copper Bar": 4},             "forge"),
+		_make("Iron Legs",    "Iron Legs",    {"Iron Bar": 4},               "forge"),
+		_make("Golden Legs",  "Golden Legs",  {"Gold Bar": 4, "Iron Bar": 1}, "forge"),
+		
+		_make("Golden Armor",  "Golden Armor",  {"Gold Bar": 3, "Iron Bar": 1},                 "forge"),
 		_make("Fang Spear",   "Fang Spear",   {"Giant Fang": 1, "Iron Bar": 3},               "forge"),
 		_make("Orc Helmet",   "Orc Helmet",   {"Orc Tooth": 5, "Beast Skin": 3, "Iron Bar": 1}, "forge"),
 	]
@@ -36,7 +41,7 @@ func getAvailableRecipes(category: String) -> Array[BlacksmithRecipe]:
 	for recipe in recipes:
 		if recipe.category != category:
 			continue
-		print("checking: ", recipe.recipeName, " can craft: ", canCraft(recipe))
+		#print("checking: ", recipe.recipeName, " can craft: ", canCraft(recipe))
 		if canCraft(recipe):
 			result.append(recipe)
 	return result

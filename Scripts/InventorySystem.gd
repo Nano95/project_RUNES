@@ -113,9 +113,18 @@ func countInBackpack(itemName: String) -> int:
 	
 	var count = 0
 	for stack in main.game_data.backpack:
+		print("checking stack: ", stack.get("name"), " == ", itemName, " qty: ", stack.get("qty", 0))
 		if stack["name"] == itemName:
 			count += stack["qty"]
 	return count
+
+func consumeFromBackpack(itemName: String, qty: int) -> int:
+	# Returns remaining qty still needed after consuming what's available
+	var available = countInBackpack(itemName)
+	var toConsume = min(available, qty)
+	if toConsume > 0:
+		removeFromBackpack(itemName, toConsume)
+	return qty - toConsume
 
 func hasInBackpack(itemName: String, qty: int = 1) -> bool:
 	return countInBackpack(itemName) >= qty
