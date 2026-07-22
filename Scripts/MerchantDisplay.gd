@@ -2,6 +2,7 @@ extends ColorRect
 class_name MerchantDisplay
 
 @export var goldLabel: Label
+@export var categoryTitleLabel: Label
 @export var potionsTab: Button
 @export var equipmentTab: Button
 @export var itemsVBox: VBoxContainer
@@ -25,10 +26,10 @@ func _ready() -> void:
 	hide()
 
 func open() -> void:
-	
 	if main.game_data.inArea:
 		return
 	currentCategory = "potion"
+	categoryTitleLabel.text = "Potions"
 	selectedEntry = {}
 	refresh()
 	show()
@@ -149,11 +150,13 @@ func refreshBuyButton() -> void:
 
 func onPotionsTabPressed() -> void:
 	currentCategory = "potion"
+	categoryTitleLabel.text = "Potions"
 	selectedEntry = {}
 	refresh()
 
 func onEquipmentTabPressed() -> void:
 	currentCategory = "equipment"
+	categoryTitleLabel.text = "Equipment"
 	selectedEntry = {}
 	refresh()
 

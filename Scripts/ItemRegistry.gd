@@ -23,12 +23,19 @@ func getStackCap(itemName: String) -> int:
 
 func _register() -> void:
 
+	# CRAFT EQUIPS
+	_equip("Copper Sword", "weapon", false, "attack",  2, 4,  "none", 0, 0.0, "A solid copper blade.", 45)
+	_equip("Iron Sword",   "weapon", false, "attack",  4, 7,  "none", 0, 0.0, "A reliable iron sword.", 75)
+	_equip("Iron Shield",  "shield", false, "defense", 3, 5,  "none", 0, 0.0, "A sturdy iron shield.",  65)
+	_equip("Gold Helmet",  "helmet", false, "defense", 4, 6,  "none", 0, 0.0, "A gleaming gold helm.",  90)
+	_equip("Orc Helmet",   "helmet", false, "defense", 3, 6,  "none", 0, 0.0, "Crude but effective.",   80)
+	_equip("Fang Spear",        "weapon", false, "attack",  4,  7,  "none",           0,    0.0,  "Tipped with a creature fang.",  55)
+	
 	_equip("Wooden Shield",      "shield", false, "defense", 1, 2, "none", 0, 0.0, "Better than nothing.",         30)
 	_equip("Crude Blade",       "weapon", false, "attack",  1,  3,  "none",           0,    0.0,  "A crude blade.",                20)
 	_equip("Orcish Axe",        "weapon", false, "attack",  3,  6,  "none",           0,    0.0,  "A crude but heavy axe.",        40)
 	_equip("Bandit Blade",      "weapon", false, "attack",  2,  5,  "none",           0,    0.0,  "Notched but sharp.",            35)
 	_equip("Rusty Sword",       "weapon", false, "attack",  0,  1,  "none",           0,    0.0,  "Barely holds an edge.",         15)
-	_equip("Fang Spear",        "weapon", false, "attack",  4,  7,  "none",           0,    0.0,  "Tipped with a creature fang.",  55)
 	_equip("Giant Club",        "weapon", true,  "attack",  5,  9,  "none",           0,    0.0,  "Impossibly heavy.",             55)
 	_equip("War Hammer",        "weapon", true,  "attack",  6,  10, "none",           0,    0.0,  "Crushes bone and armor alike.", 80)
 	_equip("Shaman Staff",      "weapon", true,  "attack",  4,  7,  "none",           0,    0.0,  "Humming with dark energy.",     65)
@@ -96,6 +103,11 @@ func _register() -> void:
 	_add("Coal",                "ore",        true,  1.6, "Burns long and hot.",              10)
 	_add("Tin Ore",             "ore",        true,  1.5, "Useful for alloys.",               12)
 
+	# ── BARS ─────────────────────────────────────────────
+	_add("Copper Bar", "ore", true, 0.8, "Smelted copper.",     15)
+	_add("Iron Bar",   "ore", true, 1.0, "Smelted iron.",       25)
+	_add("Gold Bar",   "ore", true, 1.2, "Smelted gold.",       60)
+
 	# ── WOOD ─────────────────────────────────────────────
 	_add("Oak Log",             "ore",        true,  5.0, "Sturdy hardwood.",                 10)
 	_add("Pine Wood",           "ore",        true,  3.8, "Light and workable.",              8)
@@ -111,7 +123,10 @@ func _register() -> void:
 	_add("Minor Battle Potion", "potion",     true, 2.3, "Attracts monsters for 3 events.",   25)
 	_add("Battle Potion",       "potion",     true, 2.3, "Attracts monsters for 6 events.",   45)
 	_add("Great Battle Potion", "potion",     true, 2.3, "Attracts monsters for 10 events.",  80)
-
+	
+	_add("Minor Foraging Potion", "potion", true, 2.3, "Increases forageable encounters for 3 events.",  20)
+	_add("Foraging Potion",       "potion", true, 2.3, "Increases forageable encounters for 6 events.",  35)
+	_add("Great Foraging Potion", "potion", true, 2.3, "Increases forageable encounters for 10 events.", 60)
 func _add(itemName: String, itemType: String, stackable: bool, weight: float, description: String, value: int) -> void:
 	var item = ItemData.new()
 	item.itemName = itemName

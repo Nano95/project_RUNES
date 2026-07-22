@@ -4,8 +4,9 @@ class_name TickSystem
 var main:MainNode
 @export var combatSystem:CombatSystem
 @export var gatherSystem:GatherSystem
+
 var checkpointPending: bool = false
-var eventsSinceLastCheckpoint: int = 0
+var checkpointPendingAfterCombat: bool = false
 
 var gatheringItem: String = ""
 var gatheringTicksLeft: int = 0
@@ -34,7 +35,7 @@ func _ready() -> void:
 	GameEvents.gatherStarted.connect(onGatherStarted)
 
 func onTick() -> void:
-	print("Tick", main.game_data.inArea, checkpointPending, main.game_data.inCombat)
+	#print("Tick", main.game_data.inArea, checkpointPending, main.game_data.inCombat)
 	if (not main.game_data.inArea):
 		if main.game_data.hp < main.game_data.maxHp:
 			main.game_data.hp += 1
@@ -46,6 +47,9 @@ func onTick() -> void:
 		return
 	# Handle active gathering
 	if (gatheringTicksLeft > 0):
+		if (checkpointPending):
+			return
+			# pause gathering ticks during checkpoint
 		gatheringTicksLeft -= 1
 		if (gatheringTicksLeft == 0):
 			GameEvents.eventLogged.emit(
@@ -54,7 +58,8 @@ func onTick() -> void:
 			GameEvents.gatherCompleted.emit(gatheringItem)
 			gatheringItem = ""
 			# Check if a checkpoint was waiting for gathering to finish
-			if (eventsSinceLastCheckpoint >= 10 and not main.game_data.inCombat):
+			if (checkpointPendingAfterCombat):
+				checkpointPendingAfterCombat = false
 				triggerCheckpoint()
 		else:
 			GameEvents.eventLogged.emit(
@@ -64,7 +69,6 @@ func onTick() -> void:
 		return
 	
 	main.game_data.eventCount += 1
-	eventsSinceLastCheckpoint += 1
 	if (main.game_data.eventCount == 100):
 		AreaRegistry.tryUnlockNext(main.game_data.currentArea)
 	
@@ -84,8 +88,12 @@ func onTick() -> void:
 	_roll_event()
 	# Check checkpoint AFTER event resolves
 	# but only if we didn't just start combat
-	if eventsSinceLastCheckpoint >= 10 and not main.game_data.inCombat:
-		triggerCheckpoint()
+	if (main.game_data.eventCount % 10 == 0):
+		if (main.game_data.inCombat or gatheringTicksLeft > 0):
+			# Defer checkpoint until combat/gathering resolves
+			checkpointPendingAfterCombat = true
+		else:
+			triggerCheckpoint()
 
 func onGatherStarted(itemName: String, ticks: int) -> void:
 	gatheringItem = itemName
@@ -93,24 +101,23 @@ func onGatherStarted(itemName: String, ticks: int) -> void:
 
 func onPlayerDied() -> void:
 	checkpointPending = false
-	eventsSinceLastCheckpoint = 0
 	gatheringItem = ""
 	gatheringTicksLeft = 0
 	combatSystem.pendingStrongMonsterIn = 0
+	
 
 func onAreaExited() -> void:
 	gatheringItem = ""
 	gatheringTicksLeft = 0
 	checkpointPending = false
-	eventsSinceLastCheckpoint = 0
 	combatSystem.pendingStrongMonsterIn = 0
 
 # Takes in two dummy params because combatWon emits two arguments, but are not needed here
 func onCombatResolved(_a = null, _b = null) -> void:
 	# Decrement battle potion counter after each combat
-	if combatSystem.isBattlePotionActive():
+	if (combatSystem.isBattlePotionActive()):
 		combatSystem.battlePotionEventsLeft -= 1
-		if combatSystem.battlePotionEventsLeft > 0:
+		if (combatSystem.battlePotionEventsLeft > 0):
 			GameEvents.eventLogged.emit(
 				"Battle potion active — %d events remaining." % combatSystem.battlePotionEventsLeft,
 				"danger", false
@@ -120,12 +127,15 @@ func onCombatResolved(_a = null, _b = null) -> void:
 				"Battle potion wore off.", "system", false
 			)
 	# Combat finished — check if a checkpoint was waiting
-	if checkpointPending:
+	if (checkpointPendingAfterCombat):
+		checkpointPendingAfterCombat = false
+		triggerCheckpoint()
+		return
+	if (checkpointPending):
 		GameEvents.checkpointReached.emit()
 
 func triggerCheckpoint() -> void:
 	checkpointPending = true
-	eventsSinceLastCheckpoint = 0
 	GameEvents.checkpointReached.emit()
 
 func onCheckpointContinued() -> void:
@@ -140,6 +150,16 @@ func _roll_event() -> void:
 		else:
 			GameEvents.eventLogged.emit("The area feels tense...", "system", true)
 		return
+	
+	# Foraging potion active — 90% forage chance
+	if gatherSystem.isForagingPotionActive():
+		if randf() < 0.90:
+			gatherSystem.startForage()
+		else:
+			GameEvents.eventLogged.emit("The undergrowth rustles softly...", "gather", true)
+		gatherSystem.decrementForagingPotion()
+		return
+	
 	if roll < 0.29:
 		GameEvents.eventLogged.emit("All is quiet. Nothing stirs.", "system", true)
 		return

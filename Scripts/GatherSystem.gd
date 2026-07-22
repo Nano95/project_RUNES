@@ -25,10 +25,15 @@ const FORAGE_TABLES: Dictionary = {
 }
 const POISONOUS_CHANCE: float = 0.1
 
+var foragingPotionEventsLeft: int = 0
 var main:MainNode
+
 func _ready() -> void:
 	main = Utils.get_main()
 	GameEvents.gatherCompleted.connect(onGatherCompleted)
+	GameEvents.potionUsed.connect(onPotionUsed)
+	GameEvents.areaExited.connect(onAreaExited)
+	GameEvents.playerDied.connect(onPlayerDied)
 
 func startOreGather() -> void:
 	var item = ORE_ITEMS[randi() % ORE_ITEMS.size()]
@@ -94,3 +99,45 @@ func rollForageable() -> String:
 
 func onGatherCompleted(itemName: String) -> void:
 	GameEvents.itemDropped.emit(itemName)
+
+func onPotionUsed(itemName: String) -> void:
+	match itemName:
+		"Minor Foraging Potion":
+			foragingPotionEventsLeft += 3
+			GameEvents.eventLogged.emit(
+				"Minor Foraging Potion consumed. Forageables attracted for %d events." % foragingPotionEventsLeft,
+				"gather", false
+			)
+		"Foraging Potion":
+			foragingPotionEventsLeft += 6
+			GameEvents.eventLogged.emit(
+				"Foraging Potion consumed. Forageables attracted for %d events." % foragingPotionEventsLeft,
+				"gather", false
+			)
+		"Great Foraging Potion":
+			foragingPotionEventsLeft += 10
+			GameEvents.eventLogged.emit(
+				"Great Foraging Potion consumed. Forageables attracted for %d events." % foragingPotionEventsLeft,
+				"gather", false
+			)
+
+func decrementForagingPotion() -> void:
+	if foragingPotionEventsLeft <= 0:
+		return
+	foragingPotionEventsLeft -= 1
+	if foragingPotionEventsLeft > 0:
+		GameEvents.eventLogged.emit(
+			"Foraging potion active — %d events remaining." % foragingPotionEventsLeft,
+			"gather", false
+		)
+	else:
+		GameEvents.eventLogged.emit("Foraging potion wore off.", "system", false)
+
+func isForagingPotionActive() -> bool:
+	return foragingPotionEventsLeft > 0
+
+func onAreaExited() -> void:
+	foragingPotionEventsLeft = 0
+
+func onPlayerDied() -> void:
+	foragingPotionEventsLeft = 0

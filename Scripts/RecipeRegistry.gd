@@ -14,6 +14,9 @@ func _ready() -> void:
 		_make("Minor Battle Potion", {"Rat Fur": 2, "Wild Herb": 1},          "Minor Battle Potion", "battle", 3),
 		_make("Battle Potion",       {"Slime Gel": 1, "Bloodroot": 2},         "Battle Potion",       "battle", 6),
 		_make("Great Battle Potion", {"Orc Tooth": 2, "Bloodroot": 1, "Gloomcap": 1}, "Great Battle Potion", "battle", 10),
+		_make("Minor Foraging Potion", {"Red Berry": 1, "Slime Gel": 1},                    "Minor Foraging Potion", "forage", 3),
+		_make("Foraging Potion",       {"Wild Herb": 2, "Gloomcap": 1},                     "Foraging Potion",       "forage", 6),
+		_make("Great Foraging Potion", {"Cyclops Eye": 1, "Bloodroot": 2, "Gloomcap": 1},   "Great Foraging Potion", "forage", 10),
 		_make("Regeneration Potion",{"Slime Gel": 2, "Bloodroot": 1},                    "Regeneration Potion","regen",     5),
 	]
 

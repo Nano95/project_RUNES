@@ -17,8 +17,6 @@ func onItemDropped(itemName: String) -> void:
 		addEquipmentToBackpack(instance)
 	else:
 		addToBackpack(itemName)
-	
-	print("dropping: ", itemName, " def found: ", def != null)
 
 func onLeveledUp() -> void:
 	
@@ -131,7 +129,8 @@ func onPotionUsed(itemName: String) -> void:
 	var specialPotions = [
 		"Strength Brew", "Swiftness Tonic",
 		"Time Potion", "Regeneration Potion",
-		"Minor Battle Potion", "Battle Potion", "Great Battle Potion"
+		"Minor Battle Potion", "Battle Potion", "Great Battle Potion",
+		"Minor Foraging Potion", "Foraging Potion", "Great Foraging Potion"
 	]
 	# Special potions are handled by their respective systems -- otherwise we assume it's a healing potion
 	if specialPotions.has(itemName):

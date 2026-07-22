@@ -1557,6 +1557,7 @@ theme_override_font_sizes/font_size = 32
 text = "Close"
 
 [node name="BlacksmithContainer" type="ColorRect" parent="UIController" unique_id=2089522709 node_paths=PackedStringArray("craftTab", "enhanceTab", "recipesVBox", "infoPanel", "infoName", "infoStat", "infoIngredients", "actionButton", "closeButton", "enhanceEquipFlow", "enhancePanel", "enhanceName", "enhancePip1", "enhancePip2", "enhancePip3", "enhanceCost", "enhanceStatLabel", "blacksmithSystem", "equipmentSystem", "inventorySystem")]
+visible = false
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
 anchors_preset = 15
@@ -1701,6 +1702,7 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="CraftInfoPanel" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer" unique_id=2092591289]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
@@ -1758,7 +1760,6 @@ text = "  Result: Attack +4"
 vertical_alignment = 1
 
 [node name="EnhancementInfoPanel" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer" unique_id=94403885]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
@@ -2882,8 +2883,6 @@ script = ExtResource("29_px8ax")
 inventorySystem = NodePath("../InventorySystem")
 metadata/_custom_type_script = "uid://lua0kwyswmk4"
 
-[node name="BlacksmithSystem" type="Node" parent="." unique_id=244144070 node_paths=PackedStringArray("equipmentSystem", "inventorySystem")]
+[node name="BlacksmithSystem" type="Node" parent="." unique_id=244144070]
 script = ExtResource("31_ipr08")
-equipmentSystem = NodePath("../EquipmentSystem")
-inventorySystem = NodePath("../InventorySystem")
 metadata/_custom_type_script = "uid://kilw6u3p8wgc"
