@@ -39,6 +39,8 @@ var battle_data:Dictionary = {
 }
 
 func _ready() -> void:
+	for child in get_children():
+		print(child.name)
 	game_data = SaveData.new()
 	backup_game_data = SaveData.new()
 	verify_save_directory(save_data_path)

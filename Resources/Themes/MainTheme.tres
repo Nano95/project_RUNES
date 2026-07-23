@@ -1,0 +1,63 @@
+[gd_resource type="Theme" format=3 uid="uid://3dmu3g4p1u1e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chg5n"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.6015625, 0.6015625, 0.6015625, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+shadow_color = Color(0, 0, 0, 0.30588236)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fx3s3"]
+bg_color = Color(0.13333334, 0.13333334, 0.13333334, 0.8)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.6015625, 0.6015625, 0.6015625, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0mios"]
+bg_color = Color(0.13333334, 0.13333334, 0.13333334, 0.4862745)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.6015625, 0.6015625, 0.6015625, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36kym"]
+bg_color = Color(0.14901961, 0.11372549, 0.18039216, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.48101807, 0.49022675, 0.5546875, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 10
+
+[resource]
+Button/styles/disabled = SubResource("StyleBoxFlat_chg5n")
+Button/styles/hover = SubResource("StyleBoxFlat_fx3s3")
+Button/styles/normal = SubResource("StyleBoxFlat_0mios")
+Panel/styles/panel = SubResource("StyleBoxFlat_36kym")
