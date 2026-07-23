@@ -85,7 +85,7 @@ func setEquippedSlot(slot: String, instance: Dictionary) -> void:
 
 # ── STAT CALCULATIONS ─────────────────────────────────────
 func getTotalAttack() -> int:
-	var base = 5 + (main.game_data.level * 2)
+	var base = 5 + (main.game_data.level)
 	var bonus = 0
 	for slot in ["equippedWeapon", "equippedRing", "equippedAmulet"]:
 		var item = main.game_data.get(slot)
@@ -96,7 +96,7 @@ func getTotalAttack() -> int:
 	return base + bonus
 
 func getTotalDefense() -> int:
-	var base = 2 + main.game_data.level
+	var base = 2 + int(main.game_data.level * .3)
 	var bonus = 0
 	for slot in ["equippedShield", "equippedArmor", "equippedHelmet",
 				 "equippedBoots", "equippedLegs", "equippedRing", "equippedAmulet"]:

@@ -22,8 +22,11 @@ func _ready() -> void:
 	potionsTab.pressed.connect(onPotionsTabPressed)
 	equipmentTab.pressed.connect(onEquipmentTabPressed)
 	buyButton.pressed.connect(onBuyPressed)
-	closeButton.pressed.connect(hide)
+	closeButton.pressed.connect(onClose)
 	hide()
+
+func onClose() -> void:
+	Utils.animate_modal_exit(self)
 
 func open() -> void:
 	if main.game_data.inArea:
@@ -32,7 +35,7 @@ func open() -> void:
 	categoryTitleLabel.text = "Potions"
 	selectedEntry = {}
 	refresh()
-	show()
+	Utils.animate_modal_entry(self)
 
 func refresh() -> void:
 	refreshGold()

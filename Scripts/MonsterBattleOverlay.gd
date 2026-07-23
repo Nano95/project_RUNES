@@ -54,7 +54,7 @@ func onFleePressed() -> void:
 	fleeButton.text = "Fleeing... (3)"
 
 func onCombatEnded(_a = null, _b = null) -> void:
-	hide()
+	Utils.animate_modal_exit(self)
 	monsterMaxHp = 0
 
 func updateHPColor(hpLeft: int) -> void:

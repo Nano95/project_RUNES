@@ -160,7 +160,7 @@ func _roll_event() -> void:
 		gatherSystem.decrementForagingPotion()
 		return
 	
-	if roll < 0.29:
+	if roll < 0.33:
 		GameEvents.eventLogged.emit("All is quiet. Nothing stirs.", "system", true)
 		return
 
@@ -197,7 +197,6 @@ func _roll_event() -> void:
 		return
 
 	if roll < 0.95:
-		GameEvents.eventLogged.emit("You step on a trap!", "combat", true)
 		triggerTrap()
 		return
 

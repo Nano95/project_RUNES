@@ -251,10 +251,11 @@ func animate_modal_entry(node: CanvasItem, duration := 0.15, offset := 10.0):
 	if not node:
 		return
 
+	var original_y = node.position.y  # capture BEFORE moving
 	var tween := node.get_tree().create_tween().set_parallel(true)
-	node.show()
 	node.modulate.a = 0.0
-	node.position.y -= offset  # Start slightly above
+	node.position.y = original_y - offset  # start above
+	node.show()
 
 	tween.tween_property(node, "modulate:a", 1.0, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(node, "position:y", node.position.y + offset, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
@@ -262,17 +263,21 @@ func animate_modal_entry(node: CanvasItem, duration := 0.15, offset := 10.0):
 func animate_modal_exit(node: CanvasItem, duration := 0.15, offset := 10.0, should_free:bool=false):
 	if not node:
 		return
-
+	
+	var original_y = node.position.y  # capture BEFORE moving
 	var tween := node.get_tree().create_tween().set_parallel(true)
 
 	tween.tween_property(node, "modulate:a", 0.0, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(node, "position:y", node.position.y - offset, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(node, "position:y", original_y - offset, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.set_parallel(false) # need to do this for some reason the below things will get called immediately otherwise
 	
 	if (should_free):
 		tween.tween_callback(node.queue_free)  # delete after anim completes
 	else:
-		tween.tween_callback(Callable(node, "hide"))  # Hide after animation completes
+		tween.tween_callback(func():
+			node.hide()
+			node.position.y = original_y  # restore position after hiding
+		)
 
 func get_rarity_color(rarity: String) -> Color:
 	return RARITY_COLORS.get(rarity, Color.WHITE) # Defaults to white if not found

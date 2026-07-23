@@ -45,7 +45,7 @@ func onClose() -> void:
 	# put things back to how they were
 	infoPanel.show() # crafts
 	enhancePanel.hide()
-	hide()
+	Utils.animate_modal_exit(self)
 
 func open() -> void:
 	
@@ -55,7 +55,7 @@ func open() -> void:
 	selectedRecipe = null
 	selectedEquip = {}
 	refresh()
-	show()
+	Utils.animate_modal_entry(self)
 
 func refresh() -> void:
 	if currentTab == "smelt" or currentTab == "forge":

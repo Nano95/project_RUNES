@@ -29,14 +29,17 @@ func _ready() -> void:
 	GameEvents.brewAttempted.connect(onBrewAttempted)
 	brewButton.pressed.connect(onBrewPressed)
 	#clearButton.pressed.connect(onClearPressed)
-	closeButton.pressed.connect(hide)
+	closeButton.pressed.connect(onClose)
 	hide()
+
+func onClose() -> void:
+	Utils.animate_modal_exit(self)
 
 func open() -> void:
 	currentCombo = {}
 	slotOrder = []
 	refresh()
-	show()
+	Utils.animate_modal_entry(self)
 
 func refresh() -> void:
 	refreshBackpack()

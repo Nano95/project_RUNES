@@ -35,11 +35,14 @@ func _ready() -> void:
 	longPressTimer.timeout.connect(onLongPress)
 	add_child(longPressTimer)
 
-	closeButton.pressed.connect(hide)
+	closeButton.pressed.connect(close)
 	buildButton.pressed.connect(onBuildPressed)
 
 	_buildChestGrid()
 	hide()
+
+func close() -> void:
+	Utils.animate_modal_exit(self)
 
 func open() -> void:
 	# Only accessible in town
@@ -47,7 +50,7 @@ func open() -> void:
 		return
 	selectedChestId = 1
 	refresh()
-	show()
+	Utils.animate_modal_entry(self)
 
 func refresh() -> void:
 	refreshBackpack()

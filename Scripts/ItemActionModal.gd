@@ -13,24 +13,27 @@ func _ready() -> void:
 	GameEvents.itemLongPressed.connect(onItemLongPressed)
 	equipButton.pressed.connect(onEquipPressed)
 	dropButton.pressed.connect(onDropPressed)
-	cancelButton.pressed.connect(hide)
+	cancelButton.pressed.connect(onClose)
 	hide()
+
+func onClose() -> void:
+	Utils.animate_modal_exit(self)
 
 func onItemLongPressed(itemName: String) -> void:
 	currentItem = itemName
 	itemNameLabel.text = itemName
 	var itemType = ItemRegistry.getType(itemName)
 	equipButton.visible = itemType == "equipment"
-	show()
+	Utils.animate_modal_entry(self)
 
 func onEquipPressed() -> void:
 	GameEvents.itemEquipped.emit(currentItem)
-	hide()
+	onClose()
 
 func onDropPressed() -> void:
 	inventorySystem.removeFromBackpack(currentItem)
 	GameEvents.eventLogged.emit("Dropped %s." % currentItem, "system", false)
-	hide()
+	onClose()
 
 func cancelPressed() -> void:
-	hide()
+	onClose()

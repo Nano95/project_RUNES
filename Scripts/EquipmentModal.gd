@@ -43,10 +43,13 @@ func _ready() -> void:
 	ringButton.pressed.connect(onSlotPressed.bind("ring"))
 	amuletButton.pressed.connect(onSlotPressed.bind("amulet"))
 	equipButton.pressed.connect(onEquipButtonPressed)
-	closeButton.pressed.connect(hide)
+	closeButton.pressed.connect(onClose)
 
 	clearCompare()
 	hide()
+
+func onClose() -> void:
+	Utils.animate_modal_exit(self)
 
 func open() -> void:
 	if main.game_data.inArea:
@@ -55,8 +58,7 @@ func open() -> void:
 	selectedSource = ""
 	clearCompare()
 	refresh()
-	
-	show()
+	Utils.animate_modal_entry(self)
 
 func refresh() -> void:
 	refreshSlots()
