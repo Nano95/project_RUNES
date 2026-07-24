@@ -53,5 +53,4 @@ func buyItem(entry: Dictionary) -> bool:
 	GameEvents.eventLogged.emit(
 		"Purchased %s for %d gold." % [itemName, entry["cost"]], "town", false
 	)
-	GameEvents.goldDeposited.emit(0)  # triggers gold display refresh
 	return true

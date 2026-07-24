@@ -19,14 +19,24 @@ var main:MainNode
 
 func _ready() -> void:
 	main = Utils.get_main()
-	potionsTab.pressed.connect(onPotionsTabPressed)
-	equipmentTab.pressed.connect(onEquipmentTabPressed)
-	buyButton.pressed.connect(onBuyPressed)
+	potionsTab.pressed.connect(func():
+		onPotionsTabPressed()
+		Utils.animateButtonPress(potionsTab)
+	)
+	equipmentTab.pressed.connect(func():
+		onEquipmentTabPressed()
+		Utils.animateButtonPress(equipmentTab)
+	)
+	buyButton.pressed.connect(func():
+		onBuyPressed()
+		Utils.animateButtonPress(buyButton)
+	)
 	closeButton.pressed.connect(onClose)
 	hide()
 
 func onClose() -> void:
 	Utils.animate_modal_exit(self)
+	Utils.animateButtonPress(buyButton)
 
 func open() -> void:
 	if main.game_data.inArea:
@@ -90,7 +100,10 @@ func refreshItems() -> void:
 
 		hbox.add_child(infoLabel)
 		btn.add_child(hbox)
-		btn.pressed.connect(onItemPressed.bind(entry))
+		btn.pressed.connect(func():
+			onItemPressed(entry)
+			Utils.animateButtonPress(btn)
+		)
 		itemsVBox.add_child(btn)
 
 func _getStatText(itemName: String) -> String:
@@ -99,7 +112,9 @@ func _getStatText(itemName: String) -> String:
 		return ""
 	if item.itemType == "potion":
 		var heal = _getPotionHeal(itemName)
-		return "[color=#8e44ad]%d HP[/color]" % heal
+		if (heal > 0):
+			return "[color=#8e44ad]%d HP[/color]" % heal
+		else: return ""
 	var def = ItemRegistry.getEquipmentDef(itemName)
 	if def:
 		var statLabel = def.statType.to_upper() if def.statType != "none" else ""
@@ -169,9 +184,29 @@ func onItemPressed(entry: Dictionary) -> void:
 	refreshBuyButton()
 
 func onBuyPressed() -> void:
+	Utils.animateButtonPress(buyButton)
 	if selectedEntry.is_empty():
 		return
 	var success = merchantSystem.buyItem(selectedEntry)
 	if success:
-		selectedEntry = {}
+		# Float item name upward from buy button
+		Utils.spawnFloatingLabel(
+			"+1 %s" % selectedEntry["name"],
+			Color("#27ae60"),
+			buyButton,
+			false
+		)
+	   # Float gold cost downward from gold label
+		Utils.spawnFloatingLabel(
+			"-%dg" % selectedEntry["cost"],
+			Color("#c0392b"),
+			goldLabel,
+			true
+		)
 		refresh()
+	else:
+		# Shake a failure message at the buy button
+		var reason = "Not enough gold!"
+		if main.game_data.savedGold >= selectedEntry["cost"]:
+			reason = "Backpack full or too heavy!"
+		Utils.spawnFloatingLabel(reason, Color("#c0392b"), buyButton, true)

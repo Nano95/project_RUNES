@@ -1,225 +1,151 @@
 extends ColorRect
 class_name BrewDisplay
 
-@export var backpackFlow: HFlowContainer
-@export var backpackWeightLabel: Label
-@export var backpackSlotLabel: Label
-@export var slot1Container: HBoxContainer
-@export var slot2Container: HBoxContainer  
-@export var slot3Container: HBoxContainer
+@export var recipesVBox: VBoxContainer
+@export var infoName: Label
+@export var infoDesc: RichTextLabel
+@export var instructions: RichTextLabel
+@export var ingredientsVBox: VBoxContainer
 @export var brewButton: Button
-@export var clearButton: Button
 @export var closeButton: Button
-@export var discoveredFlow: HFlowContainer
-@export var brewSystem: BrewSystem
 @export var inventorySystem: InventorySystem
+@export var brewSystem: BrewSystem
 
-# Current combination { "Wild Herb": 2, "Red Berry": 1 }
-var currentCombo: Dictionary = {}
-
-# Slot order for display
-var slotOrder: Array[String] = []
-
-var main:MainNode
+var selectedRecipe: RecipeData = null
 
 func _ready() -> void:
-	main = Utils.get_main()
-	GameEvents.backpackChanged.connect(refresh)
-	GameEvents.recipeDiscovered.connect(onRecipeDiscovered)
-	GameEvents.brewAttempted.connect(onBrewAttempted)
-	brewButton.pressed.connect(onBrewPressed)
-	#clearButton.pressed.connect(onClearPressed)
-	closeButton.pressed.connect(onClose)
+	GameEvents.backpackChanged.connect(onInventoryChanged)
+	brewButton.pressed.connect(func():
+		onBrewPressed()
+		Utils.animateButtonPress(brewButton)
+	)
+	closeButton.pressed.connect(func():
+		hide()
+		Utils.animateButtonPress(closeButton)
+	)
 	hide()
 
-func onClose() -> void:
-	Utils.animate_modal_exit(self)
-
 func open() -> void:
-	currentCombo = {}
-	slotOrder = []
+	selectedRecipe = null
 	refresh()
-	Utils.animate_modal_entry(self)
+	show()
 
 func refresh() -> void:
-	refreshBackpack()
-	refreshSlots()
-	refreshDiscovered()
-	brewButton.disabled = currentCombo.is_empty()
+	refreshRecipes()
+	refreshInfo()
+	refreshBrewButton()
 
-# ── BACKPACK PANEL ────────────────────────────────────────
-func refreshBackpack() -> void:
-	for child in backpackFlow.get_children():
-		child.queue_free()
+func onInventoryChanged() -> void:
+	if not visible:
+		return
+	refresh()
 
-	backpackWeightLabel.text = "%.1f / %.1f kg" % [
-		main.game_data.currentWeight,
-		main.game_data.maxWeight
-	]
-	backpackSlotLabel.text = "%d slots used" % main.game_data.backpack.size()
+# ── RECIPES ───────────────────────────────────────────────
+func refreshRecipes() -> void:
+	for child in recipesVBox.get_children():
+		child.free()
 
-	# Only show forageable and monster parts (brewable items)
-	var stacked = inventorySystem.getStackedView(main.game_data.backpack)
-	var brewable = stacked.filter(func(e): 
-		return e["type"] == "forageable" or e["type"] == "part"
-	)
+	var available = getAvailableRecipes()
 
-	if brewable.is_empty():
+	if available.is_empty():
 		var lbl = Label.new()
-		lbl.text = "No brewable ingredients"
+		lbl.text = "No recipes available.\nGather herbs to begin."
 		lbl.add_theme_color_override("font_color", Color("#888888"))
-		backpackFlow.add_child(lbl)
+		lbl.add_theme_font_size_override("font_size", 20)
+		lbl.custom_minimum_size = Vector2(0, 250)
+		lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
+		recipesVBox.add_child(lbl)
 		return
 
-	for entry in brewable:
+	for recipe in available:
 		var btn = Button.new()
-		var inUse = currentCombo.get(entry["name"], 0)
-		var available = entry["qty"] - inUse
-		btn.text = " %s x%d " % [entry["name"], available]
-		btn.disabled = available <= 0 or slotOrder.size() >= 3 and not currentCombo.has(entry["name"])
-		btn.add_theme_color_override("font_color", Color("#27ae60"))
-		btn.add_theme_font_size_override("font_size", 22)
-		btn.custom_minimum_size = Vector2(150,50)
-		btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-		btn.pressed.connect(onIngredientPressed.bind(entry["name"]))
-		backpackFlow.add_child(btn)
-
-# ── SLOT PANEL ────────────────────────────────────────────
-func refreshSlots() -> void:
-	_refreshSlot(slot1Container, 0)
-	_refreshSlot(slot2Container, 1)
-	_refreshSlot(slot3Container, 2)
-
-func _refreshSlot(container: HBoxContainer, idx: int) -> void:
-	for child in container.get_children():
-		child.queue_free()
-
-	if idx >= slotOrder.size():
-		var lbl = Label.new()
-		lbl.text = "[ empty ]"
-		lbl.add_theme_color_override("font_color", Color("#444444"))
-		lbl.add_theme_font_size_override("font_size", 22)
-		container.add_child(lbl)
-		return
-
-	var itemName = slotOrder[idx]
-	var qty = currentCombo.get(itemName, 0)
-
-	var nameLabel = Label.new()
-	nameLabel.text = itemName
-	nameLabel.add_theme_color_override("font_color", Color("#27ae60"))
-	nameLabel.add_theme_font_size_override("font_size", 26)
-	nameLabel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	container.add_child(nameLabel)
-
-	# Minus button
-	var minusBtn = Button.new()
-	minusBtn.text = "-"
-	minusBtn.pressed.connect(onSlotMinus.bind(itemName))
-	minusBtn.custom_minimum_size = Vector2(100, 0)
-	minusBtn.add_theme_font_size_override("font_size", 26)
-	container.add_child(minusBtn)
-
-	# Qty label
-	var qtyLabel = Label.new()
-	qtyLabel.text = str(qty)
-	qtyLabel.custom_minimum_size.x = 24
-	qtyLabel.add_theme_font_size_override("font_size", 26)
-	container.add_child(qtyLabel)
-
-	# Remove button
-	var removeBtn = Button.new()
-	removeBtn.text = "✕"
-	removeBtn.custom_minimum_size = Vector2(100, 0)
-	removeBtn.add_theme_color_override("font_color", Color("#e74c3c"))
-	removeBtn.pressed.connect(onSlotRemove.bind(itemName))
-	removeBtn.add_theme_font_size_override("font_size", 26)
-	container.add_child(removeBtn)
-
-# ── DISCOVERED RECIPES ────────────────────────────────────
-func refreshDiscovered() -> void:
-	for child in discoveredFlow.get_children():
-		child.queue_free()
-	
-	var discovered = RecipeRegistry.getDiscovered(main.game_data.discoveredRecipes)
-
-	if discovered.is_empty():
-		var lbl = Label.new()
-		lbl.text = "No recipes discovered yet."
-		lbl.add_theme_color_override("font_color", Color("#888888"))
-		discoveredFlow.add_child(lbl)
-		return
-
-	for recipe in discovered:
-		var btn = Button.new()
-		# Build ingredient string
-		var parts = []
-		for ing in recipe.ingredients:
-			parts.append("%s x%d" % [ing, recipe.ingredients[ing]])
-		btn.text = "%s — %s" % [recipe.recipeName, " + ".join(parts)]
+		btn.text = recipe.recipeName
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		btn.add_theme_color_override("font_color", Color("#8e44ad"))
-		btn.custom_minimum_size = Vector2(150,50)
-		btn.pressed.connect(onRecipeAutoFill.bind(recipe))
-		discoveredFlow.add_child(btn)
-
-# ── INTERACTIONS ──────────────────────────────────────────
-func onIngredientPressed(itemName: String) -> void:
-	if currentCombo.has(itemName):
-		currentCombo[itemName] += 1
-	else:
-		if slotOrder.size() >= 3:
-			return
-		currentCombo[itemName] = 1
-		slotOrder.append(itemName)
-	refresh()
-
-func onSlotMinus(itemName: String) -> void:
-	if not currentCombo.has(itemName):
-		return
-	currentCombo[itemName] -= 1
-	if currentCombo[itemName] <= 0:
-		currentCombo.erase(itemName)
-		slotOrder.erase(itemName)
-	refresh()
-
-func onSlotRemove(itemName: String) -> void:
-	currentCombo.erase(itemName)
-	slotOrder.erase(itemName)
-	refresh()
-
-func onRecipeAutoFill(recipe: RecipeData) -> void:
-	# Check player has all ingredients
-	var canFill = true
-	for ingredient in recipe.ingredients:
-		if inventorySystem.countInBackpack(ingredient) < recipe.ingredients[ingredient]:
-			canFill = false
-			break
-	if not canFill:
-		GameEvents.eventLogged.emit(
-			"You don't have the ingredients for %s." % recipe.recipeName,
-			"system", false
+		if (selectedRecipe == recipe):
+			btn.add_theme_color_override("font_color", Color("#8e44ad"))
+		btn.pressed.connect(func():
+			onRecipeSelected(recipe)
+			Utils.animateButtonPress(btn)
 		)
+		btn.add_theme_font_size_override("font_size", 20)
+		btn.custom_minimum_size = Vector2(0, 60)
+		recipesVBox.add_child(btn)
+
+func getAvailableRecipes() -> Array[RecipeData]:
+	var result: Array[RecipeData] = []
+	for recipe in RecipeRegistry.recipes:
+		if canBrew(recipe):
+			result.append(recipe)
+	return result
+
+func canBrew(recipe: RecipeData) -> bool:
+	for ingredient in recipe.ingredients:
+		var needed = recipe.ingredients[ingredient]
+		if inventorySystem.countInBackpack(ingredient) < needed:
+			return false
+	return true
+
+func onRecipeSelected(recipe: RecipeData) -> void:
+	selectedRecipe = recipe
+	refreshInfo()
+	refreshBrewButton()
+
+# ── INFO PANEL ────────────────────────────────────────────
+func refreshInfo() -> void:
+	var children = ingredientsVBox.get_children()
+	for i in range(2, children.size()):
+		children[i].free()
+
+	if not selectedRecipe:
+		infoName.text = "Select a recipe"
+		infoDesc.text = ""
+		ingredientsVBox.hide()
+		instructions.show()
 		return
-	currentCombo = recipe.ingredients.duplicate()
-	slotOrder = Array(recipe.ingredients.keys(), TYPE_STRING, "", null)
-	refresh()
+	ingredientsVBox.show()
+	instructions.hide()
+	
+	infoName.text = "  " + selectedRecipe.recipeName
+
+	# Description from ItemRegistry
+	var item = ItemRegistry.getItem(selectedRecipe.resultItem)
+	infoDesc.bbcode_enabled = true
+	infoDesc.text = "[i]  %s[/i]" % (item.description if item else "")
+
+	# Ingredients
+	for ingredient in selectedRecipe.ingredients:
+		var needed = selectedRecipe.ingredients[ingredient]
+		var have = inventorySystem.countInBackpack(ingredient)
+		var row = HBoxContainer.new()
+
+		var nameLabel = Label.new()
+		nameLabel.text = "  " + ingredient
+		nameLabel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		nameLabel.add_theme_font_size_override("font_size", 20)
+
+		var haveLabel = Label.new()
+		haveLabel.text = "%d / %d" % [have, needed]
+		haveLabel.add_theme_font_size_override("font_size", 20)
+		haveLabel.add_theme_color_override("font_color",
+			Color("#27ae60") if have >= needed else Color("#c0392b")
+		)
+
+		row.add_child(nameLabel)
+		row.add_child(haveLabel)
+		ingredientsVBox.add_child(row)
+
+# ── BREW BUTTON ───────────────────────────────────────────
+func refreshBrewButton() -> void:
+	brewButton.disabled = selectedRecipe == null
 
 func onBrewPressed() -> void:
-	if currentCombo.is_empty():
+	if not selectedRecipe:
 		return
-	brewSystem.attemptBrew(currentCombo)
-	currentCombo = {}
-	slotOrder = []
+	brewSystem.attemptBrew(selectedRecipe.ingredients)
+	Utils.spawnFloatingLabel(
+		"+1 %s" % selectedRecipe["recipeName"],
+		Color("#27ae60"),
+		brewButton,
+		false
+	)
 	refresh()
-
-func onClearPressed() -> void:
-	currentCombo = {}
-	slotOrder = []
-	refresh()
-
-func onBrewAttempted(_success: bool, _resultItem: String) -> void:
-	refresh()
-
-func onRecipeDiscovered(_recipeName: String) -> void:
-	refreshDiscovered()

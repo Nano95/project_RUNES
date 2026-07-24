@@ -113,7 +113,7 @@ func countInBackpack(itemName: String) -> int:
 	
 	var count = 0
 	for stack in main.game_data.backpack:
-		print("checking stack: ", stack.get("name"), " == ", itemName, " qty: ", stack.get("qty", 0))
+		#print("checking stack: ", stack.get("name"), " == ", itemName, " qty: ", stack.get("qty", 0))
 		if stack["name"] == itemName:
 			count += stack["qty"]
 	return count

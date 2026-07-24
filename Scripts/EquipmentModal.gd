@@ -34,15 +34,42 @@ func _ready() -> void:
 	GameEvents.equipmentChanged.connect(refresh)
 	GameEvents.backpackChanged.connect(refreshBackpack)
 
-	helmetButton.pressed.connect(onSlotPressed.bind("helmet"))
-	armorButton.pressed.connect(onSlotPressed.bind("armor"))
-	legsButton.pressed.connect(onSlotPressed.bind("legs"))
-	bootsButton.pressed.connect(onSlotPressed.bind("boots"))
-	weaponButton.pressed.connect(onSlotPressed.bind("weapon"))
-	shieldButton.pressed.connect(onSlotPressed.bind("shield"))
-	ringButton.pressed.connect(onSlotPressed.bind("ring"))
-	amuletButton.pressed.connect(onSlotPressed.bind("amulet"))
-	equipButton.pressed.connect(onEquipButtonPressed)
+	helmetButton.pressed.connect(func():
+		onSlotPressed("helmet")
+		Utils.animateButtonPress(helmetButton)
+	)
+	armorButton.pressed.connect(func():
+		onSlotPressed("Armor")
+		Utils.animateButtonPress(armorButton)
+	)
+	legsButton.pressed.connect(func():
+		onSlotPressed("legs")
+		Utils.animateButtonPress(legsButton)
+	)
+	bootsButton.pressed.connect(func():
+		onSlotPressed("boots")
+		Utils.animateButtonPress(bootsButton)
+	)
+	weaponButton.pressed.connect(func():
+		onSlotPressed("weapon")
+		Utils.animateButtonPress(weaponButton)
+	)
+	shieldButton.pressed.connect(func():
+		onSlotPressed("shield")
+		Utils.animateButtonPress(shieldButton)
+	)
+	ringButton.pressed.connect(func():
+		onSlotPressed("ring")
+		Utils.animateButtonPress(ringButton)
+	)
+	amuletButton.pressed.connect(func():
+		onSlotPressed("amulet")
+		Utils.animateButtonPress(amuletButton)
+	)
+	equipButton.pressed.connect(func():
+		onEquipButtonPressed()
+		Utils.animateButtonPress(equipButton)
+	)
 	closeButton.pressed.connect(onClose)
 
 	clearCompare()
@@ -50,6 +77,7 @@ func _ready() -> void:
 
 func onClose() -> void:
 	Utils.animate_modal_exit(self)
+	Utils.animateButtonPress(closeButton)
 
 func open() -> void:
 	if main.game_data.inArea:
@@ -119,8 +147,12 @@ func refreshBackpack() -> void:
 		btn.text = " %s%s%s " % [stack["name"], enhStr, statStr]
 		btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		btn.add_theme_color_override("font_color", Color("#e74c3c"))
+		btn.add_theme_font_size_override("font_size", 20)
 		btn.custom_minimum_size = Vector2(150,50)
-		btn.pressed.connect(onBackpackItemPressed.bind(stack))
+		btn.pressed.connect(func():
+			onBackpackItemPressed(stack)
+			Utils.animateButtonPress(btn)
+		)
 		backpackFlow.add_child(btn)
 
 	if not hasEquipment:

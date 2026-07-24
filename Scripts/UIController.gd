@@ -71,18 +71,23 @@ func showInventory() -> void:
 	retreatButton.visible = false
 
 func showDisplay() -> void:
+	Utils.animateButtonPress(storageButton)
 	storageDisplay.open()
 
 func showAlchemy() -> void:
+	Utils.animateButtonPress(brewButton)
 	alchemyDisplay.open()
 
 func showArmory() -> void:
+	Utils.animateButtonPress(armoryButton)
 	equipmentDisplay.open()
 
 func showMerchant() -> void:
+	Utils.animateButtonPress(merchantButton)
 	merchantDisplay.open()
 
 func showBlacksmith() -> void:
+	Utils.animateButtonPress(blacksmithButton)
 	blacksmithDisplay.open()
 
 func onAreaEntered(_areaName: String) -> void:

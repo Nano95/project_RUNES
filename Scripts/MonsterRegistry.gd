@@ -21,21 +21,20 @@ func _ready() -> void:
 			"medium": [
 				_make("Orc Scout", "medium", 35, 11, 20, 5, 14, [
 					_drop("Orc Tooth", 0.45),
-					_drop("Beast Skin", 0.25),
-					_drop("Iron Helmet", 0.1)
+					_drop("Reinforced Boots", 0.1),
+					_drop("Leather Helmet", 0.1)
 				]),
 				_make("Wild Wolf", "medium", 30, 10, 18, 4, 12, [
 					_drop("Beast Skin", 0.35),
 					_drop("Giant Fang", 0.01),
 				]),
 				_make("Bog Frog", "medium", 28, 12, 16, 3, 10, [
-					_drop("Frog Leg", 0.45),
+					_drop("Frog Leg", 0.85),
 				]),
 			],
 			"strong": [
 				_make("Orc Warrior", "strong", 70, 20, 50, 14, 30, [
 					_drop("Orc Tooth", 0.45),
-					_drop("Beast Skin", 0.20),
 					_drop("Orcish Axe", 0.05),
 					_drop("Reinforced Shield", 0.1)
 				]),
@@ -56,18 +55,20 @@ func _ready() -> void:
 			"weak": [
 				_make("Orc Scout", "weak", 35, 11, 20, 5, 14, [
 					_drop("Orc Tooth", 0.45),
-					_drop("Beast Skin", 0.25),
+					_drop("Reinforced Boots", 0.10),
+					_drop("Leather Helmet", 0.1)
 				]),
 				_make("Wild Wolf", "weak", 30, 10, 18, 4, 12, [
 					_drop("Beast Skin", 0.35),
 					_drop("Giant Fang", 0.01),
 				]),
 				_make("Bog Frog", "weak", 28, 12, 16, 3, 10, [
-					_drop("Frog Leg", 0.45),
+					_drop("Frog Leg", 0.85),
 				]),
 			],
 			"medium": [
 				_make("Rotworm", "medium", 65, 16, 32, 10, 22, [
+					_drop("Frog Leg", 0.65),
 					_drop("Creature Fang", 0.20),
 					_drop("Fang Spear", 0.01)
 				]),
@@ -76,7 +77,7 @@ func _ready() -> void:
 				]),
 				_make("Bandit", "medium", 60, 18, 35, 12, 25, [
 					_drop("Leather Armor", 0.10),
-					_drop("Leather Helmet", 0.10),
+					_drop("Iron Legs", 0.05),
 				]),
 			],
 			"strong": [
@@ -106,6 +107,7 @@ func _ready() -> void:
 		"Darkwood Forest": {
 			"weak": [
 				_make("Rotworm", "weak", 65, 12, 20, 8, 16, [
+					_drop("Frog Leg", 0.65),
 					_drop("Creature Fang", 0.20),
 					_drop("Fang Spear", 0.01)
 				]),
@@ -115,9 +117,9 @@ func _ready() -> void:
 					_drop("Coal", 0.40),
 					_drop("Gold Ore", 0.20),
 				]),
-				_make("Bandit", "weak", 60, 14, 22, 8, 18, [
+				_make("Bandit", "weak", 60, 18, 35, 12, 25, [
 					_drop("Leather Armor", 0.10),
-					_drop("Leather Helmet", 0.10),
+					_drop("Iron Legs", 0.05),
 				]),
 			],
 			"medium": [

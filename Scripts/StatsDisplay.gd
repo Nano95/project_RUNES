@@ -55,6 +55,7 @@ func refresh() -> void:
 	else:
 		goldLabel.text = "Bank"
 		goldValue.text = str(gd.savedGold)
+		print(" - ", str(gd.savedGold))
 
 	# Area
 	areaValue.text = gd.currentArea if gd.inArea else "Town"
@@ -119,6 +120,7 @@ func onAreaExited() -> void:
 	goldValue.text = str(main.game_data.savedGold)
 
 func onGoldDeposited(_amount: int) -> void:
+	print(" - gold deposited")
 	goldValue.text = str(main.game_data.gold)
 
 func xpForNextLevel() -> int:

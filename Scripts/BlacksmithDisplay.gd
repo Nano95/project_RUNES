@@ -35,10 +35,22 @@ func _ready() -> void:
 	main = Utils.get_main()
 	GameEvents.backpackChanged.connect(onInventoryChanged)
 	GameEvents.equipmentChanged.connect(onInventoryChanged)
-	craftTab.pressed.connect(onCraftTabPressed)
-	enhanceTab.pressed.connect(onEnhanceTabPressed)
-	actionButton.pressed.connect(onActionPressed)
-	closeButton.pressed.connect(onClose)
+	craftTab.pressed.connect(func():
+		onCraftTabPressed()
+		Utils.animateButtonPress(craftTab)
+	)
+	enhanceTab.pressed.connect(func():
+		onEnhanceTabPressed()
+		Utils.animateButtonPress(enhanceTab)
+	)
+	actionButton.pressed.connect(func():
+		onActionPressed()
+		Utils.animateButtonPress(actionButton)
+	)
+	closeButton.pressed.connect(func():
+		onClose()
+		Utils.animateButtonPress(closeButton)
+	)
 	hide()
 
 func onClose() -> void:
@@ -120,7 +132,10 @@ func _makeRecipeButton(recipe: BlacksmithRecipe) -> Button:
 	var btn = Button.new()
 	btn.text = "  " + recipe.recipeName + "  "
 	btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	btn.pressed.connect(onRecipeSelected.bind(recipe))
+	btn.pressed.connect(func():
+		onRecipeSelected(recipe)
+		Utils.animateButtonPress(btn)
+	)
 	btn.custom_minimum_size = Vector2(150,50)
 	btn.add_theme_font_size_override("font_size", 22)
 	if selectedRecipe == recipe:
@@ -203,7 +218,10 @@ func refreshEnhanceList() -> void:
 		btn.add_theme_font_size_override("font_size", 22)
 		if selectedEquip.get("instanceId") == stack.get("instanceId"):
 			btn.add_theme_color_override("font_color", Color("#c8880a"))
-		btn.pressed.connect(onEquipSelected.bind(stack))
+		btn.pressed.connect(func():
+			onEquipSelected(stack)
+			Utils.animateButtonPress(btn)
+		)
 		enhanceEquipFlow.add_child(btn)
 
 	if not hasItems:
@@ -290,5 +308,10 @@ func onActionPressed() -> void:
 			return
 		var success = blacksmithSystem.craft(selectedRecipe)
 		if success:
-			selectedRecipe = null
+			Utils.spawnFloatingLabel(
+				"+1 %s" % selectedRecipe["recipeName"],
+				Color("#27ae60"),
+				actionButton,
+				false
+			)
 			refresh()
