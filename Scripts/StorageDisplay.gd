@@ -77,6 +77,7 @@ func refreshBackpack() -> void:
 	
 	backpackTitleCap.text = "Backpack (%d / %d)" % [main.game_data.backpack.size(), main.game_data.backpackMax]
 	for entry in stacked:
+		print("entry: ", entry)
 		var btn = _makeItemButton(entry, "backpack")
 		backpackFlow.add_child(btn)
 
@@ -173,6 +174,7 @@ func onChestUpgraded(_chestId: int) -> void:
 	refresh()
 
 func onBuildPressed() -> void:
+	Utils.animateButtonPress(buildButton)
 	var chest = chestSystem.getChest(selectedChestId)
 	if chest:
 		chestSystem.upgradeChest(chest)

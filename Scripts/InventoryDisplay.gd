@@ -9,6 +9,7 @@ class_name InventoryDisplay
 var main:MainNode
 var longPressTimer: Timer
 var longPressTarget: String = ""
+var isPressingDown: bool = false
 const LONG_PRESS_DURATION: float = 0.5
 
 func _ready() -> void:
@@ -35,6 +36,7 @@ func refresh() -> void:
 		var emptyLabel = Label.new()
 		emptyLabel.text = "Empty"
 		emptyLabel.add_theme_color_override("font_color", Color("#888888"))
+		itemFlow.add_child.call_deferred(emptyLabel)
 		itemFlow.add_child(emptyLabel)
 		return
 
@@ -74,27 +76,27 @@ func getColorForType(itemType: String) -> Color:
 
 func onItemSinglePressed(itemName: String, itemType: String) -> void:
 	if (longPressTimer.time_left > 0):
-		print("longPressTimer.time_left return")
 		return
 	if (itemType == "potion"):
 		GameEvents.itemInspected.emit(itemName)
 		GameEvents.potionUsed.emit(itemName)
 
 func onItemButtonDown(itemName: String) -> void:
+	isPressingDown = true
 	longPressTarget = itemName
 	longPressTimer.start()
 
 func onItemButtonUp(itemName: String, itemType: String) -> void:
-	if longPressTimer.is_stopped():
-		# Timer already fired = long press, do nothing here
-		return
-	longPressTimer.stop()
-	# Short tap
-	if itemType == "potion":
-		GameEvents.potionUsed.emit(itemName)
+	isPressingDown = false
+	if not longPressTimer.is_stopped():
+		longPressTimer.stop()
+		# Was a short tap
+		if itemType == "potion":
+			call_deferred("emitPotionUsed", itemName)
 
 func onLongPress() -> void:
-	if longPressTarget == "":
+	if not isPressingDown or longPressTarget == "":
 		return
+	isPressingDown = false
 	GameEvents.itemLongPressed.emit(longPressTarget)
 	longPressTarget = ""

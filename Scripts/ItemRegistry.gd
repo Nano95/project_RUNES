@@ -92,7 +92,6 @@ func _register() -> void:
 	_add("Copper Ore",          "ore",        true,  1.5, "Common metal ore.",                8)
 	_add("Iron Ore",            "ore",        true,  1.8, "Heavy and valuable.",              15)
 	_add("Coal",                "ore",        true,  1.6, "Burns long and hot.",              10)
-	_add("Tin Ore",             "ore",        true,  1.5, "Useful for alloys.",               12)
 	_add("Gold Ore",        "ore",       true,  1.2, "Heavy and precious.",               35)
 
 	# ── BARS ─────────────────────────────────────────────

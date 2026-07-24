@@ -1790,7 +1790,6 @@ theme_override_font_sizes/font_size = 32
 text = "Close"
 
 [node name="StorageModal" type="ColorRect" parent="UIController" unique_id=700632207 node_paths=PackedStringArray("backpackFlow", "backpackTitleCap", "backpackWeightLabel", "chestFlow", "chestCapacityLabel", "chestNameLabel", "chestGrid", "upgradeLabel", "upgradeDetails", "buildButton", "closeButton", "chestSystem", "inventorySystem")]
-visible = false
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
 anchors_preset = 15

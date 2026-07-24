@@ -105,9 +105,13 @@ func removeFromBackpack(itemName: String, qty: int = 1) -> bool:
 		)
 
 	main.save_game()
+	call_deferred("emitInventoryChanged")
 	GameEvents.backpackChanged.emit()
 	GameEvents.weightChanged.emit()
 	return true
+	
+func emitInventoryChanged() -> void:
+	GameEvents.backpackChanged.emit()
 
 func countInBackpack(itemName: String) -> int:
 	
