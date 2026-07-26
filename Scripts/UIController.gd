@@ -16,6 +16,7 @@ class_name UIController
 @export var equipmentDisplay:EquipmentDisplay
 @export var merchantDisplay: MerchantDisplay
 @export var blacksmithDisplay: BlacksmithDisplay
+@export var checkPointDisplay: CheckpointOverlay
 @export var areaSystem: AreaSystem
 @export var adventuringRow: HBoxContainer
 @export var inventoryPanel: Panel
@@ -32,8 +33,6 @@ func _ready() -> void:
 	GameEvents.areaUnlocked.connect(onAreaUnlocked)
 	GameEvents.checkpointReached.connect(showCheckpoint)
 	chooseAreaButton.pressed.connect(onChooseAreaPressed)
-	continueButton.pressed.connect(onContinuePressed)
-	retreatButton.pressed.connect(onRetreatPressed)
 	storageButton.pressed.connect(showDisplay)
 	brewButton.pressed.connect(showAlchemy)
 	armoryButton.pressed.connect(showArmory)
@@ -61,14 +60,9 @@ func showCheckpoint() -> void:
 	mainActionRow.hide()
 	areaSelectRow.hide()
 	adventuringRow.show()
-	inventoryPanel.visible = false
-	continueButton.visible = true
-	retreatButton.visible = true
 
 func showInventory() -> void:
 	inventoryPanel.visible = true
-	continueButton.visible = false
-	retreatButton.visible = false
 
 func showDisplay() -> void:
 	Utils.animateButtonPress(storageButton)

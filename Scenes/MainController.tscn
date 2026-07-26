@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://dweasp2efehkt" path="res://Scripts/EquipmentModal.gd" id="16_ds30n"]
 [ext_resource type="Theme" uid="uid://3dmu3g4p1u1e" path="res://Resources/Themes/MainTheme.tres" id="17_g72ry"]
 [ext_resource type="Script" uid="uid://cgaotmic06nj0" path="res://Scripts/BlacksmithDisplay.gd" id="17_shy7a"]
+[ext_resource type="Script" uid="uid://drl0whro730mg" path="res://Scripts/CheckpointOverlay.gd" id="18_cssra"]
 [ext_resource type="Theme" uid="uid://d1wjrpj8qrv17" path="res://Resources/Themes/Subtheme_Panel.tres" id="19_shy7a"]
 [ext_resource type="Script" uid="uid://cbw7r5lrmqf02" path="res://Scripts/ChestSystem.gd" id="20_7kxyy"]
 [ext_resource type="Script" uid="uid://b37mlyqlp46f3" path="res://Scripts/LevelSystem.gd" id="22_3jiro"]
@@ -104,6 +105,12 @@ shader_parameter/activate = false
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ds30n"]
 shader = ExtResource("10_gpdd1")
 shader_parameter/lod = 3.0000001425
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tcxn3"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1q78x"]
 resource_local_to_scene = true
@@ -363,7 +370,7 @@ script = ExtResource("1_3dcjo")
 tickTimer = NodePath("TickTimer")
 eventLog = NodePath("UIController/MarginContainer/VBoxContainer/EventLogPanel/EventLog")
 
-[node name="UIController" type="Control" parent="." unique_id=1458651066 node_paths=PackedStringArray("mainActionRow", "areaSelectRow", "chooseAreaButton", "brewButton", "storageButton", "armoryButton", "merchantButton", "blacksmithButton", "areaButtons", "inventorySystem", "storageDisplay", "alchemyDisplay", "equipmentDisplay", "merchantDisplay", "blacksmithDisplay", "areaSystem", "adventuringRow", "inventoryPanel", "continueButton", "retreatButton")]
+[node name="UIController" type="Control" parent="." unique_id=1458651066 node_paths=PackedStringArray("mainActionRow", "areaSelectRow", "chooseAreaButton", "brewButton", "storageButton", "armoryButton", "merchantButton", "blacksmithButton", "areaButtons", "inventorySystem", "storageDisplay", "alchemyDisplay", "equipmentDisplay", "merchantDisplay", "blacksmithDisplay", "checkPointDisplay", "areaSystem", "adventuringRow", "inventoryPanel", "continueButton", "retreatButton")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -386,11 +393,12 @@ alchemyDisplay = NodePath("BrewingContainer")
 equipmentDisplay = NodePath("EquipmentModal")
 merchantDisplay = NodePath("MerchantContainer")
 blacksmithDisplay = NodePath("BlacksmithContainer")
+checkPointDisplay = NodePath("CheckpointOverlay")
 areaSystem = NodePath("../AreaSystem")
 adventuringRow = NodePath("MarginContainer/VBoxContainer/AdventuringRow")
 inventoryPanel = NodePath("MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay")
-continueButton = NodePath("MarginContainer/VBoxContainer/AdventuringRow/Continue")
-retreatButton = NodePath("MarginContainer/VBoxContainer/AdventuringRow/Retreat")
+continueButton = NodePath("")
+retreatButton = NodePath("")
 
 [node name="MarginContainer" type="MarginContainer" parent="UIController" unique_id=709362305]
 layout_mode = 0
@@ -843,26 +851,116 @@ layout_mode = 2
 theme_override_constants/h_separation = 9
 theme_override_constants/v_separation = 12
 
-[node name="Continue" type="Button" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow" unique_id=1247342207]
+[node name="CheckpointOverlay" type="ColorRect" parent="UIController" unique_id=428981134 node_paths=PackedStringArray("descLabel", "continueButton", "retreatButton", "eventLogPanel", "areaSystem")]
 visible = false
+material = SubResource("ShaderMaterial_ds30n")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 227.0
+offset_bottom = -815.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("18_cssra")
+descLabel = NodePath("MonsterBattlePanel/TitlePanel/Description")
+continueButton = NodePath("MonsterBattlePanel/HBoxContainer/Continue")
+retreatButton = NodePath("MonsterBattlePanel/HBoxContainer/Retreat")
+eventLogPanel = NodePath("../MarginContainer/VBoxContainer/EventLogPanel")
+areaSystem = NodePath("../../AreaSystem")
+
+[node name="MonsterBattlePanel" type="Panel" parent="UIController/CheckpointOverlay" unique_id=415730517]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.0
+offset_top = -110.0
+offset_right = 345.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("17_g72ry")
+
+[node name="TitlePanel" type="Panel" parent="UIController/CheckpointOverlay/MonsterBattlePanel" unique_id=974377931]
+layout_mode = 0
+offset_right = 690.0
+offset_bottom = 45.0
+theme = ExtResource("17_g72ry")
+
+[node name="Title2" parent="UIController/CheckpointOverlay/MonsterBattlePanel/TitlePanel" unique_id=2133995629 instance=ExtResource("6_prt4a")]
+material = SubResource("ShaderMaterial_tcxn3")
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 9.0
+offset_right = 1043.0
+offset_bottom = 140.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 80
+text = "Checkpoint Reached!"
+vertical_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="UIController/CheckpointOverlay/MonsterBattlePanel/TitlePanel" unique_id=1926443337]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 39.0
+offset_right = -8.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("3_dajxx")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+bbcode_enabled = true
+text = "How [wave amp=8 freq=3]far[/wave] is far enough"
+scroll_following = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIController/CheckpointOverlay/MonsterBattlePanel" unique_id=406963622]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -129.0
+offset_right = -11.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="Continue" type="Button" parent="UIController/CheckpointOverlay/MonsterBattlePanel/HBoxContainer" unique_id=257122894]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "Continue"
 
-[node name="Retreat" type="Button" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow" unique_id=1074962399]
-visible = false
+[node name="Retreat" type="Button" parent="UIController/CheckpointOverlay/MonsterBattlePanel/HBoxContainer" unique_id=765722737]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "Retreat"
 
 [node name="ItemActionContainer" type="ColorRect" parent="UIController" unique_id=1469258999 node_paths=PackedStringArray("itemNameLabel", "equipButton", "dropButton", "cancelButton", "inventorySystem")]
@@ -872,6 +970,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 493.0
+offset_bottom = -228.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("10_ftth8")
@@ -889,9 +989,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -345.0
-offset_top = -366.5
+offset_top = -257.5
 offset_right = 345.0
-offset_bottom = 366.5
+offset_bottom = 253.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_stretch_ratio = 0.0
@@ -1790,6 +1890,7 @@ theme_override_font_sizes/font_size = 32
 text = "Close"
 
 [node name="StorageModal" type="ColorRect" parent="UIController" unique_id=700632207 node_paths=PackedStringArray("backpackFlow", "backpackTitleCap", "backpackWeightLabel", "chestFlow", "chestCapacityLabel", "chestNameLabel", "chestGrid", "upgradeLabel", "upgradeDetails", "buildButton", "closeButton", "chestSystem", "inventorySystem")]
+visible = false
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
 anchors_preset = 15
@@ -2650,7 +2751,6 @@ theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 80
 text = "In Combat..."
 vertical_alignment = 1
-script = ExtResource("14_6iwwj")
 
 [node name="MonsterName" parent="UIController/MonsterBattleOverlay/MonsterBattlePanel" unique_id=163336450 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)

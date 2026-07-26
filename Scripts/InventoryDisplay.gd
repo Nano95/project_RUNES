@@ -27,6 +27,7 @@ func _ready() -> void:
 	refreshWeight()
 
 func refresh() -> void:
+	print(" -- refresh bp happening")
 	for child in itemFlow.get_children():
 		child.queue_free()
 
@@ -52,9 +53,8 @@ func refresh() -> void:
 		btn.add_theme_color_override("font_color", color)
 		btn.add_theme_font_size_override("font_size", 22)
 		btn.custom_minimum_size = Vector2(150,60)
-		if (entry["type"] == "potion"):
-			btn.button_up.connect(onItemButtonUp.bind(entry["name"], entry["type"]))
 		btn.button_down.connect(onItemButtonDown.bind(entry["name"]))
+		btn.button_up.connect(onItemButtonUp.bind(entry["name"], entry["type"]))
 		itemFlow.add_child(btn)
 	
 	spacesLabel.text = "(%d / %d)" % [main.game_data.backpack.size(), main.game_data.backpackMax]
@@ -68,9 +68,9 @@ func refreshWeight() -> void:
 func getColorForType(itemType: String) -> Color:
 	match itemType:
 		"equipment":  return Color("#e74c3c")
-		"part":       return Color("#888888")
+		"part":       return Color("82b6bfff")
 		"forageable": return Color("#27ae60")
-		"ore":        return Color("#aaaaaa")
+		"ore":        return Color("a5997eff")
 		"potion":     return Color("#8e44ad")
 		_:            return Color("#cccccc")
 

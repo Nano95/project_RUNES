@@ -25,7 +25,6 @@ func onLeveledUp() -> void:
 
 # ── BACKPACK ─────────────────────────────────────────────
 func addToBackpack(itemName: String, qty: int = 1) -> bool:
-	
 	var item = ItemRegistry.getItem(itemName)
 	if not item:
 		return false

@@ -11,7 +11,7 @@ var main:MainNode
 func _ready() -> void:
 	main = Utils.get_main()
 	GameEvents.eventLogged.connect(_on_event_logged)
-	tickTimer.wait_time = 1.0
+	tickTimer.wait_time = .3
 	tickTimer.timeout.connect(onTick)
 	tickTimer.start()
 	GameEvents.eventLogged.emit("Welcome back to town!", "town", false)

@@ -9,7 +9,7 @@ func _ready() -> void:
 		_make("Health Potion",      {"Wild Herb": 3, "Red Berry": 2, "Frog Leg": 1},     "Health Potion",      "heal",      30),
 		_make("Twilight Potion",    {"Gloomcap": 1, "Red Berry": 1, "Wild Herb": 1},     "Twilight Potion",    "heal",      70),
 		_make("Strength Brew",      {"Wild Herb": 2, "Orc Tooth": 1},                    "Strength Brew",      "strength",  5),
-		_make("Swiftness Tonic",    {"Wolf Fang": 1, "Bloodroot": 2},                    "Swiftness Tonic",    "swiftness", 0),
+		_make("Swiftness Tonic",    {"Creature Fang": 1, "Bloodroot": 2},                    "Swiftness Tonic",    "swiftness", 0),
 		_make("Time Potion",        {"Bat Wing": 3, "Bloodroot": 1, "Red Berry": 1},     "Time Potion",        "time",      0),
 		_make("Minor Battle Potion", {"Rat Fur": 2, "Wild Herb": 1},          "Minor Battle Potion", "battle", 3),
 		_make("Battle Potion",       {"Slime Gel": 1, "Bloodroot": 2},         "Battle Potion",       "battle", 6),

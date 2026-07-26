@@ -226,11 +226,17 @@ func onLongPress() -> void:
 func _getStacked(items: Array) -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
 	for stack in items:
+		var itemName = stack.get("name", "")
+		var item = ItemRegistry.getItem(itemName)
+		if not item:
+			# Skip unknown items gracefully
+			push_warning("Unknown item in chest: %s" % itemName)
+			continue
 		result.append({
-			"name": stack["name"],
-			"qty": stack["qty"],
-			"type": ItemRegistry.getType(stack["name"]),
-			"cap": ItemRegistry.getStackCap(stack["name"])
+			"name": itemName,
+			"qty": stack.get("qty", 1),
+			"type": item.itemType,
+			"cap": ItemRegistry.getStackCap(itemName)
 		})
 	return result
 
