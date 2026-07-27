@@ -11,6 +11,8 @@ var longPressTimer: Timer
 var longPressTarget: String = ""
 var isPressingDown: bool = false
 const LONG_PRESS_DURATION: float = 0.5
+var longPressQty: int = 0
+var longPressStackIndex: int = -1
 
 func _ready() -> void:
 	main = Utils.get_main()
@@ -27,36 +29,42 @@ func _ready() -> void:
 	refreshWeight()
 
 func refresh() -> void:
-	print(" -- refresh bp happening")
 	for child in itemFlow.get_children():
-		child.queue_free()
+		child.free()
 
-	var stacked = inventorySystem.getStackedView(main.game_data.backpack)
-
-	if stacked.is_empty():
+	if main.game_data.backpack.is_empty():
 		var emptyLabel = Label.new()
 		emptyLabel.text = "Empty"
 		emptyLabel.add_theme_color_override("font_color", Color("#888888"))
 		itemFlow.add_child.call_deferred(emptyLabel)
-		itemFlow.add_child(emptyLabel)
 		return
 
-	for entry in stacked:
+	for i in main.game_data.backpack.size():
+		var stack = main.game_data.backpack[i]
+		var itemName = stack.get("name", "")
+		var qty = stack.get("qty", 1)
+		var item = ItemRegistry.getItem(itemName)
+		if not item:
+			continue
+
 		var btn = Button.new()
-		# Show qty / cap for stackable items
-		if entry["stackable"] and entry["qty"] > 1:
-			btn.text = " %s %d/%d " % [entry["name"], entry["qty"], entry["cap"]]
+		var cap = ItemRegistry.getStackCap(itemName)
+		if item.stackable and qty > 1:
+			btn.text = " %s %d/%d " % [itemName, qty, cap]
 		else:
-			btn.text = " " + entry["name"] + " "
+			btn.text = " " + itemName + " "
+
 		btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-		var color = getColorForType(entry["type"])
+		var color = getColorForType(item.itemType)
 		btn.add_theme_color_override("font_color", color)
 		btn.add_theme_font_size_override("font_size", 22)
-		btn.custom_minimum_size = Vector2(150,60)
-		btn.button_down.connect(onItemButtonDown.bind(entry["name"]))
-		btn.button_up.connect(onItemButtonUp.bind(entry["name"], entry["type"]))
+		btn.custom_minimum_size = Vector2(150, 60)
+
+		# Bind stack index i so we always know which exact stack was pressed
+		btn.button_down.connect(onItemButtonDown.bind(itemName, i))
+		btn.button_up.connect(onItemButtonUp.bind(itemName, item.itemType))
 		itemFlow.add_child(btn)
-	
+
 	spacesLabel.text = "(%d / %d)" % [main.game_data.backpack.size(), main.game_data.backpackMax]
 
 func refreshWeight() -> void:
@@ -81,9 +89,10 @@ func onItemSinglePressed(itemName: String, itemType: String) -> void:
 		GameEvents.itemInspected.emit(itemName)
 		GameEvents.potionUsed.emit(itemName)
 
-func onItemButtonDown(itemName: String) -> void:
+func onItemButtonDown(itemName: String, stackIndex: int) -> void:
 	isPressingDown = true
 	longPressTarget = itemName
+	longPressStackIndex = stackIndex
 	longPressTimer.start()
 
 func onItemButtonUp(itemName: String, itemType: String) -> void:
@@ -97,6 +106,11 @@ func onItemButtonUp(itemName: String, itemType: String) -> void:
 func onLongPress() -> void:
 	if not isPressingDown or longPressTarget == "":
 		return
+	
+	var qty = 0
+	if longPressStackIndex >= 0 and longPressStackIndex < main.game_data.backpack.size():
+		qty = main.game_data.backpack[longPressStackIndex].get("qty", 1)
 	isPressingDown = false
-	GameEvents.itemLongPressed.emit(longPressTarget)
+	GameEvents.itemLongPressed.emit(longPressTarget, qty, longPressStackIndex)
 	longPressTarget = ""
+	longPressStackIndex = -1

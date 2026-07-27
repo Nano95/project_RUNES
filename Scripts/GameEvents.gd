@@ -25,7 +25,7 @@ signal leveledUp
 @warning_ignore("unused_signal")
 signal potionUsed(itemName: String)
 @warning_ignore("unused_signal")
-signal itemLongPressed(itemName: String)
+signal itemLongPressed(itemName: String, stackIndex: int)
 @warning_ignore("unused_signal")
 signal itemEquipped(itemName: String)
 @warning_ignore("unused_signal")

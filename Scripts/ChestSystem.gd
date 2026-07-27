@@ -162,17 +162,19 @@ func consumeFromChests(itemName: String, qty: int) -> void:
 	GameEvents.chestChanged.emit()
 
 # ── ITEM MOVEMENT ─────────────────────────────────────────
-func moveToChest(itemName: String, chestId: int, moveAll: bool = false) -> void:
+func moveToChest(itemName: String, chestId: int, moveAll: bool = false, specificQty: int = 0) -> void:
 
 	var chest = getChest(chestId)
 	if not chest or not chest.unlocked:
 		return
 
-	var qty = 1
+	var qty = 0
 	if moveAll:
 		qty = inventorySystem.countInBackpack(itemName)
-	if qty <= 0:
-		return
+	elif specificQty > 0:
+		qty = specificQty
+	else:
+		qty = 1
 
 	var stackCap = ItemRegistry.getStackCap(itemName)
 
@@ -203,16 +205,18 @@ func moveToChest(itemName: String, chestId: int, moveAll: bool = false) -> void:
 	GameEvents.backpackChanged.emit()
 	GameEvents.chestChanged.emit()
 
-func moveToBackpack(itemName: String, chestId: int, moveAll: bool = false) -> void:
+func moveToBackpack(itemName: String, chestId: int, moveAll: bool = false,  specificQty: int = 0) -> void:
 	var chest = getChest(chestId)
 	if not chest:
 		return
 
-	var qty = 1
-	if (moveAll):
+	var qty = 0
+	if moveAll:
 		qty = _countInChest(chest, itemName)
-	if qty <= 0:
-		return
+	elif specificQty > 0:
+		qty = specificQty
+	else:
+		qty = 1
 
 	for i in range(qty):
 		var item = ItemRegistry.getItem(itemName)

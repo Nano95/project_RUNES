@@ -20,6 +20,7 @@ var selectedChestId: int = 1
 var longPressTimer: Timer
 var longPressTarget: String = ""
 var longPressSource: String = ""  # "backpack" or "chest"
+var longPressQty: int = 0
 const LONG_PRESS_DURATION: float = 0.5
 
 func _ready() -> void:
@@ -77,7 +78,6 @@ func refreshBackpack() -> void:
 	
 	backpackTitleCap.text = "Backpack (%d / %d)" % [main.game_data.backpack.size(), main.game_data.backpackMax]
 	for entry in stacked:
-		print("entry: ", entry)
 		var btn = _makeItemButton(entry, "backpack")
 		backpackFlow.add_child(btn)
 
@@ -192,13 +192,14 @@ func _makeItemButton(entry: Dictionary, source: String) -> Button:
 	btn.add_theme_color_override("font_color", newColor)
 	btn.add_theme_font_size_override("font_size", 22)
 	btn.custom_minimum_size = Vector2(150,50)
-	btn.button_down.connect(onItemButtonDown.bind(entry["name"], source))
+	btn.button_down.connect(onItemButtonDown.bind(entry["name"], source, entry["qty"]))
 	btn.button_up.connect(onItemButtonUp.bind(entry["name"], source))
 	return btn
 
-func onItemButtonDown(itemName: String, source: String) -> void:
+func onItemButtonDown(itemName: String, source: String, qty: int) -> void:
 	longPressTarget = itemName
 	longPressSource = source
+	longPressQty = qty
 	longPressTimer.start()
 
 func onItemButtonUp(itemName: String, source: String) -> void:
@@ -212,14 +213,14 @@ func onItemButtonUp(itemName: String, source: String) -> void:
 		chestSystem.moveToBackpack(itemName, selectedChestId, false)
 
 func onLongPress() -> void:
-	if longPressTarget == "":
+	if longPressTarget == "" or longPressQty <= 0:
 		return
-	# Long press — move entire stack
 	if longPressSource == "backpack":
-		chestSystem.moveToChest(longPressTarget, selectedChestId, true)
+		chestSystem.moveToChest(longPressTarget, selectedChestId, false, longPressQty)
 	else:
-		chestSystem.moveToBackpack(longPressTarget, selectedChestId, true)
+		chestSystem.moveToBackpack(longPressTarget, selectedChestId, false, longPressQty)
 	longPressTarget = ""
+	longPressQty = 0
 	longPressSource = ""
 
 # ── HELPERS ──────────────────────────────────────────────
