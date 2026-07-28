@@ -29,7 +29,7 @@ func onCombatStarted(monster: MonsterData) -> void:
 	updateHPColor(monsterMaxHp)
 	fleeButton.disabled = false
 	fleeButton.text = "Flee"
-	show()
+	Utils.animate_modal_entry(self)
 
 func onCombatTick(_playerDmg: int, _monsterDmg: int, monsterHpLeft: int) -> void:
 	var hpLeft = max(0, monsterHpLeft)

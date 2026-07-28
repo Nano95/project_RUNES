@@ -20,8 +20,6 @@ class_name UIController
 @export var areaSystem: AreaSystem
 @export var adventuringRow: HBoxContainer
 @export var inventoryPanel: Panel
-@export var continueButton: Button
-@export var retreatButton: Button
 
 var main:MainNode
 
