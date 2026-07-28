@@ -103,6 +103,9 @@ func onItemButtonUp(itemName: String, itemType: String) -> void:
 		if itemType == "potion":
 			call_deferred("emitPotionUsed", itemName)
 
+func emitPotionUsed(itemName: String) -> void:
+	GameEvents.potionUsed.emit(itemName)
+
 func onLongPress() -> void:
 	if not isPressingDown or longPressTarget == "":
 		return

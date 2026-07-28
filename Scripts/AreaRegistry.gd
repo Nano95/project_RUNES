@@ -5,11 +5,11 @@ var areas: Array[AreaData] = []
 func _ready() -> void:
 	areas = [
 		_make("Hunting Grounds", 1),
-		_make("Outskirts", 1),
-		_make("Darkwood Forest", 1),
-		_make("Goblin Warren", 3),
-		_make("Stoneback Mines", 5),
-		_make("Ashfield Ruins", 8),
+		_make("Outskirts", 3),
+		_make("Darkwood Forest", 7),
+		_make("Forsaken Keep", 12),
+		_make("Stoneback Mines", 18),
+		_make("Ashfield Ruins", 25),
 	]
 
 func _make(newName: String, minLevel: int) -> AreaData:

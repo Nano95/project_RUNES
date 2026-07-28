@@ -170,6 +170,9 @@ func getPotionHeal(itemName: String) -> int:
 		"Strong Heal Potion": return 50
 		#"Herbal Elixir":      return 60
 		"Twilight Potion":    return 70
+		"Death Brew":        return 70
+		"Shadow Tonic":      return 90
+		"Nightshade Elixir": return 110
 	print("- POTION NOT FOUND: ", itemName)
 	return 0
 

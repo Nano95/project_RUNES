@@ -399,9 +399,12 @@ adventuringRow = NodePath("MarginContainer/VBoxContainer/AdventuringRow")
 inventoryPanel = NodePath("MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay")
 
 [node name="MarginContainer" type="MarginContainer" parent="UIController" unique_id=709362305]
-layout_mode = 0
-offset_right = 720.0
-offset_bottom = 1280.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 60
@@ -657,6 +660,7 @@ size_flags_vertical = 3
 [node name="MainActionRow" type="GridContainer" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=780816887]
 custom_minimum_size = Vector2(678, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 13
@@ -724,13 +728,13 @@ text = "Blacksmith"
 
 [node name="AreasSelectRow" type="ScrollContainer" parent="UIController/MarginContainer/VBoxContainer" unique_id=2075402911]
 visible = false
-custom_minimum_size = Vector2(0, 202)
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
 [node name="AreasSelectRow" type="GridContainer" parent="UIController/MarginContainer/VBoxContainer/AreasSelectRow" unique_id=2070690060]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/h_separation = 6
 theme_override_constants/v_separation = 19
@@ -739,6 +743,7 @@ columns = 3
 [node name="area1" type="Button" parent="UIController/MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow" unique_id=1488179726]
 custom_minimum_size = Vector2(221, 74)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
@@ -748,6 +753,7 @@ text = "Hunting Grounds"
 [node name="area2" type="Button" parent="UIController/MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow" unique_id=794916738]
 custom_minimum_size = Vector2(221, 74)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
@@ -757,6 +763,7 @@ text = "Outskirts"
 [node name="area3" type="Button" parent="UIController/MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow" unique_id=593624606]
 custom_minimum_size = Vector2(221, 74)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
@@ -766,6 +773,7 @@ text = "Darkwood Forest"
 [node name="area4" type="Button" parent="UIController/MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow" unique_id=285783351]
 custom_minimum_size = Vector2(221, 74)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
@@ -994,6 +1002,7 @@ value = 72.0
 show_percentage = false
 
 [node name="ItemActionContainer" type="ColorRect" parent="UIController" unique_id=1469258999 node_paths=PackedStringArray("itemNameLabel", "equipButton", "dropButton", "dropAllButton", "cancelButton", "inventorySystem")]
+visible = false
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
 anchors_preset = 15
@@ -1919,8 +1928,7 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Close"
 
-[node name="StorageModal" type="ColorRect" parent="UIController" unique_id=700632207 node_paths=PackedStringArray("backpackFlow", "backpackTitleCap", "backpackWeightLabel", "chestFlow", "chestCapacityLabel", "chestNameLabel", "chestGrid", "upgradeLabel", "upgradeDetails", "buildButton", "closeButton", "chestSystem", "inventorySystem")]
-visible = false
+[node name="StorageModal" type="ColorRect" parent="UIController" unique_id=700632207 node_paths=PackedStringArray("backpackFlow", "backpackTitleCap", "backpackWeightLabel", "quickDeposit", "depositAll", "chestFlow", "chestCapacityLabel", "chestNameLabel", "chestGrid", "upgradeLabel", "upgradeDetails", "buildButton", "closeButton", "chestSystem", "inventorySystem")]
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
 anchors_preset = 15
@@ -1932,6 +1940,8 @@ script = ExtResource("13_ab47o")
 backpackFlow = NodePath("StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/VScrollBar/backpackGrid")
 backpackTitleCap = NodePath("StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/HBoxContainer/Title")
 backpackWeightLabel = NodePath("StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/HBoxContainer/Weight")
+quickDeposit = NodePath("StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/actionButtons/quickDeposit")
+depositAll = NodePath("StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/actionButtons/DepositAll")
 chestFlow = NodePath("StoragePanel/MarginContainer/VBoxContainer/chestPanel/TOP/VScrollBar/chestGrid")
 chestCapacityLabel = NodePath("StoragePanel/MarginContainer/VBoxContainer/chestPanel/TOP/Title")
 chestNameLabel = NodePath("StoragePanel/MarginContainer/VBoxContainer/chestPanel/TOP/Title")
@@ -2033,15 +2043,35 @@ text = "Weight (10/80)oz"
 horizontal_alignment = 2
 vertical_alignment = 1
 
+[node name="actionButtons" type="HBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP" unique_id=345955610]
+layout_mode = 2
+
+[node name="quickDeposit" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/actionButtons" unique_id=382747223]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Quick Deposit"
+
+[node name="DepositAll" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/actionButtons" unique_id=1289173771]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Deposit All"
+
 [node name="VScrollBar" type="ScrollContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP" unique_id=737082488]
-custom_minimum_size = Vector2(0, 260)
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
 [node name="backpackGrid" type="HFlowContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/VScrollBar" unique_id=1029594101]
-custom_minimum_size = Vector2(670, 260)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/h_separation = 7
 theme_override_constants/v_separation = 6

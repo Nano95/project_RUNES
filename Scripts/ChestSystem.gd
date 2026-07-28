@@ -253,6 +253,128 @@ func _chestItemCount(chest: ChestData) -> int:
 	# Count total slots used (each stack = 1 slot)
 	return chest.items.size()
 
+func quickDeposit(chestId: int) -> void:
+	var chest = getChest(chestId)
+	if not chest or not chest.unlocked:
+		return
+
+	# Get unique item names already in chest
+	var chestItems: Array[String] = []
+	for stack in chest.items:
+		if not chestItems.has(stack["name"]):
+			chestItems.append(stack["name"])
+
+	if chestItems.is_empty():
+		GameEvents.eventLogged.emit(
+			"Chest %d is empty — nothing to match." % chestId, "system", false
+		)
+		return
+
+	var deposited = 0
+	var toMove = main.game_data.backpack.duplicate()
+
+	for stack in toMove:
+		var itemName = stack.get("name", "")
+		if not chestItems.has(itemName):
+			continue
+		if chest.items.size() >= getCapacity(chest):
+			break
+
+		var qty = stack.get("qty", 1)
+		var item = ItemRegistry.getItem(itemName)
+
+		# Update weight
+		if item:
+			main.game_data.currentWeight = max(
+				0.0, main.game_data.currentWeight - (item.weight * qty)
+			)
+
+		# Remove from backpack directly
+		var idx = main.game_data.backpack.find(stack)
+		if idx != -1:
+			main.game_data.backpack.remove_at(idx)
+
+		# Add to chest directly
+		var stackCap = ItemRegistry.getStackCap(itemName)
+		var added = false
+		for chestStack in chest.items:
+			if chestStack["name"] == itemName and chestStack["qty"] < stackCap:
+				var space = stackCap - chestStack["qty"]
+				var toAdd = min(space, qty)
+				chestStack["qty"] += toAdd
+				added = true
+				break
+		if not added:
+			chest.items.append({"name": itemName, "qty": qty})
+
+		deposited += qty
+
+	if deposited > 0:
+		main.save_game()
+		GameEvents.backpackChanged.emit()
+		GameEvents.chestChanged.emit()
+		GameEvents.weightChanged.emit()
+		GameEvents.eventLogged.emit(
+			"Quick deposited %d stacks into Chest %d." % [deposited, chestId], "town", false
+		)
+	else:
+		GameEvents.eventLogged.emit(
+			"Nothing to deposit — no matching items found.", "system", false
+		)
+
+func depositAll(chestId: int) -> void:
+	var chest = getChest(chestId)
+	if not chest or not chest.unlocked:
+		return
+
+	var deposited = 0
+	var toMove = main.game_data.backpack.duplicate()
+	
+	for stack in toMove:
+		if chest.items.size() >= getCapacity(chest):
+			break
+		
+		var itemName = stack.get("name", "")
+		var qty = stack.get("qty", 1)
+		var item = ItemRegistry.getItem(itemName)
+		
+		# Handle weight
+		if item:
+			main.game_data.currentWeight = max(
+				0.0, main.game_data.currentWeight - (item.weight * qty)
+			)
+		
+		# Remove from backpack directly
+		var idx = main.game_data.backpack.find(stack)
+		if idx != -1:
+			main.game_data.backpack.remove_at(idx)
+		
+		# Add to chest directly
+		var added = false
+		var stackCap = ItemRegistry.getStackCap(itemName)
+		for chestStack in chest.items:
+			if chestStack["name"] == itemName and chestStack["qty"] < stackCap:
+				var space = stackCap - chestStack["qty"]
+				var toAdd = min(space, qty)
+				chestStack["qty"] += toAdd
+				added = true
+				break
+		if not added:
+			chest.items.append({"name": itemName, "qty": qty})
+		
+		deposited += qty
+
+	if deposited > 0:
+		# Save and emit signals ONCE after all operations complete
+		main.save_game()
+		GameEvents.backpackChanged.emit()
+		GameEvents.chestChanged.emit()
+		GameEvents.weightChanged.emit()
+		GameEvents.eventLogged.emit(
+			"Deposited %d stacks into Chest %d." % [deposited, chestId], "town", false
+		)
+	else:
+		GameEvents.eventLogged.emit("Backpack is empty.", "system", false)
 
 func onChestItemMoved(_chestId: int) -> void:
 	

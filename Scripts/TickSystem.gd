@@ -206,6 +206,8 @@ func getAreaGoldFind() -> int:
 	match main.game_data.currentArea:
 		"Hunting Grounds": return randi_range(30, 80)
 		"Outskirts":       return randi_range(50, 120)
+		"Darkwood Forest":  return randi_range(130, 180)
+		"Forsaken Keep": return randi_range(170, 280) # gold find
 		_:                 return randi_range(130, 180)
 
 func triggerTrap() -> void:
@@ -250,6 +252,7 @@ func getAreaTrapDamage(area: String) -> int:
 		"Hunting Grounds":  return randi_range(2, 8)
 		"Outskirts":        return randi_range(5, 15)
 		"Darkwood Forest":  return randi_range(10, 22)
+		"Forsaken Keep": return randi_range(18, 35)  # trap damage
 		"Ashfield Ruins":   return randi_range(15, 30)
 		"The Abyssal Depths": return randi_range(25, 45)
 		_:                  return randi_range(2, 8)

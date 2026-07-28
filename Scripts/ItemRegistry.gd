@@ -53,6 +53,14 @@ func _register() -> void:
 	_equip("Elven Helmet",      "helmet", false, "defense", 2,  4,  "none",           0,    0.0,  "Light and finely crafted.",     70)
 	_equip("Dark Knight Helm",  "helmet", false, "defense", 4,  7,  "none",           0,    0.0,  "Forged in shadow.",             90)
 	_equip("Reinforced Boots",  "boots",  false, "defense", 1,  3,  "none",           0,    0.0,  "Sturdy and well-made.",         55)
+	
+	_equip("Sword of Hollow", "weapon", false, "attack",  6,  9,  "none", 0, 0.0, "Whispers when swung.",           110)
+	_equip("Gargoyle Armor",  "armor",  false, "defense", 5,  8,  "none", 0, 0.0, "Stone-hard and silent.",         120)
+	_equip("Crested Shield",  "shield", false, "defense", 6,  9,  "none", 0, 0.0, "Bears a forgotten crest.",       150)
+	_equip("Commander Helm",  "helmet", false, "defense", 5,  8,  "none", 0, 0.0, "Worn by those who led.",         100)
+	_equip("Paladin Armor",   "armor",  false, "defense", 8,  12, "none", 0, 0.0, "Heavy but nearly impenetrable.", 180)
+	_equip("King's Crown",    "helmet", false, "defense", 7,  10, "none", 0, 0.0, "Cold and terrible.",             300)
+		
 	# Rings and amulets — no stat type, effect driven
 	_equip("Ring of Protection", "ring",   false, "defense", 1, 2, "none", 0, 0.0, "A plain ring, solid defense.", 80)
 	_equip("Ring of Vitality",  "ring",   false, "none",    0,  0,  "checkpoint_heal",10,   1.0,  "Pulses with warm energy.",      200)
@@ -68,6 +76,12 @@ func _register() -> void:
 	_add("Orc Tooth",       "part",      true,  0.2, "Yellowed and cracked.",             8)
 	_add("Dark Essence",    "part",      true,  0.1, "A fragment of dark energy.",        45)
 	_add("Cloth",           "part",      true,  0.2, "Coarse woven fabric.",              6)
+	_add("Hollow Shard",   "part", true, 0.3, "A fragment of something hollow.",     35)
+	_add("Gargoyle Wing",  "part", true, 0.5, "Leathery and surprisingly light.",    40)
+	_add("Stone Fragment", "part", true, 0.4, "Chipped from something ancient.",     20)
+	_add("Priest Relic",   "part", true, 0.2, "Something unholy about it.",          45)
+	_add("Bone Fragment",  "part", true, 0.2, "Brittle but useful.",                 15)
+	_add("Paladin Crest",  "part", true, 0.2, "Heavy with former glory.",            80)
 
 	# ── HUNTING GROUNDS ───────────────────────────────────────
 	_add("Rat Tail",        "part",      true,  0.1, "A scaly rat tail.",                 5)
@@ -82,12 +96,17 @@ func _register() -> void:
 	# ── DARKWOOD FOREST ───────────────────────────────────────
 	_add("Spider Silk",     "part",      true,  0.2, "Stronger than steel.",              30)
 
+	# ── SUMONING ITEMS  ───────────────────────────────────────
+	_add("Forsaken Seal",    "part", true,  0.3, "Radiates forgotten power.",        120)
+	
 	# ── FORAGEABLES ───────────────────────────────────────
 	_add("Wild Herb",           "forageable", true,  0.5, "Common but useful.",               5)
 	_add("Red Berry",           "forageable", true,  0.5, "Sweet and slightly toxic.",        4)
 	_add("Bloodroot",           "forageable", true,  0.5, "Deep red root.",                   8)
 	_add("Gloomcap",            "forageable", true,  0.5, "A dark mushroom.",                 10)
-
+	_add("Deathbloom",       "forageable", true, 0.1, "A flower that blooms in death.",     25)
+	_add("Nightshade",       "forageable", true, 0.1, "Poisonous. Handle with care.",       20)
+	_add("Voidleaf",         "forageable", true, 0.1, "Withered and dark.",                 30)
 	# ── ORES ─────────────────────────────────────────────
 	_add("Copper Ore",          "ore",        true,  1.5, "Common metal ore.",                8)
 	_add("Iron Ore",            "ore",        true,  1.8, "Heavy and valuable.",              15)
@@ -111,6 +130,10 @@ func _register() -> void:
 	_add("Strong Heal Potion",  "potion",     true,  3.4, "Restores 50 HP.",                  35)
 	#_add("Herbal Elixir",       "potion",     true,  3.8, "Restores 60 HP.",                  45)
 	_add("Twilight Potion",     "potion",     true,  5.0, "Restores 70 HP.",                  55)
+	_add("Death Brew",         "potion", true, 3.0, "Restores 70 HP.",  50)
+	_add("Shadow Tonic",       "potion", true, 3.2, "Restores 90 HP.",  65)
+	_add("Nightshade Elixir",  "potion", true, 3.5, "Restores 110 HP.", 85)
+	
 	_add("Minor Battle Potion", "potion",     true, 2.3, "Attracts monsters for 3 events.",   25)
 	_add("Battle Potion",       "potion",     true, 2.3, "Attracts monsters for 6 events.",   45)
 	_add("Great Battle Potion", "potion",     true, 2.3, "Attracts monsters for 10 events.",  80)
@@ -118,6 +141,7 @@ func _register() -> void:
 	_add("Minor Foraging Potion", "potion", true, 2.3, "Increases forageable encounters for 3 events.",  20)
 	_add("Foraging Potion",       "potion", true, 2.3, "Increases forageable encounters for 6 events.",  35)
 	_add("Great Foraging Potion", "potion", true, 2.3, "Increases forageable encounters for 10 events.", 60)
+
 func _add(itemName: String, itemType: String, stackable: bool, weight: float, description: String, value: int) -> void:
 	var item = ItemData.new()
 	item.itemName = itemName

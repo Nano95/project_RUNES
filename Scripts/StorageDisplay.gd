@@ -4,10 +4,13 @@ class_name StorageDisplay
 @export var backpackFlow: HFlowContainer
 @export var backpackTitleCap: Label
 @export var backpackWeightLabel: Label
+@export var quickDeposit: Button
+@export var depositAll: Button
 @export var chestFlow: HFlowContainer
 @export var chestCapacityLabel: Label
 @export var chestNameLabel: Label
 @export var chestGrid: HBoxContainer
+
 @export var upgradeLabel: Label
 @export var upgradeDetails: RichTextLabel
 @export var buildButton: Button
@@ -29,6 +32,16 @@ func _ready() -> void:
 	GameEvents.chestChanged.connect(refresh)
 	GameEvents.chestUnlocked.connect(onChestUnlocked)
 	GameEvents.chestUpgraded.connect(onChestUpgraded)
+	quickDeposit.pressed.connect(func():
+		Utils.animateButtonPress(quickDeposit)
+		chestSystem.quickDeposit(selectedChestId)
+		call_deferred("refresh")
+	)
+	depositAll.pressed.connect(func():
+		Utils.animateButtonPress(depositAll)
+		chestSystem.depositAll(selectedChestId)
+		call_deferred("refresh")
+	)
 
 	longPressTimer = Timer.new()
 	longPressTimer.one_shot = true
@@ -53,10 +66,16 @@ func open() -> void:
 	refresh()
 	Utils.animate_modal_entry(self)
 
+var isRefreshing: bool = false
 func refresh() -> void:
+	print("Attempting refresh", Time.get_unix_time_from_system())
+	if isRefreshing:
+		return
+	isRefreshing = true
 	refreshBackpack()
 	refreshChest()
 	refreshUpgradePanel()
+	isRefreshing = false
 
 # ── BACKPACK ─────────────────────────────────────────────
 func refreshBackpack() -> void:
@@ -83,10 +102,12 @@ func refreshBackpack() -> void:
 
 # ── CHEST ────────────────────────────────────────────────
 func refreshChest() -> void:
+	print("children clean up")
 	for child in chestFlow.get_children():
 		child.queue_free()
 
 	var chest = chestSystem.getChest(selectedChestId)
+	print("Made it here")
 	if not chest or not chest.unlocked:
 		chestNameLabel.text = "Chest %d (Locked)" % selectedChestId
 		chestCapacityLabel.text = ""
@@ -155,6 +176,7 @@ func _buildChestGrid() -> void:
 		chestGrid.add_child(btn)
 
 func onChestSelected(chestId: int) -> void:
+	print("chest Button pressed")
 	var chest = chestSystem.getChest(chestId)
 	if not chest:
 		return
@@ -164,6 +186,7 @@ func onChestSelected(chestId: int) -> void:
 		_buildChestGrid()
 		return
 	selectedChestId = chestId
+	print("Selected: ", selectedChestId)
 	refresh()
 
 func onChestUnlocked(_chestId: int) -> void:
@@ -188,7 +211,7 @@ func _makeItemButton(entry: Dictionary, source: String) -> Button:
 	else:
 		btn.text = " " + entry["name"] + " "
 	btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	var newColor = _getColorForType(entry["type"])
+	var newColor = getColorForType(entry["type"])
 	btn.add_theme_color_override("font_color", newColor)
 	btn.add_theme_font_size_override("font_size", 22)
 	btn.custom_minimum_size = Vector2(150,50)
@@ -241,11 +264,11 @@ func _getStacked(items: Array) -> Array[Dictionary]:
 		})
 	return result
 
-func _getColorForType(itemType: String) -> Color:
+func getColorForType(itemType: String) -> Color:
 	match itemType:
 		"equipment":  return Color("#e74c3c")
-		"part":       return Color("#888888")
+		"part":       return Color("82b6bfff")
 		"forageable": return Color("#27ae60")
-		"ore":        return Color("#aaaaaa")
+		"ore":        return Color("a5997eff")
 		"potion":     return Color("#8e44ad")
 		_:            return Color("#cccccc")

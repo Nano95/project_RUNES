@@ -22,8 +22,13 @@ const FORAGE_TABLES: Dictionary = {
 		{ "max": 70,  "drops": [{"name": "Bloodroot", "weight": 50}, {"name": "Gloomcap", "weight": 50}] },
 		{ "max": 9999,"drops": [{"name": "Bloodroot", "weight": 20}, {"name": "Gloomcap", "weight": 80}] },
 	],
+	"Forsaken Keep": [
+	{ "max": 20,   "drops": [{"name": "Bloodroot", "weight": 50}, {"name": "Gloomcap", "weight": 30}, {"name": "Deathbloom", "weight": 20}] },
+	{ "max": 40,   "drops": [{"name": "Gloomcap", "weight": 20}, {"name": "Deathbloom", "weight": 50}, {"name": "Nightshade", "weight": 30}] },
+	{ "max": 70,   "drops": [{"name": "Deathbloom", "weight": 25}, {"name": "Nightshade", "weight": 50}, {"name": "Voidleaf", "weight": 25}] },
+	{ "max": 9999, "drops": [{"name": "Deathbloom", "weight": 33}, {"name": "Nightshade", "weight": 33}, {"name": "Voidleaf", "weight": 34}] },
+],
 }
-const POISONOUS_CHANCE: float = 0.1
 
 var foragingPotionEventsLeft: int = 0
 var main:MainNode
@@ -49,9 +54,14 @@ func startWoodGather() -> void:
 
 func startForage() -> void:
 	var item = rollForageable()
-	if (item == ""):
+	if item == "":
 		return
-	if (randf() < POISONOUS_CHANCE):
+	
+	var poisonChance = 0.15  # default
+	if (item == "Nightshade"):
+		poisonChance = 0.20
+	
+	if randf() < poisonChance:
 		var dmg = randi_range(3, 8)
 		main.game_data.hp = max(1, main.game_data.hp - dmg)
 		main.save_game()

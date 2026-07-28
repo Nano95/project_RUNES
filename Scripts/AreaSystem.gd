@@ -54,6 +54,11 @@ func onAreaEntered(areaName: String) -> void:
 			Vector3(0.10, 0.12, 0.11),   # dark slate grey-green
 			Vector3(0.16, 0.20, 0.15)    # muted pine
 		)
+	elif (areaName == "Forsaken Castle"):
+		main.set_background_colors(
+			Vector3(0.20, 0.16, 0.16),   # charcoal with warmth
+			Vector3(0.58, 0.30, 0.30)    # soft pastel crimson
+		)
 	else:
 		# Default
 		main.set_background_colors(Vector3(.297, .211, .09), Vector3(.355, .285, .133))

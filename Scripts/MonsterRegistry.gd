@@ -135,7 +135,7 @@ func _ready() -> void:
 			],
 			"strong": [
 				_make("Dark Druid", "strong", 180, 45, 130, 50, 90, [
-					_drop("Cloth", 0.30),
+					_drop("Cloth", 0.10),
 				]),
 				_make("Lost Soul", "strong", 150, 50, 140, 45, 85, [
 					_drop("Dark Essence", 0.10),
@@ -148,6 +148,63 @@ func _ready() -> void:
 				_make("Banshee", "elite", 650, 70, 500, 200, 400, [
 					_drop("Dark Essence", 0.90),
 					_drop("Banshee Veil", 0.25),
+				]),
+			],
+		},
+
+		"Forsaken Keep": {
+			"weak": [
+				_make("Hollow Knight", "weak", 120, 28, 55, 20, 40, [
+					_drop("Bone Fragment", 0.2),
+					_drop("Hollow Shard",  0.15),
+				]),
+				_make("Gargoyle", "weak", 110, 25, 50, 18, 36, [
+					_drop("Stone Fragment", 0.2),
+					_drop("Gargoyle Wing",  0.05),
+				]),
+				_make("Lost Soul", "weak", 90, 22, 45, 15, 30, [
+					_drop("Dark Essence",  0.15),
+				]),
+			],
+			"medium": [
+				_make("Shadow Paladin", "medium", 200, 45, 100, 40, 75, [
+					_drop("Bone Fragment",  0.2),
+					_drop("Paladin Crest",  0.02),
+				]),
+				_make("Cursed Archer", "medium", 170, 40, 90, 35, 65, [
+					_drop("Bone Fragment",  0.2),
+					_drop("Beast Skin",    0.2),
+					_drop("Creature Fang",  0.10),
+				]),
+				_make("Wretched Priest", "medium", 180, 38, 95, 38, 70, [
+					_drop("Priest Relic",  0.5),
+					_drop("Dark Essence",  0.1),
+					_drop("Cloth",         0.2),
+				]),
+			],
+			"strong": [
+				_make("Knight Commander", "strong", 320, 65, 180, 80, 150, [
+					_drop("Commander Helm", 0.05),
+					_drop("Bone Fragment",  0.45),
+				]),
+				_make("Wraith", "strong", 280, 70, 190, 85, 160, [
+					_drop("Dark Essence",   0.25),
+					_drop("Bone Fragment",  0.10),
+				]),
+				_make("Chest Mimic", "strong", 350, 60, 200, 150, 400, [
+					_drop("Iron Legs",        0.20),
+					_drop("Reinforced Shield", 0.20),
+					_drop("Leather Armor",    0.20),
+					_drop("Golden Legs",      0.05),
+					_drop("Golden Armor",     0.05),
+					_drop("Crested Shield",   0.01),
+				]),
+			],
+			"elite": [
+				_make("The Forsaken King", "elite", 1200, 120, 900, 500, 900, [
+					_drop("Paladin Crest",  0.90),
+					_drop("Forsaken Seal",  0.65),
+					_drop("King's Crown",   0.05),
 				]),
 			],
 		},
