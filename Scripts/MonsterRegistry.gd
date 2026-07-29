@@ -74,31 +74,32 @@ func _ready() -> void:
 				]),
 				_make("Cyclops", "medium", 80, 22, 40, 15, 30, [
 					_drop("Cyclops Eye", 0.25),
+					_drop("Giant Club", 0.03),
 				]),
 				_make("Bandit", "medium", 60, 18, 35, 12, 25, [
 					_drop("Leather Armor", 0.10),
 					_drop("Iron Legs", 0.05),
+					_drop("Iron Helmet", 0.05)
 				]),
 			],
 			"strong": [
 				_make("Orc Shaman", "strong", 100, 28, 70, 25, 50, [
 					_drop("Orc Tooth", 0.45),
-					_drop("Shaman Staff", 0.10),
+					_drop("Shaman Staff", 0.08),
 				]),
 				_make("War Wolf", "strong", 90, 30, 65, 22, 45, [
 					_drop("Beast Skin", 0.35),
 					_drop("Giant Fang", 0.05),
 				]),
 				_make("Stone Troll", "strong", 120, 26, 75, 28, 55, [
-					_drop("Copper Ore", 0.90),
-					_drop("Iron Ore", 0.50),
-					_drop("Coal", 0.40),
-					_drop("Gold Ore", 0.20),
+					_drop("Iron Ore", 0.90),
+					_drop("Coal", 0.70),
+					_drop("Gold Ore", 0.40),
 				]),
 			],
 			"elite": [
 				_make("Bandit King", "elite", 450, 50, 350, 150, 280, [
-					_drop("War Hammer", 0.25),
+					_drop("War Hammer", 0.2),
 					_drop("Reinforced Boots", 0.10),
 				]),
 			],
@@ -120,6 +121,7 @@ func _ready() -> void:
 				_make("Bandit", "weak", 60, 18, 35, 12, 25, [
 					_drop("Leather Armor", 0.10),
 					_drop("Iron Legs", 0.05),
+					_drop("Iron Helmet", 0.05)
 				]),
 			],
 			"medium": [
@@ -148,6 +150,7 @@ func _ready() -> void:
 				_make("Banshee", "elite", 650, 70, 500, 200, 400, [
 					_drop("Dark Essence", 0.90),
 					_drop("Banshee Veil", 0.25),
+					_drop("Cursed Shield", .05)
 				]),
 			],
 		},

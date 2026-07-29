@@ -113,7 +113,8 @@ func _updateSlotButton(btn: Button, slot: String) -> void:
 	else:
 		var enh = equipped.get("enhancement", 0)
 		var enhStr = " +%d" % enh if enh > 0 else ""
-		btn.text = "%s%s" % [equipped["name"], enhStr]
+		var twoHandStr = " [2H]" if equipped.get("twoHanded", false) else ""
+		btn.text = "%s%s%s" % [equipped["name"], enhStr, twoHandStr]
 		btn.modulate = Color(1, 1, 1, 1.0)
 		btn.disabled = false
 
@@ -183,6 +184,8 @@ func updateCompare() -> void:
 
 	# Selected name
 	selectedNameLabel.text = "%s%s" % [selectedInstance.get("name", ""), enh]
+	if selectedInstance.get("twoHanded", false):
+		selectedNameLabel.text += " [2H]"
 
 	# Selected stat type and value
 	if statType != "none":

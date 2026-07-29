@@ -21,6 +21,7 @@ func _ready() -> void:
 		
 		_make("Copper Legs",  "Copper Legs",  {"Copper Bar": 4},             "forge"),
 		_make("Iron Legs",    "Iron Legs",    {"Iron Bar": 4},               "forge"),
+		_make("Iron Helmet",    "Iron Helmet",    {"Iron Bar": 3},               "forge"),
 		_make("Golden Legs",  "Golden Legs",  {"Gold Bar": 4, "Iron Bar": 1}, "forge"),
 		
 		_make("Golden Armor",  "Golden Armor",  {"Gold Bar": 3, "Iron Bar": 1},                 "forge"),

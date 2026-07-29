@@ -44,7 +44,7 @@ func _process(_delta: float) -> void:
 		set_process(false)
 
 func onOpen() -> void:
-	position.y = eventLogPanel.position.y
+	global_position.y = eventLogPanel.global_position.y
 	Utils.animate_modal_entry(self)
 	show()
 

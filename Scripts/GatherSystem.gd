@@ -1,7 +1,7 @@
 extends Node
 class_name GatherSystem
 
-const ORE_ITEMS = ["Copper Ore", "Iron Ore", "Coal", "Tin Ore"]
+const ORE_ITEMS = ["Copper Ore", "Iron Ore", "Coal"]
 const WOOD_ITEMS = ["Oak Log", "Pine Wood", "Dark Timber"]
 const FORAGE_TABLES: Dictionary = {
 	"Hunting Grounds": [
