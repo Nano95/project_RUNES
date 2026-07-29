@@ -32,6 +32,7 @@ func equipItem(instance: Dictionary) -> void:
 			GameEvents.eventLogged.emit(
 				"Can't equip a shield with a two-handed weapon.", "system", false
 			)
+			GameEvents.cannotEquipError.emit("twoHandedError")
 			return
 
 	# Unequip current item in slot first

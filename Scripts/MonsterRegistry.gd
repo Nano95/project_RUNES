@@ -143,7 +143,7 @@ func _ready() -> void:
 					_drop("Dark Essence", 0.10),
 				]),
 				_make("Weeping Willow", "strong", 200, 42, 135, 48, 88, [
-					_drop("Bark Shield", 0.05),
+					_drop("Weeping Bark Shield", 0.05),
 				]),
 			],
 			"elite": [

@@ -33,6 +33,7 @@ func _ready() -> void:
 	main = Utils.get_main()
 	GameEvents.equipmentChanged.connect(refresh)
 	GameEvents.backpackChanged.connect(refreshBackpack)
+	GameEvents.cannotEquipError.connect(onHandleErrors)
 
 	helmetButton.pressed.connect(func():
 		onSlotPressed("helmet")
@@ -261,3 +262,13 @@ func formatEffect(instance: Dictionary) -> String:
 		"lifesteal":       return "Steals %d%% of damage as HP" % instance.get("effectValue", 0)
 		"stun":            return "Chance to stun enemy"
 	return ""
+
+func onHandleErrors(errorString:String) -> void:
+	match errorString:
+		"twoHandedError":
+			Utils.spawnFloatingLabel(
+			"2-Handed weapon!",
+			Color("#c0392b"),
+			equipButton,
+			true
+		)

@@ -46,6 +46,8 @@ signal chestChanged
 signal backpackChanged
 @warning_ignore("unused_signal")
 signal equipmentChanged
+@warning_ignore("unused_signal")
+signal cannotEquipError(error: String)
 
 @warning_ignore("unused_signal")
 signal hpChanged
