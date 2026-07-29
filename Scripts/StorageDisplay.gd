@@ -253,15 +253,30 @@ func _getStacked(items: Array) -> Array[Dictionary]:
 		var itemName = stack.get("name", "")
 		var item = ItemRegistry.getItem(itemName)
 		if not item:
-			# Skip unknown items gracefully
 			push_warning("Unknown item in chest: %s" % itemName)
 			continue
-		result.append({
-			"name": itemName,
-			"qty": stack.get("qty", 1),
-			"type": item.itemType,
-			"cap": ItemRegistry.getStackCap(itemName)
-		})
+
+		if stack.get("isEquipment", false):
+			# Equipment — show as individual instance with full data
+			result.append({
+				"name": itemName,
+				"qty": 1,
+				"type": "equipment",
+				"cap": 1,
+				"isEquipment": true,
+				"instanceId": stack.get("instanceId", ""),
+				"statBonus": stack.get("statBonus", 0),
+				"enhancement": stack.get("enhancement", 0),
+				"statType": stack.get("statType", "none"),
+				"twoHanded": stack.get("twoHanded", false)
+			})
+		else:
+			result.append({
+				"name": itemName,
+				"qty": stack.get("qty", 1),
+				"type": item.itemType,
+				"cap": ItemRegistry.getStackCap(itemName)
+			})
 	return result
 
 func getColorForType(itemType: String) -> Color:

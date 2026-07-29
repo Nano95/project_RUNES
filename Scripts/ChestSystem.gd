@@ -163,43 +163,56 @@ func consumeFromChests(itemName: String, qty: int) -> void:
 
 # ── ITEM MOVEMENT ─────────────────────────────────────────
 func moveToChest(itemName: String, chestId: int, moveAll: bool = false, specificQty: int = 0) -> void:
-
 	var chest = getChest(chestId)
 	if not chest or not chest.unlocked:
 		return
 
-	var qty = 0
+	var qty = 1
 	if moveAll:
 		qty = inventorySystem.countInBackpack(itemName)
 	elif specificQty > 0:
 		qty = specificQty
-	else:
-		qty = 1
 
 	var stackCap = ItemRegistry.getStackCap(itemName)
 
 	for i in range(qty):
-		if not inventorySystem.removeFromBackpack(itemName, 1):
+		if chest.items.size() >= getCapacity(chest):
+			GameEvents.eventLogged.emit("Chest %d is full!" % chestId, "system", false)
 			break
 
-		# Try to add to an existing incomplete stack first
-		var added = false
-		for stack in chest.items:
-			if stack["name"] == itemName and stack["qty"] < stackCap:
-				stack["qty"] += 1
-				added = true
+		# Find the actual stack/instance in backpack
+		var backpackStack = null
+		var backpackIdx = -1
+		for j in main.game_data.backpack.size():
+			if main.game_data.backpack[j].get("name") == itemName:
+				backpackStack = main.game_data.backpack[j]
+				backpackIdx = j
 				break
 
-		# Only need a new slot if no existing stack had room
-		if not added:
-			if _chestItemCount(chest) >= getCapacity(chest):
-				# No room for a new slot — put item back in backpack
-				inventorySystem.addToBackpack(itemName, 1)
-				GameEvents.eventLogged.emit(
-					"Chest %d is full!" % chestId, "system", false
-				)
-				break
-			chest.items.append({ "name": itemName, "qty": 1 })
+		if backpackStack == null or backpackIdx == -1:
+			break
+
+		# Remove from backpack
+		main.game_data.backpack.remove_at(backpackIdx)
+		var item = ItemRegistry.getItem(itemName)
+		if item:
+			main.game_data.currentWeight = max(
+				0.0, main.game_data.currentWeight - item.weight
+			)
+
+		# If equipment — store full instance
+		if backpackStack.get("isEquipment", false):
+			chest.items.append(backpackStack)
+		else:
+			# Regular stackable — try to merge into existing stack
+			var added = false
+			for chestStack in chest.items:
+				if chestStack["name"] == itemName and chestStack.get("qty", 0) < stackCap:
+					chestStack["qty"] += 1
+					added = true
+					break
+			if not added:
+				chest.items.append({"name": itemName, "qty": 1})
 
 	main.save_game()
 	GameEvents.backpackChanged.emit()
@@ -210,37 +223,50 @@ func moveToBackpack(itemName: String, chestId: int, moveAll: bool = false,  spec
 	if not chest:
 		return
 
-	var qty = 0
+	var qty = 1
 	if moveAll:
 		qty = _countInChest(chest, itemName)
 	elif specificQty > 0:
 		qty = specificQty
-	else:
-		qty = 1
 
 	for i in range(qty):
 		var item = ItemRegistry.getItem(itemName)
-		if (item):
+		if item:
 			if main.game_data.currentWeight + item.weight > main.game_data.maxWeight:
 				GameEvents.eventLogged.emit("Backpack too heavy!", "system", false)
 				break
-		# Remove from chest
-		var removed = false
-		var j = chest.items.size() - 1
-		while j >= 0:
-			if chest.items[j]["name"] == itemName:
-				chest.items[j]["qty"] -= 1
-				if chest.items[j]["qty"] <= 0:
-					chest.items.remove_at(j)
-				removed = true
+
+		# Find the stack/instance in chest
+		var chestStack = null
+		var chestIdx = -1
+		for j in chest.items.size():
+			if chest.items[j].get("name") == itemName:
+				chestStack = chest.items[j]
+				chestIdx = j
 				break
-			j -= 1
-		if not removed:
+
+		if chestStack == null or chestIdx == -1:
 			break
-		inventorySystem.addToBackpack(itemName, 1)
+
+		# If equipment — move full instance back to backpack
+		if chestStack.get("isEquipment", false):
+			chest.items.remove_at(chestIdx)
+			main.game_data.backpack.append(chestStack)
+			if item:
+				main.game_data.currentWeight += item.weight
+		else:
+			# Regular stackable
+			chestStack["qty"] -= 1
+			if chestStack["qty"] <= 0:
+				chest.items.remove_at(chestIdx)
+			main.game_data.backpack.append({"name": itemName, "qty": 1})
+			if item:
+				main.game_data.currentWeight += item.weight
 
 	main.save_game()
+	GameEvents.backpackChanged.emit()
 	GameEvents.chestChanged.emit()
+	GameEvents.weightChanged.emit()
 
 func _countInChest(chest: ChestData, itemName: String) -> int:
 	var count = 0

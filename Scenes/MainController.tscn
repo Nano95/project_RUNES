@@ -118,6 +118,42 @@ shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e5jyx"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ncs3"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f452a"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ocb2w"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbijh"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3fjy6"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8whxx"]
 resource_local_to_scene = true
 shader = ExtResource("7_108yi")
@@ -1002,24 +1038,33 @@ size_flags_vertical = 1
 value = 72.0
 show_percentage = false
 
-[node name="ItemActionContainer" type="ColorRect" parent="UIController" unique_id=1469258999 node_paths=PackedStringArray("itemNameLabel", "equipButton", "dropButton", "dropAllButton", "cancelButton", "inventorySystem")]
-visible = false
+[node name="ItemActionContainer" type="ColorRect" parent="UIController" unique_id=1469258999 node_paths=PackedStringArray("itemNameLabel", "itemDescLabel", "equipButton", "dropButton", "dropAllButton", "cancelButton", "eventLogPanel", "compareContainer", "selectedEquipType", "selectedEquipTypeValue", "equippedName", "equippedNameStatValue", "compareStats", "inventorySystem", "equipmentSystem")]
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 493.0
-offset_bottom = -228.0
+anchor_bottom = 0.5
+offset_top = -375.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("10_ftth8")
 itemNameLabel = NodePath("ItemActionModal/TitlePanel/Name")
+itemDescLabel = NodePath("ItemActionModal/Description")
 equipButton = NodePath("ItemActionModal/HBoxContainer/Equip")
 dropButton = NodePath("ItemActionModal/HBoxContainer/Drop")
 dropAllButton = NodePath("ItemActionModal/HBoxContainer/DropAll")
 cancelButton = NodePath("ItemActionModal/HBoxContainer/Close")
+eventLogPanel = NodePath("../MarginContainer/VBoxContainer/EventLogPanel")
+compareContainer = NodePath("ItemActionModal/EquipmentContainer")
+selectedEquipType = NodePath("ItemActionModal/EquipmentContainer/HBoxContainer/SelectedType")
+selectedEquipTypeValue = NodePath("ItemActionModal/EquipmentContainer/HBoxContainer/value")
+equippedName = NodePath("ItemActionModal/EquipmentContainer/HBoxContainer2/EquippedName")
+equippedNameStatValue = NodePath("ItemActionModal/EquipmentContainer/HBoxContainer2/value")
+compareStats = NodePath("ItemActionModal/EquipmentContainer/Difference/stat")
 inventorySystem = NodePath("../../InventorySystem")
+equipmentSystem = NodePath("../../EquipmentSystem")
 
 [node name="ItemActionModal" type="Panel" parent="UIController/ItemActionContainer" unique_id=981802715]
 layout_mode = 1
@@ -1029,9 +1074,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -345.0
-offset_top = -257.5
+offset_top = -180.375
 offset_right = 345.0
-offset_bottom = 253.5
+offset_bottom = 180.375
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_stretch_ratio = 0.0
@@ -1057,6 +1102,113 @@ theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 80
 text = "Item Name"
 vertical_alignment = 1
+
+[node name="Description" parent="UIController/ItemActionContainer/ItemActionModal" unique_id=2061807450 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_e5jyx")
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -112.499985
+offset_right = 1603.3333
+offset_bottom = 367.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 80
+text = "This is a description"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EquipmentContainer" type="VBoxContainer" parent="UIController/ItemActionContainer/ItemActionModal" unique_id=673012667]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 77.875
+offset_right = -11.0
+offset_bottom = -136.875
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIController/ItemActionContainer/ItemActionModal/EquipmentContainer" unique_id=159702091]
+layout_mode = 2
+
+[node name="SelectedType" parent="UIController/ItemActionContainer/ItemActionModal/EquipmentContainer/HBoxContainer" unique_id=1666232021 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+material = SubResource("ShaderMaterial_2ncs3")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "Helmet"
+vertical_alignment = 1
+
+[node name="value" parent="UIController/ItemActionContainer/ItemActionModal/EquipmentContainer/HBoxContainer" unique_id=826812178 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+material = SubResource("ShaderMaterial_f452a")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "+2"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UIController/ItemActionContainer/ItemActionModal/EquipmentContainer" unique_id=1273002168]
+layout_mode = 2
+
+[node name="EquippedName" parent="UIController/ItemActionContainer/ItemActionModal/EquipmentContainer/HBoxContainer2" unique_id=1439069798 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+material = SubResource("ShaderMaterial_ocb2w")
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "Equipped: Orcish Axe +1"
+vertical_alignment = 1
+
+[node name="value" parent="UIController/ItemActionContainer/ItemActionModal/EquipmentContainer/HBoxContainer2" unique_id=1756391922 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+material = SubResource("ShaderMaterial_pbijh")
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "+2"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Difference" type="HBoxContainer" parent="UIController/ItemActionContainer/ItemActionModal/EquipmentContainer" unique_id=1759220934]
+layout_mode = 2
+
+[node name="Difference" parent="UIController/ItemActionContainer/ItemActionModal/EquipmentContainer/Difference" unique_id=40562325 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+material = SubResource("ShaderMaterial_3fjy6")
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "Difference"
+vertical_alignment = 1
+
+[node name="stat" type="RichTextLabel" parent="UIController/ItemActionContainer/ItemActionModal/EquipmentContainer/Difference" unique_id=1943939392]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("3_dajxx")
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "[right]^ -30 ATK[/right]"
+scroll_following = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UIController/ItemActionContainer/ItemActionModal" unique_id=1470706122]
 layout_mode = 1
