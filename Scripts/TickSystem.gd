@@ -10,19 +10,10 @@ var checkpointPendingAfterCombat: bool = false
 
 var gatheringItem: String = ""
 var gatheringTicksLeft: int = 0
-
-const EVENT_WEIGHTS = {
-	"nothing_a": 8,
-	"nothing_b": 20,
-	"monster":   24,
-	"ore":       12,
-	"forage":    10,
-	"wood":      8,
-	"potion":    5,
-	"dungeon":   4,
-	"trap":      4,
-	"nothing_c": 5,
-}
+var goldPotionChance: float = .09
+var currentArea: String = ""
+var eventWeights: Array[Dictionary]
+var eventWeightsTotal: int = 0
 
 func _ready() -> void:
 	main = Utils.get_main()
@@ -31,6 +22,7 @@ func _ready() -> void:
 	GameEvents.combatWon.connect(onCombatResolved)
 	GameEvents.combatFled.connect(onCombatResolved)
 	GameEvents.playerDied.connect(onPlayerDied)
+	GameEvents.areaEntered.connect(onAreaEntered)
 	GameEvents.areaExited.connect(onAreaExited)
 	GameEvents.gatherStarted.connect(onGatherStarted)
 
@@ -104,7 +96,10 @@ func onPlayerDied() -> void:
 	gatheringItem = ""
 	gatheringTicksLeft = 0
 	combatSystem.pendingStrongMonsterIn = 0
-	
+
+func onAreaEntered(area:String) -> void:
+	currentArea = area
+	buildEventTable()
 
 func onAreaExited() -> void:
 	gatheringItem = ""
@@ -139,10 +134,22 @@ func triggerCheckpoint() -> void:
 	GameEvents.checkpointReached.emit()
 
 func onCheckpointContinued() -> void:
+	buildEventTable()
 	checkpointPending = false
 
+func rollWeightedEvent() -> String:
+	if eventWeights.is_empty():
+		buildEventTable()
+
+	var roll = randi() % eventWeightsTotal # Calculated inside of builtEventTable once every checkpoint
+	var cumulative = 0
+	for entry in eventWeights:
+		cumulative += entry["weight"]
+		if roll < cumulative:
+			return entry["event"]
+	return "nothing_c"
+
 func _roll_event() -> void:
-	var roll = randf()
 	# Battle potion active — 90% monster chance
 	if combatSystem.isBattlePotionActive():
 		if randf() < 0.90:
@@ -160,47 +167,45 @@ func _roll_event() -> void:
 		gatherSystem.decrementForagingPotion()
 		return
 	
-	if roll < 0.33:
-		GameEvents.eventLogged.emit("All is quiet. Nothing stirs.", "system", true)
-		return
+	match rollWeightedEvent():
+		"nothing_a":
+			GameEvents.eventLogged.emit("...", "system", true)
+		"nothing_b", "nothing_c":
+			GameEvents.eventLogged.emit("All is quiet. Nothing stirs.", "system", true)
+		"monster":
+			combatSystem.trySpawnMonster(main.game_data.eventCount)
+		"ore":
+			gatherSystem.startOreGather()
+		"forage":
+			gatherSystem.startForage()
+		"wood":
+			gatherSystem.startWoodGather()
+		"potion_gold":
+			if randf() < 0.70:
+				GameEvents.eventLogged.emit("You find a health potion tucked under a rock.", "loot", true)
+				GameEvents.itemDropped.emit("Health Potion")
+			else:
+				var gold = getAreaGoldFind()
+				main.game_data.gold += gold
+				main.save_game()
+				GameEvents.eventLogged.emit("You find a pouch of gold! +%d gold." % gold, "loot", true)
+				GameEvents.hpChanged.emit()
+		"dungeon":
+			GameEvents.eventLogged.emit("You discover a dungeon entrance.", "discover", true)
+		"trap":
+			triggerTrap()
+		_:
+			GameEvents.eventLogged.emit("A cold wind passes through.", "system", true)
 
-	if roll < 0.53:
-		combatSystem.trySpawnMonster(main.game_data.eventCount)
-		return
-
-	if roll < 0.62:
-		gatherSystem.startOreGather()
-		return
-
-	if roll < 0.76:
-		gatherSystem.startForage()
-		return
-
-	if roll < 0.80:
-		gatherSystem.startWoodGather()
-		return
-
-	if (roll < 0.87):
-		if (randf() < 0.70):
-			GameEvents.eventLogged.emit("You find a health potion tucked under a rock.", "loot", true)
-			GameEvents.itemDropped.emit("Health Potion")
-		else:
-			var gold = getAreaGoldFind()
-			main.game_data.gold += gold
-			main.save_game()
-			GameEvents.eventLogged.emit("You find a pouch of gold! +%d gold." % gold, "loot", true)
-			GameEvents.hpChanged.emit()
-		return
-
-	if roll < 0.91:
-		GameEvents.eventLogged.emit("You discover a dungeon entrance.", "discover", true)
-		return
-
-	if roll < 0.95:
-		triggerTrap()
-		return
-
-	GameEvents.eventLogged.emit("A cold wind passes through.", "system", true)
+func getPotionGoldChance() -> int:
+	var eventCount = main.game_data.eventCount
+	if eventCount <= 30:
+		return 9
+	elif eventCount <= 60:
+		return 6
+	elif eventCount <= 100:
+		return 3
+	return 1
 
 func getAreaGoldFind() -> int:
 	match main.game_data.currentArea:
@@ -209,6 +214,8 @@ func getAreaGoldFind() -> int:
 		"Darkwood Forest":  return randi_range(130, 180)
 		"Forsaken Keep": return randi_range(170, 280) # gold find
 		_:                 return randi_range(130, 180)
+
+
 
 func triggerTrap() -> void:
 	var traps = [
@@ -256,3 +263,90 @@ func getAreaTrapDamage(area: String) -> int:
 		"Ashfield Ruins":   return randi_range(15, 30)
 		"The Abyssal Depths": return randi_range(25, 45)
 		_:                  return randi_range(2, 8)
+
+func buildEventTable() -> void:
+	goldPotionChance = getPotionGoldChance()
+	
+	match currentArea:
+		"Hunting Grounds":
+			eventWeights = [
+				{ "event": "nothing_a",   "weight": 8  },
+				{ "event": "nothing_b",   "weight": 20 },
+				{ "event": "monster",     "weight": 24 },
+				{ "event": "ore",         "weight": 8 },
+				{ "event": "forage",      "weight": 10 },
+				{ "event": "wood",        "weight": 5  },
+				{ "event": "potion_gold", "weight": goldPotionChance },
+				{ "event": "dungeon",     "weight": 4  },
+				{ "event": "trap",        "weight": 8  },
+				{ "event": "nothing_c",   "weight": 15 },
+			]
+		"Outskirts":
+			eventWeights = [
+				{ "event": "nothing_a",   "weight": 8  },
+				{ "event": "nothing_b",   "weight": 18 },
+				{ "event": "monster",     "weight": 28 },
+				{ "event": "ore",         "weight": 12 },
+				{ "event": "forage",      "weight": 8  },
+				{ "event": "wood",        "weight": 6  },
+				{ "event": "potion_gold", "weight": goldPotionChance },
+				{ "event": "dungeon",     "weight": 4  },
+				{ "event": "trap",        "weight": 6  },
+				{ "event": "nothing_c",   "weight": 10 },
+			]
+		"Darkwood Forest":
+			eventWeights = [
+				{ "event": "nothing_a",   "weight": 10 },
+				{ "event": "nothing_b",   "weight": 18 },
+				{ "event": "monster",     "weight": 28 },
+				{ "event": "ore",         "weight": 6  },
+				{ "event": "forage",      "weight": 14 }, # more foraging in forest
+				{ "event": "wood",        "weight": 10 }, # more wood in forest
+				{ "event": "potion_gold", "weight": goldPotionChance },
+				{ "event": "dungeon",     "weight": 4  },
+				{ "event": "trap",        "weight": 8  },
+				{ "event": "nothing_c",   "weight": 12 },
+			]
+		"Forsaken Keep":
+			eventWeights = [
+				{ "event": "nothing_a",   "weight": 10 },
+				{ "event": "nothing_b",   "weight": 13 },
+				{ "event": "monster",     "weight": 33 }, # heavily monster focused
+				{ "event": "ore",         "weight": 0  }, # no mining in a castle
+				{ "event": "forage",      "weight": 6  }, # barely any foraging
+				{ "event": "wood",        "weight": 0  }, # no forestry
+				{ "event": "potion_gold", "weight": goldPotionChance },
+				{ "event": "dungeon",     "weight": 4  },
+				{ "event": "trap",        "weight": 16 }, # lots of traps
+				{ "event": "nothing_c",   "weight": 20 }, # eerie silence
+			]
+		"Ashfield Ruins":
+			eventWeights = [
+				{ "event": "nothing_a",   "weight": 10 },
+				{ "event": "nothing_b",   "weight": 15 },
+				{ "event": "monster",     "weight": 35 },
+				{ "event": "ore",         "weight": 8  }, # some ancient ore
+				{ "event": "forage",      "weight": 5  },
+				{ "event": "wood",        "weight": 2  }, # barely any wood
+				{ "event": "potion_gold", "weight": goldPotionChance },
+				{ "event": "dungeon",     "weight": 4  },
+				{ "event": "trap",        "weight": 10 },
+				{ "event": "nothing_c",   "weight": 15 },
+			]
+		_: # default fallback
+			eventWeights = [
+				{ "event": "nothing_a",   "weight": 8  },
+				{ "event": "nothing_b",   "weight": 20 },
+				{ "event": "monster",     "weight": 24 },
+				{ "event": "ore",         "weight": 12 },
+				{ "event": "forage",      "weight": 10 },
+				{ "event": "wood",        "weight": 8  },
+				{ "event": "potion_gold", "weight": goldPotionChance },
+				{ "event": "dungeon",     "weight": 4  },
+				{ "event": "trap",        "weight": 4  },
+				{ "event": "nothing_c",   "weight": 10 },
+			]
+	# Cache total
+	eventWeightsTotal = 0
+	for entry in eventWeights:
+		eventWeightsTotal += entry["weight"]
