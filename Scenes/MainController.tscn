@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://buhguegqkcr4k" path="res://Scripts/GatherSystem.gd" id="14_6iwwj"]
 [ext_resource type="Script" uid="uid://dnx5jud3bj3h2" path="res://Scripts/MerchantDisplay.gd" id="16_cssra"]
 [ext_resource type="Script" uid="uid://dweasp2efehkt" path="res://Scripts/EquipmentModal.gd" id="16_ds30n"]
+[ext_resource type="Script" uid="uid://dwxg2qpvawunx" path="res://Scripts/DebugDisplay.gd" id="16_px8ax"]
 [ext_resource type="Theme" uid="uid://3dmu3g4p1u1e" path="res://Resources/Themes/MainTheme.tres" id="17_g72ry"]
 [ext_resource type="Script" uid="uid://cgaotmic06nj0" path="res://Scripts/BlacksmithDisplay.gd" id="17_shy7a"]
 [ext_resource type="Script" uid="uid://drl0whro730mg" path="res://Scripts/CheckpointOverlay.gd" id="18_cssra"]
@@ -226,6 +227,12 @@ shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_giqqg"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7urtk"]
 resource_local_to_scene = true
 shader = ExtResource("7_108yi")
@@ -406,7 +413,7 @@ script = ExtResource("1_3dcjo")
 tickTimer = NodePath("TickTimer")
 eventLog = NodePath("UIController/MarginContainer/VBoxContainer/EventLogPanel/EventLog")
 
-[node name="UIController" type="Control" parent="." unique_id=1458651066 node_paths=PackedStringArray("mainActionRow", "areaSelectRow", "chooseAreaButton", "brewButton", "storageButton", "armoryButton", "merchantButton", "blacksmithButton", "areaButtons", "inventorySystem", "storageDisplay", "alchemyDisplay", "equipmentDisplay", "merchantDisplay", "blacksmithDisplay", "checkPointDisplay", "areaSystem", "adventuringRow", "inventoryPanel")]
+[node name="UIController" type="Control" parent="." unique_id=1458651066 node_paths=PackedStringArray("mainActionRow", "areaSelectRow", "chooseAreaButton", "brewButton", "storageButton", "armoryButton", "merchantButton", "blacksmithButton", "debugButton", "areaButtons", "inventorySystem", "storageDisplay", "alchemyDisplay", "equipmentDisplay", "merchantDisplay", "blacksmithDisplay", "checkPointDisplay", "debugDisplay", "areaSystem", "adventuringRow", "inventoryPanel")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -422,6 +429,7 @@ storageButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/MainAction
 armoryButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/MainActionRow/ArmoryBtn")
 merchantButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/MainActionRow/MerchantBtn")
 blacksmithButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/MainActionRow/BlacksmithBtn")
+debugButton = NodePath("MarginContainer/VBoxContainer/TopRow/StatsLayout/Panel/DebugBtn")
 areaButtons = [NodePath("MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow/area1"), NodePath("MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow/area2"), NodePath("MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow/area3"), NodePath("MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow/area4")]
 inventorySystem = NodePath("../InventorySystem")
 storageDisplay = NodePath("StorageModal")
@@ -430,6 +438,7 @@ equipmentDisplay = NodePath("EquipmentModal")
 merchantDisplay = NodePath("MerchantContainer")
 blacksmithDisplay = NodePath("BlacksmithContainer")
 checkPointDisplay = NodePath("CheckpointOverlay")
+debugDisplay = NodePath("DebugContainer")
 areaSystem = NodePath("../AreaSystem")
 adventuringRow = NodePath("MarginContainer/VBoxContainer/AdventuringRow")
 inventoryPanel = NodePath("MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay")
@@ -514,6 +523,20 @@ theme_override_font_sizes/font_size = 70
 text = "Event #1"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="DebugBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Panel" unique_id=1852979609]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 0
+offset_top = -31.0
+offset_right = 227.0
+offset_bottom = 49.0
+size_flags_horizontal = 3
+theme = ExtResource("17_g72ry")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Debug"
 
 [node name="Stats" type="HBoxContainer" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout" unique_id=548009463]
 layout_mode = 2
@@ -2077,6 +2100,93 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
 theme = ExtResource("17_g72ry")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Close"
+
+[node name="DebugContainer" type="ColorRect" parent="UIController" unique_id=1839322693 node_paths=PackedStringArray("debugText", "closeButton")]
+material = SubResource("ShaderMaterial_ds30n")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_px8ax")
+debugText = NodePath("MainPanel/fileText")
+closeButton = NodePath("MainPanel/ClosePanel")
+
+[node name="MainPanel" type="Panel" parent="UIController/DebugContainer" unique_id=1990606856]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.0
+offset_top = -602.0
+offset_right = 345.0
+offset_bottom = 602.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("17_g72ry")
+
+[node name="TitlePanel" type="Panel" parent="UIController/DebugContainer/MainPanel" unique_id=1101965419]
+layout_mode = 0
+offset_right = 690.0
+offset_bottom = 45.0
+theme = ExtResource("17_g72ry")
+
+[node name="Name" parent="UIController/DebugContainer/MainPanel/TitlePanel" unique_id=1900814077 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+material = SubResource("ShaderMaterial_giqqg")
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 9.0
+offset_right = 1043.0
+offset_bottom = 140.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 80
+text = "Debug"
+vertical_alignment = 1
+
+[node name="fileText" type="RichTextLabel" parent="UIController/DebugContainer/MainPanel" unique_id=1060180217]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+custom_minimum_size = Vector2(0, 47)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 50.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("3_dajxx")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+bbcode_enabled = true
+text = "[i]  Select any item to see information here.[/i]"
+scroll_following = true
+horizontal_alignment = 1
+
+[node name="ClosePanel" type="Button" parent="UIController/DebugContainer/MainPanel" unique_id=1172675801]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -65.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32

@@ -176,7 +176,6 @@ func _buildChestGrid() -> void:
 		chestGrid.add_child(btn)
 
 func onChestSelected(chestId: int) -> void:
-	print("chest Button pressed")
 	var chest = chestSystem.getChest(chestId)
 	if not chest:
 		return
@@ -186,7 +185,6 @@ func onChestSelected(chestId: int) -> void:
 		_buildChestGrid()
 		return
 	selectedChestId = chestId
-	print("Selected: ", selectedChestId)
 	refresh()
 
 func onChestUnlocked(_chestId: int) -> void:
@@ -254,8 +252,19 @@ func _getStacked(items: Array) -> Array[Dictionary]:
 		var item = ItemRegistry.getItem(itemName)
 		if not item:
 			push_warning("Unknown item in chest: %s" % itemName)
+			GameEvents.eventLogged.emit(
+				"Unknown item in chest: %s" % itemName, "system", false
+			)
 			continue
-
+		
+		if stack.get("type") == "equipment" or ItemRegistry.getEquipmentDef(stack.get("name", "")) != null:
+			if not stack.has("isEquipment"):
+				push_warning("Equipment missing instance data: %s" % stack.get("name"))
+				GameEvents.eventLogged.emit(
+					"Equipment missing instance data: %s" % stack.get("name"), "system", false
+				)
+				continue
+		
 		if stack.get("isEquipment", false):
 			# Equipment — show as individual instance with full data
 			result.append({

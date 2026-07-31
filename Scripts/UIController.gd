@@ -9,6 +9,7 @@ class_name UIController
 @export var armoryButton: Button
 @export var merchantButton: Button
 @export var blacksmithButton: Button
+@export var debugButton: Button
 @export var areaButtons: Array[Button] = []
 @export var inventorySystem: InventorySystem
 @export var storageDisplay: StorageDisplay
@@ -17,6 +18,7 @@ class_name UIController
 @export var merchantDisplay: MerchantDisplay
 @export var blacksmithDisplay: BlacksmithDisplay
 @export var checkPointDisplay: CheckpointOverlay
+@export var debugDisplay: DebugDisplay
 @export var areaSystem: AreaSystem
 @export var adventuringRow: HBoxContainer
 @export var inventoryPanel: Panel
@@ -36,6 +38,7 @@ func _ready() -> void:
 	armoryButton.pressed.connect(showArmory)
 	merchantButton.pressed.connect(showMerchant)
 	blacksmithButton.pressed.connect(showBlacksmith)
+	debugButton.pressed.connect(debugDisplay.open)
 	
 	mainActionRow.show()
 	areaSelectRow.hide()
