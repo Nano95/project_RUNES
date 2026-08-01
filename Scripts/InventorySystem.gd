@@ -34,6 +34,12 @@ func addToBackpack(itemName: String, qty: int = 1) -> bool:
 		GameEvents.eventLogged.emit(
 			"Too heavy! %s left behind." % itemName, "system", false
 		)
+		Utils.spawnFloatingLabel(
+			"Too heavy!" % itemName,
+			Color("#c0392b"),
+			main,
+			true
+		)
 		return false
 
 	var stackCap = ItemRegistry.getStackCap(itemName)
@@ -49,8 +55,36 @@ func addToBackpack(itemName: String, qty: int = 1) -> bool:
 			stack["qty"] += toAdd
 			remaining -= toAdd
 
-	# Create new stacks for remainder
+	# Try to fill existing incomplete stacks first
+	for stack in main.game_data.backpack:
+		if remaining <= 0:
+			break
+		if stack["name"] == itemName and stack["qty"] < stackCap:
+			var space = stackCap - stack["qty"]
+			var toAdd = min(space, remaining)
+			stack["qty"] += toAdd
+			remaining -= toAdd
+
+# Create new stacks for remainder
 	while remaining > 0:
+		# Check slot capacity before creating a new stack
+		if main.game_data.backpack.size() >= main.game_data.backpackMax:
+			GameEvents.eventLogged.emit(
+				"Backpack full! %s left behind." % itemName, "system", false
+			)
+			Utils.spawnFloatingLabel(
+				"Backpack full!" % itemName,
+				Color("#c0392b"),
+				main,
+				true
+			)
+			# Adjust weight since we couldn't add everything
+			var addedQty = qty - remaining
+			main.game_data.currentWeight += item.weight * addedQty
+			main.save_game()
+			GameEvents.backpackChanged.emit()
+			GameEvents.weightChanged.emit()
+			return addedQty > 0
 		var newStackQty = min(remaining, stackCap)
 		main.game_data.backpack.append({
 			"name": itemName,
@@ -70,6 +104,12 @@ func addEquipmentToBackpack(instance: Dictionary) -> bool:
 		return false
 	if main.game_data.currentWeight + item.weight > main.game_data.maxWeight:
 		GameEvents.eventLogged.emit("Too heavy to carry!", "system", false)
+		return false
+	if main.game_data.currentWeight + item.weight > main.game_data.maxWeight:
+		GameEvents.eventLogged.emit(
+			"Too heavy! %s left behind." % instance.get("name", ""), "system", false
+		)
+		
 		return false
 	main.game_data.backpack.append(instance)
 	main.game_data.currentWeight += item.weight

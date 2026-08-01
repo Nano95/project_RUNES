@@ -14,19 +14,20 @@ func _ready() -> void:
 		_make("Coal (Pine)",   "Coal", {"Pine Wood": 2}, "smelt"),
 		_make("Coal (Timber)", "Coal", {"Dark Timber": 1}, "smelt"),
 		
-		# Forging
-		_make("Copper Sword", "Copper Sword", {"Copper Bar": 2},                              "forge"),
-		_make("Iron Sword",   "Iron Sword",   {"Iron Bar": 2},                                "forge"),
-		_make("Iron Shield",  "Iron Shield",  {"Iron Bar": 3, "Copper Bar": 1},               "forge"),
+		# Equips
+		_make("Wooden Shield", "Wooden Shield", {"Pine Wood": 3},"forge"),
+		_make("Copper Sword", "Copper Sword", {"Copper Bar": 2},  "forge"),
+		_make("Iron Sword",   "Iron Sword",   {"Iron Bar": 2},"forge"),
+		_make("Iron Shield",  "Iron Shield",  {"Iron Bar": 3, "Copper Bar": 1}, "forge"),
 		
-		_make("Copper Legs",  "Copper Legs",  {"Copper Bar": 4},             "forge"),
-		_make("Iron Legs",    "Iron Legs",    {"Iron Bar": 4},               "forge"),
-		_make("Iron Helmet",    "Iron Helmet",    {"Iron Bar": 3},               "forge"),
+		_make("Copper Legs",  "Copper Legs",  {"Copper Bar": 4},"forge"),
+		_make("Iron Legs",    "Iron Legs",    {"Iron Bar": 4},"forge"),
+		_make("Iron Helmet",    "Iron Helmet",    {"Iron Bar": 3},"forge"),
 		_make("Golden Legs",  "Golden Legs",  {"Gold Bar": 4, "Iron Bar": 1}, "forge"),
 		
-		_make("Golden Armor",  "Golden Armor",  {"Gold Bar": 3, "Iron Bar": 1},                 "forge"),
-		_make("Fang Spear",   "Fang Spear",   {"Giant Fang": 1, "Iron Bar": 3},               "forge"),
-		_make("Orc Helmet",   "Orc Helmet",   {"Orc Tooth": 5, "Beast Skin": 3, "Iron Bar": 1}, "forge"),
+		_make("Golden Armor",  "Golden Armor",  {"Gold Bar": 3, "Iron Bar": 1},"forge"),
+		_make("Fang Spear",   "Fang Spear",   {"Giant Fang": 1, "Iron Bar": 3}, "forge"),
+		_make("Orc Helmet",   "Orc Helmet",   {"Orc Tooth": 5, "Beast Skin": 3, "Iron Bar": 1}, "forge")
 	]
 
 func _make(recipeName: String, resultItem: String, ingredients: Dictionary, category: String) -> BlacksmithRecipe:

@@ -200,13 +200,10 @@ func onBuyPressed() -> void:
 		Utils.spawnFloatingLabel(
 			"-%dg" % selectedEntry["cost"],
 			Color("#c0392b"),
-			goldLabel,
+			main,
 			true
 		)
 		refresh()
 	else:
-		# Shake a failure message at the buy button
-		var reason = "Not enough gold!"
-		if main.game_data.savedGold >= selectedEntry["cost"]:
-			reason = "Backpack full or too heavy!"
-		Utils.spawnFloatingLabel(reason, Color("#c0392b"), buyButton, true)
+		# Shake a failure message at the buy button elsewhere
+		pass

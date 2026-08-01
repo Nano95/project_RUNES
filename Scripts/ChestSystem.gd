@@ -242,8 +242,24 @@ func moveToBackpackFromIndex(itemName: String, chestId: int, chestIndex: int, qt
 	if item:
 		if main.game_data.currentWeight + (item.weight * qty) > main.game_data.maxWeight:
 			GameEvents.eventLogged.emit("Backpack too heavy!", "system", false)
+			Utils.spawnFloatingLabel(
+				"Too heavy to carry!",
+				Color("#c0392b"),
+				main,
+				true
+			)
 			return
-
+	if main.game_data.backpack.size() >= main.game_data.backpackMax:
+		GameEvents.eventLogged.emit(
+			"Backpack full! %s cannot be moved to." % itemName, "system", false
+		)
+		Utils.spawnFloatingLabel(
+			"Backpack is full",
+			Color("#c0392b"),
+			main,
+			true
+		)
+		return
 	if chestStack.get("isEquipment", false):
 		chest.items.remove_at(chestIndex)
 		main.game_data.backpack.append(chestStack)

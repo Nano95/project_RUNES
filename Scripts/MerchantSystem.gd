@@ -30,6 +30,12 @@ func buyItem(entry: Dictionary) -> bool:
 		GameEvents.eventLogged.emit(
 			"Not enough gold to buy %s." % entry["name"], "system", false
 		)
+		Utils.spawnFloatingLabel(
+			"Not enough gold to buy %s." % entry["name"],
+			Color("#c0392b"),
+			main,
+			true
+		)
 		return false
 
 	var itemName = entry["name"]
@@ -43,9 +49,6 @@ func buyItem(entry: Dictionary) -> bool:
 		success = inventorySystem.addToBackpack(itemName, 1)
 
 	if not success:
-		GameEvents.eventLogged.emit(
-			"Can't carry %s — too heavy or no space." % itemName, "system", false
-		)
 		return false
 
 	main.game_data.savedGold -= entry["cost"]
