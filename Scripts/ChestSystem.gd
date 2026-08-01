@@ -173,46 +173,57 @@ func moveToChest(itemName: String, chestId: int, moveAll: bool = false, specific
 	elif specificQty > 0:
 		qty = specificQty
 
-	var stackCap = ItemRegistry.getStackCap(itemName)
+	if chest.items.size() >= getCapacity(chest):
+		GameEvents.eventLogged.emit("Chest %d is full!" % chestId, "system", false)
+		return
 
-	for i in range(qty):
-		if chest.items.size() >= getCapacity(chest):
-			GameEvents.eventLogged.emit("Chest %d is full!" % chestId, "system", false)
+	# Find backpack stack
+	var backpackIdx = -1
+	for j in main.game_data.backpack.size():
+		if main.game_data.backpack[j].get("name") == itemName:
+			backpackIdx = j
 			break
 
-		# Find the actual stack/instance in backpack
-		var backpackStack = null
-		var backpackIdx = -1
-		for j in main.game_data.backpack.size():
-			if main.game_data.backpack[j].get("name") == itemName:
-				backpackStack = main.game_data.backpack[j]
-				backpackIdx = j
-				break
+	if backpackIdx == -1:
+		return
 
-		if backpackStack == null or backpackIdx == -1:
-			break
+	var backpackStack = main.game_data.backpack[backpackIdx]
+	var item = ItemRegistry.getItem(itemName)
 
-		# Remove from backpack
+	if backpackStack.get("isEquipment", false):
+		# Equipment — move full instance
 		main.game_data.backpack.remove_at(backpackIdx)
-		var item = ItemRegistry.getItem(itemName)
 		if item:
 			main.game_data.currentWeight = max(
 				0.0, main.game_data.currentWeight - item.weight
 			)
-
-		# If equipment — store full instance
-		if backpackStack.get("isEquipment", false):
-			chest.items.append(backpackStack)
+		chest.items.append(backpackStack)
+	else:
+		# Stackable — decrement or remove backpack stack
+		var actualQty = min(qty, backpackStack.get("qty", 1))
+		if backpackStack.get("qty", 1) <= actualQty:
+			main.game_data.backpack.remove_at(backpackIdx)
 		else:
-			# Regular stackable — try to merge into existing stack
-			var added = false
-			for chestStack in chest.items:
-				if chestStack["name"] == itemName and chestStack.get("qty", 0) < stackCap:
-					chestStack["qty"] += 1
-					added = true
+			main.game_data.backpack[backpackIdx]["qty"] -= actualQty
+
+		if item:
+			main.game_data.currentWeight = max(
+				0.0, main.game_data.currentWeight - (item.weight * actualQty)
+			)
+
+		# Merge into existing chest stack or create new
+		var stackCap = ItemRegistry.getStackCap(itemName)
+		var remaining = actualQty
+		for chestStack in chest.items:
+			if chestStack["name"] == itemName and chestStack.get("qty", 0) < stackCap:
+				var space = stackCap - chestStack["qty"]
+				var toAdd = min(space, remaining)
+				chestStack["qty"] += toAdd
+				remaining -= toAdd
+				if remaining <= 0:
 					break
-			if not added:
-				chest.items.append({"name": itemName, "qty": 1})
+		if remaining > 0:
+			chest.items.append({"name": itemName, "qty": remaining})
 
 	main.save_game()
 	GameEvents.backpackChanged.emit()
@@ -229,39 +240,53 @@ func moveToBackpack(itemName: String, chestId: int, moveAll: bool = false,  spec
 	elif specificQty > 0:
 		qty = specificQty
 
-	for i in range(qty):
-		var item = ItemRegistry.getItem(itemName)
-		if item:
-			if main.game_data.currentWeight + item.weight > main.game_data.maxWeight:
-				GameEvents.eventLogged.emit("Backpack too heavy!", "system", false)
-				break
+	var item = ItemRegistry.getItem(itemName)
+	if item:
+		if main.game_data.currentWeight + (item.weight * qty) > main.game_data.maxWeight:
+			GameEvents.eventLogged.emit("Backpack too heavy!", "system", false)
+			return
 
-		# Find the stack/instance in chest
-		var chestStack = null
-		var chestIdx = -1
-		for j in chest.items.size():
-			if chest.items[j].get("name") == itemName:
-				chestStack = chest.items[j]
-				chestIdx = j
-				break
-
-		if chestStack == null or chestIdx == -1:
+	# Find and remove the stack from chest
+	var chestIdx = -1
+	for j in chest.items.size():
+		if chest.items[j].get("name") == itemName:
+			chestIdx = j
 			break
 
-		# If equipment — move full instance back to backpack
-		if chestStack.get("isEquipment", false):
+	if chestIdx == -1:
+		return
+
+	var chestStack = chest.items[chestIdx]
+
+	if chestStack.get("isEquipment", false):
+		# Equipment — move full instance
+		chest.items.remove_at(chestIdx)
+		main.game_data.backpack.append(chestStack)
+		if item:
+			main.game_data.currentWeight += item.weight
+	else:
+	   # Stackable — only remove qty from chest stack, not the whole thing
+		if chestStack.get("qty", 1) <= qty:
 			chest.items.remove_at(chestIdx)
-			main.game_data.backpack.append(chestStack)
-			if item:
-				main.game_data.currentWeight += item.weight
 		else:
-			# Regular stackable
-			chestStack["qty"] -= 1
-			if chestStack["qty"] <= 0:
-				chest.items.remove_at(chestIdx)
-			main.game_data.backpack.append({"name": itemName, "qty": 1})
-			if item:
-				main.game_data.currentWeight += item.weight
+			chest.items[chestIdx]["qty"] -= qty
+		
+		if item:
+			main.game_data.currentWeight += item.weight * qty
+		
+		# Try to merge into existing backpack stack
+		var stackCap = ItemRegistry.getStackCap(itemName)
+		for backpackStack in main.game_data.backpack:
+			if backpackStack.get("name") == itemName and backpackStack.get("qty", 0) < stackCap:
+				var space = stackCap - backpackStack["qty"]
+				var toAdd = min(space, qty)
+				backpackStack["qty"] += toAdd
+				qty -= toAdd
+				if qty <= 0:
+					break
+		# Any remaining qty that didn't fit into existing stacks
+		if qty > 0:
+			main.game_data.backpack.append({"name": itemName, "qty": qty})
 
 	main.save_game()
 	GameEvents.backpackChanged.emit()
