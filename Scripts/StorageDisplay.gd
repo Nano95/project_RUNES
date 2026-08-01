@@ -19,12 +19,15 @@ class_name StorageDisplay
 @export var inventorySystem: InventorySystem
 
 var main:MainNode
+
 var selectedChestId: int = 1
+var longPressChestIndex: int = -1
+var tapChestIndex: int = -1
 var longPressTimer: Timer
 var longPressTarget: String = ""
 var longPressSource: String = ""  # "backpack" or "chest"
 var longPressQty: int = 0
-const LONG_PRESS_DURATION: float = 0.5
+const LONG_PRESS_DURATION: float = 0.4
 
 func _ready() -> void:
 	main = Utils.get_main()
@@ -68,7 +71,6 @@ func open() -> void:
 
 var isRefreshing: bool = false
 func refresh() -> void:
-	print("Attempting refresh", Time.get_unix_time_from_system())
 	if isRefreshing:
 		return
 	isRefreshing = true
@@ -96,18 +98,16 @@ func refreshBackpack() -> void:
 		return
 	
 	backpackTitleCap.text = "Backpack (%d / %d)" % [main.game_data.backpack.size(), main.game_data.backpackMax]
-	for entry in stacked:
-		var btn = _makeItemButton(entry, "backpack")
+	for i in stacked.size():
+		var btn = _makeItemButton(stacked[i], "backpack", i)
 		backpackFlow.add_child(btn)
 
 # ── CHEST ────────────────────────────────────────────────
 func refreshChest() -> void:
-	print("children clean up")
 	for child in chestFlow.get_children():
 		child.queue_free()
 
 	var chest = chestSystem.getChest(selectedChestId)
-	print("Made it here")
 	if not chest or not chest.unlocked:
 		chestNameLabel.text = "Chest %d (Locked)" % selectedChestId
 		chestCapacityLabel.text = ""
@@ -115,7 +115,7 @@ func refreshChest() -> void:
 
 	var capacity = chestSystem.getCapacity(chest)
 	chestNameLabel.text = "Chest %d" % selectedChestId
-	chestCapacityLabel.text = "%d / %d" % [chest.items.size(), capacity]
+	chestCapacityLabel.text = "Chest %d (%d / %d)" % [selectedChestId, chest.items.size(), capacity]
 
 	var stacked = _getStacked(chest.items)
 	if stacked.is_empty():
@@ -125,8 +125,8 @@ func refreshChest() -> void:
 		chestFlow.add_child(lbl)
 		return
 
-	for entry in stacked:
-		var btn = _makeItemButton(entry, "chest")
+	for i in stacked.size():
+		var btn = _makeItemButton(stacked[i], "chest", i)
 		chestFlow.add_child(btn)
 
 # ── UPGRADE PANEL ────────────────────────────────────────
@@ -170,7 +170,6 @@ func _buildChestGrid() -> void:
 			var cost = ChestSystem.UNLOCK_COSTS[chest.id - 1]
 			btn.text += "\n🔒\n %dg" % cost
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		btn.toggle_mode = true
 		btn.add_theme_font_size_override("font_size", 30)
 		btn.pressed.connect(onChestSelected.bind(chest.id))
 		chestGrid.add_child(btn)
@@ -201,7 +200,7 @@ func onBuildPressed() -> void:
 		chestSystem.upgradeChest(chest)
 
 # ── ITEM BUTTONS ─────────────────────────────────────────
-func _makeItemButton(entry: Dictionary, source: String) -> Button:
+func _makeItemButton(entry: Dictionary, source: String, stackIndex: int) -> Button:
 	var btn = Button.new()
 	var cap = entry.get("cap", 1)
 	if (entry["qty"] > 1):
@@ -213,25 +212,38 @@ func _makeItemButton(entry: Dictionary, source: String) -> Button:
 	btn.add_theme_color_override("font_color", newColor)
 	btn.add_theme_font_size_override("font_size", 22)
 	btn.custom_minimum_size = Vector2(150,50)
-	btn.button_down.connect(onItemButtonDown.bind(entry["name"], source, entry["qty"]))
-	btn.button_up.connect(onItemButtonUp.bind(entry["name"], source))
+	btn.button_down.connect(onItemButtonDown.bind(entry["name"], source, stackIndex))
+	btn.button_up.connect(onItemButtonUp.bind(entry["name"], source, stackIndex))
 	return btn
 
-func onItemButtonDown(itemName: String, source: String, qty: int) -> void:
+func onItemButtonDown(itemName: String, source: String, stackIndex: int) -> void:
 	longPressTarget = itemName
 	longPressSource = source
-	longPressQty = qty
+	longPressChestIndex = stackIndex if source == "chest" else -1
 	longPressTimer.start()
+	# Capture qty from the specific stack
+	if source == "chest":
+		var chest = chestSystem.getChest(selectedChestId)
+		if (chest and stackIndex >= 0 and stackIndex < chest.items.size()):
+			longPressQty = chest.items[stackIndex].get("qty", 1)
+		else:
+			longPressQty = 1
+	else:
+		# Backpack — read from backpack stack
+		if (stackIndex >= 0 and stackIndex < main.game_data.backpack.size()):
+			longPressQty = main.game_data.backpack[stackIndex].get("qty", 1)
+		else:
+			longPressQty = 1
 
-func onItemButtonUp(itemName: String, source: String) -> void:
+func onItemButtonUp(itemName: String, source: String, stackIndex: int) -> void:
 	if longPressTimer.is_stopped():
 		return
 	longPressTimer.stop()
 	# Single tap — move 1
 	if source == "backpack":
-		chestSystem.moveToChest(itemName, selectedChestId, false)
+		chestSystem.moveToChest(itemName, selectedChestId, false, 1)
 	else:
-		chestSystem.moveToBackpack(itemName, selectedChestId, false)
+		chestSystem.moveToBackpackFromIndex(itemName, selectedChestId, stackIndex, 1)
 
 func onLongPress() -> void:
 	if longPressTarget == "" or longPressQty <= 0:
@@ -239,7 +251,8 @@ func onLongPress() -> void:
 	if longPressSource == "backpack":
 		chestSystem.moveToChest(longPressTarget, selectedChestId, false, longPressQty)
 	else:
-		chestSystem.moveToBackpack(longPressTarget, selectedChestId, false, longPressQty)
+		chestSystem.moveToBackpackFromIndex(longPressTarget, selectedChestId, longPressChestIndex, longPressQty)
+
 	longPressTarget = ""
 	longPressQty = 0
 	longPressSource = ""
