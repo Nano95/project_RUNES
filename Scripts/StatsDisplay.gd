@@ -3,14 +3,14 @@ class_name StatsDisplay
 
 var main:MainNode
 @export var hpValue: Label
-@export var xpValue: Label
-@export var lvValue: Label
 @export var hpBar: ProgressBar
-@export var xpBar: ProgressBar
 @export var goldLabel: Label
 @export var goldValue: Label
 @export var areaValue: Label
 @export var eventValue: Label
+@export var statsLabel: Label
+@export var killsLabel: Label
+@export var equipmentSystem: EquipmentSystem
 var hpTween: Tween
 var xpTween: Tween
 var pulseTween: Tween
@@ -27,16 +27,16 @@ func _ready() -> void:
 	GameEvents.playerDied.connect(onPlayerDied)
 	GameEvents.goldDeposited.connect(onGoldDeposited)
 	GameEvents.hpChanged.connect(updateHp)
-	GameEvents.leveledUp.connect(playLevelUpEffect)
+	GameEvents.combatWon.connect(updateStats)
 	
-	refresh()
+	call_deferred("refresh")
 	goldLabel.text = "Bank"
 	goldValue.text = str(main.game_data.savedGold)
 
 func onPlayerDied() -> void:
 	var gd = main.game_data
 	@warning_ignore("integer_division")
-	main.game_data.hp = int(main.game_data.maxHp * .2)
+	main.game_data.hp = int(equipmentSystem.getMaxHp() * .2)
 	hpValue.text = "%d / %d" % [gd.hp, gd.maxHp]
 	hpBar.max_value = gd.maxHp
 	hpBar.value = gd.hp
@@ -46,7 +46,7 @@ func refresh() -> void:
 
 	#  HP and XP
 	updateHp()
-	updateXp()
+	updateStats()
 	
 	# Gold — show carried gold in area, saved gold in town
 	if (gd.inArea):
@@ -55,7 +55,6 @@ func refresh() -> void:
 	else:
 		goldLabel.text = "Bank"
 		goldValue.text = str(gd.savedGold)
-		print(" - ", str(gd.savedGold))
 
 	# Area
 	areaValue.text = gd.currentArea if gd.inArea else "Town"
@@ -63,10 +62,11 @@ func refresh() -> void:
 
 func updateHp() -> void:
 	var gd = main.game_data
-	hpValue.text = "%d / %d" % [gd.hp, gd.maxHp]
-	hpBar.max_value = gd.maxHp
+	var maxHp = equipmentSystem.getMaxHp()
+	hpValue.text = "%d / %d" % [gd.hp, maxHp]
+	hpBar.max_value = maxHp
 	#hpBar.value = gd.hp
-	var hpPct = float(gd.hp) / float(gd.maxHp) # percentage
+	var hpPct = float(gd.hp) / float(maxHp) # percentage
 	if hpPct > 0.6:
 		hpValue.modulate = Color("#27ae60")
 		hpBar.modulate = Color("#27ae60")
@@ -77,7 +77,7 @@ func updateHp() -> void:
 		hpValue.modulate = Color("#e74c3c")
 		hpBar.modulate = Color("#e74c3c")
 	# Animate the bar
-	hpBar.max_value = gd.maxHp
+	hpBar.max_value = maxHp
 	if hpTween:
 		hpTween.kill()
 	hpTween = create_tween()
@@ -85,23 +85,12 @@ func updateHp() -> void:
 	# Pulse the label on every HP change
 	#pulseHpLabel()
 
-func updateXp() -> void:
-	var gd = main.game_data
-	var xpNeeded = xpForNextLevel()
-
-	# Update text immediately
-	lvValue.text = "Lvl: %d" % gd.level
-	xpValue.text = "%d / %d" % [gd.xp, xpNeeded]
-
-	# Update bar max in case of level up
-	xpBar.max_value = xpNeeded
-
-	# Animate the bar
-	if xpTween:
-		xpTween.kill()
-	xpTween = create_tween()
-	xpTween.tween_property(xpBar, "value", gd.xp, 0.35).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-
+func updateStats() -> void:
+	var atk = equipmentSystem.getTotalAttack()
+	var def = equipmentSystem.getTotalDefense()
+	var dodge = equipmentSystem.getDodgeChance()
+	statsLabel.text = "%d | %d | %d%%" % [atk, def, int(dodge * 100)]
+	killsLabel.text = "Kills: %d" % main.game_data.sessionKills
 
 func onEventLogged(_text: String, _style: String, _track_num: bool) -> void:
 	# Refresh stats on every event tick
@@ -120,34 +109,7 @@ func onAreaExited() -> void:
 	goldValue.text = str(main.game_data.savedGold)
 
 func onGoldDeposited(_amount: int) -> void:
-	print(" - gold deposited")
 	goldValue.text = str(main.game_data.gold)
-
-func xpForNextLevel() -> int:
-	return main.game_data.level * 70 + (main.game_data.level - 1) * 35
-
-func playLevelUpEffect() -> void:
-	var gd = main.game_data
-	
-	# First animate to full
-	if xpTween:
-		xpTween.kill()
-	xpTween = create_tween()
-	xpTween.tween_property(xpBar, "value", xpBar.max_value, 0.20) \
-		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	
-	# Then flash the bar white
-	xpTween.tween_property(xpBar, "modulate", Color(1, 1, 1, 1), 0.15)
-	xpTween.tween_property(xpBar, "modulate", Color("#35d0ff"), 0.15)
-	
-	# Then reset to zero and animate up to current xp with new max
-	xpTween.tween_callback(func():
-		xpBar.max_value = xpForNextLevel()
-		xpBar.value = 0
-		lvValue.text = "Lvl: %d" % gd.level
-	)
-	xpTween.tween_property(xpBar, "value", gd.xp, 0.35) \
-		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 func pulseHpLabel() -> void:
 	if pulseTween:

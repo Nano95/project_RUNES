@@ -4,6 +4,7 @@ class_name TickSystem
 var main:MainNode
 @export var combatSystem:CombatSystem
 @export var gatherSystem:GatherSystem
+@export var equipmentSystem:EquipmentSystem
 
 var checkpointPending: bool = false
 var checkpointPendingAfterCombat: bool = false
@@ -29,7 +30,7 @@ func _ready() -> void:
 func onTick() -> void:
 	#print("Tick", main.game_data.inArea, checkpointPending, main.game_data.inCombat)
 	if (not main.game_data.inArea):
-		if main.game_data.hp < main.game_data.maxHp:
+		if (main.game_data.hp < equipmentSystem.cachedMaxHp):
 			main.game_data.hp += 1
 			GameEvents.hpChanged.emit()
 		return
@@ -61,8 +62,6 @@ func onTick() -> void:
 		return
 	
 	main.game_data.eventCount += 1
-	if (main.game_data.eventCount == 100):
-		AreaRegistry.tryUnlockNext(main.game_data.currentArea)
 	
 	# If in combat, we dont need to go further
 	if (main.game_data.inCombat):
@@ -108,7 +107,7 @@ func onAreaExited() -> void:
 	combatSystem.pendingStrongMonsterIn = 0
 
 # Takes in two dummy params because combatWon emits two arguments, but are not needed here
-func onCombatResolved(_a = null, _b = null) -> void:
+func onCombatResolved(_a = null) -> void:
 	# Decrement battle potion counter after each combat
 	if (combatSystem.isBattlePotionActive()):
 		combatSystem.battlePotionEventsLeft -= 1

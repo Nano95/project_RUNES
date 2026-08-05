@@ -5,12 +5,15 @@ class_name EquipmentSystem
 @export var chestSystem: ChestSystem
 
 var main:MainNode
+var cachedMaxHp: int = 0
 
 func _ready() -> void:
 	main = Utils.get_main()
 	GameEvents.checkpointReached.connect(onCheckpointReached)
 	GameEvents.tickFired.connect(onTick)
 	GameEvents.itemEquipped.connect(onItemEquipped)
+	GameEvents.equipmentChanged.connect(onEquipmentChanged)
+	cachedMaxHp = calculateMaxHp()
 
 # ── EQUIP / UNEQUIP ───────────────────────────────────────
 func equipItem(instance: Dictionary) -> void:
@@ -84,29 +87,55 @@ func setEquippedSlot(slot: String, instance: Dictionary) -> void:
 		"ring":   main.game_data.equippedRing = instance
 		"amulet": main.game_data.equippedAmulet = instance
 
+func onEquipmentChanged() -> void:
+	cachedMaxHp = calculateMaxHp()
+	# Clamp current HP if new max is lower
+	if main.game_data.hp > cachedMaxHp:
+		main.game_data.hp = cachedMaxHp
+	main.save_game()
+	GameEvents.hpChanged.emit()
+
 # ── STAT CALCULATIONS ─────────────────────────────────────
+func getMaxHp() -> int:
+	return cachedMaxHp
+
 func getTotalAttack() -> int:
-	var base = 5 + (main.game_data.level)
-	var bonus = 0
-	for slot in ["equippedWeapon", "equippedRing", "equippedAmulet"]:
-		var item = main.game_data.get(slot)
-		if not item or item.is_empty():
-			continue
-		if item.get("statType") == "attack":
-			bonus += item.get("statBonus", 0) + item.get("enhancement", 0)
-	return base + bonus
+	var weapon = main.game_data.equippedWeapon
+	if not weapon or weapon.is_empty():
+		return 0
+	return weapon.get("atkBonus", 0) + \
+		   weapon.get("gradeBonus", 0) + \
+		   weapon.get("enhancement", 0) * 2
 
 func getTotalDefense() -> int:
-	var base = 2 + int(main.game_data.level * .3)
-	var bonus = 0
-	for slot in ["equippedShield", "equippedArmor", "equippedHelmet",
-				 "equippedBoots", "equippedLegs", "equippedRing", "equippedAmulet"]:
+	var shield = main.game_data.equippedShield
+	if not shield or shield.is_empty():
+		return 0
+	return shield.get("defBonus", 0) + \
+		   shield.get("gradeBonus", 0) + \
+		   shield.get("enhancement", 0) * 2
+
+func calculateMaxHp() -> int:
+	var total = main.game_data.baseHp
+	var slots = [
+		"equippedHelmet", "equippedArmor", "equippedLegs",
+		"equippedBoots", "equippedSurvivalGear",
+		"equippedRing", "equippedAmulet"
+	]
+	for slot in slots:
 		var item = main.game_data.get(slot)
 		if not item or item.is_empty():
 			continue
-		if item.get("statType") == "defense":
-			bonus += item.get("statBonus", 0) + item.get("enhancement", 0)
-	return base + bonus
+		total += item.get("hpBonus", 0)
+		total += item.get("gradeBonus", 0)
+		total += item.get("enhancement", 0) * 2  # each enhancement +2 HP for now
+	return total
+
+func getDodgeChance() -> float:
+	var boots = main.game_data.equippedBoots
+	if not boots or boots.is_empty():
+		return 0.0
+	return boots.get("dodgeBonus", 0.0)
 
 # ── EFFECTS ───────────────────────────────────────────────
 func onCheckpointReached() -> void:
@@ -117,8 +146,8 @@ func onCheckpointReached() -> void:
 			continue
 		if item.get("effectType") == "checkpoint_heal":
 			var healPct = item.get("effectValue", 0)
-			var healAmt = int(main.game_data.maxHp * (healPct / 100.0))
-			main.game_data.hp = min(main.game_data.maxHp, main.game_data.hp + healAmt)
+			var healAmt = int(cachedMaxHp * (healPct / 100.0))
+			main.game_data.hp = min(cachedMaxHp, main.game_data.hp + healAmt)
 			GameEvents.eventLogged.emit(
 				"%s pulses. Restored %d HP." % [item["name"], healAmt], "gather", false
 			)
@@ -135,8 +164,8 @@ func onTick() -> void:
 			continue
 		if (item.get("effectType") == "regen"):
 			var regenAmt = item.get("effectValue", 0)
-			if main.game_data.hp < main.game_data.maxHp:
-				main.game_data.hp = min(main.game_data.maxHp, main.game_data.hp + regenAmt)
+			if main.game_data.hp < cachedMaxHp:
+				main.game_data.hp = min(cachedMaxHp, main.game_data.hp + regenAmt)
 				GameEvents.hpChanged.emit()
 
 func applyWeaponEffectOnHit() -> void:

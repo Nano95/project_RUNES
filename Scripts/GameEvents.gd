@@ -21,8 +21,6 @@ signal weightChanged
 @warning_ignore("unused_signal")
 signal itemInspected(itemName: String)
 @warning_ignore("unused_signal")
-signal leveledUp
-@warning_ignore("unused_signal")
 signal potionUsed(itemName: String)
 @warning_ignore("unused_signal")
 signal itemLongPressed(itemName: String, stackIndex: int)
@@ -71,7 +69,7 @@ signal combatStarted(monster: MonsterData)
 @warning_ignore("unused_signal")
 signal combatTick(playerDmg: int, monsterDmg: int, monsterHpLeft: int)
 @warning_ignore("unused_signal")
-signal combatWon(xp: int, gold: int)
+signal combatWon(gold: int)
 @warning_ignore("unused_signal")
 signal combatFled
 @warning_ignore("unused_signal")

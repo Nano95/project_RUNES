@@ -4,222 +4,82 @@ var areaMonsters: Dictionary = {}
 
 func _ready() -> void:
 	areaMonsters = {
-		"Hunting Grounds": {
+"Hunting Grounds": {
 			"weak": [
-				_make("Giant Rat", "weak", 15, 9, 6, 1, 5, [
-					_drop("Rat Tail", 0.45),
-					_drop("Creature Fang", 0.05),
+				_make("Orcling", "weak", 15, 6, 1, 4, [
+					_drop("Orc Leather", 0.08),
+					_drop("Orc Helmet", 0.03),
+					_drop("Orc King Shield", 0.02),
 				]),
-				_make("Green Slime", "weak", 12, 8, 5, 1, 4, [
-					_drop("Slime Gel", 0.45),
+				_make("Orc Grunt", "weak", 18, 7, 1, 5, [
+					_drop("Orc Leather", 0.08),
+					_drop("Orc Helmet", 0.03),
+					_drop("Orc King Shield", 0.02),
 				]),
-				_make("Cave Bat", "weak", 10, 6, 6, 0, 3, [
-					_drop("Bat Wing", 0.45),
-					_drop("Creature Fang", 0.05),
+				_make("Orc Runt", "weak", 12, 5, 0, 3, [
+					_drop("Orc Leather", 0.08),
+					_drop("Orc Helmet", 0.02),
+					_drop("Orc King Shield", 0.01),
 				]),
 			],
 			"medium": [
-				_make("Orc Scout", "medium", 35, 11, 20, 5, 14, [
-					_drop("Orc Tooth", 0.45),
-					_drop("Reinforced Boots", 0.1),
-					_drop("Leather Helmet", 0.1)
+				_make("Orc Warrior", "medium", 45, 12, 5, 14, [
+					_drop("Orc Leather", 0.11),
+					_drop("Orc Legs", 0.04),
+					
 				]),
-				_make("Wild Wolf", "medium", 30, 10, 18, 4, 12, [
-					_drop("Beast Skin", 0.35),
-					_drop("Giant Fang", 0.01),
+				_make("Orc Brute", "medium", 55, 14, 6, 16, [
+					_drop("Orc Leather", 0.11),
+					_drop("Orc Legs", 0.04),
+					_drop("Crude Blade", 0.04),
 				]),
-				_make("Bog Frog", "medium", 28, 12, 16, 3, 10, [
-					_drop("Frog Leg", 0.85),
-				]),
-			],
-			"strong": [
-				_make("Orc Warrior", "strong", 70, 20, 50, 14, 30, [
-					_drop("Orc Tooth", 0.45),
+				_make("Orc Raider", "medium", 50, 13, 5, 15, [
+					_drop("Orc Leather", 0.11),
+					_drop("Orc Legs", 0.03),
 					_drop("Orcish Axe", 0.05),
-					_drop("Reinforced Shield", 0.1)
-				]),
-				_make("War Wolf", "strong", 60, 22, 48, 12, 26, [
-					_drop("Beast Skin", 0.35),
-					_drop("Giant Fang", 0.05),
-				]),
-			],
-			"elite": [
-				_make("King Slime", "elite", 300, 35, 200, 80, 150, [
-					_drop("Slime Gel", 0.90),
-					_drop("Royal Slime Core", 0.03),
-				]),
-			],
-		},
-
-		"Outskirts": {
-			"weak": [
-				_make("Orc Scout", "weak", 35, 11, 20, 5, 14, [
-					_drop("Orc Tooth", 0.45),
-					_drop("Reinforced Boots", 0.10),
-					_drop("Leather Helmet", 0.1)
-				]),
-				_make("Wild Wolf", "weak", 30, 10, 18, 4, 12, [
-					_drop("Beast Skin", 0.35),
-					_drop("Giant Fang", 0.01),
-				]),
-				_make("Bog Frog", "weak", 28, 12, 16, 3, 10, [
-					_drop("Frog Leg", 0.85),
-				]),
-			],
-			"medium": [
-				_make("Rotworm", "medium", 65, 16, 32, 10, 22, [
-					_drop("Frog Leg", 0.65),
-					_drop("Creature Fang", 0.20),
-					_drop("Fang Spear", 0.01)
-				]),
-				_make("Cyclops", "medium", 80, 22, 40, 15, 30, [
-					_drop("Cyclops Eye", 0.25),
-					_drop("Giant Club", 0.03),
-				]),
-				_make("Bandit", "medium", 60, 18, 35, 12, 25, [
-					_drop("Leather Armor", 0.10),
-					_drop("Iron Legs", 0.05),
-					_drop("Iron Helmet", 0.05)
 				]),
 			],
 			"strong": [
-				_make("Orc Shaman", "strong", 100, 28, 70, 25, 50, [
-					_drop("Orc Tooth", 0.45),
-					_drop("Shaman Staff", 0.08),
+				_make("Mounted Orc", "strong", 90, 22, 14, 30, [
+					_drop("Orc Leather", 0.15),
+					_drop("Orc Boots", 0.05),
+					_drop("Orc Armor", 0.04),
+					_drop("Orcish Axe", 0.05),
 				]),
-				_make("War Wolf", "strong", 90, 30, 65, 22, 45, [
-					_drop("Beast Skin", 0.35),
-					_drop("Giant Fang", 0.05),
+				_make("Orc General", "strong", 110, 25, 16, 35, [
+					_drop("Orc Leather", 0.15),
+					_drop("Orc General Crest", 0.10),
+					_drop("Orc Boots", 0.05),
+					_drop("Orc Armor", 0.05),
 				]),
-				_make("Stone Troll", "strong", 120, 26, 75, 28, 55, [
-					_drop("Iron Ore", 0.90),
-					_drop("Coal", 0.70),
-					_drop("Gold Ore", 0.40),
-				]),
-			],
-			"elite": [
-				_make("Bandit King", "elite", 450, 50, 350, 150, 280, [
-					_drop("War Hammer", 0.2),
-					_drop("Reinforced Boots", 0.10),
-				]),
-			],
-		},
-
-		"Darkwood Forest": {
-			"weak": [
-				_make("Rotworm", "weak", 65, 12, 20, 8, 16, [
-					_drop("Frog Leg", 0.65),
-					_drop("Creature Fang", 0.20),
-					_drop("Fang Spear", 0.01)
-				]),
-				_make("Stone Troll", "weak", 120, 18, 25, 10, 20, [
-					_drop("Copper Ore", 0.90),
-					_drop("Iron Ore", 0.50),
-					_drop("Coal", 0.40),
-					_drop("Gold Ore", 0.20),
-				]),
-				_make("Bandit", "weak", 60, 18, 35, 12, 25, [
-					_drop("Leather Armor", 0.10),
-					_drop("Iron Legs", 0.05),
-					_drop("Iron Helmet", 0.05)
-				]),
-			],
-			"medium": [
-				_make("Corrupt Elf", "medium", 90, 24, 55, 20, 40, [
-					_drop("Elven Helmet", 0.25),
-				]),
-				_make("Werewolf", "medium", 130, 35, 85, 28, 55, [
-					_drop("Giant Fang", 0.50),
-				]),
-				_make("Giant Spider", "medium", 100, 28, 75, 25, 50, [
-					_drop("Spider Silk", 0.10),
-				]),
-			],
-			"strong": [
-				_make("Dark Druid", "strong", 180, 45, 130, 50, 90, [
-					_drop("Cloth", 0.10),
-				]),
-				_make("Lost Soul", "strong", 150, 50, 140, 45, 85, [
-					_drop("Dark Essence", 0.10),
-				]),
-				_make("Weeping Willow", "strong", 200, 42, 135, 48, 88, [
-					_drop("Weeping Bark Shield", 0.05),
+				_make("Orc Warchief", "strong", 130, 28, 18, 40, [
+					_drop("Orc Leather", 0.20),
+					_drop("Orc General Crest", 0.15),
+					_drop("Orc Boots", 0.06),
+					_drop("Orc Armor", 0.05),
 				]),
 			],
 			"elite": [
-				_make("Banshee", "elite", 650, 70, 500, 200, 400, [
-					_drop("Dark Essence", 0.90),
-					_drop("Banshee Veil", 0.25),
-					_drop("Cursed Shield", .05)
-				]),
-			],
-		},
-
-		"Forsaken Keep": {
-			"weak": [
-				_make("Hollow Knight", "weak", 120, 28, 55, 20, 40, [
-					_drop("Bone Fragment", 0.2),
-					_drop("Hollow Shard",  0.15),
-				]),
-				_make("Gargoyle", "weak", 110, 25, 50, 18, 36, [
-					_drop("Stone Fragment", 0.2),
-					_drop("Gargoyle Wing",  0.05),
-				]),
-				_make("Lost Soul", "weak", 90, 22, 45, 15, 30, [
-					_drop("Dark Essence",  0.15),
-				]),
-			],
-			"medium": [
-				_make("Shadow Paladin", "medium", 200, 45, 100, 40, 75, [
-					_drop("Bone Fragment",  0.2),
-					_drop("Paladin Crest",  0.02),
-				]),
-				_make("Cursed Archer", "medium", 170, 40, 90, 35, 65, [
-					_drop("Bone Fragment",  0.2),
-					_drop("Beast Skin",    0.2),
-					_drop("Creature Fang",  0.10),
-				]),
-				_make("Wretched Priest", "medium", 180, 38, 95, 38, 70, [
-					_drop("Priest Relic",  0.5),
-					_drop("Dark Essence",  0.1),
-					_drop("Cloth",         0.2),
-				]),
-			],
-			"strong": [
-				_make("Knight Commander", "strong", 320, 65, 180, 80, 150, [
-					_drop("Commander Helm", 0.05),
-					_drop("Bone Fragment",  0.45),
-				]),
-				_make("Wraith", "strong", 280, 70, 190, 85, 160, [
-					_drop("Dark Essence",   0.25),
-					_drop("Bone Fragment",  0.10),
-				]),
-				_make("Chest Mimic", "strong", 350, 60, 200, 150, 400, [
-					_drop("Iron Legs",        0.20),
-					_drop("Reinforced Shield", 0.20),
-					_drop("Leather Armor",    0.20),
-					_drop("Golden Legs",      0.05),
-					_drop("Golden Armor",     0.05),
-					_drop("Crested Shield",   0.01),
-				]),
-			],
-			"elite": [
-				_make("The Forsaken King", "elite", 1200, 120, 900, 500, 900, [
-					_drop("Paladin Crest",  0.90),
-					_drop("Forsaken Seal",  0.65),
-					_drop("King's Crown",   0.05),
+				_make("Orc King", "elite", 500, 50, 100, 200, [
+					_drop("Orc Leather", 0.90),
+					_drop("Orc General Crest", 0.45),
+					_drop("King's Tusk", 0.15),
+					_drop("Orc King Shield", 0.25),
+					_drop("Orc Helmet", 0.20),
+					_drop("Orc Armor", 0.20),
+					_drop("Orc Legs", 0.20),
+					_drop("Orc Boots", 0.20),
 				]),
 			],
 		},
 	}
 
-func _make(monsterName: String, tier: String, hp: int, atk: int, xp: int, goldMin: int, goldMax: int, loot: Array[DropEntry] = []) -> MonsterData:
+func _make(monsterName: String, tier: String, hp: int, atk: int, goldMin: int, goldMax: int, loot: Array[DropEntry] = []) -> MonsterData:
 	var m = MonsterData.new()
 	m.monsterName = monsterName
 	m.tier = tier
 	m.hp = hp
 	m.atk = atk
-	m.xp = xp
 	m.goldMin = goldMin
 	m.goldMax = goldMax
 	m.dropTable = loot

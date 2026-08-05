@@ -62,55 +62,70 @@ func onCombatStarted(monster: MonsterData) -> void:
 func tickCombat() -> void:
 	var playerAtk = randi_range(4, 9) + equipmentSystem.getTotalAttack()
 	main.game_data.currentMonsterHp -= playerAtk
-
-	# Weapon effects on hit
 	equipmentSystem.applyWeaponEffectOnHit()
 
-	# Monster attack reduced by defense, minimum 1
-	var rawMonsterAtk = randi_range(
-		int(main.game_data.currentMonsterAtk * 0.7),
-		main.game_data.currentMonsterAtk
-	) + 5 # Giving all monsters a bit more atk since they seem a bit underpowered rn
-	var reducedAtk = max(1, rawMonsterAtk - equipmentSystem.getTotalDefense())
+	var finalAtk = 0
+	var dodgeChance = equipmentSystem.getDodgeChance()
+	var dodged = dodgeChance > 0.0 and randf() < dodgeChance
 
-	# Cursed shield check
-	var finalAtk = equipmentSystem.applyCursedShieldOnHit(reducedAtk)
-	main.game_data.hp = max(0, main.game_data.hp - finalAtk)
+	if (not dodged):
+		var rawMonsterAtk = randi_range(
+			int(main.game_data.currentMonsterAtk * 0.7),
+			main.game_data.currentMonsterAtk
+		) + 5
+		var reducedAtk = max(1, rawMonsterAtk - equipmentSystem.getTotalDefense())
+		finalAtk = equipmentSystem.applyCursedShieldOnHit(reducedAtk)
+		main.game_data.hp = max(0, main.game_data.hp - finalAtk)
 
 	if main.game_data.isFleeing:
 		main.game_data.fleeTicks -= 1
-		GameEvents.eventLogged.emit(
-			"Fleeing... %s hits for %d dmg. Escaping in %d ticks..." % [
-				main.game_data.currentMonsterName,
-				finalAtk,
-				main.game_data.fleeTicks
-			], "combat", false
-		)
-		if main.game_data.hp <= 0:
+		if (dodged):
+			GameEvents.eventLogged.emit(
+				"You hit %s for %d while evading! Escaping in %d ticks..." % [
+					main.game_data.currentMonsterName,
+					playerAtk,
+					main.game_data.fleeTicks
+				], "combat", false
+			)
+		else:
+			GameEvents.eventLogged.emit(
+				"Fleeing... %s hits for %d dmg. Escaping in %d ticks..." % [
+					main.game_data.currentMonsterName,
+					finalAtk,
+					main.game_data.fleeTicks
+				], "combat", false
+			)
+		if (main.game_data.hp <= 0):
 			die()
 			return
-		if main.game_data.fleeTicks <= 0:
+		if (main.game_data.fleeTicks <= 0):
 			flee()
 			return
 		GameEvents.combatTick.emit(playerAtk, finalAtk, main.game_data.currentMonsterHp)
 		return
 
-	GameEvents.eventLogged.emit(
-		"You hit %s for %d. It strikes back for %d." % [
-			main.game_data.currentMonsterName,
-			playerAtk,
-			finalAtk
-		], "combat", false
-	)
+	if (dodged):
+		GameEvents.eventLogged.emit(
+			"You hit %s for %d while evading the attack!" % [
+				main.game_data.currentMonsterName,
+				playerAtk
+			], "gather", false
+		)
+	else:
+		GameEvents.eventLogged.emit(
+			"You hit %s for %d. It strikes back for %d." % [
+				main.game_data.currentMonsterName,
+				playerAtk,
+				finalAtk
+			], "combat", false
+		)
 
 	if main.game_data.hp <= 0:
 		die()
 		return
-
 	if main.game_data.currentMonsterHp <= 0:
 		winCombat()
 		return
-
 	GameEvents.combatTick.emit(playerAtk, finalAtk, main.game_data.currentMonsterHp)
 
 func winCombat() -> void:
@@ -124,12 +139,11 @@ func winCombat() -> void:
 		return
 	var gold = randi_range(monster.goldMin, monster.goldMax)
 	main.game_data.gold += gold
-	main.game_data.xp += monster.xp
+	main.game_data.sessionKills += 1
 	GameEvents.eventLogged.emit(
-		"%s defeated! +%d gold, +%d XP." % [
+		"%s defeated! +%d gold" % [
 			main.game_data.currentMonsterName,
 			gold,
-			monster.xp
 		], "loot", false
 	)
 	var drops = MonsterRegistry.rollDrops(monster)
@@ -137,7 +151,7 @@ func winCombat() -> void:
 		GameEvents.eventLogged.emit("Looted: %s." % drop, "loot", false)
 		GameEvents.itemDropped.emit(drop)
 	clearCombat()
-	GameEvents.combatWon.emit(gold, monster.xp)
+	GameEvents.combatWon.emit(gold)
 	main.save_game()
 
 func flee() -> void:
@@ -149,6 +163,7 @@ func die() -> void:
 	main.game_data.gold = 0
 	main.game_data.backpack = []
 	main.game_data.currentWeight = 0.0
+	main.game_data.sessionKills = 0
 	clearCombat()
 	GameEvents.eventLogged.emit("You have died. Your gold and inventory are lost.", "danger", false)
 	GameEvents.playerDied.emit()

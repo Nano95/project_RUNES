@@ -288,9 +288,6 @@ func _getStacked(items: Array) -> Array[Dictionary]:
 				"isEquipment": true,
 				"instanceId": stack.get("instanceId", ""),
 				"statBonus": stack.get("statBonus", 0),
-				"enhancement": stack.get("enhancement", 0),
-				"statType": stack.get("statType", "none"),
-				"twoHanded": stack.get("twoHanded", false)
 			})
 		else:
 			result.append({

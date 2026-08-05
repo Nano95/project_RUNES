@@ -58,8 +58,7 @@ func _ready() -> void:
 	
 	# GIVE PLAYER REWARDS
 	if !(OS.get_name() == "Windows"):
-		print("===- Starting offline check from _ready")
-		check_offline_time_and_rewards()
+		call_deferred("check_offline_time_and_rewards")
 
 func _bootstrapSaveData() -> void:
 	if game_data.chests.size() == 0:
@@ -138,6 +137,7 @@ func _notification(what):
 	if (what == NOTIFICATION_WM_WINDOW_FOCUS_IN):
 		# IOS and PC
 		if !(OS.get_name() == "Android"):
+			print("DONE HERE")
 			focus_in_notification()
 	
 	if (what == NOTIFICATION_APPLICATION_RESUMED):
@@ -168,7 +168,6 @@ func _notification(what):
 		onHardExit() # SAVE IN THIS FUNCTION
 
 func focus_in_notification() -> void:
-	print("===- Starting offline check from focus_in_notif")
 	check_offline_time_and_rewards()
 	onAppResumed()
 
@@ -230,7 +229,7 @@ func check_offline_time_and_rewards() -> void:
 		## NOW ADD to the HP without going above maxhp if not in area
 		if (game_data.inArea): return
 		var previousHp = game_data.hp
-		game_data.hp = min(game_data.maxHp, game_data.hp + elapsed)
+		game_data.hp = min(active_menu_ref.equipmentSystem.getMaxHp(), game_data.hp + elapsed)
 		var actualHealed = game_data.hp - previousHp
 		if (actualHealed > 0):
 			GameEvents.hpChanged.emit()

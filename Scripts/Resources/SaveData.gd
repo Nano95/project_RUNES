@@ -3,13 +3,12 @@ class_name SaveData
 
 @export_category("Test_game")
 @export var hp: int = 100
-@export var maxHp: int = 100
+@export var baseHp: int = 80
 @export var eventCount: int = 0
 @export var gold: int = 0
-@export var xp: int = 0
-@export var level: int = 1
 @export var currentWeight: float = 0.0
 @export var maxWeight: float = 50.0
+@export var sessionKills: int = 0
 
 @export var currentArea: String = "Town"
 @export var inArea: bool = false

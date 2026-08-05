@@ -2,6 +2,7 @@ extends Control
 class_name MainController
 
 var main:MainNode
+@export var equipmentSystem:EquipmentSystem
 @export_category("Other")
 @export var tickTimer:Timer
 

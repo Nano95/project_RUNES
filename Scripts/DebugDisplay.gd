@@ -1,6 +1,7 @@
 extends ColorRect
 class_name DebugDisplay
 
+@export var equipmentSystem:EquipmentSystem
 @export var debugText: RichTextLabel
 @export var closeButton: Button
 
@@ -22,7 +23,7 @@ func buildDebugText() -> String:
 	var text = ""
 
 	text += "[color=#c8880a][b]PLAYER[/b][/color]\n"
-	text += "Level: %d | HP: %d/%d\n" % [gd.level, gd.hp, gd.maxHp]
+	text += "Level: %d | HP: %d/%d\n" % [gd.level, gd.hp, equipmentSystem.getMaxHp()]
 	text += "XP: %d | Gold: %d | Saved: %d\n" % [gd.xp, gd.gold, gd.savedGold]
 	text += "Weight: %.1f/%.1f\n\n" % [gd.currentWeight, gd.maxWeight]
 

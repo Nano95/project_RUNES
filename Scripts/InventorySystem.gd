@@ -2,26 +2,21 @@ extends Node
 class_name InventorySystem
 
 var main:MainNode
+@export var equipmentSystem:EquipmentSystem
 
 func _ready() -> void:
 	main = Utils.get_main()
 	GameEvents.itemDropped.connect(onItemDropped)
-	GameEvents.leveledUp.connect(onLeveledUp)
 	GameEvents.potionUsed.connect(onPotionUsed)
 
+# In InventorySystem.onItemDropped
 func onItemDropped(itemName: String) -> void:
 	var def = ItemRegistry.getEquipmentDef(itemName)
-	if (def):
-		# Roll a unique instance for equipment
-		var instance = ItemRegistry.rollEquipmentInstance(itemName)
+	if def:
+		var instance = ItemRegistry.rollEquipmentInstance(itemName, true)
 		addEquipmentToBackpack(instance)
 	else:
 		addToBackpack(itemName)
-
-func onLeveledUp() -> void:
-	
-	main.game_data.maxWeight += 5.0
-	GameEvents.weightChanged.emit()
 
 # ── BACKPACK ─────────────────────────────────────────────
 func addToBackpack(itemName: String, qty: int = 1) -> bool:
@@ -189,14 +184,15 @@ func onPotionUsed(itemName: String) -> void:
 		removeFromBackpack(itemName, 1)
 		return
 	
-	if main.game_data.hp >= main.game_data.maxHp:
+	var maxHp = equipmentSystem.getMaxHp()
+	if main.game_data.hp >= maxHp:
 		GameEvents.eventLogged.emit("Already at full HP.", "system", false)
 		return
 	if not hasInBackpack(itemName):
 		return
 	var healAmount = getPotionHeal(itemName)
 	removeFromBackpack(itemName, 1)
-	main.game_data.hp = min(main.game_data.maxHp, main.game_data.hp + healAmount)
+	main.game_data.hp = min(maxHp, main.game_data.hp + healAmount)
 	main.save_game()
 	GameEvents.eventLogged.emit(
 		"Used %s. Restored %d HP." % [itemName, healAmount], "gather", false

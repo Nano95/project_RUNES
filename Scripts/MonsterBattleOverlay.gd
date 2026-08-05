@@ -56,7 +56,7 @@ func onFleePressed() -> void:
 	fleeButton.disabled = true
 	fleeButton.text = "Fleeing... (3)"
 
-func onCombatEnded(_a = null, _b = null) -> void:
+func onCombatEnded(_a = null) -> void:
 	Utils.animate_modal_exit(self)
 	monsterMaxHp = 0
 
