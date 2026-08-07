@@ -62,6 +62,8 @@ signal recipeDiscovered(recipeName: String)
 signal brewAttempted(success: bool, resultItem: String)
 @warning_ignore("unused_signal")
 signal timePotionUsed
+@warning_ignore("unused_signal")
+signal autoContinueToggled(enabled: bool)
 
 ### COMBAT
 @warning_ignore("unused_signal")

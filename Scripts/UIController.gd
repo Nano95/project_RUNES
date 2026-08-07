@@ -6,15 +6,17 @@ class_name UIController
 @export var chooseAreaButton: Button
 @export var brewButton: Button
 @export var storageButton: Button
-@export var armoryButton: Button
+@export var equipmentButton: Button
+@export var eventLogButton: Button
 @export var merchantButton: Button
 @export var blacksmithButton: Button
 @export var debugButton: Button
 @export var areaButtons: Array[Button] = []
+@export var eventLogPanel: Panel
+@export var equipmentPanel: Panel
 @export var inventorySystem: InventorySystem
 @export var storageDisplay: StorageDisplay
 @export var alchemyDisplay: BrewDisplay
-@export var equipmentDisplay:EquipmentDisplay
 @export var merchantDisplay: MerchantDisplay
 @export var blacksmithDisplay: BlacksmithDisplay
 @export var checkPointDisplay: CheckpointOverlay
@@ -22,6 +24,7 @@ class_name UIController
 @export var areaSystem: AreaSystem
 @export var adventuringRow: HBoxContainer
 @export var inventoryPanel: Panel
+@export var autoContinueButton: Button
 
 var main:MainNode
 
@@ -32,10 +35,15 @@ func _ready() -> void:
 	GameEvents.playerDied.connect(onAreaExited)
 	GameEvents.areaUnlocked.connect(onAreaUnlocked)
 	GameEvents.checkpointReached.connect(showCheckpoint)
+	autoContinueButton.toggled.connect(emitAutoContinueToggled) # outgoing emit
+	GameEvents.autoContinueToggled.connect(onAutoContinueToggled) # incoming emit
+	
+	
 	chooseAreaButton.pressed.connect(onChooseAreaPressed)
 	storageButton.pressed.connect(showDisplay)
 	brewButton.pressed.connect(showAlchemy)
-	armoryButton.pressed.connect(showArmory)
+	equipmentButton.pressed.connect(showEquipment)
+	eventLogButton.pressed.connect(showEventPanel)
 	merchantButton.pressed.connect(showMerchant)
 	blacksmithButton.pressed.connect(showBlacksmith)
 	debugButton.pressed.connect(debugDisplay.open)
@@ -73,9 +81,15 @@ func showAlchemy() -> void:
 	Utils.animateButtonPress(brewButton)
 	alchemyDisplay.open()
 
-func showArmory() -> void:
-	Utils.animateButtonPress(armoryButton)
-	equipmentDisplay.open()
+func showEquipment() -> void:
+	Utils.animateButtonBounce(equipmentPanel)
+	equipmentPanel.show()
+	eventLogPanel.hide()
+
+func showEventPanel() -> void:
+	Utils.animateButtonBounce(eventLogPanel)
+	eventLogPanel.show()
+	equipmentPanel.hide()
 
 func showMerchant() -> void:
 	Utils.animateButtonPress(merchantButton)
@@ -120,6 +134,12 @@ func onAreaButtonPressed(idx: int) -> void:
 func onAreaUnlocked(areaName: String) -> void:
 	refreshAreaGrid()
 	GameEvents.eventLogged.emit("A new area is now accessible: " + areaName + ".", "discover", false)
+
+func emitAutoContinueToggled(isToggled:bool=false) -> void:
+	GameEvents.autoContinueToggled.emit(isToggled)
+
+func onAutoContinueToggled(isToggled:bool=false) -> void:
+	autoContinueButton.button_pressed = isToggled
 
 func refreshAreaGrid() -> void:
 	var unlocked = main.game_data.unlockedAreas

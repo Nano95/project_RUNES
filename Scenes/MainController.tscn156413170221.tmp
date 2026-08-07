@@ -324,7 +324,7 @@ equipmentSystem = NodePath("EquipmentSystem")
 tickTimer = NodePath("TickTimer")
 eventLog = NodePath("UIController/MarginContainer/VBoxContainer/EventLogPanel/VBoxContainer/MarginContainer/EventLog")
 
-[node name="UIController" type="Control" parent="." unique_id=1458651066 node_paths=PackedStringArray("mainActionRow", "areaSelectRow", "chooseAreaButton", "brewButton", "storageButton", "equipmentButton", "eventLogButton", "merchantButton", "blacksmithButton", "debugButton", "areaButtons", "eventLogPanel", "equipmentPanel", "inventorySystem", "storageDisplay", "alchemyDisplay", "merchantDisplay", "blacksmithDisplay", "checkPointDisplay", "debugDisplay", "areaSystem", "adventuringRow", "inventoryPanel", "autoContinueButton")]
+[node name="UIController" type="Control" parent="." unique_id=1458651066 node_paths=PackedStringArray("mainActionRow", "areaSelectRow", "chooseAreaButton", "brewButton", "storageButton", "equipmentButton", "eventLogButton", "merchantButton", "blacksmithButton", "debugButton", "areaButtons", "eventLogPanel", "equipmentPanel", "inventorySystem", "storageDisplay", "alchemyDisplay", "merchantDisplay", "blacksmithDisplay", "checkPointDisplay", "debugDisplay", "areaSystem", "adventuringRow", "inventoryPanel")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -355,7 +355,6 @@ debugDisplay = NodePath("DebugContainer")
 areaSystem = NodePath("../AreaSystem")
 adventuringRow = NodePath("MarginContainer/VBoxContainer/AdventuringRow")
 inventoryPanel = NodePath("MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay")
-autoContinueButton = NodePath("MarginContainer/VBoxContainer/EventLogPanel/VBoxContainer/QuickConfigs/MarginContainer/HBoxContainer/AutoContinueButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="UIController" unique_id=709362305]
 layout_mode = 1
@@ -635,14 +634,23 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Equipment"
 
-[node name="AutoContinueButton" type="CheckButton" parent="UIController/MarginContainer/VBoxContainer/EventLogPanel/VBoxContainer/QuickConfigs/MarginContainer/HBoxContainer" unique_id=1681259923]
+[node name="CheckPointContinue" type="Button" parent="UIController/MarginContainer/VBoxContainer/EventLogPanel/VBoxContainer/QuickConfigs/MarginContainer/HBoxContainer" unique_id=280886899]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/outline_size = 8
+theme = ExtResource("17_g72ry")
+theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
-theme_override_font_sizes/font_size = 21
-text = " Checkpoint auto-continue?  "
-alignment = 1
+theme_override_font_sizes/font_size = 32
+text = "Auto-continue"
+
+[node name="ArmoryBtn3" type="Button" parent="UIController/MarginContainer/VBoxContainer/EventLogPanel/VBoxContainer/QuickConfigs/MarginContainer/HBoxContainer" unique_id=605988520]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("17_g72ry")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Armory"
 
 [node name="MarginContainer" type="MarginContainer" parent="UIController/MarginContainer/VBoxContainer/EventLogPanel/VBoxContainer" unique_id=860979958]
 layout_mode = 2

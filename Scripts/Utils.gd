@@ -281,6 +281,24 @@ func animateButtonPress(btn: Control) -> void:
 		tween.set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 		tween.tween_property(btn, "position", original_pos, 0.15)
 
+func animateButtonBounce(node: Control) -> void:
+	if not is_instance_valid(node):
+		return
+	
+	# Force layout recalculation before reading position
+	if not node.has_meta("originalY"):
+		# Wait one frame for layout to settle if node was hidden
+		await node.get_tree().process_frame
+		node.set_meta("originalY", node.position.y)
+		print("stored originalY after frame: ", node.position.y)
+	
+	var originalY = node.get_meta("originalY")
+	var tween = node.create_tween()
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	tween.tween_property(node, "position:y", originalY - 6, 0.1)
+	tween.set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(node, "position:y", originalY, 0.15)
+
 func spawn_reward_label(pos: Vector2, amount: int) -> void:
 	# Instance the label
 	var label: Label = my_label.instantiate()

@@ -27,6 +27,8 @@ func _ready() -> void:
 	continueButton.pressed.connect(onContinuePressed)
 	retreatButton.pressed.connect(onRetreatPressed)
 	autoCheckbox.toggled.connect(onAutoToggled)
+	# toggled from eventPanel quick settings
+	GameEvents.autoContinueToggled.connect(onAutoContinueToggled)
 	autoTimer.wait_time = AUTO_DURATION
 	autoTimer.one_shot = true
 	autoTimer.timeout.connect(onAutoTimerTimeout)
@@ -52,6 +54,9 @@ func onHide() -> void:
 	Utils.animate_modal_exit(self)
 	hide()
 
+func onAutoContinueToggled(toggled:bool = true) -> void:
+	autoCheckbox.set_pressed_no_signal(toggled)
+
 func onCheckpointReached() -> void:
 	descLabel.bbcode_enabled = true
 	descLabel.text = CHECKPOINT_MESSAGES[randi() % CHECKPOINT_MESSAGES.size()]
@@ -62,6 +67,7 @@ func onCheckpointReached() -> void:
 	onOpen()
 
 func onContinuePressed() -> void:
+	print("Auto continue pressed!")
 	Utils.animateButtonPress(continueButton)
 	stopAutoTimer()
 	onHide()
@@ -75,6 +81,7 @@ func onRetreatPressed() -> void:
 	areaSystem.exitArea()
 
 func onAutoToggled(pressed: bool) -> void:
+	GameEvents.autoContinueToggled.emit(pressed)
 	if (pressed):
 		startAutoTimer()
 	else:

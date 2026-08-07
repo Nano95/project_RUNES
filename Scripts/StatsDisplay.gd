@@ -35,10 +35,11 @@ func _ready() -> void:
 
 func onPlayerDied() -> void:
 	var gd = main.game_data
+	var maxHp:int = equipmentSystem.getMaxHp()
 	@warning_ignore("integer_division")
-	main.game_data.hp = int(equipmentSystem.getMaxHp() * .2)
-	hpValue.text = "%d / %d" % [gd.hp, gd.maxHp]
-	hpBar.max_value = gd.maxHp
+	main.game_data.hp = int(maxHp * .2)
+	hpValue.text = "%d / %d" % [gd.hp, maxHp]
+	hpBar.max_value = maxHp
 	hpBar.value = gd.hp
 
 func refresh() -> void:
@@ -85,7 +86,7 @@ func updateHp() -> void:
 	# Pulse the label on every HP change
 	#pulseHpLabel()
 
-func updateStats() -> void:
+func updateStats(_a:int=0) -> void:
 	var atk = equipmentSystem.getTotalAttack()
 	var def = equipmentSystem.getTotalDefense()
 	var dodge = equipmentSystem.getDodgeChance()
@@ -101,6 +102,8 @@ func onAreaEntered(areaName: String) -> void:
 	eventValue.text = "Event #0"
 	goldLabel.text = "Looted Gold"
 	goldValue.text = str(0)
+	main.game_data.sessionKills = 0
+	updateStats()
 
 func onAreaExited() -> void:
 	areaValue.text = "Town"
