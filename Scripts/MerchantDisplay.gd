@@ -65,6 +65,7 @@ func refreshItems() -> void:
 	for entry in stock:
 		var btn = Button.new()
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		
 		btn.custom_minimum_size = Vector2(0, 60.0)
 
 		var hbox = HBoxContainer.new()

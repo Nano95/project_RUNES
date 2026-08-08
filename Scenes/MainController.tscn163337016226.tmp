@@ -3031,7 +3031,7 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 48
 text = "Flee"
 
-[node name="SelectEquipmentDisplay" type="ColorRect" parent="UIController" unique_id=637337967 node_paths=PackedStringArray("equipmentSystem", "equipmentDisplay", "itemListTitle", "itemListHFlow", "itemInfoPanel", "itemInfoName", "itemInfoStat", "itemInfoDesc", "equipUnequipBtn", "closeModalBtn")]
+[node name="SelectEquipmentDisplay" type="ColorRect" parent="UIController" unique_id=637337967 node_paths=PackedStringArray("equipmentSystem", "equipmentDisplay", "itemListTitle", "itemListVBox", "itemInfoPanel", "itemInfoName", "itemInfoStat", "itemInfoDesc", "equipUnequipBtn", "closeModalBtn")]
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
 anchors_preset = 14
@@ -3046,7 +3046,7 @@ script = ExtResource("21_shy7a")
 equipmentSystem = NodePath("../../EquipmentSystem")
 equipmentDisplay = NodePath("../MarginContainer/VBoxContainer/EquipmentDisplay")
 itemListTitle = NodePath("MarginContainer/MonsterBattlePanel/TitlePanel/Title2")
-itemListHFlow = NodePath("MarginContainer/MonsterBattlePanel/MarginContainer/VBoxContainer/Panel/MarginContainer/AvailableItems/InventoryGrid")
+itemListVBox = NodePath("MarginContainer/MonsterBattlePanel/MarginContainer/VBoxContainer/Panel/MarginContainer/AvailableItems/InventoryGrid")
 itemInfoPanel = NodePath("MarginContainer/MonsterBattlePanel/MarginContainer/VBoxContainer/Details")
 itemInfoName = NodePath("MarginContainer/MonsterBattlePanel/MarginContainer/VBoxContainer/Details/VBoxContainer/Name")
 itemInfoStat = NodePath("MarginContainer/MonsterBattlePanel/MarginContainer/VBoxContainer/Details/VBoxContainer/Stats")
