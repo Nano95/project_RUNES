@@ -9,29 +9,27 @@ func _ready() -> void:
 				_make("Orcling", "weak", 15, 6, 1, 4, [
 					_drop("Orc Leather", 0.08),
 					_drop("Orc Helmet", 0.03),
-					_drop("Orc King Shield", 0.02),
 				]),
 				_make("Orc Grunt", "weak", 18, 7, 1, 5, [
 					_drop("Orc Leather", 0.08),
 					_drop("Orc Helmet", 0.03),
-					_drop("Orc King Shield", 0.02),
 				]),
 				_make("Orc Runt", "weak", 12, 5, 0, 3, [
 					_drop("Orc Leather", 0.08),
 					_drop("Orc Helmet", 0.02),
-					_drop("Orc King Shield", 0.01),
 				]),
 			],
 			"medium": [
 				_make("Orc Warrior", "medium", 45, 12, 5, 14, [
 					_drop("Orc Leather", 0.11),
 					_drop("Orc Legs", 0.04),
+					_drop("Orcish Axe", 0.05),
 					
 				]),
 				_make("Orc Brute", "medium", 55, 14, 6, 16, [
 					_drop("Orc Leather", 0.11),
 					_drop("Orc Legs", 0.04),
-					_drop("Crude Blade", 0.04),
+					_drop("Orcish Axe", 0.05),
 				]),
 				_make("Orc Raider", "medium", 50, 13, 5, 15, [
 					_drop("Orc Leather", 0.11),
@@ -44,7 +42,6 @@ func _ready() -> void:
 					_drop("Orc Leather", 0.15),
 					_drop("Orc Boots", 0.05),
 					_drop("Orc Armor", 0.04),
-					_drop("Orcish Axe", 0.05),
 				]),
 				_make("Orc General", "strong", 110, 25, 16, 35, [
 					_drop("Orc Leather", 0.15),

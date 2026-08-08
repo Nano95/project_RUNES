@@ -10,6 +10,7 @@ class_name CheckpointOverlay
 @export var autoProgress: ProgressBar
 
 @export var eventLogPanel: Panel
+@export var equipmentPanel: Panel
 @export var areaSystem: AreaSystem
 
 const AUTO_DURATION: float = 2.0
@@ -46,7 +47,11 @@ func _process(_delta: float) -> void:
 		set_process(false)
 
 func onOpen() -> void:
-	global_position.y = eventLogPanel.global_position.y
+	if (eventLogPanel.visible):
+		global_position.y = eventLogPanel.global_position.y
+	elif (equipmentPanel.visible):
+		global_position.y = equipmentPanel.global_position.y
+	
 	Utils.animate_modal_entry(self)
 	show()
 

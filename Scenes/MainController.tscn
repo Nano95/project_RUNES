@@ -1303,7 +1303,7 @@ layout_mode = 2
 theme_override_constants/h_separation = 9
 theme_override_constants/v_separation = 12
 
-[node name="CheckpointOverlay" type="ColorRect" parent="UIController" unique_id=428981134 node_paths=PackedStringArray("descLabel", "continueButton", "retreatButton", "autoCheckbox", "autoTimer", "autoProgress", "eventLogPanel", "areaSystem")]
+[node name="CheckpointOverlay" type="ColorRect" parent="UIController" unique_id=428981134 node_paths=PackedStringArray("descLabel", "continueButton", "retreatButton", "autoCheckbox", "autoTimer", "autoProgress", "eventLogPanel", "equipmentPanel", "areaSystem")]
 visible = false
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
@@ -1323,6 +1323,7 @@ autoCheckbox = NodePath("Panel/HBoxContainer2/CheckButton")
 autoTimer = NodePath("Panel/autoTimer")
 autoProgress = NodePath("Panel/HBoxContainer2/ProgressBar")
 eventLogPanel = NodePath("../MarginContainer/VBoxContainer/EventLogPanel")
+equipmentPanel = NodePath("../MarginContainer/VBoxContainer/EquipmentDisplay")
 areaSystem = NodePath("../../AreaSystem")
 
 [node name="Panel" type="Panel" parent="UIController/CheckpointOverlay" unique_id=415730517]
@@ -1448,7 +1449,7 @@ size_flags_vertical = 1
 value = 72.0
 show_percentage = false
 
-[node name="ItemActionContainer" type="ColorRect" parent="UIController" unique_id=1469258999 node_paths=PackedStringArray("itemNameLabel", "itemDescLabel", "equipButton", "dropButton", "dropAllButton", "cancelButton", "eventLogPanel", "compareContainer", "selectedEquipType", "selectedEquipTypeValue", "equippedName", "equippedNameStatValue", "compareStats", "inventorySystem", "equipmentSystem")]
+[node name="ItemActionContainer" type="ColorRect" parent="UIController" unique_id=1469258999 node_paths=PackedStringArray("itemNameLabel", "itemDescLabel", "equipButton", "dropButton", "dropAllButton", "cancelButton", "eventLogPanel", "equipmentPanel", "compareContainer", "selectedEquipType", "selectedEquipTypeValue", "equippedName", "equippedNameStatValue", "compareStats", "inventorySystem", "equipmentSystem")]
 visible = false
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
@@ -1468,6 +1469,7 @@ dropButton = NodePath("ItemActionModal/HBoxContainer/Drop")
 dropAllButton = NodePath("ItemActionModal/HBoxContainer/DropAll")
 cancelButton = NodePath("ItemActionModal/HBoxContainer/Close")
 eventLogPanel = NodePath("../MarginContainer/VBoxContainer/EventLogPanel")
+equipmentPanel = NodePath("../MarginContainer/VBoxContainer/EquipmentDisplay")
 compareContainer = NodePath("ItemActionModal/EquipmentContainer")
 selectedEquipType = NodePath("ItemActionModal/EquipmentContainer/HBoxContainer/SelectedType")
 selectedEquipTypeValue = NodePath("ItemActionModal/EquipmentContainer/HBoxContainer/value")
@@ -2903,7 +2905,7 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Close"
 
-[node name="MonsterBattleOverlay" type="ColorRect" parent="UIController" unique_id=1221790153 node_paths=PackedStringArray("enemyNameLabel", "enemyHPBar", "enemyHPValue", "fleeButton", "eventLogPanel")]
+[node name="MonsterBattleOverlay" type="ColorRect" parent="UIController" unique_id=1221790153 node_paths=PackedStringArray("enemyNameLabel", "enemyHPBar", "enemyHPValue", "fleeButton", "eventLogPanel", "equipmentPanel")]
 visible = false
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
@@ -2921,6 +2923,7 @@ enemyHPBar = NodePath("MonsterBattlePanel/HpProgressBar")
 enemyHPValue = NodePath("MonsterBattlePanel/MonsterHp")
 fleeButton = NodePath("MonsterBattlePanel/HBoxContainer/Flee")
 eventLogPanel = NodePath("../MarginContainer/VBoxContainer/EventLogPanel")
+equipmentPanel = NodePath("../MarginContainer/VBoxContainer/EquipmentDisplay")
 
 [node name="MonsterBattlePanel" type="Panel" parent="UIController/MonsterBattleOverlay" unique_id=242767461]
 layout_mode = 1

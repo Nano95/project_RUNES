@@ -42,6 +42,7 @@ func refresh() -> void:
 	for i in main.game_data.backpack.size():
 		var stack = main.game_data.backpack[i]
 		var itemName = stack.get("name", "")
+		var grade = stack.get("grade", "")
 		var qty = stack.get("qty", 1)
 		var item = ItemRegistry.getItem(itemName)
 		if not item:
@@ -52,7 +53,10 @@ func refresh() -> void:
 		if item.stackable and qty > 1:
 			btn.text = " %s %d/%d " % [itemName, qty, cap]
 		else:
-			btn.text = " " + itemName + " "
+			if (grade):
+				btn.text = " %s [%s] " % [itemName, grade]
+			else:
+				btn.text = " %s" % [itemName]
 
 		btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		var color = getColorForType(item.itemType)

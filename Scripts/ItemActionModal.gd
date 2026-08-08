@@ -8,6 +8,7 @@ class_name ItemActionModal
 @export var dropAllButton: Button
 @export var cancelButton: Button
 @export var eventLogPanel: Panel
+@export var equipmentPanel: Panel
 
 @export var compareContainer: VBoxContainer
 @export var selectedEquipType: Label
@@ -56,7 +57,11 @@ func onItemLongPressed(itemName: String, qty: int, stackIndex: int) -> void:
 		else:
 			itemDescLabel.visible = false
 	
-	global_position.y = eventLogPanel.global_position.y
+	if (eventLogPanel.visible):
+		global_position.y = eventLogPanel.global_position.y
+	elif (equipmentPanel.visible):
+		global_position.y = equipmentPanel.global_position.y
+
 	Utils.animate_modal_entry(self)
 
 func onEquipPressed() -> void:

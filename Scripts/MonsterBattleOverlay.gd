@@ -6,6 +6,7 @@ class_name CombatOverlay
 @export var enemyHPValue: Label
 @export var fleeButton: Button
 @export var eventLogPanel: Panel
+@export var equipmentPanel: Panel
 
 var main:MainNode
 var monsterMaxHp: int = 0
@@ -31,7 +32,10 @@ func onCombatStarted(monster: MonsterData) -> void:
 	fleeButton.disabled = false
 	fleeButton.text = "Flee"
 	
-	global_position.y = eventLogPanel.global_position.y
+	if (eventLogPanel.visible):
+		global_position.y = eventLogPanel.global_position.y
+	elif (equipmentPanel.visible):
+		global_position.y = equipmentPanel.global_position.y
 	Utils.animate_modal_entry(self)
 
 func onCombatTick(_playerDmg: int, _monsterDmg: int, monsterHpLeft: int) -> void:
