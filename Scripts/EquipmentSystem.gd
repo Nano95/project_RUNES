@@ -63,8 +63,6 @@ func unequipSlot(slot: String) -> void:
 	GameEvents.equipmentChanged.emit()
 
 func getEquippedSlot(slot: String) -> Dictionary:
-	print("Main: ", main)
-	print(" - ", main.game_data.equippedHelmet)
 	match slot:
 		"weapon": return main.game_data.equippedWeapon
 		"shield": return main.game_data.equippedShield

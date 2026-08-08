@@ -116,13 +116,7 @@ func _getStatText(itemName: String) -> String:
 		if (heal > 0):
 			return "[color=#8e44ad]%d HP[/color]" % heal
 		else: return ""
-	var def = ItemRegistry.getEquipmentDef(itemName)
-	if def:
-		var statLabel = def.statType.to_upper() if def.statType != "none" else ""
-		if def.statMax > 0:
-			return "[color=#888888]%s +%d~+%d[/color]" % [statLabel, def.statMin, def.statMax]
-		elif def.effectType != "none":
-			return "[color=#8e44ad]%s[/color]" % def.effectType
+
 	return ""
 
 func _getPotionHeal(itemName: String) -> int:
@@ -143,13 +137,7 @@ func refreshDetail() -> void:
 	detailName.text = itemName
 	detailDesc.text = "[i]%s[/i]" % (item.description if item else "")
 
-	var def = ItemRegistry.getEquipmentDef(itemName)
-	if def and def.statMax > 0:
-		detailStat.bbcode_enabled = true
-		detailStat.text = "%s +%d to +%d — [color=#c8880a]%dg[/color]" % [
-			def.statType.to_upper(), def.statMin, def.statMax, selectedEntry["cost"]
-		]
-	elif item and item.itemType == "potion":
+	if item and item.itemType == "potion":
 		detailStat.bbcode_enabled = true
 		detailStat.text = "%s — [color=#c8880a]%dg[/color]" % [
 			item.description, selectedEntry["cost"]

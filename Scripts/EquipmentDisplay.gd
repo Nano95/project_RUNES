@@ -23,7 +23,6 @@ func _ready() -> void:
 	shieldBtn.pressed.connect(onSlotPressed.bind("shield"))
 	legsBtn.pressed.connect(onSlotPressed.bind("legs"))
 	bootsBtn.pressed.connect(onSlotPressed.bind("boots"))
-	print("Main: ", main)
 	call_deferred("refresh")
 	#refresh()
 

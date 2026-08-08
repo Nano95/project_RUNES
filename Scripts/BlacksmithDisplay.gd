@@ -271,12 +271,11 @@ func refreshEnhanceDetail() -> void:
 		goldColor, cost["gold"], matColor, materialQty, materialNeeded
 	]
 
-	var statType = selectedEquip.get("statType", "")
-	var current = selectedEquip.get("statBonus", 0) + enh
 	enhanceStatLabel.bbcode_enabled = true
-	enhanceStatLabel.text = "[color=#888888]  %s[/color] [color=#ffffff]+%d[/color] → [color=#27ae60]+%d[/color]" % [
-		statType.to_upper(), current, current + 1
-	]
+	
+	#enhanceStatLabel.text = "[color=#888888]  %s[/color] [color=#ffffff]+%d[/color] → [color=#27ae60]+%d[/color]" % [
+		#statType.to_upper(), enh, enh + 1
+	#]
 func _updatePips(level: int) -> void:
 	enhancePip1.modulate = Color("#c8880a") if level >= 1 else Color("#444444")
 	enhancePip2.modulate = Color("#c8880a") if level >= 2 else Color("#444444")

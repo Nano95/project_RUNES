@@ -2,7 +2,7 @@ extends Resource
 class_name SaveData
 
 @export_category("Test_game")
-@export var hp: int = 100
+@export var hp: int = 80
 @export var baseHp: int = 80
 @export var eventCount: int = 0
 @export var gold: int = 0
@@ -42,7 +42,6 @@ class_name SaveData
 
 @export_category("General")
 @export var loot_inventory:Dictionary = {
-	# "Orc Tooth": 10
 }
 @export var rune_inv: Dictionary = { # Start pack
 	"Arcane Cross": 100,

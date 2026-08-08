@@ -23,15 +23,21 @@ func getStackCap(itemName: String) -> int:
 	return STACK_CAPS.get(item.itemType, 1)
 
 func _register() -> void:
-	_add("Orc Tooth",       "part",      true,  0.2, "Yellowed and cracked.",             8)
+	# Starter gear — no grade, no set
+	_equip("Crude Blade",    "weapon", "", 0, 4,  0, 0.0,  "A crude blade.",              20)
+	_equip("Wooden Shield",  "shield", "", 0, 0,  5, 0.0,  "Better than nothing.",        30)
+	_equip("Leather Helmet", "helmet", "", 5, 0,  0, 0.0,  "A simple leather helm.",      20)
+	_equip("Leather Armor",  "armor",  "", 15, 0, 0, 0.0,  "Basic leather protection.",   35)
+	_equip("Leather Legs",   "legs",   "", 10, 0, 0, 0.0,  "Simple leather leggings.",    25)
+	_equip("Leather Boots",  "boots",  "", 0,  0, 0, 0.02, "Worn leather boots.",         20)
+	
 	# Orc Set (Hunting Grounds)
-	_equip("Orc Helmet",        "helmet",  "Orc",   20, 0, 0,  0.0,  "Forged from orc bone.",         80)
+	_equip("Orc Helmet",        "helmet",  "Orc",   15, 0, 0,  0.0,  "Forged from orc bone.",         80)
 	_equip("Orc Armor",         "armor",   "Orc",   35, 0, 0,  0.0,  "Heavy orcish plate.",           120)
 	_equip("Orc Legs",          "legs",    "Orc",   20, 0, 0,  0.0,  "Crude but sturdy.",             80)
 	_equip("Orc Boots",         "boots",   "Orc",   10, 0, 0,  0.03, "Grants access to Orc lands.",   60)
 	# Orc weapons and shield
-	_equip("Orcish Axe",        "weapon",  "",      0, 15, 0,  0.0,  "A crude but heavy axe.",        40)
-	_equip("Warlord Blade",     "weapon",  "",      0, 22, 0,  0.0,  "Carried by an Orc Warlord.",    80)
+	_equip("Orcish Axe",        "weapon",  "",      0, 10, 0,  0.0,  "A crude but heavy axe.",        40)
 	_equip("Orc King Shield",   "shield",  "",      0,  0, 8,  0.0,  "A gleaming shield of the Orc King.",       150)
 	# Orc monster part drops
 	_add("Orc Leather",       "part", true,  0.3, "Rough orcish hide.",           10)

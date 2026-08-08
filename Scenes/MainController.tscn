@@ -617,7 +617,6 @@ text = "1000"
 vertical_alignment = 1
 
 [node name="EventLogPanel" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=863328441]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -688,6 +687,7 @@ bbcode_enabled = true
 scroll_following = true
 
 [node name="EquipmentDisplay" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=1407338151 node_paths=PackedStringArray("equipmentSystem", "itemModal", "helmetBtn", "weaponBtn", "armorBtn", "shieldBtn", "legsBtn", "bootsBtn")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0

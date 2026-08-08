@@ -104,6 +104,7 @@ func onAreaEntered(_areaName: String) -> void:
 	mainActionRow.visible = false
 	areaSelectRow.visible = false
 	showInventory()
+	call_deferred("resetPanelPositionMeta")
 	#chooseAreaButton.text = "← Retreat"
 	#chooseAreaButton.pressed.disconnect(onChooseAreaPressed)
 	#chooseAreaButton.pressed.connect(onRetreatPressed)
@@ -118,6 +119,7 @@ func onRetreatPressed() -> void:
 
 func onAreaExited() -> void:
 	chooseAreaButton.text = "Choose Area"
+	call_deferred("resetPanelPositionMeta")
 	showSafeZone()
 
 func onChooseAreaPressed() -> void:
@@ -188,3 +190,9 @@ func onLockedAreaPressed(areaName: String) -> void:
 			"%s is locked. Reach event #100 in %s to unlock it." % [areaName, previousArea],
 			"system", false
 		)
+
+func resetPanelPositionMeta() -> void:
+	if eventLogPanel.has_meta("originalY"):
+		eventLogPanel.remove_meta("originalY")
+	if equipmentPanel.has_meta("originalY"):
+		equipmentPanel.remove_meta("originalY")

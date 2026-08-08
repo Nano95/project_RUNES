@@ -122,21 +122,12 @@ func showEquipmentComparison(instance: Dictionary) -> void:
 
 	compareContainer.visible = true
 	var slot = instance.get("slot", "")
-	var statType = instance.get("statType", "none")
-	var statBonus = instance.get("statBonus", 0)
 	var enhancement = instance.get("enhancement", 0)
-	var totalBonus = statBonus + enhancement
 	var enh = " +%d" % enhancement if enhancement > 0 else ""
 	var twoHanded = " [2H]" if instance.get("twoHanded", false) else ""
 
 	# Selected item
 	itemNameLabel.text = "%s%s%s" % [instance.get("name", ""), enh, twoHanded]
-	if statType != "none":
-		selectedEquipType.text = "Selected %s" % statType.to_upper()
-		selectedEquipTypeValue.text = "+%d" % totalBonus
-	else:
-		selectedEquipType.text = instance.get("effectType", "")
-		selectedEquipTypeValue.text = ""
 
 	# Currently equipped in that slot
 	var equipped = equipmentSystem.getEquippedSlot(slot)
@@ -151,17 +142,6 @@ func showEquipmentComparison(instance: Dictionary) -> void:
 		equippedName.text = "Equipped: %s%s" % [equipped.get("name", ""), curEnh]
 		equippedNameStatValue.text = "+%d" % curBonus
 
-		if statType != "none":
-			var diff = totalBonus - curBonus
-			compareStats.bbcode_enabled = true
-			if diff > 0:
-				compareStats.text = "[color=#27ae60]▲ +%d %s[/color]" % [diff, statType.to_upper()]
-			elif diff < 0:
-				compareStats.text = "[color=#e74c3c]▼ %d %s[/color]" % [diff, statType.to_upper()]
-			else:
-				compareStats.text = "[color=#888888]= No change[/color]"
-		else:
-			compareStats.text = ""
 
 func cancelPressed() -> void:
 	onClose()

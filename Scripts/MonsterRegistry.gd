@@ -6,50 +6,50 @@ func _ready() -> void:
 	areaMonsters = {
 "Hunting Grounds": {
 			"weak": [
-				_make("Orcling", "weak", 15, 6, 1, 4, [
+				_make("Orcling", "weak", 15, 11, 1, 4, [
 					_drop("Orc Leather", 0.08),
 					_drop("Orc Helmet", 0.03),
 				]),
-				_make("Orc Grunt", "weak", 18, 7, 1, 5, [
+				_make("Orc Grunt", "weak", 18, 12, 1, 5, [
 					_drop("Orc Leather", 0.08),
 					_drop("Orc Helmet", 0.03),
 				]),
-				_make("Orc Runt", "weak", 12, 5, 0, 3, [
+				_make("Orc Runt", "weak", 12, 10, 0, 3, [
 					_drop("Orc Leather", 0.08),
 					_drop("Orc Helmet", 0.02),
 				]),
 			],
 			"medium": [
-				_make("Orc Warrior", "medium", 45, 12, 5, 14, [
+				_make("Orc Warrior", "medium", 45, 17, 5, 10, [
 					_drop("Orc Leather", 0.11),
 					_drop("Orc Legs", 0.04),
 					_drop("Orcish Axe", 0.05),
 					
 				]),
-				_make("Orc Brute", "medium", 55, 14, 6, 16, [
+				_make("Orc Brute", "medium", 55, 19, 6, 11, [
 					_drop("Orc Leather", 0.11),
 					_drop("Orc Legs", 0.04),
 					_drop("Orcish Axe", 0.05),
 				]),
-				_make("Orc Raider", "medium", 50, 13, 5, 15, [
+				_make("Orc Raider", "medium", 50, 18, 5, 10, [
 					_drop("Orc Leather", 0.11),
 					_drop("Orc Legs", 0.03),
 					_drop("Orcish Axe", 0.05),
 				]),
 			],
 			"strong": [
-				_make("Mounted Orc", "strong", 90, 22, 14, 30, [
+				_make("Mounted Orc", "strong", 90, 27, 10, 15, [
 					_drop("Orc Leather", 0.15),
 					_drop("Orc Boots", 0.05),
 					_drop("Orc Armor", 0.04),
 				]),
-				_make("Orc General", "strong", 110, 25, 16, 35, [
+				_make("Orc General", "strong", 110, 30, 12, 15, [
 					_drop("Orc Leather", 0.15),
 					_drop("Orc General Crest", 0.10),
 					_drop("Orc Boots", 0.05),
 					_drop("Orc Armor", 0.05),
 				]),
-				_make("Orc Warchief", "strong", 130, 28, 18, 40, [
+				_make("Orc Warchief", "strong", 130, 30, 10, 15, [
 					_drop("Orc Leather", 0.20),
 					_drop("Orc General Crest", 0.15),
 					_drop("Orc Boots", 0.06),
