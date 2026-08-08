@@ -22,13 +22,17 @@ func _ready() -> void:
 	fleeButton.pressed.connect(onFleePressed)
 	hide()
 
-func onCombatStarted(monster: MonsterData) -> void:
+func onCombatStarted(monster: MonsterData, weakened: bool) -> void:
+	# dont show if we end the battle in one hit
+	if (main.game_data.currentMonsterHp <= 0):
+		return
+	var currHp = int(monster.hp * .5) if (weakened) else monster.hp
 	monsterMaxHp = monster.hp
 	enemyNameLabel.text = "%s [%s]" % [monster.monsterName, monster.tier.to_upper()]
 	enemyHPBar.max_value = monsterMaxHp
-	enemyHPBar.value = monsterMaxHp
-	enemyHPValue.text = "%d / %d" % [monsterMaxHp, monsterMaxHp]
-	updateHPColor(monsterMaxHp)
+	enemyHPBar.value = currHp
+	enemyHPValue.text = "%d / %d" % [currHp, monsterMaxHp]
+	updateHPColor(currHp)
 	fleeButton.disabled = false
 	fleeButton.text = "Flee"
 	
@@ -36,6 +40,8 @@ func onCombatStarted(monster: MonsterData) -> void:
 		global_position.y = eventLogPanel.global_position.y
 	elif (equipmentPanel.visible):
 		global_position.y = equipmentPanel.global_position.y
+	
+	
 	Utils.animate_modal_entry(self)
 
 func onCombatTick(_playerDmg: int, _monsterDmg: int, monsterHpLeft: int) -> void:

@@ -23,8 +23,7 @@ func buildDebugText() -> String:
 	var text = ""
 
 	text += "[color=#c8880a][b]PLAYER[/b][/color]\n"
-	text += "Level: %d | HP: %d/%d\n" % [gd.level, gd.hp, equipmentSystem.getMaxHp()]
-	text += "XP: %d | Gold: %d | Saved: %d\n" % [gd.xp, gd.gold, gd.savedGold]
+	text += "Gold: %d | Saved: %d\n" % [gd.gold, gd.savedGold]
 	text += "Weight: %.1f/%.1f\n\n" % [gd.currentWeight, gd.maxWeight]
 
 	text += "[color=#c8880a][b]BACKPACK[/b][/color] (%d items)\n" % gd.backpack.size()

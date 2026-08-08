@@ -67,7 +67,7 @@ signal autoContinueToggled(enabled: bool)
 
 ### COMBAT
 @warning_ignore("unused_signal")
-signal combatStarted(monster: MonsterData)
+signal combatStarted(monster: MonsterData, weakened: bool)
 @warning_ignore("unused_signal")
 signal combatTick(playerDmg: int, monsterDmg: int, monsterHpLeft: int)
 @warning_ignore("unused_signal")

@@ -272,12 +272,9 @@ func buildEventTable() -> void:
 				{ "event": "nothing_a",   "weight": 8  },
 				{ "event": "nothing_b",   "weight": 20 },
 				{ "event": "monster",     "weight": 24 },
-				{ "event": "ore",         "weight": 8 },
-				{ "event": "forage",      "weight": 10 },
-				{ "event": "wood",        "weight": 5  },
+				{ "event": "forage",      "weight": 20 },
 				{ "event": "potion_gold", "weight": goldPotionChance },
-				{ "event": "dungeon",     "weight": 4  },
-				{ "event": "trap",        "weight": 8  },
+				{ "event": "trap",        "weight": 5  },
 				{ "event": "nothing_c",   "weight": 15 },
 			]
 		"Outskirts":
@@ -285,11 +282,11 @@ func buildEventTable() -> void:
 				{ "event": "nothing_a",   "weight": 8  },
 				{ "event": "nothing_b",   "weight": 18 },
 				{ "event": "monster",     "weight": 28 },
-				{ "event": "ore",         "weight": 12 },
+				#{ "event": "ore",         "weight": 12 },
 				{ "event": "forage",      "weight": 8  },
-				{ "event": "wood",        "weight": 6  },
+				#{ "event": "wood",        "weight": 6  },
 				{ "event": "potion_gold", "weight": goldPotionChance },
-				{ "event": "dungeon",     "weight": 4  },
+				#{ "event": "dungeon",     "weight": 4  },
 				{ "event": "trap",        "weight": 6  },
 				{ "event": "nothing_c",   "weight": 10 },
 			]
@@ -298,11 +295,11 @@ func buildEventTable() -> void:
 				{ "event": "nothing_a",   "weight": 10 },
 				{ "event": "nothing_b",   "weight": 18 },
 				{ "event": "monster",     "weight": 28 },
-				{ "event": "ore",         "weight": 6  },
+				#{ "event": "ore",         "weight": 6  },
 				{ "event": "forage",      "weight": 14 }, # more foraging in forest
-				{ "event": "wood",        "weight": 10 }, # more wood in forest
+				#{ "event": "wood",        "weight": 10 }, # more wood in forest
 				{ "event": "potion_gold", "weight": goldPotionChance },
-				{ "event": "dungeon",     "weight": 4  },
+				#{ "event": "dungeon",     "weight": 4  },
 				{ "event": "trap",        "weight": 8  },
 				{ "event": "nothing_c",   "weight": 12 },
 			]
@@ -311,11 +308,8 @@ func buildEventTable() -> void:
 				{ "event": "nothing_a",   "weight": 10 },
 				{ "event": "nothing_b",   "weight": 13 },
 				{ "event": "monster",     "weight": 33 }, # heavily monster focused
-				{ "event": "ore",         "weight": 0  }, # no mining in a castle
 				{ "event": "forage",      "weight": 6  }, # barely any foraging
-				{ "event": "wood",        "weight": 0  }, # no forestry
 				{ "event": "potion_gold", "weight": goldPotionChance },
-				{ "event": "dungeon",     "weight": 4  },
 				{ "event": "trap",        "weight": 16 }, # lots of traps
 				{ "event": "nothing_c",   "weight": 20 }, # eerie silence
 			]
@@ -324,11 +318,8 @@ func buildEventTable() -> void:
 				{ "event": "nothing_a",   "weight": 10 },
 				{ "event": "nothing_b",   "weight": 15 },
 				{ "event": "monster",     "weight": 35 },
-				{ "event": "ore",         "weight": 8  }, # some ancient ore
 				{ "event": "forage",      "weight": 5  },
-				{ "event": "wood",        "weight": 2  }, # barely any wood
 				{ "event": "potion_gold", "weight": goldPotionChance },
-				{ "event": "dungeon",     "weight": 4  },
 				{ "event": "trap",        "weight": 10 },
 				{ "event": "nothing_c",   "weight": 15 },
 			]

@@ -29,30 +29,49 @@ func onTick() -> void:
 		return
 	tickCombat()
 
-func startCombat(monster: MonsterData) -> void:
+func startCombat(monster: MonsterData, weakened: bool = false) -> void:
 	main.game_data.inCombat = true
 	main.game_data.currentMonsterName = monster.monsterName
 	main.game_data.currentMonsterTier = monster.tier
-	main.game_data.currentMonsterHp = monster.hp
+	main.game_data.currentMonsterHp = int(monster.hp * 0.5) if weakened else monster.hp
 	main.game_data.currentMonsterAtk = monster.atk
 	main.game_data.isFleeing = false
 	main.game_data.fleeTicks = 0
-	GameEvents.combatStarted.emit(monster)
+	GameEvents.combatStarted.emit(monster, weakened)
 
 func trySpawnMonster(eventCount: int) -> void:
 	var tier = MonsterRegistry.rollTier(eventCount)
-	if (tier == "strong" and eventCount <= 40):
+	if tier == "strong" and eventCount <= 40:
 		pendingStrongMonsterIn = 10
 		GameEvents.eventLogged.emit(OMENS[randi() % OMENS.size()], "omen", true)
 		return
-	if (tier == "elite"):
-		pendingStrongMonsterIn = 10
-		GameEvents.eventLogged.emit(OMENS[randi() % OMENS.size()], "omen", true)
-		return
-	var monster = MonsterRegistry.rollMonster(main.game_data.currentArea, tier)
-	startCombat(monster)
 
-func onCombatStarted(monster: MonsterData) -> void:
+	var monster = MonsterRegistry.rollMonster(main.game_data.currentArea, tier)
+	
+	# 10% chance of ambush or weakened
+	if (randf() < 0.10):
+		if (randf() < 0.50):
+			# Ambush
+			var ambushDmg = randi_range(5, 15)
+			main.game_data.hp = max(1, main.game_data.hp - ambushDmg)
+			main.save_game()
+			GameEvents.hpChanged.emit()
+			GameEvents.eventLogged.emit(
+				"Ambush! A %s strikes before you can react! -%d HP" % [monster.monsterName, ambushDmg],
+				"danger", false
+			)
+			startCombat(monster)
+		else:
+			# Weakened enemy
+			GameEvents.eventLogged.emit(
+				"A wounded %s stumbles toward you..." % monster.monsterName,
+				"system", false
+			)
+			startCombat(monster, true)  # pass weakened flag
+	else:
+		startCombat(monster)
+
+func onCombatStarted(monster: MonsterData, _weakened:bool=false) -> void:
 	GameEvents.eventLogged.emit(
 		"A %s appears! [%s]" % [monster.monsterName, monster.tier.to_upper()],
 		"danger",
