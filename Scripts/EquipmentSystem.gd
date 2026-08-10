@@ -118,23 +118,35 @@ func calculateMaxHp() -> int:
 	var total = main.game_data.baseHp
 	var slots = [
 		"equippedHelmet", "equippedArmor", "equippedLegs",
-		"equippedBoots", "equippedSurvivalGear",
-		"equippedRing", "equippedAmulet"
+		"equippedBoots", "equippedWeapon", "equippedShield",
 	]
 	for slot in slots:
 		var item = main.game_data.get(slot)
 		if not item or item.is_empty():
 			continue
 		total += item.get("hpBonus", 0)
-		total += item.get("gradeBonus", 0)
-		total += item.get("enhancement", 0) * 2  # each enhancement +2 HP for now
+		total += item.get("gradeHpBonus", 0)
+		total += item.get("enhancement", 0) * 2
 	return total
 
 func getDodgeChance() -> float:
-	var boots = main.game_data.equippedBoots
-	if not boots or boots.is_empty():
-		return 0.0
-	return boots.get("dodgeBonus", 0.0)
+	return getTotalEffects().get("dodge", 0.0)
+
+func getTotalEffects() -> Dictionary:
+	var total = {}
+	var slots = [
+		"equippedHelmet", "equippedArmor", "equippedLegs",
+		"equippedBoots", "equippedWeapon", "equippedShield"
+	]
+	for slot in slots:
+		var item = main.game_data.get(slot)
+		if not item or item.is_empty():
+			continue
+		for effect in item.get("effects", {}):
+			total[effect] = total.get(effect, 0.0) + item["effects"][effect]
+		for effect in item.get("gradeEffects", {}):
+			total[effect] = total.get(effect, 0.0) + item["gradeEffects"][effect]
+	return total
 
 # ── EFFECTS ───────────────────────────────────────────────
 func onCheckpointReached() -> void:

@@ -3035,6 +3035,7 @@ theme_override_font_sizes/font_size = 48
 text = "Flee"
 
 [node name="SelectEquipmentDisplay" type="ColorRect" parent="UIController" unique_id=637337967 node_paths=PackedStringArray("equipmentSystem", "equipmentDisplay", "itemListTitle", "itemListHFlow", "itemInfoPanel", "itemInfoName", "itemInfoStat", "itemInfoDesc", "equipUnequipBtn", "closeModalBtn")]
+visible = false
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
 anchors_preset = 14

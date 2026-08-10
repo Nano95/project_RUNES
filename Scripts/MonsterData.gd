@@ -8,3 +8,4 @@ class_name MonsterData
 @export var goldMin: int = 0
 @export var goldMax: int = 0
 @export var dropTable: Array[DropEntry] = []
+@export var statusEffects: Dictionary = {}

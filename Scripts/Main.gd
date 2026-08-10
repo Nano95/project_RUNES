@@ -55,6 +55,13 @@ func _ready() -> void:
 	Utils.update_crafting_speed()
 	#spawn_main_menu()
 	spawn_new_game()
+	var helmet = ItemRegistry.rollEquipmentInstance("Slimy Helmet", true)
+	var armor = ItemRegistry.rollEquipmentInstance("Slimy Armor", true)
+	var legs = ItemRegistry.rollEquipmentInstance("Slimy Legs", true)
+	
+	game_data.equippedHelmet = helmet
+	game_data.equippedArmor = armor
+	game_data.equippedLegs = legs
 	
 	# GIVE PLAYER REWARDS
 	if !(OS.get_name() == "Windows"):

@@ -103,6 +103,7 @@ func onAreaEntered(_areaName: String) -> void:
 	adventuringRow.visible = true
 	mainActionRow.visible = false
 	areaSelectRow.visible = false
+	showEventPanel()
 	showInventory()
 	call_deferred("resetPanelPositionMeta")
 	#chooseAreaButton.text = "← Retreat"

@@ -47,7 +47,7 @@ func onAreaEntered(areaName: String) -> void:
 		main.set_background_colors(Vector3(.297, .211, .09), Vector3(.355, .285, .133))
 	elif (areaName == "Hunting Grounds"):
 		main.set_background_colors(Vector3(.516, .691, .473), Vector3(.633, .793, .543))
-	elif (areaName == "Outskirts"):
+	elif (areaName == "Slime Swamps"):
 		main.set_background_colors(Vector3(.445, .488, .449), Vector3(.664, .723, .602))
 	elif (areaName == "Darkwood Forest"):
 		main.set_background_colors(
@@ -65,6 +65,7 @@ func onAreaEntered(areaName: String) -> void:
 
 func onAreaExited() -> void:
 	GameEvents.eventLogged.emit("You return to town safely.", "town", false)
+	main.game_data.activeStatusEffects = {}
 
 	main.set_background_colors(
 		Vector3(0.92, 0.88, 0.65),   # soft butter

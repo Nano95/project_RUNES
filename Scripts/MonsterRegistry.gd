@@ -4,52 +4,52 @@ var areaMonsters: Dictionary = {}
 
 func _ready() -> void:
 	areaMonsters = {
-"Hunting Grounds": {
+		"Hunting Grounds": {
 			"weak": [
-				_make("Orcling", "weak", 15, 11, 1, 4, [
+				_make("Orcling", "weak", 15, 11, 1, 4, {}, [
 					_drop("Orc Leather", 0.08),
 					_drop("Orc Helmet", 0.03),
 				]),
-				_make("Orc Grunt", "weak", 18, 12, 1, 5, [
+				_make("Orc Grunt", "weak", 18, 12, 1, 5, {}, [
 					_drop("Orc Leather", 0.08),
 					_drop("Orc Helmet", 0.03),
 				]),
-				_make("Orc Runt", "weak", 12, 10, 0, 3, [
+				_make("Orc Runt", "weak", 12, 10, 0, 3, {}, [
 					_drop("Orc Leather", 0.08),
 					_drop("Orc Helmet", 0.02),
 				]),
 			],
 			"medium": [
-				_make("Orc Warrior", "medium", 45, 17, 5, 10, [
+				_make("Orc Warrior", "medium", 45, 17, 5, 10, {}, [
 					_drop("Orc Leather", 0.11),
 					_drop("Orc Legs", 0.04),
 					_drop("Orcish Axe", 0.05),
 					
 				]),
-				_make("Orc Brute", "medium", 55, 19, 6, 11, [
+				_make("Orc Brute", "medium", 55, 19, 6, 11, {}, [
 					_drop("Orc Leather", 0.11),
 					_drop("Orc Legs", 0.04),
 					_drop("Orcish Axe", 0.05),
 				]),
-				_make("Orc Raider", "medium", 50, 18, 5, 10, [
+				_make("Orc Raider", "medium", 50, 18, 5, 10, {}, [
 					_drop("Orc Leather", 0.11),
 					_drop("Orc Legs", 0.03),
 					_drop("Orcish Axe", 0.05),
 				]),
 			],
 			"strong": [
-				_make("Mounted Orc", "strong", 90, 27, 10, 15, [
+				_make("Mounted Orc", "strong", 90, 27, 10, 15, {}, [
 					_drop("Orc Leather", 0.15),
 					_drop("Orc Boots", 0.05),
 					_drop("Orc Armor", 0.04),
 				]),
-				_make("Orc General", "strong", 110, 30, 12, 15, [
+				_make("Orc General", "strong", 110, 30, 12, 15, {}, [
 					_drop("Orc Leather", 0.15),
 					_drop("Orc General Crest", 0.10),
 					_drop("Orc Boots", 0.05),
 					_drop("Orc Armor", 0.05),
 				]),
-				_make("Orc Warchief", "strong", 130, 30, 10, 15, [
+				_make("Orc Warchief", "strong", 130, 30, 10, 15, {}, [
 					_drop("Orc Leather", 0.20),
 					_drop("Orc General Crest", 0.15),
 					_drop("Orc Boots", 0.06),
@@ -57,7 +57,7 @@ func _ready() -> void:
 				]),
 			],
 			"elite": [
-				_make("Orc King", "elite", 500, 50, 100, 200, [
+				_make("Orc King", "elite", 500, 50, 100, 200, {}, [
 					_drop("Orc Leather", 0.90),
 					_drop("Orc General Crest", 0.45),
 					_drop("King's Tusk", 0.15),
@@ -69,9 +69,79 @@ func _ready() -> void:
 				]),
 			],
 		},
+		"Slime Swamps": {
+			"weak": [
+				_make("Small Slime", "weak", 20, 8, 1, 5, {"poison": 0.3}, [
+					_drop("Slime Gel", 0.25),
+					_drop("Slimy Shield", 0.03),
+				]),
+				_make("Green Slime", "weak", 25, 10, 2, 7, {"poison": 0.3}, [
+					_drop("Slime Gel", 0.30),
+					_drop("Slimy Shield", 0.03),
+				]),
+				_make("Blue Slime", "weak", 30, 12, 2, 8, {"poison": 1.0}, [
+					_drop("Slime Gel", 0.35),
+					_drop("Slimy Shield", 0.04),
+				]),
+			],
+			"medium": [
+				_make("Bog Slime", "medium", 60, 18, 6, 16, {}, [
+					_drop("Slime Gel", 0.45),
+					_drop("Slimy Blade", 0.04),
+					_drop("Slimy Armor", 0.03),
+				]),
+				_make("Toxic Slime", "medium", 70, 20, 7, 18, {"poison": 0.33}, [
+					_drop("Slime Gel", 0.45),
+					_drop("Slime Core", 0.10),
+					_drop("Slimy Blade", 0.04),
+					_drop("Slimy Armor", 0.03),
+				]),
+				_make("Slime Mold", "medium", 65, 19, 6, 17, {}, [
+					_drop("Slime Gel", 0.40),
+					_drop("Slimy Blade", 0.03),
+					_drop("Slimy Armor", 0.03),
+				]),
+			],
+			"strong": [
+				_make("Slime Giant", "strong", 140, 32, 18, 40, {}, [
+					_drop("Slime Gel", 0.60),
+					_drop("Slime Core", 0.15),
+					_drop("Slimy Legs", 0.05),
+					_drop("Slimy Helmet", 0.04),
+				]),
+				_make("Acid Slime", "strong", 160, 36, 20, 45, {"poison": 0.33}, [
+					_drop("Slime Gel", 0.60),
+					_drop("Slime Core", 0.20),
+					_drop("Slimy Legs", 0.05),
+					_drop("Slimy Helmet", 0.04),
+				]),
+				_make("King's Guard", "strong", 180, 40, 22, 50, {"poison": 0.33}, [
+					_drop("Slime Gel", 0.65),
+					_drop("Slime Core", 0.25),
+					_drop("Slimy Legs", 0.06),
+					_drop("Slimy Helmet", 0.05),
+				]),
+			],
+			"elite": [
+				_make("King Slime", "elite", 800, 70, 150, 400, {"poison": 0.33}, [
+					_drop("Slime Gel", 0.90),
+					_drop("Slime Core", 0.60),
+					_drop("Royal Gel", 0.20),
+					_drop("Slimy Shield", 0.20),
+					_drop("Slimy Blade", 0.20),
+					_drop("Slimy Armor", 0.20),
+					_drop("Slimy Legs", 0.20),
+					_drop("Slimy Helmet", 0.20),
+					_drop("Slimy Boots", 0.15),
+				]),
+			],
+		},
 	}
 
-func _make(monsterName: String, tier: String, hp: int, atk: int, goldMin: int, goldMax: int, loot: Array[DropEntry] = []) -> MonsterData:
+func _make(monsterName: String, tier: String, hp: int, atk: int, 
+		   goldMin: int, goldMax: int, 
+		   statusEffects: Dictionary = {},
+		   drops: Array[DropEntry] = []) -> MonsterData:
 	var m = MonsterData.new()
 	m.monsterName = monsterName
 	m.tier = tier
@@ -79,7 +149,8 @@ func _make(monsterName: String, tier: String, hp: int, atk: int, goldMin: int, g
 	m.atk = atk
 	m.goldMin = goldMin
 	m.goldMax = goldMax
-	m.dropTable = loot
+	m.statusEffects = statusEffects
+	m.dropTable = drops
 	return m
 
 ### Rarity    | Chance

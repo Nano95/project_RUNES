@@ -80,3 +80,9 @@ signal playerDied
 signal fleeRequested
 @warning_ignore("unused_signal")
 signal itemDropped(itemName: String)
+@warning_ignore("unused_signal")
+signal statusEffectApplied(status: String, counter: int)
+@warning_ignore("unused_signal")
+signal statusEffectTicked(status: String, counter: int, damage: int)
+@warning_ignore("unused_signal")
+signal statusEffectCleared(status: String)

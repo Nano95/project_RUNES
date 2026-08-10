@@ -3,6 +3,7 @@ extends Node
 var items: Dictionary = {}
 var equipmentDefs: Dictionary = {}
 
+
 func _ready() -> void:
 	_register()
 
@@ -24,26 +25,42 @@ func getStackCap(itemName: String) -> int:
 
 func _register() -> void:
 	# Starter gear — no grade, no set
-	_equip("Crude Blade",    "weapon", "", 0, 4,  0, 0.0,  "A crude blade.",              20)
-	_equip("Wooden Shield",  "shield", "", 0, 0,  5, 0.0,  "Better than nothing.",        30)
-	_equip("Leather Helmet", "helmet", "", 5, 0,  0, 0.0,  "A simple leather helm.",      20)
-	_equip("Leather Armor",  "armor",  "", 15, 0, 0, 0.0,  "Basic leather protection.",   35)
-	_equip("Leather Legs",   "legs",   "", 10, 0, 0, 0.0,  "Simple leather leggings.",    25)
-	_equip("Leather Boots",  "boots",  "", 0,  0, 0, 0.02, "Worn leather boots.",         20)
-	
+	_equip("Crude Blade",    "weapon", "", 0,  4,  0, {},                    "A crude blade.",              20)
+	_equip("Wooden Shield",  "shield", "", 0,  0,  5, {},                    "Better than nothing.",        30)
+	_equip("Leather Helmet", "helmet", "", 5,  0,  0, {},                    "A simple leather helm.",      20)
+	_equip("Leather Armor",  "armor",  "", 15, 0,  0, {},                    "Basic leather protection.",   35)
+	_equip("Leather Legs",   "legs",   "", 10, 0,  0, {},                    "Simple leather leggings.",    25)
+	_equip("Leather Boots",  "boots",  "", 0,  0,  0, {"dodge": 0.02},       "Worn leather boots.",         20)
+
 	# Orc Set (Hunting Grounds)
-	_equip("Orc Helmet",        "helmet",  "Orc",   15, 0, 0,  0.0,  "Forged from orc bone.",         80)
-	_equip("Orc Armor",         "armor",   "Orc",   35, 0, 0,  0.0,  "Heavy orcish plate.",           120)
-	_equip("Orc Legs",          "legs",    "Orc",   20, 0, 0,  0.0,  "Crude but sturdy.",             80)
-	_equip("Orc Boots",         "boots",   "Orc",   10, 0, 0,  0.03, "Grants access to Orc lands.",   60)
-	# Orc weapons and shield
-	_equip("Orcish Axe",        "weapon",  "",      0, 10, 0,  0.0,  "A crude but heavy axe.",        40)
-	_equip("Orc King Shield",   "shield",  "",      0,  0, 8,  0.0,  "A gleaming shield of the Orc King.",       150)
+	_equip("Orc Helmet",      "helmet", "Orc", 15, 0,  0, {},                "Forged from orc bone.",              80)
+	_equip("Orc Armor",       "armor",  "Orc", 35, 0,  0, {},                "Heavy orcish plate.",                120)
+	_equip("Orc Legs",        "legs",   "Orc", 20, 0,  0, {},                "Crude but sturdy.",                  80)
+	_equip("Orc Boots",       "boots",  "Orc", 10, 0,  0, {"dodge": 0.03},   "Grants access to Orc lands.",        60)
+	_equip("Orcish Axe",      "weapon", "",    0,  10, 0, {},                "A crude but heavy axe.",             40)
+	_equip("Orc King Shield", "shield", "",    0,  0,  8, {},                "Shield of the Orc King.",            150)
+
+	# Slimy Set (Slime Swamps)
+	_equip("Slimy Helmet", "helmet", "Slimy", 6,  0, 0, {"poisonResistance": 0.08}, "Infused with swamp essence.",  80)
+	_equip("Slimy Armor",  "armor",  "Slimy", 18, 0, 0, {"poisonResistance": 0.20}, "Resistant to poison.",         120)
+	_equip("Slimy Legs",   "legs",   "Slimy", 8,  0, 0, {"poisonResistance": 0.15}, "Heavy with swamp mud.",        90)
+	_equip("Slimy Boots",  "boots",  "Slimy", 8,  0, 0, {"dodge": 0.04},            "Grants access to Slime Swamps.", 70)
+	_equip("Slimy Blade",  "weapon", "",      0, 17, 0, {},             "Coated in slime.",      60)
+	_equip("Slimy Shield", "shield", "",      0,  0, 15, {},             "Hardens on impact.",    70)
 	# Orc monster part drops
 	_add("Orc Leather",       "part", true,  0.3, "Rough orcish hide.",           10)
 	_add("Orc General Crest", "part", true,  0.2, "Mark of an Orc General.",      55)
 	_add("King's Tusk",       "part", true,  0.3, "A massive orc tusk.",          80)
 	_add("Warchief Totem", "summon", false, 0.5, "Summons the Orc King. Use in the field.", 500)
+	
+	# Slime Parts
+	_add("Slime Gel",   "part", true, 0.2, "Sticky green gel.",          6)
+	_add("Slime Core",  "part", true, 0.3, "Pulsing with slime energy.", 45)
+	_add("Royal Gel",   "part", true, 0.3, "Fit for a slime king.",      80)
+
+	# Slimy weapons and shield
+	_add("Slimy Blade",  "equipment", false, 2.5, "Coated in slime.",     60)
+	_add("Slimy Shield", "equipment", false, 3.0, "Hardens on impact.",   70)
 	
 	# ── FORAGEABLES ───────────────────────────────────────
 	_add("Wild Herb",           "forageable", true,  0.5, "Common but useful.",               5)
@@ -101,11 +118,10 @@ func isStackable(itemName: String) -> bool:
 	var item = getItem(itemName)
 	return item.stackable if item else false
 
-# _equip registers an item in the equipmentDefs (definitions) dictionary
-# it covers equipment-specific properties that only gear needs:
-func _equip(itemName: String, slot: String, setName: String, 
-			hpBonus: int, atkBonus: int, defBonus: int, 
-			dodgeBonus: float, description: String, value: int) -> void:
+# _equip signature
+func _equip(itemName: String, slot: String, setName: String,
+			hpBonus: int, atkBonus: int, defBonus: int,
+			effects: Dictionary, description: String, value: int) -> void:
 	var e = EquipmentData.new()
 	e.itemName = itemName
 	e.slot = slot
@@ -113,7 +129,7 @@ func _equip(itemName: String, slot: String, setName: String,
 	e.hpBonus = hpBonus
 	e.atkBonus = atkBonus
 	e.defBonus = defBonus
-	e.dodgeBonus = dodgeBonus
+	e.effects = effects
 	e.description = description
 	e.value = value
 	equipmentDefs[itemName] = e
@@ -138,33 +154,44 @@ func rollEquipmentInstance(itemName: String, graded: bool = false) -> Dictionary
 	if not def:
 		return {}
 
-	# Roll grade if looted
 	var grade = ""
-	var gradeBonus = 0
+	var gradeHpBonus = 0
+	var gradeEffects = {}
+
 	if graded:
 		var roll = randf()
 		if roll < 0.10:
 			grade = "S"
-			gradeBonus = 15
+			gradeHpBonus = 3
+			for effect in def.effects:
+				gradeEffects[effect] = def.effects[effect] * 0.375
 		elif roll < 0.40:
 			grade = "A"
-			gradeBonus = 10
+			gradeHpBonus = 2
+			for effect in def.effects:
+				gradeEffects[effect] = def.effects[effect] * 0.25
 		else:
 			grade = "B"
-			gradeBonus = 5
+			gradeHpBonus = 1
+			for effect in def.effects:
+				gradeEffects[effect] = def.effects[effect] * 0.125
 
 	return {
 		"name": itemName,
-		"instanceId": "%s_%s" % [itemName.left(4).to_lower().replace(" ", ""),
-					   "%04x" % randi_range(0, 65535)],
+		"instanceId": "%s_%s_%s" % [
+			itemName.left(4).to_lower().replace(" ", ""),
+			"%04x" % randi_range(0, 65535),
+			"%08x" % Time.get_ticks_usec()
+		],
 		"slot": def.slot,
 		"setName": def.setName,
 		"hpBonus": def.hpBonus,
 		"atkBonus": def.atkBonus,
 		"defBonus": def.defBonus,
-		"dodgeBonus": def.dodgeBonus,
+		"effects": def.effects.duplicate(),
 		"grade": grade,
-		"gradeBonus": gradeBonus,
+		"gradeHpBonus": gradeHpBonus,
+		"gradeEffects": gradeEffects,
 		"enhancement": 0,
 		"effectType": def.effectType,
 		"effectValue": def.effectValue,

@@ -10,7 +10,7 @@ const FORAGE_TABLES: Dictionary = {
 		{ "max": 70,  "drops": [{"name": "Red Berry", "weight": 10}, {"name": "Wild Herb", "weight": 45}, {"name": "Bloodroot", "weight": 45}] },
 		{ "max": 9999,"drops": [{"name": "Wild Herb", "weight": 40}, {"name": "Bloodroot", "weight": 60}] },
 	],
-	"Outskirts": [
+	"Slime Swamps": [
 		{ "max": 20,  "drops": [{"name": "Red Berry", "weight": 30}, {"name": "Wild Herb", "weight": 50}, {"name": "Bloodroot", "weight": 20}] },
 		{ "max": 40,  "drops": [{"name": "Red Berry", "weight": 10}, {"name": "Wild Herb", "weight": 55}, {"name": "Bloodroot", "weight": 30}, {"name": "Gloomcap", "weight": 5}] },
 		{ "max": 70,  "drops": [{"name": "Red Berry", "weight": 5},  {"name": "Wild Herb", "weight": 40}, {"name": "Bloodroot", "weight": 40}, {"name": "Gloomcap", "weight": 15}] },

@@ -38,6 +38,10 @@ func onTick() -> void:
 		return
 	if (main.game_data.inCombat):
 		return
+		
+	# Tick status effects every event
+	tickStatusEffects()
+
 	# Handle active gathering
 	if (gatheringTicksLeft > 0):
 		if (checkpointPending):
@@ -209,12 +213,56 @@ func getPotionGoldChance() -> int:
 func getAreaGoldFind() -> int:
 	match main.game_data.currentArea:
 		"Hunting Grounds": return randi_range(30, 80)
-		"Outskirts":       return randi_range(50, 120)
+		"Slime Swamps":       return randi_range(50, 120)
 		"Darkwood Forest":  return randi_range(130, 180)
 		"Forsaken Keep": return randi_range(170, 280) # gold find
 		_:                 return randi_range(130, 180)
 
+func tickStatusEffects() -> void:
+	if main.game_data.activeStatusEffects.is_empty():
+		return
 
+	var toClear = []
+	for status in main.game_data.activeStatusEffects:
+		var counter = main.game_data.activeStatusEffects[status]
+		if counter <= 0:
+			toClear.append(status)
+			continue
+
+		# Calculate damage — cannot kill
+		var damage = counter
+		var newHp = max(1, main.game_data.hp - damage)
+		
+		# If would kill, clear poison instead
+		if main.game_data.hp - damage <= 0:
+			toClear.append(status)
+			GameEvents.eventLogged.emit(
+				"The %s wears off just in time..." % status, "danger", false
+			)
+		else:
+			main.game_data.hp = newHp
+			main.game_data.activeStatusEffects[status] = counter - 1
+			if main.game_data.activeStatusEffects[status] <= 0:
+				toClear.append(status)
+			GameEvents.eventLogged.emit(
+				"%s damage! -%d HP (%d remaining)" % [
+					status.capitalize(),
+					damage,
+					main.game_data.activeStatusEffects[status]
+				], "danger", false
+			)
+			GameEvents.statusEffectTicked.emit(status, main.game_data.activeStatusEffects[status], damage)
+			GameEvents.hpChanged.emit()
+
+	for status in toClear:
+		main.game_data.activeStatusEffects.erase(status)
+		if not toClear.is_empty():
+			GameEvents.eventLogged.emit(
+				"%s cleared." % status.capitalize(), "system", false
+			)
+			GameEvents.statusEffectCleared.emit(status)
+
+	main.save_game()
 
 func triggerTrap() -> void:
 	var traps = [
@@ -256,7 +304,7 @@ func getAreaWeakCreature(area: String) -> String:
 func getAreaTrapDamage(area: String) -> int:
 	match area:
 		"Hunting Grounds":  return randi_range(2, 8)
-		"Outskirts":        return randi_range(5, 15)
+		"Slime Swamps":        return randi_range(5, 15)
 		"Darkwood Forest":  return randi_range(10, 22)
 		"Forsaken Keep": return randi_range(18, 35)  # trap damage
 		"Ashfield Ruins":   return randi_range(15, 30)
@@ -277,17 +325,17 @@ func buildEventTable() -> void:
 				{ "event": "trap",        "weight": 5  },
 				{ "event": "nothing_c",   "weight": 15 },
 			]
-		"Outskirts":
+		"Slime Swamps":
 			eventWeights = [
 				{ "event": "nothing_a",   "weight": 8  },
-				{ "event": "nothing_b",   "weight": 18 },
-				{ "event": "monster",     "weight": 28 },
+				{ "event": "nothing_b",   "weight": 20 },
+				{ "event": "monster",     "weight": 24 },
 				#{ "event": "ore",         "weight": 12 },
-				{ "event": "forage",      "weight": 8  },
+				{ "event": "forage",      "weight": 20 },
 				#{ "event": "wood",        "weight": 6  },
 				{ "event": "potion_gold", "weight": goldPotionChance },
 				#{ "event": "dungeon",     "weight": 4  },
-				{ "event": "trap",        "weight": 6  },
+				{ "event": "trap",        "weight": 3  },
 				{ "event": "nothing_c",   "weight": 10 },
 			]
 		"Darkwood Forest":

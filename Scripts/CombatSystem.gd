@@ -10,6 +10,11 @@ const OMENS = [
 	"A shadow passes overhead — nothing is there.",
 ]
 
+const STATUS_COUNTERS = {
+	"poison": { "weak": 3, "medium": 5, "strong": 8, "elite": 12 },
+	"burn":   { "weak": 4, "medium": 6, "strong": 10, "elite": 15 },
+}
+
 @export var equipmentSystem:EquipmentSystem
 var battlePotionEventsLeft: int = 0
 var pendingStrongMonsterIn: int = 0
@@ -95,6 +100,15 @@ func tickCombat() -> void:
 		var reducedAtk = max(1, rawMonsterAtk - equipmentSystem.getTotalDefense())
 		finalAtk = equipmentSystem.applyCursedShieldOnHit(reducedAtk)
 		main.game_data.hp = max(0, main.game_data.hp - finalAtk)
+		
+		# Apply status effects on hit
+		var monster = MonsterRegistry.getMonsterByAreaNameTier(
+			main.game_data.currentMonsterName,
+			main.game_data.currentMonsterTier,
+			main.game_data.currentArea
+		)
+		if (monster):
+			applyStatusEffects(monster)
 
 	if main.game_data.isFleeing:
 		main.game_data.fleeTicks -= 1
@@ -183,6 +197,7 @@ func die() -> void:
 	main.game_data.backpack = []
 	main.game_data.currentWeight = 0.0
 	main.game_data.sessionKills = 0
+	main.game_data.activeStatusEffects = {}
 	clearCombat()
 	GameEvents.eventLogged.emit("You have died. Your gold and inventory are lost.", "danger", false)
 	GameEvents.playerDied.emit()
@@ -223,6 +238,28 @@ func onPotionUsed(itemName: String) -> void:
 				"Great Battle Potion consumed. Monsters attracted for %d events." % battlePotionEventsLeft,
 				"danger", false
 			)
+
+func applyStatusEffects(monster: MonsterData) -> void:
+	var totalEffects = equipmentSystem.getTotalEffects()
+	for status in monster.statusEffects:
+		var baseChance = monster.statusEffects[status]
+		var resistance = totalEffects.get(status + "Resistance", 0.0)
+		var finalChance = baseChance * (1.0 - resistance)
+		print("status: %s base: %.2f resist: %.2f final: %.2f" % [
+			status, baseChance, resistance, finalChance
+		])
+		if randf() < finalChance:
+			applyStatus(status, monster.tier)
+
+func applyStatus(status: String, tier: String) -> void:
+	var counter = STATUS_COUNTERS[status].get(tier, 3)
+	main.game_data.activeStatusEffects[status] = \
+		main.game_data.activeStatusEffects.get(status, 0) + counter
+	main.save_game()
+	GameEvents.eventLogged.emit(
+		"You have been %sed! +%d %s." % [status, counter, status], "danger", false
+	)
+	GameEvents.statusEffectApplied.emit(status, main.game_data.activeStatusEffects[status])
 
 func isBattlePotionActive() -> bool:
 	return battlePotionEventsLeft > 0
