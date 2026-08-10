@@ -55,13 +55,19 @@ func _ready() -> void:
 	Utils.update_crafting_speed()
 	#spawn_main_menu()
 	spawn_new_game()
-	var helmet = ItemRegistry.rollEquipmentInstance("Slimy Helmet", true)
-	var armor = ItemRegistry.rollEquipmentInstance("Slimy Armor", true)
-	var legs = ItemRegistry.rollEquipmentInstance("Slimy Legs", true)
-	
-	game_data.equippedHelmet = helmet
-	game_data.equippedArmor = armor
-	game_data.equippedLegs = legs
+	#var boots = ItemRegistry.rollEquipmentInstance("Slimy Boots", true)
+	#var helmet = ItemRegistry.rollEquipmentInstance("Orc Helmet", true)
+	#var armor = ItemRegistry.rollEquipmentInstance("Orc Armor", true)
+	#var legs = ItemRegistry.rollEquipmentInstance("Orc Legs", true)
+	#var weapon = ItemRegistry.rollEquipmentInstance("Slimy Blade", true)
+	#var shield = ItemRegistry.rollEquipmentInstance("Orc King Shield", true)
+	#
+	#game_data.equippedHelmet = helmet
+	#game_data.equippedArmor = armor
+	#game_data.equippedLegs = legs
+	#game_data.equippedWeapon = weapon
+	#game_data.equippedShield = shield
+	#game_data.equippedBoots = boots
 	
 	# GIVE PLAYER REWARDS
 	if !(OS.get_name() == "Windows"):

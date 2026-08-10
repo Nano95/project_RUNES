@@ -177,7 +177,8 @@ func onPotionUsed(itemName: String) -> void:
 		"Strength Brew", "Swiftness Tonic",
 		"Time Potion", "Regeneration Potion",
 		"Minor Battle Potion", "Battle Potion", "Great Battle Potion",
-		"Minor Foraging Potion", "Foraging Potion", "Great Foraging Potion"
+		"Minor Foraging Potion", "Foraging Potion", "Great Foraging Potion",
+		"Minor Antidote", "Antidote", "Large Antidote"
 	]
 	# Special potions are handled by their respective systems -- otherwise we assume it's a healing potion
 	if specialPotions.has(itemName):

@@ -6,9 +6,13 @@ const OMENS = [
 	"A strong presence looms nearby.",
 	"The air grows heavy. Something ancient stirs.",
 	"The forest falls completely silent.",
-	"Your instincts scream danger.",
 	"A shadow passes overhead — nothing is there.",
 ]
+
+const ELITE_OMENS = {
+	"Hunting Grounds": "A war horn echoes in the distance...",
+	"Slime Swamps": "The swamp goes eerily silent. Something massive approaches.",
+}
 
 const STATUS_COUNTERS = {
 	"poison": { "weak": 3, "medium": 5, "strong": 8, "elite": 12 },
@@ -49,6 +53,14 @@ func trySpawnMonster(eventCount: int) -> void:
 	if tier == "strong" and eventCount <= 40:
 		pendingStrongMonsterIn = 10
 		GameEvents.eventLogged.emit(OMENS[randi() % OMENS.size()], "omen", true)
+		return
+	if tier == "elite":
+		pendingStrongMonsterIn = 10
+		var omen = ELITE_OMENS.get(
+			main.game_data.currentArea, 
+		    "Your instincts scream DANGER!"
+		)
+		GameEvents.eventLogged.emit(omen, "omen", true)
 		return
 
 	var monster = MonsterRegistry.rollMonster(main.game_data.currentArea, tier)
@@ -142,7 +154,7 @@ func tickCombat() -> void:
 			"You hit %s for %d while evading the attack!" % [
 				main.game_data.currentMonsterName,
 				playerAtk
-			], "gather", false
+			], "combat", false
 		)
 	else:
 		GameEvents.eventLogged.emit(
@@ -238,6 +250,12 @@ func onPotionUsed(itemName: String) -> void:
 				"Great Battle Potion consumed. Monsters attracted for %d events." % battlePotionEventsLeft,
 				"danger", false
 			)
+		"Minor Antidote":
+			applyAntidote(10)
+		"Antidote":
+			applyAntidote(20)
+		"Large Antidote":
+			applyAntidote(30)
 
 func applyStatusEffects(monster: MonsterData) -> void:
 	var totalEffects = equipmentSystem.getTotalEffects()
@@ -260,6 +278,29 @@ func applyStatus(status: String, tier: String) -> void:
 		"You have been %sed! +%d %s." % [status, counter, status], "danger", false
 	)
 	GameEvents.statusEffectApplied.emit(status, main.game_data.activeStatusEffects[status])
+
+func applyAntidote(reduction: int) -> void:
+	var current = main.game_data.activeStatusEffects.get("poison", 0)
+	if current <= 0:
+		GameEvents.eventLogged.emit(
+			"You are not poisoned.", "system", false
+		)
+		return
+	var newCounter = max(0, current - reduction)
+	if newCounter <= 0:
+		main.game_data.activeStatusEffects.erase("poison")
+		GameEvents.eventLogged.emit(
+			"Antidote consumed. Poison cleared!", "system", false
+		)
+		GameEvents.statusEffectCleared.emit("poison")
+	else:
+		main.game_data.activeStatusEffects["poison"] = newCounter
+		GameEvents.eventLogged.emit(
+			"Antidote consumed. Poison reduced to %d." % newCounter, "system", false
+		)
+		GameEvents.statusEffectApplied.emit("poison", newCounter)
+	main.save_game()
+	GameEvents.hpChanged.emit()
 
 func isBattlePotionActive() -> bool:
 	return battlePotionEventsLeft > 0

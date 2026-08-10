@@ -86,24 +86,6 @@ shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lbmfx"]
-resource_local_to_scene = true
-shader = ExtResource("7_108yi")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1q78x"]
-resource_local_to_scene = true
-shader = ExtResource("7_108yi")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8l5l1"]
-resource_local_to_scene = true
-shader = ExtResource("7_108yi")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4j0hr"]
 resource_local_to_scene = true
 shader = ExtResource("7_108yi")
@@ -507,15 +489,16 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -236.0
-offset_top = -60.499992
-offset_right = 463.99994
-offset_bottom = 63.500008
+offset_left = -268.6667
+offset_top = -56.9
+offset_right = 524.6667
+offset_bottom = 67.100006
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 90
 text = "0/100"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/HP" unique_id=793133424]
@@ -523,10 +506,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 10.0
-offset_top = 17.5
-offset_right = 246.0
-offset_bottom = 34.5
+offset_left = 10.0000305
+offset_top = 22.09999
+offset_right = 246.00003
+offset_bottom = 51.09999
 grow_vertical = 2
 show_percentage = false
 
@@ -562,6 +545,7 @@ grow_vertical = 2
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 90
 text = "300 | 300 | 30%"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Kills" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/PLAYERSTATS" unique_id=490513236 instance=ExtResource("6_prt4a")]
@@ -578,6 +562,7 @@ grow_vertical = 2
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 90
 text = "Kills: 100"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Gold" type="Panel" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats" unique_id=1342676474]
@@ -608,15 +593,17 @@ anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 8.0
 offset_top = -17.0
-offset_right = 707.99994
+offset_right = 478.0
 offset_bottom = 107.0
 grow_vertical = 2
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 90
 text = "1000"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EventLogPanel" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=863328441]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -686,8 +673,7 @@ theme_override_font_sizes/normal_font_size = 28
 bbcode_enabled = true
 scroll_following = true
 
-[node name="EquipmentDisplay" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=1407338151 node_paths=PackedStringArray("equipmentSystem", "itemModal", "helmetBtn", "weaponBtn", "armorBtn", "shieldBtn", "legsBtn", "bootsBtn")]
-visible = false
+[node name="EquipmentDisplay" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=1407338151 node_paths=PackedStringArray("equipmentSystem", "itemModal", "statsPanel", "helmetBtn", "weaponBtn", "armorBtn", "shieldBtn", "legsBtn", "bootsBtn")]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -695,6 +681,7 @@ theme = ExtResource("17_g72ry")
 script = ExtResource("9_ipr08")
 equipmentSystem = NodePath("../../../../EquipmentSystem")
 itemModal = NodePath("../../../SelectEquipmentDisplay")
+statsPanel = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Formulas/MarginContainer/VBoxContainer/Description")
 helmetBtn = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/HEAD/Head/Button")
 weaponBtn = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Weapon/Button")
 armorBtn = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Armor/Button")
@@ -770,6 +757,7 @@ theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer" unique_id=1910763106]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="Equipment" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer" unique_id=221783017]
 layout_mode = 2
@@ -784,7 +772,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = -50
+theme_override_constants/separation = -7
 
 [node name="HEAD" type="HBoxContainer" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer" unique_id=1152001316]
 layout_mode = 2
@@ -1015,9 +1003,9 @@ size_flags_vertical = 4
 theme = ExtResource("17_g72ry")
 
 [node name="Formulas" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1006740582]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
 theme = ExtResource("19_shy7a")
 
 [node name="MarginContainer" type="MarginContainer" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Formulas" unique_id=1866859769]
@@ -1039,75 +1027,22 @@ layout_mode = 2
 self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
 custom_minimum_size = Vector2(0, 95)
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/outline_size = 10
 theme_override_fonts/normal_font = ExtResource("3_dajxx")
 theme_override_font_sizes/normal_font_size = 22
 theme_override_font_sizes/bold_italics_font_size = 22
 theme_override_font_sizes/italics_font_size = 22
 bbcode_enabled = true
-text = "[color=#f3f39c]Survival Gear[/color]
-[b]T0[/b] Starter Survival Gear -> [b]T1[/b] Hunter Survival Gear
-[i]Increases Idle event limit to 20."
+text = "[color=#ffffff]HP[/color] 116
+[color=#e74c3c]ATK[/color] 4
+[color=#3498db]DEF[/color] 15
+[color=#f1c40f]DODGE[/color] 0%
+[color=#2ecc71]POISON CHANCE[/color] 15%
+"
 scroll_following = true
-vertical_alignment = 1
-
-[node name="HEAD" type="HBoxContainer" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Formulas/MarginContainer/VBoxContainer" unique_id=1214049157]
-layout_mode = 2
-size_flags_vertical = 6
-theme_override_constants/separation = 13
-
-[node name="Ing1" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Formulas/MarginContainer/VBoxContainer/HEAD" unique_id=722604799]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-theme = ExtResource("17_g72ry")
-
-[node name="Plus" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Formulas/MarginContainer/VBoxContainer/HEAD" unique_id=361632234 instance=ExtResource("6_prt4a")]
-self_modulate = Color(0.83, 0.83, 0.83, 1)
-material = SubResource("ShaderMaterial_lbmfx")
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 70
-text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Ing2" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Formulas/MarginContainer/VBoxContainer/HEAD" unique_id=2032343318]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-theme = ExtResource("17_g72ry")
-
-[node name="Plus2" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Formulas/MarginContainer/VBoxContainer/HEAD" unique_id=1233227854 instance=ExtResource("6_prt4a")]
-self_modulate = Color(0.83, 0.83, 0.83, 1)
-material = SubResource("ShaderMaterial_1q78x")
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 70
-text = "+"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Ing3" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Formulas/MarginContainer/VBoxContainer/HEAD" unique_id=1804818238]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-theme = ExtResource("17_g72ry")
-
-[node name="Plus3" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Formulas/MarginContainer/VBoxContainer/HEAD" unique_id=487087396 instance=ExtResource("6_prt4a")]
-self_modulate = Color(0.83, 0.83, 0.83, 1)
-material = SubResource("ShaderMaterial_8l5l1")
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 70
-text = "="
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Result" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Formulas/MarginContainer/VBoxContainer/HEAD" unique_id=744477410]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-theme = ExtResource("17_g72ry")
 
 [node name="MainActionRow" type="ScrollContainer" parent="UIController/MarginContainer/VBoxContainer" unique_id=23115074]
 layout_mode = 2

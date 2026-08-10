@@ -28,6 +28,7 @@ func _ready() -> void:
 	GameEvents.goldDeposited.connect(onGoldDeposited)
 	GameEvents.hpChanged.connect(updateHp)
 	GameEvents.combatWon.connect(updateStats)
+	GameEvents.equipmentChanged.connect(updateStats)
 	
 	call_deferred("refresh")
 	goldLabel.text = "Bank"

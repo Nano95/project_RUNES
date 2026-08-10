@@ -92,6 +92,9 @@ func _register() -> void:
 	_add("Minor Foraging Potion", "potion", true, 2.3, "Increases forageable encounters for 3 events.",  20)
 	_add("Foraging Potion",       "potion", true, 2.3, "Increases forageable encounters for 6 events.",  35)
 	_add("Great Foraging Potion", "potion", true, 2.3, "Increases forageable encounters for 10 events.", 60)
+	_add("Minor Antidote",  "potion", true, 0.5, "Reduces poison by 10.", 30)
+	_add("Antidote",        "potion", true, 0.5, "Reduces poison by 20.", 55)
+	_add("Large Antidote",  "potion", true, 0.5, "Reduces poison by 30.", 80)
 
 func _add(itemName: String, itemType: String, stackable: bool, weight: float, description: String, value: int) -> void:
 	var item = ItemData.new()

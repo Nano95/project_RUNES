@@ -20,19 +20,6 @@ func _ready() -> void:
 	if not main.game_data.equippedWeapon.is_empty():
 		return  # already has gear, don't overwrite
 
-	var weapon = ItemRegistry.rollEquipmentInstance("Crude Blade")
-	var shield = ItemRegistry.rollEquipmentInstance("Wooden Shield")
-	var helmet = ItemRegistry.rollEquipmentInstance("Leather Helmet")
-	var armor = ItemRegistry.rollEquipmentInstance("Leather Armor")
-	var legs = ItemRegistry.rollEquipmentInstance("Leather Legs")
-	var boots = ItemRegistry.rollEquipmentInstance("Leather Boots")
-
-	main.game_data.equippedWeapon = weapon
-	main.game_data.equippedShield = shield
-	main.game_data.equippedHelmet = helmet
-	main.game_data.equippedArmor = armor
-	main.game_data.equippedLegs = legs
-	main.game_data.equippedBoots = boots
 	main.save_game()
 
 func onTick() -> void:

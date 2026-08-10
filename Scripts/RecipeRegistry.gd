@@ -15,6 +15,9 @@ func _ready() -> void:
 		#_make("Foraging Potion",       {"Wild Herb": 2, "Gloomcap": 1},                     "Foraging Potion",       "forage", 6),
 		#_make("Great Foraging Potion", {"Cyclops Eye": 1, "Bloodroot": 2, "Gloomcap": 1},   "Great Foraging Potion", "forage", 10),
 		_make("Regeneration Potion",{"Slime Gel": 2, "Bloodroot": 1},                    "Regeneration Potion","regen",     5),
+		_make("Minor Antidote", {"Slime Gel": 2, "Bloodroot": 2},               "Minor Antidote", "antidote", 10),
+		_make("Antidote",       {"Slime Gel": 1, "Gloomcap": 3}, "Antidote",       "antidote", 20),
+		_make("Large Antidote", {"Slime Core": 2, "Gloomcap": 5}, "Large Antidote", "antidote", 30),
 	]
 
 func _make(recipeName: String, ingredients: Dictionary, resultItem: String, effectType: String, effectValue: int) -> RecipeData:

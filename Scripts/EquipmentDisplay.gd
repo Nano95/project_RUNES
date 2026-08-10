@@ -3,6 +3,7 @@ class_name EquipmentDisplay
 
 @export var equipmentSystem: EquipmentSystem
 @export var itemModal: EquipmentItemModal
+@export var statsPanel: RichTextLabel
 
 # Slot buttons
 @export var helmetBtn: Button
@@ -33,6 +34,7 @@ func refresh() -> void:
 	_updateSlot(shieldBtn, "shield")
 	_updateSlot(legsBtn, "legs")
 	_updateSlot(bootsBtn, "boots")
+	refreshStatsPanel()
 
 func _updateSlot(btn: Button, slot: String) -> void:
 	var equipped = equipmentSystem.getEquippedSlot(slot)
@@ -59,4 +61,26 @@ func onSlotPressed(slot: String) -> void:
 							 shieldBtn if slot == "shield" else \
 							 legsBtn if slot == "legs" else bootsBtn)
 	itemModal.open(slot)
-	
+
+func refreshStatsPanel() -> void:
+	var atk = equipmentSystem.getTotalAttack()
+	var def = equipmentSystem.getTotalDefense()
+	var maxHp = equipmentSystem.getMaxHp()
+	var effects = equipmentSystem.getTotalEffects()
+
+	var dodge = effects.get("dodge", 0.0)
+	var poisonRes = effects.get("poisonResistance", 0.0)
+	var burnRes = effects.get("burnResistance", 0.0)
+	var checkpointHeal = effects.get("checkpointHeal", 0.0)
+
+	var text = ""
+	text += "[color=#ffffff]HP[/color] %d\n" % maxHp
+	text += "[color=#e74c3c]ATK[/color] %d\n" % atk
+	text += "[color=#3498db]DEF[/color] %d\n" % def
+	text += "[color=#f1c40f]DODGE[/color] %d%%\n" % int(dodge * 100)
+	text += "[color=#2ecc71]POISON RES[/color] %d%%\n" % int(poisonRes * 100)
+	text += "[color=#e67e22]BURN RES[/color] %d%%\n" % int(burnRes * 100)
+	text += "[color=#1abc9c]CHECKPOINT HEAL[/color] %d%%" % int(checkpointHeal * 100)
+
+	statsPanel.bbcode_enabled = true
+	statsPanel.text = text
