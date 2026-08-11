@@ -83,7 +83,7 @@ func onTick() -> void:
 	_roll_event()
 	# Check checkpoint AFTER event resolves
 	# but only if we didn't just start combat
-	if (main.game_data.eventCount % 3 == 0):
+	if (main.game_data.eventCount % 10 == 0):
 		if (main.game_data.inCombat or gatheringTicksLeft > 0):
 			# Defer checkpoint until combat/gathering resolves
 			checkpointPendingAfterCombat = true
