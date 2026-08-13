@@ -41,6 +41,10 @@ class_name SaveData
 @export var equippedRing: Dictionary = {}
 @export var equippedAmulet: Dictionary = {}
 
+@export var equippedStand: Dictionary = {}
+@export var equippedLock: Dictionary = {}
+@export var equippedScale: Dictionary = {}
+
 @export_category("General")
 @export var loot_inventory:Dictionary = {
 }

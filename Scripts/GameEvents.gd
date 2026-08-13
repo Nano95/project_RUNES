@@ -64,6 +64,10 @@ signal brewAttempted(success: bool, resultItem: String)
 signal timePotionUsed
 @warning_ignore("unused_signal")
 signal autoContinueToggled(enabled: bool)
+@warning_ignore("unused_signal")
+signal bazaarStarted
+@warning_ignore("unused_signal")
+signal bazaarStopped
 
 ### COMBAT
 @warning_ignore("unused_signal")

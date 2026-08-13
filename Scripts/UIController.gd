@@ -10,10 +10,17 @@ class_name UIController
 @export var eventLogButton: Button
 @export var merchantButton: Button
 @export var blacksmithButton: Button
+@export var bazaarButton: Button
 @export var debugButton: Button
 @export var areaButtons: Array[Button] = []
 @export var eventLogPanel: Panel
 @export var equipmentPanel: Panel
+@export var quickConfigPanel: Panel
+@export var bazaarActionsPanel: Panel
+@export var bazaarStartStopBtn: Button
+
+@export var bazaarLeaveBtn: Button
+@export var bazaarSystem: BazaarSystem
 @export var inventorySystem: InventorySystem
 @export var storageDisplay: StorageDisplay
 @export var alchemyDisplay: BrewDisplay
@@ -38,7 +45,9 @@ func _ready() -> void:
 	autoContinueButton.toggled.connect(emitAutoContinueToggled) # outgoing emit
 	GameEvents.autoContinueToggled.connect(onAutoContinueToggled) # incoming emit
 	
-	
+	bazaarStartStopBtn.pressed.connect(onBazaarStartStopPressed)
+	bazaarLeaveBtn.pressed.connect(onBazaarLeavePressed)
+	bazaarButton.pressed.connect(onBazaarPressed)
 	chooseAreaButton.pressed.connect(onChooseAreaPressed)
 	storageButton.pressed.connect(showDisplay)
 	brewButton.pressed.connect(showAlchemy)
@@ -191,6 +200,38 @@ func onLockedAreaPressed(areaName: String) -> void:
 			"%s is locked. Reach event #100 in %s to unlock it." % [areaName, previousArea],
 			"system", false
 		)
+
+func onBazaarPressed() -> void:
+	# Show event log in case equipment panel is open
+	equipmentPanel.visible = false
+	eventLogPanel.visible = true
+	Utils.animateButtonBounce(eventLogPanel)
+	# Swap bars
+	quickConfigPanel.visible = false
+	bazaarActionsPanel.visible = true
+	
+	adventuringRow.visible = true
+	mainActionRow.visible = false
+	showInventory()
+	bazaarStartStopBtn.text = "Start"
+
+func onBazaarLeavePressed() -> void:
+	bazaarSystem.stopBazaar()
+	Utils.animateButtonBounce(eventLogPanel)
+	# Restore normal state
+	bazaarActionsPanel.visible = false
+	quickConfigPanel.visible = true
+	adventuringRow.visible = false
+	mainActionRow.visible = true
+
+func onBazaarStartStopPressed() -> void:
+	Utils.animateButtonPress(bazaarStartStopBtn)
+	if bazaarSystem.isBazaarActive:
+		bazaarSystem.stopBazaar()
+		bazaarStartStopBtn.text = "Start"
+	else:
+		bazaarSystem.startBazaar()
+		bazaarStartStopBtn.text = "Stop"
 
 func resetPanelPositionMeta() -> void:
 	if eventLogPanel.has_meta("originalY"):
