@@ -55,12 +55,19 @@ func _ready() -> void:
 	Utils.update_crafting_speed()
 	#spawn_main_menu()
 	spawn_new_game()
-	#var boots = ItemRegistry.rollEquipmentInstance("Slimy Boots", true)
-	#var helmet = ItemRegistry.rollEquipmentInstance("Orc Helmet", true)
-	#var armor = ItemRegistry.rollEquipmentInstance("Orc Armor", true)
-	#var legs = ItemRegistry.rollEquipmentInstance("Orc Legs", true)
-	#var weapon = ItemRegistry.rollEquipmentInstance("Slimy Blade", true)
-	#var shield = ItemRegistry.rollEquipmentInstance("Orc King Shield", true)
+	#var boots = ItemRegistry.rollEquipmentInstance("Leather Boots", false)
+	#var helmet = ItemRegistry.rollEquipmentInstance("Leather Helmet", false)
+	#var armor = ItemRegistry.rollEquipmentInstance("Leather Armor", false)
+	#var legs = ItemRegistry.rollEquipmentInstance("Leather Legs", false)
+	#var weapon = ItemRegistry.rollEquipmentInstance("Crude Blade", false)
+	#var shield = ItemRegistry.rollEquipmentInstance("Wooden Shield", false)
+	#print(" boots: ", boots)
+	#print(" helmet: ", helmet)
+	#print(" armor: ", armor)
+	#print(" legs: ", legs)
+	#print(" weapon: ", weapon)
+	#print(" shield: ", shield)
+	
 	#
 	#game_data.equippedHelmet = helmet
 	#game_data.equippedArmor = armor

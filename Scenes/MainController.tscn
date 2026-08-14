@@ -15,10 +15,16 @@
 [ext_resource type="Script" uid="uid://by3ujo2v7cwba" path="res://Scripts/EquipmentDisplay.gd" id="9_ipr08"]
 [ext_resource type="Script" uid="uid://bnfiijiu0s8yx" path="res://Scripts/ItemActionModal.gd" id="10_ftth8"]
 [ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="10_gpdd1"]
+[ext_resource type="Texture2D" uid="uid://drmk8ygqeyovk" path="res://Sprites/Equipment/SlimeHelmet.png" id="11_d0b7u"]
+[ext_resource type="Texture2D" uid="uid://di3nhbeoaa01r" path="res://Sprites/Equipment/SlimeBlade.png" id="12_lbmfx"]
+[ext_resource type="Texture2D" uid="uid://22h3m1wj43g1" path="res://Sprites/Equipment/LeatherArmor.png" id="13_1q78x"]
 [ext_resource type="Script" uid="uid://hdtvayj8dw6n" path="res://Scripts/StorageDisplay.gd" id="13_ab47o"]
 [ext_resource type="Script" uid="uid://bel5oivb4n5oe" path="res://Scripts/BrewDisplay.gd" id="13_knc0e"]
 [ext_resource type="Script" uid="uid://cbfawhw0v20ea" path="res://Scripts/MonsterBattleOverlay.gd" id="13_vlrs7"]
 [ext_resource type="Script" uid="uid://buhguegqkcr4k" path="res://Scripts/GatherSystem.gd" id="14_6iwwj"]
+[ext_resource type="Texture2D" uid="uid://c1r03lkmqnnso" path="res://Sprites/Equipment/WoodenShield.png" id="14_8l5l1"]
+[ext_resource type="Texture2D" uid="uid://bptx35ml4gmuh" path="res://Sprites/Equipment/OrcLegs.png" id="15_4j0hr"]
+[ext_resource type="Texture2D" uid="uid://27v2w0qp4px4" path="res://Sprites/Equipment/OrcBoots.png" id="16_8whxx"]
 [ext_resource type="Script" uid="uid://dnx5jud3bj3h2" path="res://Scripts/MerchantDisplay.gd" id="16_cssra"]
 [ext_resource type="Script" uid="uid://dwxg2qpvawunx" path="res://Scripts/DebugDisplay.gd" id="16_px8ax"]
 [ext_resource type="Theme" uid="uid://3dmu3g4p1u1e" path="res://Resources/Themes/MainTheme.tres" id="17_g72ry"]
@@ -610,6 +616,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EventLogPanel" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=863328441]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -719,8 +726,7 @@ theme_override_font_sizes/normal_font_size = 28
 bbcode_enabled = true
 scroll_following = true
 
-[node name="EquipmentDisplay" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=1407338151 node_paths=PackedStringArray("equipmentSystem", "itemModal", "statsPanel", "helmetBtn", "weaponBtn", "armorBtn", "shieldBtn", "legsBtn", "bootsBtn")]
-visible = false
+[node name="EquipmentDisplay" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=1407338151 node_paths=PackedStringArray("equipmentSystem", "itemModal", "statsPanel", "helmetBtn", "weaponBtn", "armorBtn", "shieldBtn", "legsBtn", "bootsBtn", "helmetTexture", "weaponTexture", "armorTexture", "shieldTexture", "legsTexture", "bootsTexture")]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -735,6 +741,12 @@ armorBtn = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxC
 shieldBtn = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Shield/Button")
 legsBtn = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW/Legs/Button")
 bootsBtn = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW2/Boots/Button")
+helmetTexture = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/HEAD/Head/Button/TextureRect")
+weaponTexture = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Weapon/Button/TextureRect")
+armorTexture = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Armor/Button/TextureRect")
+shieldTexture = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Shield/Button/TextureRect")
+legsTexture = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW/Legs/Button/TextureRect")
+bootsTexture = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW2/Boots/Button/TextureRect")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay" unique_id=1714579276]
 layout_mode = 1
@@ -858,6 +870,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TextureRect" type="TextureRect" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/HEAD/Head/Button" unique_id=2031460533]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_d0b7u")
+stretch_mode = 5
+
 [node name="Space2" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/HEAD" unique_id=1995110955]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(100, 100)
@@ -903,6 +925,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TextureRect" type="TextureRect" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Weapon/Button" unique_id=2051861856]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_lbmfx")
+stretch_mode = 5
+
 [node name="Armor" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE" unique_id=807602553]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
@@ -919,6 +951,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TextureRect" type="TextureRect" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Armor/Button" unique_id=1219419037]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_1q78x")
+stretch_mode = 5
+
 [node name="Shield" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE" unique_id=1430406743]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
@@ -934,6 +976,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Shield/Button" unique_id=206141397]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_8l5l1")
+stretch_mode = 5
 
 [node name="Space2" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE" unique_id=1458746372]
 self_modulate = Color(1, 1, 1, 0)
@@ -979,6 +1031,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW/Legs/Button" unique_id=1719264132]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_4j0hr")
+stretch_mode = 5
 
 [node name="Space4" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW" unique_id=25724400]
 self_modulate = Color(1, 1, 1, 0)
@@ -1032,6 +1094,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW2/Boots/Button" unique_id=1431877242]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_8whxx")
+stretch_mode = 5
 
 [node name="Space3" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW2" unique_id=1748346152]
 self_modulate = Color(1, 1, 1, 0)

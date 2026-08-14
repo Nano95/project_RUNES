@@ -7,13 +7,14 @@ const STOCK: Array[Dictionary] = [
 	{ "name": "Minor Battle Potion", "category": "potion",    "cost": 20  },
 	{ "name": "Minor Foraging Potion", "category": "potion",    "cost": 20  },
 	{ "name": "Health Potion",     "category": "potion",    "cost": 30 }, # CHEAP FOR NOW
-	{ "name": "Minor Antidote",     "category": "potion",    "cost": 25 }
+	{ "name": "Minor Antidote",     "category": "potion",    "cost": 25 },
 	# Equipment
-	#{ "name": "Wooden Shield",      "category": "equipment", "cost": 80  },
-	#{ "name": "Crude Blade",        "category": "equipment", "cost": 90  },
-	#{ "name": "Leather Helmet",     "category": "equipment", "cost": 120 },
-	#{ "name": "Leather Armor",      "category": "equipment", "cost": 150 },
-	#{ "name": "Reinforced Boots",   "category": "equipment", "cost": 100 },
+	{ "name": "Wooden Shield",      "category": "equipment", "cost": 0  },
+	{ "name": "Crude Blade",        "category": "equipment", "cost": 0  },
+	{ "name": "Leather Helmet",     "category": "equipment", "cost": 0 },
+	{ "name": "Leather Armor",      "category": "equipment", "cost": 0 },
+	{ "name": "Leather Legs",      "category": "equipment", "cost": 0 },
+	{ "name": "Leather Boots",   "category": "equipment", "cost": 0 },
 	#{ "name": "Ring of Protection", "category": "equipment", "cost": 200 },
 ]
 

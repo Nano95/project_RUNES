@@ -32,12 +32,122 @@ class_name SaveData
 
 @export var discoveredRecipes: Array[String] = []
 
-@export var equippedWeapon: Dictionary = {}
-@export var equippedShield: Dictionary = {}
-@export var equippedArmor: Dictionary = {}
-@export var equippedHelmet: Dictionary = {}
-@export var equippedLegs: Dictionary = {}
-@export var equippedBoots: Dictionary = {}
+@export var equippedWeapon: Dictionary = {
+	"name": "Crude Blade",
+	"instanceId": "crud_6993_003b6df2",
+	"slot": "weapon",
+	"setName": "",
+	"hpBonus": 0,
+	"atkBonus": 4,
+	"defBonus": 0,
+	"effects": {},
+	"grade": "",
+	"gradeHpBonus": 0,
+	"gradeEffects": {},
+	"enhancement": 0,
+	"effectType": "none",
+	"effectValue": 0,
+	"effectChance": 0,
+	"isEquipment": true,
+	"qty": 1
+}
+@export var equippedShield: Dictionary = {
+	"name": "Wooden Shield",
+	"instanceId": "wood_230a_003b6df9",
+	"slot": "shield",
+	"setName": "",
+	"hpBonus": 0,
+	"atkBonus": 0,
+	"defBonus": 5,
+	"effects": {},
+	"grade": "",
+	"gradeHpBonus": 0,
+	"gradeEffects": {},
+	"enhancement": 0,
+	"effectType": "none",
+	"effectValue": 0,
+	"effectChance": 0,
+	"isEquipment": true,
+	"qty": 1
+}
+@export var equippedArmor: Dictionary = {
+	"name": "Leather Armor",
+	"instanceId": "leat_e037_003b6de3",
+	"slot": "armor",
+	"setName": "",
+	"hpBonus": 15,
+	"atkBonus": 0,
+	"defBonus": 0,
+	"effects": {},
+	"grade": "",
+	"gradeHpBonus": 0,
+	"gradeEffects": {},
+	"enhancement": 0,
+	"effectType": "none",
+	"effectValue": 0,
+	"effectChance": 0,
+	"isEquipment": true,
+	"qty": 1
+}
+@export var equippedHelmet: Dictionary = {
+	"name": "Leather Helmet",
+	"instanceId": "leat_751d_003b6ddb",
+	"slot": "helmet",
+	"setName": "",
+	"hpBonus": 5,
+	"atkBonus": 0,
+	"defBonus": 0,
+	"effects": {},
+	"grade": "",
+	"gradeHpBonus": 0,
+	"gradeEffects": {},
+	"enhancement": 0,
+	"effectType": "none",
+	"effectValue": 0,
+	"effectChance": 0,
+	"isEquipment": true,
+	"qty": 1
+}
+@export var equippedLegs: Dictionary = {
+	"name": "Leather Legs",
+	"instanceId": "leat_2181_003b6dea",
+	"slot": "legs",
+	"setName": "",
+	"hpBonus": 10,
+	"atkBonus": 0,
+	"defBonus": 0,
+	"effects": {},
+	"grade": "",
+	"gradeHpBonus": 0,
+	"gradeEffects": {},
+	"enhancement": 0,
+	"effectType": "none",
+	"effectValue": 0,
+	"effectChance": 0,
+	"isEquipment": true,
+	"qty": 1
+}
+@export var equippedBoots: Dictionary = {
+	"name": "Leather Boots",
+	"instanceId": "leat_b400_003b6dcc",
+	"slot": "boots",
+	"setName": "",
+	"hpBonus": 0,
+	"atkBonus": 0,
+	"defBonus": 0,
+	"effects": {
+		"dodge": 0.02
+	},
+	"grade": "",
+	"gradeHpBonus": 0,
+	"gradeEffects": {},
+	"enhancement": 0,
+	"effectType": "none",
+	"effectValue": 0,
+	"effectChance": 0,
+	"isEquipment": true,
+	"qty": 1
+}
 @export var equippedRing: Dictionary = {}
 @export var equippedAmulet: Dictionary = {}
 

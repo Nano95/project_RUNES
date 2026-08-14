@@ -202,3 +202,33 @@ func rollEquipmentInstance(itemName: String, graded: bool = false) -> Dictionary
 		"isEquipment": true,
 		"qty": 1
 	}
+
+static func getSprite(itemName: String) -> Texture2D:
+	var path = EQUIPMENT_SPRITES.get(itemName, "")
+	if path == "":
+		return null
+	return load(path) as Texture2D
+
+const EQUIPMENT_SPRITES: Dictionary = {
+	# Starter
+	"Crude Blade":    "res://Sprites/Equipment/CrudeBlade.png",
+	"Wooden Shield":  "res://Sprites/Equipment/WoodenShield.png",
+	"Leather Helmet": "res://Sprites/Equipment/LeatherHelmet.png",
+	"Leather Armor":  "res://Sprites/Equipment/LeatherArmor.png",
+	"Leather Legs":   "res://Sprites/Equipment/LeatherLegs.png",
+	"Leather Boots":  "res://Sprites/Equipment/LeatherBoots.png",
+	# Orc Set
+	"Orc Helmet":     "res://Sprites/Equipment/OrcHelmet.png",
+	"Orc Armor":      "res://Sprites/Equipment/OrcArmor.png",
+	"Orc Legs":       "res://Sprites/Equipment/OrcLegs.png",
+	"Orc Boots":      "res://Sprites/Equipment/OrcBoots.png",
+	"Orcish Axe":     "res://Sprites/Equipment/OrcishAxe.png",
+	"Orc King Shield":"res://Sprites/Equipment/OrcKingShield.png",
+	# Slimy Set
+	"Slimy Helmet":   "res://Sprites/Equipment/SlimeHelmet.png",
+	"Slimy Armor":    "res://Sprites/Equipment/SlimeArmor.png",
+	"Slimy Legs":     "res://Sprites/Equipment/SlimeLegs.png",
+	"Slimy Boots":    "res://Sprites/Equipment/SlimeBoots.png",
+	"Slimy Blade":    "res://Sprites/Equipment/SlimeBlade.png",
+	"Slimy Shield":   "res://Sprites/Equipment/SlimeShield.png",
+}
