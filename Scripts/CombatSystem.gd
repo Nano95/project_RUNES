@@ -182,12 +182,13 @@ func winCombat() -> void:
 	if not monster:
 		clearCombat()
 		return
+	var monsterName = main.game_data.currentMonsterName
 	var gold = randi_range(monster.goldMin, monster.goldMax)
 	main.game_data.gold += gold
 	main.game_data.sessionKills += 1
 	GameEvents.eventLogged.emit(
 		"%s defeated! +%d gold" % [
-			main.game_data.currentMonsterName,
+			monsterName,
 			gold,
 		], "loot", false
 	)
@@ -195,6 +196,8 @@ func winCombat() -> void:
 	for drop in drops:
 		GameEvents.eventLogged.emit("Looted: %s." % drop, "loot", false)
 		GameEvents.itemDropped.emit(drop)
+	
+	main.game_data.stats["kills"][monsterName] = main.game_data.stats["kills"].get(monsterName, 0) + 1
 	clearCombat()
 	GameEvents.combatWon.emit(gold)
 	main.save_game()

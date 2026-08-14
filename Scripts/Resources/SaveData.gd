@@ -30,6 +30,10 @@ class_name SaveData
 @export var chestMax: int = 15
 @export var savedGold: int = 0
 
+@export var stats: Dictionary = {
+	"kills": {}
+}
+
 @export var discoveredRecipes: Array[String] = []
 
 @export var equippedWeapon: Dictionary = {
