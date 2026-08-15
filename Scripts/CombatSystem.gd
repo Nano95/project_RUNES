@@ -185,6 +185,7 @@ func winCombat() -> void:
 	var monsterName = main.game_data.currentMonsterName
 	var gold = randi_range(monster.goldMin, monster.goldMax)
 	main.game_data.gold += gold
+	main.game_data.stats["totalGoldEarned"] += gold
 	main.game_data.sessionKills += 1
 	GameEvents.eventLogged.emit(
 		"%s defeated! +%d gold" % [
@@ -213,6 +214,7 @@ func die() -> void:
 	main.game_data.currentWeight = 0.0
 	main.game_data.sessionKills = 0
 	main.game_data.activeStatusEffects = {}
+	main.game_data.stats["deaths"] += 1
 	clearCombat()
 	GameEvents.eventLogged.emit("You have died. Your gold and inventory are lost.", "danger", false)
 	GameEvents.playerDied.emit()

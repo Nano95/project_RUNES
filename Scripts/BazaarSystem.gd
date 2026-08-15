@@ -116,11 +116,19 @@ func handleBulkBuyer() -> void:
 	# Find a stackable item with qty > 1
 	var stackableItems = []
 	for stack in main.game_data.backpack:
-		if not stack.get("isEquipment", false) and stack.get("qty", 1) > 1:
+		if stack.get("isEquipment", false):
+			continue
+		var item = ItemRegistry.getItem(stack.get("name", ""))
+		if not item:
+			continue
+		# Exclude potions and summons
+		if item.itemType == "summon":
+			continue
+		if stack.get("qty", 1) > 1:
 			stackableItems.append(stack)
 
 	if stackableItems.is_empty():
-		handleCustomer()  # fallback to regular customer
+		handleCustomer()  # fallback
 		return
 
 	var stack = stackableItems[randi() % stackableItems.size()]
@@ -128,11 +136,12 @@ func handleBulkBuyer() -> void:
 	var totalQty = stack.get("qty", 1)
 	var buyQty = randi_range(1, totalQty)
 	var basePrice = getStackPrice(itemName, buyQty)
-	var bulkMultiplier = randf_range(1.5, 2.0)
+	var bulkMultiplier = randf_range(0.8, 1.4)
 	var finalPrice = int(basePrice * bulkMultiplier)
 
 	inventorySystem.removeFromBackpack(itemName, buyQty)
 	main.game_data.savedGold += finalPrice
+	main.game_data.stats["totalGoldEarned"] += finalPrice
 	main.save_game()
 	GameEvents.goldDeposited.emit(finalPrice)
 	GameEvents.eventLogged.emit(
@@ -177,6 +186,7 @@ func handleShoplifter() -> void:
 	if caught:
 		var bounty = randi_range(5, 20)
 		main.game_data.savedGold += bounty
+		main.game_data.stats["totalGoldEarned"] += bounty
 		main.save_game()
 		GameEvents.goldDeposited.emit(bounty)
 		GameEvents.eventLogged.emit(
@@ -218,6 +228,7 @@ func getStackPrice(itemName: String, qty: int) -> int:
 func sellItem(item: Dictionary, price: int) -> void:
 	removeItemFromBackpack(item)
 	main.game_data.savedGold += price
+	main.game_data.stats["totalGoldEarned"] += price
 	main.save_game()
 	GameEvents.goldDeposited.emit(price)
 	GameEvents.backpackChanged.emit()

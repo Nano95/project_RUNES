@@ -24,9 +24,15 @@ func buildDebugText() -> String:
 
 	text += "[color=#c8880a][b]PLAYER[/b][/color]\n"
 	text += "Gold: %d | Saved: %d\n" % [gd.gold, gd.savedGold]
-	text += "Weight: %.1f/%.1f\n\n" % [gd.currentWeight, gd.maxWeight]
+	text += "Weight: %.1f/%.1f\n" % [gd.currentWeight, gd.maxWeight]
+	text += "\n[color=#c8880a][b]STATS[/b][/color]\n"
+	text += "Deaths: %d\n" % main.game_data.stats.get("deaths", 0)
+	text += "Total Gold Earned: %d\n" % main.game_data.stats.get("totalGoldEarned", 0)
+	text += "\n[color=#c8880a]Kills:[/color]\n"
+	for monster in main.game_data.stats.get("kills", {}):
+		text += "  %s: %d\n" % [monster, main.game_data.stats["kills"][monster]]
 
-	text += "[color=#c8880a][b]BACKPACK[/b][/color] (%d items)\n" % gd.backpack.size()
+	text += "\n[color=#c8880a][b]BACKPACK[/b][/color] (%d items)\n" % gd.backpack.size()
 	for stack in gd.backpack:
 		if stack.get("isEquipment", false):
 			text += "  [color=#e74c3c]%s[/color] +%d (enh:%d)\n" % [
