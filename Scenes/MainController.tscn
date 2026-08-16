@@ -12,18 +12,19 @@
 [ext_resource type="Shader" uid="uid://ckjvhxujvm14n" path="res://Shaders/ArcadeFlash.gdshader" id="7_108yi"]
 [ext_resource type="Script" uid="uid://wy43n82n4e4s" path="res://Scripts/InventorySystem.gd" id="8_ck1p8"]
 [ext_resource type="Theme" uid="uid://cjjtxin1ayxsy" path="res://Resources/Themes/MainTheme_Overlay.tres" id="8_shy7a"]
+[ext_resource type="Script" uid="uid://cys4vs01mfbc" path="res://Scripts/ExpeditionDisplay.gd" id="9_8l5l1"]
 [ext_resource type="Script" uid="uid://by3ujo2v7cwba" path="res://Scripts/EquipmentDisplay.gd" id="9_ipr08"]
 [ext_resource type="Script" uid="uid://bnfiijiu0s8yx" path="res://Scripts/ItemActionModal.gd" id="10_ftth8"]
 [ext_resource type="Shader" uid="uid://bd2x5ino2w7yq" path="res://Shaders/Blur.gdshader" id="10_gpdd1"]
-[ext_resource type="Texture2D" uid="uid://drmk8ygqeyovk" path="res://Sprites/Equipment/SlimeHelmet.png" id="11_d0b7u"]
+[ext_resource type="Texture2D" uid="uid://do68xtjvgkjgv" path="res://Sprites/Equipment/OrcHelmet.png" id="12_8l5l1"]
 [ext_resource type="Texture2D" uid="uid://di3nhbeoaa01r" path="res://Sprites/Equipment/SlimeBlade.png" id="12_lbmfx"]
-[ext_resource type="Texture2D" uid="uid://22h3m1wj43g1" path="res://Sprites/Equipment/LeatherArmor.png" id="13_1q78x"]
 [ext_resource type="Script" uid="uid://hdtvayj8dw6n" path="res://Scripts/StorageDisplay.gd" id="13_ab47o"]
 [ext_resource type="Script" uid="uid://bel5oivb4n5oe" path="res://Scripts/BrewDisplay.gd" id="13_knc0e"]
 [ext_resource type="Script" uid="uid://cbfawhw0v20ea" path="res://Scripts/MonsterBattleOverlay.gd" id="13_vlrs7"]
+[ext_resource type="Texture2D" uid="uid://c5xf7um5mh8ts" path="res://Sprites/Equipment/OrcArmor.png" id="14_4j0hr"]
 [ext_resource type="Script" uid="uid://buhguegqkcr4k" path="res://Scripts/GatherSystem.gd" id="14_6iwwj"]
-[ext_resource type="Texture2D" uid="uid://c1r03lkmqnnso" path="res://Sprites/Equipment/WoodenShield.png" id="14_8l5l1"]
 [ext_resource type="Texture2D" uid="uid://bptx35ml4gmuh" path="res://Sprites/Equipment/OrcLegs.png" id="15_4j0hr"]
+[ext_resource type="Texture2D" uid="uid://uapq3yiioe27" path="res://Sprites/Equipment/OrcKingShield.png" id="15_8whxx"]
 [ext_resource type="Texture2D" uid="uid://27v2w0qp4px4" path="res://Sprites/Equipment/OrcBoots.png" id="16_8whxx"]
 [ext_resource type="Script" uid="uid://dnx5jud3bj3h2" path="res://Scripts/MerchantDisplay.gd" id="16_cssra"]
 [ext_resource type="Script" uid="uid://dwxg2qpvawunx" path="res://Scripts/DebugDisplay.gd" id="16_px8ax"]
@@ -38,6 +39,8 @@
 [ext_resource type="Script" uid="uid://lua0kwyswmk4" path="res://Scripts/MerchantSystem.gd" id="29_px8ax"]
 [ext_resource type="Script" uid="uid://kilw6u3p8wgc" path="res://Scripts/BlacksmithSystem.gd" id="31_ipr08"]
 [ext_resource type="Script" uid="uid://xd1esmbao78" path="res://Scripts/BazaarSystem.gd" id="32_ipr08"]
+[ext_resource type="Script" uid="uid://chso41vx1n5g7" path="res://Scripts/ExpeditionSystem.gd" id="39_lbmfx"]
+[ext_resource type="Script" uid="uid://c3i3ww6xxsogw" path="res://Scripts/ExpeditionTimeline.gd" id="40_1q78x"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_shy7a"]
 resource_local_to_scene = true
@@ -46,6 +49,18 @@ shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ipr08"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y6qkv"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mqv5t"]
 resource_local_to_scene = true
 shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
@@ -88,6 +103,18 @@ shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lbmfx"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i4rge"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tcxn3"]
 resource_local_to_scene = true
 shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
@@ -325,7 +352,7 @@ shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[node name="MainController" type="Control" unique_id=671700929 node_paths=PackedStringArray("equipmentSystem", "tickTimer", "eventLog")]
+[node name="MainController" type="Control" unique_id=671700929 node_paths=PackedStringArray("equipmentSystem", "tickTimer", "eventLog", "expeditionSystem")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -337,8 +364,9 @@ script = ExtResource("1_3dcjo")
 equipmentSystem = NodePath("EquipmentSystem")
 tickTimer = NodePath("TickTimer")
 eventLog = NodePath("UIController/MarginContainer/VBoxContainer/EventLogPanel/VBoxContainer/MarginContainer/EventLog")
+expeditionSystem = NodePath("ExpeditionSystem")
 
-[node name="UIController" type="Control" parent="." unique_id=1458651066 node_paths=PackedStringArray("mainActionRow", "areaSelectRow", "chooseAreaButton", "brewButton", "storageButton", "equipmentButton", "eventLogButton", "merchantButton", "blacksmithButton", "bazaarButton", "debugButton", "areaButtons", "eventLogPanel", "equipmentPanel", "quickConfigPanel", "bazaarActionsPanel", "bazaarStartStopBtn", "bazaarLeaveBtn", "bazaarSystem", "inventorySystem", "storageDisplay", "alchemyDisplay", "merchantDisplay", "blacksmithDisplay", "checkPointDisplay", "debugDisplay", "areaSystem", "adventuringRow", "inventoryPanel", "autoContinueButton")]
+[node name="UIController" type="Control" parent="." unique_id=1458651066 node_paths=PackedStringArray("mainActionRow", "areaSelectRow", "chooseAreaButton", "brewButton", "storageButton", "equipmentButton", "eventLogButton", "merchantButton", "blacksmithButton", "bazaarButton", "expeditionButton", "debugButton", "areaButtons", "eventLogPanel", "equipmentPanel", "expeditionPanel", "quickConfigPanel", "bazaarActionsPanel", "bazaarStartStopBtn", "topMainTitlePanel", "expeditionTitlePanel", "mainStatsHBox", "expeditionHBox", "bazaarLeaveBtn", "bazaarSystem", "inventorySystem", "storageDisplay", "alchemyDisplay", "merchantDisplay", "blacksmithDisplay", "checkPointDisplay", "debugDisplay", "areaSystem", "adventuringRow", "inventoryPanel", "autoContinueButton")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -356,13 +384,19 @@ eventLogButton = NodePath("MarginContainer/VBoxContainer/EquipmentDisplay/VBoxCo
 merchantButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/MainActionRow/MerchantBtn")
 blacksmithButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/MainActionRow/BlacksmithBtn")
 bazaarButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/MainActionRow/BazaarBtn")
+expeditionButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/MainActionRow/Expedition")
 debugButton = NodePath("MarginContainer/VBoxContainer/TopRow/StatsLayout/Panel/DebugBtn")
 areaButtons = [NodePath("MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow/area1"), NodePath("MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow/area2"), NodePath("MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow/area3"), NodePath("MarginContainer/VBoxContainer/AreasSelectRow/AreasSelectRow/area4")]
 eventLogPanel = NodePath("MarginContainer/VBoxContainer/EventLogPanel")
 equipmentPanel = NodePath("MarginContainer/VBoxContainer/EquipmentDisplay")
+expeditionPanel = NodePath("MarginContainer/VBoxContainer/ExpeditionLogPanel")
 quickConfigPanel = NodePath("MarginContainer/VBoxContainer/EventLogPanel/VBoxContainer/QuickConfigs")
 bazaarActionsPanel = NodePath("MarginContainer/VBoxContainer/EventLogPanel/VBoxContainer/BazaarActions")
 bazaarStartStopBtn = NodePath("MarginContainer/VBoxContainer/EventLogPanel/VBoxContainer/BazaarActions/MarginContainer/HBoxContainer/StartStopSales")
+topMainTitlePanel = NodePath("MarginContainer/VBoxContainer/TopRow/StatsLayout/Panel")
+expeditionTitlePanel = NodePath("MarginContainer/VBoxContainer/TopRow/StatsLayout/ExpeditionPanel")
+mainStatsHBox = NodePath("MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats")
+expeditionHBox = NodePath("MarginContainer/VBoxContainer/TopRow/StatsLayout/ExpeditionActions")
 bazaarLeaveBtn = NodePath("MarginContainer/VBoxContainer/EventLogPanel/VBoxContainer/BazaarActions/MarginContainer/HBoxContainer/Leave")
 bazaarSystem = NodePath("../BazaarSystem")
 inventorySystem = NodePath("../InventorySystem")
@@ -471,6 +505,47 @@ theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Debug"
+
+[node name="ExpeditionPanel" type="Panel" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout" unique_id=2121372915]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme = ExtResource("17_g72ry")
+
+[node name="LOCATION" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/ExpeditionPanel" unique_id=1674003938 instance=ExtResource("6_prt4a")]
+material = SubResource("ShaderMaterial_y6qkv")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 1.0
+offset_right = 1592.0
+offset_bottom = 101.33299
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+text = "Expedition's HQ"
+vertical_alignment = 1
+
+[node name="TIMER" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/ExpeditionPanel" unique_id=808455675 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.83, 0.83, 0.83, 1)
+material = SubResource("ShaderMaterial_mqv5t")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.9999986
+offset_top = 0.99999857
+offset_right = 1547.0
+offset_bottom = 101.33299
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+text = "10:00"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Stats" type="HBoxContainer" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout" unique_id=548009463]
 layout_mode = 2
@@ -615,7 +690,91 @@ text = "1000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ExpeditionActions" type="HBoxContainer" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout" unique_id=287870777]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Actions" type="Panel" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/ExpeditionActions" unique_id=599447132]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("17_g72ry")
+
+[node name="MarginContainer" type="MarginContainer" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/ExpeditionActions/Actions" unique_id=946049899]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/ExpeditionActions/Actions/MarginContainer" unique_id=477896291]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="StartExpeditionBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/ExpeditionActions/Actions/MarginContainer/HBoxContainer" unique_id=54260889]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("17_g72ry")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 40
+text = "Start Expedition"
+
+[node name="ReturnToTown" type="Button" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/ExpeditionActions/Actions/MarginContainer/HBoxContainer" unique_id=624138382]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("17_g72ry")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 40
+text = "Return to town"
+
+[node name="Gold" type="Panel" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/ExpeditionActions" unique_id=1970775436]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+theme = ExtResource("17_g72ry")
+
+[node name="TITLE" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/ExpeditionActions/Gold" unique_id=65532992 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.83, 0.83, 0.83, 1)
+material = SubResource("ShaderMaterial_i4rge")
+layout_mode = 1
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 707.99994
+offset_bottom = 104.0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 70
+text = "Gold"
+vertical_alignment = 1
+
+[node name="QTY" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/ExpeditionActions/Gold" unique_id=427388896 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.9764706, 0.9664216, 0.33333337, 1)
+material = SubResource("ShaderMaterial_tcxn3")
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -17.0
+offset_right = 478.0
+offset_bottom = 107.0
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 90
+text = "1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="EventLogPanel" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=863328441]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -725,8 +884,87 @@ theme_override_font_sizes/normal_font_size = 28
 bbcode_enabled = true
 scroll_following = true
 
-[node name="EquipmentDisplay" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=1407338151 node_paths=PackedStringArray("equipmentSystem", "itemModal", "statsPanel", "helmetBtn", "weaponBtn", "armorBtn", "shieldBtn", "legsBtn", "bootsBtn", "helmetTexture", "weaponTexture", "armorTexture", "shieldTexture", "legsTexture", "bootsTexture")]
+[node name="ExpeditionLogPanel" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=1768851819 node_paths=PackedStringArray("timerLabel", "locationLabel", "eventLog", "startStopBtn", "returnToTownBtn", "expeditionSystem", "uiController")]
 visible = false
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+theme = ExtResource("17_g72ry")
+script = ExtResource("9_8l5l1")
+timerLabel = NodePath("../TopRow/StatsLayout/ExpeditionPanel/TIMER")
+locationLabel = NodePath("../TopRow/StatsLayout/ExpeditionPanel/LOCATION")
+eventLog = NodePath("VBoxContainer/MarginContainer/EventLog")
+startStopBtn = NodePath("../TopRow/StatsLayout/ExpeditionActions/Actions/MarginContainer/HBoxContainer/StartExpeditionBtn")
+returnToTownBtn = NodePath("../TopRow/StatsLayout/ExpeditionActions/Actions/MarginContainer/HBoxContainer/ReturnToTown")
+expeditionSystem = NodePath("../../../../ExpeditionSystem")
+uiController = NodePath("../../..")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIController/MarginContainer/VBoxContainer/ExpeditionLogPanel" unique_id=705260861]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QuickConfigs" type="Panel" parent="UIController/MarginContainer/VBoxContainer/ExpeditionLogPanel/VBoxContainer" unique_id=273510066]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.13
+theme = ExtResource("8_shy7a")
+
+[node name="MarginContainer" type="MarginContainer" parent="UIController/MarginContainer/VBoxContainer/ExpeditionLogPanel/VBoxContainer/QuickConfigs" unique_id=473672604]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIController/MarginContainer/VBoxContainer/ExpeditionLogPanel/VBoxContainer/QuickConfigs/MarginContainer" unique_id=854764565]
+layout_mode = 2
+
+[node name="EquipmentDisplayBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/ExpeditionLogPanel/VBoxContainer/QuickConfigs/MarginContainer/HBoxContainer" unique_id=907257627]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("17_g72ry")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Equipment"
+
+[node name="AutoContinueButton" type="CheckButton" parent="UIController/MarginContainer/VBoxContainer/ExpeditionLogPanel/VBoxContainer/QuickConfigs/MarginContainer/HBoxContainer" unique_id=1657330836]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 21
+text = " Checkpoint auto-continue?  "
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UIController/MarginContainer/VBoxContainer/ExpeditionLogPanel/VBoxContainer" unique_id=1931584583]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="EventLog" type="RichTextLabel" parent="UIController/MarginContainer/VBoxContainer/ExpeditionLogPanel/VBoxContainer/MarginContainer" unique_id=200095675]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("3_dajxx")
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+scroll_following = true
+
+[node name="EquipmentDisplay" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=1407338151 node_paths=PackedStringArray("equipmentSystem", "itemModal", "statsPanel", "helmetBtn", "weaponBtn", "armorBtn", "shieldBtn", "legsBtn", "bootsBtn", "helmetTexture", "weaponTexture", "armorTexture", "shieldTexture", "legsTexture", "bootsTexture")]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -877,7 +1115,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("11_d0b7u")
+texture = ExtResource("12_8l5l1")
 stretch_mode = 5
 
 [node name="Space2" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/HEAD" unique_id=1995110955]
@@ -958,7 +1196,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("13_1q78x")
+texture = ExtResource("14_4j0hr")
 stretch_mode = 5
 
 [node name="Shield" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE" unique_id=1430406743]
@@ -984,7 +1222,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("14_8l5l1")
+texture = ExtResource("15_8whxx")
 stretch_mode = 5
 
 [node name="Space2" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE" unique_id=1458746372]
@@ -1166,6 +1404,7 @@ vertical_alignment = 1
 [node name="MainActionRow" type="ScrollContainer" parent="UIController/MarginContainer/VBoxContainer" unique_id=23115074]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
 
 [node name="MainActionRow" type="GridContainer" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=780816887]
 custom_minimum_size = Vector2(678, 0)
@@ -1174,20 +1413,30 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 13
-columns = 3
+columns = 4
 
 [node name="ChooseAreaBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow/MainActionRow" unique_id=793530980]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("17_g72ry")
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
-text = "Travel"
+text = "Fight"
+
+[node name="Expedition" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow/MainActionRow" unique_id=493965628]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("17_g72ry")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 32
+text = "Expedition"
 
 [node name="StorageBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow/MainActionRow" unique_id=120215516]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("17_g72ry")
@@ -1197,7 +1446,7 @@ theme_override_font_sizes/font_size = 32
 text = "Storage"
 
 [node name="AlchemyBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow/MainActionRow" unique_id=954765678]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("17_g72ry")
@@ -1207,7 +1456,7 @@ theme_override_font_sizes/font_size = 32
 text = "Alchemy"
 
 [node name="MerchantBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow/MainActionRow" unique_id=34585174]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("17_g72ry")
@@ -1217,7 +1466,7 @@ theme_override_font_sizes/font_size = 32
 text = "Merchant"
 
 [node name="BlacksmithBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow/MainActionRow" unique_id=320974287]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("17_g72ry")
@@ -1225,9 +1474,11 @@ theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Blacksmith"
+icon_alignment = 1
+expand_icon = true
 
 [node name="BazaarBtn" type="Button" parent="UIController/MarginContainer/VBoxContainer/MainActionRow/MainActionRow" unique_id=1502272863]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("17_g72ry")
@@ -3368,3 +3619,12 @@ metadata/_custom_type_script = "uid://kilw6u3p8wgc"
 script = ExtResource("32_ipr08")
 inventorySystem = NodePath("../InventorySystem")
 metadata/_custom_type_script = "uid://xd1esmbao78"
+
+[node name="ExpeditionSystem" type="Node" parent="." unique_id=1134059896 node_paths=PackedStringArray("expeditionTimeline")]
+script = ExtResource("39_lbmfx")
+expeditionTimeline = NodePath("../ExpeditionTimeline")
+metadata/_custom_type_script = "uid://chso41vx1n5g7"
+
+[node name="ExpeditionTimeline" type="Node" parent="." unique_id=927276975]
+script = ExtResource("40_1q78x")
+metadata/_custom_type_script = "uid://c3i3ww6xxsogw"

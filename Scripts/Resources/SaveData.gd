@@ -157,6 +157,20 @@ class_name SaveData
 @export var equippedRing: Dictionary = {}
 @export var equippedAmulet: Dictionary = {}
 
+@export_category("Expeditions")
+@export var isExpeditionActive: bool = false
+@export var expeditionArea: String = ""
+@export var expeditionStartTimestamp: int = 0
+@export var expeditionEndTimestamp: int = 0
+@export var expeditionDurationMinutes: int = 0
+@export var expeditionTimeline: Array[Dictionary] = []
+@export var expeditionProgressIndex: int = -1
+@export var expeditionHealth: int = 50
+@export var expeditionInventory: Array[Dictionary] = []
+@export var pendingExpeditionGold: int = 0
+@export var equippedExpeditionBoots: Dictionary = {}
+
+@export_category("Bazaar")
 @export var equippedStand: Dictionary = {}
 @export var equippedLock: Dictionary = {}
 @export var equippedScale: Dictionary = {}

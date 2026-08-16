@@ -8,6 +8,7 @@ var main:MainNode
 
 @export_category("UI")
 @export var eventLog: RichTextLabel
+@export var expeditionSystem: ExpeditionSystem
 
 func _ready() -> void:
 	main = Utils.get_main()

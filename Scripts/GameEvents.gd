@@ -90,3 +90,15 @@ signal statusEffectApplied(status: String, counter: int)
 signal statusEffectTicked(status: String, counter: int, damage: int)
 @warning_ignore("unused_signal")
 signal statusEffectCleared(status: String)
+
+### EXPEDITION
+@warning_ignore("unused_signal")
+signal expeditionStarted(area: String, duration: int)
+@warning_ignore("unused_signal")
+signal expeditionStopped
+@warning_ignore("unused_signal")
+signal expeditionCompleted(survived: bool)
+@warning_ignore("unused_signal")
+signal expeditionEventFired(event: Dictionary)
+@warning_ignore("unused_signal")
+signal dungeonDiscovered(area: String)

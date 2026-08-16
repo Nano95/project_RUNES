@@ -11,13 +11,20 @@ class_name UIController
 @export var merchantButton: Button
 @export var blacksmithButton: Button
 @export var bazaarButton: Button
+@export var expeditionButton: Button
 @export var debugButton: Button
 @export var areaButtons: Array[Button] = []
 @export var eventLogPanel: Panel
 @export var equipmentPanel: Panel
+@export var expeditionPanel: Panel
 @export var quickConfigPanel: Panel
 @export var bazaarActionsPanel: Panel
 @export var bazaarStartStopBtn: Button
+
+@export var topMainTitlePanel:Panel
+@export var expeditionTitlePanel:Panel
+@export var mainStatsHBox: HBoxContainer
+@export var expeditionHBox: HBoxContainer
 
 @export var bazaarLeaveBtn: Button
 @export var bazaarSystem: BazaarSystem
@@ -56,6 +63,7 @@ func _ready() -> void:
 	merchantButton.pressed.connect(showMerchant)
 	blacksmithButton.pressed.connect(showBlacksmith)
 	debugButton.pressed.connect(debugDisplay.open)
+	expeditionButton.pressed.connect(showExpeditionMode)
 	
 	mainActionRow.show()
 	areaSelectRow.hide()
@@ -201,6 +209,7 @@ func onLockedAreaPressed(areaName: String) -> void:
 			"system", false
 		)
 
+### BAZAAR
 func onBazaarPressed() -> void:
 	# Show event log in case equipment panel is open
 	equipmentPanel.visible = false
@@ -238,3 +247,35 @@ func resetPanelPositionMeta() -> void:
 		eventLogPanel.remove_meta("originalY")
 	if equipmentPanel.has_meta("originalY"):
 		equipmentPanel.remove_meta("originalY")
+
+
+### EXPEDITION
+# Show expedition mode
+func showExpeditionMode() -> void:
+	# Hide normal UI
+	mainStatsHBox.visible = false
+	mainActionRow.visible = false
+	topMainTitlePanel.visible = false
+	eventLogPanel.visible = false
+	
+	# Show expedition UI
+	expeditionTitlePanel.visible = true
+	expeditionHBox.visible = true
+	expeditionPanel.visible = true
+	Utils.animateButtonBounce(expeditionPanel)
+	
+	expeditionPanel.open()
+
+# Return to town
+func hideExpeditionMode() -> void:
+	# Restore normal UI
+	mainStatsHBox.visible = true
+	mainActionRow.visible = true
+	topMainTitlePanel.visible = true
+	eventLogPanel.visible = true
+	Utils.animateButtonBounce(eventLogPanel)
+	
+	# Hide expedition UI
+	expeditionTitlePanel.visible = false
+	expeditionHBox.visible = false
+	expeditionPanel.visible = false

@@ -159,16 +159,17 @@ func handleHaggler() -> void:
 	var basePrice = getItemPrice(item)
 	var haggleSkill = getHaggleSkill()
 	var playerWins = randf() < haggleSkill
+	var itemName = getItemDisplayName(item)
 
 	var finalPrice: int
 	var outcome: String
 
 	if playerWins:
 		finalPrice = int(basePrice * randf_range(1.1, 1.3))
-		outcome = "[color=#ff4444]Haggler[/color] tries to lowball but you hold firm! +%dg" % finalPrice
+		outcome = "[color=#ff4444]Haggler[/color] tries to lowball for %s, but you hold firm! +%dg" % [finalPrice, itemName]
 	else:
 		finalPrice = int(basePrice * randf_range(0.7, 0.9))
-		outcome = "[color=#ff4444]Haggler[/color] talks you down to %dg." % finalPrice
+		outcome = "[color=#ff4444]Haggler[/color] talks you down to %dg for the %s." % [finalPrice, itemName]
 
 	sellItem(item, finalPrice)
 	GameEvents.eventLogged.emit(outcome, "town", false)

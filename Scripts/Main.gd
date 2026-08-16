@@ -229,18 +229,11 @@ func check_offline_time_and_rewards() -> void:
 	@warning_ignore("narrowing_conversion")
 	var now:int = Time.get_unix_time_from_system()
 	var last:int = game_data.last_crafting_timestamp
-	
-	# --- RESTED CHECK ---
-	#check_rested_state()
-	#if (game_data.rested_data.charges > 0):
-		#if (is_instance_valid(rested_popup)):
-			#rested_popup.queue_free()
-		#rested_popup = rested_panel_ref.instantiate()
-		#rested_popup.setup(self)
-		#spawn_to_top_ui_layer(rested_popup)
 
 	if (last > 3):
-		#Utils.update_crafting_speed()
+		# Sync expedition
+		active_menu_ref.expeditionSystem.syncOfflineProgress()
+		
 		var elapsed:int = now - last
 		var info = info_pop_up.instantiate() as InfoPopup
 		spawn_to_top_ui_layer(info)
@@ -256,13 +249,7 @@ func check_offline_time_and_rewards() -> void:
 			GameEvents.eventLogged.emit(
 				"You rested while away. Restored %d HP." % actualHealed, "town", false
 			)
-		#var results = CraftingSystem.process_elapsed(game_data)
-		#game_data.add_crafted_runes_by_name(results)
-		#if (results.keys().size() > 0):
-			#show_reward_popups(results)
 
-		#if (active_menu_ref is MainMenu):
-			#active_menu_ref.update_info_panel()
 	game_data.last_crafting_timestamp = now
 
 func show_reward_popups(results: Dictionary) -> void:
