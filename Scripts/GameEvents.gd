@@ -102,3 +102,5 @@ signal expeditionCompleted(survived: bool)
 signal expeditionEventFired(event: Dictionary)
 @warning_ignore("unused_signal")
 signal dungeonDiscovered(area: String)
+@warning_ignore("unused_signal")
+signal expeditionSynced

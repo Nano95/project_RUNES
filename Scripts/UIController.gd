@@ -66,6 +66,7 @@ func _ready() -> void:
 	expeditionButton.pressed.connect(showExpeditionMode)
 	
 	mainActionRow.show()
+	eventLogPanel.show()
 	areaSelectRow.hide()
 	adventuringRow.hide()
 	

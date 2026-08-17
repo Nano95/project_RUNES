@@ -31,6 +31,7 @@ func _ready() -> void:
 	legsBtn.pressed.connect(onSlotPressed.bind("legs"))
 	bootsBtn.pressed.connect(onSlotPressed.bind("boots"))
 	call_deferred("refresh")
+	hide()
 	#refresh()
 
 func refresh() -> void:

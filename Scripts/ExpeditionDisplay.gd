@@ -25,6 +25,9 @@ func _ready() -> void:
 	GameEvents.expeditionCompleted.connect(onExpeditionCompleted)
 	GameEvents.expeditionStopped.connect(onExpeditionStopped)
 	GameEvents.expeditionEventFired.connect(onExpeditionEventFired)
+	print("expeditionEventFired connected: ", GameEvents.expeditionEventFired.is_connected(onExpeditionEventFired))
+	GameEvents.expeditionSynced.connect(onExpeditionSynced)
+
 
 	startStopBtn.pressed.connect(onStartStopPressed)
 	returnToTownBtn.pressed.connect(onReturnToTownPressed)
@@ -32,6 +35,7 @@ func _ready() -> void:
 	hide()
 
 func open() -> void:
+	rebuildEventLog()
 	refresh()
 	if main.game_data.isExpeditionActive:
 		uiTimer.start()
@@ -41,6 +45,13 @@ func refresh() -> void:
 	updateTimerLabel()
 	updateButtons()
 	rebuildEventLog()
+
+func onExpeditionSynced() -> void:
+	if not visible:
+		return
+	rebuildEventLog()
+	if main.game_data.isExpeditionActive:
+		uiTimer.start()
 
 # ── TIMER ─────────────────────────────────────────────────
 func updateTimerLabel() -> void:
@@ -105,6 +116,7 @@ func rebuildEventLog() -> void:
 	eventLog.scroll_to_line(eventLog.get_line_count())
 
 func onExpeditionEventFired(event: Dictionary) -> void:
+	print("ExpeditionDisplay received event: ", event.get("type", ""))
 	if not visible:
 		return
 	eventLog.bbcode_enabled = true
