@@ -185,7 +185,7 @@ func refreshAreaGrid() -> void:
 		elif nextLocked != null and i == unlocked.size():
 			# Next locked area — visible but disabled looking, still tappable
 			btn.visible = true
-			btn.text = nextLocked.areaName + " 🔒"
+			btn.text = nextLocked.areaName
 			btn.disabled = false
 			btn.modulate = Color(1, 1, 1, 0.8)
 			if btn.pressed.is_connected(onAreaButtonPressed):

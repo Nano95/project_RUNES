@@ -59,7 +59,7 @@ func refresh() -> void:
 				btn.text = " %s" % [itemName]
 
 		btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-		var color = getColorForType(item.itemType)
+		var color = Utils.getColorForType(item.itemType)
 		btn.add_theme_color_override("font_color", color)
 		btn.add_theme_font_size_override("font_size", 22)
 		btn.custom_minimum_size = Vector2(150, 60)
@@ -76,15 +76,6 @@ func refreshWeight() -> void:
 		main.game_data.currentWeight,
 		main.game_data.maxWeight
 	]
-
-func getColorForType(itemType: String) -> Color:
-	match itemType:
-		"equipment":  return Color("#e74c3c")
-		"part":       return Color("82b6bfff")
-		"forageable": return Color("#27ae60")
-		"ore":        return Color("a5997eff")
-		"potion":     return Color("#8e44ad")
-		_:            return Color("#cccccc")
 
 func onItemSinglePressed(itemName: String, itemType: String) -> void:
 	if (longPressTimer.time_left > 0):

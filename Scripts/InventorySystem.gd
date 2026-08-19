@@ -30,7 +30,7 @@ func addToBackpack(itemName: String, qty: int = 1) -> bool:
 			"Too heavy! %s left behind." % itemName, "system", false
 		)
 		Utils.spawnFloatingLabel(
-			"Too heavy!" % itemName,
+			"Too heavy!",
 			Color("#c0392b"),
 			main,
 			true
@@ -39,16 +39,6 @@ func addToBackpack(itemName: String, qty: int = 1) -> bool:
 
 	var stackCap = ItemRegistry.getStackCap(itemName)
 	var remaining = qty
-
-	# Try to fill existing incomplete stacks first
-	for stack in main.game_data.backpack:
-		if remaining <= 0:
-			break
-		if stack["name"] == itemName and stack["qty"] < stackCap:
-			var space = stackCap - stack["qty"]
-			var toAdd = min(space, remaining)
-			stack["qty"] += toAdd
-			remaining -= toAdd
 
 	# Try to fill existing incomplete stacks first
 	for stack in main.game_data.backpack:

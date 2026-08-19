@@ -208,7 +208,7 @@ func _makeItemButton(entry: Dictionary, source: String, stackIndex: int) -> Butt
 	else:
 		btn.text = " " + entry["name"] + " "
 	btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	var newColor = getColorForType(entry["type"])
+	var newColor = Utils.getColorForType(entry["type"])
 	btn.add_theme_color_override("font_color", newColor)
 	btn.add_theme_font_size_override("font_size", 22)
 	btn.custom_minimum_size = Vector2(150,50)
@@ -297,12 +297,3 @@ func _getStacked(items: Array) -> Array[Dictionary]:
 				"cap": ItemRegistry.getStackCap(itemName)
 			})
 	return result
-
-func getColorForType(itemType: String) -> Color:
-	match itemType:
-		"equipment":  return Color("#e74c3c")
-		"part":       return Color("82b6bfff")
-		"forageable": return Color("#27ae60")
-		"ore":        return Color("a5997eff")
-		"potion":     return Color("#8e44ad")
-		_:            return Color("#cccccc")

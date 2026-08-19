@@ -7,7 +7,9 @@ class_name ExpeditionDisplay
 @export var startStopBtn: Button
 @export var returnToTownBtn: Button
 @export var expeditionSystem: ExpeditionSystem
-@export var uiController:UIController
+@export var uiController: UIController
+@export var lowerRow: VBoxContainer
+@export var collectionBinPanel: CollectionBinDisplay
 
 var main = null
 var uiTimer: Timer
@@ -35,10 +37,14 @@ func _ready() -> void:
 	hide()
 
 func open() -> void:
-	rebuildEventLog()
 	refresh()
 	if main.game_data.isExpeditionActive:
 		uiTimer.start()
+	# Show/hide collection bin based on inventory
+	lowerRow.visible = true
+	var hasLoot = not main.game_data.expeditionInventory.is_empty()
+	if hasLoot:
+		collectionBinPanel.refresh()
 	show()
 
 func refresh() -> void:
@@ -91,6 +97,7 @@ func onStartStopPressed() -> void:
 
 func onReturnToTownPressed() -> void:
 	uiController.hideExpeditionMode()
+	lowerRow.visible = false
 	hide()
 
 # ── EVENT LOG ─────────────────────────────────────────────
@@ -116,7 +123,6 @@ func rebuildEventLog() -> void:
 	eventLog.scroll_to_line(eventLog.get_line_count())
 
 func onExpeditionEventFired(event: Dictionary) -> void:
-	print("ExpeditionDisplay received event: ", event.get("type", ""))
 	if not visible:
 		return
 	eventLog.bbcode_enabled = true
@@ -133,7 +139,12 @@ func _formatEvent(event: Dictionary, minute: int) -> String:
 	var item = event.get("item", "")
 	var hp = event.get("hpAfter", 50)
 
-	var line = "#%d — [color=%s]%s[/color]" % [minute, color, title]
+	var showNumber = event.get("showNumber", true)
+	var line = ""
+	if showNumber:
+		line = "[color=%s]#%d — %s[/color]" % [color, minute, title]
+	else:
+		line = "[color=%s]%s[/color]" % [color, title]
 	if desc != "":
 		line += "\n[color=#888888]%s[/color]" % desc
 	if damage > 0:
@@ -164,6 +175,9 @@ func onExpeditionStarted(_area: String, _duration: int) -> void:
 	uiTimer.start()
 
 func onExpeditionCompleted(survived: bool) -> void:
+	var hasLoot = not main.game_data.expeditionInventory.is_empty()
+	if hasLoot:
+		collectionBinPanel.refresh()
 	updateButtons()
 	updateTimerLabel()
 	uiTimer.stop()

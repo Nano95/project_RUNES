@@ -318,24 +318,24 @@ func buildEventTable() -> void:
 		"Hunting Grounds":
 			eventWeights = [
 				{ "event": "nothing_a",   "weight": 8  },
-				{ "event": "nothing_b",   "weight": 20 },
-				{ "event": "monster",     "weight": 24 },
+				{ "event": "nothing_b",   "weight": 15 },
+				{ "event": "monster",     "weight": 23 },
 				{ "event": "forage",      "weight": 20 },
 				{ "event": "potion_gold", "weight": goldPotionChance },
-				{ "event": "trap",        "weight": 5  },
+				{ "event": "trap",        "weight": 4   },
 				{ "event": "nothing_c",   "weight": 15 },
 			]
 		"Slime Swamps":
 			eventWeights = [
 				{ "event": "nothing_a",   "weight": 8  },
-				{ "event": "nothing_b",   "weight": 20 },
+				{ "event": "nothing_b",   "weight": 16 },
 				{ "event": "monster",     "weight": 24 },
 				#{ "event": "ore",         "weight": 12 },
 				{ "event": "forage",      "weight": 20 },
 				#{ "event": "wood",        "weight": 6  },
 				{ "event": "potion_gold", "weight": goldPotionChance },
 				#{ "event": "dungeon",     "weight": 4  },
-				{ "event": "trap",        "weight": 3  },
+				{ "event": "trap",        "weight": 2  },
 				{ "event": "nothing_c",   "weight": 10 },
 			]
 		"Darkwood Forest":

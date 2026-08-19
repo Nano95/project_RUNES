@@ -30,8 +30,7 @@ func startExpedition(area: String) -> void:
 		return
 
 	# Clear previous expedition data
-	main.game_data.expeditionInventory = []
-	main.game_data.pendingExpeditionGold = 0
+	main.game_data.pendingExpeditionInventory = []
 	main.game_data.expeditionProgressIndex = -1
 	main.game_data.expeditionHealth = 50
 	lastProcessedMinuteIndex = -1  # ← reset in memory tracker
@@ -58,9 +57,9 @@ func startExpedition(area: String) -> void:
 	expeditionTimer.start()
 
 	GameEvents.expeditionStarted.emit(area, duration)
-	GameEvents.eventLogged.emit(
+	_logToBoth(
 		"Expeditioner sent to %s. Returns in %d minutes." % [area, duration],
-		"town", false
+		"empty", "town"
 	)
 	print("Expedition started at %s | Ends at %s" % [
 		_readableTime(now),
@@ -207,9 +206,22 @@ func _applyEvent(event: Dictionary) -> void:
 
 	# Item
 	var item = event.get("item", "")
+	var qty = event.get("qty", 1)
 	if item != "":
-		main.game_data.expeditionInventory.append({"name": item, "qty": 1})
-
+		var stackCap = ItemRegistry.getStackCap(item)
+		var remaining = qty
+		# Try to merge into existing stacks
+		for stack in main.game_data.pendingExpeditionInventory:
+			if remaining <= 0:
+				break
+			if stack.get("name") == item and stack.get("qty", 0) < stackCap:
+				var space = stackCap - stack["qty"]
+				var toAdd = min(space, remaining)
+				stack["qty"] += toAdd
+				remaining -= toAdd
+		# Create new stack for remainder
+		if remaining > 0:
+			main.game_data.pendingExpeditionInventory.append({"name": item, "qty": remaining})
 	# Dungeon
 	if event.get("dungeon", false):
 		GameEvents.dungeonDiscovered.emit(main.game_data.expeditionArea)
@@ -218,6 +230,19 @@ func _applyEvent(event: Dictionary) -> void:
 func _handleExpeditionComplete() -> void:
 	expeditionTimer.stop()
 	main.game_data.isExpeditionActive = false
+	# Replace bin contents with new expedition loot
+	# (already populated during the expedition via _applyEvent)
+	# Clear pending gold — auto collect it
+	main.game_data.savedGold += main.game_data.pendingExpeditionGold
+	main.game_data.stats["totalGoldEarned"] += main.game_data.pendingExpeditionGold
+	if main.game_data.pendingExpeditionGold > 0:
+		_logToBoth("Expedition gold collected: +%dg" % main.game_data.pendingExpeditionGold, 
+			"town")
+		GameEvents.goldDeposited.emit(main.game_data.pendingExpeditionGold)
+	main.game_data.pendingExpeditionGold = 0
+	main.game_data.expeditionInventory = main.game_data.pendingExpeditionInventory.duplicate()
+	main.game_data.pendingExpeditionInventory = []
+	
 	main.save_game()
 
 	var survived = main.game_data.expeditionHealth > 0
@@ -225,7 +250,7 @@ func _handleExpeditionComplete() -> void:
 	if not survived:
 		msg = "Expeditioner collapsed and was brought back to safety."
 
-	GameEvents.eventLogged.emit(msg, "town", false)
+	_logToBoth(msg, "empty", "town")
 	GameEvents.expeditionCompleted.emit(survived)
 
 # ── HELPERS ───────────────────────────────────────────────
@@ -239,3 +264,20 @@ func getExpeditionDuration() -> int:
 func _readableTime(timestamp: int) -> String:
 	var datetime = Time.get_datetime_dict_from_unix_time(timestamp)
 	return "%02d:%02d:%02d" % [datetime["hour"], datetime["minute"], datetime["second"]]
+
+func _logToExpedition(message: String, type: String = "empty") -> void:
+	GameEvents.expeditionEventFired.emit({
+		"type": type,
+		"title": message,
+		"description": "",
+		"damage": 0,
+		"gold": 0,
+		"item": "",
+		"qty": 0,
+		"dungeon": false,
+		"showNumber": false
+	})
+
+func _logToBoth(message: String, expType: String = "empty", logType: String = "town") -> void:
+	GameEvents.eventLogged.emit(message, logType, false)
+	_logToExpedition(message, expType)

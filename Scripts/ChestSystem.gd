@@ -14,27 +14,27 @@ const UPGRADE_TIERS: Array = [
 	{
 		"label": "Reinforced Chest",
 		"goldCost": 200,
-		"materials": { "Oak Log": 3 }
+		"materials": { "Copper Bar": 2 }
 	},
 	{
 		"label": "Studded Chest",
 		"goldCost": 400,
-		"materials": { "Oak Log": 5 }
+		"materials": { "Copper Bar": 5, "Iron Bar": 1 }
 	},
 	{
 		"label": "Iron-Bound Chest",
 		"goldCost": 800,
-		"materials": { "Oak Log": 5, "Iron Ore": 2 }
+		"materials": { "Iron Bar": 3, "Gold Bar": 1 }
 	},
 	{
 		"label": "Reinforced Iron Chest",
 		"goldCost": 1500,
-		"materials": { "Dark Timber": 3, "Iron Ore": 4 }
+		"materials": { "Gold Bar": 3 }
 	},
 	{
 		"label": "Vault Chest",
 		"goldCost": 3000,
-		"materials": { "Dark Timber": 5, "Iron Ore": 5, "Coal": 2 }
+		"materials": { "Gold Bar": 5 }
 	},
 ]
 

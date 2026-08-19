@@ -167,8 +167,10 @@ class_name SaveData
 @export var expeditionProgressIndex: int = -1
 @export var expeditionHealth: int = 50
 @export var expeditionInventory: Array[Dictionary] = []
+@export var pendingExpeditionInventory: Array[Dictionary] = []
 @export var pendingExpeditionGold: int = 0
 @export var equippedExpeditionBoots: Dictionary = {}
+@export var autoWithdrawExpedition: bool = false
 
 @export_category("Bazaar")
 @export var equippedStand: Dictionary = {}

@@ -281,6 +281,7 @@ func animateButtonPress(btn: Control) -> void:
 		tween.set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 		tween.tween_property(btn, "position", original_pos, 0.15)
 
+# used for panels
 func animateButtonBounce(node: Control) -> void:
 	if not is_instance_valid(node):
 		return
@@ -290,7 +291,6 @@ func animateButtonBounce(node: Control) -> void:
 		# Wait one frame for layout to settle if node was hidden
 		await node.get_tree().process_frame
 		node.set_meta("originalY", node.position.y)
-		print("stored originalY after frame: ", node.position.y)
 	
 	var originalY = node.get_meta("originalY")
 	var tween = node.create_tween()
@@ -456,6 +456,15 @@ const LOG_COLORS = {
 	"town":    "#c8880a",
 	"danger":  "#e74c3c",
 }
+# For buttons
+func getColorForType(itemType: String) -> Color:
+	match itemType:
+		"equipment":  return Color("#e74c3c")
+		"part":       return Color("82b6bfff")
+		"forageable": return Color("#27ae60")
+		"ore":        return Color("a5997eff")
+		"potion":     return Color("#8e44ad")
+		_:            return Color("#cccccc")
 
 # ── BBCode HELPERS ────────────────────────────────────────
 func format_log(text: String, style: String) -> String:

@@ -62,15 +62,31 @@ func _goldEvent() -> Dictionary:
 
 func _itemEvent(area: String) -> Dictionary:
 	var item = _rollLoot(area)
+	var qty = _rollItemQty(item)
+	var title = "Found: %s" % item if qty == 1 else "Found: %s x%d" % [item, qty]
 	return {
 		"type": "item",
-		"title": "Found: %s" % item,
+		"title": title,
 		"description": "You come across %s during your expedition." % item,
 		"damage": 0,
 		"gold": 0,
 		"item": item,
+		"qty": qty,
 		"dungeon": false
 	}
+
+func _rollItemQty(itemName: String) -> int:
+	var itemDef = ItemRegistry.getItem(itemName)
+	if not itemDef:
+		return 1
+	# Equipment always 1
+	if itemDef.itemType == "equipment":
+		return 1
+	# High value items always 1
+	if itemDef.value >= 40:
+		return 1
+	# Common items get 1-5
+	return randi_range(1, 5)
 
 func _monsterEvent(area: String) -> Dictionary:
 	var monsters = EXPEDITION_MONSTERS.get(area, ["Unknown Beast"])
@@ -196,9 +212,7 @@ const TRAP_DATABASE = {
 const EXPEDITION_LOOT = {
 	"Hunting Grounds": [
 		{"name": "Orc Leather",       "weight": 40},
-		{"name": "Beast Skin",        "weight": 20},
 		{"name": "Copper Ore",        "weight": 30},
-		{"name": "Pine Wood",         "weight": 25},
 		{"name": "Coal",              "weight": 20},
 		{"name": "Wild Herb",         "weight": 15},
 		{"name": "Red Berry",         "weight": 15},
@@ -208,15 +222,13 @@ const EXPEDITION_LOOT = {
 	],
 	"Slime Swamps": [
 		{"name": "Slime Gel",         "weight": 45},
-		{"name": "Bog Essence",       "weight": 25},
-		{"name": "Toxic Gland",       "weight": 20},
-		{"name": "Slime Core",        "weight": 10},
+		{"name": "Copper Ore",          "weight": 30},
 		{"name": "Iron Ore",          "weight": 30},
-		{"name": "Oak Log",           "weight": 25},
 		{"name": "Coal",              "weight": 20},
-		{"name": "Deathbloom",        "weight": 15},
-		{"name": "Voidleaf",          "weight": 10},
-		{"name": "Nightshade",        "weight": 8},
+		{"name": "Red Berry",         "weight": 10},
+		{"name": "Wild Herb",         "weight": 20},
+		{"name": "Bloodroot",         "weight": 15},
+		{"name": "Slime Core",        "weight": 10},
 		{"name": "Royal Gel",         "weight": 2},
 	],
 }
