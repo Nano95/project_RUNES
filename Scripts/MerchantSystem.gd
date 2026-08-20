@@ -9,12 +9,15 @@ const STOCK: Array[Dictionary] = [
 	{ "name": "Health Potion",     "category": "potion",    "cost": 30 }, # CHEAP FOR NOW
 	{ "name": "Minor Antidote",     "category": "potion",    "cost": 25 },
 	# Equipment
+	{ "name": "T1 Expedition Boots", "category": "equipment", "cost": 150 },
+	{ "name": "T1 Survival Gear",    "category": "equipment", "cost": 200 },
 	{ "name": "Wooden Shield",      "category": "equipment", "cost": 0  },
 	{ "name": "Crude Blade",        "category": "equipment", "cost": 0  },
 	{ "name": "Leather Helmet",     "category": "equipment", "cost": 0 },
 	{ "name": "Leather Armor",      "category": "equipment", "cost": 0 },
 	{ "name": "Leather Legs",      "category": "equipment", "cost": 0 },
 	{ "name": "Leather Boots",   "category": "equipment", "cost": 0 },
+
 	#{ "name": "Ring of Protection", "category": "equipment", "cost": 200 },
 ]
 

@@ -212,9 +212,6 @@ func applyCursedShieldOnHit(incomingDamage: int) -> int:
 
 # ── ENHANCEMENT ───────────────────────────────────────────
 func canEnhance(instance: Dictionary) -> bool:
-	
-	print("_ maxed out? ", instance.get("enhancement", 0) >= 3)
-	print("- enough gold? ", main.game_data.savedGold < getEnhancementCost(instance)["gold"])
 	if instance.get("enhancement", 0) >= 3:
 		return false
 	var cost = getEnhancementCost(instance)

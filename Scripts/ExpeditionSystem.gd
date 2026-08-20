@@ -19,13 +19,13 @@ func _ready() -> void:
 	add_child(expeditionTimer)
 
 # ── START / STOP ──────────────────────────────────────────
-func startExpedition(area: String) -> void:
+func startExpedition() -> void:
 	if main.game_data.isExpeditionActive:
 		return
 	var duration = getExpeditionDuration()
 	if duration <= 0:
-		GameEvents.eventLogged.emit(
-			"You need Expedition Boots to send out an expeditioner.", "system", false
+		_logToExpedition(
+			"You need Expedition Boots to send out an expeditioner.", "system"
 		)
 		return
 
@@ -36,7 +36,9 @@ func startExpedition(area: String) -> void:
 	lastProcessedMinuteIndex = -1  # ← reset in memory tracker
 
 	# Generate full timeline upfront
-	var timeline = expeditionTimeline.generateTimeline(duration, area)
+	var timeline = expeditionTimeline.generateTimeline(duration)
+	# store starting area as Hunting Grounds always
+	main.game_data.expeditionArea = "Hunting Grounds"
 	main.game_data.expeditionTimeline = timeline
 	main.game_data.expeditionDurationMinutes = duration
 
@@ -47,7 +49,6 @@ func startExpedition(area: String) -> void:
 	main.game_data.expeditionStartTimestamp = now
 	main.game_data.expeditionEndTimestamp = now + (duration * secondsPerMinute)
 	main.game_data.isExpeditionActive = true
-	main.game_data.expeditionArea = area
 	main.save_game()
 
 	# Start timer at 1 second intervals
@@ -56,15 +57,11 @@ func startExpedition(area: String) -> void:
 	expeditionTimer.one_shot = false
 	expeditionTimer.start()
 
-	GameEvents.expeditionStarted.emit(area, duration)
+	GameEvents.expeditionStarted.emit(duration)
 	_logToBoth(
-		"Expeditioner sent to %s. Returns in %d minutes." % [area, duration],
+		"Expeditioner has left the town! Returns in %d minutes." % duration,
 		"empty", "town"
 	)
-	print("Expedition started at %s | Ends at %s" % [
-		_readableTime(now),
-		_readableTime(main.game_data.expeditionEndTimestamp)
-	])
 
 func stopExpedition() -> void:
 	main.game_data.isExpeditionActive = false
@@ -255,11 +252,10 @@ func _handleExpeditionComplete() -> void:
 
 # ── HELPERS ───────────────────────────────────────────────
 func getExpeditionDuration() -> int:
-	return 10  # TEMP: remove when boots system is in
 	var boots = main.game_data.equippedExpeditionBoots
 	if not boots or boots.is_empty():
 		return 0
-	return boots.get("expeditionMinutes", 0)
+	return boots.get("effects", {}).get("expeditionMinutes", 0)
 
 func _readableTime(timestamp: int) -> String:
 	var datetime = Time.get_datetime_dict_from_unix_time(timestamp)

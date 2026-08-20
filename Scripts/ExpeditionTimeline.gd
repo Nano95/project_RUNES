@@ -2,20 +2,59 @@
 extends Node
 class_name ExpeditionTimeline
 
-func generateTimeline(duration: int, area: String) -> Array[Dictionary]:
+func generateTimeline(duration: int) -> Array[Dictionary]:
 	var timeline: Array[Dictionary] = []
-	var hp = 50  # simulate HP as we generate
-	
+	var hp = 50
+
 	for i in range(duration):
 		if hp <= 0:
 			timeline.append(_passedOutEvent())
 			break
+
+		# Get area for this minute
+		var area = getAreaForMinute(i)
+
+		# Check survival gear gating at area boundaries
+		if i > 0 and i % 10 == 0:
+			if not canSurviveIn(area):
+				timeline.append({
+					"type": "empty",
+					"title": "Survival gear limit reached.",
+					"description": "The expeditioner turns back safely.",
+					"damage": 0,
+					"gold": 0,
+					"item": "",
+					"qty": 0,
+					"dungeon": false,
+					"hpAfter": hp,
+					"showNumber": true
+				})
+				break  # end timeline early
+
 		var event = _rollEvent(area, hp)
 		hp = max(0, hp - event.get("damage", 0))
 		event["hpAfter"] = hp
 		timeline.append(event)
-	
+
 	return timeline
+
+func getAreaForMinute(minute: int) -> String:
+	if minute < 10:
+		return "Hunting Grounds"
+	elif minute < 20:
+		return "Slime Swamps"
+	# future areas...
+	return "Hunting Grounds"
+
+func canSurviveIn(area: String) -> bool:
+	var survival = Utils.getMain().game_data.equippedSurvivalGear
+	if survival.is_empty():
+		return area == "Hunting Grounds"
+	var survivalArea = survival.get("effects", {}).get("expeditionArea", "Hunting Grounds")
+	match survivalArea:
+		"Hunting Grounds": return area == "Hunting Grounds"
+		"Slime Swamps": return area in ["Hunting Grounds", "Slime Swamps"]
+	return false
 
 func _rollEvent(area: String, _currentHp: int) -> Dictionary:
 	var roll = randi() % 100

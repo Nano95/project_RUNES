@@ -20,6 +20,7 @@ func _ready() -> void:
 	autoWithdrawCheckbox.toggled.connect(onAutoWithdrawToggled)
 
 func refresh() -> void:
+	if (!get_parent().visible): return
 	refreshGold()
 	refreshItems()
 	# Auto withdraw only once, not recursively
@@ -62,12 +63,12 @@ func refreshItems() -> void:
 		itemsFlow.add_child(btn)
 
 func onWithdrawAllPressed() -> void:
+	print_stack()
 	if isWithdrawing:
 		return
 	isWithdrawing = true
 	Utils.animateButtonPress(withdrawAllBtn)
 	var remaining: Array[Dictionary] = []
-	var goldCollected = main.game_data.pendingExpeditionGold
 	var anythingWithdrawn = false
 
 	for stack in main.game_data.expeditionInventory:
@@ -88,17 +89,22 @@ func onWithdrawAllPressed() -> void:
 				_logToExpedition("%s left in bin — backpack full." % itemName)
 
 	# Gold
-	if goldCollected > 0:
-		main.game_data.savedGold += goldCollected
-		main.game_data.pendingExpeditionGold = 0
-		main.game_data.stats["totalGoldEarned"] += goldCollected
-		GameEvents.goldDeposited.emit(goldCollected)
-		_logToExpedition(
-			"Collected %dg. Bank total: %dg." % [goldCollected, main.game_data.savedGold], 
-		    "gold"
-		)
+	#var goldCollected = main.game_data.pendingExpeditionGold
+	# Commenting out for awareness, im letting _handleExpeditionComplete withdraw the money
+	# automatically for convenienceas money does not weigh anything and should never be lost
+	# so i want it to be automatic 
+	#if goldCollected > 0:
+		#main.game_data.savedGold += goldCollected
+		#main.game_data.pendingExpeditionGold = 0
+		#main.game_data.stats["totalGoldEarned"] += goldCollected
+		#GameEvents.goldDeposited.emit(goldCollected)
+		#_logToExpedition(
+			#"Collected %dg. Bank total: %dg." % [goldCollected, main.game_data.savedGold], 
+			#"gold"
+		#)
 
-	if not anythingWithdrawn and remaining.is_empty() and goldCollected <= 0:
+	#if not anythingWithdrawn and remaining.is_empty() and goldCollected <= 0:
+	if not anythingWithdrawn and remaining.is_empty():
 		GameEvents.eventLogged.emit(
 			"Collection bin is empty.", "system", false
 		)

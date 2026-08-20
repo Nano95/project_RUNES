@@ -154,6 +154,49 @@ class_name SaveData
 	"isEquipment": true,
 	"qty": 1
 }
+@export var equippedExpeditionBoots: Dictionary = {
+	"atkBonus": 0,
+	"defBonus": 0,
+	"effectChance": 0.0,
+	"effectType": "none",
+	"effectValue": 0,
+	"effects": {
+	"expeditionMinutes": 10,
+	"unlocksArea": "Hunting Grounds"
+	},
+	"enhancement": 0,
+	"grade": "",
+	"gradeEffects": {},
+	"gradeHpBonus": 0,
+	"hpBonus": 0,
+	"instanceId": "t0e_ddd9_001c2b8b",
+	"isEquipment": true,
+	"name": "T0 Expedition Boots",
+	"qty": 1,
+	"setName": "",
+	"slot": "expeditionBoots"
+}
+@export var equippedSurvivalGear: Dictionary = {
+	"atkBonus": 0,
+	"defBonus": 0,
+	"effectChance": 0.0,
+	"effectType": "none",
+	"effectValue": 0,
+	"effects": {
+	"expeditionArea": "Hunting Grounds"
+	},
+	"enhancement": 0,
+	"grade": "",
+	"gradeEffects": {},
+	"gradeHpBonus": 0,
+	"hpBonus": 0,
+	"instanceId": "t0s_141a_001c2b96",
+	"isEquipment": true,
+	"name": "T0 Survival Gear",
+	"qty": 1,
+	"setName": "",
+	"slot": "survivalGear"
+}
 @export var equippedRing: Dictionary = {}
 @export var equippedAmulet: Dictionary = {}
 
@@ -169,7 +212,6 @@ class_name SaveData
 @export var expeditionInventory: Array[Dictionary] = []
 @export var pendingExpeditionInventory: Array[Dictionary] = []
 @export var pendingExpeditionGold: int = 0
-@export var equippedExpeditionBoots: Dictionary = {}
 @export var autoWithdrawExpedition: bool = false
 
 @export_category("Bazaar")

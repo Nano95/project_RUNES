@@ -92,8 +92,7 @@ func onStartStopPressed() -> void:
 		expeditionSystem.stopExpedition()
 	else:
 		# For now default to first unlocked area
-		var area = main.game_data.unlockedAreas[0] if not main.game_data.unlockedAreas.is_empty() else "Hunting Grounds"
-		expeditionSystem.startExpedition(area)
+		expeditionSystem.startExpedition()
 
 func onReturnToTownPressed() -> void:
 	uiController.hideExpeditionMode()
@@ -168,7 +167,7 @@ func _getEventColor(type: String) -> String:
 		_:          return "#888888"
 
 # ── SIGNALS ───────────────────────────────────────────────
-func onExpeditionStarted(_area: String, _duration: int) -> void:
+func onExpeditionStarted(_duration: int) -> void:
 	eventLog.text = ""
 	updateButtons()
 	updateTimerLabel()

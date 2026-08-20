@@ -93,7 +93,7 @@ signal statusEffectCleared(status: String)
 
 ### EXPEDITION
 @warning_ignore("unused_signal")
-signal expeditionStarted(area: String, duration: int)
+signal expeditionStarted(duration: int)
 @warning_ignore("unused_signal")
 signal expeditionStopped
 @warning_ignore("unused_signal")
