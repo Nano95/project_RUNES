@@ -154,49 +154,50 @@ class_name SaveData
 	"isEquipment": true,
 	"qty": 1
 }
-@export var equippedExpeditionBoots: Dictionary = {
-	"atkBonus": 0,
-	"defBonus": 0,
-	"effectChance": 0.0,
-	"effectType": "none",
-	"effectValue": 0,
-	"effects": {
-	"expeditionMinutes": 10,
+@export var equippedExpeditionMap: Dictionary = {
+  "name": "T0 Map",
+  "instanceId": "t0m_6396_001df6d8",
+  "slot": "expeditionMap",
+  "setName": "",
+  "hpBonus": 0,
+  "atkBonus": 0,
+  "defBonus": 0,
+  "effects": {
 	"unlocksArea": "Hunting Grounds"
-	},
-	"enhancement": 0,
-	"grade": "",
-	"gradeEffects": {},
-	"gradeHpBonus": 0,
-	"hpBonus": 0,
-	"instanceId": "t0e_ddd9_001c2b8b",
-	"isEquipment": true,
-	"name": "T0 Expedition Boots",
-	"qty": 1,
-	"setName": "",
-	"slot": "expeditionBoots"
+  },
+  "grade": "",
+  "gradeHpBonus": 0,
+  "gradeEffects": {},
+  "enhancement": 0,
+  "effectType": "none",
+  "effectValue": 0,
+  "effectChance": 0,
+  "isEquipment": true,
+  "qty": 1
 }
+
 @export var equippedSurvivalGear: Dictionary = {
-	"atkBonus": 0,
-	"defBonus": 0,
-	"effectChance": 0.0,
-	"effectType": "none",
-	"effectValue": 0,
-	"effects": {
-	"expeditionArea": "Hunting Grounds"
-	},
-	"enhancement": 0,
-	"grade": "",
-	"gradeEffects": {},
-	"gradeHpBonus": 0,
-	"hpBonus": 0,
-	"instanceId": "t0s_141a_001c2b96",
-	"isEquipment": true,
-	"name": "T0 Survival Gear",
-	"qty": 1,
-	"setName": "",
-	"slot": "survivalGear"
+  "name": "T0 Survival Gear",
+  "instanceId": "t0s_8a84_001df678",
+  "slot": "survivalGear",
+  "setName": "",
+  "hpBonus": 0,
+  "atkBonus": 0,
+  "defBonus": 0,
+  "effects": {
+	"expeditionMinutes": 10
+  },
+  "grade": "",
+  "gradeHpBonus": 0,
+  "gradeEffects": {},
+  "enhancement": 0,
+  "effectType": "none",
+  "effectValue": 0,
+  "effectChance": 0,
+  "isEquipment": true,
+  "qty": 1
 }
+
 @export var equippedRing: Dictionary = {}
 @export var equippedAmulet: Dictionary = {}
 

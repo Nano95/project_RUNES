@@ -2,6 +2,11 @@
 extends Node
 class_name ExpeditionTimeline
 
+var main:MainNode
+
+func _ready() -> void:
+	main = Utils.get_main()
+
 func generateTimeline(duration: int) -> Array[Dictionary]:
 	var timeline: Array[Dictionary] = []
 	var hp = 50
@@ -47,11 +52,11 @@ func getAreaForMinute(minute: int) -> String:
 	return "Hunting Grounds"
 
 func canSurviveIn(area: String) -> bool:
-	var survival = Utils.getMain().game_data.equippedSurvivalGear
-	if survival.is_empty():
-		return area == "Hunting Grounds"
-	var survivalArea = survival.get("effects", {}).get("expeditionArea", "Hunting Grounds")
-	match survivalArea:
+	var map = main.game_data.equippedExpeditionMap
+	if map.is_empty():
+		return false
+	var unlocksArea = map.get("effects", {}).get("unlocksArea", "")
+	match unlocksArea:
 		"Hunting Grounds": return area == "Hunting Grounds"
 		"Slime Swamps": return area in ["Hunting Grounds", "Slime Swamps"]
 	return false

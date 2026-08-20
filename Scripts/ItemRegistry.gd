@@ -31,12 +31,12 @@ func _register() -> void:
 	_equip("Leather Armor",  "armor",  "", 15, 0,  0, {},                    "Basic leather protection.",   35)
 	_equip("Leather Legs",   "legs",   "", 10, 0,  0, {},                    "Simple leather leggings.",    25)
 	_equip("Leather Boots",  "boots",  "", 0,  0,  0, {"dodge": 0.02},       "Worn leather boots.",         20)
-	_equip("T0 Expedition Boots", "expeditionBoots", "", 0, 0, 0, {"expeditionMinutes": 10, "unlocksArea": "Hunting Grounds"}, "Basic expedition footwear.", 0)
-	_equip("T0 Survival Gear", "survivalGear", "", 0, 0, 0, {"expeditionArea": "Hunting Grounds"}, "Basic survival pack.", 0)
+	_equip("T0 Map", "expeditionMap", "", 0, 0, 0, {"unlocksArea": "Hunting Grounds"}, "A basic map of the Hunting Grounds.", 0)
+	_equip("T0 Survival Gear", "survivalGear", "", 0, 0, 0, {"expeditionMinutes": 10}, "Basic survival pack.", 0)
 
 	# Orc Set (Hunting Grounds)
-	_equip("T1 Expedition Boots", "expeditionBoots", "", 0, 0, 0, {"expeditionMinutes": 20, "unlocksArea": "Slime Swamps"}, "Sturdier expedition boots.", 150)
-	_equip("T1 Survival Gear", "survivalGear", "", 0, 0, 0, {"expeditionArea": "Slime Swamps"}, "Reinforced survival pack.", 200)
+	_equip("T1 Map", "expeditionMap", "", 0, 0, 0, {"unlocksArea": "Slime Swamps"},    "A map of the Slime Swamps.", 150)
+	_equip("T1 Survival Gear", "survivalGear", "", 0, 0, 0, {"expeditionMinutes": 20}, "Reinforced survival pack.", 200)
 	_equip("Orc Helmet",      "helmet", "Orc", 15, 0,  0, {},                "Forged from orc bone.",              80)
 	_equip("Orc Armor",       "armor",  "Orc", 35, 0,  0, {},                "Heavy orcish plate.",                120)
 	_equip("Orc Legs",        "legs",   "Orc", 20, 0,  0, {},                "Crude but sturdy.",                  80)
@@ -221,6 +221,8 @@ const EQUIPMENT_SPRITES: Dictionary = {
 	"Leather Armor":  "res://Sprites/Equipment/LeatherArmor.png",
 	"Leather Legs":   "res://Sprites/Equipment/LeatherLegs.png",
 	"Leather Boots":  "res://Sprites/Equipment/LeatherBoots.png",
+	"T0 Map":         "res://Sprites/Equipment/T0Map.png",
+	"T0 Survival Gear": "res://Sprites/Equipment/T0SurvivalGear.png",
 	# Orc Set
 	"Orc Helmet":     "res://Sprites/Equipment/OrcHelmet.png",
 	"Orc Armor":      "res://Sprites/Equipment/OrcArmor.png",
@@ -228,6 +230,8 @@ const EQUIPMENT_SPRITES: Dictionary = {
 	"Orc Boots":      "res://Sprites/Equipment/OrcBoots.png",
 	"Orcish Axe":     "res://Sprites/Equipment/OrcishAxe.png",
 	"Orc King Shield":"res://Sprites/Equipment/OrcKingShield.png",
+	"T1 Map":         "res://Sprites/Equipment/T1Map.png",
+	"T1 Survival Gear": "res://Sprites/Equipment/T1SurvivalGear.png",
 	# Slimy Set
 	"Slimy Helmet":   "res://Sprites/Equipment/SlimeHelmet.png",
 	"Slimy Armor":    "res://Sprites/Equipment/SlimeArmor.png",

@@ -258,6 +258,7 @@ func showExpeditionMode() -> void:
 	mainActionRow.visible = false
 	topMainTitlePanel.visible = false
 	eventLogPanel.visible = false
+	equipmentPanel.visible = false
 	
 	# Show expedition UI
 	expeditionTitlePanel.visible = true

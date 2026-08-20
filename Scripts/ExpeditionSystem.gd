@@ -252,7 +252,7 @@ func _handleExpeditionComplete() -> void:
 
 # ── HELPERS ───────────────────────────────────────────────
 func getExpeditionDuration() -> int:
-	var boots = main.game_data.equippedExpeditionBoots
+	var boots = main.game_data.equippedSurvivalGear
 	if not boots or boots.is_empty():
 		return 0
 	return boots.get("effects", {}).get("expeditionMinutes", 0)

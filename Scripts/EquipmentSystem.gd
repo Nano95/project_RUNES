@@ -63,6 +63,7 @@ func unequipSlot(slot: String) -> void:
 	GameEvents.equipmentChanged.emit()
 
 func getEquippedSlot(slot: String) -> Dictionary:
+	if !(main): main = Utils.get_main()
 	match slot:
 		"weapon": return main.game_data.equippedWeapon
 		"shield": return main.game_data.equippedShield
@@ -70,6 +71,8 @@ func getEquippedSlot(slot: String) -> Dictionary:
 		"helmet": return main.game_data.equippedHelmet
 		"legs":   return main.game_data.equippedLegs
 		"boots":  return main.game_data.equippedBoots
+		"expeditionMap":  return main.game_data.equippedExpeditionMap
+		"survivalGear":   return main.game_data.equippedSurvivalGear
 		"ring":   return main.game_data.equippedRing
 		"amulet": return main.game_data.equippedAmulet
 	return {}
@@ -83,6 +86,8 @@ func setEquippedSlot(slot: String, instance: Dictionary) -> void:
 		"helmet": main.game_data.equippedHelmet = instance
 		"legs":   main.game_data.equippedLegs = instance
 		"boots":  main.game_data.equippedBoots = instance
+		"expeditionMap":  main.game_data.equippedExpeditionMap = instance
+		"survivalGear":   main.game_data.equippedSurvivalGear = instance
 		"ring":   main.game_data.equippedRing = instance
 		"amulet": main.game_data.equippedAmulet = instance
 

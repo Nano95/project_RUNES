@@ -67,10 +67,11 @@ func _ready() -> void:
 	#print(" legs: ", legs)
 	#print(" weapon: ", weapon)
 	#print(" shield: ", shield)
-	#print("-ItemRegistry.rollEquipmentInstance(\"T0 Expedition Boots\") ", ItemRegistry.rollEquipmentInstance("T0 Expedition Boots"))
-	#game_data.equippedExpeditionBoots = ItemRegistry.rollEquipmentInstance("T0 Expedition Boots")
+	#print("-ItemRegistry\") ", ItemRegistry.rollEquipmentInstance("T0 Survival Gear"))
+	#print("-ItemRegistry\") ", ItemRegistry.rollEquipmentInstance("T0 Map"))
+	#game_data.equippedExpeditionMap = ItemRegistry.rollEquipmentInstance("T0 Map")
 	#game_data.equippedSurvivalGear = ItemRegistry.rollEquipmentInstance("T0 Survival Gear")
-	
+	#
 	#
 	#game_data.equippedHelmet = helmet
 	#game_data.equippedArmor = armor

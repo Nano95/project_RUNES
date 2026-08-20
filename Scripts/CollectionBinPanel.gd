@@ -63,7 +63,6 @@ func refreshItems() -> void:
 		itemsFlow.add_child(btn)
 
 func onWithdrawAllPressed() -> void:
-	print_stack()
 	if isWithdrawing:
 		return
 	isWithdrawing = true
