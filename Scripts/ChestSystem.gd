@@ -345,18 +345,21 @@ func quickDeposit(chestId: int) -> void:
 		if idx != -1:
 			main.game_data.backpack.remove_at(idx)
 
-		# Add to chest directly
-		var stackCap = ItemRegistry.getStackCap(itemName)
-		var added = false
-		for chestStack in chest.items:
-			if chestStack["name"] == itemName and chestStack["qty"] < stackCap:
-				var space = stackCap - chestStack["qty"]
-				var toAdd = min(space, qty)
-				chestStack["qty"] += toAdd
-				added = true
-				break
-		if not added:
-			chest.items.append({"name": itemName, "qty": qty})
+		# Add to chest — preserve full instance for equipment
+		if stack.get("isEquipment", false):
+			chest.items.append(stack)
+		else:
+			var stackCap = ItemRegistry.getStackCap(itemName)
+			var added = false
+			for chestStack in chest.items:
+				if chestStack["name"] == itemName and chestStack.get("qty", 0) < stackCap:
+					var space = stackCap - chestStack["qty"]
+					var toAdd = min(space, qty)
+					chestStack["qty"] += toAdd
+					added = true
+					break
+			if not added:
+				chest.items.append({"name": itemName, "qty": qty})
 
 		deposited += qty
 
@@ -377,46 +380,47 @@ func depositAll(chestId: int) -> void:
 	var chest = getChest(chestId)
 	if not chest or not chest.unlocked:
 		return
-
 	var deposited = 0
 	var toMove = main.game_data.backpack.duplicate()
-	
+
 	for stack in toMove:
 		if chest.items.size() >= getCapacity(chest):
 			break
-		
+
 		var itemName = stack.get("name", "")
 		var qty = stack.get("qty", 1)
 		var item = ItemRegistry.getItem(itemName)
-		
+
 		# Handle weight
 		if item:
 			main.game_data.currentWeight = max(
 				0.0, main.game_data.currentWeight - (item.weight * qty)
 			)
-		
+
 		# Remove from backpack directly
 		var idx = main.game_data.backpack.find(stack)
 		if idx != -1:
 			main.game_data.backpack.remove_at(idx)
-		
-		# Add to chest directly
-		var added = false
-		var stackCap = ItemRegistry.getStackCap(itemName)
-		for chestStack in chest.items:
-			if chestStack["name"] == itemName and chestStack["qty"] < stackCap:
-				var space = stackCap - chestStack["qty"]
-				var toAdd = min(space, qty)
-				chestStack["qty"] += toAdd
-				added = true
-				break
-		if not added:
-			chest.items.append({"name": itemName, "qty": qty})
-		
+
+		# Add to chest — preserve full instance for equipment
+		if stack.get("isEquipment", false):
+			chest.items.append(stack)
+		else:
+			var added = false
+			var stackCap = ItemRegistry.getStackCap(itemName)
+			for chestStack in chest.items:
+				if chestStack["name"] == itemName and chestStack.get("qty", 0) < stackCap:
+					var space = stackCap - chestStack["qty"]
+					var toAdd = min(space, qty)
+					chestStack["qty"] += toAdd
+					added = true
+					break
+			if not added:
+				chest.items.append({"name": itemName, "qty": qty})
+
 		deposited += qty
 
 	if deposited > 0:
-		# Save and emit signals ONCE after all operations complete
 		main.save_game()
 		GameEvents.backpackChanged.emit()
 		GameEvents.chestChanged.emit()

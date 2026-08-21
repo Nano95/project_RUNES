@@ -94,7 +94,7 @@ func onDropAllPressed() -> void:
 		var weight = item.weight
 		main.game_data.currentWeight = max(0.0, main.game_data.currentWeight - weight)
 		main.save_game()
-		GameEvents.inventoryChanged.emit()
+		GameEvents.backpackChanged.emit()
 		GameEvents.eventLogged.emit("Dropped %s." % currentItem, "system", false)
 		onClose()
 		return

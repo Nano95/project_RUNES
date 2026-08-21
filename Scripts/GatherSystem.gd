@@ -16,6 +16,12 @@ const FORAGE_TABLES: Dictionary = {
 		{ "max": 70,  "drops": [{"name": "Red Berry", "weight": 5},  {"name": "Wild Herb", "weight": 40}, {"name": "Bloodroot", "weight": 40}, {"name": "Gloomcap", "weight": 15}] },
 		{ "max": 9999,"drops": [{"name": "Wild Herb", "weight": 20}, {"name": "Bloodroot", "weight": 50}, {"name": "Gloomcap", "weight": 30}] },
 	],
+	"Sandling Dunes": [
+		{ "max": 20,  "drops": [{"name": "Red Berry", "weight": 10}, {"name": "Wild Herb", "weight": 70}, {"name": "Bloodroot", "weight": 20}] },
+		{ "max": 40,  "drops": [{"name": "Wild Herb", "weight": 50}, {"name": "Bloodroot", "weight": 25}, {"name": "Gloomcap", "weight": 25}] },
+		{ "max": 70,  "drops": [{"name": "Wild Herb", "weight": 20}, {"name": "Bloodroot", "weight": 40}, {"name": "Gloomcap", "weight": 40}] },
+		{ "max": 9999,"drops": [{"name": "Bloodroot", "weight": 30}, {"name": "Gloomcap", "weight": 70}] },
+	],
 	"Darkwood Forest": [
 		{ "max": 20,  "drops": [{"name": "Wild Herb", "weight": 30}, {"name": "Bloodroot", "weight": 50}, {"name": "Gloomcap", "weight": 20}] },
 		{ "max": 40,  "drops": [{"name": "Wild Herb", "weight": 10}, {"name": "Bloodroot", "weight": 55}, {"name": "Gloomcap", "weight": 35}] },

@@ -48,6 +48,8 @@ func getAreaForMinute(minute: int) -> String:
 		return "Hunting Grounds"
 	elif minute < 20:
 		return "Slime Swamps"
+	elif minute < 30:
+		return "Sandling Dunes"
 	# future areas...
 	return "Hunting Grounds"
 
@@ -59,6 +61,7 @@ func canSurviveIn(area: String) -> bool:
 	match unlocksArea:
 		"Hunting Grounds": return area == "Hunting Grounds"
 		"Slime Swamps": return area in ["Hunting Grounds", "Slime Swamps"]
+		"Sandling Dunes": return area in ["Hunting Grounds", "Slime Swamps", "Sandling Dunes"]
 	return false
 
 func _rollEvent(area: String, _currentHp: int) -> Dictionary:
@@ -232,6 +235,7 @@ func _rollLoot(area: String) -> String:
 const EXPEDITION_MONSTERS = {
 	"Hunting Grounds": ["Orcling", "Orc Grunt", "Orc Runt", "Orc Warrior", "Orc Brute"],
 	"Slime Swamps":    ["Small Slime", "Green Slime", "Blue Slime", "Bog Slime", "Toxic Slime"],
+	"Sandling Dunes": ["Hooded Sandling", "Roaming Sandling", "Horned Sandling", "Sand Brute"],
 }
 
 const TRAP_DATABASE = {
@@ -274,5 +278,15 @@ const EXPEDITION_LOOT = {
 		{"name": "Bloodroot",         "weight": 15},
 		{"name": "Slime Core",        "weight": 10},
 		{"name": "Royal Gel",         "weight": 2},
+	],
+	"Sandling Dunes": [
+		{"name": "Bone Dust",    "weight": 50},
+		{"name": "Iron Ore",     "weight": 25},
+		{"name": "Coal",         "weight": 20},
+		{"name": "Wild Herb",         "weight": 20},
+		{"name": "Bloodroot",         "weight": 15},
+		{"name": "Gloomcap",         "weight": 15},
+		{"name": "Crystal Bone", "weight": 8},
+		{"name": "Ancient Relic","weight": 2},
 	],
 }

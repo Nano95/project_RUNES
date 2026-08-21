@@ -72,52 +72,52 @@ func _ready() -> void:
 		"Slime Swamps": {
 			"weak": [
 				_make("Small Slime", "weak", 20, 8, 1, 5, {"poison": 0.3}, [
-					_drop("Slime Gel", 0.25),
+					_drop("Slime Gel", 0.08),
 					_drop("Slimy Shield", 0.03),
 				]),
 				_make("Green Slime", "weak", 25, 10, 2, 7, {"poison": 0.3}, [
-					_drop("Slime Gel", 0.30),
+					_drop("Slime Gel", 0.08),
 					_drop("Slimy Shield", 0.03),
 				]),
 				_make("Blue Slime", "weak", 30, 12, 2, 8, {"poison": 1.0}, [
-					_drop("Slime Gel", 0.35),
+					_drop("Slime Gel", 0.08),
 					_drop("Slimy Shield", 0.04),
 				]),
 			],
 			"medium": [
 				_make("Bog Slime", "medium", 60, 18, 6, 16, {}, [
-					_drop("Slime Gel", 0.45),
+					_drop("Slime Gel", 0.12),
 					_drop("Slimy Blade", 0.04),
 					_drop("Slimy Armor", 0.03),
 				]),
 				_make("Toxic Slime", "medium", 70, 20, 7, 18, {"poison": 0.33}, [
-					_drop("Slime Gel", 0.45),
+					_drop("Slime Gel", 0.12),
 					_drop("Slime Core", 0.10),
 					_drop("Slimy Blade", 0.04),
 					_drop("Slimy Armor", 0.03),
 				]),
 				_make("Slime Mold", "medium", 65, 19, 6, 17, {}, [
-					_drop("Slime Gel", 0.40),
+					_drop("Slime Gel", 0.12),
 					_drop("Slimy Blade", 0.03),
 					_drop("Slimy Armor", 0.03),
 				]),
 			],
 			"strong": [
 				_make("Slime Giant", "strong", 140, 32, 18, 40, {}, [
-					_drop("Slime Gel", 0.60),
-					_drop("Slime Core", 0.15),
+					_drop("Slime Gel", 0.17),
+					_drop("Slime Core", 0.08),
 					_drop("Slimy Legs", 0.05),
 					_drop("Slimy Helmet", 0.04),
 				]),
 				_make("Acid Slime", "strong", 160, 36, 20, 45, {"poison": 0.33}, [
-					_drop("Slime Gel", 0.60),
-					_drop("Slime Core", 0.20),
+					_drop("Slime Gel", 0.17),
+					_drop("Slime Core", 0.09),
 					_drop("Slimy Legs", 0.05),
 					_drop("Slimy Helmet", 0.04),
 				]),
 				_make("King's Guard", "strong", 180, 40, 22, 50, {"poison": 0.33}, [
-					_drop("Slime Gel", 0.65),
-					_drop("Slime Core", 0.25),
+					_drop("Slime Gel", 0.17),
+					_drop("Slime Core", 0.10),
 					_drop("Slimy Legs", 0.06),
 					_drop("Slimy Helmet", 0.05),
 				]),
@@ -133,6 +133,75 @@ func _ready() -> void:
 					_drop("Slimy Legs", 0.20),
 					_drop("Slimy Helmet", 0.20),
 					_drop("Slimy Boots", 0.15),
+				]),
+			],
+		},
+		"Sandling Dunes": {
+			"weak": [
+				_make("Hooded Sandling", "weak", 45, 16, 3, 10, {}, [
+					_drop("Bone Dust", 0.08),
+					_drop("Sandling Helmet", 0.03),
+					_drop("Sandling Shield", 0.02),
+				]),
+				_make("Roaming Sandling", "weak", 50, 18, 3, 12, {}, [
+					_drop("Bone Dust", 0.08),
+					_drop("Sandling Helmet", 0.03),
+					_drop("Sandling Shield", 0.02),
+				]),
+				_make("Dust Sandling", "weak", 40, 15, 2, 9, {}, [
+					_drop("Bone Dust", 0.08),
+					_drop("Sandling Helmet", 0.02),
+					_drop("Sandling Shield", 0.01),
+				]),
+			],
+			"medium": [
+				_make("Horned Sandling", "medium", 90, 28, 8, 22, {}, [
+					_drop("Bone Dust", 0.12),
+					_drop("Sandling Blade", 0.04),
+					_drop("Sandling Armor", 0.03),
+				]),
+				_make("Sand Brute", "medium", 100, 30, 9, 25, {}, [
+					_drop("Bone Dust", 0.12),
+					_drop("Sandling Blade", 0.04),
+					_drop("Sandling Armor", 0.03),
+				]),
+				_make("Sandling Archer", "medium", 85, 26, 7, 20, {}, [
+					_drop("Bone Dust", 0.12),
+					_drop("Sandling Blade", 0.03),
+					_drop("Sandling Armor", 0.03),
+				]),
+			],
+			"strong": [
+				_make("Sandling Warrior", "strong", 170, 42, 22, 55, {}, [
+					_drop("Bone Dust", 0.18),
+					_drop("Crystal Bone", 0.12),
+					_drop("Sandling Legs", 0.03),
+					_drop("Sandling Boots", 0.02),
+				]),
+				_make("Sandling Champion", "strong", 200, 48, 25, 65, {}, [
+					_drop("Bone Dust", 0.18),
+					_drop("Crystal Bone", 0.18),
+					_drop("Sandling Legs", 0.04),
+					_drop("Sandling Boots", 0.03),
+				]),
+				_make("Sand Golem", "strong", 220, 52, 28, 70, {}, [
+					_drop("Bone Dust", 0.18),
+					_drop("Crystal Bone", 0.22),
+					_drop("Sandling Legs", 0.05),
+					_drop("Sandling Boots", 0.05),
+				]),
+			],
+			"elite": [
+				_make("Mad Necromancer", "elite", 1200, 90, 300, 600, {}, [
+					_drop("Bone Dust", 0.90),
+					_drop("Crystal Bone", 0.60),
+					_drop("Ancient Relic", 0.20),
+					_drop("Sandling Helmet", 0.25),
+					_drop("Sandling Armor", 0.25),
+					_drop("Sandling Legs", 0.25),
+					_drop("Sandling Boots", 0.25),
+					_drop("Sandling Blade", 0.20),
+					_drop("Sandling Shield", 0.20),
 				]),
 			],
 		},

@@ -338,6 +338,19 @@ func buildEventTable() -> void:
 				{ "event": "trap",        "weight": 2  },
 				{ "event": "nothing_c",   "weight": 10 },
 			]
+		"Sandling Dunes":
+			eventWeights = [
+				{ "event": "nothing_a",   "weight": 8  },
+				{ "event": "nothing_b",   "weight": 16 },
+				{ "event": "monster",     "weight": 24 },
+				#{ "event": "ore",         "weight": 12 },
+				{ "event": "forage",      "weight": 20 },
+				#{ "event": "wood",        "weight": 6  },
+				{ "event": "potion_gold", "weight": goldPotionChance },
+				#{ "event": "dungeon",     "weight": 4  },
+				{ "event": "trap",        "weight": 2  },
+				{ "event": "nothing_c",   "weight": 10 },
+			]
 		"Darkwood Forest":
 			eventWeights = [
 				{ "event": "nothing_a",   "weight": 10 },

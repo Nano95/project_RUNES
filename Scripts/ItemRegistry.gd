@@ -3,7 +3,6 @@ extends Node
 var items: Dictionary = {}
 var equipmentDefs: Dictionary = {}
 
-
 func _ready() -> void:
 	_register()
 
@@ -62,10 +61,23 @@ func _register() -> void:
 	_add("Slime Core",  "part", true, 0.3, "Pulsing with slime energy.", 45)
 	_add("Royal Gel",   "part", true, 0.3, "Fit for a slime king.",      80)
 
-	# Slimy weapons and shield
-	_add("Slimy Blade",  "equipment", false, 2.5, "Coated in slime.",     60)
-	_add("Slimy Shield", "equipment", false, 3.0, "Hardens on impact.",   70)
-	
+	# Sandling Set
+	_equip("Sandling Helmet", "helmet", "Sandling", 22, 0,  0,  {},              "A hood worn by sandlings.",     90)
+	_equip("Sandling Armor",  "armor",  "Sandling", 45, 0,  0,  {},              "Dense bone plating.",           140)
+	_equip("Sandling Legs",   "legs",   "Sandling", 28, 0,  0,  {},              "Bone-reinforced leggings.",     100)
+	_equip("Sandling Boots",  "boots",  "Sandling", 14, 0,  0,  {"dodge": 0.05}, "Silent in the sand.",           80)
+	# Sandling weapons
+	_equip("Sandling Blade",  "weapon", "", 0, 22, 0,  {},              "Carved from sandling remains.", 90)
+	_equip("Sandling Shield", "shield", "", 0, 0,  20, {},              "Hardened bone shield.",         100)
+	_equip("T2 Map", "expeditionMap", "", 0, 0, 0, {"unlocksArea": "Sandling Dunes"},    "A map of the Sandling Dunes.", 150)
+	_equip("T2 Survival Gear", "survivalGear", "", 0, 0, 0, {"expeditionMinutes": 30}, "Hydrating survival pack.", 200)
+
+	# Parts
+	_add("Bone Dust",    "part", true,  0.2, "Fine dust from animated bones.",     8)
+	_add("Crystal Bone", "part", true,  0.4, "Crystallized by dark magic.",        60)
+	_add("Ancient Relic","part", true,  0.3, "Radiates dark energy.",             100)
+	# Summon
+	_add("Necromancer Totem", "summon", false, 0.5, "Summons the Mad Necromancer.", 300)
 	# ── FORAGEABLES ───────────────────────────────────────
 	_add("Wild Herb",           "forageable", true,  0.5, "Common but useful.",               5)
 	_add("Red Berry",           "forageable", true,  0.5, "Sweet and slightly toxic.",        4)
@@ -239,4 +251,14 @@ const EQUIPMENT_SPRITES: Dictionary = {
 	"Slimy Boots":    "res://Sprites/Equipment/SlimeBoots.png",
 	"Slimy Blade":    "res://Sprites/Equipment/SlimeBlade.png",
 	"Slimy Shield":   "res://Sprites/Equipment/SlimeShield.png",
+	# Sandling Set
+	"Sandling Helmet": "res://Sprites/Equipment/BoneHelmet.png",
+	"Sandling Armor":  "res://Sprites/Equipment/BoneArmor.png",
+	"Sandling Legs":   "res://Sprites/Equipment/BoneLegs.png",
+	"Sandling Boots":  "res://Sprites/Equipment/BoneBoots.png",
+	"Sandling Blade":  "res://Sprites/Equipment/BoneBlade.png",
+	"Sandling Shield": "res://Sprites/Equipment/BoneShield.png",
+	# T2 Expedition gear
+	"T2 Map":           "res://Sprites/Equipment/T2Map.png",
+	"T2 Survival Gear": "res://Sprites/Equipment/T2SurvivalGear.png",
 }

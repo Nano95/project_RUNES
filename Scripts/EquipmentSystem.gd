@@ -17,7 +17,6 @@ func _ready() -> void:
 
 # ── EQUIP / UNEQUIP ───────────────────────────────────────
 func equipItem(instance: Dictionary) -> void:
-	
 	var slot = instance.get("slot", "")
 	if slot == "":
 		return
@@ -38,12 +37,17 @@ func equipItem(instance: Dictionary) -> void:
 			GameEvents.cannotEquipError.emit("twoHandedError")
 			return
 
+	if (slot == "expeditionMap"):
+		var unlocksArea = instance.get("effects", {}).get("unlocksArea", "")
+		if unlocksArea != "" and not main.game_data.unlockedAreas.has(unlocksArea):
+			main.game_data.unlockedAreas.append(unlocksArea)
+	
 	# Unequip current item in slot first
+	print("before unequipSlot, current equipped: ", getEquippedSlot(slot).get("name", "empty"))
 	unequipSlot(slot)
-
-	# Remove from backpack
+	print("after unequipSlot, backpack size: ", main.game_data.backpack.size())
 	removeInstanceFromBackpack(instance)
-
+	print("after removeFromBackpack, backpack size: ", main.game_data.backpack.size())
 	# Equip
 	setEquippedSlot(slot, instance)
 	main.save_game()
@@ -53,14 +57,17 @@ func equipItem(instance: Dictionary) -> void:
 	GameEvents.equipmentChanged.emit()
 
 func unequipSlot(slot: String) -> void:
-	
 	var current = getEquippedSlot(slot)
 	if current.is_empty():
 		return
-	# Return to backpack
-	inventorySystem.addEquipmentToBackpack(current)
+	# Bypass weight check when returning to backpack during a swap
+	main.game_data.backpack.append(current)
+	var item = ItemRegistry.getItem(current.get("name", ""))
+	if item:
+		main.game_data.currentWeight += item.weight
 	setEquippedSlot(slot, {})
 	GameEvents.equipmentChanged.emit()
+	GameEvents.backpackChanged.emit()
 
 func getEquippedSlot(slot: String) -> Dictionary:
 	if !(main): main = Utils.get_main()
@@ -258,18 +265,17 @@ func enhanceItem(instance: Dictionary) -> void:
 
 # ── HELPERS ───────────────────────────────────────────────
 func removeInstanceFromBackpack(instance: Dictionary) -> void:
-	
 	var id = instance.get("instanceId", "")
+	print("removeInstanceFromBackpack called for: ", instance.get("name", ""), " id: ", id)
+	print_stack()
 	for i in main.game_data.backpack.size():
+		print("  checking: ", main.game_data.backpack[i].get("instanceId", ""), " name: ", main.game_data.backpack[i].get("name", ""))
 		if main.game_data.backpack[i].get("instanceId", "") == id:
+			print("  found and removing: ", main.game_data.backpack[i].get("name", ""))
 			main.game_data.backpack.remove_at(i)
-			var item = ItemRegistry.getItem(instance["name"])
-			if item:
-				main.game_data.currentWeight = max(
-					0.0, main.game_data.currentWeight - item.weight
-				)
-			GameEvents.backpackChanged.emit()
+			# rest...
 			return
+	print("  NOT FOUND in backpack")
 
 func onItemEquipped(itemName: String) -> void:
 	# Find the instance in backpack by name

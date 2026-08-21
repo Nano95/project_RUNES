@@ -206,7 +206,7 @@ func onLockedAreaPressed(areaName: String) -> void:
 			break
 	if previousArea != "":
 		GameEvents.eventLogged.emit(
-			"%s is locked. Reach event #100 in %s to unlock it." % [areaName, previousArea],
+			"%s is locked. Buy the respective map for this area!" % [areaName],
 			"system", false
 		)
 

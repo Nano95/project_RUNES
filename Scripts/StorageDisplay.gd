@@ -265,21 +265,9 @@ func _getStacked(items: Array) -> Array[Dictionary]:
 		var item = ItemRegistry.getItem(itemName)
 		if not item:
 			push_warning("Unknown item in chest: %s" % itemName)
-			GameEvents.eventLogged.emit(
-				"Unknown item in chest: %s" % itemName, "system", false
-			)
 			continue
-		
-		if stack.get("type") == "equipment" or ItemRegistry.getEquipmentDef(stack.get("name", "")) != null:
-			if not stack.has("isEquipment"):
-				push_warning("Equipment missing instance data: %s" % stack.get("name"))
-				GameEvents.eventLogged.emit(
-					"Equipment missing instance data: %s" % stack.get("name"), "system", false
-				)
-				continue
-		
+
 		if stack.get("isEquipment", false):
-			# Equipment — show as individual instance with full data
 			result.append({
 				"name": itemName,
 				"qty": 1,
@@ -287,7 +275,16 @@ func _getStacked(items: Array) -> Array[Dictionary]:
 				"cap": 1,
 				"isEquipment": true,
 				"instanceId": stack.get("instanceId", ""),
-				"statBonus": stack.get("statBonus", 0),
+				"slot": stack.get("slot", ""),
+				"hpBonus": stack.get("hpBonus", 0),
+				"atkBonus": stack.get("atkBonus", 0),
+				"defBonus": stack.get("defBonus", 0),
+				"effects": stack.get("effects", {}),
+				"grade": stack.get("grade", ""),
+				"gradeHpBonus": stack.get("gradeHpBonus", 0),
+				"gradeEffects": stack.get("gradeEffects", {}),
+				"enhancement": stack.get("enhancement", 0),
+				"setName": stack.get("setName", ""),
 			})
 		else:
 			result.append({
