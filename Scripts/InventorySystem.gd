@@ -84,10 +84,6 @@ func addToBackpack(itemName: String, qty: int = 1) -> bool:
 	return true
 
 func addEquipmentToBackpack(instance: Dictionary) -> bool:
-	print("addEquipmentToBackpack: ", instance.get("name", ""))
-	print("backpack size before: ", main.game_data.backpack.size())
-	print("current weight: ", main.game_data.currentWeight)
-	print("max weight: ", main.game_data.maxWeight)
 	var item = ItemRegistry.getItem(instance["name"])
 	if not item:
 		return false

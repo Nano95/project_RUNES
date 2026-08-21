@@ -21,7 +21,6 @@ func _gui_input(event):
 
 	elif event is InputEventScreenTouch and not event.pressed:
 		if not moved:
-			print("- yes")
 			$Panel/Button.emit_signal("pressed")  # will get two emits, so make the button's MOUSE filter IGNORE
 
 # close_cta is optional

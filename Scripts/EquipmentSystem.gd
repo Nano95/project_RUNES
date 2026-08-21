@@ -43,11 +43,8 @@ func equipItem(instance: Dictionary) -> void:
 			main.game_data.unlockedAreas.append(unlocksArea)
 	
 	# Unequip current item in slot first
-	print("before unequipSlot, current equipped: ", getEquippedSlot(slot).get("name", "empty"))
 	unequipSlot(slot)
-	print("after unequipSlot, backpack size: ", main.game_data.backpack.size())
 	removeInstanceFromBackpack(instance)
-	print("after removeFromBackpack, backpack size: ", main.game_data.backpack.size())
 	# Equip
 	setEquippedSlot(slot, instance)
 	main.save_game()
@@ -266,16 +263,16 @@ func enhanceItem(instance: Dictionary) -> void:
 # ── HELPERS ───────────────────────────────────────────────
 func removeInstanceFromBackpack(instance: Dictionary) -> void:
 	var id = instance.get("instanceId", "")
-	print("removeInstanceFromBackpack called for: ", instance.get("name", ""), " id: ", id)
-	print_stack()
 	for i in main.game_data.backpack.size():
-		print("  checking: ", main.game_data.backpack[i].get("instanceId", ""), " name: ", main.game_data.backpack[i].get("name", ""))
 		if main.game_data.backpack[i].get("instanceId", "") == id:
-			print("  found and removing: ", main.game_data.backpack[i].get("name", ""))
 			main.game_data.backpack.remove_at(i)
-			# rest...
+			var item = ItemRegistry.getItem(instance["name"])
+			if item:
+				main.game_data.currentWeight = max(
+					0.0, main.game_data.currentWeight - item.weight
+				)
+			GameEvents.backpackChanged.emit()
 			return
-	print("  NOT FOUND in backpack")
 
 func onItemEquipped(itemName: String) -> void:
 	# Find the instance in backpack by name

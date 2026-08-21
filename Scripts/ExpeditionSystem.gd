@@ -173,8 +173,6 @@ func syncOfflineProgress() -> void:
 	print("Expedition resumed. Minutes left: %d" % ceil(secondsLeft / float(secondsPerMinute)))
 
 func _processRemainingEvents() -> void:
-	print("=== PROCESS REMAINING ===")
-	print("progressIndex before: ", main.game_data.expeditionProgressIndex)
 	var lastIndex = main.game_data.expeditionTimeline.size() - 1
 	for i in range(main.game_data.expeditionProgressIndex + 1, lastIndex + 1):
 		var event = main.game_data.expeditionTimeline[i]

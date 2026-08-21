@@ -73,10 +73,7 @@ func refreshItemList() -> void:
 		isEquipped = true
 		matches.append(equipped)
 
-	print("selectedSlot: ", selectedSlot)
-	print("backpack size: ", main.game_data.backpack.size())
 	for stack in main.game_data.backpack:
-		print("  stack: ", stack.get("name", ""), " isEquipment: ", stack.get("isEquipment", false), " slot: ", stack.get("slot", ""))
 		if not stack.get("isEquipment", false):
 			continue
 		if stack.get("slot", "") == selectedSlot:
