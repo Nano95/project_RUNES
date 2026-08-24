@@ -25,6 +25,9 @@ func getArea(areaName: String) -> AreaData:
 			return a
 	return null
 
+func getAllAreas() -> Array[AreaData]:
+	return areas
+
 func getNextLockedArea() -> AreaData:
 	var main = Utils.get_main()
 	for a in areas:

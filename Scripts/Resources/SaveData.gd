@@ -12,7 +12,7 @@ class_name SaveData
 
 @export var currentArea: String = "Town"
 @export var inArea: bool = false
-@export var unlockedAreas: Array[String] = ["Hunting Grounds", "Slime Swamps"]  # Outskirts unlocked by default
+@export var unlockedAreas: Array[String] = ["Hunting Grounds"]
 
 @export var inCombat: bool = false
 @export var currentMonsterName: String = ""
@@ -34,6 +34,10 @@ class_name SaveData
 	"kills": {},
 	"deaths": 0,
 	"totalGoldEarned": 0,
+}
+@export var areaStats: Dictionary = {
+	# populated on first visit
+	# "Hunting Grounds": { "bestRun": 0, "deaths": 0 }
 }
 
 @export var discoveredRecipes: Array[String] = []

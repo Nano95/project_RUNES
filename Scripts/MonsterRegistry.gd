@@ -288,3 +288,12 @@ func getMonsterByAreaNameTier(monsterName: String, tier: String, area: String) -
 		if monster.monsterName == monsterName:
 			return monster
 	return null
+
+func getMonstersForArea(area: String) -> Array[String]:
+	var result: Array[String] = []
+	if not areaMonsters.has(area):
+		return result
+	for tier in areaMonsters[area]:
+		for monster in areaMonsters[area][tier]:
+			result.append(monster.monsterName)
+	return result

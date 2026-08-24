@@ -2,7 +2,6 @@ extends Control
 class_name UIController
 
 @export var mainActionRow: ScrollContainer
-@export var areaSelectRow: ScrollContainer
 @export var chooseAreaButton: Button
 @export var brewButton: Button
 @export var storageButton: Button
@@ -20,6 +19,11 @@ class_name UIController
 @export var quickConfigPanel: Panel
 @export var bazaarActionsPanel: Panel
 @export var bazaarStartStopBtn: Button
+@export var goToStage:Button
+
+@export var areaNavPanel: Panel
+@export var areaNavFlow: HFlowContainer
+@export var areaDisplay: AreaDisplay
 
 @export var topMainTitlePanel:Panel
 @export var expeditionTitlePanel:Panel
@@ -41,6 +45,7 @@ class_name UIController
 @export var autoContinueButton: Button
 
 var main:MainNode
+var selectedArea: String = ""
 
 func _ready() -> void:
 	main = Utils.get_main()
@@ -48,7 +53,6 @@ func _ready() -> void:
 	GameEvents.areaExited.connect(onAreaExited)
 	GameEvents.playerDied.connect(onAreaExited)
 	GameEvents.areaUnlocked.connect(onAreaUnlocked)
-	GameEvents.checkpointReached.connect(showCheckpoint)
 	autoContinueButton.toggled.connect(emitAutoContinueToggled) # outgoing emit
 	GameEvents.autoContinueToggled.connect(onAutoContinueToggled) # incoming emit
 	
@@ -64,29 +68,20 @@ func _ready() -> void:
 	blacksmithButton.pressed.connect(showBlacksmith)
 	debugButton.pressed.connect(debugDisplay.open)
 	expeditionButton.pressed.connect(showExpeditionMode)
+	goToStage.pressed.connect(onGoPressed)
 	
 	mainActionRow.show()
 	eventLogPanel.show()
-	areaSelectRow.hide()
+	areaNavPanel.hide()
 	adventuringRow.hide()
-	
-	for i in areaButtons.size():
-		var idx = i
-		areaButtons[i].pressed.connect(onAreaButtonPressed.bind(idx))
 	
 	showSafeZone()
 
 func showSafeZone() -> void:
-	chooseAreaButton.text = "Choose Area"
 	chooseAreaButton.visible = true
 	mainActionRow.show()
-	areaSelectRow.hide()
+	areaNavPanel.hide()
 	adventuringRow.hide()
-
-func showCheckpoint() -> void:
-	mainActionRow.hide()
-	areaSelectRow.hide()
-	adventuringRow.show()
 
 func showInventory() -> void:
 	inventoryPanel.visible = true
@@ -120,13 +115,10 @@ func showBlacksmith() -> void:
 func onAreaEntered(_areaName: String) -> void:
 	adventuringRow.visible = true
 	mainActionRow.visible = false
-	areaSelectRow.visible = false
+	areaNavPanel.visible = false
 	showEventPanel()
 	showInventory()
 	call_deferred("resetPanelPositionMeta")
-	#chooseAreaButton.text = "← Retreat"
-	#chooseAreaButton.pressed.disconnect(onChooseAreaPressed)
-	#chooseAreaButton.pressed.connect(onRetreatPressed)
 
 func onContinuePressed() -> void:
 	showInventory()
@@ -137,20 +129,15 @@ func onRetreatPressed() -> void:
 	areaSystem.exitArea()
 
 func onAreaExited() -> void:
-	chooseAreaButton.text = "Choose Area"
 	call_deferred("resetPanelPositionMeta")
 	showSafeZone()
 
-func onChooseAreaPressed() -> void:
-	refreshAreaGrid()
-	mainActionRow.visible = false
-	areaSelectRow.visible = true
-
-func onAreaButtonPressed(idx: int) -> void:
-	var areaName = main.game_data.unlockedAreas[idx]
-	areaSelectRow.visible = false
-	mainActionRow.visible = true
-	areaSystem.enterArea(areaName)
+# replaced when redesigning the arrea buttons
+#func onAreaButtonPressed(idx: int) -> void:
+	#var areaName = main.game_data.unlockedAreas[idx]
+	#areaSelectRow.visible = false
+	#mainActionRow.visible = true
+	#areaSystem.enterArea(areaName)
 
 func onAreaUnlocked(areaName: String) -> void:
 	refreshAreaGrid()
@@ -161,6 +148,92 @@ func emitAutoContinueToggled(isToggled:bool=false) -> void:
 
 func onAutoContinueToggled(isToggled:bool=false) -> void:
 	autoContinueButton.button_pressed = isToggled
+
+func onChooseAreaPressed() -> void:
+	# Hide normal action row
+	mainActionRow.visible = false
+	#areaSelectRow.visible = true
+	mainActionRow.visible = false
+	areaNavPanel.visible = true
+	Utils.animateButtonBounce(areaDisplay)
+	
+	# Replace event log with stats panel
+	eventLogPanel.visible = false
+	equipmentPanel.visible = false
+	areaDisplay.visible = true
+	# Build area buttons
+	buildAreaButtons()
+
+func buildAreaButtons() -> void:
+	for child in areaNavFlow.get_children():
+		child.free()
+
+	var unlocked = main.game_data.unlockedAreas
+
+	# Back button
+	var backBtn = Button.new()
+	backBtn.text = "Back"
+	backBtn.pressed.connect(onAreaNavBackPressed)
+	backBtn.add_theme_font_size_override("font_size", 22)
+	backBtn.custom_minimum_size = Vector2(180 ,60)
+	areaNavFlow.add_child(backBtn)
+
+	# Area buttons
+	for area in unlocked:
+		var btn = Button.new()
+		btn.text = " " + area + " "
+		btn.pressed.connect(onAreaButtonPressed.bind(area))
+		btn.add_theme_font_size_override("font_size", 22)
+		btn.custom_minimum_size = Vector2(180, 60)
+		areaNavFlow.add_child(btn)
+
+	# Next to unlock label
+	var nextArea = getNextAreaToUnlock()
+	if nextArea != "":
+		var lbl = Label.new()
+		lbl.text = "Next: %s (equip higher tier Expedition Map)" % nextArea
+		lbl.add_theme_color_override("font_color", Color("#888888"))
+		lbl.add_theme_font_size_override("font_size", 18)
+		areaNavFlow.add_child(lbl)
+
+	# Default to first unlocked area
+	if not unlocked.is_empty():
+		selectedArea = unlocked[0]
+		areaDisplay.showArea(selectedArea)
+	
+
+# Choose an area and update panel 
+func onAreaButtonPressed(area: String) -> void:
+	selectedArea = area
+	areaDisplay.showArea(area)
+
+func onAreaNavBackPressed() -> void:
+	Utils.animateButtonBounce(eventLogPanel)
+	areaNavPanel.visible = false
+	mainActionRow.visible = true
+	eventLogPanel.visible = true
+	areaDisplay.visible = false
+	selectedArea = ""
+
+func onGoPressed() -> void:
+	if selectedArea == "":
+		return
+	# Hide area UI
+	areaNavPanel.visible = false
+	areaDisplay.visible = false
+	# Show adventure UI
+	eventLogPanel.visible = true
+	mainActionRow.visible = false  # replaced by inventory during adventure
+	# Enter area
+	areaSystem.enterArea(selectedArea)
+
+func getNextAreaToUnlock() -> String:
+	var allAreas = AreaRegistry.getAllAreas()
+	var unlocked = main.game_data.unlockedAreas
+	for area in allAreas:
+		if not unlocked.has(area.areaName):
+			return area.areaName
+	return ""
 
 func refreshAreaGrid() -> void:
 	var unlocked = main.game_data.unlockedAreas

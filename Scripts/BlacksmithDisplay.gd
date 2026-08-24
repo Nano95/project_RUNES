@@ -162,8 +162,23 @@ func refreshInfo() -> void:
 
 	# Stat info
 	var def = ItemRegistry.getEquipmentDef(selectedRecipe.resultItem)
-	if def and def.statMax > 0:
-		infoStat.text = "  Result: %s +%d to +%d" % [def.statType.to_upper(), def.statMin, def.statMax]
+	if def:
+		var statParts = []
+		if def.hpBonus > 0:
+			statParts.append("HP +%d" % def.hpBonus)
+		if def.atkBonus > 0:
+			statParts.append("ATK +%d" % def.atkBonus)
+		if def.defBonus > 0:
+			statParts.append("DEF +%d" % def.defBonus)
+		for effect in def.effects:
+			var val = def.effects[effect]
+			match effect:
+				"dodge":            statParts.append("DODGE +%d%%" % int(val * 100))
+				"poisonResistance": statParts.append("POISON RES +%d%%" % int(val * 100))
+		if statParts.is_empty():
+			infoStat.text = "  Material"
+		else:
+			infoStat.text = "  Result: %s" % "  ".join(statParts)
 	else:
 		infoStat.text = "  Material"
 

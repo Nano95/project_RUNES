@@ -42,6 +42,11 @@ func _ready() -> void:
 	main = Utils.get_main()
 	GameEvents.chestItemMoved.connect(onChestItemMoved)
 
+func emitStorageSignals() -> void:
+	GameEvents.backpackChanged.emit()
+	GameEvents.chestChanged.emit()
+	GameEvents.weightChanged.emit()
+
 # ── CAPACITY ─────────────────────────────────────────────
 func getCapacity(chest: ChestData) -> int:
 	# Base 15 slots, +5 per upgrade level
@@ -289,9 +294,7 @@ func moveToBackpackFromIndex(itemName: String, chestId: int, chestIndex: int, qt
 			main.game_data.backpack.append({"name": itemName, "qty": remaining})
 
 	main.save_game()
-	GameEvents.backpackChanged.emit()
-	GameEvents.chestChanged.emit()
-	GameEvents.weightChanged.emit()
+	call_deferred("emitStorageSignals")
 
 func _countInChest(chest: ChestData, itemName: String) -> int:
 	var count = 0

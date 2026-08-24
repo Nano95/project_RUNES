@@ -90,6 +90,14 @@ func onTick() -> void:
 		else:
 			triggerCheckpoint()
 
+func updateAreaBestRun() -> void:
+	var area = main.game_data.currentArea
+	if not main.game_data.areaStats.has(area):
+		main.game_data.areaStats[area] = {"bestRun": 0, "deaths": 0}
+	var current = main.game_data.eventCount
+	if current > main.game_data.areaStats[area]["bestRun"]:
+		main.game_data.areaStats[area]["bestRun"] = current
+
 func onGatherStarted(itemName: String, ticks: int) -> void:
 	gatheringItem = itemName
 	gatheringTicksLeft = ticks
@@ -105,6 +113,7 @@ func onAreaEntered(area:String) -> void:
 	buildEventTable()
 
 func onAreaExited() -> void:
+	updateAreaBestRun()
 	gatheringItem = ""
 	gatheringTicksLeft = 0
 	checkpointPending = false
@@ -135,6 +144,7 @@ func onCombatResolved(_a = null) -> void:
 func triggerCheckpoint() -> void:
 	checkpointPending = true
 	GameEvents.checkpointReached.emit()
+	updateAreaBestRun()
 
 func onCheckpointContinued() -> void:
 	buildEventTable()
