@@ -28,6 +28,7 @@ var longPressTarget: String = ""
 var longPressSource: String = ""  # "backpack" or "chest"
 var longPressQty: int = 0
 const LONG_PRESS_DURATION: float = 0.4
+var isRefreshing: bool = false
 
 func _ready() -> void:
 	main = Utils.get_main()
@@ -69,11 +70,13 @@ func open() -> void:
 	refresh()
 	Utils.animate_modal_entry(self)
 
-var isRefreshing: bool = false
 func refresh() -> void:
 	if isRefreshing:
 		return
 	isRefreshing = true
+	call_deferred("_doRefresh")
+
+func _doRefresh() -> void:
 	refreshBackpack()
 	refreshChest()
 	refreshUpgradePanel()
@@ -94,13 +97,15 @@ func refreshBackpack() -> void:
 		var lbl = Label.new()
 		lbl.text = "Empty"
 		lbl.add_theme_color_override("font_color", Color("#888888"))
-		backpackFlow.add_child(lbl)
+		backpackFlow.add_child.call_deferred(lbl)
+
 		return
 	
 	backpackTitleCap.text = "Backpack (%d / %d)" % [main.game_data.backpack.size(), main.game_data.backpackMax]
 	for i in stacked.size():
 		var btn = _makeItemButton(stacked[i], "backpack", i)
-		backpackFlow.add_child(btn)
+		backpackFlow.add_child.call_deferred(btn)
+
 
 # ── CHEST ────────────────────────────────────────────────
 func refreshChest() -> void:
@@ -122,12 +127,12 @@ func refreshChest() -> void:
 		var lbl = Label.new()
 		lbl.text = "Empty"
 		lbl.add_theme_color_override("font_color", Color("#888888"))
-		chestFlow.add_child(lbl)
+		chestFlow.add_child.call_deferred(lbl)
 		return
 
 	for i in stacked.size():
 		var btn = _makeItemButton(stacked[i], "chest", i)
-		chestFlow.add_child(btn)
+		chestFlow.add_child.call_deferred(btn)
 
 # ── UPGRADE PANEL ────────────────────────────────────────
 func refreshUpgradePanel() -> void:
@@ -201,6 +206,13 @@ func onBuildPressed() -> void:
 
 # ── ITEM BUTTONS ─────────────────────────────────────────
 func _makeItemButton(entry: Dictionary, source: String, stackIndex: int) -> Button:
+	if entry.is_empty():
+		push_warning("Empty entry passed to _makeItemButton")
+		return Button.new()
+	var itemName = entry.get("name", "")
+	if itemName == "":
+		push_warning("Entry missing name in _makeItemButton")
+		return Button.new()
 	var btn = Button.new()
 	var cap = entry.get("cap", 1)
 	if (entry["qty"] > 1):
