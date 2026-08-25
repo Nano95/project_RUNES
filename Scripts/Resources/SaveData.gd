@@ -40,6 +40,10 @@ class_name SaveData
 	# "Hunting Grounds": { "bestRun": 0, "deaths": 0 }
 }
 
+@export var availableAllocationPoints: int = 0
+@export var completedTasks: Array[String] = []
+@export var claimedTasks: Array[String] = []
+
 @export var discoveredRecipes: Array[String] = []
 
 @export var equippedWeapon: Dictionary = {

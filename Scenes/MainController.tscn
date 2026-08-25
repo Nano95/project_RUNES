@@ -923,6 +923,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EventLogPanel" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=863328441]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -1033,7 +1034,6 @@ bbcode_enabled = true
 scroll_following = true
 
 [node name="StageSelectPanel" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=906864538 node_paths=PackedStringArray("areaNameLabel", "bestRunLabel", "deathsLabel", "killsVBox", "tasksVBox")]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -1043,7 +1043,7 @@ areaNameLabel = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Title")
 bestRunLabel = NodePath("VBoxContainer/MarginContainer/VBoxContainer/BestRun")
 deathsLabel = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Deaths")
 killsVBox = NodePath("VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/EnemyKillsVbox")
-tasksVBox = NodePath("VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/TasksVbox")
+tasksVBox = NodePath("VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/TasksVbox")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIController/MarginContainer/VBoxContainer/StageSelectPanel" unique_id=1857219758]
 layout_mode = 1
@@ -1153,11 +1153,16 @@ layout_mode = 2
 [node name="VSeparator" type="VSeparator" parent="UIController/MarginContainer/VBoxContainer/StageSelectPanel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=277419969]
 layout_mode = 2
 
-[node name="TasksVbox" type="VBoxContainer" parent="UIController/MarginContainer/VBoxContainer/StageSelectPanel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2113860985]
+[node name="ScrollContainer" type="ScrollContainer" parent="UIController/MarginContainer/VBoxContainer/StageSelectPanel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=451545730]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Title" parent="UIController/MarginContainer/VBoxContainer/StageSelectPanel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/TasksVbox" unique_id=132410033 instance=ExtResource("6_prt4a")]
+[node name="TasksVbox" type="VBoxContainer" parent="UIController/MarginContainer/VBoxContainer/StageSelectPanel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer" unique_id=2113860985]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Title" parent="UIController/MarginContainer/VBoxContainer/StageSelectPanel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/TasksVbox" unique_id=132410033 instance=ExtResource("6_prt4a")]
 material = SubResource("ShaderMaterial_0wkor")
 layout_mode = 2
 theme_override_constants/outline_size = 14
@@ -1166,7 +1171,7 @@ text = "Tasks"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="UIController/MarginContainer/VBoxContainer/StageSelectPanel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/TasksVbox" unique_id=1521519348]
+[node name="HSeparator" type="HSeparator" parent="UIController/MarginContainer/VBoxContainer/StageSelectPanel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/TasksVbox" unique_id=1521519348]
 self_modulate = Color(1, 1, 1, 0.5294118)
 layout_mode = 2
 

@@ -127,12 +127,13 @@ func refreshChest() -> void:
 		var lbl = Label.new()
 		lbl.text = "Empty"
 		lbl.add_theme_color_override("font_color", Color("#888888"))
-		chestFlow.add_child.call_deferred(lbl)
+		chestFlow.add_child(lbl)
 		return
-
+	
 	for i in stacked.size():
+		print("item: ", stacked[i].name)
 		var btn = _makeItemButton(stacked[i], "chest", i)
-		chestFlow.add_child.call_deferred(btn)
+		chestFlow.add_child(btn)
 
 # ── UPGRADE PANEL ────────────────────────────────────────
 func refreshUpgradePanel() -> void:
