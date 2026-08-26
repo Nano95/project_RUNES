@@ -64,9 +64,10 @@ func refreshItems() -> void:
 
 	for entry in stock:
 		var btn = Button.new()
+		btn.text = " "
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		
-		btn.custom_minimum_size = Vector2(0, 60.0)
+		btn.add_theme_font_size_override("font_size", 24)
+		btn.mouse_filter = Control.MOUSE_FILTER_PASS
 
 		var hbox = HBoxContainer.new()
 		hbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL

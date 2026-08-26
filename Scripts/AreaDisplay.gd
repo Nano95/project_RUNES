@@ -56,8 +56,8 @@ func refreshKills(area: String) -> void:
 
 func refreshTasks(area: String) -> void:
 	var children = tasksVBox.get_children()
-	for i in range(1, children.size()):
-		children[i].free()
+	for i in range(2, children.size()):
+		children[i].queue_free()
 
 	var tasks = TaskRegistry.getTasksForArea(area)
 	

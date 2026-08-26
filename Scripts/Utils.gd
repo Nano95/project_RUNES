@@ -334,8 +334,7 @@ func animate_modal_entry(node: CanvasItem, duration := 0.15, offset := 10.0):
 	var tween := node.get_tree().create_tween().set_parallel(true)
 	node.modulate.a = 0.0
 	node.position.y = original_y - offset  # start above
-	node.show()
-
+	node.visible = true
 	tween.tween_property(node, "modulate:a", 1.0, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(node, "position:y", node.position.y + offset, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 

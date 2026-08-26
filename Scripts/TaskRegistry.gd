@@ -17,6 +17,40 @@ const TASKS: Array[Dictionary] = [
 	
 	# Hunting Grounds — Milestone
 	{ "id": "hg_100events",      "area": "Hunting Grounds", "monster": "",             "target": 100, "reward": "allocation", "rewardValue": 3, "desc": "Reach Event 100 in Hunting Grounds" },
+	
+	# Slime Swamps — Weak (150g)
+	{ "id": "ss_smallslime_40",  "area": "Slime Swamps", "monster": "Small Slime",  "target": 40, "reward": "gold",       "rewardValue": 150, "desc": "Kill 40 Small Slimes" },
+	{ "id": "ss_greenslime_40",  "area": "Slime Swamps", "monster": "Green Slime",  "target": 40, "reward": "gold",       "rewardValue": 150, "desc": "Kill 40 Green Slimes" },
+	{ "id": "ss_blueslime_40",   "area": "Slime Swamps", "monster": "Blue Slime",   "target": 40, "reward": "gold",       "rewardValue": 150, "desc": "Kill 40 Blue Slimes" },
+	# Slime Swamps — Medium (+2 weight)
+	{ "id": "ss_bogslime_30",    "area": "Slime Swamps", "monster": "Bog Slime",    "target": 30, "reward": "weight",     "rewardValue": 2,   "desc": "Kill 30 Bog Slimes" },
+	{ "id": "ss_toxicslime_30",  "area": "Slime Swamps", "monster": "Toxic Slime",  "target": 30, "reward": "weight",     "rewardValue": 2,   "desc": "Kill 30 Toxic Slimes" },
+	{ "id": "ss_slimemold_30",   "area": "Slime Swamps", "monster": "Slime Mold",   "target": 30, "reward": "weight",     "rewardValue": 2,   "desc": "Kill 30 Slime Molds" },
+	# Slime Swamps — Hard (+2 HP)
+	{ "id": "ss_slimegiant_20",  "area": "Slime Swamps", "monster": "Slime Giant",  "target": 20, "reward": "hp",         "rewardValue": 2,   "desc": "Kill 20 Slime Giants" },
+	{ "id": "ss_acidslime_20",   "area": "Slime Swamps", "monster": "Acid Slime",   "target": 20, "reward": "hp",         "rewardValue": 2,   "desc": "Kill 20 Acid Slimes" },
+	{ "id": "ss_kingsguard_20",  "area": "Slime Swamps", "monster": "King's Guard", "target": 20, "reward": "hp",         "rewardValue": 2,   "desc": "Kill 20 King's Guards" },
+	# Slime Swamps — Elite
+	{ "id": "ss_kingslime_1",    "area": "Slime Swamps", "monster": "King Slime",   "target": 1,  "reward": "allocation", "rewardValue": 1,   "desc": "Defeat the King Slime" },
+	# Slime Swamps — Milestone
+	{ "id": "ss_100events",      "area": "Slime Swamps", "monster": "",             "target": 100, "reward": "allocation", "rewardValue": 3,  "desc": "Reach Event 100 in Slime Swamps" },
+
+	# Sandling Dunes — Weak (150g)
+	{ "id": "sd_hoodsandling_40",  "area": "Sandling Dunes", "monster": "Hooded Sandling",   "target": 40, "reward": "gold",       "rewardValue": 150, "desc": "Kill 40 Hooded Sandlings" },
+	{ "id": "sd_roamsandling_40",  "area": "Sandling Dunes", "monster": "Roaming Sandling",  "target": 40, "reward": "gold",       "rewardValue": 150, "desc": "Kill 40 Roaming Sandlings" },
+	{ "id": "sd_dustsandling_40",  "area": "Sandling Dunes", "monster": "Dust Sandling",     "target": 40, "reward": "gold",       "rewardValue": 150, "desc": "Kill 40 Dust Sandlings" },
+	# Sandling Dunes — Medium (+2 weight)
+	{ "id": "sd_hornedsand_30",    "area": "Sandling Dunes", "monster": "Horned Sandling",   "target": 30, "reward": "weight",     "rewardValue": 2,   "desc": "Kill 30 Horned Sandlings" },
+	{ "id": "sd_sandbrute_30",     "area": "Sandling Dunes", "monster": "Sand Brute",        "target": 30, "reward": "weight",     "rewardValue": 2,   "desc": "Kill 30 Sand Brutes" },
+	{ "id": "sd_sandarcheer_30",   "area": "Sandling Dunes", "monster": "Sandling Archer",   "target": 30, "reward": "weight",     "rewardValue": 2,   "desc": "Kill 30 Sandling Archers" },
+	# Sandling Dunes — Hard (+2 HP)
+	{ "id": "sd_sandwarrior_20",   "area": "Sandling Dunes", "monster": "Sandling Warrior",  "target": 20, "reward": "hp",         "rewardValue": 2,   "desc": "Kill 20 Sandling Warriors" },
+	{ "id": "sd_sandchamp_20",     "area": "Sandling Dunes", "monster": "Sandling Champion", "target": 20, "reward": "hp",         "rewardValue": 2,   "desc": "Kill 20 Sandling Champions" },
+	{ "id": "sd_sandgolem_20",     "area": "Sandling Dunes", "monster": "Sand Golem",        "target": 20, "reward": "hp",         "rewardValue": 2,   "desc": "Kill 20 Sand Golems" },
+	# Sandling Dunes — Elite
+	{ "id": "sd_madnecro_1",       "area": "Sandling Dunes", "monster": "Mad Necromancer",   "target": 1,  "reward": "allocation", "rewardValue": 1,   "desc": "Defeat the Mad Necromancer" },
+	# Sandling Dunes — Milestone
+	{ "id": "sd_100events",        "area": "Sandling Dunes", "monster": "",                  "target": 100, "reward": "allocation", "rewardValue": 3,  "desc": "Reach Event 100 in Sandling Dunes" },
 ]
 var main:MainNode
 func _ready() -> void:

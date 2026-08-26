@@ -363,12 +363,6 @@ shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yb8to"]
-resource_local_to_scene = true
-shader = ExtResource("7_108yi")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6f3dh"]
 resource_local_to_scene = true
 shader = ExtResource("7_108yi")
@@ -923,7 +917,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EventLogPanel" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=863328441]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -1034,6 +1027,7 @@ bbcode_enabled = true
 scroll_following = true
 
 [node name="StageSelectPanel" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=906864538 node_paths=PackedStringArray("areaNameLabel", "bestRunLabel", "deathsLabel", "killsVBox", "tasksVBox")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -1156,6 +1150,7 @@ layout_mode = 2
 [node name="ScrollContainer" type="ScrollContainer" parent="UIController/MarginContainer/VBoxContainer/StageSelectPanel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=451545730]
 layout_mode = 2
 size_flags_horizontal = 3
+vertical_scroll_mode = 3
 
 [node name="TasksVbox" type="VBoxContainer" parent="UIController/MarginContainer/VBoxContainer/StageSelectPanel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer" unique_id=2113860985]
 layout_mode = 2
@@ -1698,6 +1693,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
+vertical_scroll_mode = 3
 
 [node name="MainActionRow" type="GridContainer" parent="UIController/MarginContainer/VBoxContainer/MainActionRow" unique_id=780816887]
 custom_minimum_size = Vector2(678, 0)
@@ -1850,6 +1846,7 @@ offset_top = 25.0
 offset_right = 682.0
 offset_bottom = 269.0
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 
 [node name="InventoryGrid" type="HFlowContainer" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay/VScrollBar" unique_id=1908519590]
 custom_minimum_size = Vector2(670, 244)
@@ -1963,6 +1960,7 @@ offset_right = 673.0
 offset_bottom = 173.0
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 
 [node name="backpackGrid" type="HFlowContainer" parent="UIController/MarginContainer/VBoxContainer/ExpeditionRow/CollectionBinPanel/MarginContainer/TOP/Panel/VScrollBar" unique_id=1828325178]
 layout_mode = 2
@@ -2000,6 +1998,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+vertical_scroll_mode = 3
 
 [node name="HFlowContainer" type="HFlowContainer" parent="UIController/MarginContainer/VBoxContainer/AreasSelect/MarginContainer/Panel/ScrollContainer" unique_id=1564819356]
 layout_mode = 2
@@ -2528,6 +2527,7 @@ custom_minimum_size = Vector2(0, 271)
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 
 [node name="ItemsList" type="VBoxContainer" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer/ItemsPanel/ItemsContainer/VScrollBar" unique_id=404915640]
 custom_minimum_size = Vector2(670, 270)
@@ -2805,6 +2805,7 @@ custom_minimum_size = Vector2(0, 449)
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 
 [node name="ItemsList" type="VBoxContainer" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/ItemsPanel/ItemsContainer/VScrollBar" unique_id=1448962608]
 custom_minimum_size = Vector2(670, 449)
@@ -3102,6 +3103,7 @@ custom_minimum_size = Vector2(0, 449)
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 
 [node name="ItemsList" type="VBoxContainer" parent="UIController/BrewingContainer/MainPanel/VBoxContainer/ItemsPanel/ItemsContainer/VScrollBar" unique_id=232243211]
 custom_minimum_size = Vector2(670, 449)
@@ -3429,13 +3431,14 @@ text = "Deposit All"
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 
 [node name="backpackGrid" type="HFlowContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/VScrollBar" unique_id=1029594101]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/h_separation = 7
-theme_override_constants/v_separation = 6
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 11
 
 [node name="chestPanel" type="Panel" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer" unique_id=1642933764]
 layout_mode = 2
@@ -3464,13 +3467,14 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 
 [node name="chestGrid" type="HFlowContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestPanel/TOP/VScrollBar" unique_id=806477718]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/h_separation = 7
-theme_override_constants/v_separation = 6
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 11
 
 [node name="chestSelectPanel" type="Panel" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer" unique_id=1200184606]
 layout_mode = 2
@@ -3497,6 +3501,7 @@ vertical_alignment = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM" unique_id=1334215644]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 12
 
 [node name="Chest" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM/HBoxContainer" unique_id=1083178684]
 layout_mode = 2
@@ -3667,20 +3672,22 @@ theme_override_font_sizes/font_size = 80
 text = "In Combat..."
 vertical_alignment = 1
 
-[node name="MonsterName" parent="UIController/MonsterBattleOverlay/MonsterBattlePanel" unique_id=163336450 instance=ExtResource("6_prt4a")]
-self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_yb8to")
+[node name="MonsterName" type="RichTextLabel" parent="UIController/MonsterBattleOverlay/MonsterBattlePanel" unique_id=1544063076]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 9.0
-offset_top = 65.25
-offset_right = 1554.0
-offset_bottom = 205.25
+offset_top = 61.25
+offset_bottom = 110.5
 grow_horizontal = 2
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 80
-text = "Monster Name"
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("3_dajxx")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+bbcode_enabled = true
+text = "[i][center]Select any item to see information here.[/center][/i]"
+scroll_following = true
 horizontal_alignment = 1
 vertical_alignment = 1
 

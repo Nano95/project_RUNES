@@ -172,19 +172,18 @@ func buildAreaButtons() -> void:
 
 	# Back button
 	var backBtn = Button.new()
-	backBtn.text = "Back"
+	backBtn.text = "       Back       "
 	backBtn.pressed.connect(onAreaNavBackPressed)
 	backBtn.add_theme_font_size_override("font_size", 22)
-	backBtn.custom_minimum_size = Vector2(180 ,60)
 	areaNavFlow.add_child(backBtn)
 
 	# Area buttons
 	for area in unlocked:
 		var btn = Button.new()
 		btn.text = " " + area + " "
+		btn.mouse_filter = Control.MOUSE_FILTER_PASS
 		btn.pressed.connect(onAreaButtonPressed.bind(area))
 		btn.add_theme_font_size_override("font_size", 22)
-		btn.custom_minimum_size = Vector2(180, 60)
 		areaNavFlow.add_child(btn)
 
 	# Next to unlock label

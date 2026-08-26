@@ -68,7 +68,8 @@ func open() -> void:
 		return
 	selectedChestId = 1
 	refresh()
-	Utils.animate_modal_entry(self)
+	call_deferred("showLate")
+	#Utils.animate_modal_entry(self)
 
 func refresh() -> void:
 	if isRefreshing:
@@ -81,6 +82,9 @@ func _doRefresh() -> void:
 	refreshChest()
 	refreshUpgradePanel()
 	isRefreshing = false
+
+func showLate() -> void:
+	Utils.animate_modal_entry(self)
 
 # ── BACKPACK ─────────────────────────────────────────────
 func refreshBackpack() -> void:
@@ -109,6 +113,12 @@ func refreshBackpack() -> void:
 
 # ── CHEST ────────────────────────────────────────────────
 func refreshChest() -> void:
+	if not is_instance_valid(chestFlow):
+		print("chestFlow is invalid!")
+		return
+	if not is_inside_tree():
+		print("StorageDisplay not in tree!")
+		return
 	for child in chestFlow.get_children():
 		child.queue_free()
 
@@ -131,7 +141,6 @@ func refreshChest() -> void:
 		return
 	
 	for i in stacked.size():
-		print("item: ", stacked[i].name)
 		var btn = _makeItemButton(stacked[i], "chest", i)
 		chestFlow.add_child(btn)
 
@@ -168,13 +177,15 @@ func _buildChestGrid() -> void:
 	for child in chestGrid.get_children():
 		child.queue_free()
 
-	for i in range(main.game_data.chests.size()):
+	for i in range(main.game_data.chests.size() - 1):
 		var chest = main.game_data.chests[i]
 		var btn = Button.new()
-		btn.text = "C%d" % chest.id
+		
 		if not chest.unlocked:
 			var cost = ChestSystem.UNLOCK_COSTS[chest.id - 1]
-			btn.text += "\n🔒\n %dg" % cost
+			btn.text += "C%d\n🔒\n %dg" % [chest.id, cost]
+		else:
+			btn.text = "     C%d    " % chest.id
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		btn.add_theme_font_size_override("font_size", 30)
 		btn.pressed.connect(onChestSelected.bind(chest.id))
@@ -216,7 +227,7 @@ func _makeItemButton(entry: Dictionary, source: String, stackIndex: int) -> Butt
 		return Button.new()
 	var btn = Button.new()
 	var cap = entry.get("cap", 1)
-	if (entry["qty"] > 1):
+	if (entry.get("qty", 1) > 1):
 		btn.text = " %s %d/%d " % [entry["name"], entry["qty"], cap]
 	else:
 		btn.text = " " + entry["name"] + " "
@@ -224,7 +235,6 @@ func _makeItemButton(entry: Dictionary, source: String, stackIndex: int) -> Butt
 	var newColor = Utils.getColorForType(entry["type"])
 	btn.add_theme_color_override("font_color", newColor)
 	btn.add_theme_font_size_override("font_size", 22)
-	btn.custom_minimum_size = Vector2(150,50)
 	btn.button_down.connect(onItemButtonDown.bind(entry["name"], source, stackIndex))
 	btn.button_up.connect(onItemButtonUp.bind(entry["name"], source, stackIndex))
 	return btn

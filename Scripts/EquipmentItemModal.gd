@@ -93,7 +93,7 @@ func refreshItemList() -> void:
 		var enh = instance.get("enhancement", 0)
 		var enhStr = " +%d" % enh if enh > 0 else ""
 		btn.add_theme_font_size_override("font_size", 24)
-		btn.custom_minimum_size = Vector2(250, 60)
+		btn.mouse_filter = Control.MOUSE_FILTER_PASS
 		btn.text = "%s%s%s" % [instance.get("name", ""), gradeStr, enhStr]
 		#btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		match grade:

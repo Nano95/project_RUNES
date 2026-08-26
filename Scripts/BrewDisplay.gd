@@ -61,14 +61,15 @@ func refreshRecipes() -> void:
 		var btn = Button.new()
 		btn.text = recipe.recipeName
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		btn.mouse_filter = Control.MOUSE_FILTER_PASS
 		if (selectedRecipe == recipe):
 			btn.add_theme_color_override("font_color", Color("#8e44ad"))
 		btn.pressed.connect(func():
 			onRecipeSelected(recipe)
 			Utils.animateButtonPress(btn)
 		)
-		btn.add_theme_font_size_override("font_size", 20)
-		btn.custom_minimum_size = Vector2(0, 60)
+		btn.add_theme_font_size_override("font_size", 24)
+		#btn.custom_minimum_size = Vector2(0, 60)
 		recipesVBox.add_child(btn)
 
 func getAvailableRecipes() -> Array[RecipeData]:

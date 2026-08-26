@@ -1,7 +1,7 @@
 extends ColorRect
 class_name CombatOverlay
 
-@export var enemyNameLabel: Label
+@export var enemyNameLabel: RichTextLabel
 @export var enemyHPBar: ProgressBar
 @export var enemyHPValue: Label
 @export var fleeButton: Button
@@ -28,7 +28,20 @@ func onCombatStarted(monster: MonsterData, weakened: bool) -> void:
 		return
 	var currHp = int(monster.hp * .5) if (weakened) else monster.hp
 	monsterMaxHp = monster.hp
-	enemyNameLabel.text = "%s [%s]" % [monster.monsterName, monster.tier.to_upper()]
+
+	var tierColor = ""
+	match monster.tier:
+		"weak":   tierColor = "#90ee90"  # light green
+		"medium": tierColor = "#f1c40f"  # yellow
+		"strong": tierColor = "#e74c3c"  # red
+		"elite":  tierColor = "#9b59b6"  # purple for elite
+		_:        tierColor = "#ffffff"
+
+	enemyNameLabel.text = "%s [color=%s][%s][/color]" % [
+		monster.monsterName,
+		tierColor,
+		monster.tier.to_upper()
+	]
 	enemyHPBar.max_value = monsterMaxHp
 	enemyHPBar.value = currHp
 	enemyHPValue.text = "%d / %d" % [currHp, monsterMaxHp]
@@ -40,7 +53,6 @@ func onCombatStarted(monster: MonsterData, weakened: bool) -> void:
 		global_position.y = eventLogPanel.global_position.y
 	elif (equipmentPanel.visible):
 		global_position.y = equipmentPanel.global_position.y
-	
 	
 	Utils.animate_modal_entry(self)
 

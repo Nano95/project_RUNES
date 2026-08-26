@@ -56,7 +56,7 @@ func refreshItems() -> void:
 		btn.text = " %s x%d " % [itemName, qty] if qty > 1 else itemName
 		btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		btn.add_theme_font_size_override("font_size", 22)
-		btn.custom_minimum_size = Vector2(150,50)
+		btn.mouse_filter = Control.MOUSE_FILTER_PASS
 		var item = ItemRegistry.getItem(itemName)
 		if (item):
 			btn.add_theme_color_override("font_color", Utils.getColorForType(item.itemType))

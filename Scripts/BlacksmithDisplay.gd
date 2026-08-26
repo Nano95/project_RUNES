@@ -136,7 +136,7 @@ func _makeRecipeButton(recipe: BlacksmithRecipe) -> Button:
 		onRecipeSelected(recipe)
 		Utils.animateButtonPress(btn)
 	)
-	btn.custom_minimum_size = Vector2(150,50)
+	btn.mouse_filter = Control.MOUSE_FILTER_PASS
 	btn.add_theme_font_size_override("font_size", 22)
 	if selectedRecipe == recipe:
 		btn.add_theme_color_override("font_color", Color("#c8880a"))

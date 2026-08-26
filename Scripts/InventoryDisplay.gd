@@ -62,7 +62,6 @@ func refresh() -> void:
 		var color = Utils.getColorForType(item.itemType)
 		btn.add_theme_color_override("font_color", color)
 		btn.add_theme_font_size_override("font_size", 22)
-		btn.custom_minimum_size = Vector2(150, 60)
 
 		# Bind stack index i so we always know which exact stack was pressed
 		btn.button_down.connect(onItemButtonDown.bind(itemName, i))
