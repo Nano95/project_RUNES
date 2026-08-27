@@ -45,6 +45,16 @@ func open() -> void:
 	var hasLoot = not main.game_data.expeditionInventory.is_empty()
 	if hasLoot:
 		collectionBinPanel.refresh()
+	
+	# Clear pending gold — auto collect it
+	if (main.game_data.pendingExpeditionGold > 0 and not main.game_data.isExpeditionActive):
+		main.game_data.stats["totalGoldEarned"] += main.game_data.pendingExpeditionGold
+		main.game_data.savedGold += main.game_data.pendingExpeditionGold
+		expeditionSystem._logToBoth("Expedition gold collected: +%dg" % main.game_data.pendingExpeditionGold, 
+			"town")
+		GameEvents.goldDeposited.emit(main.game_data.pendingExpeditionGold)
+	main.game_data.pendingExpeditionGold = 0
+	
 	show()
 
 func refresh() -> void:

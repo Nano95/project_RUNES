@@ -227,14 +227,7 @@ func _handleExpeditionComplete() -> void:
 	main.game_data.isExpeditionActive = false
 	# Replace bin contents with new expedition loot
 	# (already populated during the expedition via _applyEvent)
-	# Clear pending gold — auto collect it
-	main.game_data.savedGold += main.game_data.pendingExpeditionGold
-	main.game_data.stats["totalGoldEarned"] += main.game_data.pendingExpeditionGold
-	if main.game_data.pendingExpeditionGold > 0:
-		_logToBoth("Expedition gold collected: +%dg" % main.game_data.pendingExpeditionGold, 
-			"town")
-		GameEvents.goldDeposited.emit(main.game_data.pendingExpeditionGold)
-	main.game_data.pendingExpeditionGold = 0
+
 	main.game_data.expeditionInventory = main.game_data.pendingExpeditionInventory.duplicate()
 	main.game_data.pendingExpeditionInventory = []
 	

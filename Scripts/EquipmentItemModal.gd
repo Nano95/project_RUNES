@@ -115,6 +115,10 @@ func refreshItemList() -> void:
 			style.corner_radius_top_right = 8
 			style.corner_radius_bottom_left = 8
 			style.corner_radius_bottom_right = 8
+			style.content_margin_left = 10    # adjust to match your theme
+			style.content_margin_right = 10
+			style.content_margin_top = 12
+			style.content_margin_bottom = 12
 			style.border_color = Color("#27ae60")
 			btn.add_theme_stylebox_override("normal", style) 
 		itemListHFlow.add_child(btn)

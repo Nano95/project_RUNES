@@ -1911,7 +1911,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 20
-text = "$100"
+text = ""
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -2009,6 +2009,7 @@ theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 
 [node name="CheckpointOverlay" type="ColorRect" parent="UIController" unique_id=428981134 node_paths=PackedStringArray("descLabel", "continueButton", "retreatButton", "autoCheckbox", "autoProgress", "autoTimer", "eventLogPanel", "equipmentPanel", "areaSystem", "pendingLootPanel", "pendingLootFlow", "inventorySystem")]
+visible = false
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
 anchors_preset = 14
