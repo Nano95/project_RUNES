@@ -20,6 +20,8 @@ func _ready() -> void:
 	
 	if not main.game_data.equippedWeapon.is_empty():
 		return  # already has gear, don't overwrite
+	if not main.game_data.pendingLoot.is_empty():
+		main.game_data.pendingLoot.clear() 
 
 	main.save_game()
 

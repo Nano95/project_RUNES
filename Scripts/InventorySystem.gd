@@ -19,13 +19,15 @@ func onItemDropped(itemName: String) -> void:
 		addToBackpack(itemName)
 
 # ── BACKPACK ─────────────────────────────────────────────
-func addToBackpack(itemName: String, qty: int = 1) -> bool:
+func addToBackpack(itemName: String, qty: int = 1, fromPending: bool = false) -> bool:
 	var item = ItemRegistry.getItem(itemName)
 	if not item:
 		return false
 
 	var weightToAdd = item.weight * qty
 	if (main.game_data.currentWeight + weightToAdd > main.game_data.maxWeight):
+		if (not fromPending and main.game_data.inArea):
+			_addToPendingLoot(itemName, qty)
 		GameEvents.eventLogged.emit(
 			"Too heavy! %s left behind." % itemName, "system", false
 		)
@@ -54,6 +56,8 @@ func addToBackpack(itemName: String, qty: int = 1) -> bool:
 	while remaining > 0:
 		# Check slot capacity before creating a new stack
 		if main.game_data.backpack.size() >= main.game_data.backpackMax:
+			if (not fromPending and main.game_data.inArea):
+				_addToPendingLoot(itemName, remaining)
 			GameEvents.eventLogged.emit(
 				"Backpack full! %s left behind." % itemName, "system", false
 			)
@@ -83,14 +87,18 @@ func addToBackpack(itemName: String, qty: int = 1) -> bool:
 	GameEvents.weightChanged.emit()
 	return true
 
-func addEquipmentToBackpack(instance: Dictionary) -> bool:
+func addEquipmentToBackpack(instance: Dictionary, fromPending: bool = false) -> bool:
 	var item = ItemRegistry.getItem(instance["name"])
 	if not item:
 		return false
 	if main.game_data.currentWeight + item.weight > main.game_data.maxWeight:
+		if (not fromPending and main.game_data.inArea):
+			_addToPendingLoot(instance.get("name", ""), 1)
 		GameEvents.eventLogged.emit("Too heavy to carry!", "system", false)
 		return false
 	if main.game_data.currentWeight + item.weight > main.game_data.maxWeight:
+		if (not fromPending and main.game_data.inArea):
+			_addToPendingLoot(instance.get("name", ""), 1)
 		GameEvents.eventLogged.emit(
 			"Too heavy! %s left behind." % instance.get("name", ""), "system", false
 		)
@@ -133,7 +141,16 @@ func removeFromBackpack(itemName: String, qty: int = 1) -> bool:
 	GameEvents.backpackChanged.emit()
 	GameEvents.weightChanged.emit()
 	return true
-	
+
+func _addToPendingLoot(itemName: String, qty: int) -> void:
+	# If already in pending loot don't add again
+	for stack in main.game_data.pendingLoot:
+		if stack.get("name") == itemName:
+			stack["qty"] += qty
+			return
+	# Only add if not already there
+	main.game_data.pendingLoot.append({"name": itemName, "qty": qty})
+
 func emitInventoryChanged() -> void:
 	GameEvents.backpackChanged.emit()
 
@@ -200,7 +217,6 @@ func getPotionHeal(itemName: String) -> int:
 		"Death Brew":        return 70
 		"Shadow Tonic":      return 90
 		"Nightshade Elixir": return 110
-	print("- POTION NOT FOUND: ", itemName)
 	return 0
 
 # ── SHARED HELPER ─────────────────────────────────────────

@@ -71,15 +71,15 @@ func _ready() -> void:
 		},
 		"Slime Swamps": {
 			"weak": [
-				_make("Small Slime", "weak", 20, 8, 1, 5, {"poison": 0.3}, [
+				_make("Small Slime", "weak", 20, 8, 1, 5, {"poison": 0.0}, [
 					_drop("Slime Gel", 0.08),
 					_drop("Slimy Shield", 0.03),
 				]),
-				_make("Green Slime", "weak", 25, 10, 2, 7, {"poison": 0.3}, [
+				_make("Green Slime", "weak", 25, 10, 2, 7, {"poison": 0.0}, [
 					_drop("Slime Gel", 0.08),
 					_drop("Slimy Shield", 0.03),
 				]),
-				_make("Blue Slime", "weak", 30, 12, 2, 8, {"poison": 1.0}, [
+				_make("Blue Slime", "weak", 30, 12, 2, 8, {"poison": 0.1}, [
 					_drop("Slime Gel", 0.08),
 					_drop("Slimy Shield", 0.04),
 				]),
@@ -90,7 +90,7 @@ func _ready() -> void:
 					_drop("Slimy Blade", 0.04),
 					_drop("Slimy Armor", 0.03),
 				]),
-				_make("Toxic Slime", "medium", 70, 20, 7, 18, {"poison": 0.33}, [
+				_make("Toxic Slime", "medium", 70, 20, 7, 18, {"poison": 0.3}, [
 					_drop("Slime Gel", 0.12),
 					_drop("Slime Core", 0.10),
 					_drop("Slimy Blade", 0.04),
@@ -109,13 +109,13 @@ func _ready() -> void:
 					_drop("Slimy Legs", 0.05),
 					_drop("Slimy Helmet", 0.04),
 				]),
-				_make("Acid Slime", "strong", 160, 36, 20, 45, {"poison": 0.33}, [
+				_make("Acid Slime", "strong", 160, 36, 20, 45, {"poison": 0.2}, [
 					_drop("Slime Gel", 0.17),
 					_drop("Slime Core", 0.09),
 					_drop("Slimy Legs", 0.05),
 					_drop("Slimy Helmet", 0.04),
 				]),
-				_make("King's Guard", "strong", 180, 40, 22, 50, {"poison": 0.33}, [
+				_make("King's Guard", "strong", 180, 40, 22, 50, {"poison": 0.2}, [
 					_drop("Slime Gel", 0.17),
 					_drop("Slime Core", 0.10),
 					_drop("Slimy Legs", 0.06),

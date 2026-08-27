@@ -66,7 +66,8 @@ func onAreaEntered(areaName: String) -> void:
 func onAreaExited() -> void:
 	GameEvents.eventLogged.emit("You return to town safely.", "town", false)
 	main.game_data.activeStatusEffects = {}
-
+	main.game_data.pendingLoot.clear() # For lost loot
+	
 	main.set_background_colors(
 		Vector3(0.92, 0.88, 0.65),   # soft butter
 		Vector3(0.70, 0.65, 0.20)    # almost white yellow

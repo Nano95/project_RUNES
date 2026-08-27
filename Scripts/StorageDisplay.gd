@@ -114,10 +114,8 @@ func refreshBackpack() -> void:
 # ── CHEST ────────────────────────────────────────────────
 func refreshChest() -> void:
 	if not is_instance_valid(chestFlow):
-		print("chestFlow is invalid!")
 		return
 	if not is_inside_tree():
-		print("StorageDisplay not in tree!")
 		return
 	for child in chestFlow.get_children():
 		child.queue_free()

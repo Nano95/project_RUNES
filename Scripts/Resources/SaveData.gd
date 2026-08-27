@@ -43,7 +43,7 @@ class_name SaveData
 @export var availableAllocationPoints: int = 0
 @export var completedTasks: Array[String] = []
 @export var claimedTasks: Array[String] = []
-
+@export var pendingLoot: Array[Dictionary] = [] # Loot left behind while patrolling
 @export var discoveredRecipes: Array[String] = []
 
 @export var equippedWeapon: Dictionary = {

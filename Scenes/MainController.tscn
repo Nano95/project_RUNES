@@ -41,6 +41,7 @@
 [ext_resource type="Script" uid="uid://dhks5o5mwb1jf" path="res://Scripts/EquipmentItemModal.gd" id="21_shy7a"]
 [ext_resource type="Script" uid="uid://lweo3k4xtgxj" path="res://Scripts/BrewSystem.gd" id="24_i0mvu"]
 [ext_resource type="Script" uid="uid://rpg0wv8k2g7q" path="res://Scripts/EquipmentSystem.gd" id="25_i0mvu"]
+[ext_resource type="Theme" uid="uid://e2q5qskkwwb5" path="res://Resources/Themes/MainTheme_collapser.tres" id="26_46ofg"]
 [ext_resource type="Script" uid="uid://lua0kwyswmk4" path="res://Scripts/MerchantSystem.gd" id="29_px8ax"]
 [ext_resource type="Script" uid="uid://kilw6u3p8wgc" path="res://Scripts/BlacksmithSystem.gd" id="31_ipr08"]
 [ext_resource type="Script" uid="uid://xd1esmbao78" path="res://Scripts/BazaarSystem.gd" id="32_ipr08"]
@@ -2007,8 +2008,7 @@ size_flags_vertical = 3
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 
-[node name="CheckpointOverlay" type="ColorRect" parent="UIController" unique_id=428981134 node_paths=PackedStringArray("descLabel", "continueButton", "retreatButton", "autoCheckbox", "autoTimer", "autoProgress", "eventLogPanel", "equipmentPanel", "areaSystem")]
-visible = false
+[node name="CheckpointOverlay" type="ColorRect" parent="UIController" unique_id=428981134 node_paths=PackedStringArray("descLabel", "continueButton", "retreatButton", "autoCheckbox", "autoProgress", "autoTimer", "eventLogPanel", "equipmentPanel", "areaSystem", "pendingLootPanel", "pendingLootFlow", "inventorySystem")]
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
 anchors_preset = 14
@@ -2024,11 +2024,14 @@ descLabel = NodePath("Panel/TitlePanel/Description")
 continueButton = NodePath("Panel/HBoxContainer/Continue")
 retreatButton = NodePath("Panel/HBoxContainer/Retreat")
 autoCheckbox = NodePath("Panel/HBoxContainer2/CheckButton")
-autoTimer = NodePath("Panel/autoTimer")
 autoProgress = NodePath("Panel/HBoxContainer2/ProgressBar")
+autoTimer = NodePath("Panel/autoTimer")
 eventLogPanel = NodePath("../MarginContainer/VBoxContainer/EventLogPanel")
 equipmentPanel = NodePath("../MarginContainer/VBoxContainer/EquipmentDisplay")
 areaSystem = NodePath("../../AreaSystem")
+pendingLootPanel = NodePath("PendingLootOverlay")
+pendingLootFlow = NodePath("PendingLootOverlay/Panel/MarginContainer/Panel/MarginContainer/ScrollContainer/HFlowContainer")
+inventorySystem = NodePath("../../InventorySystem")
 
 [node name="Panel" type="Panel" parent="UIController/CheckpointOverlay" unique_id=415730517]
 layout_mode = 1
@@ -2100,7 +2103,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
 offset_top = -189.0
-offset_right = -11.0
+offset_right = -19.0
 offset_bottom = -71.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -2152,6 +2155,110 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 value = 72.0
 show_percentage = false
+
+[node name="PendingLootOverlay" type="ColorRect" parent="UIController/CheckpointOverlay" unique_id=243209939]
+material = SubResource("ShaderMaterial_ds30n")
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 139.5
+offset_bottom = 410.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UIController/CheckpointOverlay/PendingLootOverlay" unique_id=1270533326]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.0
+offset_top = -146.25
+offset_right = 345.0
+offset_bottom = 114.75
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("26_46ofg")
+
+[node name="HSeparator" type="HSeparator" parent="UIController/CheckpointOverlay/PendingLootOverlay/Panel" unique_id=808591986]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 11.0
+offset_top = 6.0
+offset_right = -12.0
+offset_bottom = 10.0
+grow_horizontal = 2
+
+[node name="Description" type="RichTextLabel" parent="UIController/CheckpointOverlay/PendingLootOverlay/Panel" unique_id=1840327008]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 13.0
+offset_right = -8.0
+offset_bottom = -161.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("3_dajxx")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+bbcode_enabled = true
+text = "Retrieve items left behind! They are [wave amp=12 freq=3]permanently[/wave] lost if you continue, or retreat."
+scroll_following = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UIController/CheckpointOverlay/PendingLootOverlay/Panel" unique_id=1634085396]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -161.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="UIController/CheckpointOverlay/PendingLootOverlay/Panel/MarginContainer" unique_id=579910259]
+layout_mode = 2
+theme = ExtResource("19_shy7a")
+
+[node name="MarginContainer" type="MarginContainer" parent="UIController/CheckpointOverlay/PendingLootOverlay/Panel/MarginContainer/Panel" unique_id=1747663874]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UIController/CheckpointOverlay/PendingLootOverlay/Panel/MarginContainer/Panel/MarginContainer" unique_id=237201698]
+layout_mode = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="HFlowContainer" type="HFlowContainer" parent="UIController/CheckpointOverlay/PendingLootOverlay/Panel/MarginContainer/Panel/MarginContainer/ScrollContainer" unique_id=47571902]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
 
 [node name="ItemActionContainer" type="ColorRect" parent="UIController" unique_id=1469258999 node_paths=PackedStringArray("itemNameLabel", "itemDescLabel", "equipButton", "dropButton", "dropAllButton", "cancelButton", "eventLogPanel", "equipmentPanel", "compareContainer", "selectedEquipType", "selectedEquipTypeValue", "equippedName", "equippedNameStatValue", "compareStats", "inventorySystem", "equipmentSystem")]
 visible = false

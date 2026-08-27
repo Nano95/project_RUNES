@@ -214,6 +214,7 @@ func die() -> void:
 	main.game_data.currentWeight = 0.0
 	main.game_data.sessionKills = 0
 	main.game_data.activeStatusEffects = {}
+	main.game_data.pendingLoot.clear()
 	var area = main.game_data.currentArea
 	if not main.game_data.areaStats.has(area):
 		main.game_data.areaStats[area] = {"bestRun": 0, "deaths": 0}
