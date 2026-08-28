@@ -43,24 +43,11 @@ func refresh() -> void:
 	_updateSlot(bootsBtn,  "boots",  bootsTexture)
 	refreshStatsPanel()
 
-func _updateSlot(btn: Button, slot: String, textureRect: TextureRect) -> void:
+func _updateSlot(_btn: Button, slot: String, textureRect: TextureRect) -> void:
 	var equipped = equipmentSystem.getEquippedSlot(slot)
 	if not equipped or equipped.is_empty():
-		btn.text = slot.capitalize() + "\n[empty]"
-		btn.modulate = Color(1, 1, 1, 0.4)
 		textureRect.texture = null
 	else:
-		var grade = equipped.get("grade", "")
-		var gradeStr = " [%s]" % grade if grade != "" else ""
-		var enh = equipped.get("enhancement", 0)
-		var enhStr = " +%d" % enh if enh > 0 else ""
-		btn.text = "%s\n%s%s%s" % [
-			slot.capitalize(),
-			equipped.get("name", ""),
-			gradeStr,
-			enhStr
-		]
-		btn.modulate = Color(1, 1, 1, 1.0)
 		@warning_ignore("static_called_on_instance")
 		textureRect.texture = ItemRegistry.getSprite(equipped.get("name", ""))
 
