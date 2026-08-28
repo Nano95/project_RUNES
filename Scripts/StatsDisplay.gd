@@ -113,7 +113,10 @@ func onAreaExited() -> void:
 	goldValue.text = str(main.game_data.savedGold)
 
 func onGoldDeposited(_amount: int) -> void:
-	goldValue.text = str(main.game_data.gold)
+	if main.game_data.inArea:
+		goldValue.text = str(main.game_data.gold)
+	else:
+		goldValue.text = str(main.game_data.savedGold)
 
 func pulseHpLabel() -> void:
 	if pulseTween:
