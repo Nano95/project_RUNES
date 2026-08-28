@@ -16,7 +16,7 @@ const TASKS: Array[Dictionary] = [
 	{ "id": "hg_orcking_1", "area": "Hunting Grounds", "monster": "Orc King", "target": 1, "reward": "allocation", "rewardValue": 1, "desc": "Defeat the Orc King" },
 	
 	# Hunting Grounds — Milestone
-	{ "id": "hg_100events",      "area": "Hunting Grounds", "monster": "",             "target": 100, "reward": "allocation", "rewardValue": 3, "desc": "Reach Event 100 in Hunting Grounds" },
+	{ "id": "hg_100events",      "area": "Hunting Grounds", "monster": "",             "target": 100, "reward": "allocation", "rewardValue": 3, "desc": "Reach Event #100" },
 	
 	# Slime Swamps — Weak (150g)
 	{ "id": "ss_smallslime_40",  "area": "Slime Swamps", "monster": "Small Slime",  "target": 40, "reward": "gold",       "rewardValue": 150, "desc": "Kill 40 Small Slimes" },
@@ -33,7 +33,7 @@ const TASKS: Array[Dictionary] = [
 	# Slime Swamps — Elite
 	{ "id": "ss_kingslime_1",    "area": "Slime Swamps", "monster": "King Slime",   "target": 1,  "reward": "allocation", "rewardValue": 1,   "desc": "Defeat the King Slime" },
 	# Slime Swamps — Milestone
-	{ "id": "ss_100events",      "area": "Slime Swamps", "monster": "",             "target": 100, "reward": "allocation", "rewardValue": 3,  "desc": "Reach Event 100 in Slime Swamps" },
+	{ "id": "ss_100events",      "area": "Slime Swamps", "monster": "",             "target": 100, "reward": "allocation", "rewardValue": 3,  "desc": "Reach Event #100" },
 
 	# Sandling Dunes — Weak (150g)
 	{ "id": "sd_hoodsandling_40",  "area": "Sandling Dunes", "monster": "Hooded Sandling",   "target": 40, "reward": "gold",       "rewardValue": 150, "desc": "Kill 40 Hooded Sandlings" },
@@ -50,7 +50,7 @@ const TASKS: Array[Dictionary] = [
 	# Sandling Dunes — Elite
 	{ "id": "sd_madnecro_1",       "area": "Sandling Dunes", "monster": "Mad Necromancer",   "target": 1,  "reward": "allocation", "rewardValue": 1,   "desc": "Defeat the Mad Necromancer" },
 	# Sandling Dunes — Milestone
-	{ "id": "sd_100events",        "area": "Sandling Dunes", "monster": "",                  "target": 100, "reward": "allocation", "rewardValue": 3,  "desc": "Reach Event 100 in Sandling Dunes" },
+	{ "id": "sd_100events",        "area": "Sandling Dunes", "monster": "",                  "target": 100, "reward": "allocation", "rewardValue": 3,  "desc": "Reach Event #100" },
 ]
 var main:MainNode
 func _ready() -> void:

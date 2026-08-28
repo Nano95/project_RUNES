@@ -175,23 +175,33 @@ func rollEquipmentInstance(itemName: String, graded: bool = false) -> Dictionary
 
 	var grade = ""
 	var gradeHpBonus = 0
+	var gradeBonus = 0  # for weapon ATK and shield DEF
 	var gradeEffects = {}
 
-	if graded:
+	if (graded):
 		var roll = randf()
-		if roll < 0.10:
+		if roll < 0.03:
+			grade = "SS"
+			gradeHpBonus = 5
+			gradeBonus = 5
+			for effect in def.effects:
+				gradeEffects[effect] = def.effects[effect] * 0.5
+		elif roll < 0.13:
 			grade = "S"
 			gradeHpBonus = 3
+			gradeBonus = 3
 			for effect in def.effects:
 				gradeEffects[effect] = def.effects[effect] * 0.375
-		elif roll < 0.40:
+		elif roll < 0.43:
 			grade = "A"
 			gradeHpBonus = 2
+			gradeBonus = 2
 			for effect in def.effects:
 				gradeEffects[effect] = def.effects[effect] * 0.25
 		else:
 			grade = "B"
 			gradeHpBonus = 1
+			gradeBonus = 1
 			for effect in def.effects:
 				gradeEffects[effect] = def.effects[effect] * 0.125
 
@@ -210,6 +220,7 @@ func rollEquipmentInstance(itemName: String, graded: bool = false) -> Dictionary
 		"effects": def.effects.duplicate(),
 		"grade": grade,
 		"gradeHpBonus": gradeHpBonus,
+		"gradeBonus": gradeBonus,
 		"gradeEffects": gradeEffects,
 		"enhancement": 0,
 		"effectType": def.effectType,

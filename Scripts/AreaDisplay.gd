@@ -42,13 +42,13 @@ func refreshKills(area: String) -> void:
 		var nameLabel = Label.new()
 		nameLabel.text = monsterName
 		nameLabel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		nameLabel.add_theme_font_size_override("font_size", 22)
+		nameLabel.add_theme_font_size_override("font_size", 24)
 		nameLabel.add_theme_constant_override("outline_size", 14)
 		
 		var countLabel = Label.new()
 		countLabel.text = str(count)
-		countLabel.add_theme_color_override("font_color", Color("#c8880a"))
-		countLabel.add_theme_font_size_override("font_size", 22)
+		countLabel.add_theme_color_override("font_color", Color("e7c74bff"))
+		countLabel.add_theme_font_size_override("font_size", 24)
 		countLabel.add_theme_constant_override("outline_size", 14)
 		row.add_child(nameLabel)
 		row.add_child(countLabel)

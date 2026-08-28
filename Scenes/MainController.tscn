@@ -1131,6 +1131,7 @@ size_flags_vertical = 3
 [node name="EnemyKillsVbox" type="VBoxContainer" parent="UIController/MarginContainer/VBoxContainer/StageSelectPanel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2119404706]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
 
 [node name="Title" parent="UIController/MarginContainer/VBoxContainer/StageSelectPanel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/EnemyKillsVbox" unique_id=93527346 instance=ExtResource("6_prt4a")]
 material = SubResource("ShaderMaterial_ifcbf")

@@ -59,7 +59,7 @@ func _ready() -> void:
 	#var helmet = ItemRegistry.rollEquipmentInstance("Leather Helmet", false)
 	#var armor = ItemRegistry.rollEquipmentInstance("Leather Armor", false)
 	#var legs = ItemRegistry.rollEquipmentInstance("Leather Legs", false)
-	#var weapon = ItemRegistry.rollEquipmentInstance("Crude Blade", false)
+	#var weapon = ItemRegistry.rollEquipmentInstance("Orcish Axe", false)
 	#var shield = ItemRegistry.rollEquipmentInstance("Wooden Shield", false)
 	#print(" boots: ", boots)
 	#print(" helmet: ", helmet)

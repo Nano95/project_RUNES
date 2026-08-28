@@ -97,6 +97,7 @@ func refreshItemList() -> void:
 		btn.text = "%s%s%s" % [instance.get("name", ""), gradeStr, enhStr]
 		#btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		match grade:
+			"SS": btn.add_theme_color_override("font_color", Color("fa0c81ff"))
 			"S": btn.add_theme_color_override("font_color", Color("#FFD700"))
 			"A": btn.add_theme_color_override("font_color", Color("#4fc3f7"))
 			"B": btn.add_theme_color_override("font_color", Color("#aaaaaa"))
@@ -146,6 +147,7 @@ func refreshInfoPanel() -> void:
 	]
 
 	match grade:
+		"SS": itemInfoName.add_theme_color_override("font_color", Color("fa0c81ff"))
 		"S": itemInfoName.add_theme_color_override("font_color", Color("#FFD700"))
 		"A": itemInfoName.add_theme_color_override("font_color", Color("#4fc3f7"))
 		"B": itemInfoName.add_theme_color_override("font_color", Color("#aaaaaa"))

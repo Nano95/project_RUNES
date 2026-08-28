@@ -214,6 +214,7 @@ func getItemPrice(item: Dictionary) -> int:
 
 	if item.get("isEquipment", false):
 		match item.get("grade", ""):
+			"SS": return int(basePrice * 4.0)
 			"S": return int(basePrice * 2.0)
 			"A": return int(basePrice * 1.6)
 			"B": return int(basePrice * 1.3)

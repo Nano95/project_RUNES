@@ -144,10 +144,13 @@ func refreshPendingLoot() -> void:
 
 func onPendingItemPressed(stack: Dictionary) -> void:
 	var itemName = stack.get("name", "")
-	var qty = stack.get("qty", 1)
-	var success = inventorySystem.addToBackpack(itemName, qty, true)
-	if success:
-		main.game_data.pendingLoot.erase(stack)
+	var success = inventorySystem.addToBackpack(itemName, 1, true) # one at a time
+	print(" - stack: ", itemName, " - ", stack)
+	if (success):
+		# Decrement qty or remove if empty
+		stack["qty"] -= 1
+		if stack["qty"] <= 0:
+			main.game_data.pendingLoot.erase(stack)
 		main.save_game()
 		refreshPendingLoot()
 		GameEvents.eventLogged.emit(
