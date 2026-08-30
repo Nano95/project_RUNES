@@ -80,6 +80,17 @@ func onPotionUsed(itemName: String) -> void:
 	# InventorySystem handles heal potions
 	# Here we handle special effects
 	match itemName:
+		"Regen Potion":
+			if main.game_data.regenCounter > 0:
+				GameEvents.eventLogged.emit(
+					"Already regenerating!", "system", false
+				)
+				return
+			main.game_data.regenCounter = 5
+			main.game_data.regenPerTick = 10
+			GameEvents.eventLogged.emit(
+				"Regen Potion consumed. Regenerating 10 HP per tick.", "gather", false
+			)
 		"Time Potion":
 			GameEvents.timePotionUsed.emit()
 		"Strength Brew":
@@ -88,8 +99,6 @@ func onPotionUsed(itemName: String) -> void:
 			pass # TODO: implement effect
 		"Battle Potion":
 			pass # TODO: implement effect
-		"Regeneration Potion":
-			pass # TODO: implement regen tick
 
 func onTimePotionUsed() -> void:
 	if main.game_data.inCombat:

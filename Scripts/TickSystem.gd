@@ -123,6 +123,8 @@ func onAreaExited() -> void:
 	checkpointPending = false
 	combatSystem.pendingStrongMonsterIn = 0
 	combatSystem.pendingMonsterTier = ""
+	main.game_data.regenCounter = 0
+	main.game_data.regenPerTick = 0
 
 # Takes in two dummy params because combatWon emits two arguments, but are not needed here
 func onCombatResolved(_a = null) -> void:
@@ -234,6 +236,26 @@ func getAreaGoldFind() -> int:
 		_:                 return randi_range(130, 180)
 
 func tickStatusEffects() -> void:
+	# Regen heals first before any negative status effects
+	if main.game_data.regenCounter > 0:
+		var heal = min(main.game_data.regenPerTick, 
+					  equipmentSystem.getMaxHp() - main.game_data.hp)
+		if heal > 0:
+			main.game_data.hp += heal
+			GameEvents.hpChanged.emit()
+			GameEvents.eventLogged.emit(
+				"Regenerating... +%d HP (%d ticks left)" % [
+					heal, main.game_data.regenCounter - 1
+				], "gather", false
+			)
+		main.game_data.regenCounter -= 1
+		if main.game_data.regenCounter <= 0:
+			main.game_data.regenCounter = 0
+			main.game_data.regenPerTick = 0
+			GameEvents.eventLogged.emit(
+				"Regeneration wore off.", "system", false
+			)
+	
 	if main.game_data.activeStatusEffects.is_empty():
 		return
 

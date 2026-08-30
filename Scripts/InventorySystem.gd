@@ -182,7 +182,7 @@ func getBackpackSlotCount() -> int:
 func onPotionUsed(itemName: String) -> void:
 	var specialPotions = [
 		"Strength Brew", "Swiftness Tonic",
-		"Time Potion", "Regeneration Potion",
+		"Time Potion", "Regen Potion",
 		"Minor Battle Potion", "Battle Potion", "Great Battle Potion",
 		"Minor Foraging Potion", "Foraging Potion", "Great Foraging Potion",
 		"Minor Antidote", "Antidote", "Large Antidote"
@@ -211,12 +211,8 @@ func getPotionHeal(itemName: String) -> int:
 		"Berry Extract":      return 15
 		"Minor Health Potion":  return 20
 		"Health Potion":      return 30
-		"Strong Heal Potion": return 50
-		#"Herbal Elixir":      return 60
-		"Twilight Potion":    return 70
-		"Death Brew":        return 70
-		"Shadow Tonic":      return 90
-		"Nightshade Elixir": return 110
+		#"Strong Heal Potion": return 50
+		"Twilight Potion":    return 55
 	return 0
 
 # ── SHARED HELPER ─────────────────────────────────────────

@@ -99,8 +99,9 @@ func _register() -> void:
 	_add("Berry Extract",       "potion",     true,  2.3, "Restores 15 HP.",                  10)
 	_add("Minor Health Potion",   "potion",     true,  2.3, "Restores 20 HP.",                  15)
 	_add("Health Potion",       "potion",     true,  2.8, "Restores 30 HP.",                  20)
-	_add("Twilight Potion",     "potion",     true,  5.0, "Restores 70 HP.",                  55)
-
+	_add("Twilight Potion",     "potion",     true,  5.0, "Restores 55 HP.",                  50)
+	_add("Regen Potion",         "potion", true, 2.0, "Restores 50 HP over 5 ticks.",  60)
+	#_add("Greater Regen Potion", "potion", true, 2.5, "Restores 125 HP over 5 ticks.", 100)
 	_add("Minor Battle Potion", "potion",     true, 2.3, "Attracts monsters for 3 events.",   25)
 	_add("Battle Potion",       "potion",     true, 2.3, "Attracts monsters for 6 events.",   45)
 	_add("Great Battle Potion", "potion",     true, 2.3, "Attracts monsters for 10 events.",  80)

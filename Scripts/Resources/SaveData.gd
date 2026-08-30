@@ -21,7 +21,10 @@ class_name SaveData
 @export var currentMonsterAtk: int = 0
 @export var isFleeing: bool = false
 @export var fleeTicks: int = 0
+
 @export var activeStatusEffects: Dictionary = {}
+@export var regenCounter: int = 0
+@export var regenPerTick: int = 0
 
 @export var backpack: Array[Dictionary] = []
 @export var backpackMax: int = 20
