@@ -107,6 +107,7 @@ func onPlayerDied() -> void:
 	gatheringItem = ""
 	gatheringTicksLeft = 0
 	combatSystem.pendingStrongMonsterIn = 0
+	updateAreaBestRun()
 
 func onAreaEntered(area:String) -> void:
 	currentArea = area
