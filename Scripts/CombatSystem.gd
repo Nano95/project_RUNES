@@ -22,6 +22,7 @@ const STATUS_COUNTERS = {
 @export var equipmentSystem:EquipmentSystem
 var battlePotionEventsLeft: int = 0
 var pendingStrongMonsterIn: int = 0
+var pendingMonsterTier: String = ""  # ← add this
 var main:MainNode
 
 func _ready() -> void:
@@ -50,12 +51,14 @@ func startCombat(monster: MonsterData, weakened: bool = false) -> void:
 
 func trySpawnMonster(eventCount: int) -> void:
 	var tier = MonsterRegistry.rollTier(eventCount)
-	if tier == "strong" and eventCount <= 40:
+	if (tier == "strong" and eventCount <= 40):
 		pendingStrongMonsterIn = 10
+		pendingMonsterTier = "strong"
 		GameEvents.eventLogged.emit(OMENS[randi() % OMENS.size()], "omen", true)
 		return
-	if tier == "elite":
+	if (tier == "elite"):
 		pendingStrongMonsterIn = 10
+		pendingMonsterTier = "elite"
 		var omen = ELITE_OMENS.get(
 			main.game_data.currentArea, 
 		    "Your instincts scream DANGER!"

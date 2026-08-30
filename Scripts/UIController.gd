@@ -75,7 +75,9 @@ func _ready() -> void:
 	areaNavPanel.hide()
 	adventuringRow.hide()
 	
-	showSafeZone()
+	if (main.game_data.inArea):
+		onAreaEntered("")
+	else: showSafeZone()
 
 func showSafeZone() -> void:
 	chooseAreaButton.visible = true

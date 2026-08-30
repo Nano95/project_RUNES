@@ -12,11 +12,11 @@ func _ready() -> void:
 		
 		# ORC THINGS
 		_make("Orc Helmet",  "Orc Helmet",  {"Orc Leather": 10, "Copper Bar": 1},        "forge"),
-		_make("Orc Armor",   "Orc Armor",   {"Orc General Crest": 2, "Copper Bar": 4},  "forge"),
+		_make("Orc Armor",   "Orc Armor",   {"Orc General Crest": 2, "Copper Bar": 2},  "forge"),
 		_make("Orc Legs",    "Orc Legs",    {"Orc Leather": 10, "Copper Bar": 3},       "forge"),
 		_make("Orc Boots",   "Orc Boots",   {"Orc Leather": 10, "Copper Bar": 2},       "forge"),
-		_make("Orc King Shield",   "Orc King Shield",   {"King's Tusk": 1, "Iron Bar": 3},       "forge"),
-		_make("Warchief Totem", "Warchief Totem", {"King's Tusk": 2, "Orc Leather": 5}, "forge"),
+		_make("Orc King Shield",   "Orc King Shield",   {"Orc General Crest": 1, "Iron Bar": 2},       "forge"),
+		_make("Warchief Totem", "Warchief Totem", {"King's Tusk": 1, "Orc Leather": 5}, "forge"),
 
 		# Slimy Set
 		_make("Slimy Helmet", "Slimy Helmet", {"Slime Gel": 8,  "Iron Bar": 2},              "forge"),

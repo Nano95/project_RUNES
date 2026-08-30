@@ -41,10 +41,10 @@ func _ready() -> void:
 				]),
 			],
 			"elite": [
-				_make("Orc King", "elite", 500, 50, 100, 200, {}, "orc", .2, [
+				_make("Orc King", "elite", 500, 50, 100, 200, {}, "orc", .28, [
 					_drop("Orc Leather", 0.90),
-					_drop("Orc General Crest", 0.45),
-					_drop("King's Tusk", 0.15),
+					_drop("Orc General Crest", 0.65),
+					_drop("King's Tusk", 0.99),
 				]),
 			],
 		},

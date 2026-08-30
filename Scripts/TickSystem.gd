@@ -75,7 +75,9 @@ func onTick() -> void:
 	if (combatSystem.pendingStrongMonsterIn > 0):
 		combatSystem.pendingStrongMonsterIn -= 1
 		if (combatSystem.pendingStrongMonsterIn == 0):
-			var monster = MonsterRegistry.rollMonster(main.game_data.currentArea, "strong")
+			var monster = MonsterRegistry.rollMonster(
+				main.game_data.currentArea, combatSystem.pendingMonsterTier
+			)
 			combatSystem.startCombat(monster)
 			return
 	
@@ -107,6 +109,7 @@ func onPlayerDied() -> void:
 	gatheringItem = ""
 	gatheringTicksLeft = 0
 	combatSystem.pendingStrongMonsterIn = 0
+	combatSystem.pendingMonsterTier = ""
 	updateAreaBestRun()
 
 func onAreaEntered(area:String) -> void:
@@ -119,6 +122,7 @@ func onAreaExited() -> void:
 	gatheringTicksLeft = 0
 	checkpointPending = false
 	combatSystem.pendingStrongMonsterIn = 0
+	combatSystem.pendingMonsterTier = ""
 
 # Takes in two dummy params because combatWon emits two arguments, but are not needed here
 func onCombatResolved(_a = null) -> void:
