@@ -16,6 +16,13 @@ class_name BlacksmithDisplay
 @export var enhancePip1: Panel
 @export var enhancePip2: Panel
 @export var enhancePip3: Panel
+@export var enhancePip4: Panel
+@export var enhancePip5: Panel
+@export var enhancePip6: Panel
+@export var enhancePip7: Panel
+@export var enhancePip8: Panel
+@export var enhancePip9: Panel
+@export var enhancePip10: Panel
 @export var enhanceInstructions: RichTextLabel
 @export var enhanceDataList: VBoxContainer
 @export var enhanceCost: RichTextLabel
@@ -27,7 +34,6 @@ class_name BlacksmithDisplay
 var currentTab: String = "smelt"
 var selectedRecipe: BlacksmithRecipe = null
 var selectedEquip: Dictionary = {}
-
 
 var main:MainNode
 
@@ -82,7 +88,6 @@ func refresh() -> void:
 func onInventoryChanged() -> void:
 	if not visible:
 		return
-	print("onInventoryChanged fired")
 	refresh()
 
 # ── CRAFT TAB ─────────────────────────────────────────────
@@ -220,7 +225,7 @@ func refreshEnhanceList() -> void:
 	for stack in main.game_data.backpack:
 		if not stack.get("isEquipment", false):
 			continue
-		if stack.get("enhancement", 0) >= 3:
+		if stack.get("enhancement", 0) >= equipmentSystem.MAX_ENHANCEMENT:
 			continue
 		hasItems = true
 		var btn = Button.new()
@@ -253,79 +258,118 @@ func onEquipSelected(instance: Dictionary) -> void:
 
 func refreshEnhanceDetail() -> void:
 	if selectedEquip.is_empty():
-		enhanceInstructions.show()
-		enhanceDataList.hide()
-		enhanceName.text = "  Select an item"
+		enhanceName.text = "Select an item to see information here"
 		enhanceCost.text = ""
 		enhanceStatLabel.text = ""
 		_updatePips(0)
 		return
 
+
 	enhanceInstructions.hide()
 	enhanceDataList.show()
 	var enh = selectedEquip.get("enhancement", 0)
-	enhanceName.text = "  " + selectedEquip.get("name", "")
+	enhanceName.text = selectedEquip.get("name", "")
 	_updatePips(enh)
 
-	if enh >= 3:
-		enhanceCost.text = "  Max enhancement reached."
+	if (enh >= equipmentSystem.MAX_ENHANCEMENT):
+		enhanceCost.bbcode_enabled = true
+		enhanceCost.text = "[color=#888888]Max enhancement reached.[/color]"
 		enhanceStatLabel.text = ""
 		return
 
-	var cost = equipmentSystem.getEnhancementCost(selectedEquip)
-	var materialNeeded = cost["materials"].keys()[0]
-	var materialQty = cost["materials"][materialNeeded]
-	var haveMat = inventorySystem.countInBackpack(materialNeeded)
+	var cost = equipmentSystem.ENHANCEMENT_TABLE[enh]
+	var haveMat = inventorySystem.countInBackpack(cost["material"])
 	var haveGold = main.game_data.savedGold >= cost["gold"]
-	var hasMat = haveMat >= materialQty
+	var hasMat = haveMat >= cost["qty"]
+	var destroyChance = cost["destroyChance"]
 
 	var goldColor = "#c8880a" if haveGold else "#c0392b"
 	var matColor = "#27ae60" if hasMat else "#c0392b"
 
-	enhanceCost.text = "[color=%s]  %dg[/color] + [color=%s]%dx %s[/color]" % [
-		goldColor, cost["gold"], matColor, materialQty, materialNeeded
+	enhanceCost.bbcode_enabled = true
+	enhanceCost.text = "+%d → [color=%s]%dg[/color] + [color=%s]%dx %s[/color]" % [
+		enh + 1, goldColor, cost["gold"], matColor, cost["qty"], cost["material"]
 	]
 
+	# Destroy chance warning
+	var destroyColor = "#888888" if destroyChance == 0.0 else \
+					   "#f56552" if destroyChance < 0.15 else "#b6291a"
+	var destroyText = "Safe" if destroyChance == 0.0 else \
+					  "Destroy chance: %d%%" % int(destroyChance * 100)
+	enhanceCost.text += "\n[color=%s]%s[/color]" % [destroyColor, destroyText]
+
+	var statType = selectedEquip.get("slot", "")
+	var statLabel = ""
+	var current = 0
+	var nextBonus = cost["statBonus"]
+
+	if statType == "weapon":
+		statLabel = "ATK"
+		current = selectedEquip.get("atkBonus", 0)
+	elif statType == "shield":
+		statLabel = "DEF"
+		current = selectedEquip.get("defBonus", 0)
+	elif statType == "boots":
+		statLabel = "DODGE"
+		var currentDodge = selectedEquip.get("effects", {}).get("dodge", 0.0) * 100
+		var nextDodge = currentDodge + 0.5
+		enhanceStatLabel.bbcode_enabled = true
+		enhanceStatLabel.text = "[color=#888888]%s[/color] [color=#ffffff]%.1f%%[/color] → [color=#27ae60]%.1f%%[/color]" % [
+			statLabel, currentDodge, nextDodge
+		]
+		return
+	else:
+		statLabel = "HP"
+		current = selectedEquip.get("hpBonus", 0)
+
 	enhanceStatLabel.bbcode_enabled = true
-	
-	#enhanceStatLabel.text = "[color=#888888]  %s[/color] [color=#ffffff]+%d[/color] → [color=#27ae60]+%d[/color]" % [
-		#statType.to_upper(), enh, enh + 1
-	#]
+	enhanceStatLabel.text = "[color=#888888]%s[/color] [color=#ffffff]%d[/color] → [color=#27ae60]%d[/color]" % [
+		statLabel, current, current + nextBonus
+	]
+
 func _updatePips(level: int) -> void:
-	enhancePip1.modulate = Color("#c8880a") if level >= 1 else Color("#444444")
-	enhancePip2.modulate = Color("#c8880a") if level >= 2 else Color("#444444")
-	enhancePip3.modulate = Color("#c8880a") if level >= 3 else Color("#444444")
+	var pips = [enhancePip1, enhancePip2, enhancePip3, enhancePip4, enhancePip5,
+				enhancePip6, enhancePip7, enhancePip8, enhancePip9, enhancePip10]
+	for i in pips.size():
+		if pips[i]:
+			pips[i].modulate = Color("#c8880a") if i < level else Color("#444444")
 
 # ── ACTION BUTTON ─────────────────────────────────────────
 func refreshActionButton() -> void:
-	if currentTab == "enhance":
+	if (currentTab == "enhance"):
 		actionButton.text = "Enhance"
-		if selectedEquip.is_empty() or selectedEquip.get("enhancement", 0) >= 3:
+		if selectedEquip.is_empty() or selectedEquip.get("enhancement", 0) >= equipmentSystem.MAX_ENHANCEMENT:
 			actionButton.disabled = true
-			print("_ EMPTY, disabling")
 			return
 		actionButton.disabled = not equipmentSystem.canEnhance(selectedEquip)
-		print("- canEnhance, ",  not equipmentSystem.canEnhance(selectedEquip))
 	else:
 		actionButton.text = "Craft"
 		actionButton.disabled = selectedRecipe == null
 
 func onActionPressed() -> void:
-	if currentTab == "enhance":
+	if (currentTab == "enhance"):
 		if selectedEquip.is_empty():
 			return
-		blacksmithSystem.enhance(selectedEquip)
-		selectedEquip = {}
-		refresh()
+		var result = equipmentSystem.enhanceItem(selectedEquip)
+		match result["result"]:
+			"success":
+				selectedEquip = result["instance"]
+				refresh()
+			"destroyed":
+				selectedEquip = {}
+				refresh()
+			"maxed":
+				GameEvents.eventLogged.emit(
+					"This item is already at max enhancement.", "system", false
+				)
+			"error":
+				GameEvents.eventLogged.emit(
+					"Enhancement failed — item not found in backpack.", "system", false
+				)
 	else:
 		if not selectedRecipe:
 			return
 		var success = blacksmithSystem.craft(selectedRecipe)
 		if success:
-			Utils.spawnFloatingLabel(
-				"+1 %s" % selectedRecipe["recipeName"],
-				Color("#27ae60"),
-				actionButton,
-				false
-			)
+			selectedRecipe = null
 			refresh()

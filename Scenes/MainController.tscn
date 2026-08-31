@@ -2772,7 +2772,7 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Close"
 
-[node name="BlacksmithContainer" type="ColorRect" parent="UIController" unique_id=2089522709 node_paths=PackedStringArray("craftTab", "enhanceTab", "recipesVBox", "infoPanel", "infoName", "infoStat", "infoIngredients", "actionButton", "closeButton", "enhanceEquipFlow", "enhancePanel", "enhanceName", "enhancePip1", "enhancePip2", "enhancePip3", "enhanceInstructions", "enhanceDataList", "enhanceCost", "enhanceStatLabel", "blacksmithSystem", "equipmentSystem", "inventorySystem")]
+[node name="BlacksmithContainer" type="ColorRect" parent="UIController" unique_id=2089522709 node_paths=PackedStringArray("craftTab", "enhanceTab", "recipesVBox", "infoPanel", "infoName", "infoStat", "infoIngredients", "actionButton", "closeButton", "enhanceEquipFlow", "enhancePanel", "enhanceName", "enhancePip1", "enhancePip2", "enhancePip3", "enhancePip4", "enhancePip5", "enhancePip6", "enhancePip7", "enhancePip8", "enhancePip9", "enhancePip10", "enhanceInstructions", "enhanceDataList", "enhanceCost", "enhanceStatLabel", "blacksmithSystem", "equipmentSystem", "inventorySystem")]
 visible = false
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
@@ -2797,6 +2797,13 @@ enhanceName = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxC
 enhancePip1 = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer/Pip1")
 enhancePip2 = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer/Pip2")
 enhancePip3 = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer/Pip3")
+enhancePip4 = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer/Pip4")
+enhancePip5 = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer/Pip5")
+enhancePip6 = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer/Pip6")
+enhancePip7 = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer/Pip7")
+enhancePip8 = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer/Pip8")
+enhancePip9 = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer/Pip9")
+enhancePip10 = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer/Pip10")
 enhanceInstructions = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/Instructions")
 enhanceDataList = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer")
 enhanceCost = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/Cost2")
@@ -3028,7 +3035,9 @@ text = "  Item Name"
 vertical_alignment = 1
 
 [node name="PipsContainer" type="HBoxContainer" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer" unique_id=689072246]
+self_modulate = Color(0.71484375, 0.16053611, 0.10331726, 1)
 layout_mode = 2
+theme_override_constants/separation = 14
 
 [node name="Panel" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=132272848]
 self_modulate = Color(1, 1, 1, 0)
@@ -3037,7 +3046,6 @@ layout_mode = 2
 theme = ExtResource("17_g72ry")
 
 [node name="Pip1" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=1720618154]
-self_modulate = Color(0.33984375, 0.33984375, 0.33984375, 1)
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
 theme = ExtResource("17_g72ry")
@@ -3048,6 +3056,41 @@ layout_mode = 2
 theme = ExtResource("17_g72ry")
 
 [node name="Pip3" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=456462551]
+custom_minimum_size = Vector2(50, 20)
+layout_mode = 2
+theme = ExtResource("17_g72ry")
+
+[node name="Pip4" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=572913584]
+custom_minimum_size = Vector2(50, 20)
+layout_mode = 2
+theme = ExtResource("17_g72ry")
+
+[node name="Pip5" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=1600818902]
+custom_minimum_size = Vector2(50, 20)
+layout_mode = 2
+theme = ExtResource("17_g72ry")
+
+[node name="Pip6" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=737428761]
+custom_minimum_size = Vector2(50, 20)
+layout_mode = 2
+theme = ExtResource("17_g72ry")
+
+[node name="Pip7" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=2075332459]
+custom_minimum_size = Vector2(50, 20)
+layout_mode = 2
+theme = ExtResource("17_g72ry")
+
+[node name="Pip8" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=2108956423]
+custom_minimum_size = Vector2(50, 20)
+layout_mode = 2
+theme = ExtResource("17_g72ry")
+
+[node name="Pip9" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=1297365698]
+custom_minimum_size = Vector2(50, 20)
+layout_mode = 2
+theme = ExtResource("17_g72ry")
+
+[node name="Pip10" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=136561687]
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
 theme = ExtResource("17_g72ry")
@@ -3069,7 +3112,7 @@ vertical_alignment = 1
 
 [node name="Cost2" type="RichTextLabel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer" unique_id=758758048]
 self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10

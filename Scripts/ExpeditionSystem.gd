@@ -7,7 +7,7 @@ var expeditionTimer: Timer
 var lastProcessedMinuteIndex: int = -1
 var alignmentPending: bool = false
 
-const DEBUG_SPEED = true  # set to false for production
+const DEBUG_SPEED = false  # set to false for production
 const DEBUG_SECONDS_PER_MINUTE = 10  # 10 seconds = 1 expedition minute
 
 func _ready() -> void:
@@ -170,7 +170,6 @@ func syncOfflineProgress() -> void:
 		expeditionTimer.start()
 
 	GameEvents.expeditionSynced.emit()
-	print("Expedition resumed. Minutes left: %d" % ceil(secondsLeft / float(secondsPerMinute)))
 
 func _processRemainingEvents() -> void:
 	var lastIndex = main.game_data.expeditionTimeline.size() - 1

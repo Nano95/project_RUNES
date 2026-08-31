@@ -187,12 +187,16 @@ func onEquipUnequipPressed() -> void:
 # ── HELPERS ───────────────────────────────────────────────
 func _getStatSummary(instance: Dictionary) -> String:
 	var parts = []
-	var hp = instance.get("hpBonus", 0) + instance.get("gradeBonus", 0)
-	var atk = instance.get("atkBonus", 0)
-	var def = instance.get("defBonus", 0)
-	var dodge = instance.get("dodgeBonus", 0.0)
+	var slot = instance.get("slot", "")
+	var gradeBonus = instance.get("gradeBonus", 0)
+	var hp = instance.get("hpBonus", 0) + (instance.get("gradeHpBonus", 0) if slot != "weapon" and slot != "shield" else 0)
+	var atk = instance.get("atkBonus", 0) + (gradeBonus if slot == "weapon" else 0)
+	var def = instance.get("defBonus", 0) + (gradeBonus if slot == "shield" else 0)
+	var dodge = instance.get("effects", {}).get("dodge", 0.0)
+	var poisonRes = instance.get("effects", {}).get("poisonResistance", 0.0)
 	if hp > 0: parts.append("HP+%d" % hp)
 	if atk > 0: parts.append("ATK+%d" % atk)
 	if def > 0: parts.append("DEF+%d" % def)
-	if dodge > 0: parts.append("DODGE+%d%%" % int(dodge * 100))
+	if dodge > 0: parts.append("DODGE+%.1f%%" % (dodge * 100))
+	if poisonRes > 0: parts.append("POISON RES+%d%%" % int(poisonRes * 100))
 	return "  ".join(parts)
