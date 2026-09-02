@@ -181,9 +181,9 @@ func _buildChestGrid() -> void:
 		
 		if not chest.unlocked:
 			var cost = ChestSystem.UNLOCK_COSTS[chest.id - 1]
-			btn.text += "C%d\n🔒\n %dg" % [chest.id, cost]
+			btn.text += "C%d\n %dg" % [chest.id, cost]
 		else:
-			btn.text = "     C%d    " % chest.id
+			btn.text = "   C%d   " % chest.id
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		btn.add_theme_font_size_override("font_size", 30)
 		btn.pressed.connect(onChestSelected.bind(chest.id))

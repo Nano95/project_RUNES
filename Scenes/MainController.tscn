@@ -3460,10 +3460,10 @@ depositAll = NodePath("StoragePanel/MarginContainer/VBoxContainer/backpackPanel/
 chestFlow = NodePath("StoragePanel/MarginContainer/VBoxContainer/chestPanel/TOP/VScrollBar/chestGrid")
 chestCapacityLabel = NodePath("StoragePanel/MarginContainer/VBoxContainer/chestPanel/TOP/Title")
 chestNameLabel = NodePath("StoragePanel/MarginContainer/VBoxContainer/chestPanel/TOP/Title")
-chestGrid = NodePath("StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM/HBoxContainer")
-upgradeLabel = NodePath("StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM/upgradeLabel")
-upgradeDetails = NodePath("StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM/HBoxContainer/upgradeDetails")
-buildButton = NodePath("StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM/HBoxContainer/BuildButton")
+chestGrid = NodePath("StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/MarginContainer/BOTTOM/HBoxContainer")
+upgradeLabel = NodePath("StoragePanel/MarginContainer/VBoxContainer/upgradePanel/MarginContainer/BOTTOM/upgradeLabel")
+upgradeDetails = NodePath("StoragePanel/MarginContainer/VBoxContainer/upgradePanel/MarginContainer/BOTTOM/HBoxContainer/upgradeDetails")
+buildButton = NodePath("StoragePanel/MarginContainer/VBoxContainer/upgradePanel/MarginContainer/BOTTOM/HBoxContainer/BuildButton")
 closeButton = NodePath("StoragePanel/MarginContainer/VBoxContainer/ClosePanel")
 chestSystem = NodePath("../../ChestSystem")
 inventorySystem = NodePath("../../InventorySystem")
@@ -3478,7 +3478,7 @@ anchor_bottom = 0.5
 offset_left = -345.0
 offset_top = -610.0
 offset_right = 345.0
-offset_bottom = 569.0
+offset_bottom = 625.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_stretch_ratio = 0.0
@@ -3524,6 +3524,7 @@ theme_override_constants/separation = 10
 [node name="backpackPanel" type="Panel" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer" unique_id=1402454724]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 1.1
 theme = ExtResource("19_shy7a")
 
 [node name="TOP" type="VBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel" unique_id=476456849]
@@ -3595,6 +3596,7 @@ theme_override_constants/v_separation = 11
 [node name="chestPanel" type="Panel" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer" unique_id=1642933764]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 1.25
 theme = ExtResource("19_shy7a")
 
 [node name="TOP" type="VBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestPanel" unique_id=1371929412]
@@ -3631,17 +3633,25 @@ theme_override_constants/v_separation = 11
 [node name="chestSelectPanel" type="Panel" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer" unique_id=1200184606]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.6
+size_flags_stretch_ratio = 0.45
 theme = ExtResource("19_shy7a")
 
-[node name="BOTTOM" type="VBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel" unique_id=261696771]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 13.0
-offset_right = 665.0
-offset_bottom = 181.0
+[node name="MarginContainer" type="MarginContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel" unique_id=750074922]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 10
 
-[node name="Title" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM" unique_id=123750841 instance=ExtResource("6_prt4a")]
+[node name="BOTTOM" type="VBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/MarginContainer" unique_id=261696771]
+layout_mode = 2
+
+[node name="Title" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/MarginContainer/BOTTOM" unique_id=123750841 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
 material = SubResource("ShaderMaterial_3x45r")
 layout_mode = 2
@@ -3650,75 +3660,79 @@ theme_override_font_sizes/font_size = 20
 text = "Chests"
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM" unique_id=1334215644]
+[node name="HBoxContainer" type="HBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/MarginContainer/BOTTOM" unique_id=1334215644]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 12
 
-[node name="Chest" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM/HBoxContainer" unique_id=1083178684]
+[node name="Chest" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/MarginContainer/BOTTOM/HBoxContainer" unique_id=1083178684]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 30
 text = "Chest 1"
 
-[node name="Chest2" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM/HBoxContainer" unique_id=35200581]
+[node name="Chest2" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/MarginContainer/BOTTOM/HBoxContainer" unique_id=35200581]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 30
 text = "Chest 2"
 
-[node name="Chest3" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM/HBoxContainer" unique_id=661348212]
+[node name="Chest3" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/MarginContainer/BOTTOM/HBoxContainer" unique_id=661348212]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 30
 text = "Chest 3"
 
-[node name="Chest4" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM/HBoxContainer" unique_id=449736511]
+[node name="Chest4" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/MarginContainer/BOTTOM/HBoxContainer" unique_id=449736511]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 30
 text = "Chest 4"
 
-[node name="Chest5" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM/HBoxContainer" unique_id=1832104945]
+[node name="Chest5" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/MarginContainer/BOTTOM/HBoxContainer" unique_id=1832104945]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_dajxx")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 30
 text = "Chest 5"
 
 [node name="upgradePanel" type="Panel" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer" unique_id=233616020]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.6
+size_flags_stretch_ratio = 0.55
 theme = ExtResource("19_shy7a")
 
-[node name="BOTTOM" type="VBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel" unique_id=888638861]
+[node name="MarginContainer" type="MarginContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel" unique_id=1315917881]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 9.0
-offset_right = -4.0
-offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
 
-[node name="Title" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM" unique_id=898538128 instance=ExtResource("6_prt4a")]
+[node name="BOTTOM" type="VBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/MarginContainer" unique_id=888638861]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Title" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/MarginContainer/BOTTOM" unique_id=898538128 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
 material = SubResource("ShaderMaterial_2hqfv")
 layout_mode = 2
@@ -3727,7 +3741,7 @@ theme_override_font_sizes/font_size = 20
 text = "Craft Storage Upgrade"
 vertical_alignment = 1
 
-[node name="upgradeLabel" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM" unique_id=913053343 instance=ExtResource("6_prt4a")]
+[node name="upgradeLabel" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/MarginContainer/BOTTOM" unique_id=913053343 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
 material = SubResource("ShaderMaterial_g3wwx")
 layout_mode = 2
@@ -3735,12 +3749,12 @@ theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 20
 text = "MAX UPGRADE COMPLETE"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM" unique_id=1359600201]
+[node name="HBoxContainer" type="HBoxContainer" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/MarginContainer/BOTTOM" unique_id=1359600201]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="upgradeDetails" type="RichTextLabel" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM/HBoxContainer" unique_id=616643088]
+[node name="upgradeDetails" type="RichTextLabel" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/MarginContainer/BOTTOM/HBoxContainer" unique_id=616643088]
 custom_minimum_size = Vector2(500, 100)
 layout_mode = 2
 size_flags_vertical = 4
@@ -3748,7 +3762,7 @@ size_flags_stretch_ratio = 0.8
 bbcode_enabled = true
 text = "Upgrade Label"
 
-[node name="BuildButton" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM/HBoxContainer" unique_id=317496883]
+[node name="BuildButton" type="Button" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/MarginContainer/BOTTOM/HBoxContainer" unique_id=317496883]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
