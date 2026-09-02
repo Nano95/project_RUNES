@@ -12,7 +12,7 @@ const TASKS: Array[Dictionary] = [
 	# Hunting Grounds — Hard (+2 HP)
 	{ "id": "hg_mountedorc_20",  "area": "Hunting Grounds", "monster": "Mounted Orc",  "target": 20, "reward": "hp",     "rewardValue": 2,    "desc": "Kill 20 Mounted Orcs" },
 	{ "id": "hg_orcgeneral_20",  "area": "Hunting Grounds", "monster": "Orc General",  "target": 20, "reward": "hp",     "rewardValue": 2,    "desc": "Kill 20 Orc Generals" },
-	{ "id": "hg_orcwarlord_20",  "area": "Hunting Grounds", "monster": "Orc Warlord",  "target": 20, "reward": "hp",     "rewardValue": 2,    "desc": "Kill 20 Orc Warlords" },
+	{ "id": "hg_orcwarlord_20",  "area": "Hunting Grounds", "monster": "Orc Warchief",  "target": 20, "reward": "hp",     "rewardValue": 2,    "desc": "Kill 20 Orc Warchiefs" },
 	{ "id": "hg_orcking_1", "area": "Hunting Grounds", "monster": "Orc King", "target": 1, "reward": "allocation", "rewardValue": 1, "desc": "Defeat the Orc King" },
 	
 	# Hunting Grounds — Milestone

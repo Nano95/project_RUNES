@@ -230,9 +230,11 @@ func refreshEnhanceList() -> void:
 		hasItems = true
 		var btn = Button.new()
 		
+		var grade = stack.get("grade", "")
+		var gradeStr = " [%s]" % grade if grade != "" else ""
 		var enh = stack.get("enhancement", 0)
 		var enhStr = " +%d" % enh if enh > 0 else ""
-		btn.text = stack["name"] + enhStr
+		btn.text = " %s%s%s " % [stack["name"], gradeStr, enhStr]
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		btn.custom_minimum_size = Vector2(150,50)
 		btn.add_theme_font_size_override("font_size", 22)

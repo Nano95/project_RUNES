@@ -75,9 +75,20 @@ func onTick() -> void:
 	if (combatSystem.pendingStrongMonsterIn > 0):
 		combatSystem.pendingStrongMonsterIn -= 1
 		if (combatSystem.pendingStrongMonsterIn == 0):
-			var monster = MonsterRegistry.rollMonster(
-				main.game_data.currentArea, combatSystem.pendingMonsterTier
-			)
+			var monster: MonsterData
+			if combatSystem.pendingSummonedEliteName != "":
+				# Spawn specific summoned elite
+				monster = MonsterRegistry.getMonsterByAreaNameTier(
+					combatSystem.pendingSummonedEliteName,
+					"elite",
+					main.game_data.currentArea
+				)
+				combatSystem.pendingSummonedEliteName = ""
+			else:
+				monster = MonsterRegistry.rollMonster(
+					main.game_data.currentArea,
+					combatSystem.pendingMonsterTier
+				)
 			combatSystem.startCombat(monster)
 			return
 	
@@ -170,6 +181,20 @@ func rollWeightedEvent() -> String:
 	return "nothing_c"
 
 func _roll_event() -> void:
+	# Summon pending — force omen next event
+	if combatSystem.summonedElitePending:
+		combatSystem.summonedElitePending = false
+		combatSystem.pendingStrongMonsterIn = 10
+		combatSystem.pendingMonsterTier = "elite"
+		combatSystem.pendingSummonedEliteName = combatSystem.summonedEliteName
+		combatSystem.summonedEliteName = ""
+		var omen = combatSystem.ELITE_OMENS.get(
+			main.game_data.currentArea,
+            "Your instincts scream DANGER!"
+		)
+		GameEvents.eventLogged.emit(omen, "omen", true)
+		return
+	
 	# Battle potion active — 90% monster chance
 	if combatSystem.isBattlePotionActive():
 		if randf() < 0.90:
@@ -203,7 +228,7 @@ func _roll_event() -> void:
 		"potion_gold":
 			if randf() < 0.70:
 				GameEvents.eventLogged.emit("You find a health potion tucked under a rock.", "loot", true)
-				GameEvents.itemDropped.emit("Health Potion")
+				GameEvents.itemDropped.emit("Health Potion", "gather")
 			else:
 				var gold = getAreaGoldFind()
 				main.game_data.gold += gold

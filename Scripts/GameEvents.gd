@@ -83,7 +83,7 @@ signal playerDied
 @warning_ignore("unused_signal")
 signal fleeRequested
 @warning_ignore("unused_signal")
-signal itemDropped(itemName: String)
+signal itemDropped(itemName: String, source: String)  # "combat", "gather", "forage"
 @warning_ignore("unused_signal")
 signal statusEffectApplied(status: String, counter: int)
 @warning_ignore("unused_signal")

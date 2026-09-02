@@ -114,7 +114,7 @@ func rollForageable() -> String:
 	return drops[drops.size() - 1]["name"]
 
 func onGatherCompleted(itemName: String) -> void:
-	GameEvents.itemDropped.emit(itemName)
+	GameEvents.itemDropped.emit(itemName, "gather")
 
 func onPotionUsed(itemName: String) -> void:
 	match itemName:

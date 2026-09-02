@@ -14,6 +14,21 @@ const ELITE_OMENS = {
 	"Slime Swamps": "The swamp goes eerily silent. Something massive approaches.",
 }
 
+const SUMMON_AREAS = {
+	"Warchief Totem":    "Hunting Grounds",
+	"Royal Totem":    "Slime Swamps",
+	"Necromancer Totem": "Sandling Dunes",
+}
+
+const SUMMON_ELITES = {
+	"Warchief Totem":    "Orc King",
+	"Royal Totem":    "King Slime",
+	"Necromancer Totem": "Mad Necromancer",
+}
+var pendingSummonedEliteName: String = ""
+var summonedElitePending: bool = false
+var summonedEliteName: String = ""
+
 const STATUS_COUNTERS = {
 	"poison": { "weak": 3, "medium": 5, "strong": 8, "elite": 12 },
 	"burn":   { "weak": 4, "medium": 6, "strong": 10, "elite": 15 },
@@ -198,8 +213,7 @@ func winCombat() -> void:
 	)
 	var drops = MonsterRegistry.rollDrops(monster)
 	for drop in drops:
-		GameEvents.eventLogged.emit("Looted: %s." % drop, "loot", false)
-		GameEvents.itemDropped.emit(drop)
+		GameEvents.itemDropped.emit(drop, "combat")
 	
 	main.game_data.stats["kills"][monsterName] = main.game_data.stats["kills"].get(monsterName, 0) + 1
 	clearCombat()
@@ -271,6 +285,8 @@ func onPotionUsed(itemName: String) -> void:
 			applyAntidote(20)
 		"Large Antidote":
 			applyAntidote(30)
+		"Warchief Totem", "Necromancer Totem":
+			_handleSummon(itemName)
 
 func applyStatusEffects(monster: MonsterData) -> void:
 	var totalEffects = equipmentSystem.getTotalEffects()
@@ -317,11 +333,38 @@ func applyAntidote(reduction: int) -> void:
 	main.save_game()
 	GameEvents.hpChanged.emit()
 
+func _handleSummon(itemName: String) -> bool:
+	var requiredArea = SUMMON_AREAS.get(itemName, "")
+	if main.game_data.currentArea != requiredArea:
+		GameEvents.eventLogged.emit(
+			"This totem has no power here.", "system", false
+		)
+		return false
+
+	if pendingStrongMonsterIn > 0 or summonedElitePending:
+		GameEvents.eventLogged.emit(
+			"Something is already coming...", "system", false
+		)
+		return false
+
+	summonedElitePending = true
+	summonedEliteName = SUMMON_ELITES.get(itemName, "")
+	GameEvents.eventLogged.emit(
+		"The ground trembles... something ancient stirs.", "danger", false
+	)
+	return true
+
 func isBattlePotionActive() -> bool:
 	return battlePotionEventsLeft > 0
 
 func onAreaExited() -> void:
 	battlePotionEventsLeft = 0
+	summonedElitePending = false
+	summonedEliteName = ""
+	pendingSummonedEliteName = ""
 
 func onPlayerDied() -> void:
 	battlePotionEventsLeft = 0
+	summonedElitePending = false
+	summonedEliteName = ""
+	pendingSummonedEliteName = ""

@@ -229,6 +229,12 @@ func _makeItemButton(entry: Dictionary, source: String, stackIndex: int) -> Butt
 		btn.text = " %s %d/%d " % [entry["name"], entry["qty"], cap]
 	else:
 		btn.text = " " + entry["name"] + " "
+		if (entry.get("isEquipment", false)):
+			var grade = entry.get("grade", "")
+			var gradeStr = " [%s]" % grade if grade != "" else ""
+			var enh = entry.get("enhancement", 0)
+			var enhStr = " +%d" % enh if enh > 0 else ""
+			btn.text = " %s%s%s " % [itemName, gradeStr, enhStr]
 	btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	var newColor = Utils.getColorForType(entry["type"])
 	btn.add_theme_color_override("font_color", newColor)

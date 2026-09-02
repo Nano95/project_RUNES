@@ -48,30 +48,6 @@
 [ext_resource type="Script" uid="uid://chso41vx1n5g7" path="res://Scripts/ExpeditionSystem.gd" id="39_lbmfx"]
 [ext_resource type="Script" uid="uid://c3i3ww6xxsogw" path="res://Scripts/ExpeditionTimeline.gd" id="40_1q78x"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8whxx"]
-resource_local_to_scene = true
-shader = ExtResource("7_108yi")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_p5mh2"]
-resource_local_to_scene = true
-shader = ExtResource("7_108yi")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2yq3t"]
-resource_local_to_scene = true
-shader = ExtResource("7_108yi")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jtibr"]
-resource_local_to_scene = true
-shader = ExtResource("7_108yi")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_46ofg"]
 resource_local_to_scene = true
 shader = ExtResource("7_108yi")
@@ -126,36 +102,6 @@ shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2hqfv"]
-resource_local_to_scene = true
-shader = ExtResource("7_108yi")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g3wwx"]
-resource_local_to_scene = true
-shader = ExtResource("7_108yi")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_omlyq"]
-resource_local_to_scene = true
-shader = ExtResource("7_108yi")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ifcbf"]
-resource_local_to_scene = true
-shader = ExtResource("7_108yi")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0wkor"]
-resource_local_to_scene = true
-shader = ExtResource("7_108yi")
-shader_parameter/time = 4.750000002218258e-07
-shader_parameter/activate = false
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tqqnj"]
 resource_local_to_scene = true
 shader = ExtResource("7_108yi")
@@ -185,10 +131,6 @@ resource_local_to_scene = true
 shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ds30n"]
-shader = ExtResource("10_gpdd1")
-shader_parameter/lod = 3.0000001425
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7urtk"]
 resource_local_to_scene = true
@@ -243,6 +185,10 @@ resource_local_to_scene = true
 shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ds30n"]
+shader = ExtResource("10_gpdd1")
+shader_parameter/lod = 3.0000001425
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w7uob"]
 resource_local_to_scene = true
@@ -364,6 +310,12 @@ shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yb8to"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6f3dh"]
 resource_local_to_scene = true
 shader = ExtResource("7_108yi")
@@ -389,6 +341,54 @@ shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3x45r"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2hqfv"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g3wwx"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_omlyq"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ifcbf"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0wkor"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_axu02"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_chhej"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yx0dv"]
 resource_local_to_scene = true
 shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
@@ -427,7 +427,7 @@ blacksmithButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/MainAct
 bazaarButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/MainActionRow/BazaarBtn")
 expeditionButton = NodePath("MarginContainer/VBoxContainer/MainActionRow/MainActionRow/Expedition")
 debugButton = NodePath("MarginContainer/VBoxContainer/TopRow/StatsLayout/Panel/DebugBtn")
-areaButtons = [NodePath(""), NodePath(""), NodePath(""), NodePath("")]
+areaButtons = [null, null, null, null]
 eventLogPanel = NodePath("MarginContainer/VBoxContainer/EventLogPanel")
 equipmentPanel = NodePath("MarginContainer/VBoxContainer/EquipmentDisplay")
 expeditionPanel = NodePath("MarginContainer/VBoxContainer/ExpeditionLogPanel")
@@ -503,7 +503,7 @@ size_flags_stretch_ratio = 0.4
 theme = ExtResource("17_g72ry")
 
 [node name="LOCATION" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Panel" unique_id=1696817232 instance=ExtResource("6_prt4a")]
-material = SubResource("ShaderMaterial_8whxx")
+material = SubResource("ShaderMaterial_46ofg")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -520,7 +520,7 @@ vertical_alignment = 1
 
 [node name="EVENT" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Panel" unique_id=278627998 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.83, 0.83, 0.83, 1)
-material = SubResource("ShaderMaterial_p5mh2")
+material = SubResource("ShaderMaterial_tjyrn")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -559,7 +559,7 @@ size_flags_stretch_ratio = 0.4
 theme = ExtResource("17_g72ry")
 
 [node name="LOCATION" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/ExpeditionPanel" unique_id=1674003938 instance=ExtResource("6_prt4a")]
-material = SubResource("ShaderMaterial_2yq3t")
+material = SubResource("ShaderMaterial_1qs3o")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -578,7 +578,7 @@ vertical_alignment = 1
 
 [node name="TIMER" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/ExpeditionPanel" unique_id=808455675 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.83, 0.83, 0.83, 1)
-material = SubResource("ShaderMaterial_jtibr")
+material = SubResource("ShaderMaterial_2ul0n")
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -608,7 +608,7 @@ theme = ExtResource("17_g72ry")
 
 [node name="TITLE" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/HP" unique_id=245101516 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.83, 0.83, 0.83, 1)
-material = SubResource("ShaderMaterial_46ofg")
+material = SubResource("ShaderMaterial_jmrk2")
 layout_mode = 1
 offset_left = 8.0
 offset_top = 8.0
@@ -621,7 +621,7 @@ vertical_alignment = 1
 
 [node name="NUMBER" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/HP" unique_id=617930616 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.4426837, 0.9765625, 0.33187866, 1)
-material = SubResource("ShaderMaterial_tjyrn")
+material = SubResource("ShaderMaterial_1jcrk")
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -657,7 +657,7 @@ theme = ExtResource("17_g72ry")
 
 [node name="TITLE" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/PLAYERSTATS" unique_id=2090476017 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.83, 0.83, 0.83, 1)
-material = SubResource("ShaderMaterial_1qs3o")
+material = SubResource("ShaderMaterial_xh5qk")
 layout_mode = 1
 offset_left = 8.0
 offset_top = 8.0
@@ -669,7 +669,7 @@ text = "Stats"
 vertical_alignment = 1
 
 [node name="Stats" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/PLAYERSTATS" unique_id=1794919632 instance=ExtResource("6_prt4a")]
-material = SubResource("ShaderMaterial_2ul0n")
+material = SubResource("ShaderMaterial_p0dnj")
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -686,7 +686,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Kills" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/PLAYERSTATS" unique_id=490513236 instance=ExtResource("6_prt4a")]
-material = SubResource("ShaderMaterial_jmrk2")
+material = SubResource("ShaderMaterial_ucm65")
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -710,7 +710,7 @@ theme = ExtResource("17_g72ry")
 
 [node name="TITLE" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/Gold" unique_id=476879201 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.83, 0.83, 0.83, 1)
-material = SubResource("ShaderMaterial_1jcrk")
+material = SubResource("ShaderMaterial_tqqnj")
 layout_mode = 1
 offset_left = 8.0
 offset_top = 8.0
@@ -723,7 +723,7 @@ vertical_alignment = 1
 
 [node name="QTY" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/Gold" unique_id=1880836942 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.9764706, 0.9664216, 0.33333337, 1)
-material = SubResource("ShaderMaterial_xh5qk")
+material = SubResource("ShaderMaterial_1ryv8")
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -888,7 +888,7 @@ theme = ExtResource("17_g72ry")
 
 [node name="TITLE" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/ExpeditionGear/Gold" unique_id=65532992 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.83, 0.83, 0.83, 1)
-material = SubResource("ShaderMaterial_p0dnj")
+material = SubResource("ShaderMaterial_0a853")
 layout_mode = 1
 offset_left = 8.0
 offset_top = 8.0
@@ -901,7 +901,7 @@ vertical_alignment = 1
 
 [node name="QTY" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/ExpeditionGear/Gold" unique_id=427388896 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.9764706, 0.9664216, 0.33333337, 1)
-material = SubResource("ShaderMaterial_ucm65")
+material = SubResource("ShaderMaterial_01qki")
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -1090,7 +1090,7 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 
 [node name="Title" parent="UIController/MarginContainer/VBoxContainer/StageSelectPanel/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1760559794 instance=ExtResource("6_prt4a")]
-material = SubResource("ShaderMaterial_2hqfv")
+material = SubResource("ShaderMaterial_pes2p")
 layout_mode = 2
 theme_override_constants/outline_size = 14
 theme_override_font_sizes/font_size = 30
@@ -1104,7 +1104,7 @@ layout_mode = 2
 
 [node name="BestRun" parent="UIController/MarginContainer/VBoxContainer/StageSelectPanel/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1145304036 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.8745098, 0.8745098, 0.8745098, 1)
-material = SubResource("ShaderMaterial_g3wwx")
+material = SubResource("ShaderMaterial_7urtk")
 layout_mode = 2
 theme_override_constants/outline_size = 14
 theme_override_font_sizes/font_size = 26
@@ -1113,7 +1113,7 @@ vertical_alignment = 1
 
 [node name="Deaths" parent="UIController/MarginContainer/VBoxContainer/StageSelectPanel/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1246800848 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.8745098, 0.8745098, 0.8745098, 1)
-material = SubResource("ShaderMaterial_omlyq")
+material = SubResource("ShaderMaterial_acljg")
 layout_mode = 2
 theme_override_constants/outline_size = 14
 theme_override_font_sizes/font_size = 26
@@ -1134,7 +1134,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.7
 
 [node name="Title" parent="UIController/MarginContainer/VBoxContainer/StageSelectPanel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/EnemyKillsVbox" unique_id=93527346 instance=ExtResource("6_prt4a")]
-material = SubResource("ShaderMaterial_ifcbf")
+material = SubResource("ShaderMaterial_vqh4c")
 layout_mode = 2
 theme_override_constants/outline_size = 14
 theme_override_font_sizes/font_size = 30
@@ -1160,7 +1160,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Title" parent="UIController/MarginContainer/VBoxContainer/StageSelectPanel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/TasksVbox" unique_id=132410033 instance=ExtResource("6_prt4a")]
-material = SubResource("ShaderMaterial_0wkor")
+material = SubResource("ShaderMaterial_4exnt")
 layout_mode = 2
 theme_override_constants/outline_size = 14
 theme_override_font_sizes/font_size = 30
@@ -1797,7 +1797,7 @@ inventorySystem = NodePath("../../../../../InventorySystem")
 
 [node name="Title" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay" unique_id=1349935487 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_tqqnj")
+material = SubResource("ShaderMaterial_ax22c")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -1810,7 +1810,7 @@ theme_override_font_sizes/font_size = 60
 text = "Backpack"
 
 [node name="QTY" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay" unique_id=8404646 instance=ExtResource("6_prt4a")]
-material = SubResource("ShaderMaterial_1ryv8")
+material = SubResource("ShaderMaterial_o2vow")
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 1
 anchors_preset = 1
@@ -1826,7 +1826,7 @@ text = "0 / 20"
 horizontal_alignment = 2
 
 [node name="WEIGHT" parent="UIController/MarginContainer/VBoxContainer/AdventuringRow/BackpackDisplay" unique_id=1267963551 instance=ExtResource("6_prt4a")]
-material = SubResource("ShaderMaterial_0a853")
+material = SubResource("ShaderMaterial_x7npw")
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -1897,7 +1897,7 @@ theme_override_constants/separation = 14
 
 [node name="Title" parent="UIController/MarginContainer/VBoxContainer/ExpeditionRow/CollectionBinPanel/MarginContainer/TOP/HBoxContainer" unique_id=2120465269 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_01qki")
+material = SubResource("ShaderMaterial_sk1pp")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
@@ -1907,7 +1907,7 @@ vertical_alignment = 1
 
 [node name="gold" parent="UIController/MarginContainer/VBoxContainer/ExpeditionRow/CollectionBinPanel/MarginContainer/TOP/HBoxContainer" unique_id=1570454396 instance=ExtResource("6_prt4a")]
 self_modulate = Color(1, 0.8509804, 0.28627452, 1)
-material = SubResource("ShaderMaterial_pes2p")
+material = SubResource("ShaderMaterial_is0r6")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
@@ -2060,7 +2060,7 @@ offset_bottom = 45.0
 theme = ExtResource("17_g72ry")
 
 [node name="Title2" parent="UIController/CheckpointOverlay/Panel/TitlePanel" unique_id=2133995629 instance=ExtResource("6_prt4a")]
-material = SubResource("ShaderMaterial_7urtk")
+material = SubResource("ShaderMaterial_w7uob")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -2316,7 +2316,7 @@ theme = ExtResource("17_g72ry")
 
 [node name="Name" parent="UIController/ItemActionContainer/ItemActionModal/TitlePanel" unique_id=304158171 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_acljg")
+material = SubResource("ShaderMaterial_6ix6u")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -2331,7 +2331,7 @@ vertical_alignment = 1
 
 [node name="Description" parent="UIController/ItemActionContainer/ItemActionModal" unique_id=2061807450 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_vqh4c")
+material = SubResource("ShaderMaterial_hurik")
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -2366,7 +2366,7 @@ layout_mode = 2
 
 [node name="SelectedType" parent="UIController/ItemActionContainer/ItemActionModal/EquipmentContainer/HBoxContainer" unique_id=1666232021 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
-material = SubResource("ShaderMaterial_4exnt")
+material = SubResource("ShaderMaterial_1sljs")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
@@ -2376,7 +2376,7 @@ vertical_alignment = 1
 
 [node name="value" parent="UIController/ItemActionContainer/ItemActionModal/EquipmentContainer/HBoxContainer" unique_id=826812178 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
-material = SubResource("ShaderMaterial_ax22c")
+material = SubResource("ShaderMaterial_sg6du")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
@@ -2390,7 +2390,7 @@ layout_mode = 2
 
 [node name="EquippedName" parent="UIController/ItemActionContainer/ItemActionModal/EquipmentContainer/HBoxContainer2" unique_id=1439069798 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
-material = SubResource("ShaderMaterial_o2vow")
+material = SubResource("ShaderMaterial_8myfu")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2401,7 +2401,7 @@ vertical_alignment = 1
 
 [node name="value" parent="UIController/ItemActionContainer/ItemActionModal/EquipmentContainer/HBoxContainer2" unique_id=1756391922 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
-material = SubResource("ShaderMaterial_x7npw")
+material = SubResource("ShaderMaterial_yu1px")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
@@ -2416,7 +2416,7 @@ layout_mode = 2
 
 [node name="Difference" parent="UIController/ItemActionContainer/ItemActionModal/EquipmentContainer/Difference" unique_id=40562325 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
-material = SubResource("ShaderMaterial_sk1pp")
+material = SubResource("ShaderMaterial_0mgj1")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
@@ -2535,7 +2535,7 @@ theme = ExtResource("17_g72ry")
 
 [node name="Name" parent="UIController/MerchantContainer/MerchantPanel/TitlePanel" unique_id=1919689286 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_is0r6")
+material = SubResource("ShaderMaterial_y6qkv")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -2550,7 +2550,7 @@ vertical_alignment = 1
 
 [node name="Gold" parent="UIController/MerchantContainer/MerchantPanel/TitlePanel" unique_id=1413023271 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_w7uob")
+material = SubResource("ShaderMaterial_mqv5t")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -2623,7 +2623,7 @@ layout_mode = 2
 
 [node name="Title" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer/ItemsPanel/ItemsContainer/HBoxContainer" unique_id=1250030446 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_6ix6u")
+material = SubResource("ShaderMaterial_i4rge")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
@@ -2685,7 +2685,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ItemName" parent="UIController/MerchantContainer/MerchantPanel/VBoxContainer/InfoPanel/DiscoveredRecipes" unique_id=1681143752 instance=ExtResource("6_prt4a")]
-material = SubResource("ShaderMaterial_hurik")
+material = SubResource("ShaderMaterial_tcxn3")
 layout_mode = 0
 offset_left = 9.0
 offset_top = 2.5
@@ -2836,7 +2836,7 @@ theme = ExtResource("17_g72ry")
 
 [node name="Name" parent="UIController/BlacksmithContainer/BlacksmithPanel/TitlePanel" unique_id=55023032 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_1sljs")
+material = SubResource("ShaderMaterial_wgw7l")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -2908,7 +2908,7 @@ layout_mode = 2
 
 [node name="Title" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/ItemsPanel/ItemsContainer/HBoxContainer" unique_id=1662738840 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_sg6du")
+material = SubResource("ShaderMaterial_2ncs3")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
@@ -2968,7 +2968,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CraftName" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/CraftInfoPanel/VBoxContainer" unique_id=101643548 instance=ExtResource("6_prt4a")]
-material = SubResource("ShaderMaterial_8myfu")
+material = SubResource("ShaderMaterial_f452a")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
@@ -2978,7 +2978,7 @@ vertical_alignment = 1
 
 [node name="Result" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/CraftInfoPanel/VBoxContainer" unique_id=1047364473 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_yu1px")
+material = SubResource("ShaderMaterial_ocb2w")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
@@ -3026,7 +3026,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CraftName" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer" unique_id=181511056 instance=ExtResource("6_prt4a")]
-material = SubResource("ShaderMaterial_0mgj1")
+material = SubResource("ShaderMaterial_pbijh")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
@@ -3198,7 +3198,7 @@ theme = ExtResource("17_g72ry")
 
 [node name="Name" parent="UIController/BrewingContainer/MainPanel/TitlePanel" unique_id=1789634314 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_y6qkv")
+material = SubResource("ShaderMaterial_3fjy6")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -3242,7 +3242,7 @@ layout_mode = 2
 
 [node name="Title" parent="UIController/BrewingContainer/MainPanel/VBoxContainer/ItemsPanel/ItemsContainer/HBoxContainer" unique_id=1536449615 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_mqv5t")
+material = SubResource("ShaderMaterial_e5jyx")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
@@ -3302,7 +3302,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CraftName" parent="UIController/BrewingContainer/MainPanel/VBoxContainer/CraftInfoPanel/VBoxContainer" unique_id=1676351549 instance=ExtResource("6_prt4a")]
-material = SubResource("ShaderMaterial_i4rge")
+material = SubResource("ShaderMaterial_giqqg")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
@@ -3391,7 +3391,7 @@ theme = ExtResource("17_g72ry")
 
 [node name="Name" parent="UIController/DebugContainer/MainPanel/TitlePanel" unique_id=1900814077 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_tcxn3")
+material = SubResource("ShaderMaterial_yb8to")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -3492,7 +3492,7 @@ theme = ExtResource("17_g72ry")
 
 [node name="Name" parent="UIController/StorageModal/StoragePanel/TitlePanel" unique_id=1856336911 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_wgw7l")
+material = SubResource("ShaderMaterial_6f3dh")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -3539,7 +3539,7 @@ layout_mode = 2
 
 [node name="Title" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/HBoxContainer" unique_id=1448538055 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_2ncs3")
+material = SubResource("ShaderMaterial_jktrf")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
@@ -3549,7 +3549,7 @@ vertical_alignment = 1
 
 [node name="Weight" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/backpackPanel/TOP/HBoxContainer" unique_id=117332496 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_f452a")
+material = SubResource("ShaderMaterial_cqoki")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
@@ -3608,7 +3608,7 @@ grow_vertical = 2
 
 [node name="Title" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestPanel/TOP" unique_id=458006425 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_ocb2w")
+material = SubResource("ShaderMaterial_gyd8t")
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 20
@@ -3643,7 +3643,7 @@ offset_bottom = 181.0
 
 [node name="Title" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/chestSelectPanel/BOTTOM" unique_id=123750841 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_pbijh")
+material = SubResource("ShaderMaterial_3x45r")
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 20
@@ -3720,7 +3720,7 @@ grow_vertical = 2
 
 [node name="Title" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM" unique_id=898538128 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_3fjy6")
+material = SubResource("ShaderMaterial_2hqfv")
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 20
@@ -3729,7 +3729,7 @@ vertical_alignment = 1
 
 [node name="upgradeLabel" parent="UIController/StorageModal/StoragePanel/MarginContainer/VBoxContainer/upgradePanel/BOTTOM" unique_id=913053343 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_e5jyx")
+material = SubResource("ShaderMaterial_g3wwx")
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 20
@@ -3811,7 +3811,7 @@ theme = ExtResource("17_g72ry")
 
 [node name="Title2" parent="UIController/MonsterBattleOverlay/MonsterBattlePanel/TitlePanel" unique_id=1470752034 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.87, 0.25230002, 0.25230002, 1)
-material = SubResource("ShaderMaterial_giqqg")
+material = SubResource("ShaderMaterial_omlyq")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -3845,7 +3845,7 @@ vertical_alignment = 1
 
 [node name="MonsterHp" parent="UIController/MonsterBattleOverlay/MonsterBattlePanel" unique_id=37391184 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_6f3dh")
+material = SubResource("ShaderMaterial_ifcbf")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -3947,7 +3947,7 @@ theme = ExtResource("8_shy7a")
 
 [node name="Title2" parent="UIController/SelectEquipmentDisplay/MarginContainer/MonsterBattlePanel/TitlePanel" unique_id=1023283131 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.8509804, 0.8509804, 0.8509804, 1)
-material = SubResource("ShaderMaterial_jktrf")
+material = SubResource("ShaderMaterial_0wkor")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -4048,7 +4048,7 @@ grow_vertical = 2
 
 [node name="Name" parent="UIController/SelectEquipmentDisplay/MarginContainer/MonsterBattlePanel/MarginContainer/VBoxContainer/Details/VBoxContainer" unique_id=1878964052 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_cqoki")
+material = SubResource("ShaderMaterial_axu02")
 custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 theme_override_constants/outline_size = 12
@@ -4059,7 +4059,7 @@ vertical_alignment = 1
 
 [node name="Description" parent="UIController/SelectEquipmentDisplay/MarginContainer/MonsterBattlePanel/MarginContainer/VBoxContainer/Details/VBoxContainer" unique_id=957214854 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_gyd8t")
+material = SubResource("ShaderMaterial_chhej")
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_constants/line_spacing = -9
@@ -4072,7 +4072,7 @@ vertical_alignment = 1
 
 [node name="Stats" parent="UIController/SelectEquipmentDisplay/MarginContainer/MonsterBattlePanel/MarginContainer/VBoxContainer/Details/VBoxContainer" unique_id=1590357372 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.85, 0.85, 0.85, 1)
-material = SubResource("ShaderMaterial_3x45r")
+material = SubResource("ShaderMaterial_yx0dv")
 custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 theme_override_constants/line_spacing = -9
@@ -4127,9 +4127,10 @@ script = ExtResource("7_1fnpd")
 equipmentSystem = NodePath("../EquipmentSystem")
 metadata/_custom_type_script = "uid://cmsfrujy8ifuq"
 
-[node name="InventorySystem" type="Node" parent="." unique_id=679220032 node_paths=PackedStringArray("equipmentSystem")]
+[node name="InventorySystem" type="Node" parent="." unique_id=679220032 node_paths=PackedStringArray("equipmentSystem", "combatSystem")]
 script = ExtResource("8_ck1p8")
 equipmentSystem = NodePath("../EquipmentSystem")
+combatSystem = NodePath("../CombatSystem")
 metadata/_custom_type_script = "uid://wy43n82n4e4s"
 
 [node name="GatherSystem" type="Node" parent="." unique_id=83814038]

@@ -60,6 +60,7 @@ func _register() -> void:
 	_add("Slime Gel",   "part", true, 0.2, "Sticky green gel.",          6)
 	_add("Slime Core",  "part", true, 0.3, "Pulsing with slime energy.", 45)
 	_add("Royal Gel",   "part", true, 0.3, "Fit for a slime king.",      80)
+	_add("Royal Totem", "summon", false, 0.5, "Summons the King Slime. Use in the Slime Swamps.", 200)
 
 	# Sandling Set
 	_equip("Sandling Helmet", "helmet", "Sandling", 22, 0,  0,  {},              "A hood worn by sandlings.",     90)
@@ -76,8 +77,8 @@ func _register() -> void:
 	_add("Bone Dust",    "part", true,  0.2, "Fine dust from animated bones.",     8)
 	_add("Crystal Bone", "part", true,  0.4, "Crystallized by dark magic.",        60)
 	_add("Ancient Relic","part", true,  0.3, "Radiates dark energy.",             100)
-	# Summon
 	_add("Necromancer Totem", "summon", false, 0.5, "Summons the Mad Necromancer.", 300)
+	
 	# ── FORAGEABLES ───────────────────────────────────────
 	_add("Wild Herb",           "forageable", true,  0.5, "Common but useful.",               5)
 	_add("Red Berry",           "forageable", true,  0.5, "Sweet and slightly toxic.",        4)

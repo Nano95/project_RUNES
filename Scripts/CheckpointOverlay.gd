@@ -128,7 +128,16 @@ func refreshPendingLoot() -> void:
 		var btn = Button.new()
 		var itemName = stack.get("name", "")
 		var qty = stack.get("qty", 1)
-		btn.text = "%s x%d" % [itemName, qty] if qty > 1 else itemName
+		var displayText = itemName
+		if stack.get("isEquipment", false):
+			var grade = stack.get("grade", "")
+			var gradeStr = " [%s]" % grade if grade != "" else ""
+			var enh = stack.get("enhancement", 0)
+			var enhStr = " +%d" % enh if enh > 0 else ""
+			displayText = "%s%s%s" % [itemName, gradeStr, enhStr]
+		else:
+			displayText = "%s x%d" % [itemName, qty] if qty > 1 else itemName
+		btn.text = displayText 
 		btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		var item = ItemRegistry.getItem(itemName)
 		if item:
@@ -144,13 +153,22 @@ func refreshPendingLoot() -> void:
 
 func onPendingItemPressed(stack: Dictionary) -> void:
 	var itemName = stack.get("name", "")
-	var success = inventorySystem.addToBackpack(itemName, 1, true) # one at a time
-	print(" - stack: ", itemName, " - ", stack)
+	var success = false
+	
+	if stack.get("isEquipment", false):
+		# Pass full instance, fromPending = true to prevent re-adding to pendingLoot
+		success = inventorySystem.addEquipmentToBackpack(stack, true)
+	else:
+		success = inventorySystem.addToBackpack(itemName, 1, true)
+	
 	if (success):
 		# Decrement qty or remove if empty
-		stack["qty"] -= 1
-		if stack["qty"] <= 0:
+		if stack.get("isEquipment", false):
 			main.game_data.pendingLoot.erase(stack)
+		else:
+			stack["qty"] -= 1
+			if stack["qty"] <= 0:
+				main.game_data.pendingLoot.erase(stack)
 		main.save_game()
 		refreshPendingLoot()
 		GameEvents.eventLogged.emit(

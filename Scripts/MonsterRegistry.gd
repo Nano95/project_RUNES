@@ -6,13 +6,13 @@ func _ready() -> void:
 	areaMonsters = {
 		"Hunting Grounds": {
 			"weak": [
-				_make("Orcling", "weak", 15, 11, 1, 4, {}, "orc", .01, [
+				_make("Orcling", "weak", 15, 11, 1, 4, {}, "orc", .3, [
 					_drop("Orc Leather", 0.08),
 				]),
 				_make("Orc Grunt", "weak", 18, 12, 1, 5, {}, "orc", .01, [
 					_drop("Orc Leather", 0.08),
 				]),
-				_make("Orc Runt", "weak", 12, 10, 0, 3, {}, "orc", .01, [
+				_make("Orc Runt", "weak", 12, 10, 0, 3, {}, "orc", .02, [
 					_drop("Orc Leather", 0.08),
 				]),
 			],
@@ -89,7 +89,7 @@ func _ready() -> void:
 				_make("King Slime", "elite", 680, 40, 150, 400, {"poison": 0.35}, "slimy", .2, [
 					_drop("Slime Gel", 0.90),
 					_drop("Slime Core", 0.60),
-					_drop("Royal Gel", 0.20),
+					_drop("Royal Gel", 0.99),
 				]),
 			],
 		},
@@ -131,10 +131,10 @@ func _ready() -> void:
 				]),
 			],
 			"elite": [
-				_make("Mad Necromancer", "elite", 1200, 90, 300, 600, {}, "sandling", .2, [
+				_make("Mad Necromancer", "elite", 1200, 40, 300, 600, {}, "sandling", .2, [
 					_drop("Bone Dust", 0.90),
 					_drop("Crystal Bone", 0.60),
-					_drop("Ancient Relic", 0.20),
+					_drop("Ancient Relic", 0.99),
 				]),
 			],
 		},

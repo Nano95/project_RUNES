@@ -16,7 +16,7 @@ func _ready() -> void:
 		_make("Orc Legs",    "Orc Legs",    {"Orc Leather": 10, "Copper Bar": 3},       "forge"),
 		_make("Orc Boots",   "Orc Boots",   {"Orc Leather": 10, "Copper Bar": 2},       "forge"),
 		_make("Orc King Shield",   "Orc King Shield",   {"Orc General Crest": 1, "Iron Bar": 2},       "forge"),
-		_make("Warchief Totem", "Warchief Totem", {"King's Tusk": 1, "Orc Leather": 5}, "forge"),
+		_make("Warchief Totem", "Warchief Totem", {"Orc General Crest": 1, "Orc Leather": 10}, "forge"),
 
 		# Slimy Set
 		_make("Slimy Helmet", "Slimy Helmet", {"Slime Gel": 8,  "Iron Bar": 2},              "forge"),
@@ -24,15 +24,16 @@ func _ready() -> void:
 		_make("Slimy Legs",   "Slimy Legs",   {"Slime Gel": 10, "Iron Bar": 2},              "forge"),
 		_make("Slimy Boots",  "Slimy Boots",  {"Slime Gel": 8,  "Iron Bar": 2},              "forge"),
 		_make("Slimy Blade",  "Slimy Blade",  {"Slime Core": 1, "Iron Bar": 3},              "forge"),
-		_make("Slimy Shield", "Slimy Shield", {"Slime Core": 1, "Slime Gel": 5, "Iron Bar": 2}, "forge"),
-
+		_make("Slimy Shield", "Slimy Shield", {"Slime Core": 3, "Slime Gel": 5, "Iron Bar": 2}, "forge"),
+		_make("Royal Totem", "Royal Totem", {"Slime Core": 5, "Slime Gel": 10}, "forge"),
+		
 		_make("Sandling Helmet", "Sandling Helmet", {"Crystal Bone": 1, "Iron Bar": 3}, "forge"),
 		_make("Sandling Armor",  "Sandling Armor",  {"Crystal Bone": 2, "Iron Bar": 4}, "forge"),
 		_make("Sandling Legs",   "Sandling Legs",   {"Bone Dust": 10,   "Iron Bar": 3}, "forge"),
 		_make("Sandling Boots",  "Sandling Boots",  {"Bone Dust": 8,    "Iron Bar": 2}, "forge"),
 		_make("Sandling Blade",  "Sandling Blade",  {"Crystal Bone": 1, "Iron Bar": 3}, "forge"),
 		_make("Sandling Shield", "Sandling Shield", {"Ancient Relic": 1,"Iron Bar": 2}, "forge"),
-		_make("Necromancer Totem", "Necromancer Totem", {"Ancient Relic": 1, "Bone Dust": 10}, "forge"),
+		_make("Necromancer Totem", "Necromancer Totem", {"Ancient Relic": 1, "Crystal Bone": 3}, "forge"),
 	]
 
 func _make(recipeName: String, resultItem: String, ingredients: Dictionary, category: String) -> BlacksmithRecipe:

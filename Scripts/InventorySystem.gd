@@ -3,6 +3,7 @@ class_name InventorySystem
 
 var main:MainNode
 @export var equipmentSystem:EquipmentSystem
+@export var combatSystem:CombatSystem
 
 func _ready() -> void:
 	main = Utils.get_main()
@@ -10,12 +11,22 @@ func _ready() -> void:
 	GameEvents.potionUsed.connect(onPotionUsed)
 
 # In InventorySystem.onItemDropped
-func onItemDropped(itemName: String) -> void:
+func onItemDropped(itemName: String , source: String) -> void:
 	var def = ItemRegistry.getEquipmentDef(itemName)
 	if def:
 		var instance = ItemRegistry.rollEquipmentInstance(itemName, true)
+		var grade = instance.get("grade", "")
+		var gradeStr = " [%s]" % grade if grade != "" else ""
+		if source == "combat":
+			GameEvents.eventLogged.emit(
+				"Looted: %s%s" % [itemName, gradeStr], "loot", false
+			)
 		addEquipmentToBackpack(instance)
 	else:
+		if source == "combat":
+			GameEvents.eventLogged.emit(
+				"Looted: %s" % itemName, "loot", false
+			)
 		addToBackpack(itemName)
 
 # ── BACKPACK ─────────────────────────────────────────────
@@ -91,19 +102,26 @@ func addEquipmentToBackpack(instance: Dictionary, fromPending: bool = false) -> 
 	var item = ItemRegistry.getItem(instance["name"])
 	if not item:
 		return false
-	if main.game_data.currentWeight + item.weight > main.game_data.maxWeight:
+	
+	# Check slot capacity
+	if main.game_data.backpack.size() >= main.game_data.backpackMax:
 		if (not fromPending and main.game_data.inArea):
-			_addToPendingLoot(instance.get("name", ""), 1)
-		GameEvents.eventLogged.emit("Too heavy to carry!", "system", false)
+			print("-- adding from pending")
+			_addEquipmentToPendingLoot(instance)
+		GameEvents.eventLogged.emit(
+			"Backpack full! %s left behind." % instance.get("name", ""), "system", false
+		)
 		return false
+	
+	# Check weight
 	if main.game_data.currentWeight + item.weight > main.game_data.maxWeight:
 		if (not fromPending and main.game_data.inArea):
-			_addToPendingLoot(instance.get("name", ""), 1)
+			_addEquipmentToPendingLoot(instance)
 		GameEvents.eventLogged.emit(
 			"Too heavy! %s left behind." % instance.get("name", ""), "system", false
 		)
-		
 		return false
+	
 	main.game_data.backpack.append(instance)
 	main.game_data.currentWeight += item.weight
 	main.save_game()
@@ -112,7 +130,6 @@ func addEquipmentToBackpack(instance: Dictionary, fromPending: bool = false) -> 
 	return true
 
 func removeFromBackpack(itemName: String, qty: int = 1) -> bool:
-	
 	if countInBackpack(itemName) < qty:
 		return false
 
@@ -143,13 +160,15 @@ func removeFromBackpack(itemName: String, qty: int = 1) -> bool:
 	return true
 
 func _addToPendingLoot(itemName: String, qty: int) -> void:
-	# If already in pending loot don't add again
 	for stack in main.game_data.pendingLoot:
-		if stack.get("name") == itemName:
+		if stack.get("name") == itemName and not stack.get("isEquipment", false):
 			stack["qty"] += qty
 			return
-	# Only add if not already there
 	main.game_data.pendingLoot.append({"name": itemName, "qty": qty})
+
+func _addEquipmentToPendingLoot(instance: Dictionary) -> void:
+	# Equipment is always unique — just append full instance
+	main.game_data.pendingLoot.append(instance)
 
 func emitInventoryChanged() -> void:
 	GameEvents.backpackChanged.emit()
@@ -180,18 +199,25 @@ func getBackpackSlotCount() -> int:
 
 # ── POTIONS ──────────────────────────────────────────────
 func onPotionUsed(itemName: String) -> void:
+	# Summon items — only consume if successful
+	if (itemName == "Warchief Totem" or itemName == "Royal Totem" or \
+		itemName == "Necromancer Totem"):
+		var success = combatSystem._handleSummon(itemName)
+		if success:
+			removeFromBackpack(itemName, 1)
+		return
+
 	var specialPotions = [
 		"Strength Brew", "Swiftness Tonic",
 		"Time Potion", "Regen Potion",
 		"Minor Battle Potion", "Battle Potion", "Great Battle Potion",
 		"Minor Foraging Potion", "Foraging Potion", "Great Foraging Potion",
-		"Minor Antidote", "Antidote", "Large Antidote"
+		"Minor Antidote", "Antidote", "Large Antidote",
 	]
-	# Special potions are handled by their respective systems -- otherwise we assume it's a healing potion
 	if specialPotions.has(itemName):
 		removeFromBackpack(itemName, 1)
 		return
-	
+
 	var maxHp = equipmentSystem.getMaxHp()
 	if main.game_data.hp >= maxHp:
 		GameEvents.eventLogged.emit("Already at full HP.", "system", false)
