@@ -33,6 +33,15 @@ class_name SaveData
 @export var chestMax: int = 15
 @export var savedGold: int = 0
 
+@export var totalAllocationPoints: int = 0
+@export var allocatedAtk: int = 0
+@export var allocatedDef: int = 0
+@export var allocatedHp: int = 0
+@export var allocatedWeight: int = 0
+@export var allocatedDodge: int = 0
+@export var allocatedTownRegen: int = 0
+@export var allocatedCheckpointRegen: int = 0
+
 @export var stats: Dictionary = {
 	"kills": {},
 	"deaths": 0,
@@ -231,6 +240,14 @@ class_name SaveData
 @export var equippedLock: Dictionary = {}
 @export var equippedScale: Dictionary = {}
 
+func getMaxWeight() -> float:
+	return maxWeight + (allocatedWeight * 3.0)
+
+func getAvailablePoints() -> int:
+	return totalAllocationPoints - allocatedAtk - allocatedDef - allocatedHp - \
+		   allocatedWeight - allocatedDodge - allocatedTownRegen - allocatedCheckpointRegen
+
+#============================
 @export_category("General")
 @export var loot_inventory:Dictionary = {
 }

@@ -36,7 +36,7 @@ func addToBackpack(itemName: String, qty: int = 1, fromPending: bool = false) ->
 		return false
 
 	var weightToAdd = item.weight * qty
-	if (main.game_data.currentWeight + weightToAdd > main.game_data.maxWeight):
+	if (main.game_data.currentWeight + weightToAdd > main.game_data.getMaxWeight()):
 		if (not fromPending and main.game_data.inArea):
 			_addToPendingLoot(itemName, qty)
 		GameEvents.eventLogged.emit(
@@ -114,7 +114,7 @@ func addEquipmentToBackpack(instance: Dictionary, fromPending: bool = false) -> 
 		return false
 	
 	# Check weight
-	if main.game_data.currentWeight + item.weight > main.game_data.maxWeight:
+	if main.game_data.currentWeight + item.weight > main.game_data.getMaxWeight():
 		if (not fromPending and main.game_data.inArea):
 			_addEquipmentToPendingLoot(instance)
 		GameEvents.eventLogged.emit(

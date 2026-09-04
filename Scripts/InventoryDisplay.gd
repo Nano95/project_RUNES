@@ -73,7 +73,7 @@ func refresh() -> void:
 func refreshWeight() -> void:
 	weightLabel.text = "Weight: %.1f / %.1f" % [
 		main.game_data.currentWeight,
-		main.game_data.maxWeight
+		main.game_data.getMaxWeight()
 	]
 
 func onItemSinglePressed(itemName: String, itemType: String) -> void:

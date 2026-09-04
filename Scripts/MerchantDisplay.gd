@@ -36,7 +36,7 @@ func _ready() -> void:
 
 func onClose() -> void:
 	Utils.animate_modal_exit(self)
-	Utils.animateButtonPress(buyButton)
+	Utils.animateButtonPress(closeButton)
 
 func open() -> void:
 	if main.game_data.inArea:

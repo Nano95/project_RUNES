@@ -11,6 +11,7 @@ class_name UIController
 @export var blacksmithButton: Button
 @export var bazaarButton: Button
 @export var expeditionButton: Button
+@export var castleButton: Button
 @export var debugButton: Button
 @export var areaButtons: Array[Button] = []
 @export var eventLogPanel: Panel
@@ -37,6 +38,7 @@ class_name UIController
 @export var alchemyDisplay: BrewDisplay
 @export var merchantDisplay: MerchantDisplay
 @export var blacksmithDisplay: BlacksmithDisplay
+@export var castleDisplay: CastleDisplay
 @export var checkPointDisplay: CheckpointOverlay
 @export var debugDisplay: DebugDisplay
 @export var areaSystem: AreaSystem
@@ -65,6 +67,7 @@ func _ready() -> void:
 	equipmentButton.pressed.connect(showEquipment)
 	eventLogButton.pressed.connect(showEventPanel)
 	merchantButton.pressed.connect(showMerchant)
+	castleButton.pressed.connect(showCastle)
 	blacksmithButton.pressed.connect(showBlacksmith)
 	debugButton.pressed.connect(debugDisplay.open)
 	expeditionButton.pressed.connect(showExpeditionMode)
@@ -113,6 +116,10 @@ func showMerchant() -> void:
 func showBlacksmith() -> void:
 	Utils.animateButtonPress(blacksmithButton)
 	blacksmithDisplay.open()
+
+func showCastle() -> void:
+	Utils.animateButtonPress(castleButton)
+	castleDisplay.open()
 
 func onAreaEntered(_areaName: String) -> void:
 	adventuringRow.visible = true

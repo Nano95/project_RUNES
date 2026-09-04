@@ -127,14 +127,18 @@ func getMaxHp() -> int:
 func getTotalAttack() -> int:
 	var weapon = main.game_data.equippedWeapon
 	if not weapon or weapon.is_empty():
-		return 0
-	return weapon.get("atkBonus", 0) + weapon.get("gradeBonus", 0)
+		return 0 + main.game_data.allocatedAtk
+	return weapon.get("atkBonus", 0) + \
+		   weapon.get("gradeBonus", 0) + \
+		   main.game_data.allocatedAtk
 
 func getTotalDefense() -> int:
 	var shield = main.game_data.equippedShield
 	if not shield or shield.is_empty():
-		return 0
-	return shield.get("defBonus", 0) + shield.get("gradeBonus", 0)
+		return 0 + main.game_data.allocatedDef
+	return shield.get("defBonus", 0) + \
+		   shield.get("gradeBonus", 0) + \
+		   main.game_data.allocatedDef
 
 func calculateMaxHp() -> int:
 	var total = main.game_data.baseHp
@@ -148,10 +152,12 @@ func calculateMaxHp() -> int:
 			continue
 		total += item.get("hpBonus", 0)
 		total += item.get("gradeHpBonus", 0)
+	total += main.game_data.allocatedHp * 5
 	return total
 
 func getDodgeChance() -> float:
-	return getTotalEffects().get("dodge", 0.0)
+	var baseDodge = getTotalEffects().get("dodge", 0.0)
+	return baseDodge + (main.game_data.allocatedDodge * 0.01)
 
 func getTotalEffects() -> Dictionary:
 	var total = {}

@@ -245,7 +245,7 @@ func moveToBackpackFromIndex(itemName: String, chestId: int, chestIndex: int, qt
 
 	var item = ItemRegistry.getItem(itemName)
 	if item:
-		if main.game_data.currentWeight + (item.weight * qty) > main.game_data.maxWeight:
+		if main.game_data.currentWeight + (item.weight * qty) > main.game_data.getMaxWeight():
 			GameEvents.eventLogged.emit("Backpack too heavy!", "system", false)
 			Utils.spawnFloatingLabel(
 				"Too heavy to carry!",

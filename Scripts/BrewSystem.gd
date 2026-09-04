@@ -39,7 +39,7 @@ func attemptBrew(ingredients: Dictionary) -> void:
 	# Check backpack can hold result
 	var resultItem = ItemRegistry.getItem(recipe.resultItem)
 	if resultItem:
-		if main.game_data.currentWeight + resultItem.weight > main.game_data.maxWeight:
+		if main.game_data.currentWeight + resultItem.weight > main.game_data.getMaxWeight():
 			GameEvents.eventLogged.emit(
 				"Brewed %s but your backpack is too heavy to carry it!" % recipe.resultItem,
 				"system", false

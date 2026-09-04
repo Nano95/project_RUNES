@@ -101,7 +101,7 @@ func claimReward(task: Dictionary) -> void:
 				"Task complete! +%d base HP" % task["rewardValue"], "town", false
 			)
 		"allocation":
-			main.game_data.availableAllocationPoints += task["rewardValue"]
+			main.game_data.totalAllocationPoints += task["rewardValue"]
 			GameEvents.eventLogged.emit(
 				"Task complete! +%d allocation points" % task["rewardValue"], "town", false
 			)

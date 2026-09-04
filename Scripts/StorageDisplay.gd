@@ -93,7 +93,7 @@ func refreshBackpack() -> void:
 
 	backpackWeightLabel.text = "%.1f / %.1f oz" % [
 		main.game_data.currentWeight,
-		main.game_data.maxWeight
+		main.game_data.getMaxWeight()
 	]
 	
 	var stacked = _getStacked(main.game_data.backpack)

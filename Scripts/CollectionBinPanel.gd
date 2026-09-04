@@ -82,7 +82,7 @@ func onWithdrawAllPressed() -> void:
 			remaining.append(stack)
 			# Check which reason
 			var item = ItemRegistry.getItem(itemName)
-			if item and main.game_data.currentWeight + (item.weight * qty) > main.game_data.maxWeight:
+			if item and main.game_data.currentWeight + (item.weight * qty) > main.game_data.getMaxWeight():
 				_logToExpedition("%s left in bin — too heavy." % itemName)
 			else:
 				_logToExpedition("%s left in bin — backpack full." % itemName)
