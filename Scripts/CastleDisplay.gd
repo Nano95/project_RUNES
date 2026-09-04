@@ -31,6 +31,8 @@ func _ready() -> void:
 	hpAddBtn.pressed.connect(func(): onAllocate("hp"))
 	weightAddBtn.pressed.connect(func(): onAllocate("weight"))
 	dodgeAddBtn.pressed.connect(func(): onAllocate("dodge"))
+	TownRegenAddBtn.pressed.connect(func(): onAllocate("townRegen"))
+	checkpointRegenAddBtn.pressed.connect(func(): onAllocate("checkpointRegen"))
 	resetBtn.pressed.connect(onReset)
 	closeBtn.pressed.connect(onClose)
 	hide()
@@ -49,7 +51,9 @@ func refresh() -> void:
 					main.game_data.allocatedDef - \
 					main.game_data.allocatedHp - \
 					main.game_data.allocatedWeight - \
-					main.game_data.allocatedDodge
+					main.game_data.allocatedDodge - \
+					main.game_data.allocatedTownRegen - \
+					main.game_data.allocatedCheckpointRegen
 
 	availablePointsLabel.text = "Available Points: %d" % available
 
@@ -97,13 +101,16 @@ func onAllocate(stat: String) -> void:
 		"atk":    main.game_data.allocatedAtk += 1
 		"def":    main.game_data.allocatedDef += 1
 		"hp":     main.game_data.allocatedHp += 1
-		"weight": main.game_data.allocatedWeight += 1
+		"weight": 
+			main.game_data.allocatedWeight += 1
+			GameEvents.weightChanged.emit()
 		"dodge":  main.game_data.allocatedDodge += 1
 		"townRegen": main.game_data.allocatedTownRegen += 1
 		"checkpointRegen": main.game_data.allocatedCheckpointRegen += 1
 
 	main.save_game()
 	GameEvents.equipmentChanged.emit()
+
 	GameEvents.eventLogged.emit(
 		"Allocated 1 point to %s." % stat.to_upper(), "town", false
 	)
@@ -127,6 +134,7 @@ func onReset() -> void:
 
 	main.save_game()
 	GameEvents.equipmentChanged.emit()
+	GameEvents.weightChanged.emit()
 	GameEvents.goldDeposited.emit(0)
 	GameEvents.eventLogged.emit(
 		"All allocation points reset for %dg." % RESET_COST, "town", false

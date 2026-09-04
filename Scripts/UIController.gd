@@ -78,15 +78,20 @@ func _ready() -> void:
 	areaNavPanel.hide()
 	adventuringRow.hide()
 	
+	
 	if (main.game_data.inArea):
 		onAreaEntered("")
 	else: showSafeZone()
+
+func updateCastleBtn() -> void:
+	castleButton.visible = main.game_data.totalAllocationPoints > 0
 
 func showSafeZone() -> void:
 	chooseAreaButton.visible = true
 	mainActionRow.show()
 	areaNavPanel.hide()
 	adventuringRow.hide()
+	updateCastleBtn()
 
 func showInventory() -> void:
 	inventoryPanel.visible = true
@@ -130,7 +135,6 @@ func onAreaEntered(_areaName: String) -> void:
 	call_deferred("resetPanelPositionMeta")
 
 func onContinuePressed() -> void:
-	showInventory()
 	GameEvents.eventLogged.emit("You press deeper...", "system", false)
 	GameEvents.checkpointContinued.emit()
 
@@ -140,13 +144,6 @@ func onRetreatPressed() -> void:
 func onAreaExited() -> void:
 	call_deferred("resetPanelPositionMeta")
 	showSafeZone()
-
-# replaced when redesigning the arrea buttons
-#func onAreaButtonPressed(idx: int) -> void:
-	#var areaName = main.game_data.unlockedAreas[idx]
-	#areaSelectRow.visible = false
-	#mainActionRow.visible = true
-	#areaSystem.enterArea(areaName)
 
 func onAreaUnlocked(areaName: String) -> void:
 	refreshAreaGrid()
@@ -160,8 +157,6 @@ func onAutoContinueToggled(isToggled:bool=false) -> void:
 
 func onChooseAreaPressed() -> void:
 	# Hide normal action row
-	mainActionRow.visible = false
-	#areaSelectRow.visible = true
 	mainActionRow.visible = false
 	areaNavPanel.visible = true
 	Utils.animateButtonBounce(areaDisplay)
@@ -221,6 +216,7 @@ func onAreaNavBackPressed() -> void:
 	mainActionRow.visible = true
 	eventLogPanel.visible = true
 	areaDisplay.visible = false
+	updateCastleBtn()
 	selectedArea = ""
 
 func onGoPressed() -> void:

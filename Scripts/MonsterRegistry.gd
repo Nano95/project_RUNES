@@ -6,7 +6,7 @@ func _ready() -> void:
 	areaMonsters = {
 		"Hunting Grounds": {
 			"weak": [
-				_make("Orcling", "weak", 15, 11, 1, 4, {}, "orc", .3, [
+				_make("Orcling", "weak", 15, 11, 1, 4, {}, "orc", .01, [
 					_drop("Orc Leather", 0.08),
 				]),
 				_make("Orc Grunt", "weak", 18, 12, 1, 5, {}, "orc", .01, [
@@ -131,7 +131,7 @@ func _ready() -> void:
 				]),
 			],
 			"elite": [
-				_make("Mad Necromancer", "elite", 1200, 40, 300, 600, {}, "sandling", .2, [
+				_make("Mad Necromancer", "elite", 1200, 48, 300, 600, {}, "sandling", .2, [
 					_drop("Bone Dust", 0.90),
 					_drop("Crystal Bone", 0.60),
 					_drop("Ancient Relic", 0.99),

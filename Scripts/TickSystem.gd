@@ -28,10 +28,13 @@ func _ready() -> void:
 	GameEvents.gatherStarted.connect(onGatherStarted)
 
 func onTick() -> void:
-	#print("Tick", main.game_data.inArea, checkpointPending, main.game_data.inCombat)
 	if (not main.game_data.inArea):
 		if (main.game_data.hp < equipmentSystem.cachedMaxHp):
-			main.game_data.hp += 1
+			var regenAmount = 1 + main.game_data.allocatedTownRegen
+			main.game_data.hp = min(
+				equipmentSystem.cachedMaxHp,
+				main.game_data.hp + regenAmount
+			)
 			GameEvents.hpChanged.emit()
 		return
 	if (checkpointPending):
@@ -161,8 +164,27 @@ func onCombatResolved(_a = null) -> void:
 
 func triggerCheckpoint() -> void:
 	checkpointPending = true
-	GameEvents.checkpointReached.emit()
 	updateAreaBestRun()
+	
+	# Checkpoint heal based on allocation
+	var baseHealPercent = 0.0  # base checkpoint heal, adjust as needed
+	var bonusHealPercent = main.game_data.allocatedCheckpointRegen * 0.02
+	var totalHealPercent = baseHealPercent + bonusHealPercent
+	if (totalHealPercent > 0):
+		var healAmount = int(equipmentSystem.cachedMaxHp * totalHealPercent)
+		if healAmount > 0:
+			main.game_data.hp = min(
+				equipmentSystem.cachedMaxHp,
+				main.game_data.hp + healAmount
+			)
+			GameEvents.hpChanged.emit()
+			GameEvents.eventLogged.emit(
+				"Restoring %d%% of max HP... %d HP restored!" % [
+					int(totalHealPercent * 100),
+					healAmount
+				], "gather", false
+			)
+	GameEvents.checkpointReached.emit()
 
 func onCheckpointContinued() -> void:
 	buildEventTable()
