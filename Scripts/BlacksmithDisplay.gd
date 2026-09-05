@@ -93,7 +93,6 @@ func onInventoryChanged() -> void:
 # ── CRAFT TAB ─────────────────────────────────────────────
 func onCraftTabPressed() -> void:
 	currentTab = "smelt"
-	selectedRecipe = null
 	enhancePanel.hide()
 	infoPanel.show() # crafts
 	refresh()
@@ -373,5 +372,4 @@ func onActionPressed() -> void:
 			return
 		var success = blacksmithSystem.craft(selectedRecipe)
 		if success:
-			selectedRecipe = null
 			refresh()

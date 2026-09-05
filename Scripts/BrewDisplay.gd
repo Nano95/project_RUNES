@@ -87,6 +87,7 @@ func canBrew(recipe: RecipeData) -> bool:
 	return true
 
 func onRecipeSelected(recipe: RecipeData) -> void:
+	print(" - recipe selected")
 	selectedRecipe = recipe
 	refreshInfo()
 	refreshBrewButton()
@@ -142,11 +143,19 @@ func refreshBrewButton() -> void:
 func onBrewPressed() -> void:
 	if not selectedRecipe:
 		return
-	brewSystem.attemptBrew(selectedRecipe.ingredients)
-	Utils.spawnFloatingLabel(
-		"+1 %s" % selectedRecipe["recipeName"],
-		Color("#27ae60"),
-		brewButton,
-		false
-	)
+	var result = brewSystem.attemptBrew(selectedRecipe.ingredients)
+	match result:
+		"success":
+			Utils.spawnFloatingLabel(
+				"+1 %s" % selectedRecipe["recipeName"],
+				Color("#27ae60"),
+				brewButton,
+				false
+			)
+		"too_heavy":
+			Utils.spawnFloatingLabel("Too heavy!", Color("#e74c3c"), brewButton, false)
+		"backpack_full":
+			Utils.spawnFloatingLabel("Backpack full!", Color("#e74c3c"), brewButton, false)
+		"missing_ingredients":
+			Utils.spawnFloatingLabel("Missing ingredients!", Color("#e74c3c"), brewButton, false)
 	refresh()

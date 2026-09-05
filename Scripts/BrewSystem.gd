@@ -11,8 +11,7 @@ func _ready() -> void:
 	GameEvents.timePotionUsed.connect(onTimePotionUsed)
 
 # ── BREWING ───────────────────────────────────────────────
-func attemptBrew(ingredients: Dictionary) -> void:
-
+func attemptBrew(ingredients: Dictionary) -> String:
 	# Check player has all ingredients
 	for itemName in ingredients:
 		var needed = ingredients[itemName]
@@ -21,31 +20,28 @@ func attemptBrew(ingredients: Dictionary) -> void:
 			GameEvents.eventLogged.emit(
 				"You don't have enough %s." % itemName, "system", false
 			)
-			return
+			return "missing_ingredients"
 
-	# Consume ingredients regardless of success
-	for itemName in ingredients:
-		inventorySystem.removeFromBackpack(itemName, ingredients[itemName])
-
-	# Find matching recipe
+	# Find matching recipe first before consuming
 	var recipe = RecipeRegistry.findRecipe(ingredients)
-	if not recipe:
-		GameEvents.eventLogged.emit(
-			"The mixture fizzles. Nothing useful comes of it.", "system", false
-		)
-		GameEvents.brewAttempted.emit(false, "")
-		return
 
-	# Check backpack can hold result
+	# Check weight BEFORE consuming
 	var resultItem = ItemRegistry.getItem(recipe.resultItem)
 	if resultItem:
 		if main.game_data.currentWeight + resultItem.weight > main.game_data.getMaxWeight():
 			GameEvents.eventLogged.emit(
-				"Brewed %s but your backpack is too heavy to carry it!" % recipe.resultItem,
-				"system", false
+				"Too heavy to carry %s!" % recipe.resultItem, "system", false
 			)
-			GameEvents.brewAttempted.emit(false, "")
-			return
+			return "too_heavy"
+		if main.game_data.backpack.size() >= main.game_data.backpackMax:
+			GameEvents.eventLogged.emit(
+				"Backpack full! Can't brew %s." % recipe.resultItem, "system", false
+			)
+			return "backpack_full"
+
+	# Now safe to consume ingredients
+	for itemName in ingredients:
+		inventorySystem.removeFromBackpack(itemName, ingredients[itemName])
 
 	# Add result to backpack
 	inventorySystem.addToBackpack(recipe.resultItem, 1)
@@ -62,8 +58,8 @@ func attemptBrew(ingredients: Dictionary) -> void:
 		GameEvents.eventLogged.emit(
 			"Brewed %s." % recipe.resultItem, "gather", false
 		)
-
 	GameEvents.brewAttempted.emit(true, recipe.resultItem)
+	return "success"
 
 # ── RECIPE DISCOVERY ──────────────────────────────────────
 func onRecipeDiscovered(recipeName: String) -> void:

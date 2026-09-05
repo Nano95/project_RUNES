@@ -9,16 +9,16 @@ var cachedMaxHp: int = 0
 
 const ENHANCEMENT_TABLE = [
 	# { "statBonus": int, "destroyChance": float, "material": String, "qty": int, "gold": int }
-	{ "statBonus": 1, "destroyChance": 0.1, "material": "Copper Bar", "qty": 0, "gold": 40  },  # +1
+	{ "statBonus": 1, "destroyChance": 0.05, "material": "Copper Bar", "qty": 0, "gold": 40  },  # +1
 	{ "statBonus": 1, "destroyChance": 0.1, "material": "Copper Bar", "qty": 0, "gold": 50  },  # +2
-	{ "statBonus": 1, "destroyChance": 0.2, "material": "Copper Bar", "qty": 0, "gold": 60  },  # +3
-	{ "statBonus": 1, "destroyChance": 0.2, "material": "Copper Bar", "qty": 0, "gold": 70  },  # +4
-	{ "statBonus": 1, "destroyChance": 0.3, "material": "Iron Bar", "qty": 0, "gold": 80 },  # +5
-	{ "statBonus": 2, "destroyChance": 0.3, "material": "Iron Bar", "qty": 0, "gold": 90 },  # +6
-	{ "statBonus": 2, "destroyChance": 0.4, "material": "Iron Bar", "qty": 0, "gold": 100 },  # +7
-	{ "statBonus": 2, "destroyChance": 0.5, "material": "Iron Bar", "qty": 0, "gold": 100 },  # +8
-	{ "statBonus": 2, "destroyChance": 0.6, "material": "Iron Bar", "qty": 0, "gold": 100 },  # +9
-	{ "statBonus": 2, "destroyChance": 0.7, "material": "Iron Bar", "qty": 0, "gold": 100 },  # +10
+	{ "statBonus": 1, "destroyChance": 0.1, "material": "Copper Bar", "qty": 0, "gold": 60  },  # +3
+	{ "statBonus": 1, "destroyChance": 0.15, "material": "Copper Bar", "qty": 0, "gold": 70  },  # +4
+	{ "statBonus": 1, "destroyChance": 0.2, "material": "Iron Bar", "qty": 0, "gold": 80 },  # +5
+	{ "statBonus": 2, "destroyChance": 0.25, "material": "Iron Bar", "qty": 0, "gold": 90 },  # +6
+	{ "statBonus": 2, "destroyChance": 0.3, "material": "Iron Bar", "qty": 0, "gold": 100 },  # +7
+	{ "statBonus": 2, "destroyChance": 0.35, "material": "Iron Bar", "qty": 0, "gold": 100 },  # +8
+	{ "statBonus": 2, "destroyChance": 0.4, "material": "Iron Bar", "qty": 0, "gold": 100 },  # +9
+	{ "statBonus": 2, "destroyChance": 0.5, "material": "Iron Bar", "qty": 0, "gold": 100 },  # +10
 ]
 
 const MAX_ENHANCEMENT = 10
