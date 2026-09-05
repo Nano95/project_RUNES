@@ -47,7 +47,7 @@ class_name UIController
 @export var autoContinueButton: Button
 
 var main:MainNode
-var selectedArea: String = ""
+var selectedArea: String = "Hunting Grounds"
 
 func _ready() -> void:
 	main = Utils.get_main()
@@ -199,9 +199,10 @@ func buildAreaButtons() -> void:
 		lbl.add_theme_font_size_override("font_size", 18)
 		areaNavFlow.add_child(lbl)
 
-	# Default to first unlocked area
+	# Default to first unlocked area only if no valid selection exists
 	if not unlocked.is_empty():
-		selectedArea = unlocked[0]
+		if selectedArea == "" or not unlocked.has(selectedArea):
+			selectedArea = unlocked[0]
 		areaDisplay.showArea(selectedArea)
 	
 
@@ -217,7 +218,6 @@ func onAreaNavBackPressed() -> void:
 	eventLogPanel.visible = true
 	areaDisplay.visible = false
 	updateCastleBtn()
-	selectedArea = ""
 
 func onGoPressed() -> void:
 	if selectedArea == "":
