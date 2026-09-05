@@ -33,6 +33,7 @@
 [ext_resource type="Script" uid="uid://dnx5jud3bj3h2" path="res://Scripts/MerchantDisplay.gd" id="16_cssra"]
 [ext_resource type="Script" uid="uid://dwxg2qpvawunx" path="res://Scripts/DebugDisplay.gd" id="16_px8ax"]
 [ext_resource type="Theme" uid="uid://3dmu3g4p1u1e" path="res://Resources/Themes/MainTheme.tres" id="17_g72ry"]
+[ext_resource type="Shader" uid="uid://bd58tbqxr7kll" path="res://Shaders/ColoredOutline.gdshader" id="17_jmrk2"]
 [ext_resource type="Script" uid="uid://cgaotmic06nj0" path="res://Scripts/BlacksmithDisplay.gd" id="17_shy7a"]
 [ext_resource type="Script" uid="uid://drl0whro730mg" path="res://Scripts/CheckpointOverlay.gd" id="18_cssra"]
 [ext_resource type="Script" uid="uid://c4msu72ry7ojh" path="res://Scripts/CollectionBinPanel.gd" id="19_4j0hr"]
@@ -154,6 +155,80 @@ shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4exnt"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n3a7j"]
+resource_local_to_scene = true
+shader = ExtResource("17_jmrk2")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 0.800000038
+shader_parameter/enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_njrmv"]
+resource_local_to_scene = true
+shader = ExtResource("17_jmrk2")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 0.800000038
+shader_parameter/enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dufdo"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5xwel"]
+resource_local_to_scene = true
+shader = ExtResource("17_jmrk2")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 0.800000038
+shader_parameter/enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8nfo3"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a3pjr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rn5g0"]
+resource_local_to_scene = true
+shader = ExtResource("17_jmrk2")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 0.800000038
+shader_parameter/enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pqu6s"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e3t7b"]
+resource_local_to_scene = true
+shader = ExtResource("17_jmrk2")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 0.800000038
+shader_parameter/enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ifl3x"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eacn3"]
+resource_local_to_scene = true
+shader = ExtResource("17_jmrk2")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 0.800000038
+shader_parameter/enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rp0fy"]
 resource_local_to_scene = true
 shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
@@ -1043,6 +1118,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EventLogPanel" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=863328441]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -1378,8 +1454,7 @@ theme_override_font_sizes/normal_font_size = 28
 bbcode_enabled = true
 scroll_following = true
 
-[node name="EquipmentDisplay" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=1407338151 node_paths=PackedStringArray("equipmentSystem", "itemModal", "statsPanel", "helmetBtn", "weaponBtn", "armorBtn", "shieldBtn", "legsBtn", "bootsBtn", "helmetTexture", "weaponTexture", "armorTexture", "shieldTexture", "legsTexture", "bootsTexture")]
-visible = false
+[node name="EquipmentDisplay" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=1407338151 node_paths=PackedStringArray("equipmentSystem", "itemModal", "statsPanel", "helmetBtn", "weaponBtn", "armorBtn", "shieldBtn", "legsBtn", "bootsBtn", "helmetTexture", "weaponTexture", "armorTexture", "shieldTexture", "legsTexture", "bootsTexture", "helmetGradeLabel", "weaponGradeLabel", "armorGradeLabel", "shieldGradeLabel", "legsGradeLabel", "bootsGradeLabel")]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -1400,6 +1475,12 @@ armorTexture = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/V
 shieldTexture = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Shield/Button/TextureRect")
 legsTexture = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW/Legs/Button/TextureRect")
 bootsTexture = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW2/Boots/Button/TextureRect")
+helmetGradeLabel = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/HEAD/Head/Button/Stats")
+weaponGradeLabel = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Weapon/Button/Stats")
+armorGradeLabel = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Armor/Button/Stats")
+shieldGradeLabel = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Shield/Button/Stats")
+legsGradeLabel = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW/Legs/Button/Stats")
+bootsGradeLabel = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW2/Boots/Button/Stats")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay" unique_id=1714579276]
 layout_mode = 1
@@ -1524,6 +1605,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/HEAD/Head/Button" unique_id=2031460533]
+material = SubResource("ShaderMaterial_n3a7j")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1532,6 +1614,23 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_8l5l1")
 stretch_mode = 5
+
+[node name="Stats" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/HEAD/Head/Button" unique_id=1872575197 instance=ExtResource("6_prt4a")]
+material = null
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 74.0
+offset_right = 0.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 50
+text = "[SS]"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Space2" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/HEAD" unique_id=1995110955]
 self_modulate = Color(1, 1, 1, 0)
@@ -1579,6 +1678,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Weapon/Button" unique_id=2051861856]
+material = SubResource("ShaderMaterial_njrmv")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1587,6 +1687,23 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_lbmfx")
 stretch_mode = 5
+
+[node name="Stats" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Weapon/Button" unique_id=858597646 instance=ExtResource("6_prt4a")]
+material = SubResource("ShaderMaterial_dufdo")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 74.0
+offset_right = 0.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 50
+text = "[SS]"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Armor" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE" unique_id=807602553]
 custom_minimum_size = Vector2(100, 100)
@@ -1605,6 +1722,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Armor/Button" unique_id=1219419037]
+material = SubResource("ShaderMaterial_5xwel")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1614,7 +1732,25 @@ grow_vertical = 2
 texture = ExtResource("14_4j0hr")
 stretch_mode = 5
 
+[node name="Stats" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Armor/Button" unique_id=370638129 instance=ExtResource("6_prt4a")]
+material = SubResource("ShaderMaterial_8nfo3")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 74.0
+offset_right = 0.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 50
+text = "[SS]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Shield" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE" unique_id=1430406743]
+material = SubResource("ShaderMaterial_a3pjr")
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1631,6 +1767,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Shield/Button" unique_id=206141397]
+material = SubResource("ShaderMaterial_rn5g0")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1639,6 +1776,23 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("15_8whxx")
 stretch_mode = 5
+
+[node name="Stats" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Shield/Button" unique_id=1915725886 instance=ExtResource("6_prt4a")]
+material = SubResource("ShaderMaterial_pqu6s")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 74.0
+offset_right = 0.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 50
+text = "[SS]"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Space2" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE" unique_id=1458746372]
 self_modulate = Color(1, 1, 1, 0)
@@ -1686,6 +1840,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW/Legs/Button" unique_id=1719264132]
+material = SubResource("ShaderMaterial_e3t7b")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1694,6 +1849,23 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("15_4j0hr")
 stretch_mode = 5
+
+[node name="Stats" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW/Legs/Button" unique_id=184956323 instance=ExtResource("6_prt4a")]
+material = SubResource("ShaderMaterial_ifl3x")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 74.0
+offset_right = 0.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 50
+text = "[SS]"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Space4" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW" unique_id=25724400]
 self_modulate = Color(1, 1, 1, 0)
@@ -1749,6 +1921,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW2/Boots/Button" unique_id=1431877242]
+material = SubResource("ShaderMaterial_eacn3")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1757,6 +1930,23 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("16_8whxx")
 stretch_mode = 5
+
+[node name="Stats" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW2/Boots/Button" unique_id=266300242 instance=ExtResource("6_prt4a")]
+material = SubResource("ShaderMaterial_rp0fy")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 74.0
+offset_right = 0.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 50
+text = "[SS]"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Space3" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW2" unique_id=1748346152]
 self_modulate = Color(1, 1, 1, 0)

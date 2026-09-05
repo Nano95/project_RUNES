@@ -18,7 +18,27 @@ class_name EquipmentDisplay
 @export var shieldTexture: TextureRect
 @export var legsTexture: TextureRect
 @export var bootsTexture: TextureRect
+@export var helmetGradeLabel: Label
+@export var weaponGradeLabel: Label
+@export var armorGradeLabel: Label
+@export var shieldGradeLabel: Label
+@export var legsGradeLabel: Label
+@export var bootsGradeLabel: Label
 var main:MainNode
+
+const OUTLINE_COLORS = {
+	0:  null,                    # no outline
+	1:  Color("#4fc3f7"),        # light blue
+	2:  Color("4facf7ff"),
+	3:  Color("4f9cf7ff"),
+	4:  Color("4f75f7ff"),
+	5:  Color("6d59b6ff"),        # purple
+	6:  Color("#9b59b6"),
+	7:  Color("e900e2ff"),
+	8:  Color("fc0d61ff"),        # pink
+	9:  Color("ff6e1fff"),        # red
+	10: Color("#FFD700"),        # gold
+}
 
 func _ready() -> void:
 	main = Utils.get_main()
@@ -35,21 +55,24 @@ func _ready() -> void:
 	#refresh()
 
 func refresh() -> void:
-	_updateSlot(helmetBtn, "helmet", helmetTexture)
-	_updateSlot(weaponBtn, "weapon", weaponTexture)
-	_updateSlot(armorBtn,  "armor",  armorTexture)
-	_updateSlot(shieldBtn, "shield", shieldTexture)
-	_updateSlot(legsBtn,   "legs",   legsTexture)
-	_updateSlot(bootsBtn,  "boots",  bootsTexture)
+	_updateSlot(helmetBtn, "helmet", helmetTexture, helmetGradeLabel)
+	_updateSlot(weaponBtn, "weapon", weaponTexture, weaponGradeLabel)
+	_updateSlot(armorBtn,  "armor",  armorTexture, armorGradeLabel)
+	_updateSlot(shieldBtn, "shield", shieldTexture, shieldGradeLabel)
+	_updateSlot(legsBtn,   "legs",   legsTexture, legsGradeLabel)
+	_updateSlot(bootsBtn,  "boots",  bootsTexture, bootsGradeLabel)
 	refreshStatsPanel()
 
-func _updateSlot(_btn: Button, slot: String, textureRect: TextureRect) -> void:
+func _updateSlot(_btn: Button, slot: String, textureRect: TextureRect, gradeLabel: Label) -> void:
 	var equipped = equipmentSystem.getEquippedSlot(slot)
 	if not equipped or equipped.is_empty():
 		textureRect.texture = null
+		_updateGradeBadge(gradeLabel, {})
 	else:
 		@warning_ignore("static_called_on_instance")
 		textureRect.texture = ItemRegistry.getSprite(equipped.get("name", ""))
+		_updateGradeBadge(gradeLabel, equipped)
+		_applyEnhancementOutline(textureRect, equipped)
 
 func onSlotPressed(slot: String) -> void:
 	Utils.animateButtonPress(helmetBtn if slot == "helmet" else \
@@ -81,3 +104,31 @@ func refreshStatsPanel() -> void:
 
 	statsPanel.bbcode_enabled = true
 	statsPanel.text = text
+
+func _applyEnhancementOutline(textureRect: TextureRect, instance: Dictionary) -> void:
+	var enh = instance.get("enhancement", 0)
+	var color = OUTLINE_COLORS.get(enh, null)
+	
+	var mat = textureRect.material as ShaderMaterial
+	if not mat:
+		return
+	
+	if color == null or enh == 0:
+		mat.set_shader_parameter("enabled", false)
+	else:
+		mat.set_shader_parameter("enabled", true)
+		mat.set_shader_parameter("outline_color", color)
+
+func _updateGradeBadge(gradeLabel: Label, instance: Dictionary) -> void:
+	var grade = instance.get("grade", "")
+	if grade == "":
+		gradeLabel.visible = false
+		return
+	gradeLabel.visible = true
+	gradeLabel.text = "[%s]" % grade
+	match grade:
+		"SS": gradeLabel.self_modulate = Color("#FFD700")
+		"S":  gradeLabel.self_modulate = Color("#fc0d61ff")
+		"A":  gradeLabel.self_modulate = Color("#9b59b6")
+		"B":  gradeLabel.self_modulate = Color("#4f9cf7ff")
+		_:    gradeLabel.self_modulate = Color("#ffffff")

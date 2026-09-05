@@ -106,7 +106,6 @@ func addEquipmentToBackpack(instance: Dictionary, fromPending: bool = false) -> 
 	# Check slot capacity
 	if main.game_data.backpack.size() >= main.game_data.backpackMax:
 		if (not fromPending and main.game_data.inArea):
-			print("-- adding from pending")
 			_addEquipmentToPendingLoot(instance)
 		GameEvents.eventLogged.emit(
 			"Backpack full! %s left behind." % instance.get("name", ""), "system", false
@@ -203,7 +202,6 @@ func onPotionUsed(itemName: String) -> void:
 	if (itemName == "Warchief Totem" or itemName == "Royal Totem" or \
 		itemName == "Necromancer Totem"):
 		var success = combatSystem._handleSummon(itemName)
-		print("- test", success)
 		if success:
 			removeFromBackpack(itemName, 1)
 		return

@@ -256,7 +256,6 @@ func removeItemFromBackpack(item: Dictionary) -> void:
 	else:
 		inventorySystem.removeFromBackpack(item.get("name", ""), 1)
 	
-	print(getItemDisplayName(item))
 	main.game_data.currentWeight = max(
 		0.0, main.game_data.currentWeight - ItemRegistry.getItem(item.get("name", "")).weight
 	)

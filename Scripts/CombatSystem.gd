@@ -4,14 +4,13 @@ class_name CombatSystem
 const OMENS = [
 	"You feel watched.",
 	"A strong presence looms nearby.",
-	"The air grows heavy. Something ancient stirs.",
 	"The forest falls completely silent.",
-	"A shadow passes overhead — nothing is there.",
 ]
 
 const ELITE_OMENS = {
 	"Hunting Grounds": "A war horn echoes in the distance...",
 	"Slime Swamps": "The swamp goes eerily silent. Something massive approaches.",
+	"Sandling Dunes": "A deep evil fills you with the feeling of doom.",
 }
 
 const SUMMON_AREAS = {
@@ -334,9 +333,6 @@ func applyAntidote(reduction: int) -> void:
 	GameEvents.hpChanged.emit()
 
 func _handleSummon(itemName: String) -> bool:
-	print("=== _handleSummon called: ", itemName)
-	print("pendingStrongMonsterIn: ", pendingStrongMonsterIn)
-	print("summonedElitePending: ", summonedElitePending)
 	var requiredArea = SUMMON_AREAS.get(itemName, "")
 	if main.game_data.currentArea != requiredArea:
 		GameEvents.eventLogged.emit(

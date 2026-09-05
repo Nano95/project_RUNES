@@ -97,11 +97,11 @@ func refreshItemList() -> void:
 		btn.text = "%s%s%s" % [instance.get("name", ""), gradeStr, enhStr]
 		#btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		match grade:
-			"SS": btn.add_theme_color_override("font_color", Color("fa0c81ff"))
-			"S": btn.add_theme_color_override("font_color", Color("#FFD700"))
-			"A": btn.add_theme_color_override("font_color", Color("#4fc3f7"))
-			"B": btn.add_theme_color_override("font_color", Color("#aaaaaa"))
-			_:   btn.add_theme_color_override("font_color", Color("#ffffff"))
+			"SS": btn.self_modulate = Color("#FFD700")
+			"S": btn.self_modulate = Color("#fc0d61ff")
+			"A": btn.self_modulate = Color("#9b59b6")
+			"B": btn.self_modulate = Color("#4f9cf7ff")
+			_:   btn.self_modulate = Color("#ffffff")
 		btn.pressed.connect(onItemSelected.bind(instance))
 		
 		if (isEquipped and count == 0):
@@ -147,11 +147,11 @@ func refreshInfoPanel() -> void:
 	]
 
 	match grade:
-		"SS": itemInfoName.add_theme_color_override("font_color", Color("fa0c81ff"))
-		"S": itemInfoName.add_theme_color_override("font_color", Color("#FFD700"))
-		"A": itemInfoName.add_theme_color_override("font_color", Color("#4fc3f7"))
-		"B": itemInfoName.add_theme_color_override("font_color", Color("#aaaaaa"))
-		_:   itemInfoName.add_theme_color_override("font_color", Color("#ffffff"))
+		"SS": itemInfoName.self_modulate = Color("#FFD700")
+		"S": itemInfoName.self_modulate = Color("#fc0d61ff")
+		"A": itemInfoName.self_modulate = Color("#9b59b6")
+		"B": itemInfoName.self_modulate = Color("#4f9cf7ff")
+		_:   itemInfoName.self_modulate = Color("#ffffff")
 
 	itemInfoStat.text = _getStatSummary(selectedInstance)
 
