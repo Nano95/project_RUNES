@@ -450,36 +450,33 @@ func buildEventTable() -> void:
 			]
 		"Forsaken Keep":
 			eventWeights = [
-				{ "event": "nothing_a",   "weight": 10 },
-				{ "event": "nothing_b",   "weight": 13 },
-				{ "event": "monster",     "weight": 33 }, # heavily monster focused
-				{ "event": "forage",      "weight": 6  }, # barely any foraging
+				{ "event": "nothing_a",   "weight": 8  },
+				{ "event": "nothing_b",   "weight": 15 },
+				{ "event": "monster",     "weight": 23 },
+				{ "event": "forage",      "weight": 20 },
 				{ "event": "potion_gold", "weight": goldPotionChance },
-				{ "event": "trap",        "weight": 16 }, # lots of traps
-				{ "event": "nothing_c",   "weight": 20 }, # eerie silence
+				{ "event": "trap",        "weight": 4   },
+				{ "event": "nothing_c",   "weight": 15 },
 			]
 		"Ashfield Ruins":
 			eventWeights = [
-				{ "event": "nothing_a",   "weight": 10 },
+				{ "event": "nothing_a",   "weight": 8  },
 				{ "event": "nothing_b",   "weight": 15 },
-				{ "event": "monster",     "weight": 35 },
-				{ "event": "forage",      "weight": 5  },
+				{ "event": "monster",     "weight": 23 },
+				{ "event": "forage",      "weight": 20 },
 				{ "event": "potion_gold", "weight": goldPotionChance },
-				{ "event": "trap",        "weight": 10 },
+				{ "event": "trap",        "weight": 4   },
 				{ "event": "nothing_c",   "weight": 15 },
 			]
 		_: # default fallback
 			eventWeights = [
 				{ "event": "nothing_a",   "weight": 8  },
-				{ "event": "nothing_b",   "weight": 20 },
-				{ "event": "monster",     "weight": 24 },
-				{ "event": "ore",         "weight": 12 },
-				{ "event": "forage",      "weight": 10 },
-				{ "event": "wood",        "weight": 8  },
+				{ "event": "nothing_b",   "weight": 15 },
+				{ "event": "monster",     "weight": 23 },
+				{ "event": "forage",      "weight": 20 },
 				{ "event": "potion_gold", "weight": goldPotionChance },
-				{ "event": "dungeon",     "weight": 4  },
-				{ "event": "trap",        "weight": 4  },
-				{ "event": "nothing_c",   "weight": 10 },
+				{ "event": "trap",        "weight": 4   },
+				{ "event": "nothing_c",   "weight": 15 },
 			]
 	# Cache total
 	eventWeightsTotal = 0

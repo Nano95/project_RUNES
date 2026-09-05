@@ -46,6 +46,7 @@
 [ext_resource type="Script" uid="uid://lua0kwyswmk4" path="res://Scripts/MerchantSystem.gd" id="29_px8ax"]
 [ext_resource type="Theme" uid="uid://tt0s7xdrosew" path="res://Resources/Themes/Subtheme_Panel_Contrast.tres" id="29_tjyrn"]
 [ext_resource type="Script" uid="uid://kilw6u3p8wgc" path="res://Scripts/BlacksmithSystem.gd" id="31_ipr08"]
+[ext_resource type="Theme" uid="uid://8r5ssgxq3al0" path="res://Resources/Themes/Subtheme_Panel_Pips.tres" id="32_2ul0n"]
 [ext_resource type="Script" uid="uid://xd1esmbao78" path="res://Scripts/BazaarSystem.gd" id="32_ipr08"]
 [ext_resource type="Script" uid="uid://chso41vx1n5g7" path="res://Scripts/ExpeditionSystem.gd" id="39_lbmfx"]
 [ext_resource type="Script" uid="uid://c3i3ww6xxsogw" path="res://Scripts/ExpeditionTimeline.gd" id="40_1q78x"]
@@ -2483,7 +2484,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EquipmentContainer" type="VBoxContainer" parent="UIController/ItemActionContainer/ItemActionModal" unique_id=673012667]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2496,6 +2496,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UIController/ItemActionContainer/ItemActionModal/EquipmentContainer" unique_id=159702091]
+visible = false
 layout_mode = 2
 
 [node name="SelectedType" parent="UIController/ItemActionContainer/ItemActionModal/EquipmentContainer/HBoxContainer" unique_id=1666232021 instance=ExtResource("6_prt4a")]
@@ -2569,6 +2570,7 @@ theme_override_font_sizes/normal_font_size = 28
 bbcode_enabled = true
 text = "[right]^ -30 ATK[/right]"
 scroll_following = true
+horizontal_alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UIController/ItemActionContainer/ItemActionModal" unique_id=1470706122]
 layout_mode = 1
@@ -3707,52 +3709,52 @@ theme = ExtResource("17_g72ry")
 [node name="Pip1" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=1720618154]
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
-theme = ExtResource("17_g72ry")
+theme = ExtResource("32_2ul0n")
 
 [node name="Pip2" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=460349595]
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
-theme = ExtResource("17_g72ry")
+theme = ExtResource("32_2ul0n")
 
 [node name="Pip3" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=456462551]
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
-theme = ExtResource("17_g72ry")
+theme = ExtResource("32_2ul0n")
 
 [node name="Pip4" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=572913584]
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
-theme = ExtResource("17_g72ry")
+theme = ExtResource("32_2ul0n")
 
 [node name="Pip5" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=1600818902]
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
-theme = ExtResource("17_g72ry")
+theme = ExtResource("32_2ul0n")
 
 [node name="Pip6" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=737428761]
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
-theme = ExtResource("17_g72ry")
+theme = ExtResource("32_2ul0n")
 
 [node name="Pip7" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=2075332459]
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
-theme = ExtResource("17_g72ry")
+theme = ExtResource("32_2ul0n")
 
 [node name="Pip8" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=2108956423]
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
-theme = ExtResource("17_g72ry")
+theme = ExtResource("32_2ul0n")
 
 [node name="Pip9" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=1297365698]
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
-theme = ExtResource("17_g72ry")
+theme = ExtResource("32_2ul0n")
 
 [node name="Pip10" type="Panel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer/PipsContainer" unique_id=136561687]
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
-theme = ExtResource("17_g72ry")
+theme = ExtResource("32_2ul0n")
 
 [node name="Instructions" type="RichTextLabel" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/EnhancementInfoPanel/VBoxContainer" unique_id=517871733]
 self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)

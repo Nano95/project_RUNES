@@ -307,10 +307,10 @@ func refreshEnhanceDetail() -> void:
 
 	if statType == "weapon":
 		statLabel = "ATK"
-		current = selectedEquip.get("atkBonus", 0)
+		current = selectedEquip.get("atkBonus", 0) + selectedEquip.get("gradeBonus", 0)
 	elif statType == "shield":
 		statLabel = "DEF"
-		current = selectedEquip.get("defBonus", 0)
+		current = selectedEquip.get("defBonus", 0) + selectedEquip.get("gradeBonus", 0)
 	elif statType == "boots":
 		statLabel = "DODGE"
 		var currentDodge = selectedEquip.get("effects", {}).get("dodge", 0.0) * 100
@@ -322,7 +322,7 @@ func refreshEnhanceDetail() -> void:
 		return
 	else:
 		statLabel = "HP"
-		current = selectedEquip.get("hpBonus", 0)
+		current = selectedEquip.get("hpBonus", 0) + selectedEquip.get("gradeHpBonus", 0)
 
 	enhanceStatLabel.bbcode_enabled = true
 	enhanceStatLabel.text = "[color=#888888]%s[/color] [color=#ffffff]%d[/color] → [color=#27ae60]%d[/color]" % [
@@ -334,7 +334,7 @@ func _updatePips(level: int) -> void:
 				enhancePip6, enhancePip7, enhancePip8, enhancePip9, enhancePip10]
 	for i in pips.size():
 		if pips[i]:
-			pips[i].modulate = Color("#c8880a") if i < level else Color("#444444")
+			pips[i].modulate = Color("f6ee56ff") if i < level else Color("5b5b5bff")
 
 # ── ACTION BUTTON ─────────────────────────────────────────
 func refreshActionButton() -> void:

@@ -203,6 +203,7 @@ func onPotionUsed(itemName: String) -> void:
 	if (itemName == "Warchief Totem" or itemName == "Royal Totem" or \
 		itemName == "Necromancer Totem"):
 		var success = combatSystem._handleSummon(itemName)
+		print("- test", success)
 		if success:
 			removeFromBackpack(itemName, 1)
 		return

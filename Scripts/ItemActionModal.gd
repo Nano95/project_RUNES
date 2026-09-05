@@ -119,15 +119,15 @@ func showEquipmentComparison(instance: Dictionary) -> void:
 	if not instance.get("isEquipment", false):
 		compareContainer.visible = false
 		return
-
 	compareContainer.visible = true
 	var slot = instance.get("slot", "")
 	var enhancement = instance.get("enhancement", 0)
 	var enh = " +%d" % enhancement if enhancement > 0 else ""
-	var twoHanded = " [2H]" if instance.get("twoHanded", false) else ""
+	var grade = instance.get("grade", "")
+	var gradeStr = " [%s]" % grade if grade != "" else ""
 
 	# Selected item
-	itemNameLabel.text = "%s%s%s" % [instance.get("name", ""), enh, twoHanded]
+	itemNameLabel.text = "%s%s%s" % [instance.get("name", ""), gradeStr, enh]
 
 	# Currently equipped in that slot
 	var equipped = equipmentSystem.getEquippedSlot(slot)
@@ -136,12 +136,62 @@ func showEquipmentComparison(instance: Dictionary) -> void:
 		equippedNameStatValue.text = ""
 		compareStats.bbcode_enabled = true
 		compareStats.text = "[color=#888888]Nothing equipped[/color]"
-	else:
-		var curBonus = equipped.get("statBonus", 0) + equipped.get("enhancement", 0)
-		var curEnh = " +%d" % equipped.get("enhancement", 0) if equipped.get("enhancement", 0) > 0 else ""
-		equippedName.text = "Equipped: %s%s" % [equipped.get("name", ""), curEnh]
-		equippedNameStatValue.text = "+%d" % curBonus
+		return
 
+	var curGrade = equipped.get("grade", "")
+	var curGradeStr = " [%s]" % curGrade if curGrade != "" else ""
+	var curEnh = equipped.get("enhancement", 0)
+	var curEnhStr = " +%d" % curEnh if curEnh > 0 else ""
+	equippedName.text = "Equipped: %s%s%s" % [equipped.get("name", ""), curGradeStr, curEnhStr]
+
+	# Build stat comparison
+	compareStats.bbcode_enabled = true
+	var text = ""
+
+	# Primary stat comparison based on slot
+	if slot == "weapon":
+		var newAtk = instance.get("atkBonus", 0) + instance.get("gradeBonus", 0)
+		var curAtk = equipped.get("atkBonus", 0) + equipped.get("gradeBonus", 0)
+		text += _compareStatLine("ATK", curAtk, newAtk)
+	elif slot == "shield":
+		var newDef = instance.get("defBonus", 0) + instance.get("gradeBonus", 0)
+		var curDef = equipped.get("defBonus", 0) + equipped.get("gradeBonus", 0)
+		text += _compareStatLine("DEF", curDef, newDef)
+	else:
+		var newHp = instance.get("hpBonus", 0) + instance.get("gradeHpBonus", 0)
+		var curHp = equipped.get("hpBonus", 0) + equipped.get("gradeHpBonus", 0)
+		text += _compareStatLine("HP", curHp, newHp)
+
+	# Dodge comparison for boots
+	if slot == "boots":
+		var newDodge = instance.get("effects", {}).get("dodge", 0.0)
+		var curDodge = equipped.get("effects", {}).get("dodge", 0.0)
+		text += _compareStatLineFloat("DODGE", curDodge * 100, newDodge * 100, "%")
+
+	# Poison resistance comparison
+	var newPR = instance.get("effects", {}).get("poisonResistance", 0.0)
+	var curPR = equipped.get("effects", {}).get("poisonResistance", 0.0)
+	if newPR > 0 or curPR > 0:
+		text += _compareStatLineFloat("POISON RES", curPR * 100, newPR * 100, "%")
+
+	compareStats.text = text
+	equippedNameStatValue.text = ""
+
+func _compareStatLine(label: String, current: int, incoming: int) -> String:
+	var diff = incoming - current
+	var diffColor = "#27ae60" if diff > 0 else "#e74c3c" if diff < 0 else "#888888"
+	var diffStr = "+%d" % diff if diff > 0 else "%d" % diff if diff < 0 else "="
+	return "[color=#888888]%s[/color]  %d → %d  [color=%s](%s)[/color]\n" % [
+		label, current, incoming, diffColor, diffStr
+	]
+
+func _compareStatLineFloat(label: String, current: float, incoming: float, suffix: String) -> String:
+	var diff = incoming - current
+	var diffColor = "#27ae60" if diff > 0 else "#e74c3c" if diff < 0 else "#888888"
+	var diffStr = "+%.1f%s" % [diff, suffix] if diff > 0 else "%.1f%s" % [diff, suffix] if diff < 0 else "="
+	return "[color=#888888]%s[/color]  %.1f%s → %.1f%s  [color=%s](%s)[/color]\n" % [
+		label, current, suffix, incoming, suffix, diffColor, diffStr
+	]
 
 func cancelPressed() -> void:
 	onClose()

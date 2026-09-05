@@ -76,13 +76,6 @@ func refreshWeight() -> void:
 		main.game_data.getMaxWeight()
 	]
 
-func onItemSinglePressed(itemName: String, itemType: String) -> void:
-	if (longPressTimer.time_left > 0):
-		return
-	if (itemType == "potion"):
-		GameEvents.itemInspected.emit(itemName)
-		GameEvents.potionUsed.emit(itemName)
-
 func onItemButtonDown(itemName: String, stackIndex: int) -> void:
 	isPressingDown = true
 	longPressTarget = itemName
@@ -94,7 +87,7 @@ func onItemButtonUp(itemName: String, itemType: String) -> void:
 	if not longPressTimer.is_stopped():
 		longPressTimer.stop()
 		# Was a short tap
-		if itemType == "potion":
+		if (itemType == "potion" or itemType == "summon"):
 			call_deferred("emitPotionUsed", itemName)
 
 func emitPotionUsed(itemName: String) -> void:

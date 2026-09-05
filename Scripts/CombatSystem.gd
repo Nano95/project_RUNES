@@ -285,8 +285,8 @@ func onPotionUsed(itemName: String) -> void:
 			applyAntidote(20)
 		"Large Antidote":
 			applyAntidote(30)
-		"Warchief Totem", "Necromancer Totem":
-			_handleSummon(itemName)
+		#"Warchief Totem", "Royal Totem" ,"Necromancer Totem": handled in inventorySystem
+			#
 
 func applyStatusEffects(monster: MonsterData) -> void:
 	var totalEffects = equipmentSystem.getTotalEffects()
@@ -334,6 +334,9 @@ func applyAntidote(reduction: int) -> void:
 	GameEvents.hpChanged.emit()
 
 func _handleSummon(itemName: String) -> bool:
+	print("=== _handleSummon called: ", itemName)
+	print("pendingStrongMonsterIn: ", pendingStrongMonsterIn)
+	print("summonedElitePending: ", summonedElitePending)
 	var requiredArea = SUMMON_AREAS.get(itemName, "")
 	if main.game_data.currentArea != requiredArea:
 		GameEvents.eventLogged.emit(
