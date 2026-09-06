@@ -1118,7 +1118,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EventLogPanel" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=863328441]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -1455,6 +1454,7 @@ bbcode_enabled = true
 scroll_following = true
 
 [node name="EquipmentDisplay" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=1407338151 node_paths=PackedStringArray("equipmentSystem", "itemModal", "statsPanel", "helmetBtn", "weaponBtn", "armorBtn", "shieldBtn", "legsBtn", "bootsBtn", "helmetTexture", "weaponTexture", "armorTexture", "shieldTexture", "legsTexture", "bootsTexture", "helmetGradeLabel", "weaponGradeLabel", "armorGradeLabel", "shieldGradeLabel", "legsGradeLabel", "bootsGradeLabel")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -2370,9 +2370,10 @@ anchor_bottom = 0.5
 offset_left = -345.0
 offset_top = -140.0
 offset_right = 345.0
-offset_bottom = 138.0
+offset_bottom = 183.5
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_stretch_ratio = 0.0
 theme = ExtResource("17_g72ry")
 
@@ -2405,9 +2406,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
-offset_top = 40.5
+offset_top = 49.5
 offset_right = -8.0
-offset_bottom = 47.5
+offset_bottom = 56.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -2429,9 +2430,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
-offset_top = -189.0
+offset_top = -220.0
 offset_right = -19.0
-offset_bottom = -71.0
+offset_bottom = -102.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 10
@@ -2463,7 +2464,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
-offset_top = -60.0
+offset_top = -91.0
 offset_right = -11.0
 offset_bottom = -11.0
 grow_horizontal = 2
@@ -2477,9 +2478,10 @@ alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="UIController/CheckpointOverlay/Panel/HBoxContainer2" unique_id=889409963]
 self_modulate = Color(0.93818855, 0.94140625, 0.529541, 1)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 1
+size_flags_vertical = 4
 value = 72.0
 show_percentage = false
 
@@ -2490,8 +2492,8 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = 139.5
-offset_bottom = 410.0
+offset_top = 186.5
+offset_bottom = 457.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -2630,6 +2632,7 @@ offset_right = 345.0
 offset_bottom = 180.375
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_stretch_ratio = 0.0
 theme = ExtResource("17_g72ry")
 
@@ -2850,6 +2853,7 @@ offset_right = 345.0
 offset_bottom = 473.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_stretch_ratio = 0.0
 theme = ExtResource("17_g72ry")
 
@@ -3676,6 +3680,7 @@ offset_right = 345.0
 offset_bottom = 473.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_stretch_ratio = 0.0
 theme = ExtResource("17_g72ry")
 
@@ -4038,6 +4043,7 @@ offset_right = 345.0
 offset_bottom = 473.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_stretch_ratio = 0.0
 theme = ExtResource("17_g72ry")
 
@@ -4231,6 +4237,7 @@ offset_right = 345.0
 offset_bottom = 602.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_stretch_ratio = 0.0
 theme = ExtResource("17_g72ry")
 
@@ -4332,6 +4339,7 @@ offset_right = 345.0
 offset_bottom = 625.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_stretch_ratio = 0.0
 theme = ExtResource("17_g72ry")
 
@@ -4665,6 +4673,7 @@ offset_right = 345.0
 offset_bottom = 160.25
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_stretch_ratio = 0.0
 theme = ExtResource("17_g72ry")
 
@@ -4794,6 +4803,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15

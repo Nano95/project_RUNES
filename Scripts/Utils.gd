@@ -329,33 +329,65 @@ func spawn_reward_label(pos: Vector2, amount: int) -> void:
 func animate_modal_entry(node: CanvasItem, duration := 0.15, offset := 10.0):
 	if not node:
 		return
-
-	var original_y = node.position.y  # capture BEFORE moving
-	var tween := node.get_tree().create_tween().set_parallel(true)
+	
+	# Expect node to be the ColorRect container
+	# mainPanel is the first child
+	var colorRect = node
+	var mainPanel = node.get_child(0) if node.get_child_count() > 0 else null
+	
+	var original_y = mainPanel.position.y if mainPanel else 0.0
+	
+	# Set initial state
 	node.modulate.a = 0.0
-	node.position.y = original_y - offset  # start above
 	node.visible = true
-	tween.tween_property(node, "modulate:a", 1.0, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(node, "position:y", node.position.y + offset, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	if mainPanel:
+		mainPanel.position.y = original_y - offset
+		mainPanel.scale = Vector2(1.35, 1.35)
+	
+	# Set shader lod to 0
+	if colorRect is ColorRect and colorRect.material is ShaderMaterial:
+		colorRect.material.set_shader_parameter("lod", 0.0)
+	
+	var tween = node.get_tree().create_tween().set_parallel(true)
+	
+	# Fade in container
+	tween.tween_property(node, "modulate:a", 1.0, duration) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	# Blur ramp up
+	if colorRect is ColorRect and colorRect.material is ShaderMaterial:
+		tween.tween_method(
+			func(val: float): colorRect.material.set_shader_parameter("lod", val),
+			0.0, 3.0, duration
+		).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	# Panel slide up + scale punch
+	if mainPanel:
+		tween.tween_property(mainPanel, "position:y", original_y, duration) \
+			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		tween.tween_property(mainPanel, "scale", Vector2(1.0, 1.0), duration) \
+			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
-func animate_modal_exit(node: CanvasItem, duration := 0.15, offset := 10.0, should_free:bool=false):
+func animate_modal_exit(node: CanvasItem, duration := 0.15) -> void:
 	if not node:
 		return
 	
-	var original_y = node.position.y  # capture BEFORE moving
-	var tween := node.get_tree().create_tween().set_parallel(true)
-
-	tween.tween_property(node, "modulate:a", 0.0, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(node, "position:y", original_y - offset, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	tween.set_parallel(false) # need to do this for some reason the below things will get called immediately otherwise
+	var colorRect = node
+	var tween = node.get_tree().create_tween().set_parallel(true)
 	
-	if (should_free):
-		tween.tween_callback(node.queue_free)  # delete after anim completes
-	else:
-		tween.tween_callback(func():
-			node.hide()
-			node.position.y = original_y  # restore position after hiding
-		)
+	# Fade out
+	tween.tween_property(node, "modulate:a", 0.0, duration) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	# Blur ramp down
+	if colorRect is ColorRect and colorRect.material is ShaderMaterial:
+		tween.tween_method(
+			func(val: float): colorRect.material.set_shader_parameter("lod", val),
+			3.0, 0.0, duration
+		).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	# Hide after tween completes
+	tween.chain().tween_callback(func(): node.visible = false)
 
 func get_rarity_color(rarity: String) -> Color:
 	return RARITY_COLORS.get(rarity, Color.WHITE) # Defaults to white if not found
