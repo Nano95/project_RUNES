@@ -20,7 +20,7 @@ func _ready() -> void:
 		Utils.animateButtonPress(brewButton)
 	)
 	closeButton.pressed.connect(func():
-		hide()
+		Utils.animate_modal_exit(self)
 		Utils.animateButtonPress(closeButton)
 	)
 	hide()
@@ -28,7 +28,7 @@ func _ready() -> void:
 func open() -> void:
 	selectedRecipe = null
 	refresh()
-	show()
+	Utils.animate_modal_entry(self)
 
 func refresh() -> void:
 	refreshRecipes()
