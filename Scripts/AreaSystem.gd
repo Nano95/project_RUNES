@@ -8,8 +8,8 @@ func _ready() -> void:
 	GameEvents.playerDied.connect(onPlayerDied)
 	main = Utils.get_main()
 	main.set_background_colors(
-		Vector3(0.92, 0.88, 0.65),   # soft butter
-		Vector3(0.70, 0.65, 0.20)    # almost white yellow
+		Vector3(0.40, 0.58, 0.82),   # soft butter
+		Vector3(0.45, 0.63, 0.86)   # almost white yellow
 	)
 func enterArea(areaName: String) -> void:
 	main.game_data.currentArea = areaName
@@ -44,15 +44,15 @@ func onAreaEntered(areaName: String) -> void:
 	GameEvents.eventLogged.emit("You enter " + areaName + ".", "discover", false)
 
 	if (areaName == "Town"):
-		main.set_background_colors(Vector3(.297, .211, .09), Vector3(.355, .285, .133))
+		main.set_background_colors(Vector3(0.40, 0.58, 0.82), Vector3(0.45, 0.63, 0.86))
 	elif (areaName == "Hunting Grounds"):
-		main.set_background_colors(Vector3(.516, .691, .473), Vector3(.633, .793, .543))
+		main.set_background_colors(Vector3(0.60, 0.82, 0.60), Vector3(0.55, 0.78, 0.55))
 	elif (areaName == "Slime Swamps"):
-		main.set_background_colors(Vector3(.445, .488, .449), Vector3(.664, .723, .602))
-	elif (areaName == "Darkwood Forest"):
+		main.set_background_colors(Vector3(0.25, 0.38, 0.20), Vector3(0.30, 0.43, 0.24))
+	elif (areaName == "Sandling Dunes"):
 		main.set_background_colors(
-			Vector3(0.10, 0.12, 0.11),   # dark slate grey-green
-			Vector3(0.16, 0.20, 0.15)    # muted pine
+			Vector3(0.85, 0.72, 0.40),   # dark slate grey-green
+			Vector3(0.88, 0.76, 0.46)    # muted pine
 		)
 	elif (areaName == "Forsaken Castle"):
 		main.set_background_colors(
@@ -61,14 +61,11 @@ func onAreaEntered(areaName: String) -> void:
 		)
 	else:
 		# Default
-		main.set_background_colors(Vector3(.297, .211, .09), Vector3(.355, .285, .133))
+		main.set_background_colors(Vector3(0.40, 0.58, 0.82), Vector3(0.45, 0.63, 0.86))
 
 func onAreaExited() -> void:
 	GameEvents.eventLogged.emit("You return to town safely.", "town", false)
 	main.game_data.activeStatusEffects = {}
 	main.game_data.pendingLoot.clear() # For lost loot
 	
-	main.set_background_colors(
-		Vector3(0.92, 0.88, 0.65),   # soft butter
-		Vector3(0.70, 0.65, 0.20)    # almost white yellow
-	)
+	main.set_background_colors(Vector3(0.40, 0.58, 0.82), Vector3(0.45, 0.63, 0.86))
