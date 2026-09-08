@@ -24,7 +24,11 @@ func _ready() -> void:
 
 func onCombatStarted(monster: MonsterData, weakened: bool) -> void:
 	# dont show if we end the battle in one hit
-	if (main.game_data.currentMonsterHp <= 0):
+	await get_tree().process_frame
+	# Now check if combat already ended
+	if not main.game_data.inCombat:
+		return
+	if main.game_data.currentMonsterHp <= 0:
 		return
 	var currHp = int(monster.hp * .5) if (weakened) else monster.hp
 	monsterMaxHp = monster.hp

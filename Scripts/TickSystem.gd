@@ -256,7 +256,6 @@ func _roll_event() -> void:
 				main.game_data.gold += gold
 				main.save_game()
 				GameEvents.eventLogged.emit("You find a pouch of gold! +%d gold." % gold, "loot", true)
-				GameEvents.hpChanged.emit()
 		"dungeon":
 			GameEvents.eventLogged.emit("You discover a dungeon entrance.", "discover", true)
 		"trap":

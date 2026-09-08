@@ -47,7 +47,6 @@ func refresh() -> void:
 	var gd = main.game_data
 
 	#  HP and XP
-	updateHp()
 	updateStats()
 	
 	# Gold — show carried gold in area, saved gold in town
@@ -69,10 +68,10 @@ func updateHp() -> void:
 	hpBar.max_value = maxHp
 	#hpBar.value = gd.hp
 	var hpPct = float(gd.hp) / float(maxHp) # percentage
-	if hpPct > 0.6:
+	if (hpPct > 0.6):
 		hpValue.modulate = Color("#27ae60")
 		hpBar.modulate = Color("#27ae60")
-	elif hpPct > 0.3:
+	elif (hpPct > 0.3):
 		hpValue.modulate = Color("#c8880a")
 		hpBar.modulate = Color("#c8880a")
 	else:
@@ -86,6 +85,7 @@ func updateHp() -> void:
 	hpTween.tween_property(hpBar, "value", gd.hp, 0.35).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	# Pulse the label on every HP change
 	#pulseHpLabel()
+	animateHpBarHit()
 
 func updateStats(_a:int=0) -> void:
 	var atk = equipmentSystem.getTotalAttack()
@@ -127,3 +127,23 @@ func pulseHpLabel() -> void:
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	pulseTween.tween_property(hpValue, "scale", NORMAL_SCALE, 0.20) \
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+
+func animateHpBarHit() -> void:
+	var maxHp = equipmentSystem.cachedMaxHp
+	var currentHp = main.game_data.hp
+	var hpPercent = float(currentHp) / float(maxHp)
+	
+	var scaleY = 1.0
+	if hpPercent <= 0.33:
+		scaleY = 1.3
+	elif hpPercent <= .66:
+		scaleY = 1.2
+	else:
+		scaleY = 1.05
+	
+	# Set pivot to center
+	#hpBar.pivot_offset = hpBar.size / 2
+	
+	var tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_property(hpBar, "scale", Vector2(scaleY, scaleY + .07), 0.08)
+	tween.tween_property(hpBar, "scale", Vector2(1.0, 1.0), 0.12)

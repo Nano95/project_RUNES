@@ -157,6 +157,7 @@ func tickCombat() -> void:
 					main.game_data.fleeTicks
 				], "combat", false
 			)
+		
 		if (main.game_data.hp <= 0):
 			die()
 			return
@@ -185,10 +186,17 @@ func tickCombat() -> void:
 	if main.game_data.hp <= 0:
 		die()
 		return
+	
+	if !dodged:
+		call_deferred("delayedHpUpdate")
 	if main.game_data.currentMonsterHp <= 0:
 		winCombat()
 		return
+
 	GameEvents.combatTick.emit(playerAtk, finalAtk, main.game_data.currentMonsterHp)
+
+func delayedHpUpdate() -> void:
+	GameEvents.hpChanged.emit()
 
 func winCombat() -> void:
 	var monster = MonsterRegistry.getMonsterByAreaNameTier(

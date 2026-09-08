@@ -230,6 +230,11 @@ func onPotionUsed(itemName: String) -> void:
 	GameEvents.eventLogged.emit(
 		"Used %s. Restored %d HP." % [itemName, healAmount], "gather", false
 	)
+	
+	call_deferred("delayedHpUpdate") 
+
+func delayedHpUpdate() -> void:
+	GameEvents.hpChanged.emit()
 
 func getPotionHeal(itemName: String) -> int:
 	match itemName:

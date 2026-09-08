@@ -848,6 +848,7 @@ offset_top = 22.09999
 offset_right = 246.00003
 offset_bottom = 51.09999
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 show_percentage = false
 
 [node name="PLAYERSTATS" type="Panel" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats" unique_id=1782283260]
