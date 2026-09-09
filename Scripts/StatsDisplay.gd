@@ -31,6 +31,7 @@ func _ready() -> void:
 	GameEvents.equipmentChanged.connect(updateStats)
 	
 	call_deferred("refresh")
+	call_deferred("updateHp")
 	goldLabel.text = "Bank"
 	goldValue.text = str(main.game_data.savedGold)
 

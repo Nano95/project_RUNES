@@ -9,6 +9,10 @@ class_name CheckpointOverlay
 @export var autoProgress: ProgressBar
 @export var autoTimer: Timer
 
+@export var titlePanel: Panel
+@export var mainPanel: Panel
+@export var minMaxBtn: Button 
+@export var minMaxLabel: Label
 @export var eventLogPanel: Panel
 @export var equipmentPanel: Panel
 @export var areaSystem: AreaSystem
@@ -35,6 +39,7 @@ func _ready() -> void:
 	continueButton.pressed.connect(onContinuePressed)
 	retreatButton.pressed.connect(onRetreatPressed)
 	autoCheckbox.toggled.connect(onAutoToggled)
+	minMaxBtn.pressed.connect(onMinMaxPressed)
 	# toggled from eventPanel quick settings
 	GameEvents.autoContinueToggled.connect(onAutoContinueToggled)
 	autoTimer.wait_time = AUTO_DURATION
@@ -44,6 +49,7 @@ func _ready() -> void:
 	autoProgress.max_value = AUTO_DURATION
 	autoProgress.value = 0.0
 	autoProgress.visible = false
+	
 	set_process(false)
 	hide()
 
@@ -77,6 +83,9 @@ func onCheckpointReached() -> void:
 	# Start timer automatically if checkbox is checked
 	if autoCheckbox.button_pressed:
 		startAutoTimer()
+	isMinimized = false
+	mainPanel.visible = true
+	minMaxLabel.text = "TAP TO MINIMIZE"
 	onOpen()
 
 func onContinuePressed() -> void:
@@ -182,3 +191,41 @@ func onPendingItemPressed(stack: Dictionary) -> void:
 func clearPendingLoot() -> void:
 	main.game_data.pendingLoot.clear()
 	main.save_game()
+
+var isMinimized: bool = false
+
+func onMinMaxPressed() -> void:
+	isMinimized = not isMinimized
+	
+	if isMinimized:
+		# Hide main content
+		mainPanel.visible = false
+		if pendingLootPanel:
+			pendingLootPanel.visible = false
+		
+		# Tween LOD down to 0
+		var mat = self.material as ShaderMaterial
+		if mat:
+			var tween = create_tween()
+			tween.tween_method(
+				func(val: float): mat.set_shader_parameter("lod", val),
+				3.0, 0.0, 0.1
+			).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		
+		minMaxLabel.text = "TAP TO MAXIMIZE"
+	else:
+		# Show main content
+		mainPanel.visible = true
+		if pendingLootPanel:
+			pendingLootPanel.visible = not main.game_data.pendingLoot.is_empty()
+		
+		# Tween LOD back up to 3
+		var mat = self.material as ShaderMaterial
+		if mat:
+			var tween = create_tween()
+			tween.tween_method(
+				func(val: float): mat.set_shader_parameter("lod", val),
+				0.0, 3.0, 0.1
+			).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		
+		minMaxLabel.text = "TAP TO MINIMIZE"

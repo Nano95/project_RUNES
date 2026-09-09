@@ -274,6 +274,18 @@ shader = ExtResource("7_108yi")
 shader_parameter/time = 4.750000002218258e-07
 shader_parameter/activate = false
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g5715"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4l73"]
+resource_local_to_scene = true
+shader = ExtResource("7_108yi")
+shader_parameter/time = 4.750000002218258e-07
+shader_parameter/activate = false
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6ix6u"]
 resource_local_to_scene = true
 shader = ExtResource("7_108yi")
@@ -819,6 +831,19 @@ theme_override_font_sizes/font_size = 70
 text = "HP"
 vertical_alignment = 1
 
+[node name="ProgressBar" type="ProgressBar" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/HP" unique_id=793133424]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0000305
+offset_top = 22.09999
+offset_right = 246.00003
+offset_bottom = 51.09999
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+show_percentage = false
+
 [node name="NUMBER" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/HP" unique_id=617930616 instance=ExtResource("6_prt4a")]
 self_modulate = Color(0.4426837, 0.9765625, 0.33187866, 1)
 material = SubResource("ShaderMaterial_1jcrk")
@@ -837,19 +862,6 @@ theme_override_font_sizes/font_size = 90
 text = "0/100"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="ProgressBar" type="ProgressBar" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats/HP" unique_id=793133424]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 10.0000305
-offset_top = 22.09999
-offset_right = 246.00003
-offset_bottom = 51.09999
-grow_vertical = 2
-pivot_offset_ratio = Vector2(0.5, 0.5)
-show_percentage = false
 
 [node name="PLAYERSTATS" type="Panel" parent="UIController/MarginContainer/VBoxContainer/TopRow/StatsLayout/Stats" unique_id=1782283260]
 layout_mode = 2
@@ -2335,8 +2347,7 @@ size_flags_vertical = 3
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 
-[node name="CheckpointOverlay" type="ColorRect" parent="UIController" unique_id=428981134 node_paths=PackedStringArray("descLabel", "continueButton", "retreatButton", "autoCheckbox", "autoProgress", "autoTimer", "eventLogPanel", "equipmentPanel", "areaSystem", "pendingLootPanel", "pendingLootFlow", "inventorySystem")]
-visible = false
+[node name="CheckpointOverlay" type="ColorRect" parent="UIController" unique_id=428981134 node_paths=PackedStringArray("descLabel", "continueButton", "retreatButton", "autoCheckbox", "autoProgress", "autoTimer", "titlePanel", "mainPanel", "minMaxBtn", "minMaxLabel", "eventLogPanel", "equipmentPanel", "areaSystem", "pendingLootPanel", "pendingLootFlow", "inventorySystem")]
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
 anchors_preset = 14
@@ -2344,16 +2355,21 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_top = -375.0
-offset_bottom = -54.0
+offset_bottom = 5.0650024
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("18_cssra")
-descLabel = NodePath("Panel/TitlePanel/Description")
+descLabel = NodePath("Panel/Description")
 continueButton = NodePath("Panel/HBoxContainer/Continue")
 retreatButton = NodePath("Panel/HBoxContainer/Retreat")
 autoCheckbox = NodePath("Panel/HBoxContainer2/CheckButton")
 autoProgress = NodePath("Panel/HBoxContainer2/ProgressBar")
 autoTimer = NodePath("Panel/autoTimer")
+titlePanel = NodePath("TitlePanel")
+mainPanel = NodePath("Panel")
+minMaxBtn = NodePath("TitlePanel/minimizeBtn")
+minMaxLabel = NodePath("TitlePanel/subtitle")
 eventLogPanel = NodePath("../MarginContainer/VBoxContainer/EventLogPanel/VBoxContainer/QuickConfigs")
 equipmentPanel = NodePath("../MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/QuickConfigs")
 areaSystem = NodePath("../../AreaSystem")
@@ -2369,9 +2385,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -345.0
-offset_top = -140.0
+offset_top = -151.0
 offset_right = 345.0
-offset_bottom = 183.5
+offset_bottom = 172.5
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
@@ -2380,7 +2396,32 @@ theme = ExtResource("17_g72ry")
 
 [node name="autoTimer" type="Timer" parent="UIController/CheckpointOverlay/Panel" unique_id=1810294690]
 
+[node name="Description" type="RichTextLabel" parent="UIController/CheckpointOverlay/Panel" unique_id=1926443337]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 49.5
+offset_right = -8.0
+offset_bottom = -222.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("3_dajxx")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+bbcode_enabled = true
+text = "How [wave amp=8 freq=3]far[/wave] is far enough"
+scroll_following = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="TitlePanel" type="Panel" parent="UIController/CheckpointOverlay/Panel" unique_id=974377931]
+visible = false
 layout_mode = 0
 offset_right = 690.0
 offset_bottom = 45.0
@@ -2398,30 +2439,6 @@ grow_horizontal = 2
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 80
 text = "Checkpoint Reached!"
-vertical_alignment = 1
-
-[node name="Description" type="RichTextLabel" parent="UIController/CheckpointOverlay/Panel/TitlePanel" unique_id=1926443337]
-self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 49.5
-offset_right = -8.0
-offset_bottom = 56.5
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/outline_size = 10
-theme_override_fonts/normal_font = ExtResource("3_dajxx")
-theme_override_font_sizes/normal_font_size = 28
-theme_override_font_sizes/bold_italics_font_size = 22
-theme_override_font_sizes/italics_font_size = 22
-bbcode_enabled = true
-text = "How [wave amp=8 freq=3]far[/wave] is far enough"
-scroll_following = true
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UIController/CheckpointOverlay/Panel" unique_id=406963622]
@@ -2486,15 +2503,65 @@ size_flags_vertical = 4
 value = 72.0
 show_percentage = false
 
+[node name="TitlePanel" type="Panel" parent="UIController/CheckpointOverlay" unique_id=1121234979]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 10.0
+offset_right = 705.0
+offset_bottom = 55.0
+theme = ExtResource("17_g72ry")
+
+[node name="Title2" parent="UIController/CheckpointOverlay/TitlePanel" unique_id=877426361 instance=ExtResource("6_prt4a")]
+material = SubResource("ShaderMaterial_g5715")
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 9.0
+offset_top = 1.0
+offset_right = 1043.0
+offset_bottom = 141.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 80
+text = "Checkpoint Reached!"
+vertical_alignment = 1
+
+[node name="subtitle" parent="UIController/CheckpointOverlay/TitlePanel" unique_id=1814895226 instance=ExtResource("6_prt4a")]
+self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
+material = SubResource("ShaderMaterial_g4l73")
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 163.0
+offset_top = 2.0
+offset_right = 1197.0
+offset_bottom = 142.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 80
+text = "TAP TO MINIMIZE"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="minimizeBtn" type="Button" parent="UIController/CheckpointOverlay/TitlePanel" unique_id=1237629853]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="PendingLootOverlay" type="ColorRect" parent="UIController/CheckpointOverlay" unique_id=243209939]
+visible = false
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = 186.5
-offset_bottom = 457.0
+offset_top = 175.5
+offset_bottom = 445.99997
 grow_horizontal = 2
 grow_vertical = 2
 
