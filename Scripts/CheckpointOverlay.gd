@@ -55,9 +55,9 @@ func _process(_delta: float) -> void:
 
 func onOpen() -> void:
 	if (eventLogPanel.visible):
-		global_position.y = eventLogPanel.global_position.y
+		global_position.y = eventLogPanel.global_position.y + eventLogPanel.size.y
 	elif (equipmentPanel.visible):
-		global_position.y = equipmentPanel.global_position.y
+		global_position.y = equipmentPanel.global_position.y + equipmentPanel.size.y
 	
 	Utils.animate_modal_entry(self)
 	show()

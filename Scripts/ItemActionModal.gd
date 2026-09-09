@@ -21,6 +21,7 @@ class_name ItemActionModal
 @export var equipmentSystem: EquipmentSystem
 
 var currentItem: String = ""
+var currentInstance: Dictionary = {} # for equipment
 var currentStackQty: int = 0
 var currentStackIndex: int = -1
 var main:MainNode
@@ -48,8 +49,11 @@ func onItemLongPressed(itemName: String, qty: int, stackIndex: int) -> void:
 	itemDescLabel.visible = !equippable
 	equipButton.visible = equippable
 	compareContainer.visible = equippable
-	if (equippable): showEquipmentComparison(main.game_data.backpack[stackIndex])
+	if (equippable):
+		currentInstance = main.game_data.backpack[stackIndex]
+		showEquipmentComparison(currentInstance)
 	else:
+		currentInstance = {}
 		var item = ItemRegistry.getItem(itemName)
 		if item and item.description != "":
 			itemDescLabel.visible = true
@@ -58,9 +62,9 @@ func onItemLongPressed(itemName: String, qty: int, stackIndex: int) -> void:
 			itemDescLabel.visible = false
 	
 	if (eventLogPanel.visible):
-		global_position.y = eventLogPanel.global_position.y
+		global_position.y = eventLogPanel.global_position.y + eventLogPanel.size.y
 	elif (equipmentPanel.visible):
-		global_position.y = equipmentPanel.global_position.y
+		global_position.y = equipmentPanel.global_position.y + equipmentPanel.size.y
 
 	Utils.animate_modal_entry(self)
 
@@ -69,7 +73,11 @@ func onEquipPressed() -> void:
 	onClose()
 
 func onDropPressed() -> void:
-	inventorySystem.removeFromBackpack(currentItem)
+	if (currentInstance.get("isEquipment", false)):
+		equipmentSystem.removeInstanceFromBackpack(currentInstance)
+		currentInstance = {}
+	else:
+		inventorySystem.removeFromBackpack(currentItem, 1)
 	GameEvents.eventLogged.emit("Dropped %s." % currentItem, "system", false)
 	onClose()
 

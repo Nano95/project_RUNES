@@ -83,8 +83,6 @@ func updateHp() -> void:
 		hpTween.kill()
 	hpTween = create_tween()
 	hpTween.tween_property(hpBar, "value", gd.hp, 0.35).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	# Pulse the label on every HP change
-	#pulseHpLabel()
 	animateHpBarHit()
 
 func updateStats(_a:int=0) -> void:
@@ -117,16 +115,6 @@ func onGoldDeposited(_amount: int) -> void:
 		goldValue.text = str(main.game_data.gold)
 	else:
 		goldValue.text = str(main.game_data.savedGold)
-
-func pulseHpLabel() -> void:
-	if pulseTween:
-		pulseTween.kill()
-	hpValue.scale = NORMAL_SCALE
-	pulseTween = create_tween()
-	pulseTween.tween_property(hpValue, "scale", PULSE_SCALE, 0.12) \
-		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	pulseTween.tween_property(hpValue, "scale", NORMAL_SCALE, 0.20) \
-		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 
 func animateHpBarHit() -> void:
 	var maxHp = equipmentSystem.cachedMaxHp

@@ -342,7 +342,7 @@ func animate_modal_entry(node: CanvasItem, duration := 0.15, offset := 10.0):
 	node.visible = true
 	if mainPanel:
 		mainPanel.position.y = original_y - offset
-		mainPanel.scale = Vector2(1.35, 1.35)
+		mainPanel.scale = Vector2(.85, 1.45)
 	
 	# Set shader lod to 0
 	if colorRect is ColorRect and colorRect.material is ShaderMaterial:
