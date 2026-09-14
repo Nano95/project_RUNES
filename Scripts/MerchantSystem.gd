@@ -11,8 +11,10 @@ const STOCK: Array[Dictionary] = [
 	# Equipment
 	{ "name": "T1 Map", "category": "equipment", "cost": 150 },
 	{ "name": "T1 Survival Gear",    "category": "equipment", "cost": 200 },
-	{ "name": "T2 Map",           "category": "equipment", "cost": 500 },
-	{ "name": "T2 Survival Gear", "category": "equipment", "cost": 750 },
+	{ "name": "T2 Map",           "category": "equipment", "cost": 1000 },
+	{ "name": "T2 Survival Gear", "category": "equipment", "cost": 1250 },
+	{ "name": "T3 Map",           "category": "equipment", "cost": 2800 },
+	{ "name": "T3 Survival Gear", "category": "equipment", "cost": 3000 },
 	{ "name": "Wooden Shield",      "category": "equipment", "cost": 0  },
 	{ "name": "Crude Blade",        "category": "equipment", "cost": 0  },
 	{ "name": "Leather Helmet",     "category": "equipment", "cost": 0 },
@@ -37,6 +39,12 @@ const STOCK: Array[Dictionary] = [
 	{ "name": "Sandling Boots",     "category": "equipment", "cost": 0 },
 	{ "name": "Sandling Blade",     "category": "equipment", "cost": 0 },
 	{ "name": "Sandling Shield",    "category": "equipment", "cost": 0 },
+	{ "name": "Dwarven Helmet",    "category": "equipment", "cost": 0 },
+	{ "name": "Dwarven Armor",     "category": "equipment", "cost": 0 },
+	{ "name": "Dwarven Legs",      "category": "equipment", "cost": 0 },
+	{ "name": "Dwarven Boots",     "category": "equipment", "cost": 0 },
+	{ "name": "Dwarven Hammer",     "category": "equipment", "cost": 0 },
+	{ "name": "Dwarven Shield",    "category": "equipment", "cost": 0 },
 
 	#{ "name": "Ring of Protection", "category": "equipment", "cost": 200 },
 ]

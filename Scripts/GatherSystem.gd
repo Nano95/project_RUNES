@@ -22,18 +22,24 @@ const FORAGE_TABLES: Dictionary = {
 		{ "max": 70,  "drops": [{"name": "Wild Herb", "weight": 20}, {"name": "Bloodroot", "weight": 40}, {"name": "Gloomcap", "weight": 40}] },
 		{ "max": 9999,"drops": [{"name": "Bloodroot", "weight": 30}, {"name": "Gloomcap", "weight": 70}] },
 	],
-	"Darkwood Forest": [
-		{ "max": 20,  "drops": [{"name": "Wild Herb", "weight": 30}, {"name": "Bloodroot", "weight": 50}, {"name": "Gloomcap", "weight": 20}] },
-		{ "max": 40,  "drops": [{"name": "Wild Herb", "weight": 10}, {"name": "Bloodroot", "weight": 55}, {"name": "Gloomcap", "weight": 35}] },
-		{ "max": 70,  "drops": [{"name": "Bloodroot", "weight": 50}, {"name": "Gloomcap", "weight": 50}] },
-		{ "max": 9999,"drops": [{"name": "Bloodroot", "weight": 20}, {"name": "Gloomcap", "weight": 80}] },
+	"Dwarf Stronghold": [
+		{ "max": 20,   "drops": [{"name": "Bloodroot",    "weight": 60}, {"name": "Gloomcap", "weight": 30}, {"name": "Cave Moss", "weight": 10}], },
+		{ "max": 40,   "drops": [{"name": "Bloodroot",    "weight": 30}, {"name": "Gloomcap", "weight": 50}, {"name": "Cave Moss", "weight": 20}] },
+		{ "max": 70,   "drops": [{"name": "Bloodroot",     "weight": 10}, {"name": "Gloomcap", "weight": 65}, {"name": "Cave Moss", "weight": 25}] },
+		{ "max": 9999, "drops": [{"name": "Gloomcap", "weight": 25}, {"name": "Cave Moss", "weight": 75}] },
 	],
-	"Forsaken Keep": [
-	{ "max": 20,   "drops": [{"name": "Bloodroot", "weight": 50}, {"name": "Gloomcap", "weight": 30}, {"name": "Deathbloom", "weight": 20}] },
-	{ "max": 40,   "drops": [{"name": "Gloomcap", "weight": 20}, {"name": "Deathbloom", "weight": 50}, {"name": "Nightshade", "weight": 30}] },
-	{ "max": 70,   "drops": [{"name": "Deathbloom", "weight": 25}, {"name": "Nightshade", "weight": 50}, {"name": "Voidleaf", "weight": 25}] },
-	{ "max": 9999, "drops": [{"name": "Deathbloom", "weight": 33}, {"name": "Nightshade", "weight": 33}, {"name": "Voidleaf", "weight": 34}] },
-],
+	#"Darkwood Forest": [
+		#{ "max": 20,  "drops": [{"name": "Wild Herb", "weight": 30}, {"name": "Bloodroot", "weight": 50}, {"name": "Gloomcap", "weight": 20}] },
+		#{ "max": 40,  "drops": [{"name": "Wild Herb", "weight": 10}, {"name": "Bloodroot", "weight": 55}, {"name": "Gloomcap", "weight": 35}] },
+		#{ "max": 70,  "drops": [{"name": "Bloodroot", "weight": 50}, {"name": "Gloomcap", "weight": 50}] },
+		#{ "max": 9999,"drops": [{"name": "Bloodroot", "weight": 20}, {"name": "Gloomcap", "weight": 80}] },
+	#],
+	#"Forsaken Keep": [
+		#{ "max": 20,   "drops": [{"name": "Bloodroot", "weight": 50}, {"name": "Gloomcap", "weight": 30}, {"name": "Deathbloom", "weight": 20}] },
+		#{ "max": 40,   "drops": [{"name": "Gloomcap", "weight": 20}, {"name": "Deathbloom", "weight": 50}, {"name": "Nightshade", "weight": 30}] },
+		#{ "max": 70,   "drops": [{"name": "Deathbloom", "weight": 25}, {"name": "Nightshade", "weight": 50}, {"name": "Voidleaf", "weight": 25}] },
+		#{ "max": 9999, "drops": [{"name": "Deathbloom", "weight": 33}, {"name": "Nightshade", "weight": 33}, {"name": "Voidleaf", "weight": 34}] },
+	#],
 }
 
 var foragingPotionEventsLeft: int = 0

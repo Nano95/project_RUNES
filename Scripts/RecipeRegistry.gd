@@ -8,6 +8,7 @@ func _ready() -> void:
 		_make("Minor Health Potion",{"Wild Herb": 2},                                    "Minor Health Potion","heal",      20),
 		_make("Health Potion",      {"Wild Herb": 3, "Red Berry": 1},     "Health Potion",      "heal",      30),
 		_make("Twilight Potion",    {"Gloomcap": 1, "Bloodroot": 1, "Red Berry": 1},     "Twilight Potion",    "heal",      55),
+		_make("Cave Tonic", {"Cave Moss": 2, "Gloomcap": 1},                             "Cave Tonic",  "heal",             70),
 		_make("Regen Potion",         {"Bloodroot": 3},                          "Regen Potion",         "regen", 50),
 #_make("Greater Regen Potion", {"Bloodroot": 3, "Deathbloom": 2},         "Greater Regen Potion", "regen", 125),
 		

@@ -8,7 +8,8 @@ func _ready() -> void:
 		# Smelting
 		_make("Copper Bar", "Copper Bar", {"Copper Ore": 3, "Coal": 2}, "smelt"),
 		_make("Iron Bar",   "Iron Bar",   {"Iron Ore": 3,   "Coal": 2}, "smelt"),
-		_make("Gold Bar",   "Gold Bar",   {"Gold Ore": 3,   "Coal": 3}, "smelt"),
+		_make("Gold Bar",   "Gold Bar",   {"Gold Ore": 3,   "Coal": 2}, "smelt"),
+		_make("Gem Shard",   "Gem Shard",   {"Rough Gemstone": 4,   "Coal": 1}, "smelt"),
 		
 		# ORC THINGS
 		_make("Orc Helmet",  "Orc Helmet",  {"Orc Leather": 10, "Copper Bar": 1},        "forge"),
@@ -37,6 +38,15 @@ func _ready() -> void:
 		_make("Sandling Shield", "Sandling Shield", {"Ancient Relic": 1,"Iron Bar": 2}, "forge"),
 		_make("Necromancer Totem", "Necromancer Totem", {"Crystal Bone": 3}, "forge"),
 		_make("Necromancer Totem", "Necromancer Totem", {"Ancient Relic": 1, "Crystal Bone": 1}, "forge"),
+		
+		_make("Dwarven Helmet", "Dwarven Helmet", {"Rough Gemstone": 2, "Gold Bar": 2}, "forge"),
+		_make("Dwarven Armor",  "Dwarven Armor",  {"Rough Gemstone": 3, "Gold Bar": 4}, "forge"),
+		_make("Dwarven Legs",   "Dwarven Legs",   {"Rough Gemstone": 2, "Gold Bar": 3}, "forge"),
+		_make("Dwarven Boots",  "Dwarven Boots",  {"Rough Gemstone": 2, "Gold Bar": 2}, "forge"),
+		_make("Dwarven Hammer",  "Dwarven Hammer",  {"Gem Shard": 1,      "Gold Bar": 3}, "forge"),
+		_make("Dwarven Shield", "Dwarven Shield", {"Gem Shard": 1,      "Gold Bar": 2}, "forge"),
+		_make("Dragon Totem",   "Dragon Totem",   {"Gem Shard": 7,   "Crystal Bone": 2}, "forge"),
+		_make("Dragon Totem",   "Dragon Totem",   {"Dragon's Eye": 1,   "Gem Shard": 2}, "forge"),
 	]
 
 func _make(recipeName: String, resultItem: String, ingredients: Dictionary, category: String) -> BlacksmithRecipe:

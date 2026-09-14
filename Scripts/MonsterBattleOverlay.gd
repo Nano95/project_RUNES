@@ -24,6 +24,7 @@ func _ready() -> void:
 
 func onCombatStarted(monster: MonsterData, weakened: bool) -> void:
 	# dont show if we end the battle in one hit
+	monsterMaxHp = monster.hp
 	await get_tree().process_frame
 	# Now check if combat already ended
 	if not main.game_data.inCombat:
@@ -48,7 +49,8 @@ func onCombatStarted(monster: MonsterData, weakened: bool) -> void:
 	]
 	enemyHPBar.max_value = monsterMaxHp
 	enemyHPBar.value = currHp
-	enemyHPValue.text = "%d / %d" % [currHp, monsterMaxHp]
+	#enemyHPValue.text = "%d / %d" % [currHp, monsterMaxHp]
+	print(" - enemy txt: ", currHp)
 	updateHPColor(currHp)
 	fleeButton.disabled = false
 	fleeButton.text = "Flee"
@@ -62,6 +64,7 @@ func onCombatStarted(monster: MonsterData, weakened: bool) -> void:
 
 func onCombatTick(_playerDmg: int, _monsterDmg: int, monsterHpLeft: int) -> void:
 	var hpLeft = max(0, monsterHpLeft)
+	print(" - cobat tickenemy txt: ", hpLeft)
 	enemyHPValue.text = "%d / %d" % [hpLeft, monsterMaxHp]
 	updateHPColor(hpLeft)
 	# Animate the bar

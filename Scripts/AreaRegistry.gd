@@ -7,10 +7,11 @@ func _ready() -> void:
 		_make("Hunting Grounds", 1),
 		_make("Slime Swamps", 5),
 		_make("Sandling Dunes", 15),
-		_make("Darkwood Forest", 8),
-		_make("Forsaken Keep", 12),
-		_make("Stoneback Mines", 18),
-		_make("Ashfield Ruins", 25),
+		_make("Dwarf Stronghold", 20),
+		#_make("Darkwood Forest", 8),
+		#_make("Forsaken Keep", 12),
+		#_make("Stoneback Mines", 18),
+		#_make("Ashfield Ruins", 25),
 	]
 
 func _make(newName: String, minLevel: int) -> AreaData:

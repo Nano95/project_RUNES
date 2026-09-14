@@ -50,6 +50,8 @@ func getAreaForMinute(minute: int) -> String:
 		return "Slime Swamps"
 	elif minute < 30:
 		return "Sandling Dunes"
+	elif minute < 40:
+		return "Dwarf Stronghold"
 	# future areas...
 	return "Hunting Grounds"
 
@@ -62,6 +64,7 @@ func canSurviveIn(area: String) -> bool:
 		"Hunting Grounds": return area == "Hunting Grounds"
 		"Slime Swamps": return area in ["Hunting Grounds", "Slime Swamps"]
 		"Sandling Dunes": return area in ["Hunting Grounds", "Slime Swamps", "Sandling Dunes"]
+		"Dwarf Stronghold": return area in ["Hunting Grounds", "Slime Swamps", "Sandling Dunes", "Dwarf Stronghold"]
 	return false
 
 func _rollEvent(area: String, _currentHp: int) -> Dictionary:
@@ -236,6 +239,7 @@ const EXPEDITION_MONSTERS = {
 	"Hunting Grounds": ["Orcling", "Orc Grunt", "Orc Runt", "Orc Warrior", "Orc Brute"],
 	"Slime Swamps":    ["Small Slime", "Green Slime", "Blue Slime", "Bog Slime", "Toxic Slime"],
 	"Sandling Dunes": ["Hooded Sandling", "Roaming Sandling", "Horned Sandling", "Sand Brute"],
+	"Dwarf Stronghold": ["Dwarf Miner", "Dwarf Guard", "Cave Dwarf", "Dwarf Warrior", "Crazed Dwarf"],
 }
 
 const TRAP_DATABASE = {
@@ -255,6 +259,24 @@ const TRAP_DATABASE = {
 		{"name": "You brushed a venomous swamp plant.", "damage": 6},
 		{"name": "You spotted the danger and backed away.", "damage": 0},
 	],
+	"Sandling Dunes": [
+		{"name": "A sandling snare catches your ankle.", "damage": 5},
+		{"name": "You sink into a patch of quicksand.", "damage": 7},
+		{"name": "A scorpion hidden in the sand stings you.", "damage": 6},
+		{"name": "The blazing sun saps your strength.", "damage": 4},
+		{"name": "A sandstorm blinds and cuts you.", "damage": 8},
+		{"name": "You step on a bone spike trap.", "damage": 5},
+		{"name": "Toxic sand gets in your eyes.", "damage": 3},
+		{"name": "You spotted the danger and sidestepped.", "damage": 0},
+	],
+	"Dwarf Stronghold": [
+		{"name": "A pickaxe swings from the ceiling!", "damage": 8},
+		{"name": "You trip on a minecart track.", "damage": 3},
+		{"name": "Loose rocks fall from above.", "damage": 6},
+		{"name": "You inhale coal dust.", "damage": 3},
+		{"name": "A gem trap springs shut on your hand.", "damage": 5},
+		{"name": "You spotted the trap and ducked.", "damage": 0},
+	],
 }
 
 const EXPEDITION_LOOT = {
@@ -265,8 +287,8 @@ const EXPEDITION_LOOT = {
 		{"name": "Wild Herb",         "weight": 35},
 		{"name": "Red Berry",         "weight": 35},
 		{"name": "Bloodroot",         "weight": 20},
-		{"name": "Orc General Crest", "weight": 2},
-		{"name": "King's Tusk",       "weight": 1},
+		{"name": "Orc General Crest", "weight": 4},
+		{"name": "King's Tusk",       "weight": 2},
 	],
 	"Slime Swamps": [
 		{"name": "Slime Gel",         "weight": 95},
@@ -276,8 +298,8 @@ const EXPEDITION_LOOT = {
 		{"name": "Red Berry",         "weight": 20},
 		{"name": "Wild Herb",         "weight": 35},
 		{"name": "Bloodroot",         "weight": 35},
-		{"name": "Slime Core",        "weight": 2},
-		{"name": "Royal Gel",         "weight": 1},
+		{"name": "Slime Core",        "weight": 4},
+		{"name": "Royal Gel",         "weight": 2},
 	],
 	"Sandling Dunes": [
 		{"name": "Bone Dust",    "weight": 100},
@@ -286,7 +308,17 @@ const EXPEDITION_LOOT = {
 		{"name": "Wild Herb",         "weight": 40},
 		{"name": "Bloodroot",         "weight": 30},
 		{"name": "Gloomcap",         "weight": 30},
-		{"name": "Crystal Bone", "weight": 2},
-		{"name": "Ancient Relic","weight": 1},
+		{"name": "Crystal Bone", "weight": 4},
+		{"name": "Ancient Relic","weight": 2},
+	],
+	"Dwarf Stronghold": [
+		{"name": "Rough Gemstone", "weight": 100},
+		{"name": "Gold Ore",       "weight": 50},
+		{"name": "Coal",           "weight": 40},
+		{"name": "Cave Moss",      "weight": 25},
+		{"name": "Bloodroot",         "weight": 10},
+		{"name": "Gloomcap",         "weight": 30},
+		{"name": "Gem Shard",      "weight": 4},
+		{"name": "Dragon's Eye",   "weight": 2},
 	],
 }

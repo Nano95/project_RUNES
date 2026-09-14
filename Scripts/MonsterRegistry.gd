@@ -95,13 +95,13 @@ func _ready() -> void:
 		},
 		"Sandling Dunes": {
 			"weak": [
-				_make("Hooded Sandling", "weak", 45, 16, 3, 10, {}, "sandling", .01, [
+				_make("Hooded Sandling", "weak", 45, 19, 3, 10, {}, "sandling", .01, [
 					_drop("Bone Dust", 0.08),
 				]),
-				_make("Roaming Sandling", "weak", 50, 18, 3, 12, {}, "sandling", .01, [
+				_make("Roaming Sandling", "weak", 50, 23, 3, 12, {}, "sandling", .01, [
 					_drop("Bone Dust", 0.08),
 				]),
-				_make("Dust Sandling", "weak", 40, 15, 2, 9, {}, "sandling", .01, [
+				_make("Dust Sandling", "weak", 40, 26, 2, 9, {}, "sandling", .01, [
 					_drop("Bone Dust", 0.08),
 				]),
 			],
@@ -135,6 +135,51 @@ func _ready() -> void:
 					_drop("Bone Dust", 0.90),
 					_drop("Crystal Bone", 0.60),
 					_drop("Ancient Relic", 0.99),
+				]),
+			],
+		},
+		"Dwarf Stronghold": {
+			"weak": [
+				_make("Dwarf Miner",  "weak", 75, 20, 4, 14, {}, "dwarven", .01, [
+					_drop("Rough Gemstone", 0.08),
+				]),
+				_make("Dwarf Guard",  "weak", 80, 22, 4, 16, {}, "dwarven", .01, [
+					_drop("Rough Gemstone", 0.08),
+				]),
+				_make("Cave Dwarf",   "weak", 78, 18, 3, 12, {}, "dwarven", .01, [
+					_drop("Rough Gemstone", 0.08),
+				]),
+			],
+			"medium": [
+				_make("Dwarf Warrior",    "medium", 110, 40, 10, 28, {}, "dwarven", .04,[
+					_drop("Rough Gemstone", 0.12),
+				]),
+				_make("Crazed Dwarf",     "medium", 120, 43, 11, 30, {"poison": 0.20}, "dwarven", .04, [
+					_drop("Rough Gemstone", 0.12),
+				]),
+				_make("Dwarf Geomancer",  "medium", 130, 47, 10, 26, {"poison": 0.20}, "dwarven", .04, [
+					_drop("Rough Gemstone", 0.12),
+				]),
+			],
+			"strong": [
+				_make("Dwarf Champion",  "strong", 220, 58, 28, 75, {}, "dwarven", 0.07, [
+					_drop("Rough Gemstone", 0.12),
+					_drop("Gem Shard",      0.12),
+				]),
+				_make("Stone Golem",     "strong", 250, 62, 30, 80, {}, "dwarven", 0.07, [
+					_drop("Rough Gemstone", 0.15),
+					_drop("Gem Shard",      0.15),
+				]),
+				_make("Dwarf Warlord",   "strong", 235, 60, 29, 78, {}, "dwarven", 0.07 ,[
+					_drop("Rough Gemstone", 0.18),
+					_drop("Gem Shard",      0.15),
+				]),
+			],
+			"elite": [
+				_make("Ancient Dragon", "elite", 1500, 65, 500, 900, {}, "dwarven", 0.2, [
+					_drop("Rough Gemstone", 0.90),
+					_drop("Gem Shard",      0.60),
+					_drop("Dragon's Eye",   0.99),
 				]),
 			],
 		},
@@ -252,5 +297,9 @@ const EQUIPMENT_SETS: Dictionary = {
 	"sandling": [
 		"Sandling Helmet", "Sandling Shield", "Sandling Armor",
 		"Sandling Legs", "Sandling Boots", "Sandling Blade"
+	],
+	"dwarven": [
+		"Dwarven Helmet", "Dwarven Armor", "Dwarven Legs",
+		"Dwarven Boots", "Dwarven Hammer", "Dwarven Shield"
 	],
 }

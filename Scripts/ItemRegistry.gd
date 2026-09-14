@@ -78,12 +78,31 @@ func _register() -> void:
 	_add("Crystal Bone", "part", true,  0.4, "Crystallized by dark magic.",        60)
 	_add("Ancient Relic","part", true,  0.3, "Radiates dark energy.",             100)
 	_add("Necromancer Totem", "summon", false, 0.5, "Summons the Mad Necromancer.", 300)
+	_equip("T3 Map",           "expeditionMap", "", 0, 0, 0, {"unlocksArea": "Dwarf Stronghold"}, "A map of the Dwarf Stronghold.", 450)
+	_equip("T3 Survival Gear", "survivalGear",  "", 0, 0, 0, {"expeditionMinutes": 40},            "Illuminating survival pack.",        500)
+	
+	# Parts
+	_add("Rough Gemstone", "part", true,  0.3, "A small uncut gemstone.",           15)
+	_add("Gem Shard",      "part", true,  0.4, "A larger partially cut gemstone.",  60)
+	_add("Dragon's Eye",   "part", true,  0.3, "A legendary red diamond resembling the eye of a dragon.",  200)
+
+	# Equipment
+	_equip("Dwarven Helmet", "helmet", "Dwarven", 30, 0,  0,  {},               "Forged in the deep.",          120)
+	_equip("Dwarven Armor",  "armor",  "Dwarven", 52, 0,  0,  {},               "Heavy dwarven plate.",         180)
+	_equip("Dwarven Legs",   "legs",   "Dwarven", 35, 0,  0,  {},               "Stone-reinforced leggings.",   140)
+	_equip("Dwarven Boots",  "boots",  "Dwarven", 18, 0,  0,  {"dodge": 0.06},  "Sturdy mining boots.",         110)
+	_equip("Dwarven Hammer",  "weapon", "",        0,  27, 0,  {},               "A masterwork dwarven hammer.",  150)
+	_equip("Dwarven Shield", "shield", "",        0,  0,  25, {},               "Carved from mountain stone.",  160)
+
+	# Summon
+	_add("Dragon Totem", "summon", false, 0.5, "Summons the Ancient Dragon.", 500)
 	
 	# ── FORAGEABLES ───────────────────────────────────────
 	_add("Wild Herb",           "forageable", true,  0.5, "Common but useful.",               5)
 	_add("Red Berry",           "forageable", true,  0.5, "Sweet and slightly toxic.",        4)
 	_add("Bloodroot",           "forageable", true,  0.5, "Deep red root.",                   8)
 	_add("Gloomcap",            "forageable", true,  0.5, "A dark mushroom.",                 10)
+	_add("Cave Moss",           "forageable", true, 0.1, "Glowing moss from cave walls.", 5)
 
 	# ── ORES ─────────────────────────────────────────────
 	_add("Copper Ore",          "ore",        true,  1.5, "Common metal ore.",                8)
@@ -100,8 +119,9 @@ func _register() -> void:
 	_add("Berry Extract",       "potion",     true,  2.3, "Restores 15 HP.",                  10)
 	_add("Minor Health Potion",   "potion",     true,  2.3, "Restores 20 HP.",                  15)
 	_add("Health Potion",       "potion",     true,  2.8, "Restores 30 HP.",                  20)
-	_add("Twilight Potion",     "potion",     true,  5.0, "Restores 55 HP.",                  50)
-	_add("Regen Potion",         "potion", true, 2.0, "Restores 50 HP over 5 ticks.",  60)
+	_add("Twilight Potion",     "potion",     true,  3.6, "Restores 55 HP.",                  50)
+	_add("Cave Tonic",          "potion", true, 4.0, "A potent brew from cave flora.", 80)
+	_add("Regen Potion",         "potion", true, 2.5, "Restores 50 HP over 5 ticks.",  60)
 	#_add("Greater Regen Potion", "potion", true, 2.5, "Restores 125 HP over 5 ticks.", 100)
 	_add("Minor Battle Potion", "potion",     true, 2.3, "Attracts monsters for 3 events.",   25)
 	_add("Battle Potion",       "potion",     true, 2.3, "Attracts monsters for 6 events.",   45)
@@ -274,4 +294,13 @@ const EQUIPMENT_SPRITES: Dictionary = {
 	# T2 Expedition gear
 	"T2 Map":           "res://Sprites/Equipment/T2Map.png",
 	"T2 Survival Gear": "res://Sprites/Equipment/T2SurvivalGear.png",
+	# Dwarven Set
+	"Dwarven Helmet": "res://Sprites/Equipment/DwarvenHelmet.png",
+	"Dwarven Armor":  "res://Sprites/Equipment/DwarvenArmor.png",
+	"Dwarven Legs":   "res://Sprites/Equipment/DwarvenLegs.png",
+	"Dwarven Boots":  "res://Sprites/Equipment/DwarvenBoots.png",
+	"Dwarven Hammer":  "res://Sprites/Equipment/DwarvenHammer.png",
+	"Dwarven Shield": "res://Sprites/Equipment/DwarvenShield.png",
+	"T3 Map":         "res://Sprites/Equipment/T3Map.png",
+	"T3 Survival Gear": "res://Sprites/Equipment/T3SurvivalGear.png",
 }

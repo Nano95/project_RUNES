@@ -19,9 +19,9 @@ const TASKS: Array[Dictionary] = [
 	{ "id": "hg_100events",      "area": "Hunting Grounds", "monster": "",             "target": 100, "reward": "allocation", "rewardValue": 3, "desc": "Reach Event #100" },
 	
 	# Slime Swamps — Weak (150g)
-	{ "id": "ss_smallslime_40",  "area": "Slime Swamps", "monster": "Small Slime",  "target": 40, "reward": "gold",       "rewardValue": 150, "desc": "Kill 40 Small Slimes" },
-	{ "id": "ss_greenslime_40",  "area": "Slime Swamps", "monster": "Green Slime",  "target": 40, "reward": "gold",       "rewardValue": 150, "desc": "Kill 40 Green Slimes" },
-	{ "id": "ss_blueslime_40",   "area": "Slime Swamps", "monster": "Blue Slime",   "target": 40, "reward": "gold",       "rewardValue": 150, "desc": "Kill 40 Blue Slimes" },
+	{ "id": "ss_smallslime_40",  "area": "Slime Swamps", "monster": "Small Slime",  "target": 40, "reward": "gold",       "rewardValue": 200, "desc": "Kill 40 Small Slimes" },
+	{ "id": "ss_greenslime_40",  "area": "Slime Swamps", "monster": "Green Slime",  "target": 40, "reward": "gold",       "rewardValue": 200, "desc": "Kill 40 Green Slimes" },
+	{ "id": "ss_blueslime_40",   "area": "Slime Swamps", "monster": "Blue Slime",   "target": 40, "reward": "gold",       "rewardValue": 200, "desc": "Kill 40 Blue Slimes" },
 	# Slime Swamps — Medium (+2 weight)
 	{ "id": "ss_bogslime_30",    "area": "Slime Swamps", "monster": "Bog Slime",    "target": 30, "reward": "weight",     "rewardValue": 2,   "desc": "Kill 30 Bog Slimes" },
 	{ "id": "ss_toxicslime_30",  "area": "Slime Swamps", "monster": "Toxic Slime",  "target": 30, "reward": "weight",     "rewardValue": 2,   "desc": "Kill 30 Toxic Slimes" },
@@ -36,9 +36,9 @@ const TASKS: Array[Dictionary] = [
 	{ "id": "ss_100events",      "area": "Slime Swamps", "monster": "",             "target": 100, "reward": "allocation", "rewardValue": 3,  "desc": "Reach Event #100" },
 
 	# Sandling Dunes — Weak (150g)
-	{ "id": "sd_hoodsandling_40",  "area": "Sandling Dunes", "monster": "Hooded Sandling",   "target": 40, "reward": "gold",       "rewardValue": 150, "desc": "Kill 40 Hooded Sandlings" },
-	{ "id": "sd_roamsandling_40",  "area": "Sandling Dunes", "monster": "Roaming Sandling",  "target": 40, "reward": "gold",       "rewardValue": 150, "desc": "Kill 40 Roaming Sandlings" },
-	{ "id": "sd_dustsandling_40",  "area": "Sandling Dunes", "monster": "Dust Sandling",     "target": 40, "reward": "gold",       "rewardValue": 150, "desc": "Kill 40 Dust Sandlings" },
+	{ "id": "sd_hoodsandling_40",  "area": "Sandling Dunes", "monster": "Hooded Sandling",   "target": 40, "reward": "gold",       "rewardValue": 300, "desc": "Kill 40 Hooded Sandlings" },
+	{ "id": "sd_roamsandling_40",  "area": "Sandling Dunes", "monster": "Roaming Sandling",  "target": 40, "reward": "gold",       "rewardValue": 300, "desc": "Kill 40 Roaming Sandlings" },
+	{ "id": "sd_dustsandling_40",  "area": "Sandling Dunes", "monster": "Dust Sandling",     "target": 40, "reward": "gold",       "rewardValue": 300, "desc": "Kill 40 Dust Sandlings" },
 	# Sandling Dunes — Medium (+2 weight)
 	{ "id": "sd_hornedsand_30",    "area": "Sandling Dunes", "monster": "Horned Sandling",   "target": 30, "reward": "weight",     "rewardValue": 2,   "desc": "Kill 30 Horned Sandlings" },
 	{ "id": "sd_sandbrute_30",     "area": "Sandling Dunes", "monster": "Sand Brute",        "target": 30, "reward": "weight",     "rewardValue": 2,   "desc": "Kill 30 Sand Brutes" },
@@ -51,6 +51,22 @@ const TASKS: Array[Dictionary] = [
 	{ "id": "sd_madnecro_1",       "area": "Sandling Dunes", "monster": "Mad Necromancer",   "target": 1,  "reward": "allocation", "rewardValue": 1,   "desc": "Defeat the Mad Necromancer" },
 	# Sandling Dunes — Milestone
 	{ "id": "sd_100events",        "area": "Sandling Dunes", "monster": "",                  "target": 100, "reward": "allocation", "rewardValue": 3,  "desc": "Reach Event #100" },
+	# Dwarf Stronghold — Weak (150g)
+	{ "id": "ds_dwarfminer_40",   "area": "Dwarf Stronghold", "monster": "Dwarf Miner",    "target": 40, "reward": "gold",       "rewardValue": 400, "desc": "Kill 40 Dwarf Miners" },
+	{ "id": "ds_dwarfguard_40",   "area": "Dwarf Stronghold", "monster": "Dwarf Guard",    "target": 40, "reward": "gold",       "rewardValue": 400, "desc": "Kill 40 Dwarf Guards" },
+	{ "id": "ds_cavedwarf_40",    "area": "Dwarf Stronghold", "monster": "Cave Dwarf",     "target": 40, "reward": "gold",       "rewardValue": 400, "desc": "Kill 40 Cave Dwarves" },
+	# Dwarf Stronghold — Medium (+2 weight)
+	{ "id": "ds_dwarfwarrior_30", "area": "Dwarf Stronghold", "monster": "Dwarf Warrior",   "target": 30, "reward": "weight",     "rewardValue": 2,   "desc": "Kill 30 Dwarf Warriors" },
+	{ "id": "ds_crazeddwarf_30",  "area": "Dwarf Stronghold", "monster": "Crazed Dwarf",    "target": 30, "reward": "weight",     "rewardValue": 2,   "desc": "Kill 30 Crazed Dwarves" },
+	{ "id": "ds_geomancer_30",    "area": "Dwarf Stronghold", "monster": "Dwarf Geomancer", "target": 30, "reward": "weight",     "rewardValue": 2,   "desc": "Kill 30 Dwarf Geomancers" },
+	# Dwarf Stronghold — Hard (+2 HP)
+	{ "id": "ds_dwarfchamp_20",   "area": "Dwarf Stronghold", "monster": "Dwarf Champion",  "target": 20, "reward": "hp",         "rewardValue": 2,   "desc": "Kill 20 Dwarf Champions" },
+	{ "id": "ds_stonegolem_20",   "area": "Dwarf Stronghold", "monster": "Stone Golem",     "target": 20, "reward": "hp",         "rewardValue": 2,   "desc": "Kill 20 Stone Golems" },
+	{ "id": "ds_dwarfwarlord_20", "area": "Dwarf Stronghold", "monster": "Dwarf Warlord",   "target": 20, "reward": "hp",         "rewardValue": 2,   "desc": "Kill 20 Dwarf Warlords" },
+	# Dwarf Stronghold — Elite
+	{ "id": "ds_ancientdragon_1", "area": "Dwarf Stronghold", "monster": "Ancient Dragon",  "target": 1,  "reward": "allocation", "rewardValue": 1,   "desc": "Defeat the Ancient Dragon" },
+	# Dwarf Stronghold — Milestone
+	{ "id": "ds_100events",       "area": "Dwarf Stronghold", "monster": "",                "target": 100, "reward": "allocation", "rewardValue": 3,  "desc": "Reach Event 100 in Dwarf Stronghold" },
 ]
 var main:MainNode
 func _ready() -> void:

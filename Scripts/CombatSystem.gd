@@ -11,18 +11,21 @@ const ELITE_OMENS = {
 	"Hunting Grounds": "A war horn echoes in the distance...",
 	"Slime Swamps": "The swamp goes eerily silent. Something massive approaches.",
 	"Sandling Dunes": "A deep evil fills you with the feeling of doom.",
+	"Dwarf Stronghold": "Something Ancient looms up ahead...",
 }
 
 const SUMMON_AREAS = {
 	"Warchief Totem":    "Hunting Grounds",
 	"Royal Totem":    "Slime Swamps",
 	"Necromancer Totem": "Sandling Dunes",
+	"Dragon Totem":    "Dwarf Stronghold",
 }
 
 const SUMMON_ELITES = {
 	"Warchief Totem":    "Orc King",
 	"Royal Totem":    "King Slime",
 	"Necromancer Totem": "Mad Necromancer",
+	"Dragon Totem":      "Ancient Dragon",
 }
 var pendingSummonedEliteName: String = ""
 var summonedElitePending: bool = false

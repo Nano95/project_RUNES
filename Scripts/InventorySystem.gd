@@ -200,7 +200,7 @@ func getBackpackSlotCount() -> int:
 func onPotionUsed(itemName: String) -> void:
 	# Summon items — only consume if successful
 	if (itemName == "Warchief Totem" or itemName == "Royal Totem" or \
-		itemName == "Necromancer Totem"):
+		itemName == "Necromancer Totem" or itemName == "Dragon Totem"):
 		var success = combatSystem._handleSummon(itemName)
 		if success:
 			removeFromBackpack(itemName, 1)
@@ -241,8 +241,8 @@ func getPotionHeal(itemName: String) -> int:
 		"Berry Extract":      return 15
 		"Minor Health Potion":  return 20
 		"Health Potion":      return 30
-		#"Strong Heal Potion": return 50
 		"Twilight Potion":    return 55
+		"Cave Tonic": return 70
 	return 0
 
 # ── SHARED HELPER ─────────────────────────────────────────
