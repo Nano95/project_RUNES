@@ -32,7 +32,6 @@ func onCombatStarted(monster: MonsterData, weakened: bool) -> void:
 	if main.game_data.currentMonsterHp <= 0:
 		return
 	var currHp = int(monster.hp * .5) if (weakened) else monster.hp
-	monsterMaxHp = monster.hp
 
 	var tierColor = ""
 	match monster.tier:
@@ -50,7 +49,6 @@ func onCombatStarted(monster: MonsterData, weakened: bool) -> void:
 	enemyHPBar.max_value = monsterMaxHp
 	enemyHPBar.value = currHp
 	#enemyHPValue.text = "%d / %d" % [currHp, monsterMaxHp]
-	print(" - enemy txt: ", currHp)
 	updateHPColor(currHp)
 	fleeButton.disabled = false
 	fleeButton.text = "Flee"
