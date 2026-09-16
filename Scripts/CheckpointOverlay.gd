@@ -73,9 +73,6 @@ func onHide() -> void:
 	Utils.animate_modal_exit(self)
 	hide()
 
-func onAutoContinueToggled(toggled:bool = true) -> void:
-	autoCheckbox.set_pressed_no_signal(toggled)
-
 func onCheckpointReached() -> void:
 	descLabel.bbcode_enabled = true
 	descLabel.text = CHECKPOINT_MESSAGES[randi() % CHECKPOINT_MESSAGES.size()]
@@ -103,9 +100,19 @@ func onRetreatPressed() -> void:
 	onHide()
 	areaSystem.exitArea()
 
+# Fired by the checkbox directly — emits signal so other UI can sync, then starts/stops timer
 func onAutoToggled(pressed: bool) -> void:
 	GameEvents.autoContinueToggled.emit(pressed)
 	if (pressed):
+		startAutoTimer()
+	else:
+		stopAutoTimer()
+
+# Fired by external signal (e.g. quick settings panel) — uses set_pressed_no_signal
+# to avoid re-triggering onAutoToggled and causing a signal loop
+func onAutoContinueToggled(toggled:bool = true) -> void:
+	autoCheckbox.set_pressed_no_signal(toggled)
+	if (toggled):
 		startAutoTimer()
 	else:
 		stopAutoTimer()
