@@ -1131,6 +1131,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EventLogPanel" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=863328441]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -1467,7 +1468,6 @@ bbcode_enabled = true
 scroll_following = true
 
 [node name="EquipmentDisplay" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=1407338151 node_paths=PackedStringArray("equipmentSystem", "itemModal", "statsPanel", "helmetBtn", "weaponBtn", "armorBtn", "shieldBtn", "legsBtn", "bootsBtn", "helmetTexture", "weaponTexture", "armorTexture", "shieldTexture", "legsTexture", "bootsTexture", "helmetGradeLabel", "weaponGradeLabel", "armorGradeLabel", "shieldGradeLabel", "legsGradeLabel", "bootsGradeLabel")]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -1475,7 +1475,7 @@ theme = ExtResource("17_g72ry")
 script = ExtResource("9_ipr08")
 equipmentSystem = NodePath("../../../../EquipmentSystem")
 itemModal = NodePath("../../../SelectEquipmentDisplay")
-statsPanel = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Formulas/MarginContainer/VBoxContainer/Description")
+statsPanel = NodePath("Formulas/MarginContainer/VBoxContainer/Description")
 helmetBtn = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/HEAD/Head/Button")
 weaponBtn = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Weapon/Button")
 armorBtn = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE/Armor/Button")
@@ -1583,28 +1583,12 @@ theme_override_constants/separation = -7
 [node name="HEAD" type="HBoxContainer" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer" unique_id=1152001316]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 38
-
-[node name="Space" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/HEAD" unique_id=911443865]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("17_g72ry")
-
-[node name="Space4" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/HEAD" unique_id=1349977357]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("17_g72ry")
+theme_override_constants/separation = 50
 
 [node name="Head" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/HEAD" unique_id=1026232978]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(130, 130)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
 size_flags_vertical = 4
 theme = ExtResource("17_g72ry")
 
@@ -1634,50 +1618,36 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 74.0
-offset_right = 0.0
-offset_bottom = 74.0
+offset_left = -5.0
+offset_top = 84.0
+offset_right = -5.0
+offset_bottom = 84.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.45, 0.45)
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 50
 text = "[SS]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Space2" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/HEAD" unique_id=1995110955]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("17_g72ry")
-
-[node name="Space3" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/HEAD" unique_id=540238628]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("17_g72ry")
-
 [node name="MIDDLE" type="HBoxContainer" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer" unique_id=559509212]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 38
+theme_override_constants/separation = 18
 
-[node name="Space" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE" unique_id=1747176112]
+[node name="Space3" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE" unique_id=496170297]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
 size_flags_vertical = 4
 theme = ExtResource("17_g72ry")
 
 [node name="Weapon" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE" unique_id=1890344787]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(125, 125)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
 size_flags_vertical = 4
 theme = ExtResource("17_g72ry")
 
@@ -1707,11 +1677,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 74.0
-offset_right = 0.0
-offset_bottom = 74.0
+offset_left = -4.0
+offset_top = 80.0
+offset_right = -4.0
+offset_bottom = 80.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.45, 0.45)
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 50
 text = "[SS]"
@@ -1719,9 +1691,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Armor" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE" unique_id=807602553]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(125, 125)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
 size_flags_vertical = 4
 theme = ExtResource("17_g72ry")
 
@@ -1751,11 +1723,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 74.0
-offset_right = 0.0
-offset_bottom = 74.0
+offset_left = -4.0
+offset_top = 80.0
+offset_right = -4.0
+offset_bottom = 80.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.45, 0.45)
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 50
 text = "[SS]"
@@ -1764,9 +1738,9 @@ vertical_alignment = 1
 
 [node name="Shield" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE" unique_id=1430406743]
 material = SubResource("ShaderMaterial_a3pjr")
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(125, 125)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
 size_flags_vertical = 4
 theme = ExtResource("17_g72ry")
 
@@ -1796,22 +1770,24 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 74.0
-offset_right = 0.0
-offset_bottom = 74.0
+offset_left = -4.0
+offset_top = 80.0
+offset_right = -4.0
+offset_bottom = 80.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.45, 0.45)
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 50
 text = "[SS]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Space2" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE" unique_id=1458746372]
+[node name="Space4" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/MIDDLE" unique_id=1448830156]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
 size_flags_vertical = 4
 theme = ExtResource("17_g72ry")
 
@@ -1820,26 +1796,10 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 38
 
-[node name="Space" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW" unique_id=1904261006]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("17_g72ry")
-
-[node name="Space3" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW" unique_id=1276515510]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("17_g72ry")
-
 [node name="Legs" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW" unique_id=1509764329]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(125, 125)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
 size_flags_vertical = 4
 theme = ExtResource("17_g72ry")
 
@@ -1869,58 +1829,28 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 74.0
-offset_right = 0.0
-offset_bottom = 74.0
+offset_left = -4.0
+offset_top = 80.0
+offset_right = -4.0
+offset_bottom = 80.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.45, 0.45)
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 50
 text = "[SS]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Space4" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW" unique_id=25724400]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("17_g72ry")
-
-[node name="Space2" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW" unique_id=1958642687]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("17_g72ry")
-
 [node name="LOW2" type="HBoxContainer" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer" unique_id=1713341855]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 38
 
-[node name="Space" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW2" unique_id=640120065]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("17_g72ry")
-
-[node name="Space2" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW2" unique_id=864300530]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("17_g72ry")
-
 [node name="Boots" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW2" unique_id=381449704]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(125, 125)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
 size_flags_vertical = 4
 theme = ExtResource("17_g72ry")
 
@@ -1950,40 +1880,35 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 74.0
-offset_right = 0.0
-offset_bottom = 74.0
+offset_left = -4.0
+offset_top = 80.0
+offset_right = -4.0
+offset_bottom = 80.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.45, 0.45)
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 50
 text = "[SS]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Space3" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW2" unique_id=1748346152]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("17_g72ry")
-
-[node name="Space4" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Equipment/VBoxContainer/LOW2" unique_id=1008307530]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("17_g72ry")
-
-[node name="Formulas" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1006740582]
-layout_mode = 2
+[node name="Formulas" type="Panel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay" unique_id=1006740582]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 33.0
+offset_top = -302.0
+offset_right = 263.0
+offset_bottom = -32.0
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.6
-theme = ExtResource("19_shy7a")
+theme = ExtResource("8_shy7a")
 
-[node name="MarginContainer" type="MarginContainer" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Formulas" unique_id=1866859769]
+[node name="MarginContainer" type="MarginContainer" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/Formulas" unique_id=1866859769]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1995,10 +1920,10 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Formulas/MarginContainer" unique_id=1006657687]
+[node name="VBoxContainer" type="VBoxContainer" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/Formulas/MarginContainer" unique_id=1006657687]
 layout_mode = 2
 
-[node name="Description" type="RichTextLabel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/VBoxContainer/MarginContainer/VBoxContainer/Formulas/MarginContainer/VBoxContainer" unique_id=1445887813]
+[node name="Description" type="RichTextLabel" parent="UIController/MarginContainer/VBoxContainer/EquipmentDisplay/Formulas/MarginContainer/VBoxContainer" unique_id=1445887813]
 self_modulate = Color(0.7882353, 0.7882353, 0.7882353, 1)
 custom_minimum_size = Vector2(0, 95)
 layout_mode = 2
@@ -2013,10 +1938,9 @@ text = "[color=#ffffff]HP[/color] 116
 [color=#e74c3c]ATK[/color] 4
 [color=#3498db]DEF[/color] 15
 [color=#f1c40f]DODGE[/color] 0%
-[color=#2ecc71]POISON CHANCE[/color] 15%
+[color=#2ecc71]POISON RESIST[/color] 15%
 "
 scroll_following = true
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MainActionRow" type="ScrollContainer" parent="UIController/MarginContainer/VBoxContainer" unique_id=23115074]
@@ -2510,7 +2434,7 @@ offset_left = 15.0
 offset_top = 10.0
 offset_right = 705.0
 offset_bottom = 55.0
-theme = ExtResource("17_g72ry")
+theme = ExtResource("19_shy7a")
 
 [node name="Title2" parent="UIController/CheckpointOverlay/TitlePanel" unique_id=877426361 instance=ExtResource("6_prt4a")]
 material = SubResource("ShaderMaterial_i4rge")
