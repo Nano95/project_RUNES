@@ -57,6 +57,7 @@ func _ready() -> void:
 	GameEvents.areaUnlocked.connect(onAreaUnlocked)
 	autoContinueButton.toggled.connect(emitAutoContinueToggled) # outgoing emit
 	GameEvents.autoContinueToggled.connect(onAutoContinueToggled) # incoming emit
+	GameEvents.bazaarStopped.connect(onBazaarStopped)
 	
 	bazaarStartStopBtn.pressed.connect(onBazaarStartStopPressed)
 	bazaarLeaveBtn.pressed.connect(onBazaarLeavePressed)
@@ -290,6 +291,9 @@ func onLockedAreaPressed(areaName: String) -> void:
 ### BAZAAR
 func onBazaarPressed() -> void:
 	# Show event log in case equipment panel is open
+	GameEvents.eventLogged.emit(
+		"You walk over to the bazaar.", "town", false
+	)
 	equipmentPanel.visible = false
 	eventLogPanel.visible = true
 	Utils.animateButtonBounce(eventLogPanel)
@@ -303,7 +307,11 @@ func onBazaarPressed() -> void:
 	bazaarStartStopBtn.text = "Start"
 
 func onBazaarLeavePressed() -> void:
-	bazaarSystem.stopBazaar()
+	if bazaarSystem.isBazaarActive:
+		bazaarSystem.stopBazaar()
+	GameEvents.eventLogged.emit(
+		"You walk back over to the town center...", "town", false
+	)
 	Utils.animateButtonBounce(eventLogPanel)
 	# Restore normal state
 	bazaarActionsPanel.visible = false
@@ -319,6 +327,9 @@ func onBazaarStartStopPressed() -> void:
 	else:
 		bazaarSystem.startBazaar()
 		bazaarStartStopBtn.text = "Stop"
+
+func onBazaarStopped() -> void:
+	bazaarStartStopBtn.text = "Start"
 
 func resetPanelPositionMeta() -> void:
 	if eventLogPanel.has_meta("originalY"):

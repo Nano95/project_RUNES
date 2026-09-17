@@ -6,6 +6,7 @@ class_name BazaarSystem
 var main:MainNode = null
 var bazaarTimer: Timer
 var isBazaarActive: bool = false
+var sessionStartGold: int = 0
 
 const BASE_HAGGLE_GREED: float = 0.40
 const BASE_SHOPLIFT_CATCH: float = 0.50
@@ -44,12 +45,16 @@ func getHaggleSkill() -> float:
 		return 0.0
 	return scale.get("effects", {}).get("haggleSkill", 0.0)
 
+func _getBazaarSessionEarnings() -> int:
+	return main.game_data.savedGold - sessionStartGold
+
 func startBazaar() -> void:
 	if main.game_data.backpack.is_empty():
 		GameEvents.eventLogged.emit(
 			"Your backpack is empty. Nothing to sell!", "system", false
 		)
 		return
+	sessionStartGold = main.game_data.savedGold
 	isBazaarActive = true
 	bazaarTimer.start()
 	GameEvents.bazaarStarted.emit()
@@ -61,16 +66,14 @@ func stopBazaar() -> void:
 	isBazaarActive = false
 	bazaarTimer.stop()
 	GameEvents.bazaarStopped.emit()
-	GameEvents.eventLogged.emit(
-		"You close your stall for the day.", "town", false
-	)
+	_logSessionEarnings()
 
 func onTick() -> void:
 	if main.game_data.backpack.is_empty():
-		stopBazaar()
 		GameEvents.eventLogged.emit(
-			"You've sold everything! Stall closed.", "town", false
+			"You've sold everything!", "town", false
 		)
+		stopBazaar()
 		return
 	rollEvent()
 
@@ -201,6 +204,17 @@ func handleShoplifter() -> void:
 			"[color=#ff8800]Shoplifter[/color] steals your %s!" % itemName, "danger", false
 		)
 
+func _logSessionEarnings() -> void:
+	var earned = _getBazaarSessionEarnings()
+	if earned > 0:
+		GameEvents.eventLogged.emit(
+			"Stall closed. You earned %dg this session!" % earned, "town", false
+		)
+	elif earned == 0:
+		GameEvents.eventLogged.emit(
+			"Stall closed. No sales this session.", "system", false
+		)
+
 # ── HELPERS ───────────────────────────────────────────────
 func getRandomBackpackItem() -> Dictionary:
 	if main.game_data.backpack.is_empty():
@@ -212,15 +226,26 @@ func getItemPrice(item: Dictionary) -> int:
 	var itemDef = ItemRegistry.getItem(itemName)
 	var basePrice = itemDef.value if itemDef else 10
 
-	if item.get("isEquipment", false):
+	var gradeMultiplier = 1.0
+	if (item.get("isEquipment", false)):
+		# Grade multiplier
 		match item.get("grade", ""):
-			"SS": return int(basePrice * 4.0)
-			"S": return int(basePrice * 2.0)
-			"A": return int(basePrice * 1.6)
-			"B": return int(basePrice * 1.3)
-		return basePrice
+			"B":  gradeMultiplier = 1.1
+			"A":  gradeMultiplier = 1.25
+			"S":  gradeMultiplier = 1.5
+			"SS": gradeMultiplier = 2.0
+	
+	# Enhancement multiplier (only from +2 onwards)
+	var enhMultiplier = 1.0
+	var enh = item.get("enhancement", 0)
+	if (enh >= 2):
+		var enhTable = {
+			2: 1.05, 3: 1.10, 4: 1.15, 5: 1.20,
+			6: 1.30, 7: 1.40, 8: 1.55, 9: 1.70, 10: 2.0
+		}
+		enhMultiplier = enhTable.get(enh, 1.0)
 
-	return basePrice
+	return int(basePrice * gradeMultiplier * enhMultiplier)
 
 func getStackPrice(itemName: String, qty: int) -> int:
 	var itemDef = ItemRegistry.getItem(itemName)

@@ -77,12 +77,7 @@ func onPotionUsed(itemName: String) -> void:
 	# Here we handle special effects
 	match itemName:
 		"Regen Potion":
-			if main.game_data.regenCounter > 0:
-				GameEvents.eventLogged.emit(
-					"Already regenerating!", "system", false
-				)
-				return
-			main.game_data.regenCounter = 5
+			main.game_data.regenCounter += 5
 			main.game_data.regenPerTick = 10
 			GameEvents.eventLogged.emit(
 				"Regen Potion consumed. Regenerating 10 HP per tick.", "gather", false
