@@ -62,7 +62,6 @@ func onCombatStarted(monster: MonsterData, weakened: bool) -> void:
 
 func onCombatTick(_playerDmg: int, _monsterDmg: int, monsterHpLeft: int) -> void:
 	var hpLeft = max(0, monsterHpLeft)
-	print(" - cobat tickenemy txt: ", hpLeft)
 	enemyHPValue.text = "%d / %d" % [hpLeft, monsterMaxHp]
 	updateHPColor(hpLeft)
 	# Animate the bar

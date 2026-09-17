@@ -345,13 +345,21 @@ func applyAntidote(reduction: int) -> void:
 
 func _handleSummon(itemName: String) -> bool:
 	var requiredArea = SUMMON_AREAS.get(itemName, "")
-	if main.game_data.currentArea != requiredArea:
+	if (main.game_data.currentArea != requiredArea):
 		GameEvents.eventLogged.emit(
 			"This totem has no power here.", "system", false
 		)
 		return false
 
-	if pendingStrongMonsterIn > 0 or summonedElitePending:
+	# Check event count
+	if (main.game_data.eventCount < 50):
+		GameEvents.eventLogged.emit(
+			"The totem does not react... venture deeper first. (%d/50 events)" % main.game_data.eventCount,
+			"system", false
+		)
+		return false
+
+	if (pendingStrongMonsterIn > 0 or summonedElitePending):
 		GameEvents.eventLogged.emit(
 			"Something is already coming...", "system", false
 		)

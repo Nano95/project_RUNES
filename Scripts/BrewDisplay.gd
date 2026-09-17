@@ -87,7 +87,6 @@ func canBrew(recipe: RecipeData) -> bool:
 	return true
 
 func onRecipeSelected(recipe: RecipeData) -> void:
-	print(" - recipe selected")
 	selectedRecipe = recipe
 	refreshInfo()
 	refreshBrewButton()
