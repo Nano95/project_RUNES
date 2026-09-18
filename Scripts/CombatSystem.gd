@@ -67,7 +67,14 @@ func startCombat(monster: MonsterData, weakened: bool = false) -> void:
 	GameEvents.combatStarted.emit(monster, weakened)
 
 func trySpawnMonster(eventCount: int) -> void:
+	# Don't roll a new omen if one is already counting down
+
 	var tier = MonsterRegistry.rollTier(eventCount)
+	# this if statement added to prevent two elite omen simulatenously. if an elite is rolled while one
+	# elite is pending then it's just downgraded to a strong one. And the eventCount will be above 40 if 
+	# we are seeing elites so no need to worry about that if statement. It will just be a regular encounter.
+	if ((tier == "elite") and pendingMonsterTier == "elite"):
+		tier = "strong"
 	if (tier == "strong" and eventCount <= 40):
 		pendingStrongMonsterIn = 10
 		pendingMonsterTier = "strong"
