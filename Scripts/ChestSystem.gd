@@ -313,7 +313,7 @@ func moveToBackpackFromIndex(itemName: String, chestId: int, chestIndex: int, qt
 	# Log if partial transfer
 	if actualQty < availableQty:
 		GameEvents.eventLogged.emit(
-			"Transferred %d/%d %s — backpack limit reached." % [actualQty, availableQty, itemName],
+			"Transferred %d/%d %s — space or weight limit reached." % [actualQty, availableQty, itemName],
 			"system", false
 		)
 
