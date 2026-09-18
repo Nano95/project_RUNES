@@ -244,54 +244,78 @@ func moveToBackpackFromIndex(itemName: String, chestId: int, chestIndex: int, qt
 		return
 
 	var item = ItemRegistry.getItem(itemName)
-	if item:
-		if main.game_data.currentWeight + (item.weight * qty) > main.game_data.getMaxWeight():
-			GameEvents.eventLogged.emit("Backpack too heavy!", "system", false)
-			Utils.spawnFloatingLabel(
-				"Too heavy to carry!",
-				Color("#c0392b"),
-				main,
-				true
-			)
-			return
-	if main.game_data.backpack.size() >= main.game_data.backpackMax:
-		GameEvents.eventLogged.emit(
-			"Backpack full! %s cannot be moved to." % itemName, "system", false
-		)
-		Utils.spawnFloatingLabel(
-			"Backpack is full",
-			Color("#c0392b"),
-			main,
-			true
-		)
-		return
+	
+	# Equipment — all or nothing
 	if chestStack.get("isEquipment", false):
+		if item and main.game_data.currentWeight + item.weight > main.game_data.getMaxWeight():
+			GameEvents.eventLogged.emit("Too heavy to carry!", "system", false)
+			return
+		if main.game_data.backpack.size() >= main.game_data.backpackMax:
+			GameEvents.eventLogged.emit("Backpack full!", "system", false)
+			return
 		chest.items.remove_at(chestIndex)
 		main.game_data.backpack.append(chestStack)
 		if item:
 			main.game_data.currentWeight += item.weight
+		main.save_game()
+		call_deferred("emitStorageSignals")
+		return
+
+	# Stackable — transfer as much as possible
+	var availableQty = min(qty, chestStack.get("qty", 1))
+	
+	# Calculate max transferable by weight
+	var maxByWeight = availableQty
+	if item and item.weight > 0:
+		var weightAvailable = main.game_data.getMaxWeight() - main.game_data.currentWeight
+		maxByWeight = min(availableQty, int(weightAvailable / item.weight))
+	
+	# Calculate max transferable by capacity
+	var stackCap = ItemRegistry.getStackCap(itemName)
+	var spaceInExistingStacks = 0
+	for backpackStack in main.game_data.backpack:
+		if backpackStack.get("name") == itemName:
+			spaceInExistingStacks += stackCap - backpackStack.get("qty", 0)
+	var emptySlots = main.game_data.backpackMax - main.game_data.backpack.size()
+	var maxByCapacity = spaceInExistingStacks + (emptySlots * stackCap)
+
+	var actualQty = min(maxByWeight, maxByCapacity)
+	actualQty = min(actualQty, availableQty)
+
+	if actualQty <= 0:
+		GameEvents.eventLogged.emit(
+			"Can't carry any %s!" % itemName, "system", false
+		)
+		Utils.spawnFloatingLabel("Too heavy!", Color("#c0392b"), main, true)
+		return
+
+	# Transfer actualQty
+	if chestStack.get("qty", 1) <= actualQty:
+		chest.items.remove_at(chestIndex)
 	else:
-		var actualQty = min(qty, chestStack.get("qty", 1))
-		if chestStack.get("qty", 1) <= actualQty:
-			chest.items.remove_at(chestIndex)
-		else:
-			chest.items[chestIndex]["qty"] -= actualQty
+		chest.items[chestIndex]["qty"] -= actualQty
 
-		if item:
-			main.game_data.currentWeight += item.weight * actualQty
+	if item:
+		main.game_data.currentWeight += item.weight * actualQty
 
-		var stackCap = ItemRegistry.getStackCap(itemName)
-		var remaining = actualQty
-		for backpackStack in main.game_data.backpack:
-			if backpackStack.get("name") == itemName and backpackStack.get("qty", 0) < stackCap:
-				var space = stackCap - backpackStack["qty"]
-				var toAdd = min(space, remaining)
-				backpackStack["qty"] += toAdd
-				remaining -= toAdd
-				if remaining <= 0:
-					break
-		if remaining > 0:
-			main.game_data.backpack.append({"name": itemName, "qty": remaining})
+	var remaining = actualQty
+	for backpackStack in main.game_data.backpack:
+		if remaining <= 0:
+			break
+		if backpackStack.get("name") == itemName and backpackStack.get("qty", 0) < stackCap:
+			var space = stackCap - backpackStack["qty"]
+			var toAdd = min(space, remaining)
+			backpackStack["qty"] += toAdd
+			remaining -= toAdd
+	if remaining > 0:
+		main.game_data.backpack.append({"name": itemName, "qty": remaining})
+
+	# Log if partial transfer
+	if actualQty < availableQty:
+		GameEvents.eventLogged.emit(
+			"Transferred %d/%d %s — backpack limit reached." % [actualQty, availableQty, itemName],
+			"system", false
+		)
 
 	main.save_game()
 	call_deferred("emitStorageSignals")

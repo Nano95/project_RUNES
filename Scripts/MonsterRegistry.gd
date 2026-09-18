@@ -140,13 +140,13 @@ func _ready() -> void:
 		},
 		"Dwarf Stronghold": {
 			"weak": [
-				_make("Dwarf Miner",  "weak", 75, 20, 4, 14, {}, "dwarven", .01, [
+				_make("Dwarf Miner",  "weak", 85, 32, 4, 14, {}, "dwarven", .01, [
 					_drop("Rough Gemstone", 0.08),
 				]),
-				_make("Dwarf Guard",  "weak", 80, 22, 4, 16, {}, "dwarven", .01, [
+				_make("Dwarf Guard",  "weak", 90, 33, 4, 16, {}, "dwarven", .01, [
 					_drop("Rough Gemstone", 0.08),
 				]),
-				_make("Cave Dwarf",   "weak", 78, 18, 3, 12, {}, "dwarven", .01, [
+				_make("Cave Dwarf",   "weak", 98, 35, 3, 12, {}, "dwarven", .01, [
 					_drop("Rough Gemstone", 0.08),
 				]),
 			],
@@ -166,11 +166,11 @@ func _ready() -> void:
 					_drop("Rough Gemstone", 0.12),
 					_drop("Gem Shard",      0.12),
 				]),
-				_make("Stone Golem",     "strong", 250, 62, 30, 80, {}, "dwarven", 0.07, [
+				_make("Stone Golem",     "strong", 250, 50, 30, 80, {}, "dwarven", 0.07, [
 					_drop("Rough Gemstone", 0.15),
 					_drop("Gem Shard",      0.15),
 				]),
-				_make("Dwarf Warlord",   "strong", 235, 60, 29, 78, {}, "dwarven", 0.07 ,[
+				_make("Dwarf Warlord",   "strong", 235, 62, 29, 78, {}, "dwarven", 0.07 ,[
 					_drop("Rough Gemstone", 0.18),
 					_drop("Gem Shard",      0.15),
 				]),

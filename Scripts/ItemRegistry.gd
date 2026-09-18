@@ -36,48 +36,48 @@ func _register() -> void:
 	# Orc Set (Hunting Grounds)
 	_equip("T1 Map", "expeditionMap", "", 0, 0, 0, {"unlocksArea": "Slime Swamps"},    "A map of the Slime Swamps.", 150)
 	_equip("T1 Survival Gear", "survivalGear", "", 0, 0, 0, {"expeditionMinutes": 20}, "Reinforced survival pack.", 200)
-	_equip("Orc Helmet",      "helmet", "Orc", 15, 0,  0, {},                "Forged from orc bone.",              80)
-	_equip("Orc Armor",       "armor",  "Orc", 35, 0,  0, {},                "Heavy orcish plate.",                120)
-	_equip("Orc Legs",        "legs",   "Orc", 20, 0,  0, {},                "Crude but sturdy.",                  80)
+	_equip("Orc Helmet",      "helmet", "Orc", 15, 0,  0, {},                "Forged from orc bone.",              30)
+	_equip("Orc Armor",       "armor",  "Orc", 35, 0,  0, {},                "Heavy orcish plate.",                60)
+	_equip("Orc Legs",        "legs",   "Orc", 20, 0,  0, {},                "Crude but sturdy.",                  45)
 	_equip("Orc Boots",       "boots",  "Orc", 10, 0,  0, {"dodge": 0.03},   "Grants access to Orc lands.",        60)
-	_equip("Orcish Axe",      "weapon", "",    0,  10, 0, {},                "A crude but heavy axe.",             40)
-	_equip("Orc King Shield", "shield", "",    0,  0,  8, {},                "Shield of the Orc King.",            150)
+	_equip("Orcish Axe",      "weapon", "",    0,  10, 0, {},                "A crude but heavy axe.",             50)
+	_equip("Orc King Shield", "shield", "",    0,  0,  8, {},                "Shield of the Orc King.",            50)
 
 	# Slimy Set (Slime Swamps)
-	_equip("Slimy Helmet", "helmet", "Slimy", 6,  0, 0, {"poisonResistance": 0.08}, "Infused with swamp essence.",  80)
-	_equip("Slimy Armor",  "armor",  "Slimy", 18, 0, 0, {"poisonResistance": 0.20}, "Resistant to poison.",         120)
-	_equip("Slimy Legs",   "legs",   "Slimy", 8,  0, 0, {"poisonResistance": 0.15}, "Heavy with swamp mud.",        90)
-	_equip("Slimy Boots",  "boots",  "Slimy", 8,  0, 0, {"dodge": 0.04},            "Grants access to Slime Swamps.", 70)
-	_equip("Slimy Blade",  "weapon", "",      0, 17, 0, {},             "Coated in slime.",      60)
+	_equip("Slimy Helmet", "helmet", "Slimy", 6,  0, 0, {"poisonResistance": 0.08}, "Infused with swamp essence.",  50)
+	_equip("Slimy Armor",  "armor",  "Slimy", 18, 0, 0, {"poisonResistance": 0.20}, "Resistant to poison.",         100)
+	_equip("Slimy Legs",   "legs",   "Slimy", 8,  0, 0, {"poisonResistance": 0.15}, "Heavy with swamp mud.",        70)
+	_equip("Slimy Boots",  "boots",  "Slimy", 8,  0, 0, {"dodge": 0.04},            "Grants access to Slime Swamps.", 50)
+	_equip("Slimy Blade",  "weapon", "",      0, 17, 0, {},             "Coated in slime.",      70)
 	_equip("Slimy Shield", "shield", "",      0,  0, 15, {},             "Hardens on impact.",    70)
 	# Orc monster part drops
 	_add("Orc Leather",       "part", true,  0.3, "Rough orcish hide.",           10)
-	_add("Orc General Crest", "part", true,  0.2, "Mark of an Orc General.",      55)
+	_add("Orc General Crest", "part", true,  0.2, "Mark of an Orc General.",      35)
 	_add("King's Tusk",       "part", true,  0.3, "A massive orc tusk.",          80)
-	_add("Warchief Totem", "summon", false, 0.5, "Summons the Orc King. Use in the field.", 500)
+	_add("Warchief Totem", "summon", false, 0.5, "Summons the Orc King. Use in the field.", 200)
 	
 	# Slime Parts
-	_add("Slime Gel",   "part", true, 0.2, "Sticky green gel.",          6)
+	_add("Slime Gel",   "part", true, 0.2, "Sticky green gel.",          15)
 	_add("Slime Core",  "part", true, 0.3, "Pulsing with slime energy.", 45)
-	_add("Royal Gel",   "part", true, 0.3, "Fit for a slime king.",      80)
-	_add("Royal Totem", "summon", false, 0.5, "Summons the King Slime. Use in the Slime Swamps.", 200)
+	_add("Royal Gel",   "part", true, 0.3, "Fit for a slime king.",      130)
+	_add("Royal Totem", "summon", false, 0.5, "Summons the King Slime. Use in the Slime Swamps.", 400)
 
 	# Sandling Set
 	_equip("Sandling Helmet", "helmet", "Sandling", 22, 0,  0,  {},              "A hood worn by sandlings.",     90)
-	_equip("Sandling Armor",  "armor",  "Sandling", 45, 0,  0,  {},              "Dense bone plating.",           140)
-	_equip("Sandling Legs",   "legs",   "Sandling", 28, 0,  0,  {},              "Bone-reinforced leggings.",     100)
+	_equip("Sandling Armor",  "armor",  "Sandling", 45, 0,  0,  {},              "Dense bone plating.",           130)
+	_equip("Sandling Legs",   "legs",   "Sandling", 28, 0,  0,  {},              "Bone-reinforced leggings.",     90)
 	_equip("Sandling Boots",  "boots",  "Sandling", 14, 0,  0,  {"dodge": 0.05}, "Silent in the sand.",           80)
 	# Sandling weapons
-	_equip("Sandling Blade",  "weapon", "", 0, 22, 0,  {},              "Carved from sandling remains.", 90)
+	_equip("Sandling Blade",  "weapon", "", 0, 22, 0,  {},              "Carved from sandling remains.", 100)
 	_equip("Sandling Shield", "shield", "", 0, 0,  20, {},              "Hardened bone shield.",         100)
 	_equip("T2 Map", "expeditionMap", "", 0, 0, 0, {"unlocksArea": "Sandling Dunes"},    "A map of the Sandling Dunes.", 150)
 	_equip("T2 Survival Gear", "survivalGear", "", 0, 0, 0, {"expeditionMinutes": 30}, "Hydrating survival pack.", 200)
 
 	# Parts
-	_add("Bone Dust",    "part", true,  0.2, "Fine dust from animated bones.",     8)
+	_add("Bone Dust",    "part", true,  0.2, "Fine dust from animated bones.",     20)
 	_add("Crystal Bone", "part", true,  0.4, "Crystallized by dark magic.",        60)
 	_add("Ancient Relic","part", true,  0.3, "Radiates dark energy.",             100)
-	_add("Necromancer Totem", "summon", false, 0.5, "Summons the Mad Necromancer.", 300)
+	_add("Necromancer Totem", "summon", false, 0.5, "Summons the Mad Necromancer.", 600)
 	_equip("T3 Map",           "expeditionMap", "", 0, 0, 0, {"unlocksArea": "Dwarf Stronghold"}, "A map of the Dwarf Stronghold.", 450)
 	_equip("T3 Survival Gear", "survivalGear",  "", 0, 0, 0, {"expeditionMinutes": 40},            "Illuminating survival pack.",        500)
 	
@@ -87,15 +87,15 @@ func _register() -> void:
 	_add("Dragon's Eye",   "part", true,  0.3, "A legendary red diamond resembling the eye of a dragon.",  200)
 
 	# Equipment
-	_equip("Dwarven Helmet", "helmet", "Dwarven", 30, 0,  0,  {},               "Forged in the deep.",          120)
+	_equip("Dwarven Helmet", "helmet", "Dwarven", 30, 0,  0,  {},               "Forged in the deep.",          110)
 	_equip("Dwarven Armor",  "armor",  "Dwarven", 52, 0,  0,  {},               "Heavy dwarven plate.",         180)
 	_equip("Dwarven Legs",   "legs",   "Dwarven", 35, 0,  0,  {},               "Stone-reinforced leggings.",   140)
 	_equip("Dwarven Boots",  "boots",  "Dwarven", 18, 0,  0,  {"dodge": 0.06},  "Sturdy mining boots.",         110)
-	_equip("Dwarven Hammer",  "weapon", "",        0,  27, 0,  {},               "A masterwork dwarven hammer.",  150)
-	_equip("Dwarven Shield", "shield", "",        0,  0,  25, {},               "Carved from mountain stone.",  160)
+	_equip("Dwarven Hammer",  "weapon", "",        0,  27, 0,  {},               "A masterwork dwarven hammer.",  130)
+	_equip("Dwarven Shield", "shield", "",        0,  0,  25, {},               "Carved from mountain stone.",  130)
 
 	# Summon
-	_add("Dragon Totem", "summon", false, 0.5, "Summons the Ancient Dragon.", 500)
+	_add("Dragon Totem", "summon", false, 0.5, "Summons the Ancient Dragon.", 600)
 	
 	# ── FORAGEABLES ───────────────────────────────────────
 	_add("Wild Herb",           "forageable", true,  0.5, "Common but useful.",               5)
