@@ -13,13 +13,16 @@ const ENHANCEMENT_TABLE = [
 	{ "statBonus": 1, "destroyChance": 0.05, "material": "Copper Bar", "qty": 0, "gold": 50  },  # +2
 	{ "statBonus": 1, "destroyChance": 0.1, "material": "Copper Bar", "qty": 0, "gold": 60  },  # +3
 	{ "statBonus": 1, "destroyChance": 0.15, "material": "Copper Bar", "qty": 0, "gold": 70  },  # +4
-	{ "statBonus": 1, "destroyChance": 0.2, "material": "Iron Bar", "qty": 0, "gold": 80 },  # +5
-	{ "statBonus": 2, "destroyChance": 0.25, "material": "Iron Bar", "qty": 0, "gold": 100 },  # +6
-	{ "statBonus": 2, "destroyChance": 0.3, "material": "Iron Bar", "qty": 0, "gold": 120 },  # +7
-	{ "statBonus": 2, "destroyChance": 0.35, "material": "Iron Bar", "qty": 0, "gold": 140 },  # +8
-	{ "statBonus": 2, "destroyChance": 0.4, "material": "Iron Bar", "qty": 0, "gold": 160 },  # +9
-	{ "statBonus": 3, "destroyChance": 0.5, "material": "Iron Bar", "qty": 0, "gold": 200 },  # +10
+	{ "statBonus": 1, "destroyChance": 0.15, "material": "Iron Bar", "qty": 0, "gold": 80 },  # +5
+	{ "statBonus": 2, "destroyChance": 0.2, "material": "Iron Bar", "qty": 0, "gold": 100 },  # +6
+	{ "statBonus": 2, "destroyChance": 0.25, "material": "Iron Bar", "qty": 0, "gold": 120 },  # +7
+	{ "statBonus": 2, "destroyChance": 0.3, "material": "Iron Bar", "qty": 0, "gold": 140 },  # +8
+	{ "statBonus": 2, "destroyChance": 0.35, "material": "Iron Bar", "qty": 0, "gold": 160 },  # +9
+	{ "statBonus": 3, "destroyChance": 0.45, "material": "Iron Bar", "qty": 0, "gold": 200 },  # +10
 ]
+const SAFE_ENHANCE_GOLD_MULTIPLIER = 2.0
+const SAFE_ENHANCE_DESTROY_REDUCTION = 0.05
+
 
 const MAX_ENHANCEMENT = 10
 const SAFETY_NET_ACTIVE = false  # future: set to true when minigame is implemented
@@ -257,12 +260,29 @@ func getEnhancementCost(instance: Dictionary) -> Dictionary:
 		return {}
 	return ENHANCEMENT_TABLE[enh]
 
-func enhanceItem(instance: Dictionary) -> Dictionary:
+func getSafeEnhanceCost(instance: Dictionary) -> Dictionary:
+	var cost = getEnhancementCost(instance)
+	if cost.is_empty():
+		return {}
+	return {
+		"statBonus": cost["statBonus"],
+		"destroyChance": max(0.0, cost["destroyChance"] - SAFE_ENHANCE_DESTROY_REDUCTION),
+		"material": cost["material"],
+		"qty": cost["qty"],
+		"gold": int(cost["gold"] * SAFE_ENHANCE_GOLD_MULTIPLIER)
+	}
+
+func safeEnhanceItem(instance: Dictionary) -> Dictionary:
+	var cost = getSafeEnhanceCost(instance)
+	if cost.is_empty():
+		return { "result": "maxed" }
+	return enhanceItem(instance, cost)  # pass override cost
+
+func enhanceItem(instance: Dictionary, costOverride: Dictionary = {}) -> Dictionary:
 	var enh = instance.get("enhancement", 0)
 	if enh >= MAX_ENHANCEMENT:
 		return { "result": "maxed" }
-
-	var cost = ENHANCEMENT_TABLE[enh]
+	var cost = costOverride if (not costOverride.is_empty()) else ENHANCEMENT_TABLE[enh]
 
 	# Consume materials and gold
 	inventorySystem.consumeFromBackpack(cost["material"], cost["qty"])
@@ -270,6 +290,7 @@ func enhanceItem(instance: Dictionary) -> Dictionary:
 
 	# Destroy chance check
 	var destroyChance = cost["destroyChance"]
+	print(" destroy chance: ", destroyChance)
 	if not SAFETY_NET_ACTIVE and randf() < destroyChance:
 		# Item destroyed — remove from backpack
 		_removeInstanceFromBackpackById(instance.get("instanceId", ""))

@@ -9,6 +9,7 @@ class_name BlacksmithDisplay
 @export var infoStat: Label
 @export var infoIngredients: VBoxContainer
 @export var actionButton: Button
+@export var safeEnhanceBtn: Button
 @export var closeButton: Button
 @export var enhanceEquipFlow: VBoxContainer
 @export var enhancePanel: Panel
@@ -51,6 +52,10 @@ func _ready() -> void:
 	)
 	actionButton.pressed.connect(func():
 		onActionPressed()
+		Utils.animateButtonPress(actionButton)
+	)
+	safeEnhanceBtn.pressed.connect(func():
+		onSafeEnhancePressed()
 		Utils.animateButtonPress(actionButton)
 	)
 	closeButton.pressed.connect(func():
@@ -250,6 +255,17 @@ func refreshEnhanceList() -> void:
 		lbl.text = "No enhanceable items in backpack."
 		lbl.add_theme_color_override("font_color", Color("#888888"))
 		enhanceEquipFlow.add_child(lbl)
+	
+	var safeCost = equipmentSystem.getSafeEnhanceCost(selectedEquip)
+	if not safeCost.is_empty() and \
+		safeCost["destroyChance"] < equipmentSystem.ENHANCEMENT_TABLE[selectedEquip.get("enhancement", 0)]["destroyChance"]:
+		safeEnhanceBtn.visible = true
+		safeEnhanceBtn.text = "Safe Enhance\n(%dg) %d%% destroy" % [
+			safeCost["gold"],
+			int(safeCost["destroyChance"] * 100)
+		]
+	else:
+		safeEnhanceBtn.visible = false
 
 func onEquipSelected(instance: Dictionary) -> void:
 	selectedEquip = instance
@@ -264,7 +280,6 @@ func refreshEnhanceDetail() -> void:
 		enhanceStatLabel.text = ""
 		_updatePips(0)
 		return
-
 
 	enhanceInstructions.hide()
 	enhanceDataList.show()
@@ -345,6 +360,7 @@ func refreshActionButton() -> void:
 		actionButton.disabled = not equipmentSystem.canEnhance(selectedEquip)
 	else:
 		actionButton.text = "Craft"
+		safeEnhanceBtn.hide()
 		actionButton.disabled = selectedRecipe == null
 
 func onActionPressed() -> void:
@@ -373,3 +389,19 @@ func onActionPressed() -> void:
 		var success = blacksmithSystem.craft(selectedRecipe)
 		if success:
 			refresh()
+
+func onSafeEnhancePressed() -> void:
+	if selectedEquip.is_empty():
+		return
+	var result = equipmentSystem.safeEnhanceItem(selectedEquip)
+	match result["result"]:
+		"success":
+			selectedEquip = result["instance"]
+			refresh()
+		"destroyed":
+			selectedEquip = {}
+			refresh()
+		"maxed":
+			GameEvents.eventLogged.emit(
+				"Already at max enhancement.", "system", false
+			)

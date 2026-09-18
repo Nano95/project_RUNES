@@ -1131,7 +1131,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EventLogPanel" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=863328441]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -1468,6 +1467,7 @@ bbcode_enabled = true
 scroll_following = true
 
 [node name="EquipmentDisplay" type="Panel" parent="UIController/MarginContainer/VBoxContainer" unique_id=1407338151 node_paths=PackedStringArray("equipmentSystem", "itemModal", "statsPanel", "helmetBtn", "weaponBtn", "armorBtn", "shieldBtn", "legsBtn", "bootsBtn", "helmetTexture", "weaponTexture", "armorTexture", "shieldTexture", "legsTexture", "bootsTexture", "helmetGradeLabel", "weaponGradeLabel", "armorGradeLabel", "shieldGradeLabel", "legsGradeLabel", "bootsGradeLabel")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -3620,8 +3620,7 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 32
 text = "Close"
 
-[node name="BlacksmithContainer" type="ColorRect" parent="UIController" unique_id=2089522709 node_paths=PackedStringArray("craftTab", "enhanceTab", "recipesVBox", "infoPanel", "infoName", "infoStat", "infoIngredients", "actionButton", "closeButton", "enhanceEquipFlow", "enhancePanel", "enhanceName", "enhancePip1", "enhancePip2", "enhancePip3", "enhancePip4", "enhancePip5", "enhancePip6", "enhancePip7", "enhancePip8", "enhancePip9", "enhancePip10", "enhanceInstructions", "enhanceDataList", "enhanceCost", "enhanceStatLabel", "blacksmithSystem", "equipmentSystem", "inventorySystem")]
-visible = false
+[node name="BlacksmithContainer" type="ColorRect" parent="UIController" unique_id=2089522709 node_paths=PackedStringArray("craftTab", "enhanceTab", "recipesVBox", "infoPanel", "infoName", "infoStat", "infoIngredients", "actionButton", "safeEnhanceBtn", "closeButton", "enhanceEquipFlow", "enhancePanel", "enhanceName", "enhancePip1", "enhancePip2", "enhancePip3", "enhancePip4", "enhancePip5", "enhancePip6", "enhancePip7", "enhancePip8", "enhancePip9", "enhancePip10", "enhanceInstructions", "enhanceDataList", "enhanceCost", "enhanceStatLabel", "blacksmithSystem", "equipmentSystem", "inventorySystem")]
 material = SubResource("ShaderMaterial_ds30n")
 layout_mode = 1
 anchors_preset = 15
@@ -3638,6 +3637,7 @@ infoName = NodePath("BlacksmithPanel/VBoxContainer/CraftInfoPanel/VBoxContainer/
 infoStat = NodePath("BlacksmithPanel/VBoxContainer/CraftInfoPanel/VBoxContainer/Result")
 infoIngredients = NodePath("BlacksmithPanel/VBoxContainer/CraftInfoPanel/VBoxContainer")
 actionButton = NodePath("BlacksmithPanel/VBoxContainer/BottomActions/BuyBtn")
+safeEnhanceBtn = NodePath("BlacksmithPanel/VBoxContainer/BottomActions/safeEnhanceBtn")
 closeButton = NodePath("BlacksmithPanel/VBoxContainer/BottomActions/CloseBtn")
 enhanceEquipFlow = NodePath("BlacksmithPanel/VBoxContainer/ItemsPanel/ItemsContainer/VScrollBar/ItemsList")
 enhancePanel = NodePath("BlacksmithPanel/VBoxContainer/EnhancementInfoPanel")
@@ -3991,6 +3991,19 @@ theme_override_fonts/font = ExtResource("3_dajxx")
 theme_override_font_sizes/font_size = 28
 text = "Buy
 "
+
+[node name="safeEnhanceBtn" type="Button" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/BottomActions" unique_id=318461894]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme = ExtResource("17_g72ry")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_dajxx")
+theme_override_font_sizes/font_size = 26
+text = "Safe Enhance
+(200g)"
 
 [node name="CloseBtn" type="Button" parent="UIController/BlacksmithContainer/BlacksmithPanel/VBoxContainer/BottomActions" unique_id=1047559107]
 layout_mode = 2
