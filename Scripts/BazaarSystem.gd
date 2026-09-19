@@ -231,17 +231,17 @@ func getItemPrice(item: Dictionary) -> int:
 		# Grade multiplier
 		match item.get("grade", ""):
 			"B":  gradeMultiplier = 1.1
-			"A":  gradeMultiplier = 1.25
-			"S":  gradeMultiplier = 1.5
-			"SS": gradeMultiplier = 2.0
+			"A":  gradeMultiplier = 1.4
+			"S":  gradeMultiplier = 1.75
+			"SS": gradeMultiplier = 2.5
 	
 	# Enhancement multiplier (only from +2 onwards)
 	var enhMultiplier = 1.0
 	var enh = item.get("enhancement", 0)
 	if (enh >= 2):
 		var enhTable = {
-			2: 1.05, 3: 1.10, 4: 1.15, 5: 1.20,
-			6: 1.30, 7: 1.40, 8: 1.55, 9: 1.70, 10: 2.0
+			2: 1.1, 3: 1.3, 4: 1.4, 5: 1.5,
+			6: 1.6, 7: 1.7, 8: 1.8, 9: 1.9, 10: 2.0
 		}
 		enhMultiplier = enhTable.get(enh, 1.0)
 
