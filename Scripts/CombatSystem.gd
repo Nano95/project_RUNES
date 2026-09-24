@@ -273,7 +273,7 @@ func onFleeRequested() -> void:
 	if not main.game_data.inCombat or main.game_data.isFleeing:
 		return
 	main.game_data.isFleeing = true
-	main.game_data.fleeTicks = 3
+	main.game_data.fleeTicks = 2
 	GameEvents.eventLogged.emit("You attempt to flee...", "system", false)
 
 func onPotionUsed(itemName: String) -> void:

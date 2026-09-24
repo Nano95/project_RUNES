@@ -30,7 +30,7 @@ func _ready() -> void:
 func onTick() -> void:
 	if (not main.game_data.inArea):
 		if (main.game_data.hp < equipmentSystem.cachedMaxHp):
-			var regenAmount = 1 + main.game_data.allocatedTownRegen
+			var regenAmount = 10 + main.game_data.allocatedTownRegen
 			main.game_data.hp = min(
 				equipmentSystem.cachedMaxHp,
 				main.game_data.hp + regenAmount
