@@ -34,6 +34,7 @@ class_name UIController
 @export var bazaarLeaveBtn: Button
 @export var bazaarSystem: BazaarSystem
 @export var inventorySystem: InventorySystem
+@export var inventoryDisplay: InventoryDisplay
 @export var storageDisplay: StorageDisplay
 @export var alchemyDisplay: BrewDisplay
 @export var merchantDisplay: MerchantDisplay
@@ -95,6 +96,7 @@ func showSafeZone() -> void:
 	updateCastleBtn()
 
 func showInventory() -> void:
+	inventoryDisplay.buildInventory()
 	inventoryPanel.visible = true
 
 func showDisplay() -> void:

@@ -267,6 +267,7 @@ func onItemButtonUp(itemName: String, source: String, stackIndex: int) -> void:
 		return
 	longPressTimer.stop()
 	# Single tap — move 1
+	print("onItemButtonUp source: ", source, " item: ", itemName)
 	if source == "backpack":
 		chestSystem.moveToChest(itemName, selectedChestId, false, 1)
 	else:

@@ -23,7 +23,7 @@ signal itemInspected(itemName: String)
 @warning_ignore("unused_signal")
 signal potionUsed(itemName: String)
 @warning_ignore("unused_signal")
-signal itemLongPressed(itemName: String, stackIndex: int)
+signal itemLongPressed(itemName: String, qty: int, stackIndex: int, instanceId: String)
 @warning_ignore("unused_signal")
 signal itemEquipped(itemName: String)
 @warning_ignore("unused_signal")
@@ -42,6 +42,18 @@ signal chestItemMoved(chestId: int)
 signal chestChanged
 @warning_ignore("unused_signal")
 signal backpackChanged
+@warning_ignore("unused_signal")
+signal itemStackUpdated
+@warning_ignore("unused_signal")
+signal itemStackAdded
+@warning_ignore("unused_signal")
+signal itemStackRemoved
+@warning_ignore("unused_signal")
+signal equipmentAdded
+@warning_ignore("unused_signal")
+signal equipmentRemoved
+@warning_ignore("unused_signal")
+signal itemAddedToBackpack(itemName: String, qty: int)
 @warning_ignore("unused_signal")
 signal equipmentChanged
 @warning_ignore("unused_signal")

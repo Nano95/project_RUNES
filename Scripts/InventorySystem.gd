@@ -62,6 +62,8 @@ func addToBackpack(itemName: String, qty: int = 1, fromPending: bool = false) ->
 			var toAdd = min(space, remaining)
 			stack["qty"] += toAdd
 			remaining -= toAdd
+			if (main.game_data.inArea):
+				GameEvents.itemStackUpdated.emit(itemName, stack["qty"])
 
 # Create new stacks for remainder
 	while remaining > 0:
@@ -91,6 +93,8 @@ func addToBackpack(itemName: String, qty: int = 1, fromPending: bool = false) ->
 			"qty": newStackQty
 		})
 		remaining -= newStackQty
+		if (main.game_data.inArea):
+			GameEvents.itemStackAdded.emit(itemName, newStackQty)
 
 	main.game_data.currentWeight += weightToAdd
 	main.save_game()
@@ -125,11 +129,15 @@ func addEquipmentToBackpack(instance: Dictionary, fromPending: bool = false) -> 
 	main.game_data.currentWeight += item.weight
 	main.save_game()
 	GameEvents.backpackChanged.emit()
+	if (main.game_data.inArea):
+		GameEvents.equipmentAdded.emit(instance)
 	GameEvents.weightChanged.emit()
 	return true
 
 func removeFromBackpack(itemName: String, qty: int = 1) -> bool:
+	print("removeFromBackpack: ", itemName, " qty: ", qty, " count: ", countInBackpack(itemName))
 	if countInBackpack(itemName) < qty:
+		print("qty retrn early")
 		return false
 
 	var item = ItemRegistry.getItem(itemName)
@@ -145,16 +153,21 @@ func removeFromBackpack(itemName: String, qty: int = 1) -> bool:
 			remaining -= toRemove
 			if stack["qty"] <= 0:
 				main.game_data.backpack.remove_at(i)
+				if (main.game_data.inArea):
+					GameEvents.itemStackRemoved.emit(itemName)
+			else:
+				if (main.game_data.inArea):
+					GameEvents.itemStackUpdated.emit(itemName, stack["qty"])
 		i -= 1
 
-	if item:
+	if (item):
 		main.game_data.currentWeight = max(
 			0.0, main.game_data.currentWeight - (item.weight * qty)
 		)
 
 	main.save_game()
+	print("remove complete")
 	call_deferred("emitInventoryChanged")
-	GameEvents.backpackChanged.emit()
 	GameEvents.weightChanged.emit()
 	return true
 

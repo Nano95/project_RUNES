@@ -355,40 +355,57 @@ func quickDeposit(chestId: int) -> void:
 		var itemName = stack.get("name", "")
 		if not chestItems.has(itemName):
 			continue
-		if chest.items.size() >= getCapacity(chest):
-			break
 
 		var qty = stack.get("qty", 1)
 		var item = ItemRegistry.getItem(itemName)
 
-		# Update weight
-		if item:
-			main.game_data.currentWeight = max(
-				0.0, main.game_data.currentWeight - (item.weight * qty)
-			)
-
-		# Remove from backpack directly
-		var idx = main.game_data.backpack.find(stack)
-		if idx != -1:
-			main.game_data.backpack.remove_at(idx)
-
-		# Add to chest — preserve full instance for equipment
 		if stack.get("isEquipment", false):
+			# Equipment needs a free slot
+			if chest.items.size() >= getCapacity(chest):
+				continue
+			var idx = main.game_data.backpack.find(stack)
+			if idx != -1:
+				main.game_data.backpack.remove_at(idx)
+			if item:
+				main.game_data.currentWeight = max(
+					0.0, main.game_data.currentWeight - item.weight
+				)
 			chest.items.append(stack)
+			deposited += 1
 		else:
 			var stackCap = ItemRegistry.getStackCap(itemName)
-			var added = false
+			var remaining = qty
+
+			# First try to fill existing stacks
 			for chestStack in chest.items:
+				if remaining <= 0:
+					break
 				if chestStack["name"] == itemName and chestStack.get("qty", 0) < stackCap:
 					var space = stackCap - chestStack["qty"]
-					var toAdd = min(space, qty)
+					var toAdd = min(space, remaining)
 					chestStack["qty"] += toAdd
-					added = true
-					break
-			if not added:
-				chest.items.append({"name": itemName, "qty": qty})
+					remaining -= toAdd
 
-		deposited += qty
+			# Only create new stack if chest has room
+			if remaining > 0 and chest.items.size() < getCapacity(chest):
+				chest.items.append({"name": itemName, "qty": remaining})
+				remaining = 0
+
+			# How much actually moved
+			var actualMoved = qty - remaining
+			if actualMoved > 0:
+				if item:
+					main.game_data.currentWeight = max(
+						0.0, main.game_data.currentWeight - (item.weight * actualMoved)
+					)
+				# Update or remove backpack stack
+				var idx = main.game_data.backpack.find(stack)
+				if idx != -1:
+					if remaining <= 0:
+						main.game_data.backpack.remove_at(idx)
+					else:
+						main.game_data.backpack[idx]["qty"] = remaining
+				deposited += actualMoved
 
 	if deposited > 0:
 		main.save_game()
@@ -396,7 +413,7 @@ func quickDeposit(chestId: int) -> void:
 		GameEvents.chestChanged.emit()
 		GameEvents.weightChanged.emit()
 		GameEvents.eventLogged.emit(
-			"Quick deposited %d stacks into Chest %d." % [deposited, chestId], "town", false
+			"Quick deposited %d into Chest %d." % [deposited, chestId], "town", false
 		)
 	else:
 		GameEvents.eventLogged.emit(

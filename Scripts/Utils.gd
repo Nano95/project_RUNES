@@ -265,6 +265,46 @@ func spawnFloatingLabel(text: String, color: Color, sourceNode: Control, shake: 
 	tween.set_parallel(false)
 	tween.tween_callback(lbl.queue_free)
 
+func spawnFloatingLabelAtPos(text: String, color: Color, pos: Vector2, shake: bool = false) -> void:
+	var lbl = RichTextLabel.new()
+	lbl.bbcode_enabled = true
+	lbl.text = "[color=#%s]%s[/color]" % [color.to_html(false), text]
+	lbl.fit_content = true
+	lbl.scroll_active = false
+	lbl.size = Vector2(300, 60)
+	lbl.custom_minimum_size = Vector2(150, 60)
+	lbl.pivot_offset_ratio = Vector2(.5, .5)
+	lbl.add_theme_constant_override("outline_size", 10)
+	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	main_node.spawn_to_top_ui_layer(lbl)
+	lbl.position = pos - Vector2(lbl.size.x / 2, 0)
+
+	var tween = lbl.create_tween().set_parallel(true)
+
+	if shake:
+		lbl.text = "[shake rate=20 level=5][color=#%s][font_size=28]%s[/font_size][/color][/shake]" % [color.to_html(false), text]
+		tween.tween_property(lbl, "position:y", lbl.position.y - 40, 0.6) \
+			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		tween.tween_property(lbl, "scale", Vector2(1.5, 1.5), 0.15) \
+			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		tween.chain().tween_property(lbl, "scale", Vector2(0.0, 0.0), 0.3) \
+			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+		tween.tween_property(lbl, "modulate:a", 0.0, 0.3).set_delay(0.3)
+	else:
+		lbl.text = "[wave amp=20 freq=10][color=#%s][font_size=28]%s[/font_size][/color][/wave]" % [color.to_html(false), text]
+		tween.tween_property(lbl, "position:y", lbl.position.y - 40, 0.6) \
+			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		tween.tween_property(lbl, "scale", Vector2(1.5, 1.5), 0.15) \
+			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		tween.chain().tween_property(lbl, "scale", Vector2(0.0, 0.0), 0.3) \
+			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+		tween.tween_property(lbl, "modulate:a", 0.0, 0.3).set_delay(0.3)
+
+	tween.set_parallel(false)
+	tween.tween_callback(lbl.queue_free)
+
 func animateButtonPress(btn: Control) -> void:
 	if (is_instance_valid(btn)):
 		if not btn.has_meta("original_position"):

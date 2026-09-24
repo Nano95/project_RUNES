@@ -290,7 +290,6 @@ func enhanceItem(instance: Dictionary, costOverride: Dictionary = {}) -> Diction
 
 	# Destroy chance check
 	var destroyChance = cost["destroyChance"]
-	print(" destroy chance: ", destroyChance)
 	if not SAFETY_NET_ACTIVE and randf() < destroyChance:
 		# Item destroyed — remove from backpack
 		_removeInstanceFromBackpackById(instance.get("instanceId", ""))
@@ -344,9 +343,12 @@ func removeInstanceFromBackpack(instance: Dictionary) -> void:
 				main.game_data.currentWeight = max(
 					0.0, main.game_data.currentWeight - item.weight
 				)
+			if (main.game_data.inArea):
+				GameEvents.equipmentRemoved.emit(id) 
 			GameEvents.backpackChanged.emit()
 			return
 
+# only called by enhancement logic
 func _removeInstanceFromBackpackById(instanceId: String) -> void:
 	for i in main.game_data.backpack.size():
 		if main.game_data.backpack[i].get("instanceId", "") == instanceId:

@@ -38,7 +38,8 @@ func _ready() -> void:
 func onClose() -> void:
 	Utils.animate_modal_exit(self)
 
-func onItemLongPressed(itemName: String, qty: int, stackIndex: int) -> void:
+func onItemLongPressed(itemName: String, qty: int, stackIndex: int, instanceId: String) -> void:
+
 	currentItem = itemName
 	currentStackQty = qty
 	currentStackIndex = stackIndex
@@ -50,7 +51,12 @@ func onItemLongPressed(itemName: String, qty: int, stackIndex: int) -> void:
 	equipButton.visible = equippable
 	compareContainer.visible = equippable
 	if (equippable):
-		currentInstance = main.game_data.backpack[stackIndex]
+		# Find by instanceId — immune to index shifts
+		for i in main.game_data.backpack.size():
+			if main.game_data.backpack[i].get("instanceId", "") == instanceId:
+				currentStackIndex = i
+				currentInstance = main.game_data.backpack[i]
+				break
 		showEquipmentComparison(currentInstance)
 	else:
 		currentInstance = {}
@@ -103,6 +109,8 @@ func onDropAllPressed() -> void:
 		main.game_data.currentWeight = max(0.0, main.game_data.currentWeight - weight)
 		main.save_game()
 		GameEvents.backpackChanged.emit()
+		if main.game_data.inArea:
+			GameEvents.equipmentRemoved.emit(stack.get("instanceId", ""))
 		GameEvents.eventLogged.emit("Dropped %s." % currentItem, "system", false)
 		onClose()
 		return
@@ -117,6 +125,8 @@ func onDropAllPressed() -> void:
 		)
 	main.save_game()
 	GameEvents.backpackChanged.emit()
+	if main.game_data.inArea:
+		GameEvents.itemStackRemoved.emit(currentItem)  # ← add
 	GameEvents.weightChanged.emit()
 	GameEvents.eventLogged.emit(
 		"Dropped %s x%d." % [currentItem, qty], "system", false
